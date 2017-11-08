@@ -47,9 +47,13 @@ def toolsRoute():
 def toolsPageRoute(identifier):
     return ''
 
-@app.route("/aboutMe")
-def aboutMeRoute():
-    return render_template('aboutMe.html')
+@app.route("/stats")
+def statsRoute():
+    return render_template('stats.html')
+
+@app.route("/about")
+def aboutRoute():
+    return render_template('about.html')
 
 
 
