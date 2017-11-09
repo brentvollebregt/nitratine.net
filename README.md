@@ -3,13 +3,34 @@ Flask server running at brentvollebregt.pythonanywhere.com (in development)
 
 ## Planning
 - Home
-    - Projects
-    - Blog
-        - Text and Images, lots of images
-    - YouTube
-        - Brief run though on each video
-    - Tools
-        - Int to hex to rgb to everything at once
-    - About Me
-        - What I do
-        - Languages
+    - Most viewed
+    - Recent
+    - Random Button
+    - Small external links
+- Projects
+    - Top
+    - Most recent
+- Blog
+    - Top
+    - Most recent
+- YouTube
+    - Top
+    - Most recent
+- Tools
+    - Most recently sorted
+    - Squares with text backed by images
+- Stats
+    - # Of Articles
+    - Page views
+- About Me
+    - What I do
+    - Languages
+    - Links outside
+        - Github
+        - Stackoverflow
+        - Play store
+
+## Colours
+ - Main: #1976d2
+ - Light: #63a4ff
+ - Dark: #004ba0

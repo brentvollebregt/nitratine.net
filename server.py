@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for
 
 import data_managers
 
@@ -17,7 +17,10 @@ def homeRoute():
 
 @app.route("/projects")
 def projectsRoute():
-    return render_template('projects.html')
+    return render_template('sub.html',
+                           title="Projects",
+                           display_icon=url_for('static', filename='img/project-icon.svg')
+                           )
 
 @app.route("/projects/<identifier>")
 def projectsPageRoute(identifier):
@@ -25,15 +28,36 @@ def projectsPageRoute(identifier):
 
 @app.route("/blog")
 def blogRoute():
-    return render_template('blog.html')
+    return render_template('sub.html',
+                           title="Blog",
+                           display_icon=url_for('static', filename='img/blog-icon.svg')
+                           )
 
 @app.route("/blog/<identifier>")
 def blogPageRoute(identifier):
     return ''
 
+@app.route("/apps")
+def appsRoute():
+    return render_template('sub.html',
+                           title="Apps",
+                           display_icon=url_for('static', filename='img/apps-icon.svg')
+                           )
+
+@app.route("/apps/<identifier>")
+def appsPageRoute(identifier):
+    return ''
+
+@app.route("/apps/<identifier>/bug-report")
+def appsBugRoute(identifier):
+    return ''
+
 @app.route("/youtube")
 def youtubeRoute():
-    return render_template('youtube.html')
+    return render_template('sub.html',
+                           title="YouTube",
+                           display_icon=url_for('static', filename='img/youtube-icon.svg')
+                           )
 
 @app.route("/youtube/<identifier>")
 def youtubePageRoute(identifier):
@@ -41,7 +65,10 @@ def youtubePageRoute(identifier):
 
 @app.route("/tools")
 def toolsRoute():
-    return render_template('tools.html')
+    return render_template('sub.html',
+                           title="Tools",
+                           display_icon=url_for('static', filename='img/tools-icon.svg')
+                           )
 
 @app.route("/tools/<identifier>")
 def toolsPageRoute(identifier):

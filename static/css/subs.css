@@ -1,0 +1,25 @@
+.top_bar {
+    height: 60px;
+    background-color: #1976d2;
+}
+
+.header_wrapper {
+    height: 90px;
+    background-color: #1976d2;
+    margin-bottom: 20px;
+}
+
+.header_img {
+    width: 90px;
+    height: 90px;
+    background-size: 100% 100%;
+    background-position: center;
+    float: left;
+    margin-left: 50px;
+}
+
+.header_text {
+    font-family: sans-serif;
+    font-size: 52px;
+    padding: 15px 0 15px 160px;
+}

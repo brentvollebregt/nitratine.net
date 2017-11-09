@@ -1,0 +1,24 @@
+{% extends "SKELETON.html" %}
+
+{% block head %}
+<title>{{ title }}</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/subs.css') }}">
+<style>
+    .header_img > svg {
+        fill: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="header_wrapper">
+    <div class="header_img" style="background-image: url({{ display_icon }})"></div>
+    <div class="header_text">{{ title }}</div>
+</div>
+
+<!-- Featured sections -->
+<div class="content_container">
+
+</div>
+{% endblock %}

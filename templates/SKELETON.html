@@ -11,8 +11,16 @@
 	</head>
 	<body>
         <div class="nav">
-            <div class="icon">
+            <a class="icon">
+                <div>
 
+                </div>
+            </a>
+            <div class="nav_section">
+                <a class="nav_button" href="/">
+                    <img src="{{ url_for('static', filename='img/home-icon.svg') }}" class="nav_button_icon" />
+                    <div class="nav_button_text">Home</div>
+                </a>
             </div>
             <div class="nav_section">
                 <a class="nav_button" href="/projects">
@@ -22,6 +30,10 @@
                 <a class="nav_button" href="/blog">
                     <img src="{{ url_for('static', filename='img/blog-icon.svg') }}" class="nav_button_icon" />
                     <div class="nav_button_text">Blog</div>
+                </a>
+                <a class="nav_button" href="/apps">
+                    <img src="{{ url_for('static', filename='img/apps-icon.svg') }}" class="nav_button_icon" />
+                    <div class="nav_button_text">Apps</div>
                 </a>
                 <a class="nav_button" href="/youtube">
                     <img src="{{ url_for('static', filename='img/youtube-icon.svg') }}" class="nav_button_icon" />
@@ -45,12 +57,7 @@
         </div>
 
         <div class="content">
-            <div class="top_bar">
-
-            </div>
-            <div>
-                {% block content %}{% endblock %}
-            </div>
+            {% block content %}{% endblock %}
         </div>
 	</body>
 </html>
