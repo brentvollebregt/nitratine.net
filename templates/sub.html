@@ -3,22 +3,61 @@
 {% block head %}
 <title>{{ title }}</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/subs.css') }}">
-<style>
-    .header_img > svg {
-        fill: white;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
 <!-- Header -->
 <div class="header_wrapper">
     <div class="header_img" style="background-image: url({{ display_icon }})"></div>
-    <div class="header_text">{{ title }}</div>
+    <h1 class="header_text">{{ title }}</h1>
 </div>
 
 <!-- Featured sections -->
 <div class="content_container">
+    <!-- Top -->
+    <div class="content_box">
+        <h2 class="content_box_title">Top Articles</h2>
+        <div style="display: grid; grid-template-columns: 200px 200px 200px 200px 200px; grid-gap: 5px; height: 200px; margin: 5px;">
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+        </div>
+        This is a lot of content<br>Seriously.
+    </div>
 
+
+
+    <div class="content_box">
+        <h2 class="content_box_title">Top Articles</h2>
+        <div style="display: grid; grid-template-columns: 200px 200px 200px 200px 200px; grid-gap: 5px; height: 200px; margin: 5px;">
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+        </div>
+        This is a lot of content<br>Seriously.
+    </div>
+    <!-- Top -->
+    <div class="content_box">
+        <h2 class="content_box_title">Top Articles</h2>
+        <div style="display: grid; grid-template-columns: 200px 200px 200px 200px 200px; grid-gap: 5px; height: 200px; margin: 5px;">
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+            <div style="background: red;"></div>
+        </div>
+        This is a lot of content<br>Seriously.
+    </div>
+
+
+    <!-- Recent -->
+    <div class="content_box">
+        <h2 class="content_box_title">Articles Ordered By Date</h2>
+        This is a lot of content<br>Seriously.
+    </div>
 </div>
 {% endblock %}

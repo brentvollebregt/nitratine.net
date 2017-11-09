@@ -34,3 +34,6 @@ Flask server running at brentvollebregt.pythonanywhere.com (in development)
  - Main: #1976d2
  - Light: #63a4ff
  - Dark: #004ba0
+
+
+Remember shadows at the end

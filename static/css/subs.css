@@ -6,7 +6,6 @@
 .header_wrapper {
     height: 90px;
     background-color: #1976d2;
-    margin-bottom: 20px;
 }
 
 .header_img {
@@ -16,10 +15,29 @@
     background-position: center;
     float: left;
     margin-left: 50px;
+    filter: invert(100%);
 }
 
 .header_text {
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 52px;
     padding: 15px 0 15px 160px;
+    color: white;
+    font-weight: normal;
+}
+
+.content_box {
+    display: grid;
+    background: white;
+    border: solid 3px #1976d2;
+    margin: 12px;
+    padding: 3px;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.75);
+}
+
+.content_box_title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    margin: 5px;
+    font-size: 200%;
 }
