@@ -46,8 +46,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 5px;
-    height: 200px;
     margin: 5px;
+}
+
+.top_article_single {
+    background: red;
+    height: 200px;
 }
 
 .date_order_article_container {
@@ -55,4 +59,53 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     margin: 5px;
+}
+
+.date_order_article {
+    height: 200px;
+    padding: 10px;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.75);
+    display: block;
+    position: relative;
+}
+
+.date_order_article:hover {
+    background: #efecec;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.75);
+}
+
+.date_order_article_image {
+    width: 33%;
+    float: left;
+    margin-right: 10px;
+}
+
+.date_order_article_title {
+    display: inline;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 150%;
+}
+
+.date_order_article_text {
+    font-family: 'Roboto', sans-serif;
+    margin: 8px 0;
+    font-size: 95%;
+}
+
+.date_order_article_tag_box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.date_order_article_tag {
+    height: 25px;
+    background: #505050;
+    display: inline;
+    padding: 2px 10px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
 }
