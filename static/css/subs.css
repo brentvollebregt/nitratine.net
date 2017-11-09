@@ -41,3 +41,18 @@
     margin: 5px;
     font-size: 200%;
 }
+
+.top_article_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 5px;
+    height: 200px;
+    margin: 5px;
+}
+
+.date_order_article_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin: 5px;
+}

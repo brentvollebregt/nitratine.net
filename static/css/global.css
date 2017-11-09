@@ -17,7 +17,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,7 +25,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #63a4ff;
+    background: #d81b60;
 }
 
 /* - Nav Bar */
@@ -33,7 +33,7 @@ body {
 .nav {
     height: 100%;
     position: fixed;
-    width: 300px;
+    width: 280px;
     background: white;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -78,10 +78,9 @@ body {
 /* - Content */
 
 .content {
-    margin-left: 300px;
+    margin-left: 280px;
 }
 
 .content_container {
     max-width: 1200px;
-    margin: auto;
 }
