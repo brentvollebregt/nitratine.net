@@ -38,6 +38,20 @@ Flask server running at brentvollebregt.pythonanywhere.com (in development)
  - Light Highlight: #ff5c8d
  - Dark Highlight: #a00037
 
+## Stuff that needs to be stored
+ - Article
+    - ID
+    - Sub location
+    - Title
+    - Desc
+    - Tags
+    - Views
+    - Views for last week (each indv day) ?
+    - Content (img + text)
+ - Total views
+    - Hour contribution
+
+
 
 Remember shadows at the end
 
