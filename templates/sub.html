@@ -3,6 +3,7 @@
 {% block head %}
 <title>{{ title }}</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/subs.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animations.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -18,14 +19,14 @@
     <div class="content_box">
         <h2 class="content_box_title">Top Articles</h2>
         <div class="top_article_container">
-            <a class="top_article amin-sweep-to-bottom">
+            <a class="top_article sweep-to-bottom">
                 <img src="{{ url_for('static', filename='img/apps/colour-icon.png') }}" class="top_article_image">
                 <h3 class="top_article_title">Colour - Android App</h3>
             </a>
-            <a class="top_article amin-sweep-to-bottom"></a>
-            <a class="top_article amin-sweep-to-bottom"></a>
-            <a class="top_article amin-sweep-to-bottom"></a>
-            <a class="top_article amin-sweep-to-bottom"></a>
+            <a class="top_article sweep-to-bottom"></a>
+            <a class="top_article sweep-to-bottom"></a>
+            <a class="top_article sweep-to-bottom"></a>
+            <a class="top_article sweep-to-bottom"></a>
         </div>
     </div>
 
@@ -33,7 +34,7 @@
     <div class="content_box">
         <h2 class="content_box_title">Articles Ordered By Date</h2>
         <div class="date_order_article_container">
-            <a class="date_order_article anim-sweep-to-right">
+            <a class="date_order_article sweep-to-right">
                 <img src="{{ url_for('static', filename='img/apps/colour-icon.png') }}" class="date_order_article_image">
                 <h3 class="date_order_article_title">Colour - The completely pointless app</h3>
                 <p class="date_order_article_text">This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen.</p>
@@ -44,10 +45,10 @@
                     <div class="date_order_article_tag">Random</div>
                 </div>
             </a>
-            <a class="date_order_article anim-sweep-to-right"></a>
-            <a class="date_order_article anim-sweep-to-right"></a>
-            <a class="date_order_article anim-sweep-to-right"></a>
-            <a class="date_order_article anim-sweep-to-right"></a>
+            <a class="date_order_article sweep-to-right"></a>
+            <a class="date_order_article sweep-to-right"></a>
+            <a class="date_order_article sweep-to-right"></a>
+            <a class="date_order_article sweep-to-right"></a>
         </div>
     </div>
 </div>

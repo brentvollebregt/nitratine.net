@@ -1,0 +1,16 @@
+.section_header {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    margin: 0 0 10px;
+    font-size: 200%;
+}
+
+.tile {
+    padding: 10px;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.75);
+    display: block;
+    background: white;
+    border: solid 3px #1976d2;
+    text-align: center;
+    cursor: pointer;
+}

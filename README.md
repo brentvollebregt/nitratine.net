@@ -29,6 +29,7 @@ Flask server running at brentvollebregt.pythonanywhere.com (in development)
         - Github
         - Stackoverflow
         - Play store
+    - Top articles in my opinion
 
 ## Colours
  - Main: #1976d2
@@ -43,16 +44,20 @@ Flask server running at brentvollebregt.pythonanywhere.com (in development)
     - ID
     - Sub location
     - Title
+        - Small
+        - Big
     - Desc
     - Tags
     - Views
-    - Views for last week (each indv day) ?
+        - Total
+        - Last week (each indv day) ?
     - Content (img + text)
- - Total views
+ - Views
+    - Total
     - Hour contribution
-
-
 
 Remember shadows at the end
 
-Screen with specifications
+Media queries css
+
+ICON - Blue writing with pink accents (+black and white) - transparent
