@@ -84,38 +84,37 @@
 }
 
 .date_order_article:hover {
-    background: #efecec;
     cursor: pointer;
     box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.75);
 }
 
-.date_order_article_image {
+.tile_image {
     height: 100%;
     float: left;
     margin-right: 10px;
 }
 
-.date_order_article_title {
+.tile_title {
     display: inline;
     font-family: 'Roboto', sans-serif;
     font-weight: normal;
     font-size: 150%;
 }
 
-.date_order_article_text {
+.tile_text {
     font-family: 'Roboto', sans-serif;
     margin: 8px 0;
     font-size: 95%;
 }
 
-.date_order_article_tag_box {
+.tile_tag_box {
     position: absolute;
     bottom: 0;
     right: 0;
     margin: 10px;
 }
 
-.date_order_article_tag {
+.tile_tag {
     height: 25px;
     background: #505050;
     display: inline;

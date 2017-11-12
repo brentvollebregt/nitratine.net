@@ -3,6 +3,7 @@
 {% block head %}
 <title>Home</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animations.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -11,18 +12,32 @@
     <div style="height: 220px;background: lightgrey;font-family: 'Roboto', sans-serif;text-align: center;line-height: 220px;font-size: 400%;">Brent Vollebregt</div>
     <!-- Featured sections -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 10px; padding: 15px;">
-        <h2 class="section_header">Newest</h2>
-        <h2 class="section_header">Top</h2>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
-        <a class="tile">Tile</a>
+        <div>
+            <h2 class="section_header">Newest</h2>
+            <a class="tile sweep-to-right">
+                <img src="{{ url_for('static', filename='img/apps/colour-icon.png') }}" class="tile_image">
+                <h3 class="tile_title">Colour - The completely pointless app</h3>
+                <p class="tile_text">This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen.</p>
+                <div class="tile_tag_box">
+                    <div class="tile_tag">Java</div>
+                    <div class="tile_tag">Android</div>
+                    <div class="tile_tag">Colour</div>
+                    <div class="tile_tag">Random</div>
+                </div>
+            </a>
+            <a class="tile">Tile</a>
+            <a class="tile">Tile</a>
+            <a class="tile">Tile</a>
+            <a class="tile">Tile</a>
+        </div>
+        <div>
+            <h2 class="section_header">Top</h2>
+                <a class="tile">Tile</a>
+            <a class="tile">Tile</a>
+            <a class="tile">Tile</a>
+            <a class="tile">Tile</a>
+            <a class="tile">Tile</a>
+        </div>
     </div>
 </div>
 {% endblock %}

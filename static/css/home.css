@@ -11,6 +11,43 @@
     display: block;
     background: white;
     border: solid 3px #1976d2;
-    text-align: center;
     cursor: pointer;
+    margin: 10px 0;
+    position: relative;
+    height: 170px;
+}
+
+.tile_image {
+    height: 100%;
+    float: left;
+    margin-right: 10px;
+}
+
+.tile_title {
+    display: inline;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 150%;
+}
+
+.tile_text {
+    font-family: 'Roboto', sans-serif;
+    margin: 8px 0;
+    font-size: 95%;
+}
+
+.tile_tag_box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.tile_tag {
+    height: 25px;
+    background: #505050;
+    display: inline;
+    padding: 2px 10px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
 }
