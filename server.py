@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, render_template_string, send_from_directory
 
 import data_managers
 
@@ -6,6 +6,7 @@ import data_managers
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
+articles_location = "articles/" # Intergrate into JSON later
 
 
 
@@ -46,7 +47,12 @@ def appsRoute():
 
 @app.route("/apps/<identifier>")
 def appsPageRoute(identifier):
-    return ''
+    with open('articles/apps/' + identifier + '/view.html', 'r') as f:
+        html = f.read()
+
+    return render_template_string(html,
+                           title="Apps",
+                           )
 
 @app.route("/apps/<identifier>/bug-report")
 def appsBugRoute(identifier):
@@ -78,9 +84,9 @@ def toolsPageRoute(identifier):
 def statsRoute():
     return render_template('stats.html')
 
-@app.route("/about")
-def aboutRoute():
-    return render_template('about.html')
+@app.route("/img/<sub>/<article>/<img>")
+def articleImageServing(sub, article, img):
+    return send_from_directory(articles_location + sub + "/" + article + "/", img)
 
 
 

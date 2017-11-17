@@ -27,13 +27,13 @@
     display: inline;
     font-family: 'Roboto', sans-serif;
     font-weight: normal;
-    font-size: 150%;
+    font-size: 24px;
 }
 
 .tile_text {
     font-family: 'Roboto', sans-serif;
     margin: 8px 0;
-    font-size: 95%;
+    font-size: 15px;
 }
 
 .tile_tag_box {
@@ -50,4 +50,5 @@
     padding: 2px 10px;
     color: white;
     font-family: 'Roboto', sans-serif;
+    font-size: 15px;
 }
