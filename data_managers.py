@@ -1,14 +1,32 @@
 import json
+import os
+import time
 
 class JSON():
 
     file_location = "data.json"
-    default_data = {}
+    default_data = {
+        "articles_location" : "articles/",
+        "articles" : {
+            "apps" : {},
+            "blog" : {},
+            "projects" : {},
+            "tools" : {},
+            "youtube" : {}
+        },
+        "views" : {
+            "today" : {
+                "count" : 0,
+                "date" : 1483182000
+            }
+        }
+    }
 
     def __init__(self):
         self.getFile()
         if self.data is None:
             self.createDefaultFile()
+        self.articleScrape()
 
     # File writing
 
@@ -46,3 +64,34 @@ class JSON():
 
             oldest = files[sorted(files)[0]]
             os.remove(save_location + oldest)
+
+    # Articles
+
+    def articleScrape(self):
+        subs = ['apps', 'blog', 'projects', 'tools', 'youtube']
+        for sub in subs:
+            for article in os.listdir(self.article_location + sub):
+                if article not in self.data['articles'][sub]:
+                    with open(self.article_location + sub + "/" + article + "/data.json", 'r') as article_json_file:
+                        article_data = json.load(article_json_file)
+                    self.data['articles'][sub][article] = {
+                        "title" : article_data["title"],
+                        "title_reduced" : article_data["title_reduced"],
+                        "description" : article_data["description"],
+                        "tags" : article_data["tags"],
+                        "date" : time.mktime( time.strptime(article_data["date"], "%d %b %y") )
+                    }
+
+    # Views
+
+    def viewDayRollOverCheck(self):
+        pass
+
+    def articleView(self, sub, location):
+        pass
+
+    # Getters
+
+    @property
+    def article_location(self):
+        return self.data['articles_location']

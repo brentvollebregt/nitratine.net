@@ -52,7 +52,7 @@ TODO
 
 ## Stuff that needs to be stored
  - Article
-    - ID
+    - date
     - Sub location
     - Title
         - Small
@@ -62,7 +62,6 @@ TODO
     - Views
         - Total
         - Last week (each indv day) ?
-    - Content (img + text)
  - Views
     - Total
     - Hour contribution

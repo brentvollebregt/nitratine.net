@@ -6,7 +6,7 @@ import data_managers
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
-articles_location = "articles/" # Intergrate into JSON later
+# TODO Pull all pages in
 
 
 
@@ -84,9 +84,9 @@ def toolsPageRoute(identifier):
 def statsRoute():
     return render_template('stats.html')
 
-@app.route("/img/<sub>/<article>/<img>")
+@app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):
-    return send_from_directory(articles_location + sub + "/" + article + "/", img)
+    return send_from_directory(data.article_location + sub + "/" + article + "/", img)
 
 
 
