@@ -6,11 +6,10 @@ import data_managers
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
-# TODO Pull all pages in
 
 
 
-# API Routes
+# Routes
 
 @app.route("/")
 def homeRoute():
@@ -23,8 +22,8 @@ def projectsRoute():
                            display_icon=url_for('static', filename='img/project-icon.svg')
                            )
 
-@app.route("/projects/<identifier>")
-def projectsPageRoute(identifier):
+@app.route("/projects/<article>")
+def projectsPageRoute(article):
     return ''
 
 @app.route("/blog")
@@ -34,8 +33,8 @@ def blogRoute():
                            display_icon=url_for('static', filename='img/blog-icon.svg')
                            )
 
-@app.route("/blog/<identifier>")
-def blogPageRoute(identifier):
+@app.route("/blog/<article>")
+def blogPageRoute(article):
     return ''
 
 @app.route("/apps")
@@ -45,17 +44,18 @@ def appsRoute():
                            display_icon=url_for('static', filename='img/apps-icon.svg')
                            )
 
-@app.route("/apps/<identifier>")
-def appsPageRoute(identifier):
-    with open('articles/apps/' + identifier + '/view.html', 'r') as f:
+@app.route("/apps/<article>")
+def appsPageRoute(article):
+    with open('articles/apps/' + article + '/view.html', 'r') as f:
         html = f.read()
 
+    data.articleView('apps', article)
     return render_template_string(html,
                            title="Apps",
                            )
 
-@app.route("/apps/<identifier>/bug-report")
-def appsBugRoute(identifier):
+@app.route("/apps/<article>/bug-report")
+def appsBugRoute(article):
     return ''
 
 @app.route("/youtube")
@@ -65,8 +65,8 @@ def youtubeRoute():
                            display_icon=url_for('static', filename='img/youtube-icon.svg')
                            )
 
-@app.route("/youtube/<identifier>")
-def youtubePageRoute(identifier):
+@app.route("/youtube/<article>")
+def youtubePageRoute(article):
     return ''
 
 @app.route("/tools")
@@ -76,8 +76,8 @@ def toolsRoute():
                            display_icon=url_for('static', filename='img/tools-icon.svg')
                            )
 
-@app.route("/tools/<identifier>")
-def toolsPageRoute(identifier):
+@app.route("/tools/<article>")
+def toolsPageRoute(article):
     return ''
 
 @app.route("/stats")
@@ -87,6 +87,14 @@ def statsRoute():
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):
     return send_from_directory(data.article_location + sub + "/" + article + "/", img)
+
+
+
+# For testing
+
+@app.route("/json")
+def jsonRoute():
+    return str(data.data)
 
 
 

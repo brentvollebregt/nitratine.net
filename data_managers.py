@@ -18,7 +18,9 @@ class JSON():
             "today" : {
                 "count" : 0,
                 "date" : 1483182000
-            }
+            },
+            "hours" : {},
+            "count" : 0
         }
     }
 
@@ -79,7 +81,11 @@ class JSON():
                         "title_reduced" : article_data["title_reduced"],
                         "description" : article_data["description"],
                         "tags" : article_data["tags"],
-                        "date" : time.mktime( time.strptime(article_data["date"], "%d %b %y") )
+                        "date" : time.mktime( time.strptime(article_data["date"], "%d %b %y") ),
+                        "views" : {
+                            "count" : 0,
+                            "30days" : {}
+                        }
                     }
 
     # Views
@@ -87,8 +93,20 @@ class JSON():
     def viewDayRollOverCheck(self):
         pass
 
-    def articleView(self, sub, location):
-        pass
+    def articleView(self, sub, article):
+        self.data['articles'][sub][article]['views']['count'] += 1
+
+        # TODO Daily in article
+
+        # TODO Global today (check date to see if needs to be rotated)
+
+        hour = time.strftime('%H')
+        if hour not in self.data['views']['hours']:
+            self.data['views']['hours'][hour] = 1
+        else:
+            self.data['views']['hours'][hour] += 1
+
+        self.data['views']['count'] += 1
 
     # Getters
 
