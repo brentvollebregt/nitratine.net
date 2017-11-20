@@ -78,6 +78,8 @@ class JSON():
                     with open(self.article_location + sub + "/" + article + "/data.json", 'r') as article_json_file:
                         article_data = json.load(article_json_file)
                     self.data['articles'][sub][article] = {
+                        "sub" : sub,
+                        "url_ext" : article,
                         "title" : article_data["title"],
                         "title_reduced" : article_data["title_reduced"],
                         "description" : article_data["description"],

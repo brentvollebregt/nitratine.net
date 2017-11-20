@@ -14,29 +14,35 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 10px; padding: 15px;">
         <div>
             <h2 class="section_header">Newest</h2>
-            <a class="tile sweep-to-right">
-                <img src="/non-static/apps/colour/icon.png" class="tile_image">
-                <h3 class="tile_title">Colour - The completely pointless app</h3>
-                <p class="tile_text">This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen.</p>
+
+            {% for article in recent_articles %}
+            <a class="tile sweep-to-right" href="/{{ article['sub'] }}/{{ article['url_ext'] }}">
+                <img src="/non-static/{{ article['sub'] }}/{{ article['url_ext'] }}/icon.png" class="tile_image">
+                <h3 class="tile_title">{{ article['title'] }}</h3>
+                <p class="tile_text">{{ article['description'] }}</p>
                 <div class="tile_tag_box">
-                    <div class="tile_tag">Java</div>
-                    <div class="tile_tag">Android</div>
-                    <div class="tile_tag">Colour</div>
-                    <div class="tile_tag">Random</div>
+                    {% for tag in article['tags'] %}
+                    <div class="tile_tag">{{ tag }}</div>
+                    {% endfor %}
                 </div>
             </a>
-            <a class="tile">Tile</a>
-            <a class="tile">Tile</a>
-            <a class="tile">Tile</a>
-            <a class="tile">Tile</a>
+            {% endfor %}
         </div>
+
         <div>
             <h2 class="section_header">Top</h2>
-                <a class="tile">Tile</a>
-            <a class="tile">Tile</a>
-            <a class="tile">Tile</a>
-            <a class="tile">Tile</a>
-            <a class="tile">Tile</a>
+            {% for article in top_articles %}
+            <a class="tile sweep-to-right" href="/{{ article['sub'] }}/{{ article['url_ext'] }}">
+                <img src="/non-static/{{ article['sub'] }}/{{ article['url_ext'] }}/icon.png" class="tile_image">
+                <h3 class="tile_title">{{ article['title'] }}</h3>
+                <p class="tile_text">{{ article['description'] }}</p>
+                <div class="tile_tag_box">
+                    {% for tag in article['tags'] %}
+                    <div class="tile_tag">{{ tag }}</div>
+                    {% endfor %}
+                </div>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </div>

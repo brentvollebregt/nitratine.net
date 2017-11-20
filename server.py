@@ -13,7 +13,9 @@ data = data_managers.JSON()
 
 @app.route("/")
 def homeRoute():
-    return render_template('home.html')
+    top_articles = data.getArticlesByViews('home')
+    recent_articles = data.getArticlesByDate('home', 5)
+    return render_template('home.html', top_articles=top_articles, recent_articles=recent_articles)
 
 @app.route("/projects")
 def projectsRoute():

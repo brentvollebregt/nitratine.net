@@ -15,6 +15,7 @@
     margin: 10px 0;
     position: relative;
     height: 170px;
+    text-decoration: none;
 }
 
 .tile_image {
