@@ -91,6 +91,12 @@ class JSON():
                         }
                     }
 
+    def articleExists(self, sub, article):
+        if article in self.data['articles'][sub]:
+            return True
+        else:
+            return False
+
     # Views
 
     def articleView(self, sub, article):

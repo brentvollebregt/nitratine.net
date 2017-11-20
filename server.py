@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, render_template_string, send_from_directory
+from flask import Flask, render_template, redirect, url_for, render_template_string, send_from_directory, abort
 
 import data_managers
 
@@ -19,78 +19,78 @@ def homeRoute():
 
 @app.route("/projects")
 def projectsRoute():
-    return render_template('sub.html',
-                           title="Projects",
-                           display_icon=url_for('static', filename='img/project-icon.svg')
-                           )
+    return getSub('projects', "Projects")
 
 @app.route("/projects/<article>")
 def projectsPageRoute(article):
-    return ''
+    return getArticle('projects', "Projects", article)
 
 @app.route("/blog")
 def blogRoute():
-    return render_template('sub.html',
-                           title="Blog",
-                           display_icon=url_for('static', filename='img/blog-icon.svg')
-                           )
+    return getSub('blog', "Blog")
 
 @app.route("/blog/<article>")
 def blogPageRoute(article):
-    return ''
+    return getArticle('blog', "Blog", article)
 
 @app.route("/apps")
 def appsRoute():
-    top_articles = data.getArticlesByViews('apps')
-    recent_articles = data.getArticlesByDate('apps')
-    return render_template('sub.html',
-                           title="Apps",
-                           display_icon=url_for('static', filename='img/apps-icon.svg'),
-                           top_articles=top_articles,
-                           recent_articles=recent_articles)
+    return getSub('apps', "Apps")
 
 @app.route("/apps/<article>")
 def appsPageRoute(article):
-    # TODO Check if article exists in JSON
-    with open('articles/apps/' + article + '/view.html', 'r') as f:
-        html = f.read()
+    return getArticle('apps', "Apps", article)
 
-    data.articleView('apps', article)
-    return render_template_string(html, title="Apps")
-
-@app.route("/apps/<article>/bug-report")
+@app.route("/apps/<article>/bug-report") # TODO
 def appsBugRoute(article):
     return ''
 
 @app.route("/youtube")
 def youtubeRoute():
-    return render_template('sub.html',
-                           title="YouTube",
-                           display_icon=url_for('static', filename='img/youtube-icon.svg')
-                           )
+    return getSub('youtube', "YouTube")
 
 @app.route("/youtube/<article>")
 def youtubePageRoute(article):
-    return ''
+    return getArticle('youtube', "YouTube", article)
 
 @app.route("/tools")
 def toolsRoute():
-    return render_template('sub.html',
-                           title="Tools",
-                           display_icon=url_for('static', filename='img/tools-icon.svg')
-                           )
+    return getSub('tools', "Tools")
 
 @app.route("/tools/<article>")
 def toolsPageRoute(article):
-    return ''
+    return getArticle('tools', "Tools", article)
 
-@app.route("/stats")
+@app.route("/stats") # TODO
 def statsRoute():
     return render_template('stats.html')
 
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):
     return send_from_directory(data.article_location + sub + "/" + article + "/", img)
+
+
+
+# Recurring code
+
+def getSub(sub, title):
+    top_articles = data.getArticlesByViews(sub)
+    recent_articles = data.getArticlesByDate(sub)
+    return render_template('sub.html',
+                           title=title,
+                           display_icon=url_for('static', filename='img/' + sub + '-icon.svg'),
+                           top_articles=top_articles,
+                           recent_articles=recent_articles)
+
+def getArticle(sub, title, article):
+    if not data.articleExists(sub, article):
+        abort(404)
+
+    with open('articles/' + sub + '/' + article + '/view.html', 'r') as f:
+        html = f.read()
+
+    data.articleView(sub, article)
+    return render_template_string(html, title=title)
 
 
 
