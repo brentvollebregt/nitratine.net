@@ -46,13 +46,12 @@ def appsRoute():
 
 @app.route("/apps/<article>")
 def appsPageRoute(article):
+    # TODO Check if article exists in JSON
     with open('articles/apps/' + article + '/view.html', 'r') as f:
         html = f.read()
 
     data.articleView('apps', article)
-    return render_template_string(html,
-                           title="Apps",
-                           )
+    return render_template_string(html, title="Apps")
 
 @app.route("/apps/<article>/bug-report")
 def appsBugRoute(article):

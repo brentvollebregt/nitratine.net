@@ -1,6 +1,7 @@
 import json
 import os
 import time
+import shutil
 
 class JSON():
 
@@ -90,9 +91,6 @@ class JSON():
 
     # Views
 
-    def viewDayRollOverCheck(self):
-        pass
-
     def articleView(self, sub, article):
         self.data['articles'][sub][article]['views']['count'] += 1
 
@@ -107,6 +105,35 @@ class JSON():
             self.data['views']['hours'][hour] += 1
 
         self.data['views']['count'] += 1
+
+    # Article Display
+
+    def getArticlesInSub(self, sub):
+        if sub == "home":
+            subs = ['apps', 'blog', 'projects', 'tools', 'youtube']
+        else:
+            subs = [sub]
+
+        articles = []
+        for sub in subs:
+            for article in self.data['articles'][sub]:
+                articles.append(self.data['articles'][sub][article])
+
+        return articles
+
+    def getArticlesByViews(self, sub):
+        articles = self.getArticlesInSub(sub)
+        sorted_articles = sorted(articles, key=lambda x: x['views']['count'], reverse=True)
+
+        return sorted_articles[:5]
+
+    def getArticlesByDate(self, sub, limit=False):
+        articles = self.getArticlesInSub(sub)
+        sorted_articles = sorted(articles, key=lambda x: x['date'], reverse=True)
+
+        if limit:
+            return sorted_articles[:limit]
+        return sorted_articles
 
     # Getters
 
