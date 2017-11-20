@@ -41,10 +41,13 @@ def blogPageRoute(article):
 
 @app.route("/apps")
 def appsRoute():
+    top_articles = data.getArticlesByViews('apps')
+    recent_articles = data.getArticlesByDate('apps')
     return render_template('sub.html',
                            title="Apps",
-                           display_icon=url_for('static', filename='img/apps-icon.svg')
-                           )
+                           display_icon=url_for('static', filename='img/apps-icon.svg'),
+                           top_articles=top_articles,
+                           recent_articles=recent_articles)
 
 @app.route("/apps/<article>")
 def appsPageRoute(article):
