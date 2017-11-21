@@ -8,8 +8,7 @@ Make sure you have Flask installed (pip install flask) and python (obviously).<b
 Run server.py to host the server; alternatively this can be imported and routes executed somewhere else (like pythonanywhere does).
 
 ## Articles
-To add articles to the site...
-Article layout
+To add articles to the site you will need to have defined the articles location in the servers data.json. They then need to follow a format to be detected on startup.
  - Root directory (specified in JSON (adding later))
     - sub (e.g. apps, blog, projects...)
         - Article name (what will be in the url)
@@ -17,8 +16,38 @@ Article layout
             - icon.png (Icon for article)
             - view.html (HTML page extending SKELETON.html)
 
-data.json sample:
-TODO
+#### data.json sample:
+```json
+{
+  "title" : "Colour - The completely pointless app",
+  "title_reduced" : "Colour - Android App",
+  "description" : "This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen.",
+  "tags" : ["Android", "App", "Java", "Random"],
+  "date" : "18 Nov 17"
+}
+```
+
+#### Article Layout Example
+- articles
+    - apps
+        - colour
+            - data.json
+            - icon.png
+            - view.html
+    - blog
+        - how-to-make-a-flask-site
+            - data.json
+            - icon.png
+            - view.html
+    - projects
+    - tools
+        - rbg-hex-converter
+            - data.json
+            - icon.png
+            - view.html
+    - youtube
+
+These articles will be found at www.yourdomain.com/sub/article. e.g. brentvollebregt.pythonanywhere.com/apps/colour
 
 ## Planning
 - Home
@@ -26,21 +55,6 @@ TODO
     - Recent
     - Random Button
     - Small external links
-- Projects
-    - Top
-    - Most recent
-- Blog
-    - Top
-    - Most recent
-- YouTube
-    - Top
-    - Most recent
-- Tools
-    - Most recently sorted
-    - Squares with text backed by images
-- Stats
-    - # Of Articles
-    - Page views
 
 ## Colours
  - Main: #1976d2
@@ -50,24 +64,14 @@ TODO
  - Light Highlight: #ff5c8d
  - Dark Highlight: #a00037
 
-## Stuff that needs to be stored
- - Article
-    - date
-    - Sub location
-    - Title
-        - Small
-        - Big
-    - Desc
-    - Tags
-    - Views
-        - Total
-        - Last week (each indv day) ?
- - Views
-    - Total
-    - Hour contribution
-
+# Notes
 Remember box shadows at the end
 
 Media queries css
 
 ICON - Blue writing with pink accents (+black and white) - transparent
+
+Stuff smaller?
+- title 23px
+- desc 13px
+- tags 14px
