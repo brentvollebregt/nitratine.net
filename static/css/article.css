@@ -1,0 +1,42 @@
+.article_content {
+    padding: 15px;
+    max-width: 1200px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.article_content h1 {
+    font-weight: normal;
+    font-size: 50px;
+    margin: 20px 0;
+    color: #1976d2;
+    border-bottom: solid 2px #1976d2;
+}
+
+.article_content h2 {
+    font-weight: normal;
+    font-size: 30px;
+    color: #1976d2;
+    border-bottom: solid 1px #1976d2;
+}
+
+.article_content p {
+    font-size: 17px;
+}
+
+.article_content ul li {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.vertical_screenshot {
+    height: 450px;
+}
+
+.link {
+    color: #d81b60;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #a00037;
+}
