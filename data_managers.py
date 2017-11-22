@@ -16,10 +16,7 @@ class JSON():
             "youtube" : {}
         },
         "views" : {
-            "today" : {
-                "count" : 0,
-                "date" : 1483182000
-            },
+            "daily" : {},
             "hours" : {},
             "count" : 0
         }
@@ -87,7 +84,7 @@ class JSON():
                         "date" : time.mktime( time.strptime(article_data["date"], "%d %b %y") ),
                         "views" : {
                             "count" : 0,
-                            "30days" : {}
+                            "7days" : {}
                         }
                     }
 
@@ -97,14 +94,21 @@ class JSON():
         else:
             return False
 
+    def getArticleTitle(self, sub, article):
+        return self.data['articles'][sub][article]['title']
+
     # Views
 
     def articleView(self, sub, article):
         self.data['articles'][sub][article]['views']['count'] += 1
 
-        # TODO Daily in article
+        # TODO 7days in articles
 
-        # TODO Global today (check date to see if needs to be rotated)
+        today = time.strftime('%d %b %y')
+        if today in self.data['views']['daily']:
+            self.data['views']['daily'][today] += 1
+        else:
+            self.data['views']['daily'][today] = 1
 
         hour = time.strftime('%H')
         if hour not in self.data['views']['hours']:

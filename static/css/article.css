@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 .article_content {
     padding: 15px;
     max-width: 1200px;
@@ -24,8 +28,8 @@
 }
 
 .article_content ul li {
-    font-size: 18px;
-    margin: 5px 0;
+    font-size: 17px;
+    margin: 4px 0;
 }
 
 .vertical_screenshot {
@@ -34,7 +38,6 @@
 
 .link {
     color: #d81b60;
-    text-decoration: none;
 }
 
 .link:hover {

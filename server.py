@@ -23,7 +23,7 @@ def projectsRoute():
 
 @app.route("/projects/<article>")
 def projectsPageRoute(article):
-    return getArticle('projects', "Projects", article)
+    return getArticle('projects', article)
 
 @app.route("/blog")
 def blogRoute():
@@ -31,7 +31,7 @@ def blogRoute():
 
 @app.route("/blog/<article>")
 def blogPageRoute(article):
-    return getArticle('blog', "Blog", article)
+    return getArticle('blog', article)
 
 @app.route("/apps")
 def appsRoute():
@@ -39,11 +39,7 @@ def appsRoute():
 
 @app.route("/apps/<article>")
 def appsPageRoute(article):
-    return getArticle('apps', "Apps", article)
-
-@app.route("/apps/<article>/bug-report") # TODO
-def appsBugRoute(article):
-    return ''
+    return getArticle('apps', article)
 
 @app.route("/youtube")
 def youtubeRoute():
@@ -51,7 +47,7 @@ def youtubeRoute():
 
 @app.route("/youtube/<article>")
 def youtubePageRoute(article):
-    return getArticle('youtube', "YouTube", article)
+    return getArticle('youtube', article)
 
 @app.route("/tools")
 def toolsRoute():
@@ -59,7 +55,7 @@ def toolsRoute():
 
 @app.route("/tools/<article>")
 def toolsPageRoute(article):
-    return getArticle('tools', "Tools", article)
+    return getArticle('tools', article)
 
 @app.route("/stats") # TODO
 def statsRoute():
@@ -82,7 +78,7 @@ def getSub(sub, title):
                            top_articles=top_articles,
                            recent_articles=recent_articles)
 
-def getArticle(sub, title, article):
+def getArticle(sub, article):
     if not data.articleExists(sub, article):
         abort(404)
 
@@ -90,7 +86,7 @@ def getArticle(sub, title, article):
         html = f.read()
 
     data.articleView(sub, article)
-    return render_template_string(html, title=title)
+    return render_template_string(html, title=data.getArticleTitle(sub, article))
 
 
 
