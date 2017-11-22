@@ -10,7 +10,7 @@ a {
 
 .article_content h1 {
     font-weight: normal;
-    font-size: 50px;
+    font-size: 55px;
     margin: 20px 0;
     color: #1976d2;
     border-bottom: solid 2px #1976d2;
@@ -18,7 +18,7 @@ a {
 
 .article_content h2 {
     font-weight: normal;
-    font-size: 30px;
+    font-size: 35px;
     color: #1976d2;
     border-bottom: solid 1px #1976d2;
 }

@@ -100,17 +100,26 @@ class JSON():
     # Views
 
     def articleView(self, sub, article):
+        today = time.strftime('%d %b %y')
+        hour = time.strftime('%H')
+
         self.data['articles'][sub][article]['views']['count'] += 1
 
-        # TODO 7days in articles
+        if today in self.data['articles'][sub][article]['views']['7days']:
+            self.data['articles'][sub][article]['views']['7days'][today] += 1
+        else:
+            self.data['articles'][sub][article]['views']['7days'][today] = 1
+        if len(self.data['articles'][sub][article]['views']['7days']) > 7:
+            dates = [i for i in self.data['articles'][sub][article]['views']['7days']]
+            dates_formatted = [time.strptime(date, '%d %b %y') for date in dates]
+            ealiest_entry = time.strftime('%d %b %y', min(dates_formatted) )
+            del self.data['articles'][sub][article]['views']['7days'][ealiest_entry]
 
-        today = time.strftime('%d %b %y')
         if today in self.data['views']['daily']:
             self.data['views']['daily'][today] += 1
         else:
             self.data['views']['daily'][today] = 1
 
-        hour = time.strftime('%H')
         if hour not in self.data['views']['hours']:
             self.data['views']['hours'][hour] = 1
         else:

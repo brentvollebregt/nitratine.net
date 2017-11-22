@@ -51,7 +51,6 @@ These articles will be found at www.yourdomain.com/sub/article. e.g. brentvolleb
 
 ## TODO
 - Statistics page
-- One view counters not done
 - Administration
     - Edit article
     - Edit article JSON
