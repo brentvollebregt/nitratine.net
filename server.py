@@ -1,12 +1,9 @@
 from flask import Flask, render_template , url_for, render_template_string, send_from_directory, abort
-
 import data_managers
-
 
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
-
 
 
 # Routes
@@ -59,12 +56,26 @@ def toolsPageRoute(article):
 
 @app.route("/stats") # TODO
 def statsRoute():
-    return render_template('stats.html')
+    total_views = data.getTotalViews()
+    number_of_articles = data.getArticleCount()
+
+    last_20_day_labels = data.getLast20DayLabels()
+    last_20_day_data = data.getLast20DayData()
+    prev_20_day_data = data.getPrev20DayData()
+
+    hourly_data = data.getHourlyData()
+
+    return render_template('stats.html',
+                           total_views=str(total_views),
+                           number_of_articles=str(number_of_articles),
+                           last_20_day_labels=str(last_20_day_labels).replace("'", '"'),
+                           last_20_day_data=str(last_20_day_data),
+                           prev_20_day_data=str(prev_20_day_data),
+                           hourly_data=str(hourly_data))
 
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):
     return send_from_directory(data.article_location + sub + "/" + article + "/", img)
-
 
 
 # Recurring code
@@ -89,13 +100,11 @@ def getArticle(sub, article):
     return render_template_string(html, title=data.getArticleTitle(sub, article))
 
 
-
 # For testing
 
 @app.route("/json")
 def jsonRoute():
     return str(data.data)
-
 
 
 if __name__ == '__main__':

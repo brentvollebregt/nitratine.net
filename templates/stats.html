@@ -1,5 +1,76 @@
 {% extends "SKELETON.html" %}
+
+{% block head %}
+<script src="/js/Chart.min.js"></script>
+{% endblock %}
+
 {% block content %}
-# of articles
-Page views
+<ul style="margin: 0;">
+    <lu style="display: block;">Total Views : {{ total_views }}</lu>
+    <lu style="display: block;">Number Of Articles: {{ number_of_articles }}</lu>
+</ul>
+
+<canvas id="twentyDayChart" height="250px" style="width: 80%;"></canvas>
+<script>
+var ctx = document.getElementById("twentyDayChart").getContext('2d');
+var twentyDayChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ last_20_day_labels | safe}},
+        datasets: [{
+            label: 'Last 20 Days',
+            data: {{ last_20_day_data }},
+            backgroundColor: 'rgba(25, 118, 210, 1)',
+            borderColor: 'rgba(25, 118, 210, 1)',
+            borderWidth: 1,
+            fill: false
+        },
+        {
+            label: '20 Day Previous Comparison',
+            data: {{ prev_20_day_data }},
+            backgroundColor: 'rgba(245, 225, 55, 1)',
+            borderColor: 'rgba(245, 225, 55, 1)',
+            borderWidth: 1,
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+<canvas id="hourlyChart" height="250px" style="width: 80%;"></canvas>
+<script>
+var ctx = document.getElementById("hourlyChart").getContext('2d');
+var hourlyChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ["12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"],
+        datasets: [{
+            label: 'Total Views Per Hour',
+            data: {{ hourly_data }},
+            backgroundColor: 'rgba(25, 118, 210, 1)',
+            borderColor: 'rgba(25, 118, 210, 1)',
+            borderWidth: 1,
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
 {% endblock %}

@@ -55,6 +55,9 @@ These articles will be found at www.yourdomain.com/sub/article. e.g. brentvolleb
     - Edit article
     - Edit article JSON
     - Export stats
+    - Edit JSON
+    - Download and Upload JSON
+    - Re-scrape pages
 
 ## Colours
  - Main: #1976d2

@@ -19,6 +19,10 @@ class JSON():
             "daily" : {},
             "hours" : {},
             "count" : 0
+        },
+        "administration" : {
+            "username" : "",
+            "password" : ""
         }
     }
 
@@ -155,6 +159,43 @@ class JSON():
         if limit:
             return sorted_articles[:limit]
         return sorted_articles
+
+    # Statistics
+
+    def getTotalViews(self):
+        return self.data['views']['count']
+
+    def getArticleCount(self):
+        return len([article for sub in self.data['articles'] for article in self.data['articles'][sub]])
+
+    def getLast20DayLabels(self):
+        labels_datefmt = [time.strptime(date, "%d %b %y") for date in self.data['views']['daily']]
+        labels_datefmt.sort()
+        labels = [time.strftime("%d %b %y", label) for label in labels_datefmt]
+        return labels[-20:]
+
+    def getLast20DayData(self):
+        return [self.data['views']['daily'][label] for label in self.getLast20DayLabels()]
+
+    def getPrev20DayData(self):
+        days_recorded = [date for date in self.data['views']['daily']]
+        for date in self.getLast20DayLabels():
+            days_recorded.remove(date)
+        labels_datefmt = [time.strptime(date, "%d %b %y") for date in days_recorded]
+        labels_datefmt.sort()
+        labels = [time.strftime("%d %b %y", label) for label in labels_datefmt]
+        return [self.data['views']['daily'][label] for label in labels[-20:]]
+
+    def getHourlyData(self):
+        hourly_data = []
+        for hour in range(24):
+            hour = str(hour).zfill(2)
+            if hour in self.data['views']['hours']:
+                data = self.data['views']['hours'][hour]
+            else:
+                data = 0
+            hourly_data.append(data)
+        return hourly_data
 
     # Getters
 
