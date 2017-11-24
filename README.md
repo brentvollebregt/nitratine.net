@@ -51,6 +51,7 @@ These articles will be found at www.yourdomain.com/sub/article. e.g. brentvolleb
 
 ## TODO
 - Statistics page
+- Accessing navbar on smaller screens
 - Administration
     - Edit article
     - Edit article JSON
@@ -58,6 +59,9 @@ These articles will be found at www.yourdomain.com/sub/article. e.g. brentvolleb
     - Edit JSON
     - Download and Upload JSON
     - Re-scrape pages
+    - Remove Article (details and files)
+<!--<link rel="icon" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">-->
+
 
 ## Colours
  - Main: #1976d2

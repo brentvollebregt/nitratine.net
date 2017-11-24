@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="theme-color" content="#1976d2"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
-        <!--<link rel="icon" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">-->
 		<meta name="viewport" content="width=device-width, initial-scale=0.6">
         <script>var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
         {% block head %}{% endblock %}

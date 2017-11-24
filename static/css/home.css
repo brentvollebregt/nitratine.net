@@ -3,13 +3,26 @@
     font-family: 'Roboto', sans-serif;
     font-size: 25px;
     color: #1976d2;
+    padding: 0 20px;
 }
 
 .featured_sections {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /*grid-template-columns: 1fr 1fr;*/
     grid-gap: 10px;
     padding: 5px 15px;
+}
+
+@media screen and (min-width : 980px) {
+    .featured_sections {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width : 979px) {
+    .featured_sections {
+        grid-template-columns: 1fr;
+    }
 }
 
 .section_header {

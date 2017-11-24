@@ -38,12 +38,28 @@ body {
 
 /* - Nav Bar */
 
-.nav {
-    height: 100%;
-    position: fixed;
-    width: 280px;
-    background: white;
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
+/*.nav {*/
+    /*height: 100%;*/
+    /*position: fixed;*/
+    /*width: 280px;*/
+    /*background: white;*/
+    /*border-right: 1px solid rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+@media screen and (min-width : 1140px) {
+    .nav {
+        height: 100%;
+        position: fixed;
+        width: 280px;
+        background: white;
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media screen and (max-width : 1139px) {
+    .nav {
+        display: none;
+    }
 }
 
 .icon {
@@ -85,8 +101,20 @@ body {
 
 /* - Content */
 
-.content {
-    margin-left: 280px;
+/*.content {*/
+    /*margin-left: 280px;*/
+/*}*/
+
+@media screen and (min-width : 1140px) {
+    .content {
+        margin-left: 280px;
+    }
+}
+
+@media screen and (max-width : 1139px) {
+    .content {
+        margin-left: 0;
+    }
 }
 
 .content_container {
