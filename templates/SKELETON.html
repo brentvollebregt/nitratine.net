@@ -4,11 +4,24 @@
         <meta charset="utf-8">
         <meta name="theme-color" content="#1976d2"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
+        <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=0.6">
         <script>var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
         {% block head %}{% endblock %}
 	</head>
 	<body>
+        <div id="small_nav" class="small_nav" onclick="toggleNav(this)">
+            <div class="small_nav_item" onclick="linkTo('')">Home</div>
+            <div class="small_nav_item" onclick="linkTo('projects')">Projects</div>
+            <div class="small_nav_item" onclick="linkTo('blog')">Blog</div>
+            <div class="small_nav_item" onclick="linkTo('apps')">Apps</div>
+            <div class="small_nav_item" onclick="linkTo('youtube')">YouTube</div>
+            <div class="small_nav_item" onclick="linkTo('tools')">Tools</div>
+            <div class="small_nav_item" onclick="linkTo('stats')">Statistics</div>
+            <img id="small_nav_icon" src="{{ url_for('static', filename='img/menu-icon.svg') }}" style="height: 50px; transition: transform .3s; filter: invert()" />
+        </div>
+        <div id="small_nav_spacer" class="small_nav_spacer"></div>
+
         <div class="nav">
             <a class="icon">
                 <div>

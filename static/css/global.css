@@ -1,11 +1,9 @@
-/*@import url('https://fonts.googleapis.com/css?family=Roboto');*/
-
 @font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: url(/font/Roboto-Regular.ttf);
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/font/Roboto-Regular.ttf);
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
 html {
@@ -29,7 +27,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -39,14 +37,14 @@ body {
 /* - Nav Bar */
 
 /*.nav {*/
-    /*height: 100%;*/
-    /*position: fixed;*/
-    /*width: 280px;*/
-    /*background: white;*/
-    /*border-right: 1px solid rgba(0, 0, 0, 0.2);*/
+/*height: 100%;*/
+/*position: fixed;*/
+/*width: 280px;*/
+/*background: white;*/
+/*border-right: 1px solid rgba(0, 0, 0, 0.2);*/
 /*}*/
 
-@media screen and (min-width : 1140px) {
+@media screen and (min-width: 1140px) {
     .nav {
         height: 100%;
         position: fixed;
@@ -56,7 +54,7 @@ body {
     }
 }
 
-@media screen and (max-width : 1139px) {
+@media screen and (max-width: 1139px) {
     .nav {
         display: none;
     }
@@ -99,19 +97,67 @@ body {
     margin: 18px 0;
 }
 
+.small_nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background: #1976d2;
+    z-index: 1;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.75);
+    text-align: center;
+    cursor: pointer;
+}
+
+.small_nav_spacer {
+    height: 50px;
+}
+
+.small_nav_item {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    padding: 10px;
+    display: none;
+}
+
+.small_nav_item:hover {
+    background: #63a4ff;
+}
+
+@media screen and (min-width: 1140px) {
+    .small_nav {
+        display: none
+    }
+
+    .small_nav_spacer {
+        display: none
+    }
+}
+
+@media screen and (max-width: 1139px) {
+    .small_nav {
+        display: block
+    }
+
+    .small_nav_spacer {
+        display: block
+    }
+}
+
 /* - Content */
 
 /*.content {*/
-    /*margin-left: 280px;*/
+/*margin-left: 280px;*/
 /*}*/
 
-@media screen and (min-width : 1140px) {
+@media screen and (min-width: 1140px) {
     .content {
         margin-left: 280px;
     }
 }
 
-@media screen and (max-width : 1139px) {
+@media screen and (max-width: 1139px) {
     .content {
         margin-left: 0;
     }

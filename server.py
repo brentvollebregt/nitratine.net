@@ -54,7 +54,7 @@ def toolsRoute():
 def toolsPageRoute(article):
     return getArticle('tools', article)
 
-@app.route("/stats") # TODO
+@app.route("/stats")
 def statsRoute():
     total_views = data.getTotalViews()
     number_of_articles = data.getArticleCount()
@@ -68,7 +68,7 @@ def statsRoute():
     return render_template('stats.html',
                            total_views=str(total_views),
                            number_of_articles=str(number_of_articles),
-                           last_20_day_labels=str(last_20_day_labels).replace("'", '"'),
+                           last_20_day_labels=str(last_20_day_labels),
                            last_20_day_data=str(last_20_day_data),
                            prev_20_day_data=str(prev_20_day_data),
                            hourly_data=str(hourly_data))
