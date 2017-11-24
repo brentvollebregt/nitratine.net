@@ -2,13 +2,34 @@
 
 {% block head %}
 <script src="/js/Chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/subs.css') }}">
+<style>
+    .data {
+        text-align: center;
+        margin: 30px;
+    }
+    .descriptor {
+        font-family: 'Roboto', sans-serif;
+        font-size: 40px;
+        color: #505050;
+    }
+
+    .value {
+        font-family: 'Roboto', sans-serif;
+        font-size: 45px;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<ul style="margin: 0;">
-    <lu style="display: block;">Total Views : {{ total_views }}</lu>
-    <lu style="display: block;">Number Of Articles: {{ number_of_articles }}</lu>
-</ul>
+<!-- Header -->
+<div class="header_wrapper">
+    <div class="header_img" style="background-image: url(/img/stats-icon.svg)"></div>
+    <h1 class="header_text">Statistics</h1>
+</div>
+
+<div class="data"><span class="descriptor">Total Views :</span> <span class="value">{{ total_views }}</span></div>
+<div class="data"><span class="descriptor">Number Of Articles:</span> <span class="value">{{ number_of_articles }}</span></div>
 
 <canvas id="twentyDayChart" height="250px" style="width: 80%;"></canvas>
 <script>
