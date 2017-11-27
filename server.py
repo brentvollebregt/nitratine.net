@@ -1,12 +1,13 @@
-from flask import Flask, render_template , url_for, render_template_string, send_from_directory, abort
+from flask import Flask, render_template, url_for, render_template_string, send_from_directory, abort, session, request, redirect, jsonify
 import data_managers
 
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
+app.secret_key = data.secrty_key
 
 
-# Routes
+# View Routes
 
 @app.route("/")
 def homeRoute():
@@ -72,6 +73,27 @@ def statsRoute():
                            last_20_day_data=str(last_20_day_data),
                            prev_20_day_data=str(prev_20_day_data),
                            hourly_data=str(hourly_data))
+
+@app.route("/admin", methods=['GET', 'POST'])
+def adminRoute():
+    if request.method == 'GET':
+        if 'logged_in' in session and session['logged_in']:
+            return render_template('admin.html')
+        else:
+            return render_template('login.html')
+    else:
+        if request.json['username'] == data.username and request.json['password'] == data.password:
+            session['logged_in'] = True
+            return jsonify({'success' : True})
+        return jsonify({'success' : False})
+
+
+# Work Routes
+
+@app.route("/admin/logout")
+def adminLogoutRoute():
+    session['logged_in'] = False
+    return redirect(url_for('adminRoute'))
 
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):

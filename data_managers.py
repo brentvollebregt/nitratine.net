@@ -2,6 +2,8 @@ import json
 import os
 import time
 import shutil
+import string
+import random
 
 class JSON():
 
@@ -23,7 +25,8 @@ class JSON():
         "administration" : {
             "username" : "",
             "password" : ""
-        }
+        },
+        "secrty_key" : "secret"
     }
 
     def __init__(self):
@@ -202,3 +205,20 @@ class JSON():
     @property
     def article_location(self):
         return self.data['articles_location']
+
+    @property
+    def secrty_key(self):
+        if 'secrty_key' in self.data:
+            return self.data['secrty_key']
+        else:
+            print ("WARN: Generating own secret key")
+            self.data['secrty_key'] = ''.join([random.choice(string.punctuation + string.digits + string.ascii_letters) for i in range(32)])
+            return self.data['secrty_key']
+
+    @property
+    def username(self):
+        return self.data['administration']['username']
+
+    @property
+    def password(self):
+        return self.data['administration']['password']
