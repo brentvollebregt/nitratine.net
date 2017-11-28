@@ -50,7 +50,7 @@ To add articles to the site you will need to have defined the articles location 
 These articles will be found at www.yourdomain.com/sub/article. e.g. brentvollebregt.pythonanywhere.com/apps/colour
 
 ## TODO
-<!--<link rel="icon" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">-->
+
 
 ## Colours
  - Main: #1976d2

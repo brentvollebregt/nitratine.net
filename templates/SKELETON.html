@@ -7,6 +7,7 @@
         <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=0.6">
         <script>var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+        <link rel="icon" sizes="100x100" href="{{ url_for('static', filename='img/favicon.ico') }}">
         {% block head %}{% endblock %}
 	</head>
 	<body>
@@ -37,7 +38,7 @@
             </div>
             <div class="nav_section">
                 <a class="nav_button" href="/projects">
-                    <img src="{{ url_for('static', filename='img/project-icon.svg') }}" class="nav_button_icon" />
+                    <img src="{{ url_for('static', filename='img/projects-icon.svg') }}" class="nav_button_icon" />
                     <div class="nav_button_text">Projects</div>
                 </a>
                 <a class="nav_button" href="/blog">

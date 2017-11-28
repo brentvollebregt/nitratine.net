@@ -1,6 +1,6 @@
 login = function () {
-    var username = '';
-    var password = '';
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/admin", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -13,7 +13,8 @@ login = function () {
         if (data) {
             window.location.reload();
         } else {
-
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
         }
     };
 };

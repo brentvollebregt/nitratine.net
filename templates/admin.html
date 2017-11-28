@@ -6,24 +6,33 @@
 {% endblock %}
 
 {% block content %}
-<h1>Push JSON</h1>
-<h1>Download JSON</h1>
-<h1>Re-scrape Pages</h1>
-<h1>Export Stats</h1>
-<h1>Upload JSON</h1>
+<style>
+    h1, h2, h3 {margin: 0; font-weight: normal; font-family: 'Roboto', sans-serif;}
+</style>
+<button>Push JSON</button>
+<button>Download JSON</button>
+<button>Re-scrape Pages</button>
+<button>Export Stats</button>
+<button>Upload JSON</button>
 
 <h1>Edit Article</h1>
-<h2>Article Location: </h2>
-<h3>Get</h3> <!-- Make sure the article exists -->
-<h2>Download HTML</h2>
+<input placeholder="Article Sub">
+<input placeholder="Article URL">
+<button>Get</button> <!-- Make sure the article exists -->
+<br>
+<button>Download HTML</button>
 <h2>Upload HTML</h2>
-<h2>Download JSON</h2>
+<button>Download icon</button>
+<h2>Upload icon</h2>
+<button>Download JSON</button>
 <h2>Upload JSON</h2>
-<h2>Delete Article</h2>
+<button>Delete Article</button>
 
 <h1>Create Article</h1>
-<h2>Sub, url</h2>
-<h2>Create</h2> <!-- Create a default to be edited later -->
+<input placeholder="Article Sub">
+<input placeholder="Article URL">
+<button>Create</button> <!-- Create a default to be edited later -->
 
-
+<br>
+<button onclick="logout()">Logout</button>
 {% endblock %}
