@@ -50,17 +50,7 @@ To add articles to the site you will need to have defined the articles location 
 These articles will be found at www.yourdomain.com/sub/article. e.g. brentvollebregt.pythonanywhere.com/apps/colour
 
 ## TODO
-- Administration
-    - Edit article
-    - Edit article JSON
-    - Export stats
-    - Edit JSON
-    - Download and Upload JSON
-    - Re-scrape pages
-    - Remove Article (details and files)
 <!--<link rel="icon" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">-->
-
-
 
 ## Colours
  - Main: #1976d2

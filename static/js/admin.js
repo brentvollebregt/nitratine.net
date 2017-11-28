@@ -10,8 +10,11 @@ login = function () {
     }));
     xhr.onload = function () {
         var data = JSON.parse(this.responseText)['success'];
-        console.log(data);
-        window.location.reload();
+        if (data) {
+            window.location.reload();
+        } else {
+
+        }
     };
 };
 
@@ -20,7 +23,6 @@ logout = function () {
     xhr.open("GET", "/admin/logout", true);
     xhr.send(null);
     xhr.onload = function () {
-        console.log(this.responseText);
         window.location.reload();
     };
 };

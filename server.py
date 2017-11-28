@@ -93,7 +93,7 @@ def adminRoute():
 @app.route("/admin/logout")
 def adminLogoutRoute():
     session['logged_in'] = False
-    return redirect(url_for('adminRoute'))
+    return jsonify({'success' : True})
 
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):

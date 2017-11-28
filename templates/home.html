@@ -8,8 +8,10 @@
 
 {% block content %}
 <div class="content_container">
-    <!-- Header (Temporary) -->
-    <div style="height: 220px;background: lightgrey;font-family: 'Roboto', sans-serif;text-align: center;line-height: 220px;font-size: 400%;">Brent Vollebregt</div>
+    <!-- Header -->
+    <div style="text-align: center; padding: 30px 30px 10px 30px;">
+        <img src="{{ url_for('static', filename='img/nitratine.png') }}" style="max-width: 880px; width: 100%;">
+    </div>
     <p class="welcome_message">Yes, I <span style="color: #d81b60;">built this site myself</span> and I am <span style="color: #d81b60;">very sorry</span> for it.</p>
     <!-- Featured sections -->
     <div class="featured_sections">
