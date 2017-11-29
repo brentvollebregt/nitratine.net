@@ -3,36 +3,65 @@
 {% block head %}
 <title>Administration</title>
 <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+<style>
+    h1 {
+        margin: 20px 0 5px 0;
+        font-size: 230%;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .major_button {
+        font-size: 190%;
+        border: solid 2px black;
+        margin: 5px 0;
+        padding: 5px 8px;
+        transition: color .8s, background .8s;
+        background: transparent;
+        border-radius: 6px;
+        width: 100%;
+    }
+
+    .major_button:hover {
+        color: white;
+        background: #313131;
+    }
+
+    button {
+        font-family: 'Roboto', sans-serif;
+        cursor: pointer;
+    }
+
+    input {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<style>
-    h1, h2, h3 {margin: 0; font-weight: normal; font-family: 'Roboto', sans-serif;}
-</style>
-<button>Push JSON</button>
-<button>Download JSON</button>
-<button>Re-scrape Pages</button>
-<button>Export Stats</button>
-<button>Upload JSON</button>
+<div style="padding: 10px; max-width: 600px; width: 100%;">
+    <button class="major_button">Push JSON</button>
+    <button class="major_button">Download JSON</button>
+    <input type="file" id="json_file" accept=".json" style="width: 49%">
+    <button class="major_button" style="width: 50%">Upload JSON</button>
+    <button class="major_button">Re-scrape Pages</button>
+    <button class="major_button">Export Stats</button>
 
-<h1>Edit Article</h1>
-<input placeholder="Article Sub">
-<input placeholder="Article URL">
-<button>Get</button> <!-- Make sure the article exists -->
-<br>
-<button>Download HTML</button>
-<h2>Upload HTML</h2>
-<button>Download icon</button>
-<h2>Upload icon</h2>
-<button>Download JSON</button>
-<h2>Upload JSON</h2>
-<button>Delete Article</button>
+    <h1>Download Article</h1>
+    <input placeholder="Article Sub" style="width: 20%;">
+    <input placeholder="Article URL" style="width: 40%;">
+    <button style="width: 19%;">Download</button>
 
-<h1>Create Article</h1>
-<input placeholder="Article Sub">
-<input placeholder="Article URL">
-<button>Create</button> <!-- Create a default to be edited later -->
+    <h1>Delete Article</h1>
+    <input placeholder="Article Sub" style="width: 20%;">
+    <input placeholder="Article URL" style="width: 40%;">
+    <button style="width: 19%;">Delete</button>
 
-<br>
-<button onclick="logout()">Logout</button>
+    <h1>Upload Article</h1>
+    <input placeholder="Article Sub" style="width: 20%;">
+    <input placeholder="Article URL" style="width: 40%;">
+    <button style="width: 20%;">Upload</button>
+    <input type="file" id="json_file" accept=".zip" style="width: 40%;">
+
+    <button onclick="logout()" class="major_button" style="margin-top: 20px;">Logout</button>
+</div>
 {% endblock %}

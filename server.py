@@ -95,6 +95,55 @@ def adminLogoutRoute():
     session['logged_in'] = False
     return jsonify({'success' : True})
 
+@app.route("/admin/push_json")
+def adminPushJsonRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
+@app.route("/admin/download_json")
+def adminDownloadJsonRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
+@app.route("/admin/rescrape")
+def adminRescrapeRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
+@app.route("/admin/download_stats")
+def adminDownloadStatsRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
+@app.route("/admin/delete_article")
+def adminDeleteArticleRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
+@app.route("/admin/create_article")
+def adminCreateArticleRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
+@app.route("/admin/download_article")
+def adminDownloadArticleRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):
     return send_from_directory(data.article_location + sub + "/" + article + "/", img)
