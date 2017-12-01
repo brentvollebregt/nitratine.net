@@ -39,27 +39,32 @@
 
 {% block content %}
 <div style="padding: 10px; max-width: 600px; width: 100%;">
-    <button class="major_button">Push JSON</button>
-    <button class="major_button">Download JSON</button>
-    <input type="file" id="json_file" accept=".json" style="width: 49%">
-    <button class="major_button" style="width: 50%">Upload JSON</button>
-    <button class="major_button">Re-scrape Pages</button>
-    <button class="major_button">Export Stats</button>
+    <button onclick="simple_call('/admin/push_json')" class="major_button">Push JSON</button>
+    <button onclick="simple_call('/admin/rescrape')" class="major_button">Re-scrape Pages</button>
+    <form action="/admin/download_stats" method="GET">
+        <button class="major_button">Export Stats</button>
+    </form>
+    <button onclick="download_json()" class="major_button" style="width: 50%; margin-top: 20px;">Download JSON</button>
+    <button onclick="upload_json()" class="major_button" style="width: 49%; margin-top: 20px;">Upload JSON</button>
+    <textarea id="jsonEdit" style="height: 100px; width: 100%; border-radius: 5px;"></textarea>
+
 
     <h1>Download Article</h1>
-    <input placeholder="Article Sub" style="width: 20%;">
-    <input placeholder="Article URL" style="width: 40%;">
-    <button style="width: 19%;">Download</button>
+    <form action="/admin/download_article" method="POST">
+        <input name="sub" placeholder="Article Sub" style="width: 20%;">
+        <input name="url" placeholder="Article URL" style="width: 40%;">
+        <button style="width: 19%;">Download</button>
+    </form>
 
-    <h1>Delete Article</h1>
+    <h1>Delete Article</h1> <!-- TODO -->
     <input placeholder="Article Sub" style="width: 20%;">
     <input placeholder="Article URL" style="width: 40%;">
-    <button style="width: 19%;">Delete</button>
+    <button style="width: 20%;">Delete</button>
 
-    <h1>Upload Article</h1>
+    <h1>Upload Article</h1> <!-- TODO -->
     <input placeholder="Article Sub" style="width: 20%;">
     <input placeholder="Article URL" style="width: 40%;">
-    <button style="width: 20%;">Upload</button>
+    <button style="width: 19%;">Upload</button>
     <input type="file" id="json_file" accept=".zip" style="width: 40%;">
 
     <button onclick="logout()" class="major_button" style="margin-top: 20px;">Logout</button>

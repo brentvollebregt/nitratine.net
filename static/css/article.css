@@ -9,15 +9,32 @@ a {
 }
 
 .article_content h1 {
-    font-weight: normal;
     font-size: 55px;
-    margin: 20px 0;
+    margin: 20px 0 10px;
     color: #1976d2;
     border-bottom: solid 2px #1976d2;
 }
 
+.date {
+    font-size: 90%;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.date:before {
+    content: '🕑 ';
+}
+
+.views {
+    font-size: 90%;
+    font-weight: bold;
+}
+
+.views:before {
+    content: '📈 ';
+}
+
 .article_content h2 {
-    font-weight: normal;
     font-size: 35px;
     color: #1976d2;
     border-bottom: solid 1px #1976d2;

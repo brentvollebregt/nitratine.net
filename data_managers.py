@@ -104,6 +104,12 @@ class JSON():
     def getArticleTitle(self, sub, article):
         return self.data['articles'][sub][article]['title']
 
+    def getArticleDate(self, sub, article):
+        return time.strftime("%d %b %y", time.localtime(int(self.data['articles'][sub][article]['date'])))
+
+    def getArticleViews(self, sub, article):
+        return self.data['articles'][sub][article]['views']['count']
+
     # Views
 
     def articleView(self, sub, article):
