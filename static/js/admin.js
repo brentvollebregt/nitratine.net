@@ -58,11 +58,32 @@ export_stats = function () {
 };
 
 delete_article = function () {
-
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/delete_article', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        sub: document.getElementById('delete_article_sub').value,
+        url: document.getElementById('delete_article_url').value
+    }));
+    xhr.onload = function () {
+        console.log(JSON.parse(this.responseText)['success']);
+        document.getElementById('delete_article_sub').value = '';
+        document.getElementById('delete_article_url').value = '';
+    };
 };
 
 upload_article = function () {
-
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/upload_article', true);
+    var formData = new FormData();
+    formData.append('sub', document.getElementById('upload_article_sub').value);
+    formData.append('url', document.getElementById('upload_article_url').value);
+    formData.append('file', document.getElementById('upload_article_file').files[0]);
+    xhr.send(formData);
+    xhr.onload = function () {
+        console.log(JSON.parse(this.responseText)['success']);
+    };
 };
 
 simple_call = function (url) {

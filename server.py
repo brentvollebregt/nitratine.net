@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, render_template_string, send_
 import data_managers
 import utils
 import ast
+import os
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
@@ -104,6 +105,22 @@ def adminPushJsonRoute():
     data.writeFile()
     return jsonify({'success': True})
 
+@app.route("/admin/rescrape")
+def adminRescrapeRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    data.articleScrape()
+    return jsonify({'success': True})
+
+@app.route("/admin/download_stats")
+def adminDownloadStatsRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    print("[TODO] Download Stats")
+    return jsonify({'success': True})
+
 @app.route("/admin/download_json")
 def adminDownloadJsonRoute():
     if 'logged_in' not in session or not session['logged_in']:
@@ -124,44 +141,6 @@ def adminUploadJsonRoute():
     except:
         return jsonify({'success': False})
 
-@app.route("/admin/rescrape")
-def adminRescrapeRoute():
-    if 'logged_in' not in session or not session['logged_in']:
-        return jsonify({'success': False})
-
-    data.articleScrape()
-    return jsonify({'success': True})
-
-@app.route("/admin/download_stats")
-def adminDownloadStatsRoute():
-    if 'logged_in' not in session or not session['logged_in']:
-        return jsonify({'success': False})
-
-    print("[TODO] Download Stats")
-    return jsonify({'success': True})
-
-@app.route("/admin/delete_article")
-def adminDeleteArticleRoute():
-    if 'logged_in' not in session or not session['logged_in']:
-        return jsonify({'success': False})
-
-    sub = request.form['sub']
-    url = request.form['url']
-
-    print("[TODO] Delete Article")
-    return jsonify({'success': True})
-
-@app.route("/admin/create_article")
-def adminCreateArticleRoute():
-    if 'logged_in' not in session or not session['logged_in']:
-        return jsonify({'success': False})
-
-    sub = request.form['sub']
-    url = request.form['url']
-
-    print("[TODO] Create Article")
-    return jsonify({'success': True})
-
 @app.route("/admin/download_article", methods=['POST'])
 def adminDownloadArticleRoute():
     if 'logged_in' not in session or not session['logged_in']:
@@ -172,6 +151,32 @@ def adminDownloadArticleRoute():
         return send_from_directory(directory='', filename=filename, as_attachment=True, attachment_filename=filename)
     else:
         return jsonify({'success': False})
+
+@app.route("/admin/delete_article", methods=['POST'])
+def adminDeleteArticleRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        sub = request.json['sub']
+        url = request.json['url']
+        utils.deleteArticleFiles(data.article_location, sub, url)
+        data.removeArticle(sub, url)
+        return jsonify({'success': True})
+    except:
+        return jsonify({'success': False})
+
+@app.route("/admin/upload_article", methods=['POST'])
+def adminCreateArticleRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    sub = request.form['sub']
+    url = request.form['url']
+    file = request.files['file']
+    file.save(os.getcwd() + '\\zip.zip')
+    utils.moveZip(data.article_location, sub, url)
+    return jsonify({'success': True})
 
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):

@@ -110,6 +110,10 @@ class JSON():
     def getArticleViews(self, sub, article):
         return self.data['articles'][sub][article]['views']['count']
 
+    def removeArticle(self, sub, article):
+        if sub in self.data['articles'] and article in self.data['articles'][sub]:
+            del self.data['articles'][sub][article]
+
     # Views
 
     def articleView(self, sub, article):
