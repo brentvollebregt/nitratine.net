@@ -53,10 +53,6 @@ download_json = function () {
     };
 };
 
-export_stats = function () {
-
-};
-
 delete_article = function () {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", '/admin/delete_article', true);

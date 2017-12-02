@@ -210,6 +210,14 @@ class JSON():
             hourly_data.append(data)
         return hourly_data
 
+    def getDownloadableStats(self):
+        stats = {'views' : self.data['views'], 'articles' : {}}
+        for sub in self.data['articles']:
+            stats['articles'][sub] = {}
+            for article in self.data['articles'][sub]:
+                stats['articles'][sub][article] = self.data['articles'][sub][article]['views']
+        return stats
+
     # Getters
 
     @property

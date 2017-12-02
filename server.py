@@ -1,8 +1,9 @@
-from flask import Flask, render_template, url_for, render_template_string, send_from_directory, abort, session, request, redirect, jsonify
+from flask import Flask, render_template, url_for, render_template_string, send_from_directory, abort, session, request, redirect, jsonify, Response
 import data_managers
 import utils
 import ast
 import os
+import json
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
@@ -118,8 +119,9 @@ def adminDownloadStatsRoute():
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'success': False})
 
-    print("[TODO] Download Stats")
-    return jsonify({'success': True})
+    return Response(json.dumps(data.getDownloadableStats()),
+                    mimetype='application/json',
+                    headers={'Content-Disposition': 'attachment;filename=stats.json'})
 
 @app.route("/admin/download_json")
 def adminDownloadJsonRoute():

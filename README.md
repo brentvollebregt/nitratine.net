@@ -50,7 +50,7 @@ To add articles to the site you will need to have defined the articles location 
 These articles will be found at www.yourdomain.com/sub/article. e.g. brentvollebregt.pythonanywhere.com/apps/colour
 
 ## TODO
-
+ - Export stats in /admin
 
 ## Colours
  - Main: #1976d2
@@ -59,11 +59,6 @@ These articles will be found at www.yourdomain.com/sub/article. e.g. brentvolleb
  - Main Highlight: #d81b60
  - Light Highlight: #ff5c8d
  - Dark Highlight: #a00037
-
-# Notes
-Media queries css
-
-ICON - Blue writing with pink accents (+black and white) - transparent
 
 Stuff smaller?
 - title 23px
