@@ -34,10 +34,27 @@
     input {
         font-family: 'Roboto', sans-serif;
     }
+
+    .success {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px 25px 10px 150px;
+        background: #25c725;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 20px;
+        border-radius: 0 5px 5px 0;
+        transition: margin-left 1s;
+    }
+
+    .success_hide {
+        margin-left: -1000px;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
+<div id="success" class="success success_hide">Successful</div>
 <div style="padding: 10px; max-width: 600px; width: 100%;">
     <button onclick="simple_call('/admin/push_json')" class="major_button">Push JSON</button>
     <button onclick="simple_call('/admin/rescrape')" class="major_button">Re-scrape Pages</button>

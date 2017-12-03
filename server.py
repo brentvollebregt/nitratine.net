@@ -207,30 +207,9 @@ def getArticle(sub, article):
     return render_template_string(html, title=data.getArticleTitle(sub, article), date=data.getArticleDate(sub, article), views=data.getArticleViews(sub, article))
 
 
-# For testing
-
-@app.route("/json")
-def jsonRoute():
-    return str(data.data)
-
-import os
-@app.context_processor
-def override_url_for():
-    return dict(url_for=dated_url_for)
-
-def dated_url_for(endpoint, **values):
-    if endpoint == 'static':
-        filename = values.get('filename', None)
-        if filename:
-            file_path = os.path.join(app.root_path,
-                                     endpoint, filename)
-            values['q'] = int(os.stat(file_path).st_mtime)
-    return url_for(endpoint, **values)
-
-
 if __name__ == '__main__':
     import socket
     ip = socket.gethostbyname(socket.gethostname())
     port = 8080
     print("Site starting on http://" + ip + ":" + str(port))
-    app.run(debug=True, host=ip, port=port)
+    app.run(host=ip, port=port)
