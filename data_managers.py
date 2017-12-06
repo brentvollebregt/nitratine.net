@@ -78,22 +78,22 @@ class JSON():
         subs = ['apps', 'blog', 'projects', 'tools', 'youtube']
         for sub in subs:
             for article in os.listdir(self.article_location + sub):
+                with open(self.article_location + sub + "/" + article + "/data.json", 'r') as article_json_file:
+                    article_data = json.load(article_json_file)
                 if article not in self.data['articles'][sub]:
-                    with open(self.article_location + sub + "/" + article + "/data.json", 'r') as article_json_file:
-                        article_data = json.load(article_json_file)
                     self.data['articles'][sub][article] = {
                         "sub" : sub,
                         "url_ext" : article,
-                        "title" : article_data["title"],
-                        "title_reduced" : article_data["title_reduced"],
-                        "description" : article_data["description"],
-                        "tags" : article_data["tags"],
-                        "date" : time.mktime( time.strptime(article_data["date"], "%d %b %y") ),
                         "views" : {
                             "count" : 0,
                             "7days" : {}
                         }
                     }
+                self.data['articles'][sub][article]['title'] = article_data["title"]
+                self.data['articles'][sub][article]['title_reduced'] = article_data["title_reduced"]
+                self.data['articles'][sub][article]['description'] = article_data["description"]
+                self.data['articles'][sub][article]['tags'] = article_data["tags"]
+                self.data['articles'][sub][article]['date'] = time.mktime( time.strptime(article_data["date"], "%d %b %y") )
 
     def articleExists(self, sub, article):
         if article in self.data['articles'][sub]:

@@ -40,6 +40,12 @@ a {
     border-bottom: solid 1px #1976d2;
 }
 
+.article_content h3 {
+    font-size: 25px;
+    color: #1976d2;
+    margin: 0.5em 0;
+}
+
 .article_content p {
     font-size: 17px;
 }
@@ -47,6 +53,12 @@ a {
 .article_content ul li {
     font-size: 17px;
     margin: 4px 0;
+}
+
+.article_content img {
+    width: 100%;
+    margin: auto;
+    max-width: 700px;
 }
 
 .vertical_screenshot {
