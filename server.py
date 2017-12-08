@@ -4,6 +4,8 @@ import utils
 import ast
 import os
 import json
+import time
+
 
 app = Flask(__name__, static_url_path='')
 data = data_managers.JSON()
@@ -205,6 +207,12 @@ def getArticle(sub, article):
 
     data.articleView(sub, article)
     return render_template_string(html, title=data.getArticleTitle(sub, article), date=data.getArticleDate(sub, article), views=data.getArticleViews(sub, article))
+
+def convertDateToReadable(timestamp):
+    return time.strftime('%d %b %y', time.localtime( int(timestamp) ))
+
+
+app.jinja_env.globals.update(convertDateToReadable=convertDateToReadable)
 
 
 if __name__ == '__main__':

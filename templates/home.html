@@ -24,9 +24,8 @@
                 <h3 class="tile_title">{{ article['title'] }}</h3>
                 <p class="tile_text">{{ article['description'] }}</p>
                 <div class="tile_tag_box">
-                    {% for tag in article['tags'] %}
-                    <div class="tile_tag">{{ tag }}</div>
-                    {% endfor %}
+                    <div class="tile_tag" style="margin-right: 10px;">🕑 {{ convertDateToReadable(article['date']) }}</div>
+                    <div class="tile_tag">📈 {{ article['views']['count'] }}</div>
                 </div>
             </a>
             {% endfor %}
@@ -40,9 +39,8 @@
                 <h3 class="tile_title">{{ article['title'] }}</h3>
                 <p class="tile_text">{{ article['description'] }}</p>
                 <div class="tile_tag_box">
-                    {% for tag in article['tags'] %}
-                    <div class="tile_tag">{{ tag }}</div>
-                    {% endfor %}
+                    <div class="tile_tag" style="margin-right: 10px;">🕑 {{ convertDateToReadable(article['date']) }}</div>
+                    <div class="tile_tag">📈 {{ article['views']['count'] }}</div>
                 </div>
             </a>
             {% endfor %}

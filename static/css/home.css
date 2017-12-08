@@ -72,11 +72,7 @@
 }
 
 .tile_tag {
-    height: 25px;
-    background: #505050;
     display: inline;
-    padding: 2px 10px;
-    color: white;
     font-family: 'Roboto', sans-serif;
-    font-size: 15px;
+    font-weight: bold;
 }

@@ -63,6 +63,7 @@ a {
 
 .vertical_screenshot {
     height: 450px;
+    width: auto !important;
 }
 
 .link {
