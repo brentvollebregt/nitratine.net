@@ -1,5 +1,5 @@
-# brentvollebregt.pythonanywhere.com
-Flask server running at brentvollebregt.pythonanywhere.com (in development)
+# nitratine.pythonanywhere.com
+Flask server running at nitratine.pythonanywhere.com (in development)
 
 This site is a simple blog that allows for pages to be added dynamically with added features
 
@@ -47,7 +47,7 @@ To add articles to the site you will need to have defined the articles location 
             - view.html
     - youtube
 
-These articles will be found at www.yourdomain.com/sub/article. e.g. brentvollebregt.pythonanywhere.com/apps/colour
+These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
 
 ## Colours
  - Main: #1976d2
