@@ -108,6 +108,13 @@ def adminPushJsonRoute():
     data.writeFile()
     return jsonify({'success': True})
 
+@app.route("/admin/cwd")
+def adminCwd():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True, 'cwd': os.getcwd()})
+
 @app.route("/admin/rescrape")
 def adminRescrapeRoute():
     if 'logged_in' not in session or not session['logged_in']:

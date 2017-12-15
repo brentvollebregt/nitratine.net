@@ -47,8 +47,6 @@ download_json = function () {
     xhr.overrideMimeType('application/json');
     xhr.send(null);
     xhr.onload = function () {
-        console.log(JSON.parse(this.responseText)['success']);
-        console.log(JSON.parse(this.responseText)['data']);
         document.getElementById('jsonEdit').value = JSON.stringify(JSON.parse(this.responseText)['data']);
         success_message(JSON.parse(this.responseText)['success']);
     };
@@ -115,4 +113,16 @@ success_message = function (success) {
             success_node.classList.add('success_hide')
         }, 3000
     );
+};
+
+cwd = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", '/admin/cwd', true);
+    xhr.overrideMimeType('application/json');
+    xhr.send(null);
+    xhr.onload = function () {
+        if (JSON.parse(this.responseText)['success']) {
+            alert(JSON.parse(this.responseText)['cwd'])
+        }
+    };
 };
