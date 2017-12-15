@@ -73,3 +73,8 @@ a {
 .link:hover {
     color: #a00037;
 }
+
+.emphasis {
+    font-style: italic;
+    font-weight: bold;
+}
