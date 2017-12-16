@@ -189,7 +189,7 @@ def adminCreateArticleRoute():
         sub = request.form['sub']
         url = request.form['url']
         file = request.files['file']
-        file.save(os.getcwd() + '\\zip.zip')
+        file.save(os.getcwd() + '/zip.zip')
         utils.moveZip(data.article_location, sub, url)
         return jsonify({'success': True})
     except Exception as e:

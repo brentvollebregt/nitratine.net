@@ -24,7 +24,7 @@ def deleteArticleFiles(article_location, sub, url):
 
 def moveZip(article_location, sub, url):
     folder = article_location + sub + "/" + url + "/"
-    file = os.getcwd() + '\\zip.zip'
+    file = os.getcwd() + '/zip.zip'
     if os.path.exists(folder):
         shutil.rmtree(folder)
     os.makedirs(folder)
