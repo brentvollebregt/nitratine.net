@@ -144,24 +144,27 @@ def adminUploadJsonRoute():
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'success': False})
 
-    uploaded_data = request.json['data']
     try:
+        uploaded_data = request.json['data']
         parse = ast.literal_eval(request.json['data']);
         data.data = parse
         return jsonify({'success': True})
-    except:
-        return jsonify({'success': False})
+    except Exception as e:
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/download_article", methods=['POST'])
 def adminDownloadArticleRoute():
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'success': False})
 
-    filename = utils.zipArticle(data.article_location, request.form['sub'], request.form['url'])
-    if filename:
-        return send_from_directory(directory='', filename=filename, as_attachment=True, attachment_filename=filename)
-    else:
-        return jsonify({'success': False})
+    try:
+        filename = utils.zipArticle(data.article_location, request.form['sub'], request.form['url'])
+        if filename:
+            return send_from_directory(directory='', filename=filename, as_attachment=True, attachment_filename=filename)
+        else:
+            return jsonify({'success': False})
+    except Exception as e:
+        return jsonify({'success': False, 'reason' : str(e)})
 
 @app.route("/admin/delete_article", methods=['POST'])
 def adminDeleteArticleRoute():
@@ -174,20 +177,23 @@ def adminDeleteArticleRoute():
         utils.deleteArticleFiles(data.article_location, sub, url)
         data.removeArticle(sub, url)
         return jsonify({'success': True})
-    except:
-        return jsonify({'success': False})
+    except Exception as e:
+        return jsonify({'success': False, 'reason' : str(e)})
 
 @app.route("/admin/upload_article", methods=['POST'])
 def adminCreateArticleRoute():
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'success': False})
 
-    sub = request.form['sub']
-    url = request.form['url']
-    file = request.files['file']
-    file.save(os.getcwd() + '\\zip.zip')
-    utils.moveZip(data.article_location, sub, url)
-    return jsonify({'success': True})
+    try:
+        sub = request.form['sub']
+        url = request.form['url']
+        file = request.files['file']
+        file.save(os.getcwd() + '\\zip.zip')
+        utils.moveZip(data.article_location, sub, url)
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'reason' : str(e)})
 
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):
