@@ -77,7 +77,8 @@ def statsRoute():
                            last_20_day_labels=str(last_20_day_labels),
                            last_20_day_data=str(last_20_day_data),
                            prev_20_day_data=str(prev_20_day_data),
-                           hourly_data=str(hourly_data))
+                           hourly_data=str(hourly_data),
+                           time=time.strftime("%d %b %y, %H:%M:%S"))
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminRoute():

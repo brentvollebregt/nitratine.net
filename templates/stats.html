@@ -10,13 +10,19 @@
     }
     .descriptor {
         font-family: 'Roboto', sans-serif;
-        font-size: 40px;
+        font-size: 30px;
         color: #505050;
     }
 
     .value {
         font-family: 'Roboto', sans-serif;
-        font-size: 45px;
+        font-size: 35px;
+    }
+
+    .time {
+        margin: 5px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
     }
 </style>
 {% endblock %}
@@ -94,4 +100,6 @@ var hourlyChart = new Chart(ctx, {
     }
 });
 </script>
+
+<div class="time">Statistics generates at {{ time }} (server time)</div>
 {% endblock %}
