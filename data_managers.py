@@ -78,22 +78,27 @@ class JSON():
         subs = ['apps', 'blog', 'projects', 'tools', 'youtube']
         for sub in subs:
             for article in os.listdir(self.article_location + sub):
-                with open(self.article_location + sub + "/" + article + "/data.json", 'r') as article_json_file:
-                    article_data = json.load(article_json_file)
-                if article not in self.data['articles'][sub]:
-                    self.data['articles'][sub][article] = {
-                        "sub" : sub,
-                        "url_ext" : article,
-                        "views" : {
-                            "count" : 0,
-                            "7days" : {}
+                try:
+                    with open(self.article_location + sub + "/" + article + "/data.json", 'r') as article_json_file:
+                        article_data = json.load(article_json_file)
+                    if article not in self.data['articles'][sub]:
+                        self.data['articles'][sub][article] = {
+                            "sub" : sub,
+                            "url_ext" : article,
+                            "views" : {
+                                "count" : 0,
+                                "7days" : {}
+                            }
                         }
-                    }
-                self.data['articles'][sub][article]['title'] = article_data["title"]
-                self.data['articles'][sub][article]['title_reduced'] = article_data["title_reduced"]
-                self.data['articles'][sub][article]['description'] = article_data["description"]
-                self.data['articles'][sub][article]['tags'] = article_data["tags"]
-                self.data['articles'][sub][article]['date'] = time.mktime( time.strptime(article_data["date"], "%d %b %y") )
+                    self.data['articles'][sub][article]['title'] = article_data["title"]
+                    self.data['articles'][sub][article]['title_reduced'] = article_data["title_reduced"]
+                    self.data['articles'][sub][article]['description'] = article_data["description"]
+                    self.data['articles'][sub][article]['tags'] = article_data["tags"]
+                    self.data['articles'][sub][article]['date'] = time.mktime( time.strptime(article_data["date"], "%d %b %y") )
+                except Exception as e:
+                    self.data['articles'][sub][article]['error'] = True
+                    self.data['articles'][sub][article]['reason'] = str(e)
+                    self.data['articles'][sub][article]['day'] = time.strftime("%d %b %y, %H:%M:%S")
 
     def articleExists(self, sub, article):
         if article in self.data['articles'][sub]:
