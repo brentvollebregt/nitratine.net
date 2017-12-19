@@ -61,3 +61,6 @@ Stuff smaller?
 - title 23px
 - desc 13px
 - tags 14px
+
+# TODO
+ - Put youtube/GitHub icon beside link to show what it is

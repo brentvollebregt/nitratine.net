@@ -78,3 +78,23 @@ a {
     font-style: italic;
     font-weight: bold;
 }
+
+.github:before {
+    background: url(/img/github.svg);
+    background-size: 100% 100%;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    content: "";
+    margin-right: 5px;
+}
+
+.youtube:before {
+    background-image: url(/img/youtube.png);
+    background-size: 100% 100%;
+    display: inline-block;
+    width: 24px;
+    height: 16px;
+    content: "";
+    margin-right: 5px;
+}
