@@ -46,6 +46,12 @@ a {
     margin: 0.5em 0;
 }
 
+.article_content h4 {
+    font-size: 18px;
+    color: #1976d2;
+    margin: 0.5em 0.5em;
+}
+
 .article_content p {
     font-size: 17px;
 }
@@ -56,13 +62,11 @@ a {
 }
 
 .article_content img {
-    width: 100%;
-    margin: auto;
     max-width: 700px;
 }
 
 .vertical_screenshot {
-    height: 450px;
+    max-height: 450px;
     width: auto !important;
 }
 
@@ -77,6 +81,11 @@ a {
 .emphasis {
     font-style: italic;
     font-weight: bold;
+}
+
+.code {
+    font-family: Consolas, Courier, monospace;
+    font-size: 14px;
 }
 
 .github:before {
