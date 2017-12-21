@@ -27,7 +27,8 @@ class JSON():
             "password" : ""
         },
         "secrty_key" : "secret",
-        "extra_header_info" : ''
+        "extra_header_info" : '',
+        "robots" : ""
     }
 
     def __init__(self):
@@ -250,3 +251,7 @@ class JSON():
     @property
     def extra_header_info(self):
         return self.data['extra_header_info']
+
+    @property
+    def robots(self):
+        return self.data['robots']

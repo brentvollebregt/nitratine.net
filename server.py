@@ -96,6 +96,14 @@ def adminRoute():
             return jsonify({'success' : True})
         return jsonify({'success' : False})
 
+@app.route("/robots.txt")
+def robotsRoute():
+    return data.robots
+
+@app.route("/sitemap.xml")
+def sitemapRoute():
+    return ''
+
 
 # Work Routes
 
