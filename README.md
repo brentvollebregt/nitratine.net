@@ -61,3 +61,8 @@ Stuff smaller?
 - title 23px
 - desc 13px
 - tags 14px
+
+# TODO
+ - Generate Sitemap at /sitemap.xml
+ - Add robots.txt
+    - Sitemap: http://example.com/sitemap_location.xml

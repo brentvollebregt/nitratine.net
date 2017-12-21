@@ -18,7 +18,10 @@ app.secret_key = data.secrty_key
 def homeRoute():
     top_articles = data.getArticlesByViews('home')
     recent_articles = data.getArticlesByDate('home', 5)
-    return render_template('home.html', top_articles=top_articles, recent_articles=recent_articles)
+    return render_template('home.html',
+                           top_articles=top_articles,
+                           recent_articles=recent_articles,
+                           extra_header_info=data.extra_header_info)
 
 @app.route("/projects")
 def projectsRoute():
@@ -210,7 +213,8 @@ def getSub(sub, title):
                            title=title,
                            display_icon=url_for('static', filename='img/' + sub + '-icon.svg'),
                            top_articles=top_articles,
-                           recent_articles=recent_articles)
+                           recent_articles=recent_articles,
+                           extra_header_info=data.extra_header_info)
 
 def getArticle(sub, article):
     if not data.articleExists(sub, article):
@@ -220,7 +224,11 @@ def getArticle(sub, article):
         html = f.read()
 
     data.articleView(sub, article)
-    return render_template_string(html, title=data.getArticleTitle(sub, article), date=data.getArticleDate(sub, article), views=data.getArticleViews(sub, article))
+    return render_template_string(html,
+                                  title=data.getArticleTitle(sub, article),
+                                  date=data.getArticleDate(sub, article),
+                                  views=data.getArticleViews(sub, article),
+                                  extra_header_info=data.extra_header_info)
 
 def convertDateToReadable(timestamp):
     return time.strftime('%d %b %y', time.localtime( int(timestamp) ))

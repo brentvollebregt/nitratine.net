@@ -56,13 +56,22 @@ a {
     font-size: 17px;
 }
 
-.article_content ul li {
+.article_content ul li, .article_content ol li {
     font-size: 17px;
     margin: 4px 0;
 }
 
 .article_content img {
     max-width: 700px;
+}
+
+.article_content table {
+        border-collapse: collapse;
+}
+
+.article_content th, .article_content td {
+    border: 1px solid #b3b7bb;
+    padding: 6px 13px;
 }
 
 .vertical_screenshot {
