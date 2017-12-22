@@ -28,7 +28,7 @@ class JSON():
         },
         "secrty_key" : "secret",
         "extra_header_info" : '',
-        "robots" : ""
+        "site_location" : ""
     }
 
     def __init__(self):
@@ -120,6 +120,9 @@ class JSON():
     def removeArticle(self, sub, article):
         if sub in self.data['articles'] and article in self.data['articles'][sub]:
             del self.data['articles'][sub][article]
+
+    def getArticleList(self, sub):
+        return [article for article in self.data['articles'][sub]]
 
     # Views
 
@@ -253,5 +256,5 @@ class JSON():
         return self.data['extra_header_info']
 
     @property
-    def robots(self):
-        return self.data['robots']
+    def site_location(self):
+        return self.data['site_location']

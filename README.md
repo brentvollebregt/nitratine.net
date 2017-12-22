@@ -64,5 +64,11 @@ Stuff smaller?
 
 # TODO
  - Generate Sitemap at /sitemap.xml
- - Add robots.txt
-    - Sitemap: http://example.com/sitemap_location.xml
+ - Meta in headers:
+    - Description
+    - Keywords?
+    - Language (lang="en")
+    - Subject?
+    - Revise all that are neeeded
+    - Cut descriptions short when window is resized (and on entry) by calculating if text is outside
+    - Title and description from data.json to article

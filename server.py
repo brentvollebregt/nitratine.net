@@ -98,11 +98,21 @@ def adminRoute():
 
 @app.route("/robots.txt")
 def robotsRoute():
-    return data.robots
+    return "Sitemap: " + data.site_location + "/sitemap.xml"
 
 @app.route("/sitemap.xml")
 def sitemapRoute():
-    return ''
+    top = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    middle = ""
+
+    middle += "  <url>\n    <loc>" + data.site_location + "</loc>\n    <priority>1.00</priority>\n  </url>\n"
+    for sub in ['apps', 'blog', 'projects', 'tools', "youtube"]:
+        middle += "  <url>\n    <loc>" + data.site_location + "/" + sub + "</loc>\n    <priority>0.80</priority>\n  </url>\n"
+        for article in data.getArticleList(sub):
+            middle += "  <url>\n    <loc>" + data.site_location + "/" + sub + "/" + article + "</loc>\n    <priority>0.64</priority>\n  </url>\n"
+
+    bottom = "</urlset>"
+    return top + middle + bottom
 
 
 # Work Routes
