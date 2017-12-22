@@ -8,6 +8,7 @@ import time
 
 
 app = Flask(__name__, static_url_path='')
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 604800 # 1 Week
 data = data_managers.JSON()
 app.secret_key = data.secrty_key
 

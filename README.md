@@ -63,12 +63,18 @@ Stuff smaller?
 - tags 14px
 
 # TODO
- - Generate Sitemap at /sitemap.xml
+- Cut descriptions short when window is resized (and on entry) by calculating if text is outside
+- Title and description from data.json to article
  - Meta in headers:
     - Description
     - Keywords?
     - Language (lang="en")
     - Subject?
     - Revise all that are neeeded
-    - Cut descriptions short when window is resized (and on entry) by calculating if text is outside
-    - Title and description from data.json to article
+- Cache static content (week?)
+- Scale images? (articles/ - Not to project)
+
+<meta name="description" content="A description of the page" />
+
+## Test
+- See if cache control worked
