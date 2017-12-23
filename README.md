@@ -65,16 +65,7 @@ Stuff smaller?
 # TODO
 - Cut descriptions short when window is resized (and on entry) by calculating if text is outside
 - Title and description from data.json to article
- - Meta in headers:
-    - Description
-    - Keywords?
-    - Language (lang="en")
-    - Subject?
-    - Revise all that are neeeded
-- Cache static content (week?)
+- Description meta tag <!-- <meta name="description" content="A description of the page" /> -->
 - Scale images? (articles/ - Not to project)
-
-<meta name="description" content="A description of the page" />
-
-## Test
-- See if cache control worked
+- Get Snow
+- Make page dark themed

@@ -169,11 +169,11 @@ class JSON():
 
         return articles
 
-    def getArticlesByViews(self, sub):
+    def getArticlesByViews(self, sub, limit=5):
         articles = self.getArticlesInSub(sub)
         sorted_articles = sorted(articles, key=lambda x: x['views']['count'], reverse=True)
 
-        return sorted_articles[:5]
+        return sorted_articles[:limit]
 
     def getArticlesByDate(self, sub, limit=False):
         articles = self.getArticlesInSub(sub)

@@ -17,8 +17,8 @@ app.secret_key = data.secrty_key
 
 @app.route("/")
 def homeRoute():
-    top_articles = data.getArticlesByViews('home')
-    recent_articles = data.getArticlesByDate('home', 5)
+    top_articles = data.getArticlesByViews('home', 8)
+    recent_articles = data.getArticlesByDate('home', 8)
     return render_template('home.html',
                            top_articles=top_articles,
                            recent_articles=recent_articles,
