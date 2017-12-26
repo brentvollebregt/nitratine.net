@@ -27,12 +27,12 @@ class JSON():
             "password" : ""
         },
         "descriptions" : {
-            "home" : "",
-            "apps" : "",
-            "blog" : "",
-            "projects" : "",
-            "tools" : "",
-            "youtube" : ""
+            "home" : "Nitratine is the home of my projects, tutorials and tools. I built the backend myself using Python and Flask.",
+            "apps" : "This is a showcase of the apps that I have made and the background of how and why they came about.",
+            "blog" : "This is where most of my experiments are recorded as sometimes I need to experiment concepts for some projects.",
+            "projects" : "These are the projects I have made and contributed to. I show how they work and how to install and use them.",
+            "tools" : "These are small tools that I always need around but can't find or they function too bad.",
+            "youtube" : "These articles are written tutorials of the YouTube channel PyTutorials. This also contains quick fixes for things that people have foudn coming up."
         },
         "secrty_key" : "secret",
         "extra_header_info" : '',

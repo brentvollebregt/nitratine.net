@@ -18,7 +18,7 @@
 <div class="content_container">
     <!-- Top -->
     <div class="content_box">
-        <h2 class="content_box_title">Top Articles</h2>
+        <h2 class="content_box_title">📈 Top Articles</h2>
         <div class="top_article_container">
             {% for article in top_articles %}
             <a class="top_article sweep-to-bottom" href="/{{ article['sub'] }}/{{ article['url_ext'] }}">
@@ -31,7 +31,7 @@
 
     <!-- Recent -->
     <div class="content_box">
-        <h2 class="content_box_title">Articles Ordered By Date</h2>
+        <h2 class="content_box_title">🕑 Articles Ordered By Date</h2>
         <div class="date_order_article_container">
             {% for article in recent_articles %}
             <a class="date_order_article sweep-to-right" href="/{{ article['sub'] }}/{{ article['url_ext'] }}">
