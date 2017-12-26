@@ -247,6 +247,7 @@ def getArticle(sub, article):
                                   title=data.getArticleTitle(sub, article),
                                   date=data.getArticleDate(sub, article),
                                   views=data.getArticleViews(sub, article),
+                                  description=data.getArticleDescription(sub, article),
                                   extra_header_info=data.extra_header_info)
 
 def convertDateToReadable(timestamp):

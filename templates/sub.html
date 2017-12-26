@@ -22,7 +22,7 @@
             {% for article in top_articles %}
             <a class="top_article sweep-to-bottom" href="/{{ article['sub'] }}/{{ article['url_ext'] }}">
                 <img src="/non-static/{{ article['sub'] }}/{{ article['url_ext'] }}/icon.png" class="top_article_image">
-                <h3 class="top_article_title">{{ article['title_reduced'] }}</h3>
+                <h3 class="top_article_title">{{ article['title'] }}</h3>
             </a>
             {% endfor %}
         </div>

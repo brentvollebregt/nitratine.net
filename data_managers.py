@@ -93,9 +93,7 @@ class JSON():
                             }
                         }
                     self.data['articles'][sub][article]['title'] = article_data["title"]
-                    self.data['articles'][sub][article]['title_reduced'] = article_data["title_reduced"]
                     self.data['articles'][sub][article]['description'] = article_data["description"]
-                    self.data['articles'][sub][article]['tags'] = article_data["tags"]
                     self.data['articles'][sub][article]['date'] = time.mktime( time.strptime(article_data["date"], "%d %b %y") )
                 except Exception as e:
                     self.data['articles'][sub][article]['error'] = True
@@ -116,6 +114,9 @@ class JSON():
 
     def getArticleViews(self, sub, article):
         return self.data['articles'][sub][article]['views']['count']
+
+    def getArticleDescription(self, sub, article):
+        return self.data['articles'][sub][article]['description']
 
     def removeArticle(self, sub, article):
         if sub in self.data['articles'] and article in self.data['articles'][sub]:
