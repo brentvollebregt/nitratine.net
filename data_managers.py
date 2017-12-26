@@ -26,6 +26,14 @@ class JSON():
             "username" : "",
             "password" : ""
         },
+        "descriptions" : {
+            "home" : "",
+            "apps" : "",
+            "blog" : "",
+            "projects" : "",
+            "tools" : "",
+            "youtube" : ""
+        },
         "secrty_key" : "secret",
         "extra_header_info" : '',
         "site_location" : ""
@@ -228,6 +236,14 @@ class JSON():
             for article in self.data['articles'][sub]:
                 stats['articles'][sub][article] = self.data['articles'][sub][article]['views']
         return stats
+
+    # Static Location Descriptions
+
+    def getHomeDescription(self):
+        return self.data['descriptions']['home']
+
+    def getSubDescription(self, sub):
+        return self.data['descriptions'][sub]
 
     # Getters
 

@@ -63,12 +63,6 @@ Stuff smaller?
 - tags 14px
 
 # TODO
-- Have "description" and "reduced_description" in data.json (indv) + fix mess
-    - Add "reduced_description" to be added to main data.json
-    - "reduced_description" to be displayed on tiles
-    - Remove "title_reduced" - this was an effort to save small vertical tiles, this is not needed. Map to "title"
-    - "description" to go into header and just under titles <!-- <meta name="description" content="A description of the page" /> -->
-    - Make titles served straight to article, don't set in article ({{ title }})
 - Scale images? (articles/ - Not to project)
 - Get Snow
 - Make page dark themed

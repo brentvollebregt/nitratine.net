@@ -22,7 +22,8 @@ def homeRoute():
     return render_template('home.html',
                            top_articles=top_articles,
                            recent_articles=recent_articles,
-                           extra_header_info=data.extra_header_info)
+                           extra_header_info=data.extra_header_info,
+                           description=data.getHomeDescription())
 
 @app.route("/projects")
 def projectsRoute():
@@ -233,7 +234,8 @@ def getSub(sub, title):
                            display_icon=url_for('static', filename='img/' + sub + '-icon.svg'),
                            top_articles=top_articles,
                            recent_articles=recent_articles,
-                           extra_header_info=data.extra_header_info)
+                           extra_header_info=data.extra_header_info,
+                           description=data.getSubDescription(sub))
 
 def getArticle(sub, article):
     if not data.articleExists(sub, article):
