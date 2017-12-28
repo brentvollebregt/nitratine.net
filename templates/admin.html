@@ -4,54 +4,7 @@
 <title>Administration | Nitratine</title>
 <meta name="robots" content="noindex">
 <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
-<style>
-    h1 {
-        margin: 20px 0 5px 0;
-        font-size: 230%;
-        font-family: 'Roboto', sans-serif;
-    }
-
-    .major_button {
-        font-size: 190%;
-        border: solid 2px black;
-        margin: 5px 0;
-        padding: 5px 8px;
-        transition: color .8s, background .8s;
-        background: transparent;
-        border-radius: 6px;
-        width: 100%;
-    }
-
-    .major_button:hover {
-        color: white;
-        background: #313131;
-    }
-
-    button {
-        font-family: 'Roboto', sans-serif;
-        cursor: pointer;
-    }
-
-    input {
-        font-family: 'Roboto', sans-serif;
-    }
-
-    .success {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        padding: 10px 25px 10px 150px;
-        background: #25c725;
-        font-family: 'Roboto', sans-serif;
-        margin-bottom: 20px;
-        border-radius: 0 5px 5px 0;
-        transition: margin-left 1s;
-    }
-
-    .success_hide {
-        margin-left: -1000px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}">
 {% endblock %}
 
 {% block content %}
