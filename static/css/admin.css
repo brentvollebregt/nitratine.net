@@ -9,15 +9,14 @@ h1 {
     border: solid 2px black;
     margin: 5px 0;
     padding: 5px 8px;
-    transition: color .8s, background .8s;
+    transition: background .3s;
     background: transparent;
     border-radius: 6px;
     width: 100%;
 }
 
 .major_button:hover {
-    color: white;
-    background: #313131;
+    background: #63a4ff;
 }
 
 button {
@@ -43,4 +42,10 @@ input {
 
 .success_hide {
     margin-left: -1000px;
+}
+
+#jsonEdit {
+    height: 100px;
+    width: 100%;
+    border-radius: 5px;
 }

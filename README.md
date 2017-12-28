@@ -13,6 +13,8 @@ It needed to be easy to add articles and be fully dynamic.
 - Site split into five categories (the main ones I wanted)
 - Easily edit site settings anywhere
 - Pages displayed by popularity and date
+- Switch between light and dark themes
+- Option to switch snow on
 
 ## Usage
 1. Install Python
