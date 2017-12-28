@@ -6,28 +6,8 @@
 <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/subs.css') }}">
 <link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/subs.css') }}">
-<style>
-    .data {
-        text-align: center;
-        margin: 30px;
-    }
-    .descriptor {
-        font-family: 'Roboto', sans-serif;
-        font-size: 30px;
-        color: #505050;
-    }
-
-    .value {
-        font-family: 'Roboto', sans-serif;
-        font-size: 35px;
-    }
-
-    .time {
-        margin: 5px;
-        text-align: center;
-        font-family: 'Roboto', sans-serif;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stats.css') }}">
+<link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/stats.css') }}">
 {% endblock %}
 
 {% block content %}
