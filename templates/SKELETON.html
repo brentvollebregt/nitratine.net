@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="theme-color" content="#1976d2"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
+        <link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/global.css') }}">
         <script async src="{{ url_for('static', filename='js/navigation.js') }}"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=0.6">
         <script>var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>

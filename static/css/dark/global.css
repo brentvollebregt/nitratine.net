@@ -1,0 +1,26 @@
+body {
+    background: #263238;
+}
+
+@media screen and (min-width: 1140px) {
+    .nav {
+        background: #263238;
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
+.nav_section, .nav_section_bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav_button_icon {
+    filter: invert(1);
+}
+
+.nav_button_text {
+    color: white;
+}
+
+.switch_text {
+    color: white;
+}

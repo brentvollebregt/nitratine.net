@@ -1,0 +1,20 @@
+.date, .views {
+    color: white;
+}
+
+.article_content p {
+    color: white;
+}
+
+.article_content ul li, .article_content ol li {
+    color: white;
+}
+
+
+.article_content th, .article_content td {
+    color: white;
+}
+
+.github:before {
+    filter: invert(1);
+}

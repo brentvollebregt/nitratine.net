@@ -8,7 +8,6 @@ getThemeToSwitch = function () {
 };
 
 setTheme = function () {
-    console.log("Set Theme");
     if (localStorage.getItem("dark_theme") === null) {
         setThemeDark();
     } else {
@@ -20,17 +19,22 @@ setTheme = function () {
 setThemeDark = function () {
     localStorage.setItem("dark_theme", true);
     document.getElementById("dark_theme_switch").checked = true;
-    // Disable light if exists
-    // Enable dark if exists
-    // Create dark if not
+    setCSSDisabled('css_dark_theme', false);
+    setCSSDisabled('css_light_theme', true);
 };
 
 setThemeLight = function () {
     localStorage.removeItem("dark_theme");
     document.getElementById("dark_theme_switch").checked = false;
-    // Disable dark theme if exists
-    // Enable light if exists
-    // Create light if not
+    setCSSDisabled('css_dark_theme', true);
+    setCSSDisabled('css_light_theme', false);
+};
+
+setCSSDisabled = function (className, disabled) {
+    var stylesheets = document.getElementsByClassName(className);
+    for (var i = 0; i < stylesheets.length; i++) {
+        stylesheets[i].disabled = disabled;
+    }
 };
 
 // Snow

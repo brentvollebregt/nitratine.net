@@ -1,0 +1,12 @@
+h1 {
+    color: white;
+}
+
+.major_button {
+    border: solid 2px white;
+    color: white;
+}
+
+.major_button:hover {
+    background: #63a4ff;
+}

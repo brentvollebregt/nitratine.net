@@ -15,19 +15,17 @@ a {
     border-bottom: solid 2px #1976d2;
 }
 
-.date {
+.date, .views {
     font-size: 90%;
     font-weight: bold;
+}
+
+.date {
     margin-right: 20px;
 }
 
 .date:before {
     content: '🕑 ';
-}
-
-.views {
-    font-size: 90%;
-    font-weight: bold;
 }
 
 .views:before {
