@@ -12,6 +12,7 @@
         {% block head %}{% endblock %}
 	</head>
 	<body>
+        <div id="snow"></div>
         <div id="small_nav" class="small_nav" onclick="toggleNav(this)">
             <div class="small_nav_item" onclick="linkTo('')">Home</div>
             <div class="small_nav_item" onclick="linkTo('projects')">Projects</div>
@@ -65,19 +66,21 @@
                     <div class="nav_button_text">Statistics</div>
                 </a>
             </div>
-            <div class="nav_section" style="position: absolute; bottom: 0; width: 100%; padding: 5px 0;">
+            <div class="nav_section_bottom">
                 <div class="switch_text">Dark Theme</div>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" id="dark_theme_switch" onchange="setTheme()">
                     <span class="slider round"></span>
                 </label>
                 <div class="switch_text">Snow</div>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" id="snow_switch" onchange="setSnow()">
                     <span class="slider round"></span>
                 </label>
             </div>
         </div>
+
+        <script src="{{ url_for('static', filename='js/options.js') }}"></script>
 
         <div class="content">
             {% block content %}{% endblock %}

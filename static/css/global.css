@@ -59,8 +59,15 @@ body {
     cursor: pointer;
 }
 
-.nav_section {
+.nav_section, .nav_section_bottom {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.nav_section_bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
 }
 
 .nav_button {
@@ -220,4 +227,26 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* - Snow */
+
+#snow {
+    pointer-events: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.snow {
+    background: url(/img/snow/s1.png), url(/img/snow/s2.png), url(/img/snow/s3.png);
+    animation: snow 7s linear infinite;
+}
+
+@keyframes snow {
+    0% { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 500px 1000px, 400px 400px, 300px 300px; }
 }
