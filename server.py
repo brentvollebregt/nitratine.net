@@ -277,4 +277,4 @@ if __name__ == '__main__':
     ip = socket.gethostbyname(socket.gethostname())
     port = 8080
     print("Site starting on http://" + ip + ":" + str(port))
-    app.run(host=ip, port=port, debug=True)
+    app.run(host=ip, port=port)

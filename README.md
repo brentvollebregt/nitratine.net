@@ -3,9 +3,15 @@ Flask server running at nitratine.pythonanywhere.com
 
 ## What is this?
 I wanted to make a simple site that hosted my projects, tutorials and tools.<br>
-It needed to be easy to add articles and be fully dynamic.
+It needed to be easy to add articles and be fully dynamic.<br>
+It has a dark and light theme and allows you to turn snow particles on.
 
 ## Screenshots
+![Home Screen](https://i.imgur.com/WGHWSqjl.png)
+![Article](https://i.imgur.com/spgdKTll.png)<br>
+![Mobile Home Screen](https://i.imgur.com/rtgvXTCl.png)
+![Mobile Menu](https://i.imgur.com/KMityGll.png)
+![Mobile Article](https://i.imgur.com/OdPrsYGl.png)
 
 ## Features
 - Easily add articles though a file explorer or administration panel
@@ -15,21 +21,23 @@ It needed to be easy to add articles and be fully dynamic.
 - Pages displayed by popularity and date
 - Switch between light and dark themes
 - Option to switch snow on
+- Supports smaller screen sizes
+- Has a different menu for smaller devices
 
 ## Usage
 1. Install Python
 2. Install Flask (```pip install Flask```)
 3. Run server.py to make sure data.json generates
 4. Edit data.json
-    - site_location: only needed for robots.txt
-    - articles_location: location of articles
+    - site_location: only needed for robots.txt (e.g. "http://nitratine.pythonanywhere.com")
+    - articles_location: location of articles (e.g. "articles/")
     - administration: username and password for logging in at /admin
     - extra_header_info: A place to stick things like google analytics and verification tokens
-    - descriptions: Edit descriptions of the six major pages
+    - descriptions: Edit descriptions of the six major pages (descriptions for articles can be defined in the article itself or use the "description" variable passed to the Jinja template.
 
 ### Articles
 To add articles to the site you will need to have defined the articles location in the servers data.json. They then need to follow a format to be detected on startup.
- - Root directory (specified in JSON (adding later))
+ - Root directory (specified in JSON)
     - sub (e.g. apps, blog, projects...)
         - Article name (what will be in the url)
             - data.json (Article info)
@@ -107,6 +115,3 @@ Under that is a "Upload Article" section. This allows you to upload a zip file o
 Be aware that when downloading an article, the files need to be moved up to re-upload.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
-
-# TODO
-- Change buttons in phone nav when options are changed
