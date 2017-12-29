@@ -107,3 +107,6 @@ Under that is a "Upload Article" section. This allows you to upload a zip file o
 Be aware that when downloading an article, the files need to be moved up to re-upload.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
+
+# TODO
+- Change buttons in phone nav when options are changed

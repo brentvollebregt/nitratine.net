@@ -14,17 +14,51 @@
 	</head>
 	<body>
         <div id="snow"></div>
-        <div id="small_nav" class="small_nav" onclick="toggleNav(this)">
-            <div class="small_nav_item" onclick="linkTo('')">Home</div>
-            <div class="small_nav_item" onclick="linkTo('projects')">Projects</div>
-            <div class="small_nav_item" onclick="linkTo('blog')">Blog</div>
-            <div class="small_nav_item" onclick="linkTo('apps')">Apps</div>
-            <div class="small_nav_item" onclick="linkTo('youtube')">YouTube</div>
-            <div class="small_nav_item" onclick="linkTo('tools')">Tools</div>
-            <div class="small_nav_item" onclick="linkTo('stats')">Statistics</div>
-            <img id="small_nav_icon" src="{{ url_for('static', filename='img/menu-icon.svg') }}" style="height: 50px; transition: transform .3s; filter: invert()" />
+        <div id="phone_nav" style="">
+            <div class="phone_nav_tile" onclick="linkTo('')">
+                <img src="/img/home-icon.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text">Home</div>
+            </div>
+            <div class="phone_nav_tile" onclick="linkTo('projects')">
+                <img src="/img/projects-icon.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text">Projects</div>
+            </div>
+            <div class="phone_nav_tile" onclick="linkTo('blog')">
+                <img src="/img/blog-icon.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text">Blog</div>
+            </div>
+            <div class="phone_nav_tile" onclick="linkTo('apps')">
+                <img src="/img/apps-icon.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text">Apps</div>
+            </div>
+            <div class="phone_nav_tile" onclick="linkTo('youtube')">
+                <img src="/img/youtube-icon.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text">YouTube</div>
+            </div>
+            <div class="phone_nav_tile" onclick="linkTo('tools')">
+                <img src="/img/tools-icon.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text">Tools</div>
+            </div>
+            <div class="phone_nav_tile" onclick="linkTo('stats')">
+                <img src="/img/stats-icon.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text">Statistics</div>
+            </div>
+            <div class="phone_nav_tile" onclick="setTheme()">
+                <img src="/img/dark-icon_enabled.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text phone_nav_button_enabled">Theme</div>
+            </div>
+            <div class="phone_nav_tile" onclick="setSnow()">
+                <img src="/img/snow-icon_enabled.svg" class="phone_nav_tile_img">
+                <div class="phone_nav_tile_text phone_nav_button_enabled">Snow</div>
+            </div>
+            <div class="phone_nav_tile"></div>
+            <div class="phone_nav_tile"></div>
+            <div class="phone_nav_tile"></div>
+            <div id="phone_nav_bar" onclick="navToggle()">
+                <img id="phone_nav_bar_icon" src="{{ url_for('static', filename='img/menu-icon.svg') }}">
+            </div>
         </div>
-        <div id="small_nav_spacer" class="small_nav_spacer"></div>
+        <div class="phone_nav_bar_block"></div>
 
         <div class="nav">
             <a class="icon" onclick="window.location.href = window.location.origin">
