@@ -143,6 +143,7 @@ body {
     cursor: pointer;
     height: 55px;
     grid-column: span 4;
+    border-top: solid 2px rgba(255, 255, 255, 0.6);
 }
 
 #phone_nav_bar_icon {
