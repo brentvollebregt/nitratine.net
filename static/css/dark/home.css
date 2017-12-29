@@ -1,31 +1,19 @@
-.section_header {
-    color: white!important;
+.section_header, .tile_title, .tile_text, .tile_tag {
+    color: white;
 }
 
 .tile {
-    background: #37474f!important; /* transparent */
-}
-
-.tile_title {
-    color: white!important;
-}
-
-.tile_text {
-    color: white!important;
-}
-
-.tile_tag {
-    color: white!important;
+    background: #37474f; /* transparent */
 }
 
 .bottom_sub_link_a {
-    background: #37474f!important;
+    background: #37474f;
 }
 
 .bottom_sub_link_items {
-    filter: invert(1)!important;
+    filter: invert(1);
 }
 
 .bottom_sub_link_items:hover {
-    filter: none!important;
+    filter: none;
 }

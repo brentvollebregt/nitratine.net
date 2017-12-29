@@ -1,10 +1,9 @@
-h1 {
+h1, .major_button, #jsonEdit {
     color: white;
 }
 
 .major_button {
     border: solid 2px white;
-    color: white;
 }
 
 .major_button:hover {
@@ -13,5 +12,4 @@ h1 {
 
 #jsonEdit {
     background: transparent;
-    color: white;
 }

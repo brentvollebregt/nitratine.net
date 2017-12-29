@@ -1,17 +1,4 @@
-.date, .views {
-    color: white;
-}
-
-.article_content p {
-    color: white;
-}
-
-.article_content ul li, .article_content ol li {
-    color: white;
-}
-
-
-.article_content th, .article_content td {
+.date, .views, .article_content p, .article_content ul li, .article_content ol li, .article_content th, .article_content td {
     color: white;
 }
 

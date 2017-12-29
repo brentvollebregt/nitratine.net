@@ -1,11 +1,7 @@
+.value, .time {
+    color: white;
+}
+
 .descriptor {
     color: #cecece;
-}
-
-.value {
-    color: white;
-}
-
-.time {
-    color: white;
 }

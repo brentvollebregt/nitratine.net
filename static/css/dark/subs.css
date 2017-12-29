@@ -1,4 +1,4 @@
-.content_box_title {
+.content_box_title, .top_article_title, .tile_title, .tile_text, .tile_tag {
     color: white;
 }
 
@@ -6,22 +6,6 @@
     background: #37474f;
 }
 
-.top_article_title {
-    color: white;
-}
-
 .date_order_article {
     background: #37474f;
-}
-
-.tile_title {
-    color: white;
-}
-
-.tile_text {
-    color: white;
-}
-
-.tile_tag {
-    color: white;
 }

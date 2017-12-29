@@ -1,21 +1,22 @@
+.descriptor, .value, .time {
+    font-family: 'Roboto', sans-serif;
+}
+
 .data {
     text-align: center;
     margin: 30px;
 }
 
 .descriptor {
-    font-family: 'Roboto', sans-serif;
     font-size: 30px;
     color: #505050;
 }
 
 .value {
-    font-family: 'Roboto', sans-serif;
     font-size: 35px;
 }
 
 .time {
     margin: 5px;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
 }

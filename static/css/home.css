@@ -1,6 +1,9 @@
+.welcome_message, .section_header, .tile_title, .tile_text, .tile_tag {
+    font-family: 'Roboto', sans-serif;
+}
+
 .welcome_message {
     text-align: center;
-    font-family: 'Roboto', sans-serif;
     font-size: 25px;
     color: #1976d2;
     padding: 0 20px;
@@ -26,7 +29,6 @@
 }
 
 .section_header {
-    font-family: 'Roboto', sans-serif;
     font-weight: normal;
     margin: 0 0 10px;
     font-size: 180%;
@@ -53,13 +55,11 @@
 
 .tile_title {
     display: inline;
-    font-family: 'Roboto', sans-serif;
     font-weight: normal;
     font-size: 24px;
 }
 
 .tile_text {
-    font-family: 'Roboto', sans-serif;
     margin: 8px 0;
     font-size: 15px;
     overflow: hidden;
@@ -74,7 +74,6 @@
 
 .tile_tag {
     display: inline;
-    font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
 

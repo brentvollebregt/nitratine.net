@@ -1,3 +1,7 @@
+.nav_button_text, .switch_text {
+    color: white;
+}
+
 body {
     background: #263238;
 }
@@ -15,12 +19,4 @@ body {
 
 .nav_button_icon {
     filter: invert(1);
-}
-
-.nav_button_text {
-    color: white;
-}
-
-.switch_text {
-    color: white;
 }
