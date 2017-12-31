@@ -5,6 +5,7 @@ import ast
 import os
 import json
 import time
+import importlib
 
 
 app = Flask(__name__, static_url_path='')
@@ -225,7 +226,9 @@ def articleImageServing(sub, article, img):
 
 @app.route("/script/<sub>/<article>/<script>")
 def articleScriptServing(sub, article, script):
-    return ''
+    module_string = "articles." + sub + '.' + article + '.' + script
+    module = importlib.import_module(module_string)
+    return module.main(request)
 
 
 # Recurring code

@@ -23,6 +23,7 @@ It has a dark and light theme and allows you to turn snow particles on.
 - Option to switch snow on
 - Supports smaller screen sizes
 - Has a different menu for smaller devices
+- Run python code server side
 
 ## Usage
 1. Install Python
@@ -30,14 +31,13 @@ It has a dark and light theme and allows you to turn snow particles on.
 3. Run server.py to make sure data.json generates
 4. Edit data.json
     - site_location: only needed for robots.txt (e.g. "http://nitratine.pythonanywhere.com")
-    - articles_location: location of articles (e.g. "articles/")
     - administration: username and password for logging in at /admin
     - extra_header_info: A place to stick things like google analytics and verification tokens
     - descriptions: Edit descriptions of the six major pages (descriptions for articles can be defined in the article itself or use the "description" variable passed to the Jinja template.
 
 ### Articles
-To add articles to the site you will need to have defined the articles location in the servers data.json. They then need to follow a format to be detected on startup.
- - Root directory (specified in JSON)
+Articles will be searched for in articles/ which will be in the same directory as server.py. They then need to follow a format to be detected on startup.
+ - articles/
     - sub (e.g. apps, blog, projects...)
         - Article name (what will be in the url)
             - data.json (Article info)
@@ -115,3 +115,5 @@ Under that is a "Upload Article" section. This allows you to upload a zip file o
 Be aware that when downloading an article, the files need to be moved up to re-upload.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
+
+# TODO Add info about server side scripts
