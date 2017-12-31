@@ -223,6 +223,10 @@ def adminCreateArticleRoute():
 def articleImageServing(sub, article, img):
     return send_from_directory(data.article_location + sub + "/" + article + "/", img)
 
+@app.route("/script/<sub>/<article>/<script>")
+def articleScriptServing(sub, article, script):
+    return ''
+
 
 # Recurring code
 

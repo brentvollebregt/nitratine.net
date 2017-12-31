@@ -9,7 +9,6 @@ class JSON():
 
     file_location = "data.json"
     default_data = {
-        "articles_location" : "articles/",
         "articles" : {
             "apps" : {},
             "blog" : {},
@@ -44,6 +43,7 @@ class JSON():
         if self.data is None:
             self.createDefaultFile()
         self.articleScrape()
+        self.checkDirStructure()
 
     # File writing
 
@@ -56,11 +56,16 @@ class JSON():
 
     def writeFile(self):
         with open(self.file_location, 'w') as outfile:
-            json.dump(self.data, outfile) # , indent=4, sort_keys=True (without saves computation)
+            json.dump(self.data, outfile)
 
     def createDefaultFile(self):
         self.data = self.default_data
         self.writeFile()
+
+    def checkDirStructure(self):
+        for sub in ['apps', 'blog', 'projects', 'tools', 'youtube']:
+            if not os.path.exists(self.article_location + sub):
+                os.makedirs(self.article_location + sub)
 
     def createBackup(self):
         self.writeFile()
@@ -249,7 +254,7 @@ class JSON():
 
     @property
     def article_location(self):
-        return self.data['articles_location']
+        return os.path.dirname(os.path.realpath(__file__)) + '/articles/'
 
     @property
     def secrty_key(self):
