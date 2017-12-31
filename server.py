@@ -241,7 +241,7 @@ def getArticle(sub, article):
     if not data.articleExists(sub, article):
         abort(404)
 
-    with open('articles/' + sub + '/' + article + '/view.html', 'r') as f:
+    with open(data.article_location + sub + '/' + article + '/view.html', 'r') as f:
         html = f.read()
 
     data.articleView(sub, article)
