@@ -224,7 +224,7 @@ def adminCreateArticleRoute():
 def articleImageServing(sub, article, img):
     return send_from_directory(data.article_location + sub + "/" + article + "/", img)
 
-@app.route("/script/<sub>/<article>/<script>")
+@app.route("/script/<sub>/<article>/<script>", methods=['POST'])
 def articleScriptServing(sub, article, script):
     module_string = "articles." + sub + '.' + article + '.' + script
     module = importlib.import_module(module_string)
