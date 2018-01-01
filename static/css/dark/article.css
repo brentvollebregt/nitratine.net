@@ -1,5 +1,13 @@
-.date, .views, .article_content p, .article_content ul li, .article_content ol li, .article_content th, .article_content td {
+.date, .views, .article_content p, .article_content ul li, .article_content ol li, .article_content th, .article_content td, .article_content textarea, .article_content select, .article_content button {
     color: white;
+}
+
+textarea {
+    background: transparent;
+}
+
+option {
+    color: black;
 }
 
 .github:before, .website:before {
