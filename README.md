@@ -93,6 +93,15 @@ Here we can see that the two blocks are extended from SKELETON.html. The article
             - view.html
     - youtube
 
+### Server Side Scripting
+By putting python files in an articles folder, a script can be called at the path /scripts/[sub]/[article]/[script]. The Python file needs to contain a main method that takes the request as a parameter. The main method must return something to be passed back to the client.
+```python
+def main(request):
+    """Do Stuff"""
+    return {"success" : True}
+```
+The object returned from the main method is what will be returned to the client. This means if you want to return a JSON object, it would be recommended to jsonify it first.
+
 ### Pushing JSON
 In /admin, there is a "Push JSON" button. This will write the current data in memory to data.json. Useful if the server is about to be stopped so the data and be re-imported.
 
@@ -115,5 +124,3 @@ Under that is a "Upload Article" section. This allows you to upload a zip file o
 Be aware that when downloading an article, the files need to be moved up to re-upload.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
-
-# TODO Add info about server side scripts
