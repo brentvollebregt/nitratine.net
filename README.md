@@ -1,4 +1,4 @@
-# Nitratine
+[![Header Image](https://i.imgur.com/I1bP0JU.png)](http://nitratine.pythonanywhere.com)
 Flask server running at nitratine.pythonanywhere.com
 
 ## What is this?
