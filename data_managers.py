@@ -37,7 +37,7 @@ class JSON():
         "extra_header_info" : '',
         "site_location" : "",
         "redirects" : {},
-        "push_per_view" : True,
+        "push_per_view" : 1,
         "view_ip_blacklist" : []
     }
 
