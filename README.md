@@ -124,3 +124,10 @@ Under that is a "Upload Article" section. This allows you to upload a zip file o
 Be aware that when downloading an article, the files need to be moved up to re-upload.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
+
+# TODO
+- Redirects (Stored in JSON)
+- Ignore IP list for view counts ("ADD ME") in /admin
+- Add more stuff to admin
+- Admin sub selection drop down
+- Dynamically able to add subs? (might not be worth it)
