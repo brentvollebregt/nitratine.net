@@ -36,7 +36,8 @@ class JSON():
         "secrty_key" : "secret",
         "extra_header_info" : '',
         "site_location" : "",
-        "redirects" : {}
+        "redirects" : {},
+        "push_per_view" : True
     }
 
     def __init__(self):
@@ -176,6 +177,9 @@ class JSON():
             self.data['views']['hours'][hour] += 1
 
         self.data['views']['count'] += 1
+
+        if self.data['push_per_view']:
+            self.writeFile()
 
     # Article Display
 

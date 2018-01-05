@@ -126,7 +126,16 @@ Be aware that when downloading an article, the files need to be moved up to re-u
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
 
 ### Redirects
-Redirects can currently only be modified in the raw JSON. To set up a redirect, go to "redirects" in the json and create a new key-value pair in the dictionary. They key is the request.path (e.g. /to/be/redirected) and the value is where to redirect to (e.g./redirect/to/here).
+Redirects can currently only be modified in the raw JSON. To set up a redirect, go to "redirects" in the json and create a new key-value pair in the dictionary. They key is the request.path (e.g. /to/be/redirected) and the value is where to redirect to (e.g./redirect/to/here). For example:
+```json
+"redirects" : {
+    "/apps/color": "/apps/colour",
+    "/colour" : "/apps/colour"
+}
+```
+
+### Push Per View
+Push per view saves the data in memory to data.json whenever a view is added. This saves you from having to push the data before each restart of the server (can lose data if you forget to push). Set to true to enable.
 
 # TODO
 - Ignore IP list
