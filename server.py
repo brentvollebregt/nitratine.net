@@ -257,7 +257,7 @@ def getArticle(sub, article):
     with open(data.article_location + sub + '/' + article + '/view.html', 'r') as f:
         html = f.read()
 
-    data.articleView(sub, article)
+    data.articleView(sub, article, request.remote_addr)
     return render_template_string(html,
                                   title=data.getArticleTitle(sub, article),
                                   date=data.getArticleDate(sub, article),

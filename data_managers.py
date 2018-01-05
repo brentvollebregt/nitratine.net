@@ -37,7 +37,8 @@ class JSON():
         "extra_header_info" : '',
         "site_location" : "",
         "redirects" : {},
-        "push_per_view" : True
+        "push_per_view" : True,
+        "view_ip_blacklist" : []
     }
 
     def __init__(self):
@@ -150,7 +151,10 @@ class JSON():
 
     # Views
 
-    def articleView(self, sub, article):
+    def articleView(self, sub, article, ip):
+        if self.isIPViewBlacklisted(ip):
+            return
+
         today = time.strftime('%d %b %y')
         hour = time.strftime('%H')
 
@@ -180,6 +184,11 @@ class JSON():
 
         if self.data['push_per_view']:
             self.writeFile()
+
+    # View IP Blacklist
+
+    def isIPViewBlacklisted(self, ip):
+        return ip in self.data['view_ip_blacklist']
 
     # Article Display
 
