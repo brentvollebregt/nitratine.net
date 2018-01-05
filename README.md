@@ -125,9 +125,16 @@ Be aware that when downloading an article, the files need to be moved up to re-u
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
 
+### Redirects
+Redirects can currently only be modified in the raw JSON. To set up a redirect, go to "redirects" in the json and create a new key-value pair in the dictionary. They key is the request.path (e.g. /to/be/redirected) and the value is where to redirect to (e.g./redirect/to/here).
+
 # TODO
-- Redirects (Stored in JSON)
-- Ignore IP list for view counts ("ADD ME") in /admin
+- Ignore IP list
 - Add more stuff to admin
-- Admin sub selection drop down
+    - Easily set redirects
+    - Set site location with one click
+    - Add me for ignore ip list
+    - Articles location
+    - Edit descriptions
+    - Admin sub selection drop down
 - Dynamically able to add subs? (might not be worth it)

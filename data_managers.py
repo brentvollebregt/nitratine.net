@@ -35,7 +35,8 @@ class JSON():
         },
         "secrty_key" : "secret",
         "extra_header_info" : '',
-        "site_location" : ""
+        "site_location" : "",
+        "redirects" : {}
     }
 
     def __init__(self):
@@ -137,6 +138,14 @@ class JSON():
 
     def getArticleList(self, sub):
         return [article for article in self.data['articles'][sub]]
+
+    # Redirects
+
+    def isARedirect(self, path):
+        return path in self.data['redirects']
+
+    def getRedirect(self, path):
+        return self.data['redirects'][path]
 
     # Views
 

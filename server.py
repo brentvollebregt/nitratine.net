@@ -119,6 +119,8 @@ def sitemapRoute():
 
 @app.errorhandler(404)
 def page_not_found(e):
+    if data.isARedirect(request.path):
+        return redirect(data.getRedirect(request.path))
     return render_template('404.html'), 404
 
 
