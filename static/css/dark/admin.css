@@ -1,15 +1,3 @@
-h1, .major_button, #jsonEdit {
+h1, button, select, input, textarea {
     color: white;
-}
-
-.major_button {
-    border: solid 2px white;
-}
-
-.major_button:hover {
-    background: #63a4ff;
-}
-
-#jsonEdit {
-    background: transparent;
 }

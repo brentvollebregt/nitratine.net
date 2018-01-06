@@ -141,11 +141,4 @@ Push per view saves the data in memory to data.json whenever a view is added. Th
 Too make in-site statistics ignore a specific IP, you can add it to the list in "view_ip_blacklist" in data.json. This is useful when you don't want to count your views on a site.
 
 # TODO
-- Add more stuff to admin
-    - Easily set redirects
-    - Set site location with one click
-    - Add me for ignore ip list
-    - Articles location
-    - Edit descriptions
-    - Admin sub selection drop down
-- Dynamically able to add subs? (might not be worth it)
+- Map new commands in /admin

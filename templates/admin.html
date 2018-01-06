@@ -10,36 +10,94 @@
 
 {% block content %}
 <div id="success" class="success success_hide">Successful</div>
-<div style="padding: 10px; max-width: 600px; width: 100%;">
-    <button onclick="simple_call('/admin/push_json')" class="major_button">Push JSON</button>
-    <button onclick="simple_call('/admin/rescrape')" class="major_button">Re-scrape Pages</button>
-    <form action="/admin/download_stats" method="GET">
-        <button class="major_button">Export Stats</button>
-    </form>
-    <button onclick="download_json()" class="major_button" style="width: 50%; margin-top: 20px;">Download JSON</button>
-    <button onclick="upload_json()" class="major_button" style="width: 49%; margin-top: 20px;">Upload JSON</button>
-    <textarea id="jsonEdit" style="height: 100px; width: 100%; border-radius: 5px;"></textarea>
-    <button onclick="cwd()" class="major_button">CWD</button>
-
+<div class="wrapper">
+    <div class="dual_col">
+        <button onclick="simple_call('/admin/push_json')" class="button_l">Push JSON</button>
+        <button onclick="simple_call('/admin/rescrape')" class="button_l">Re-scrape Pages</button>
+    </div>
 
     <h1>Download Article</h1>
     <form action="/admin/download_article" method="POST">
-        <input name="sub" placeholder="Sub" style="width: 20%;">
-        <input name="url" placeholder="Article" style="width: 40%;">
-        <button style="width: 19%;">Download</button>
+        <select name="sub" title="Sub">
+            <option value="projects">Projects</option>
+            <option value="blog">Blog</option>
+            <option value="apps">Apps</option>
+            <option value="youtube">YouTube</option>
+            <option value="tools">Tools</option>
+        </select>
+        <input name="url" placeholder="Article">
+        <button>Download</button>
     </form>
-
     <h1>Delete Article</h1>
-    <input id="delete_article_sub" placeholder="Sub" style="width: 20%;">
-    <input id="delete_article_url" placeholder="Article" style="width: 40%;">
-    <button onclick="delete_article()" style="width: 20%;">Delete</button>
-
+    <select id="delete_article_sub" title="Sub">
+        <option value="projects">Projects</option>
+        <option value="blog">Blog</option>
+        <option value="apps">Apps</option>
+        <option value="youtube">YouTube</option>
+        <option value="tools">Tools</option>
+    </select>
+    <input id="delete_article_url" placeholder="Article">
+    <button onclick="delete_article()">Delete</button>
     <h1>Upload Article</h1>
-    <input id="upload_article_sub" placeholder="Sub" style="width: 20%;">
-    <input id="upload_article_url" placeholder="Article" style="width: 40%;">
-    <button onclick="upload_article()" style="width: 19%;">Upload</button>
-    <input id="upload_article_file" type="file" accept=".zip" style="width: 40%;">
+    <select id="upload_article_sub" title="Sub">
+        <option value="projects">Projects</option>
+        <option value="blog">Blog</option>
+        <option value="apps">Apps</option>
+        <option value="youtube">YouTube</option>
+        <option value="tools">Tools</option>
+    </select>
+    <input id="upload_article_url" placeholder="Article">
+    <button onclick="upload_article()">Upload</button>
+    <input id="upload_article_file" type="file" accept=".zip" style="border: none;">
 
-    <button onclick="logout()" class="major_button" style="margin-top: 20px;">Logout</button>
+    <h1>Redirects</h1>
+    <p class="redirects">/example -> /to/example</p>
+    <p class="redirects">/example2 -> /to/example2</p>
+    <input id="redirect_from" placeholder="Path From" style="margin-top: 4px;">
+    <p>to</p>
+    <input id="redirect_to" placeholder="Path To">
+    <button>Add</button>
+    <br>
+    <input id="redirect_remove" placeholder="Relative Link" style="margin-top: 2px;">
+    <button>Remove</button>
+
+    <h1>Static Descriptions</h1>
+    <div style="display: grid; grid-template-columns: 5fr 1fr; grid-gap: 2px; width: 100%;">
+        <textarea></textarea>
+        <button>Set Home</button>
+        <textarea></textarea>
+        <button>Set Projects</button>
+        <textarea></textarea>
+        <button>Set Blog</button>
+        <textarea></textarea>
+        <button>Set Apps</button>
+        <textarea></textarea>
+        <button>Set YouTube</button>
+        <textarea></textarea>
+        <button>Set Tools</button>
+        <textarea></textarea>
+        <button>Set Stats</button>
+    </div>
+
+    <h1>Raw JSON</h1>
+    <div class="dual_col" style="margin-bottom: 2px;">
+        <button onclick="download_json()" class="button_l">Download JSON</button>
+        <button onclick="upload_json()" class="button_l">Upload JSON</button>
+    </div>
+    <textarea id="jsonEdit"></textarea>
+
+    <div class="dual_col" style="margin-top: 15px;">
+        <button class="button_m">Set Site Location</button>
+        <button class="button_m">Add Me To View IP Blacklist</button>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; grid-gap: 2px;">
+            <p>Push Per View:</p>
+            <button class="button_m">On</button>
+            <button class="button_m">Off</button>
+        </div>
+        <form action="/admin/download_stats" method="GET">
+            <button class="button_m">Export Stats</button>
+        </form>
+        <button onclick="logout()" class="button_m" style="grid-column: 1/3;">Logout</button>
+    </div>
 </div>
 {% endblock %}
