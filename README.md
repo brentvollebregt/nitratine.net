@@ -135,7 +135,7 @@ Redirects can currently only be modified in the raw JSON. To set up a redirect, 
 ```
 
 ### Push Per View
-Push per view saves the data in memory to data.json whenever a view is added. This saves you from having to push the data before each restart of the server (can lose data if you forget to push). Set to 1 to enable.
+Push per view saves the data in memory to data.json whenever a view is added. This saves you from having to push the data before each restart of the server (can lose data if you forget to push). Set to true to enable (remember in /admin you are editing JavaScript so it needs to be true instead of Python's True).
 
 ### View IP Blacklist
 Too make in-site statistics ignore a specific IP, you can add it to the list in "view_ip_blacklist" in data.json. This is useful when you don't want to count your views on a site.

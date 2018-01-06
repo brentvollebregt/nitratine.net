@@ -34,7 +34,7 @@ upload_json = function () {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.overrideMimeType('application/json');
     xhr.send(JSON.stringify({
-        data: document.getElementById('jsonEdit').value
+        data: JSON.parse(document.getElementById('jsonEdit').value)
     }));
     xhr.onload = function () {
         success_message(JSON.parse(this.responseText)['success']);

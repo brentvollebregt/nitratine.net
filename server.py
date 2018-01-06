@@ -176,10 +176,11 @@ def adminUploadJsonRoute():
         return jsonify({'success': False})
 
     try:
-        uploaded_data = request.json['data']
-        parse = ast.literal_eval(request.json['data']);
-        data.data = parse
-        return jsonify({'success': True})
+        if type(request.json['data']) == dict:
+            data.data = request.json['data']
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'reason': "Not in JSON format"})
     except Exception as e:
         return jsonify({'success': False, 'reason': str(e)})
 

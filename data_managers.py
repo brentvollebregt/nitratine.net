@@ -31,7 +31,7 @@ class JSON():
             "blog" : "This is where most of my experiments are recorded as sometimes I need to experiment concepts for some projects.",
             "projects" : "These are the projects I have made and contributed to. I show how they work and how to install and use them.",
             "tools" : "These are small tools that I always need around but can't find or they function too bad.",
-            "youtube" : "These articles are written tutorials of the YouTube channel PyTutorials. This also contains quick fixes for things that people have foudn coming up."
+            "youtube" : "These articles are written tutorials of the YouTube channel PyTutorials. This also contains quick fixes for things that people have found coming up."
         },
         "secrty_key" : "secret",
         "extra_header_info" : '',
