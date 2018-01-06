@@ -102,6 +102,7 @@ def main(request):
 ```
 The object returned from the main method is what will be returned to the client. This means if you want to return a JSON object, it would be recommended to jsonify it first.
 
+## Administration Features
 ### Pushing JSON
 In /admin, there is a "Push JSON" button. This will write the current data in memory to data.json. Useful if the server is about to be stopped so the data and be re-imported.
 
@@ -113,9 +114,6 @@ In /admin, there is a "Export Stats" button. This buttons will download a .json 
 
 ### Data Manipulation
 In /admin, there is a "Download JSON" and "Upload JSON" button. This allows you to download JSON to the text box underneath, edit and re-upload it to the server.
-
-### CWD
-In /admin, there is a "CWD" button. This button simple alerts the current working directory for debugging purposes.
 
 ### Article Management
 In /admin, under "Download Article" you can enter a sub and an article name to download the article as a .zip<br>
