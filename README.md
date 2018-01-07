@@ -109,22 +109,18 @@ In /admin, there is a "Push JSON" button. This will write the current data in me
 ### Re-Scraping Pages
 In /admin, there is a "Re-scrape Pages" button. This checks all data.json article files for new data and will add any new articles if found.
 
-### Exporting Stats
-In /admin, there is a "Export Stats" button. This buttons will download a .json file of the current sites statistics.
-
-### Data Manipulation
-In /admin, there is a "Download JSON" and "Upload JSON" button. This allows you to download JSON to the text box underneath, edit and re-upload it to the server.
-
 ### Article Management
 In /admin, under "Download Article" you can enter a sub and an article name to download the article as a .zip<br>
 Under that is a "Delete Article" section. This allows you to delete an article by entering a sub and an article name.<br>
-Under that is a "Upload Article" section. This allows you to upload a zip file of an article by adding a file and entering a sub and an article name. These files need to be in the zip immediately (top level).<br>
+Under that is a "Upload Article" section. This allows you to upload a zip file of an article by adding a file and entering a sub and an article name. These files need to be in the zip immediately (top level). You will need to re-scrape to add these new articles.<br>
 Be aware that when downloading an article, the files need to be moved up to re-upload.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
 
 ### Redirects
-Redirects can currently only be modified in the raw JSON. To set up a redirect, go to "redirects" in the json and create a new key-value pair in the dictionary. They key is the request.path (e.g. /to/be/redirected) and the value is where to redirect to (e.g./redirect/to/here). For example:
+To set up a redirect, go to the "Redirects" section in /admin and put where you would like to put the redirect from and to; then press add. Reloading the page will show the current redirects.
+To remove a redirect, put the 'from' link in the input beside the remove button and click remove. Refresh to see that is has been removed.
+In the server data, they can be manually done as below:
 ```json
 "redirects" : {
     "/apps/color": "/apps/colour",
@@ -132,11 +128,20 @@ Redirects can currently only be modified in the raw JSON. To set up a redirect, 
 }
 ```
 
+### Static Descriptions
+Under the Static Descriptions header, you can edit descriptions of home, stats, apps and other subs. Modify the description in the relative box (page is shown in the submit button) and click "Set x"
+
+### Raw Data Manipulation
+In /admin, there is a "Download JSON" and "Upload JSON" button. This allows you to download JSON to the text box underneath, edit and re-upload it to the server.
+
+### Set Site Location
+This is just a button that will allow the server know what the sites location is in terms of it's url to generate robots.txt and sitemap.xml
+
+### Add Me To View IP Blacklist
+Too make in-site statistics ignore a specific IP, you can add yourself to the list that contains ignored ips when counting views. Your ip will be added when clicking this button.
+
 ### Push Per View
 Push per view saves the data in memory to data.json whenever a view is added. This saves you from having to push the data before each restart of the server (can lose data if you forget to push). Set to true to enable (remember in /admin you are editing JavaScript so it needs to be true instead of Python's True).
 
-### View IP Blacklist
-Too make in-site statistics ignore a specific IP, you can add it to the list in "view_ip_blacklist" in data.json. This is useful when you don't want to count your views on a site.
-
-# TODO
-- Map new commands in /admin
+### Exporting Stats
+In /admin, there is a "Export Stats" button. This buttons will download a .json file of the current sites statistics.
