@@ -24,7 +24,7 @@ def homeRoute():
                            top_articles=top_articles,
                            recent_articles=recent_articles,
                            extra_header_info=data.extra_header_info,
-                           description=data.getHomeDescription())
+                           description=data.getStaticPageDescription('home'))
 
 @app.route("/projects")
 def projectsRoute():
@@ -84,13 +84,21 @@ def statsRoute():
                            last_20_day_data=str(last_20_day_data),
                            prev_20_day_data=str(prev_20_day_data),
                            hourly_data=str(hourly_data),
-                           time=time.strftime("%d %b %y, %H:%M:%S"))
+                           time=time.strftime("%d %b %y, %H:%M:%S"),
+                           description=data.getStaticPageDescription('stats'))
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminRoute():
     if request.method == 'GET':
         if 'logged_in' in session and session['logged_in']:
-            return render_template('admin.html')
+            redirects = data.redirects
+            redirects_formatted = []
+            for single_redirect in redirects:
+                redirects_formatted.append(single_redirect + " -> " + redirects[single_redirect])
+            return render_template('admin.html',
+                                   redirects=redirects_formatted,
+                                   descriptions=data.static_descriptions,
+                                   ppv=data.pushPerView)
         else:
             return render_template('login.html')
     else:
@@ -124,12 +132,7 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-# Work Routes
-
-@app.route("/admin/logout")
-def adminLogoutRoute():
-    session['logged_in'] = False
-    return redirect(url_for('adminRoute'))
+# Admin Routes
 
 @app.route("/admin/push_json")
 def adminPushJsonRoute():
@@ -147,37 +150,7 @@ def adminRescrapeRoute():
     data.articleScrape()
     return jsonify({'success': True})
 
-@app.route("/admin/download_stats")
-def adminDownloadStatsRoute():
-    if 'logged_in' not in session or not session['logged_in']:
-        return jsonify({'success': False})
-
-    return Response(json.dumps(data.getDownloadableStats()),
-                    mimetype='application/json',
-                    headers={'Content-Disposition': 'attachment;filename=stats.json'})
-
-@app.route("/admin/download_json")
-def adminDownloadJsonRoute():
-    if 'logged_in' not in session or not session['logged_in']:
-        return jsonify({'success': False})
-
-    return jsonify({'success': True, 'data' : data.data})
-
-@app.route("/admin/upload_json", methods=['POST'])
-def adminUploadJsonRoute():
-    if 'logged_in' not in session or not session['logged_in']:
-        return jsonify({'success': False})
-
-    try:
-        if type(request.json['data']) == dict:
-            data.data = request.json['data']
-            return jsonify({'success': True})
-        else:
-            return jsonify({'success': False, 'reason': "Not in JSON format"})
-    except Exception as e:
-        return jsonify({'success': False, 'reason': str(e)})
-
-@app.route("/admin/download_article", methods=['POST'])
+@app.route("/admin/article/download", methods=['POST'])
 def adminDownloadArticleRoute():
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'success': False})
@@ -191,7 +164,7 @@ def adminDownloadArticleRoute():
     except Exception as e:
         return jsonify({'success': False, 'reason' : str(e)})
 
-@app.route("/admin/delete_article", methods=['POST'])
+@app.route("/admin/article/delete", methods=['POST'])
 def adminDeleteArticleRoute():
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'success': False})
@@ -205,7 +178,7 @@ def adminDeleteArticleRoute():
     except Exception as e:
         return jsonify({'success': False, 'reason' : str(e)})
 
-@app.route("/admin/upload_article", methods=['POST'])
+@app.route("/admin/article/upload", methods=['POST'])
 def adminCreateArticleRoute():
     if 'logged_in' not in session or not session['logged_in']:
         return jsonify({'success': False})
@@ -219,6 +192,110 @@ def adminCreateArticleRoute():
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': False, 'reason' : str(e)})
+
+@app.route("/admin/json/download")
+def adminDownloadJsonRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True, 'data' : data.data})
+
+@app.route("/admin/json/upload", methods=['POST'])
+def adminUploadJsonRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        if type(request.json['data']) == dict:
+            data.data = request.json['data']
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'reason': "Not in JSON format"})
+    except Exception as e:
+        return jsonify({'success': False, 'reason': str(e)})
+
+@app.route("/admin/redirects/add", methods=['POST'])
+def adminRedirectsAddRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        data.addRedirect(request.json['from'], request.json['to'])
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
+@app.route("/admin/redirects/remove", methods=['POST'])
+def adminRedirectsRemoveRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        data.removeRedirect(request.json['redirect'])
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
+@app.route("/admin/modify_description/<page>", methods=['POST'])
+def adminModifyDescriptionRoute(page):
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        data.setStaticPageDescription(page, request.json['desc'])
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
+@app.route("/admin/set_site_location")
+def adminSetSiteLocationRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        data.setSiteLocation(request.url_root[:-1])
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
+@app.route("/admin/add_me_to_ip_blacklist")
+def adminAddMeToIPBlacklistRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        data.addIPViewBlacklisted(request.remote_addr)
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
+@app.route("/admin/set_push_per_view", methods=['POST'])
+def adminSetPushPerViewRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        data.setPushPerView(request.json['enable'])
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
+@app.route("/admin/download_stats")
+def adminDownloadStatsRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    return Response(json.dumps(data.getDownloadableStats()),
+                    mimetype='application/json',
+                    headers={'Content-Disposition': 'attachment;filename=stats.json'})
+
+@app.route("/admin/logout")
+def adminLogoutRoute():
+    session['logged_in'] = False
+    return redirect(url_for('adminRoute'))
+
+
+# Work Routes
 
 @app.route("/non-static/<sub>/<article>/<img>")
 def articleImageServing(sub, article, img):
@@ -242,7 +319,7 @@ def getSub(sub, title):
                            top_articles=top_articles,
                            recent_articles=recent_articles,
                            extra_header_info=data.extra_header_info,
-                           description=data.getSubDescription(sub))
+                           description=data.getStaticPageDescription(sub))
 
 def getArticle(sub, article):
     if not data.articleExists(sub, article):

@@ -1,39 +1,6 @@
-logout = function () {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/admin/logout", true);
-    xhr.send(null);
-    xhr.onload = function () {
-        window.location.reload();
-    };
-};
-
-upload_json = function () {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", '/admin/upload_json', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.overrideMimeType('application/json');
-    xhr.send(JSON.stringify({
-        data: JSON.parse(document.getElementById('jsonEdit').value)
-    }));
-    xhr.onload = function () {
-        success_message(JSON.parse(this.responseText)['success']);
-    };
-};
-
-download_json = function () {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", '/admin/download_json', true);
-    xhr.overrideMimeType('application/json');
-    xhr.send(null);
-    xhr.onload = function () {
-        document.getElementById('jsonEdit').value = JSON.stringify(JSON.parse(this.responseText)['data']);
-        success_message(JSON.parse(this.responseText)['success']);
-    };
-};
-
 delete_article = function () {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", '/admin/delete_article', true);
+    xhr.open("POST", '/admin/article/delete', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.overrideMimeType('application/json');
     xhr.send(JSON.stringify({
@@ -51,7 +18,7 @@ delete_article = function () {
 
 upload_article = function () {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", '/admin/upload_article', true);
+    xhr.open("POST", '/admin/article/upload', true);
     var formData = new FormData();
     formData.append('sub', document.getElementById('upload_article_sub').value);
     formData.append('url', document.getElementById('upload_article_url').value);
@@ -64,6 +31,105 @@ upload_article = function () {
             document.getElementById('upload_article_url').value = '';
             document.getElementById('upload_article_file').value = '';
         }
+    };
+};
+
+upload_json = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/json/upload', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        data: JSON.parse(document.getElementById('jsonEdit').value)
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+    };
+};
+
+download_json = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", '/admin/json/download', true);
+    xhr.overrideMimeType('application/json');
+    xhr.send(null);
+    xhr.onload = function () {
+        document.getElementById('jsonEdit').value = JSON.stringify(JSON.parse(this.responseText)['data']);
+        success_message(JSON.parse(this.responseText)['success']);
+    };
+};
+
+add_redirect = function () {
+    var from = document.getElementById('redirect_from').value;
+    var to = document.getElementById('redirect_to').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/redirects/add', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        from: from,
+        to: to
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+    };
+};
+
+remove_redirect = function () {
+    var redirect = document.getElementById('redirect_remove').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/redirects/remove', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        redirect: redirect
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+    };
+};
+
+modify_desc = function (page) {
+    var desc = document.getElementById('staticDesc_' + page).value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/modify_description/'+ page, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        desc: desc
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+    };
+};
+
+set_push_per_view = function (enable) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/set_push_per_view', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        enable: enable
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+        if (JSON.parse(this.responseText)['success']) {
+            if (enable) {
+                document.getElementById('ppv_on').style.background = '#d81b60';
+                document.getElementById('ppv_off').style.background = '';
+            } else {
+                document.getElementById('ppv_on').style.background = '';
+                document.getElementById('ppv_off').style.background = '#d81b60';
+            }
+        }
+    };
+};
+
+logout = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/admin/logout", true);
+    xhr.send(null);
+    xhr.onload = function () {
+        window.location.reload();
     };
 };
 
@@ -92,16 +158,4 @@ success_message = function (success) {
             success_node.classList.add('success_hide')
         }, 3000
     );
-};
-
-cwd = function () {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", '/admin/cwd', true);
-    xhr.overrideMimeType('application/json');
-    xhr.send(null);
-    xhr.onload = function () {
-        if (JSON.parse(this.responseText)['success']) {
-            alert(JSON.parse(this.responseText)['cwd'])
-        }
-    };
 };

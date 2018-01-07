@@ -17,7 +17,7 @@
     </div>
 
     <h1>Download Article</h1>
-    <form action="/admin/download_article" method="POST">
+    <form action="/admin/article/download" method="POST">
         <select name="sub" title="Sub">
             <option value="projects">Projects</option>
             <option value="blog">Blog</option>
@@ -51,32 +51,33 @@
     <input id="upload_article_file" type="file" accept=".zip" style="border: none;">
 
     <h1>Redirects</h1>
-    <p class="redirects">/example -> /to/example</p>
-    <p class="redirects">/example2 -> /to/example2</p>
+    {% for item in redirects %}
+        <p class="redirects">{{ item }}</p>
+    {% endfor %}
     <input id="redirect_from" placeholder="Path From" style="margin-top: 4px;">
     <p>to</p>
     <input id="redirect_to" placeholder="Path To">
-    <button>Add</button>
+    <button onclick="add_redirect()">Add</button>
     <br>
     <input id="redirect_remove" placeholder="Relative Link" style="margin-top: 2px;">
-    <button>Remove</button>
+    <button onclick="remove_redirect()">Remove</button>
 
     <h1>Static Descriptions</h1>
     <div class="fiveto1_col">
-        <textarea></textarea>
-        <button>Set Home</button>
-        <textarea></textarea>
-        <button>Set Projects</button>
-        <textarea></textarea>
-        <button>Set Blog</button>
-        <textarea></textarea>
-        <button>Set Apps</button>
-        <textarea></textarea>
-        <button>Set YouTube</button>
-        <textarea></textarea>
-        <button>Set Tools</button>
-        <textarea></textarea>
-        <button>Set Stats</button>
+        <textarea id="staticDesc_home">{{ descriptions['home'] }}</textarea>
+        <button onclick="modify_desc('home')">Set Home</button>
+        <textarea id="staticDesc_projects">{{ descriptions['projects'] }}</textarea>
+        <button onclick="modify_desc('projects')">Set Projects</button>
+        <textarea id="staticDesc_blog">{{ descriptions['blog'] }}</textarea>
+        <button onclick="modify_desc('blog')">Set Blog</button>
+        <textarea id="staticDesc_apps">{{ descriptions['apps'] }}</textarea>
+        <button onclick="modify_desc('apps')">Set Apps</button>
+        <textarea id="staticDesc_youtube">{{ descriptions['youtube'] }}</textarea>
+        <button onclick="modify_desc('youtube')">Set YouTube</button>
+        <textarea id="staticDesc_tools">{{ descriptions['tools'] }}</textarea>
+        <button onclick="modify_desc('tools')">Set Tools</button>
+        <textarea id="staticDesc_stats">{{ descriptions['stats'] }}</textarea>
+        <button onclick="modify_desc('stats')">Set Stats</button>
     </div>
 
     <h1>Raw JSON</h1>
@@ -87,12 +88,12 @@
     <textarea id="jsonEdit"></textarea>
 
     <div class="dual_col" style="margin-top: 15px;">
-        <button class="button_m">Set Site Location</button>
-        <button class="button_m">Add Me To View IP Blacklist</button>
+        <button class="button_m" onclick="simple_call('/admin/set_site_location')">Set Site Location</button>
+        <button class="button_m" onclick="simple_call('/admin/add_me_to_ip_blacklist')">Add Me To View IP Blacklist</button>
         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; grid-gap: 2px;">
             <p>Push Per View:</p>
-            <button class="button_m">On</button>
-            <button class="button_m">Off</button>
+            <button {% if ppv %}style="background: #d81b60;"{% endif %} id="ppv_on" class="button_m" onclick="set_push_per_view(true)">On</button>
+            <button {% if not ppv %}style="background: #d81b60;"{% endif %} id="ppv_off" class="button_m" onclick="set_push_per_view(false)">Off</button>
         </div>
         <form action="/admin/download_stats" method="GET">
             <button class="button_m">Export Stats</button>

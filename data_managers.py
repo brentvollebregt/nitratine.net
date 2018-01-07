@@ -31,7 +31,8 @@ class JSON():
             "blog" : "This is where most of my experiments are recorded as sometimes I need to experiment concepts for some projects.",
             "projects" : "These are the projects I have made and contributed to. I show how they work and how to install and use them.",
             "tools" : "These are small tools that I always need around but can't find or they function too bad.",
-            "youtube" : "These articles are written tutorials of the YouTube channel PyTutorials. This also contains quick fixes for things that people have found coming up."
+            "youtube" : "These articles are written tutorials of the YouTube channel PyTutorials. This also contains quick fixes for things that people have found coming up.",
+            "stats" : "Statistics including total views and articles, when people visited and where in the day."
         },
         "secrty_key" : "secret",
         "extra_header_info" : '',
@@ -149,6 +150,13 @@ class JSON():
     def getRedirect(self, path):
         return self.data['redirects'][path]
 
+    def addRedirect(self, path, to):
+        self.data['redirects'][path] = to
+
+    def removeRedirect(self, path):
+        if path in self.data['redirects']:
+            del self.data['redirects'][path]
+
     # Views
 
     def articleView(self, sub, article, ip):
@@ -182,13 +190,16 @@ class JSON():
 
         self.data['views']['count'] += 1
 
-        if self.data['push_per_view']:
+        if self.pushPerView:
             self.writeFile()
 
     # View IP Blacklist
 
     def isIPViewBlacklisted(self, ip):
         return ip in self.data['view_ip_blacklist']
+
+    def addIPViewBlacklisted(self, ip):
+        self.data['view_ip_blacklist'].append(ip)
 
     # Article Display
 
@@ -266,11 +277,19 @@ class JSON():
 
     # Static Location Descriptions
 
-    def getHomeDescription(self):
-        return self.data['descriptions']['home']
-
-    def getSubDescription(self, sub):
+    def getStaticPageDescription(self, sub):
         return self.data['descriptions'][sub]
+
+    def setStaticPageDescription(self, page, desc):
+        self.data['descriptions'][page] = desc
+
+    # Other Site Settings
+
+    def setSiteLocation(self, location):
+        self.data['site_location'] = location
+
+    def setPushPerView(self, ppv):
+        self.data['push_per_view'] = ppv
 
     # Getters
 
@@ -302,3 +321,15 @@ class JSON():
     @property
     def site_location(self):
         return self.data['site_location']
+
+    @property
+    def static_descriptions(self):
+        return self.data['descriptions']
+
+    @property
+    def redirects(self):
+        return self.data['redirects']
+
+    @property
+    def pushPerView(self):
+        return self.data['push_per_view']
