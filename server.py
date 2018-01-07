@@ -334,7 +334,8 @@ def getArticle(sub, article):
                                   date=data.getArticleDate(sub, article),
                                   views=data.getArticleViews(sub, article),
                                   description=data.getArticleDescription(sub, article),
-                                  extra_header_info=data.extra_header_info)
+                                  extra_header_info=data.extra_header_info,
+                                  relative_url='/' + sub + '/' + article)
 
 def convertDateToReadable(timestamp):
     return time.strftime('%d %b %y', time.localtime( int(timestamp) ))
