@@ -199,7 +199,8 @@ class JSON():
         return ip in self.data['view_ip_blacklist']
 
     def addIPViewBlacklisted(self, ip):
-        self.data['view_ip_blacklist'].append(ip)
+        if ip not in self.data['view_ip_blacklist']:
+            self.data['view_ip_blacklist'].append(ip)
 
     # Article Display
 
