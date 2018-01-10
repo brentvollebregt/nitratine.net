@@ -145,3 +145,10 @@ Push per view saves the data in memory to data.json whenever a view is added. Th
 
 ### Exporting Stats
 In /admin, there is a "Export Stats" button. This buttons will download a .json file of the current sites statistics.
+
+# TODO
+- Icon image in article? (shift title right)
+- Temp folder for file creation and uploading
+- Clean temp button
+- Upload and Download article folder
+- Remove file structure in zips (https://stackoverflow.com/questions/27991745/python-zip-file-and-avoid-directory-structure)

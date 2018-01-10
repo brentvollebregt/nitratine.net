@@ -21,7 +21,7 @@ upload_article = function () {
     xhr.open("POST", '/admin/article/upload', true);
     var formData = new FormData();
     formData.append('sub', document.getElementById('upload_article_sub').value);
-    formData.append('url', document.getElementById('upload_article_url').value);
+    formData.append('article', document.getElementById('upload_article_url').value);
     formData.append('file', document.getElementById('upload_article_file').files[0]);
     xhr.send(formData);
     xhr.onload = function () {

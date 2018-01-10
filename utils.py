@@ -2,12 +2,19 @@ import zipfile
 import os
 import shutil
 
-def zipArticle(article_location, sub, url):
-    # TODO Checks for old zip files (delete)
+tmp_path = os.path.dirname(os.path.realpath(__file__)) + '/tmp/'
+
+def createTmp():
+    if not os.path.exists(tmp_path):
+        os.makedirs(tmp_path)
+
+def zipArticle(article_location, sub, article):
     try:
-        filename = 'articleZip_' + sub + '_' + url + '.zip'
-        zipf = zipfile.ZipFile(filename, 'w', zipfile.ZIP_DEFLATED)
-        for root, dirs, files in os.walk(os.path.join(article_location + sub + '/' + url + '/')):
+        createTmp()
+        filename = 'articleZip_' + sub + '_' + article + '.zip'
+        path = tmp_path + filename
+        zipf = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED)
+        for root, dirs, files in os.walk(os.path.join(article_location + sub + '/' + article + '/')):
             for file in files:
                 zipf.write(os.path.join(root, file))
     except Exception as e:
@@ -22,7 +29,7 @@ def deleteArticleFiles(article_location, sub, url):
     if os.path.exists(folder):
         shutil.rmtree(folder)
 
-def moveZip(article_location, sub, url):
+def unzipArticle(article_location, sub, url):
     folder = article_location + sub + "/" + url + "/"
     file = os.getcwd() + '/zip.zip'
     if os.path.exists(folder):

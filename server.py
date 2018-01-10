@@ -156,9 +156,9 @@ def adminDownloadArticleRoute():
         return jsonify({'success': False})
 
     try:
-        filename = utils.zipArticle(data.article_location, request.form['sub'], request.form['url'])
+        filename = utils.zipArticle(data.article_location, request.form['sub'], request.form['article'])
         if filename:
-            return send_from_directory(directory='', filename=filename, as_attachment=True, attachment_filename=filename)
+            return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
         else:
             return jsonify({'success': False})
     except Exception as e:
@@ -185,10 +185,10 @@ def adminCreateArticleRoute():
 
     try:
         sub = request.form['sub']
-        url = request.form['url']
+        url = request.form['article']
         file = request.files['file']
         file.save(os.getcwd() + '/zip.zip')
-        utils.moveZip(data.article_location, sub, url)
+        utils.unzipArticle(data.article_location, sub, url)
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': False, 'reason' : str(e)})
