@@ -113,7 +113,6 @@ In /admin, there is a "Re-scrape Pages" button. This checks all data.json articl
 In /admin, under "Download Article" you can enter a sub and an article name to download the article as a .zip<br>
 Under that is a "Delete Article" section. This allows you to delete an article by entering a sub and an article name.<br>
 Under that is a "Upload Article" section. This allows you to upload a zip file of an article by adding a file and entering a sub and an article name. These files need to be in the zip immediately (top level). You will need to re-scrape to add these new articles.<br>
-Be aware that when downloading an article, the files need to be moved up to re-upload.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
 
