@@ -315,6 +315,17 @@ def adminDownloadStatsRoute():
                     mimetype='application/json',
                     headers={'Content-Disposition': 'attachment;filename=stats.json'})
 
+@app.route("/admin/remove_tmp")
+def adminRemoveTmpRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        utils.removeTmp()
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
 @app.route("/admin/logout")
 def adminLogoutRoute():
     session['logged_in'] = False

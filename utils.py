@@ -8,6 +8,10 @@ def createTmp():
     if not os.path.exists(tmp_path):
         os.makedirs(tmp_path)
 
+def removeTmp():
+    if os.path.exists(tmp_path):
+        shutil.rmtree(tmp_path)
+
 def zipArticle(article_location, sub, article):
     try:
         createTmp()

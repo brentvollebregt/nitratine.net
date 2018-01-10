@@ -172,5 +172,4 @@ upload_article_folder = function () {
             document.getElementById('article_folder_zip').value = '';
         }
     };
-
 };

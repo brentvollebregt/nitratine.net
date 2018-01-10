@@ -145,6 +145,8 @@ Push per view saves the data in memory to data.json whenever a view is added. Th
 ### Exporting Stats
 In /admin, there is a "Export Stats" button. This buttons will download a .json file of the current sites statistics.
 
+### Delete /tmp/
+When downloading a zip file, the server cannot delete the file while processing the request as it needs to serve it. Thus the files sit in /tmp/ (beside server.py) so they can be deleted later.
+
 # TODO
 - Icon image in article? (shift title right)
-- Clean temp button
