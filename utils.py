@@ -16,7 +16,8 @@ def zipArticle(article_location, sub, article):
         zipf = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED)
         for root, dirs, files in os.walk(os.path.join(article_location + sub + '/' + article + '/')):
             for file in files:
-                zipf.write(os.path.join(root, file))
+                new_name = os.path.join(root, file).replace(os.path.join(article_location + sub + '/' + article + '/'), '')
+                zipf.write(os.path.join(root, file), new_name)
     except Exception as e:
         filename = False
         print (e)
