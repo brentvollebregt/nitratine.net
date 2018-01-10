@@ -159,3 +159,8 @@ success_message = function (success) {
         }, 3000
     );
 };
+
+upload_article_folder = function () {
+    var zipfile = document.getElementById('article_folder_zip');
+
+};

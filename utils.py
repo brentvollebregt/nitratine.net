@@ -40,3 +40,23 @@ def unzipArticle(article_location, sub, url):
     zip_ref.extractall(folder)
     zip_ref.close()
     os.remove(file)
+
+def zipArticleFolder(location):
+    try:
+        createTmp()
+        filename = 'ArticleFolder.zip'
+        path = tmp_path + filename
+        zipf = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED)
+        for root, dirs, files in os.walk(location):
+            for file in files:
+                new_name = os.path.join(root, file).replace(location, '')
+                zipf.write(os.path.join(root, file), new_name)
+    except Exception as e:
+        filename = False
+        print(e)
+    finally:
+        zipf.close()
+    return filename
+
+def unzipArticleFolder():
+    pass

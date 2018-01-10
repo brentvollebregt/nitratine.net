@@ -148,7 +148,5 @@ In /admin, there is a "Export Stats" button. This buttons will download a .json 
 
 # TODO
 - Icon image in article? (shift title right)
-- Temp folder for file creation and uploading
-- Clean temp button
 - Upload and Download article folder
-- Remove file structure in zips (https://stackoverflow.com/questions/27991745/python-zip-file-and-avoid-directory-structure)
+- Clean temp button

@@ -236,6 +236,31 @@ def adminRedirectsRemoveRoute():
     except Exception as e:
         return jsonify({'success': True, 'reason': str(e)})
 
+@app.route("/admin/article_folder/upload", methods=['POST'])
+def adminArticleFolderUploadRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        # TODO
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
+@app.route("/admin/article_folder/download")
+def adminArticleFolderDownloadRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        filename = utils.zipArticleFolder(data.article_location)
+        if filename:
+            return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
+        else:
+            return jsonify({'success': False})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
 @app.route("/admin/modify_description/<page>", methods=['POST'])
 def adminModifyDescriptionRoute(page):
     if 'logged_in' not in session or not session['logged_in']:

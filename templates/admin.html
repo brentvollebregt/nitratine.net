@@ -87,6 +87,17 @@
     </div>
     <textarea id="jsonEdit"></textarea>
 
+    <h1>Article Folder</h1>
+    <div class="dual_col">
+        <form action="/admin/article_folder/download" method="GET">
+            <button class="button_m">Download</button>
+        </form>
+        <button class="button_m" onclick="upload_article_folder()">Upload</button>
+    </div>
+    <div class="dual_col">
+        <input id="article_folder_zip" type="file" style="border: none; grid-column: 2/3;">
+    </div>
+
     <div class="dual_col" style="margin-top: 15px;">
         <button class="button_m" onclick="simple_call('/admin/set_site_location')">Set Site Location</button>
         <button class="button_m" onclick="simple_call('/admin/add_me_to_ip_blacklist')">Add Me To View IP Blacklist</button>
