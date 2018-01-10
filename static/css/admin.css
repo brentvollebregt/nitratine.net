@@ -27,10 +27,6 @@ button, select, input {
     border: solid 2px #d81b60;
 }
 
-select:focus, input:focus, textarea:focus, button:focus {
-    outline: none;
-}
-
 button, select {
     cursor: pointer;
     padding: 4px 15px;
