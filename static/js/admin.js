@@ -161,6 +161,16 @@ success_message = function (success) {
 };
 
 upload_article_folder = function () {
-    var zipfile = document.getElementById('article_folder_zip');
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/article_folder/upload', true);
+    var formData = new FormData();
+    formData.append('file', document.getElementById('article_folder_zip').files[0]);
+    xhr.send(formData);
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+        if (JSON.parse(this.responseText)['success']) {
+            document.getElementById('article_folder_zip').value = '';
+        }
+    };
 
 };

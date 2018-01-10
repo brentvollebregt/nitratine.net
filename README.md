@@ -148,5 +148,4 @@ In /admin, there is a "Export Stats" button. This buttons will download a .json 
 
 # TODO
 - Icon image in article? (shift title right)
-- Upload and Download article folder
 - Clean temp button

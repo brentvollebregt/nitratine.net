@@ -242,7 +242,8 @@ def adminArticleFolderUploadRoute():
         return jsonify({'success': False})
 
     try:
-        # TODO
+        request.files['file'].save(os.getcwd() + '/zip.zip')
+        utils.unzipArticleFolder(data.article_location)
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': True, 'reason': str(e)})

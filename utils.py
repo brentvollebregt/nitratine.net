@@ -58,5 +58,12 @@ def zipArticleFolder(location):
         zipf.close()
     return filename
 
-def unzipArticleFolder():
-    pass
+def unzipArticleFolder(location):
+    file = os.getcwd() + '/zip.zip'
+    if os.path.exists(location):
+        shutil.rmtree(location)
+    os.makedirs(location)
+    zip_ref = zipfile.ZipFile(file, 'r')
+    zip_ref.extractall(location)
+    zip_ref.close()
+    os.remove(file)
