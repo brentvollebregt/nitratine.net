@@ -1,3 +1,7 @@
 h1, button, select, input, textarea {
     color: white;
 }
+
+option {
+    color: black;
+}

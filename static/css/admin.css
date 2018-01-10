@@ -61,6 +61,7 @@ textarea {
     margin-bottom: 20px;
     border-radius: 0 5px 5px 0;
     transition: margin-left 1s;
+    font-family: 'Roboto', sans-serif;
 }
 
 .success_hide {
