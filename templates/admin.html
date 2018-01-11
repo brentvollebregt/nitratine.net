@@ -47,7 +47,7 @@
         <option value="tools">Tools</option>
     </select>
     <input id="upload_article_url" placeholder="Article">
-    <button onclick="upload_article()">Upload</button>
+    <button id="upload_article_btn" onclick="upload_article()">Upload</button>
     <input id="upload_article_file" type="file" accept=".zip" style="border: none;">
 
     <h1>Redirects</h1>
@@ -92,7 +92,7 @@
         <form action="/admin/article_folder/download" method="GET">
             <button class="button_m">Download</button>
         </form>
-        <button class="button_m" onclick="upload_article_folder()">Upload</button>
+        <button id="article_folder_upload_btn" class="button_m" onclick="upload_article_folder()">Upload</button>
     </div>
     <div class="dual_col">
         <input id="article_folder_zip" type="file" style="border: none; grid-column: 2/3;">

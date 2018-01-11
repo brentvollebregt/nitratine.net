@@ -23,11 +23,19 @@ upload_article = function () {
     formData.append('sub', document.getElementById('upload_article_sub').value);
     formData.append('article', document.getElementById('upload_article_url').value);
     formData.append('file', document.getElementById('upload_article_file').files[0]);
+    xhr.upload.addEventListener("progress", function(e) {
+        var percent = e.loaded / e.total;
+        document.getElementById('upload_article_btn').textContent = Math.round(percent * 100) + "%";
+    }, false);
+    xhr.onreadystatechange = function(e) {
+        if (xhr.readyState === 4) {
+            document.getElementById('upload_article_btn').textContent = 'Upload';
+        }
+    };
     xhr.send(formData);
     xhr.onload = function () {
         success_message(JSON.parse(this.responseText)['success']);
         if (JSON.parse(this.responseText)['success']) {
-            document.getElementById('upload_article_sub').value = '';
             document.getElementById('upload_article_url').value = '';
             document.getElementById('upload_article_file').value = '';
         }
@@ -165,6 +173,15 @@ upload_article_folder = function () {
     xhr.open("POST", '/admin/article_folder/upload', true);
     var formData = new FormData();
     formData.append('file', document.getElementById('article_folder_zip').files[0]);
+    xhr.upload.addEventListener("progress", function(e) {
+        var percent = e.loaded / e.total;
+        document.getElementById('article_folder_upload_btn').textContent = Math.round(percent * 100) + "%";
+    }, false);
+    xhr.onreadystatechange = function(e) {
+        if (xhr.readyState === 4) {
+            document.getElementById('article_folder_upload_btn').textContent = 'Upload';
+        }
+    };
     xhr.send(formData);
     xhr.onload = function () {
         success_message(JSON.parse(this.responseText)['success']);
