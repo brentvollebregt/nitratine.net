@@ -133,6 +133,9 @@ Under the Static Descriptions header, you can edit descriptions of home, stats, 
 ### Raw Data Manipulation
 In /admin, there is a "Download JSON" and "Upload JSON" button. This allows you to download JSON to the text box underneath, edit and re-upload it to the server.
 
+### Article Folder
+In this section you can download the whole /articles folder or upload a zipped file of the /articles folder. This is easier than using an online console to upload, move and unzip.
+
 ### Set Site Location
 This is just a button that will allow the server know what the sites location is in terms of it's url to generate robots.txt and sitemap.xml
 
