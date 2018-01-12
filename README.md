@@ -61,6 +61,7 @@ Articles will be searched for in articles/ which will be in the same directory a
 <title>{{ title }} | Nitratine</title>
 <meta name="description" content="{{ description }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/article.css') }}">
+<style>h1:before {background-image: url(/non-static{{ relative_url }}/icon.png);}</style>
 {% endblock %}
 
 {% block content %}
@@ -72,6 +73,7 @@ Articles will be searched for in articles/ which will be in the same directory a
 {% endblock %}
 ```
 Here we can see that the two blocks are extended from SKELETON.html. The article CSS file is added and relevant data passed to the template has been used including date, views, description and title; these are pulled from data.json.
+None of this is actually needed to make a page but it is just a structure I have created. Along with the variables passed in the example, extra_header_info and relative_url are also passed; relative_url being /sub/article.
 
 #### Article Layout Example
 - articles
@@ -153,3 +155,15 @@ When downloading a zip file, the server cannot delete the file while processing 
 
 # TODO
 - Icon image in article? (shift title right)
+```css
+h1:before {
+    display: inline-block;
+    content: "";
+    margin-right: 10px;
+    height: 40px;
+    background-image: url(/non-static{{ relative_url }}/icon.png);
+    background-size: 100% 100%;
+    width: 40px;
+}
+```
+Issue is getting relative_url in clean
