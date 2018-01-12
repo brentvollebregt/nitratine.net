@@ -60,7 +60,7 @@ a {
 }
 
 .article_content img {
-    max-width: 700px;
+    max-width: 100%;
 }
 
 .article_content table {
@@ -97,6 +97,15 @@ a {
 .vertical_screenshot {
     max-height: 450px;
     width: auto !important;
+}
+
+.highlight {
+    width: 100%;
+    overflow: auto;
+}
+
+.highlight pre {
+    margin: 0;
 }
 
 .link {
