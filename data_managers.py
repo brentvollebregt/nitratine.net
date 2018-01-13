@@ -38,6 +38,7 @@ class JSON():
         "extra_header_info" : '',
         "site_location" : "",
         "redirects" : {},
+        "redirects_request_count" : {},
         "push_per_view" : 1,
         "view_ip_blacklist" : []
     }
@@ -148,14 +149,20 @@ class JSON():
         return path in self.data['redirects']
 
     def getRedirect(self, path):
+        self.data['redirects_request_count'][path] += 1
         return self.data['redirects'][path]
+
+    def getRedirectCount(self, path):
+        return self.data['redirects_request_count'][path]
 
     def addRedirect(self, path, to):
         self.data['redirects'][path] = to
+        self.data['redirects_request_count'][path] = 0
 
     def removeRedirect(self, path):
         if path in self.data['redirects']:
             del self.data['redirects'][path]
+            del self.data['redirects_request_count'][path]
 
     # Views
 

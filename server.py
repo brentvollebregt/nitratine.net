@@ -94,7 +94,7 @@ def adminRoute():
             redirects = data.redirects
             redirects_formatted = []
             for single_redirect in redirects:
-                redirects_formatted.append(single_redirect + " -> " + redirects[single_redirect])
+                redirects_formatted.append('[' + str(data.getRedirectCount(single_redirect)) + '] ' + single_redirect + " -> " + redirects[single_redirect])
             return render_template('admin.html',
                                    redirects=redirects_formatted,
                                    descriptions=data.static_descriptions,
