@@ -61,7 +61,7 @@ Articles will be searched for in articles/ which will be in the same directory a
 <title>{{ title }} | Nitratine</title>
 <meta name="description" content="{{ description }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/article.css') }}">
-<style>h1:before {background-image: url(/non-static{{ relative_url }}/icon.png);}</style>
+<script async src="{{ url_for('static', filename='js/article.js') }}"></script>
 {% endblock %}
 
 {% block content %}
