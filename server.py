@@ -23,7 +23,8 @@ def homeRoute():
     return render_template('home.html',
                            top_articles=top_articles,
                            recent_articles=recent_articles,
-                           extra_header_info=data.extra_header_info,
+                           google_site_verification=data.google_site_verification,
+                           google_analytics=data.google_analytics,
                            description=data.getStaticPageDescription('home'))
 
 @app.route("/projects")
@@ -85,7 +86,10 @@ def statsRoute():
                            prev_20_day_data=str(prev_20_day_data),
                            hourly_data=str(hourly_data),
                            time=time.strftime("%d %b %y, %H:%M:%S"),
-                           description=data.getStaticPageDescription('stats'))
+                           description=data.getStaticPageDescription('stats'),
+                           google_site_verification=data.google_site_verification,
+                           google_analytics=data.google_analytics,
+                           )
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminRoute():
@@ -374,7 +378,8 @@ def getSub(sub, title):
                            display_icon=url_for('static', filename='img/' + sub + '-icon.svg'),
                            top_articles=top_articles,
                            recent_articles=recent_articles,
-                           extra_header_info=data.extra_header_info,
+                           google_site_verification=data.google_site_verification,
+                           google_analytics=data.google_analytics,
                            description=data.getStaticPageDescription(sub))
 
 def getArticle(sub, article):
@@ -390,7 +395,8 @@ def getArticle(sub, article):
                                   date=data.getArticleDate(sub, article),
                                   views=data.getArticleViews(sub, article),
                                   description=data.getArticleDescription(sub, article),
-                                  extra_header_info=data.extra_header_info,
+                                  google_site_verification=data.google_site_verification,
+                                  google_analytics=data.google_analytics,
                                   relative_url='/' + sub + '/' + article)
 
 def convertDateToReadable(timestamp):

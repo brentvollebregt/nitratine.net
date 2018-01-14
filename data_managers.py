@@ -35,12 +35,15 @@ class JSON():
             "stats" : "Statistics including total views and articles, when people visited and where in the day."
         },
         "secrty_key" : "secret",
-        "extra_header_info" : '',
         "site_location" : "",
         "redirects" : {},
         "redirects_request_count" : {},
         "push_per_view" : 1,
-        "view_ip_blacklist" : []
+        "view_ip_blacklist" : [],
+        "external" : {
+            "google-site-verification" : "",
+            "google-analytics" : ""
+        }
     }
 
     def __init__(self):
@@ -327,10 +330,6 @@ class JSON():
         return self.data['administration']['password']
 
     @property
-    def extra_header_info(self):
-        return self.data['extra_header_info']
-
-    @property
     def site_location(self):
         return self.data['site_location']
 
@@ -345,3 +344,11 @@ class JSON():
     @property
     def pushPerView(self):
         return self.data['push_per_view']
+
+    @property
+    def google_site_verification(self):
+        return self.data['external']['google-site-verification']
+
+    @property
+    def google_analytics(self):
+        return self.data['external']['google-analytics']

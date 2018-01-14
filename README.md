@@ -153,11 +153,11 @@ In /admin, there is a "Export Stats" button. This buttons will download a .json 
 ### Delete /tmp/
 When downloading a zip file, the server cannot delete the file while processing the request as it needs to serve it. Thus the files sit in /tmp/ (beside server.py) so they can be deleted later.
 
+## Google Analytics and Site Verification
+In data.json in the 'external' key there is two more keys. These are passed to the skeleton to be rendered on every page that extends skeleton. The data in 'google-site-verification' is ideally for your google site verification meta tag; make sure to put the whole tag in there, not just the content value. The 'google-analytics' key is ideally for your google analytics code; put all the code you are given here, not just the id.<br>
+These values do not have to be set to what has been stated above; they are just a way to make getting dynamic code in the header easier.
+
 # TODO
-- /admin move articles to new sub easily
-    - Move data
-    - Move files
-    - Create redirect
 - Create right side bar on screens wide enough (dynamic sizing of articles)
 - Integrate Google
     - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats
