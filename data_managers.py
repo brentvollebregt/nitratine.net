@@ -143,6 +143,10 @@ class JSON():
     def getArticleList(self, sub):
         return [article for article in self.data['articles'][sub]]
 
+    def moveArticle(self, sub, article, new_sub):
+        self.data['articles'][new_sub][article] = self.data['articles'][sub][article]
+        del self.data['articles'][sub][article]
+
     # Redirects
 
     def isARedirect(self, path):

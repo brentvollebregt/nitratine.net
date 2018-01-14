@@ -156,11 +156,10 @@ def adminDownloadArticleRoute():
         return jsonify({'success': False})
 
     try:
-        filename = utils.zipArticle(data.article_location, request.form['sub'], request.form['article'])
-        if filename:
-            return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
-        else:
-            return jsonify({'success': False})
+        filename = 'articleZip_' + request.form['sub'] + '_' + request.form['article'] + '.zip'
+        location = data.article_location + request.form['sub'] + '/' + request.form['article'] + '/'
+        utils.zipFolder(location, filename)
+        return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
     except Exception as e:
         return jsonify({'success': False, 'reason' : str(e)})
 
@@ -171,9 +170,9 @@ def adminDeleteArticleRoute():
 
     try:
         sub = request.json['sub']
-        url = request.json['url']
-        utils.deleteArticleFiles(data.article_location, sub, url)
-        data.removeArticle(sub, url)
+        article = request.json['url']
+        utils.deleteFolder(data.article_location + sub + '/' + article + '/')
+        data.removeArticle(sub, article)
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': False, 'reason' : str(e)})
@@ -185,10 +184,30 @@ def adminCreateArticleRoute():
 
     try:
         sub = request.form['sub']
-        url = request.form['article']
+        article = request.form['article']
         file = request.files['file']
         file.save(os.getcwd() + '/zip.zip')
-        utils.unzipArticle(data.article_location, sub, url)
+        utils.unzipFolder(data.article_location + sub + "/" + article + "/")
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'reason' : str(e)})
+
+@app.route("/admin/article/move", methods=['POST'])
+def adminMoveArticleRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        sub = request.json['sub']
+        article = request.json['article']
+        to_sub = request.json['to_sub']
+        do_redirect = request.json['redirect']
+        data.moveArticle(sub, article, to_sub)
+        utils.moveFolder(data.article_location + '/' + sub + '/' + article + '/',
+                         data.article_location + '/' + to_sub + '/' + article + '/'
+                         )
+        if do_redirect:
+            data.addRedirect('/' + sub + "/" + article, '/' + to_sub + "/" + article)
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': False, 'reason' : str(e)})
@@ -243,7 +262,7 @@ def adminArticleFolderUploadRoute():
 
     try:
         request.files['file'].save(os.getcwd() + '/zip.zip')
-        utils.unzipArticleFolder(data.article_location)
+        utils.unzipFolder(data.article_location)
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': True, 'reason': str(e)})
@@ -254,11 +273,11 @@ def adminArticleFolderDownloadRoute():
         return jsonify({'success': False})
 
     try:
+        filename = 'ArticleFolder.zip'
+        location = data.article_location
         filename = utils.zipArticleFolder(data.article_location)
-        if filename:
-            return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
-        else:
-            return jsonify({'success': False})
+        utils.zipFolder(location, filename)
+        return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
     except Exception as e:
         return jsonify({'success': True, 'reason': str(e)})
 

@@ -50,6 +50,26 @@
     <button id="upload_article_btn" onclick="upload_article()">Upload</button>
     <input id="upload_article_file" type="file" accept=".zip" style="border: none;">
 
+    <h1>Move Article</h1>
+    <select id="move_article_sub_from" title="Sub">
+        <option value="projects">Projects</option>
+        <option value="blog">Blog</option>
+        <option value="apps">Apps</option>
+        <option value="youtube">YouTube</option>
+        <option value="tools">Tools</option>
+    </select>
+    <input id="move_article_url" placeholder="Article">
+    <br>
+    <select id="move_article_sub_to" title="Sub" style="margin-top: 2px;">
+        <option value="projects">Projects</option>
+        <option value="blog">Blog</option>
+        <option value="apps">Apps</option>
+        <option value="youtube">YouTube</option>
+        <option value="tools">Tools</option>
+    </select>
+    <input id="move_article_redirect" type="checkbox" checked><p style="margin: 0 10px 0 3px;">Redirect</p>
+    <button onclick="move_article()">Move</button>
+
     <h1>Redirects</h1>
     {% for item in redirects %}
         <p class="redirects">{{ item }}</p>

@@ -42,6 +42,26 @@ upload_article = function () {
     };
 };
 
+move_article = function () {
+    var sub = document.getElementById('move_article_sub_from').value;
+    var article = document.getElementById('move_article_url').value;
+    var to_sub = document.getElementById('move_article_sub_to').value;
+    var redirect = document.getElementById('move_article_redirect').checked;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/article/move', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        sub: sub,
+        article: article,
+        to_sub: to_sub,
+        redirect: redirect
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+    };
+};
+
 upload_json = function () {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", '/admin/json/upload', true);
