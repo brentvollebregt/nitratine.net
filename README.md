@@ -154,16 +154,11 @@ In /admin, there is a "Export Stats" button. This buttons will download a .json 
 When downloading a zip file, the server cannot delete the file while processing the request as it needs to serve it. Thus the files sit in /tmp/ (beside server.py) so they can be deleted later.
 
 # TODO
-- Icon image in article? (shift title right)
-```css
-h1:before {
-    display: inline-block;
-    content: "";
-    margin-right: 10px;
-    height: 40px;
-    background-image: url(/non-static{{ relative_url }}/icon.png);
-    background-size: 100% 100%;
-    width: 40px;
-}
-```
-Issue is getting relative_url in clean
+- /admin move articles to new sub easily
+    - Move data
+    - Move files
+    - Create redirect
+- Create right side bar on screens wide enough (dynamic sizing of articles)
+- Integrate Google
+    - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats
+    - Options to add advertisements
