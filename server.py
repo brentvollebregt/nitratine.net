@@ -290,7 +290,7 @@ def adminAddMeToIPBlacklistRoute():
         return jsonify({'success': False})
 
     try:
-        data.addIPViewBlacklisted(request.remote_addr)
+        data.addIPViewBlacklisted(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))
         return jsonify({'success': True})
     except Exception as e:
         return jsonify({'success': True, 'reason': str(e)})
@@ -338,7 +338,7 @@ def adminLogoutRoute():
 def articleImageServing(sub, article, img):
     return send_from_directory(data.article_location + sub + "/" + article + "/", img)
 
-@app.route("/script/<sub>/<article>/<script>", methods=['POST'])
+@app.route("/script/<sub>/<article>/<script>", methods=['POST', 'GET'])
 def articleScriptServing(sub, article, script):
     module_string = "articles." + sub + '.' + article + '.' + script
     module = importlib.import_module(module_string)
@@ -365,7 +365,7 @@ def getArticle(sub, article):
     with open(data.article_location + sub + '/' + article + '/view.html', 'r') as f:
         html = f.read()
 
-    data.articleView(sub, article, request.remote_addr)
+    data.articleView(sub, article, request.environ.get('HTTP_X_REAL_IP', request.remote_addr))
     return render_template_string(html,
                                   title=data.getArticleTitle(sub, article),
                                   date=data.getArticleDate(sub, article),
