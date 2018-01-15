@@ -53,8 +53,6 @@ navToggle = function () {
 function checkOptionsSection() {
     var nav_options = document.getElementById('nav_options');
     var last_nav_link = document.getElementById('last_nav_link');
-    console.log(last_nav_link.getBoundingClientRect().bottom  + ' ' + nav_options.getBoundingClientRect().top);
-    console.log(last_nav_link.getBoundingClientRect().bottom >= nav_options.getBoundingClientRect().top);
     if (last_nav_link.getBoundingClientRect().bottom >= nav_options.getBoundingClientRect().top) {
         nav_options.style.visibility = 'hidden';
     } else {
