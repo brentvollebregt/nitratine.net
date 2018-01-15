@@ -30,7 +30,6 @@ linkTo = function (location) {
 
 navToggle = function () {
     var nav_icon = document.getElementById('phone_nav_bar_icon');
-    var nav_bar = document.getElementById('phone_nav_bar');
     var phone_nav = document.getElementById('phone_nav');
 
     var navDropped = true;
@@ -51,3 +50,22 @@ navToggle = function () {
     nav_icon.dropped = !navDropped
 };
 
+function checkOptionsSection() {
+    var nav_options = document.getElementById('nav_options');
+    var last_nav_link = document.getElementById('last_nav_link');
+    console.log(last_nav_link.getBoundingClientRect().bottom  + ' ' + nav_options.getBoundingClientRect().top);
+    console.log(last_nav_link.getBoundingClientRect().bottom >= nav_options.getBoundingClientRect().top);
+    if (last_nav_link.getBoundingClientRect().bottom >= nav_options.getBoundingClientRect().top) {
+        nav_options.style.visibility = 'hidden';
+    } else {
+        nav_options.style.visibility = 'visible';
+    }
+}
+
+window.addEventListener('load', function () {
+    checkOptionsSection();
+}, true);
+
+window.addEventListener('resize', function () {
+    checkOptionsSection();
+});
