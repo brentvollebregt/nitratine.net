@@ -279,7 +279,6 @@ def adminArticleFolderDownloadRoute():
     try:
         filename = 'ArticleFolder.zip'
         location = data.article_location
-        filename = utils.zipArticleFolder(data.article_location)
         utils.zipFolder(location, filename)
         return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
     except Exception as e:
