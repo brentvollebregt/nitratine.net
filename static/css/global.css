@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-.nav_button_text, .phone_nav_tile_text, .switch_text {
-    font-family: 'Roboto', sans-serif;
-}
-
 html {
     height: 100%;
 }
@@ -12,6 +8,7 @@ body {
     height: 100%;
     margin: 0;
     background: #efecec;
+    font-family: 'Roboto', sans-serif;
 }
 
 * {

@@ -1,7 +1,3 @@
-.welcome_message, .section_header, .tile_title, .tile_text, .tile_tag {
-    font-family: 'Roboto', sans-serif;
-}
-
 .welcome_message {
     text-align: center;
     font-size: 25px;

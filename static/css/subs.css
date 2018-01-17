@@ -1,7 +1,3 @@
-.header_text, .content_box_title, .top_article_title, .tile_title, .tile_text, .tile_tag {
-    font-family: 'Roboto', sans-serif;
-}
-
 .header_wrapper {
     height: 90px;
     background-color: #1976d2;

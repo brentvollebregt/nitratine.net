@@ -5,7 +5,6 @@
 }
 
 h1 {
-    font-family: 'Roboto', sans-serif;
     font-size: 25px;
     color: #1976d2;
     margin: 15px 0 5px 0;
@@ -13,14 +12,12 @@ h1 {
 
 p {
     font-size: 18px;
-    font-family: 'Roboto', sans-serif;
     color: #1976d2;
     display: inline;
     margin: 10px 0;
 }
 
 button, select, input {
-    font-family: 'Roboto', sans-serif;
     background: transparent;
     font-size: 15px;
     border-radius: 4px;
@@ -57,7 +54,6 @@ textarea {
     margin-bottom: 20px;
     border-radius: 0 5px 5px 0;
     transition: margin-left 1s;
-    font-family: 'Roboto', sans-serif;
 }
 
 .success_hide {
@@ -96,7 +92,6 @@ textarea {
 
 .redirects {
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
     color: #1976d2;
     display: block;
     margin: 1px 0;
