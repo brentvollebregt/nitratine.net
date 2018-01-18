@@ -50,8 +50,8 @@ class JSON():
         self.getFile()
         if self.data is None:
             self.createDefaultFile()
-        self.articleScrape()
         self.checkDirStructure()
+        self.articleScrape()
 
     # File writing
 
