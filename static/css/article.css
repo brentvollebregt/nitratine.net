@@ -109,6 +109,7 @@ h1:before {
 .highlight {
     width: 100%;
     overflow: auto;
+    font-size: 15px;
 }
 
 .highlight pre {
