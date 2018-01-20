@@ -6,8 +6,8 @@
         <meta charset="utf-8">
         <meta name="theme-color" content="#1976d2"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
-        <link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/global.css') }}" disabled>
-        <script async src="{{ url_for('static', filename='js/global.js') }}"></script>
+        <link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/global.css') }}">
+        <script src="{{ url_for('static', filename='js/global.js') }}"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=0.6">
         <script>var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
         <link rel="icon" sizes="100x100" href="{{ url_for('static', filename='img/favicon.ico') }}">
@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <script>getThemeToSwitch();getSnowToSwitch();</script>
+        <script>getThemeToSwitch();getSnowToSwitch();checkOptionsSection();</script>
 
         <div id="right_sidebar">
             <div class="bottom_ad">
@@ -122,6 +122,7 @@
         </div>
 
         <div class="content">
+            <script>checkRightSidebar();</script>
             {% block content %}{% endblock %}
         </div>
 	</body>
