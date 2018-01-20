@@ -25,7 +25,8 @@ def homeRoute():
                            recent_articles=recent_articles,
                            google_site_verification=data.google_site_verification,
                            google_analytics=data.google_analytics,
-                           description=data.getStaticPageDescription('home'))
+                           description=data.getStaticPageDescription('home'),
+                           right_sidebar_code=data.getRightSidebarAd())
 
 @app.route("/projects")
 def projectsRoute():
@@ -89,7 +90,7 @@ def statsRoute():
                            description=data.getStaticPageDescription('stats'),
                            google_site_verification=data.google_site_verification,
                            google_analytics=data.google_analytics,
-                           )
+                           right_sidebar_code='')
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminRoute():
@@ -379,7 +380,8 @@ def getSub(sub, title):
                            recent_articles=recent_articles,
                            google_site_verification=data.google_site_verification,
                            google_analytics=data.google_analytics,
-                           description=data.getStaticPageDescription(sub))
+                           description=data.getStaticPageDescription(sub),
+                           right_sidebar_code=data.getRightSidebarAd())
 
 def getArticle(sub, article):
     if not data.articleExists(sub, article):
@@ -396,7 +398,8 @@ def getArticle(sub, article):
                                   description=data.getArticleDescription(sub, article),
                                   google_site_verification=data.google_site_verification,
                                   google_analytics=data.google_analytics,
-                                  relative_url='/' + sub + '/' + article)
+                                  relative_url='/' + sub + '/' + article,
+                                  right_sidebar_code=data.getRightSidebarAd())
 
 def convertDateToReadable(timestamp):
     return time.strftime('%d %b %y', time.localtime( int(timestamp) ))

@@ -137,6 +137,8 @@ setSnowFalse = function () {
 
 // Events
 window.addEventListener('load', function () {
+    getThemeToSwitch();
+    getSnowToSwitch();
     checkOptionsSection();
     checkRightSidebar();
 }, true);
@@ -145,7 +147,3 @@ window.addEventListener('resize', function () {
     checkOptionsSection();
     checkRightSidebar();
 });
-
-// On Call
-getThemeToSwitch();
-getSnowToSwitch();

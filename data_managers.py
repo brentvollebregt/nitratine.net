@@ -42,7 +42,11 @@ class JSON():
         "view_ip_blacklist" : [],
         "external" : {
             "google-site-verification" : "",
-            "google-analytics" : ""
+            "google-analytics" : "",
+            "ads" : {
+                "enabled" : True,
+                "right_sidebar_code" : ""
+            }
         }
     }
 
@@ -297,6 +301,13 @@ class JSON():
 
     def setStaticPageDescription(self, page, desc):
         self.data['descriptions'][page] = desc
+
+    # Ads
+
+    def getRightSidebarAd(self):
+        if self.data['external']['ads']['enabled']:
+            return self.data['external']['ads']['right_sidebar_code']
+        return ''
 
     # Other Site Settings
 
