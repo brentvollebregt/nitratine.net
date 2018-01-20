@@ -1,3 +1,49 @@
+// Links
+linkTo = function (location) {
+    window.location.href = "/" + location;
+};
+
+// Small screen navigation
+navToggle = function () {
+    var nav_icon = document.getElementById('phone_nav_bar_icon');
+    var phone_nav = document.getElementById('phone_nav');
+
+    var navDropped = true;
+    if (nav_icon.dropped == null || nav_icon.dropped == false) {
+        navDropped = false;
+    }
+
+    if (navDropped) {
+        nav_icon.style.transform = "";
+        phone_nav.style.marginTop = "-408px"
+    } else {
+        nav_icon.style.transform = "rotate(180deg)";
+        phone_nav.style.marginTop = "0px"
+    }
+
+    nav_icon.dropped = !navDropped
+};
+
+// Right Sidebar
+function checkRightSidebar() {
+    if (window.innerWidth >= 1780) {
+        document.getElementById('right_sidebar').style.display = 'block';
+    } else {
+        document.getElementById('right_sidebar').style.display = 'none';
+    }
+}
+
+// Options view in sidebar
+function checkOptionsSection() {
+    var nav_options = document.getElementById('nav_options');
+    var last_nav_link = document.getElementById('last_nav_link');
+    if (last_nav_link.getBoundingClientRect().bottom >= nav_options.getBoundingClientRect().top) {
+        nav_options.style.visibility = 'hidden';
+    } else {
+        nav_options.style.visibility = 'visible';
+    }
+}
+
 // Theme
 getThemeToSwitch = function () {
     if (localStorage.getItem("dark_theme") !== null) {
@@ -13,7 +59,6 @@ setTheme = function () {
     } else {
         setThemeLight();
     }
-
 };
 
 setThemeDark = function () {
@@ -56,13 +101,11 @@ getSnowToSwitch = function () {
     } else {
         setSnowFalse();
     }
-
 };
 
 setSnow = function () {
     if (localStorage.getItem("snow") === null) {
         setSnowTrue();
-
     } else {
         setSnowFalse();
     }
@@ -92,6 +135,17 @@ setSnowFalse = function () {
     phone_nav_text.style.color = 'white';
 };
 
+// Events
+window.addEventListener('load', function () {
+    checkOptionsSection();
+    checkRightSidebar();
+}, true);
 
+window.addEventListener('resize', function () {
+    checkOptionsSection();
+    checkRightSidebar();
+});
+
+// On Call
 getThemeToSwitch();
 getSnowToSwitch();
