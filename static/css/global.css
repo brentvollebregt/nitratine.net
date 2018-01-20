@@ -280,5 +280,14 @@ input:checked + .slider:before {
     height: 100%;
     width: 300px;
     margin-left: 1480px;
-    display: none
+    display: none;
+    padding: 15px 0;
+}
+
+.bottom_ad {
+    width: 300px;
+    height: 250px;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 15px;
 }
