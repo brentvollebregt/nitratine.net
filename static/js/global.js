@@ -26,11 +26,34 @@ navToggle = function () {
 
 // Right Sidebar
 function checkRightSidebar() {
-    if (window.innerWidth >= 1780) {
-        document.getElementById('right_sidebar').style.display = 'block';
+    if (window.innerWidth >= 1790 && enable_right_sidebar) {
+        // Navbar 280, Home and Sub content max 1200, right sidebar 300 + 10 margin (should be 15 but we'll support more)
+        document.getElementById('right_sidebar').style.display = 'flex';
     } else {
         document.getElementById('right_sidebar').style.display = 'none';
     }
+}
+
+function setupRightSidebar() {
+    // https://www.googleapis.com/youtube/v3/videos?part=statistics&id=#&key=#
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", ' https://www.googleapis.com/youtube/v3/search?key=' + youtube_data_API_key + '&channelId=' + youtube_channel_id + '&part=id&order=date&maxResults=6&type=video', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send();
+    xhr.onload = function () {
+        var data = JSON.parse(this.responseText)['items'];
+        var ids = [];
+        var parent = document.getElementById('recent-yt');
+        for (var i = 0; i < data.length; i++) {
+            ids.push(data[i]['id']['videoId']);
+            var tmp_node = document.createElement('img');
+            tmp_node.src = 'https://img.youtube.com/vi/' + data[i]['id']['videoId'] + '/mqdefault.jpg';
+            tmp_node.style.width = '100%';
+            tmp_node.style.height = 'auto';
+            parent.appendChild(tmp_node);
+        }
+    };
 }
 
 // Options view in sidebar
@@ -139,4 +162,8 @@ setSnowFalse = function () {
 window.addEventListener('resize', function () {
     checkOptionsSection();
     checkRightSidebar();
+});
+
+window.addEventListener('load', function () {
+    setupRightSidebar();
 });

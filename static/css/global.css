@@ -274,20 +274,20 @@ input:checked + .slider:before {
     }
 }
 
+/* Right Sidebar */
+
 #right_sidebar {
     position: fixed;
     left: 0;
     height: 100%;
     width: 300px;
-    margin-left: 1480px;
+    margin: 0 15px 0 1480px;
     display: none;
-    padding: 15px 0;
+    align-items: center;
 }
 
-.bottom_ad {
+.ad_300x250 {
     width: 300px;
     height: 250px;
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 15px;
+    margin: 6px 0;
 }

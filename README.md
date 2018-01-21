@@ -159,6 +159,7 @@ These values do not have to be set to what has been stated above; they are just 
 
 # TODO
 - Create right side bar on screens wide enough (dynamic sizing of articles)
+- Server versions
 - Integrate Google
     - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats
     - Options to add advertisements

@@ -152,6 +152,28 @@ set_push_per_view = function (enable) {
     };
 };
 
+set_enable_right_sidebar = function (enable) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/set_enable_right_sidebar', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        enable: enable
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+        if (JSON.parse(this.responseText)['success']) {
+            if (enable) {
+                document.getElementById('ers_on').style.background = '#d81b60';
+                document.getElementById('ers_off').style.background = '';
+            } else {
+                document.getElementById('ers_on').style.background = '';
+                document.getElementById('ers_off').style.background = '#d81b60';
+            }
+        }
+    };
+};
+
 logout = function () {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "/admin/logout", true);

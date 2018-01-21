@@ -40,13 +40,16 @@ class JSON():
         "redirects_request_count" : {},
         "push_per_view" : 1,
         "view_ip_blacklist" : [],
+        "enable_right_sidebar" : True,
         "external" : {
             "google-site-verification" : "",
             "google-analytics" : "",
             "ads" : {
                 "enabled" : True,
-                "right_sidebar_code" : ""
-            }
+                "300x250_code" : ""
+            },
+            "youtube_channel_id" : "",
+            "youtube_data_API_key" : ""
         }
     }
 
@@ -302,12 +305,37 @@ class JSON():
     def setStaticPageDescription(self, page, desc):
         self.data['descriptions'][page] = desc
 
-    # Ads
+    # External
 
     def getRightSidebarAd(self):
         if self.data['external']['ads']['enabled']:
-            return self.data['external']['ads']['right_sidebar_code']
+            return self.data['external']['ads']['300x250_code']
         return ''
+
+    @property
+    def youtube_channel_id(self):
+        return self.data['external']['youtube_channel_id']
+
+    @property
+    def youtube_data_API_key(self):
+        return self.data['external']['youtube_data_API_key']
+
+    @property
+    def google_site_verification(self):
+        return self.data['external']['google-site-verification']
+
+    @property
+    def google_analytics(self):
+        return self.data['external']['google-analytics']
+
+    # Right sidebar
+
+    def setRightSidebarEnabled(self, enabled):
+        self.data['enable_right_sidebar'] = enabled
+
+    @property
+    def enable_right_sidebar(self):
+        return self.data['enable_right_sidebar']
 
     # Other Site Settings
 
@@ -355,11 +383,3 @@ class JSON():
     @property
     def pushPerView(self):
         return self.data['push_per_view']
-
-    @property
-    def google_site_verification(self):
-        return self.data['external']['google-site-verification']
-
-    @property
-    def google_analytics(self):
-        return self.data['external']['google-analytics']

@@ -26,7 +26,10 @@ def homeRoute():
                            google_site_verification=data.google_site_verification,
                            google_analytics=data.google_analytics,
                            description=data.getStaticPageDescription('home'),
-                           right_sidebar_code=data.getRightSidebarAd())
+                           ad_300x250_code=data.getRightSidebarAd(),
+                           youtube_data_API_key = data.youtube_data_API_key,
+                           youtube_channel_id=data.youtube_channel_id,
+                           enable_right_sidebar=data.enable_right_sidebar)
 
 @app.route("/projects")
 def projectsRoute():
@@ -90,7 +93,10 @@ def statsRoute():
                            description=data.getStaticPageDescription('stats'),
                            google_site_verification=data.google_site_verification,
                            google_analytics=data.google_analytics,
-                           right_sidebar_code='')
+                           ad_300x250_code='',
+                           youtube_data_API_key = data.youtube_data_API_key,
+                           youtube_channel_id=data.youtube_channel_id,
+                           enable_right_sidebar=data.enable_right_sidebar)
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminRoute():
@@ -103,7 +109,11 @@ def adminRoute():
             return render_template('admin.html',
                                    redirects=redirects_formatted,
                                    descriptions=data.static_descriptions,
-                                   ppv=data.pushPerView)
+                                   ppv=data.pushPerView,
+                                   ad_300x250_code='',
+                                   youtube_data_API_key=data.youtube_data_API_key,
+                                   youtube_channel_id=data.youtube_channel_id,
+                                   enable_right_sidebar=data.enable_right_sidebar)
         else:
             return render_template('login.html')
     else:
@@ -329,6 +339,17 @@ def adminSetPushPerViewRoute():
     except Exception as e:
         return jsonify({'success': True, 'reason': str(e)})
 
+@app.route("/admin/set_enable_right_sidebar", methods=['POST'])
+def adminSetEnableRightSidebarRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        data.setRightSidebarEnabled(request.json['enable'])
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': True, 'reason': str(e)})
+
 @app.route("/admin/download_stats")
 def adminDownloadStatsRoute():
     if 'logged_in' not in session or not session['logged_in']:
@@ -381,7 +402,10 @@ def getSub(sub, title):
                            google_site_verification=data.google_site_verification,
                            google_analytics=data.google_analytics,
                            description=data.getStaticPageDescription(sub),
-                           right_sidebar_code=data.getRightSidebarAd())
+                           ad_300x250_code=data.getRightSidebarAd(),
+                           youtube_data_API_key = data.youtube_data_API_key,
+                           youtube_channel_id=data.youtube_channel_id,
+                           enable_right_sidebar=data.enable_right_sidebar)
 
 def getArticle(sub, article):
     if not data.articleExists(sub, article):
@@ -399,7 +423,10 @@ def getArticle(sub, article):
                                   google_site_verification=data.google_site_verification,
                                   google_analytics=data.google_analytics,
                                   relative_url='/' + sub + '/' + article,
-                                  right_sidebar_code=data.getRightSidebarAd())
+                                  ad_300x250_code=data.getRightSidebarAd(),
+                                  youtube_data_API_key=data.youtube_data_API_key,
+                                  youtube_channel_id=data.youtube_channel_id,
+                                  enable_right_sidebar=data.enable_right_sidebar)
 
 def convertDateToReadable(timestamp):
     return time.strftime('%d %b %y', time.localtime( int(timestamp) ))
