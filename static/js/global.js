@@ -46,6 +46,7 @@ function setupRightSidebar() {
         var ids = [];
         var parent = document.getElementById('recent-yt');
         for (var i = 0; i < data.length; i++) {
+            if (data[i]['id']['videoId'] === undefined) {continue}
             ids.push(data[i]['id']['videoId']);
             var tmp_node = document.createElement('img');
             tmp_node.src = 'https://img.youtube.com/vi/' + data[i]['id']['videoId'] + '/mqdefault.jpg';
@@ -53,6 +54,10 @@ function setupRightSidebar() {
             tmp_node.style.height = 'auto';
             parent.appendChild(tmp_node);
         }
+        var yt_text = document.createElement('div');
+        yt_text.innerText = 'Recent YouTube Videos';
+        yt_text.style.textAlign = 'center';
+        parent.parentNode.insertBefore(yt_text, parent);
     };
 }
 

@@ -23,13 +23,8 @@ def homeRoute():
     return render_template('home.html',
                            top_articles=top_articles,
                            recent_articles=recent_articles,
-                           google_site_verification=data.google_site_verification,
-                           google_analytics=data.google_analytics,
                            description=data.getStaticPageDescription('home'),
-                           ad_300x250_code=data.getRightSidebarAd(),
-                           youtube_data_API_key = data.youtube_data_API_key,
-                           youtube_channel_id=data.youtube_channel_id,
-                           enable_right_sidebar=data.enable_right_sidebar)
+                           skeleton_required=skeleton_required_vars())
 
 @app.route("/projects")
 def projectsRoute():
@@ -91,12 +86,7 @@ def statsRoute():
                            hourly_data=str(hourly_data),
                            time=time.strftime("%d %b %y, %H:%M:%S"),
                            description=data.getStaticPageDescription('stats'),
-                           google_site_verification=data.google_site_verification,
-                           google_analytics=data.google_analytics,
-                           ad_300x250_code='',
-                           youtube_data_API_key = data.youtube_data_API_key,
-                           youtube_channel_id=data.youtube_channel_id,
-                           enable_right_sidebar=data.enable_right_sidebar)
+                           skeleton_required=skeleton_required_vars())
 
 @app.route("/admin", methods=['GET', 'POST'])
 def adminRoute():
@@ -110,12 +100,10 @@ def adminRoute():
                                    redirects=redirects_formatted,
                                    descriptions=data.static_descriptions,
                                    ppv=data.pushPerView,
-                                   ad_300x250_code='',
-                                   youtube_data_API_key=data.youtube_data_API_key,
-                                   youtube_channel_id=data.youtube_channel_id,
-                                   enable_right_sidebar=data.enable_right_sidebar)
+                                   skeleton_required=skeleton_required_vars(google_site_verification='', google_analytics=''))
         else:
-            return render_template('login.html')
+            return render_template('login.html',
+                                   skeleton_required=skeleton_required_vars(google_site_verification='', google_analytics=''))
     else:
         if request.json['username'] == data.username and request.json['password'] == data.password:
             session['logged_in'] = True
@@ -399,13 +387,8 @@ def getSub(sub, title):
                            display_icon=url_for('static', filename='img/' + sub + '-icon.svg'),
                            top_articles=top_articles,
                            recent_articles=recent_articles,
-                           google_site_verification=data.google_site_verification,
-                           google_analytics=data.google_analytics,
                            description=data.getStaticPageDescription(sub),
-                           ad_300x250_code=data.getRightSidebarAd(),
-                           youtube_data_API_key = data.youtube_data_API_key,
-                           youtube_channel_id=data.youtube_channel_id,
-                           enable_right_sidebar=data.enable_right_sidebar)
+                           skeleton_required=skeleton_required_vars())
 
 def getArticle(sub, article):
     if not data.articleExists(sub, article):
@@ -420,13 +403,20 @@ def getArticle(sub, article):
                                   date=data.getArticleDate(sub, article),
                                   views=data.getArticleViews(sub, article),
                                   description=data.getArticleDescription(sub, article),
-                                  google_site_verification=data.google_site_verification,
-                                  google_analytics=data.google_analytics,
                                   relative_url='/' + sub + '/' + article,
-                                  ad_300x250_code=data.getRightSidebarAd(),
-                                  youtube_data_API_key=data.youtube_data_API_key,
-                                  youtube_channel_id=data.youtube_channel_id,
-                                  enable_right_sidebar=data.enable_right_sidebar)
+                                  skeleton_required=skeleton_required_vars())
+
+def skeleton_required_vars(google_site_verification=None, google_analytics=None, ad_300x250_code=None,
+                           youtube_data_API_key=None, youtube_channel_id=None, enable_right_sidebar=None):
+    ''' The varaibles required to extend SKELETON.html '''
+    return {
+        'google_site_verification' : google_site_verification if google_site_verification != None else data.google_site_verification,
+        'google_analytics': google_analytics if google_analytics != None else data.google_analytics,
+        'ad_300x250_code': ad_300x250_code if ad_300x250_code != None else data.getRightSidebarAd(),
+        'youtube_data_API_key': youtube_data_API_key if youtube_data_API_key != None else data.youtube_data_API_key,
+        'youtube_channel_id': youtube_channel_id if youtube_channel_id != None else data.youtube_channel_id,
+        'enable_right_sidebar': enable_right_sidebar if enable_right_sidebar != None else data.enable_right_sidebar
+    }
 
 def convertDateToReadable(timestamp):
     return time.strftime('%d %b %y', time.localtime( int(timestamp) ))

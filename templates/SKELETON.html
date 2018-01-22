@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 	<head>
-        {{ google_site_verification | safe }}
-        {{ google_analytics | safe }}
+        {{ skeleton_required['google_site_verification']|safe }}
+        {{ skeleton_required['google_analytics']|safe }}
         <meta charset="utf-8">
         <meta name="theme-color" content="#1976d2"/>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/global.css') }}">
@@ -10,7 +10,7 @@
         <script src="{{ url_for('static', filename='js/global.js') }}"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=0.6">
         <link rel="icon" sizes="100x100" href="{{ url_for('static', filename='img/favicon.ico') }}">
-        <script>var youtube_channel_id = "{{ youtube_channel_id }}"; var youtube_data_API_key = "{{ youtube_data_API_key }}"; var enable_right_sidebar = {{ enable_right_sidebar|tojson }};</script>
+        <script>var youtube_channel_id = "{{ skeleton_required['youtube_channel_id'] }}"; var youtube_data_API_key = "{{ skeleton_required['youtube_data_API_key'] }}"; var enable_right_sidebar = {{ skeleton_required['enable_right_sidebar']|tojson }};</script>
         {% block head %}{% endblock %}
 	</head>
 	<body>
@@ -116,7 +116,7 @@
         <script>getThemeToSwitch();getSnowToSwitch();checkOptionsSection();</script>
 
         <div id="right_sidebar">
-            <div>
+            <div id="right_sidebar_vertically_aligned">
 {#                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-gap: 10px; padding: 10px;">#}
 {#                    <img src="/img/github.svg" style="width: 100%;">#}
 {#                    <div style="position: relative;">#}
@@ -126,12 +126,10 @@
 {#                    <img src="/img/github.svg" style="width: 100%;">#}
 {#                </div>#}
 
-                <div id="recent-yt" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 2px;">
-
-                </div>
+                <div id="recent-yt" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 2px;"></div>
 
                 <div class="ad_300x250">
-                    {{ ad_300x250_code|safe }}
+                    {{ skeleton_required['ad_300x250_code']|safe }}
                 </div>
             </div>
         </div>

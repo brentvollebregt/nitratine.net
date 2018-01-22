@@ -128,8 +128,8 @@
         </div>
         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; grid-gap: 2px;">
             <p>Right Sidebar:</p>
-            <button {% if enable_right_sidebar %}style="background: #d81b60;"{% endif %} id="ers_on" class="button_m" onclick="set_enable_right_sidebar(true)">On</button>
-            <button {% if not enable_right_sidebar %}style="background: #d81b60;"{% endif %} id="ers_off" class="button_m" onclick="set_enable_right_sidebar(false)">Off</button>
+            <button {% if skeleton_required['enable_right_sidebar'] %}style="background: #d81b60;"{% endif %} id="ers_on" class="button_m" onclick="set_enable_right_sidebar(true)">On</button>
+            <button {% if not skeleton_required['enable_right_sidebar'] %}style="background: #d81b60;"{% endif %} id="ers_off" class="button_m" onclick="set_enable_right_sidebar(false)">Off</button>
         </div>
         <form action="/admin/download_stats" method="GET">
             <button class="button_m">Export Stats</button>
