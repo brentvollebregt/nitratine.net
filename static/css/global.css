@@ -285,9 +285,3 @@ input:checked + .slider:before {
     display: none;
     align-items: center;
 }
-
-.ad_300x250 {
-    width: 300px;
-    height: 250px;
-    margin: 6px 0;
-}
