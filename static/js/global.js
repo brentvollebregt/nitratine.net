@@ -35,9 +35,9 @@ function checkRightSidebar() {
 }
 
 function setupRightSidebar() {
-    // https://www.googleapis.com/youtube/v3/videos?part=statistics&id=#&key=#
+    // Stats on videos: https://www.googleapis.com/youtube/v3/videos?part=statistics&id=#&key=#
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", ' https://www.googleapis.com/youtube/v3/search?key=' + youtube_data_API_key + '&channelId=' + youtube_channel_id + '&part=id&order=date&maxResults=6&type=video', true);
+    xhr.open("GET", 'https://www.googleapis.com/youtube/v3/search?key=' + youtube_data_API_key + '&channelId=' + youtube_channel_id + '&part=id&order=date&maxResults=6&type=video', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.overrideMimeType('application/json');
     xhr.send();
@@ -60,6 +60,7 @@ function setupRightSidebar() {
         var yt_text = document.createElement('div');
         yt_text.innerText = 'Recent YouTube Videos';
         yt_text.style.textAlign = 'center';
+        yt_text.style.fontSize = '12px';
         parent.parentNode.insertBefore(yt_text, parent);
     };
 }
