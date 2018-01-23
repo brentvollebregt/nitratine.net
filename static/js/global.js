@@ -58,6 +58,7 @@ function setupRightSidebar() {
             parent.appendChild(tmp_node);
         }
         var yt_text = document.createElement('div');
+        yt_text.id = 'recent_yt_videos';
         yt_text.innerText = 'Recent YouTube Videos';
         yt_text.style.textAlign = 'center';
         yt_text.style.fontSize = '12px';

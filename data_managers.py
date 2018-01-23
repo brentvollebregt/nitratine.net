@@ -49,7 +49,8 @@ class JSON():
                 "300x250_code" : ""
             },
             "youtube_channel_id" : "",
-            "youtube_data_API_key" : ""
+            "youtube_data_API_key" : "",
+            "github_username" : ""
         }
     }
 
@@ -327,6 +328,10 @@ class JSON():
     @property
     def google_analytics(self):
         return self.data['external']['google-analytics']
+
+    @property
+    def github_username(self):
+        return self.data['external']['github_username']
 
     # Right sidebar
 

@@ -407,7 +407,7 @@ def getArticle(sub, article):
                                   skeleton_required=skeleton_required_vars())
 
 def skeleton_required_vars(google_site_verification=None, google_analytics=None, ad_300x250_code=None,
-                           youtube_data_API_key=None, youtube_channel_id=None, enable_right_sidebar=None):
+                           youtube_data_API_key=None, youtube_channel_id=None, enable_right_sidebar=None, github_username=None):
     ''' The varaibles required to extend SKELETON.html '''
     return {
         'google_site_verification' : google_site_verification if google_site_verification != None else data.google_site_verification,
@@ -415,7 +415,8 @@ def skeleton_required_vars(google_site_verification=None, google_analytics=None,
         'ad_300x250_code': ad_300x250_code if ad_300x250_code != None else data.getRightSidebarAd(),
         'youtube_data_API_key': youtube_data_API_key if youtube_data_API_key != None else data.youtube_data_API_key,
         'youtube_channel_id': youtube_channel_id if youtube_channel_id != None else data.youtube_channel_id,
-        'enable_right_sidebar': enable_right_sidebar if enable_right_sidebar != None else data.enable_right_sidebar
+        'enable_right_sidebar': enable_right_sidebar if enable_right_sidebar != None else data.enable_right_sidebar,
+        'github_username': github_username if github_username != None else data.github_username
     }
 
 def convertDateToReadable(timestamp):

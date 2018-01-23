@@ -117,30 +117,19 @@
 
         <div id="right_sidebar">
             <div id="right_sidebar_vertically_aligned">
-{#                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-gap: 10px; padding: 10px;">#}
-{#                    <img src="/img/github.svg" style="width: 100%;">#}
-{#                    <div style="position: relative;">#}
-{#                        <img src="/img/youtube.png" style="max-height: 100%; max-width: 100%; width: auto; height: auto; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;">#}
-{#                    </div>#}
-{#                    <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/512/Twitter-icon.png" style="width: 100%;">#}
-{#                    <img src="/img/github.svg" style="width: 100%;">#}
-{#                </div>#}
 
-{#                <div id="channel-data" style="display: grid; grid-template-columns: 60px 240px; grid-gap: 0; height: 60px;">#}
-{#                    <div>#}
-{#                        <img src="https://yt3.ggpht.com/-KkAYNEM2v1o/AAAAAAAAAAI/AAAAAAAAAAA/W_yF5WrFM8w/s88-c-k-no-mo-rj-c0xffffff/photo.jpg" style="height: 58px; margin: 2px;">#}
-{#                    </div>#}
-{#                    <div style="padding: 4px;">#}
-{#                        <div>PyTutorials</div>#}
-{#                        <div>Subscribe: 3,668</div>#}
-{#                        <div>A: 863,586  S: 3,668</div>#}
-{#                    </div>#}
-{#                </div>#}
-
-                <script src="https://apis.google.com/js/platform.js"></script>
-                <div class="g-ytsubscribe" data-channelid="UCesEknt3SRX9R9W_f93Tb7g" data-layout="full" data-theme="default" data-count="default"></div>
+                <script async src="https://apis.google.com/js/platform.js"></script>
+                <div id="yt-subscribe-button">
+                    <div class="g-ytsubscribe" data-channelid="UCesEknt3SRX9R9W_f93Tb7g" data-layout="full" data-theme="default" data-count="default"></div>
+                </div>
 
                 <div id="recent-yt" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 2px;"></div>
+
+                <div style="height: 150px; margin: 10px 0;">
+                    <!-- https://github.com/lepture/github-cards -->
+                    <div class="github-card" data-github="{{ skeleton_required['github_username'] }}" data-width="300" data-height="150" data-theme="default" ></div>
+                    <script async src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+                </div>
 
                 {{ skeleton_required['ad_300x250_code']|safe }}
             </div>

@@ -285,3 +285,12 @@ input:checked + .slider:before {
     display: none;
     align-items: center;
 }
+
+#yt-subscribe-button {
+    background: #efecec;
+    height: 54px;
+    width: 175px;
+    padding: 3px;
+    border-radius: 4px;
+    margin: 0 auto 5px auto;
+}
