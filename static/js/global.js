@@ -52,6 +52,9 @@ function setupRightSidebar() {
             tmp_node.src = 'https://img.youtube.com/vi/' + data[i]['id']['videoId'] + '/mqdefault.jpg';
             tmp_node.style.width = '100%';
             tmp_node.style.height = 'auto';
+            tmp_node.href = 'https://www.youtube.com/watch?v=' + data[i]['id']['videoId'];
+            tmp_node.onclick = function () { window.open(this.href, '_blank') };
+            tmp_node.style.cursor = 'pointer';
             parent.appendChild(tmp_node);
         }
         var yt_text = document.createElement('div');
