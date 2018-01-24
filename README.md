@@ -159,5 +159,7 @@ These values do not have to be set to what has been stated above; they are just 
 
 # TODO
 - Documentation for new items
+- Create footer for mobile
+    - Contents are right sidebar
 - Integrate Google
     - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats
