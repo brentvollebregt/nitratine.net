@@ -100,6 +100,8 @@ def adminRoute():
                                    redirects=redirects_formatted,
                                    descriptions=data.static_descriptions,
                                    ppv=data.pushPerView,
+                                   gsv=data.google_site_verification,
+                                   gac=data.google_analytics,
                                    skeleton_required=skeleton_required_vars(google_site_verification='', google_analytics=''))
         else:
             return render_template('login.html',
