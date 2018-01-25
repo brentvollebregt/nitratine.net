@@ -158,8 +158,12 @@ In data.json in the 'external' key there is two more keys. These are passed to t
 These values do not have to be set to what has been stated above; they are just a way to make getting dynamic code in the header easier.
 
 # TODO
+- Add codes specified in data.json to /admin
 - Documentation for new items
 - Create footer for mobile
     - Contents are right sidebar
 - Integrate Google
     - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats
+
+# SERVER TODO
+- [ads]"enabled" remove

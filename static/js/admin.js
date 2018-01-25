@@ -232,3 +232,18 @@ upload_article_folder = function () {
         }
     };
 };
+
+function setExternal(id) {
+    var value = document.getElementById(id).value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/admin/set_external_value', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.overrideMimeType('application/json');
+    xhr.send(JSON.stringify({
+        id: id,
+        value: value
+    }));
+    xhr.onload = function () {
+        success_message(JSON.parse(this.responseText)['success']);
+    }
+}

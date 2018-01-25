@@ -245,7 +245,7 @@ def adminRedirectsAddRoute():
         data.addRedirect(request.json['from'], request.json['to'])
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/redirects/remove", methods=['POST'])
 def adminRedirectsRemoveRoute():
@@ -256,7 +256,7 @@ def adminRedirectsRemoveRoute():
         data.removeRedirect(request.json['redirect'])
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/article_folder/upload", methods=['POST'])
 def adminArticleFolderUploadRoute():
@@ -268,7 +268,7 @@ def adminArticleFolderUploadRoute():
         utils.unzipFolder(data.article_location)
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/article_folder/download")
 def adminArticleFolderDownloadRoute():
@@ -281,7 +281,7 @@ def adminArticleFolderDownloadRoute():
         utils.zipFolder(location, filename)
         return send_from_directory(directory=utils.tmp_path, filename=filename, as_attachment=True, attachment_filename=filename)
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/modify_description/<page>", methods=['POST'])
 def adminModifyDescriptionRoute(page):
@@ -292,7 +292,32 @@ def adminModifyDescriptionRoute(page):
         data.setStaticPageDescription(page, request.json['desc'])
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
+
+
+@app.route("/admin/set_external_value", methods=['POST'])
+def adminSetExternalValueRoute():
+    if 'logged_in' not in session or not session['logged_in']:
+        return jsonify({'success': False})
+
+    try:
+        key = request.json['id']
+        value = request.json['value']
+        if key == 'google-site-verification':
+            data.google_site_verification = value
+        elif key == 'google-analytics-code':
+            data.google_analytics = value
+        elif key == 'github-username':
+            data.github_username = value
+        elif key == 'youtube-channel-id':
+            data.youtube_channel_id = value
+        elif key == 'youtube-data-api-key':
+            data.youtube_data_API_key = value
+        elif key == 'ad-code-300x250':
+            data.setRightSidebarAdCode(value)
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/set_site_location")
 def adminSetSiteLocationRoute():
@@ -303,7 +328,7 @@ def adminSetSiteLocationRoute():
         data.setSiteLocation(request.url_root[:-1])
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/add_me_to_ip_blacklist")
 def adminAddMeToIPBlacklistRoute():
@@ -314,7 +339,7 @@ def adminAddMeToIPBlacklistRoute():
         data.addIPViewBlacklisted(request.environ.get('HTTP_X_REAL_IP', request.remote_addr))
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/set_push_per_view", methods=['POST'])
 def adminSetPushPerViewRoute():
@@ -325,7 +350,7 @@ def adminSetPushPerViewRoute():
         data.setPushPerView(request.json['enable'])
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/set_enable_right_sidebar", methods=['POST'])
 def adminSetEnableRightSidebarRoute():
@@ -336,7 +361,7 @@ def adminSetEnableRightSidebarRoute():
         data.setRightSidebarEnabled(request.json['enable'])
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/download_stats")
 def adminDownloadStatsRoute():
@@ -356,7 +381,7 @@ def adminRemoveTmpRoute():
         utils.removeTmp()
         return jsonify({'success': True})
     except Exception as e:
-        return jsonify({'success': True, 'reason': str(e)})
+        return jsonify({'success': False, 'reason': str(e)})
 
 @app.route("/admin/logout")
 def adminLogoutRoute():
@@ -412,7 +437,7 @@ def skeleton_required_vars(google_site_verification=None, google_analytics=None,
     return {
         'google_site_verification' : google_site_verification if google_site_verification != None else data.google_site_verification,
         'google_analytics': google_analytics if google_analytics != None else data.google_analytics,
-        'ad_300x250_code': ad_300x250_code if ad_300x250_code != None else data.getRightSidebarAd(),
+        'ad_300x250_code': ad_300x250_code if ad_300x250_code != None else data.getRightSidebarAdCode(),
         'youtube_data_API_key': youtube_data_API_key if youtube_data_API_key != None else data.youtube_data_API_key,
         'youtube_channel_id': youtube_channel_id if youtube_channel_id != None else data.youtube_channel_id,
         'enable_right_sidebar': enable_right_sidebar if enable_right_sidebar != None else data.enable_right_sidebar,

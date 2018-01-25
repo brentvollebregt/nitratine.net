@@ -45,7 +45,6 @@ class JSON():
             "google-site-verification" : "",
             "google-analytics" : "",
             "ads" : {
-                "enabled" : True,
                 "300x250_code" : ""
             },
             "youtube_channel_id" : "",
@@ -308,30 +307,51 @@ class JSON():
 
     # External
 
-    def getRightSidebarAd(self):
-        if self.data['external']['ads']['enabled']:
-            return self.data['external']['ads']['300x250_code']
-        return ''
+    def getRightSidebarAdCode(self):
+        return self.data['external']['ads']['300x250_code']
+
+    def setRightSidebarAdCode(self, value):
+        self.data['external']['ads']['300x250_code'] = value
 
     @property
     def youtube_channel_id(self):
         return self.data['external']['youtube_channel_id']
 
+    @youtube_channel_id.setter
+    def youtube_channel_id(self, value):
+        self.data['external']['youtube_channel_id'] = value
+
     @property
     def youtube_data_API_key(self):
         return self.data['external']['youtube_data_API_key']
+
+    @youtube_data_API_key.setter
+    def youtube_data_API_key(self, value):
+        self.data['external']['youtube_data_API_key'] = value
 
     @property
     def google_site_verification(self):
         return self.data['external']['google-site-verification']
 
+    @google_site_verification.setter
+    def google_site_verification(self, value):
+        self.data['external']['google-site-verification'] = value
+
     @property
     def google_analytics(self):
         return self.data['external']['google-analytics']
 
+    @google_analytics.setter
+    def google_analytics(self, value):
+        self.data['external']['google-analytics'] = value
+
     @property
     def github_username(self):
         return self.data['external']['github_username']
+
+    @github_username.setter
+    def github_username(self, value):
+        self.data['external']['github_username'] = value
 
     # Right sidebar
 
