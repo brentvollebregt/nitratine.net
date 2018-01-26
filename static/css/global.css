@@ -294,3 +294,24 @@ input:checked + .slider:before {
     border-radius: 4px;
     margin: 0 auto 5px auto;
 }
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2px;
+}
+
+.github-card-horz-alig {
+    height: 150px;
+    margin: 5px auto;
+}
+
+/* Footer */
+
+@media screen and (min-width: 800px) {
+    footer {display: none;}
+}
+
+@media screen and (max-width: 799px) {
+    footer {display: block;}
+}

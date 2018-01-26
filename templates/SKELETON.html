@@ -123,9 +123,9 @@
                     <div class="g-ytsubscribe" data-channelid="{{ skeleton_required['youtube_channel_id'] }}" data-layout="full" data-theme="default" data-count="default"></div>
                 </div>
 
-                <div id="recent-yt" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 2px;"></div>
+                <div id="recent-yt" class="grid2"></div>
 
-                <div style="height: 150px; margin: 10px 0;">
+                <div class="github-card-horz-alig">
                     <!-- https://github.com/lepture/github-cards -->
                     <div class="github-card" data-github="{{ skeleton_required['github_username'] }}" data-width="300" data-height="150" data-theme="default" ></div>
                     <script async src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
@@ -139,5 +139,13 @@
             <script>checkRightSidebar();</script>
             {% block content %}{% endblock %}
         </div>
+
+        <footer>
+            <div id="recent-yt2" class="grid2"></div>
+            <div class="github-card-horz-alig" style="width: 400px;">
+                <div class="github-card" data-github="{{ skeleton_required['github_username'] }}" data-width="400" data-height="150" data-theme="default" ></div>
+                <script async src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+            </div>
+        </footer>
 	</body>
 </html>

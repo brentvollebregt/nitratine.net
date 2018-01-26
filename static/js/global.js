@@ -45,6 +45,7 @@ function setupRightSidebar() {
         var data = JSON.parse(this.responseText)['items'];
         var ids = [];
         var parent = document.getElementById('recent-yt');
+        var parent2 = document.getElementById('recent-yt2');
         for (var i = 0; i < data.length; i++) {
             if (data[i]['id']['videoId'] === undefined) {continue}
             ids.push(data[i]['id']['videoId']);
@@ -56,6 +57,7 @@ function setupRightSidebar() {
             tmp_node.onclick = function () { window.open(this.href, '_blank') };
             tmp_node.style.cursor = 'pointer';
             parent.appendChild(tmp_node);
+            parent2.appendChild(tmp_node.cloneNode(true));
         }
         var yt_text = document.createElement('div');
         yt_text.id = 'recent_yt_videos';
@@ -63,6 +65,7 @@ function setupRightSidebar() {
         yt_text.style.textAlign = 'center';
         yt_text.style.fontSize = '12px';
         parent.parentNode.insertBefore(yt_text, parent);
+        parent2.parentNode.insertBefore(yt_text.cloneNode(true), parent2);
     };
 }
 

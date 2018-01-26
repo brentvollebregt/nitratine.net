@@ -24,6 +24,11 @@ It has a dark and light theme and allows you to turn snow particles on.
 - Supports smaller screen sizes
 - Has a different menu for smaller devices
 - Run python code server side
+- Right sidebar that appears on wide enough devices with:
+    - YouTube subscribe button
+    - 6 most recent videos
+    - Github card of your profile
+    - Optional: 300x250 ad
 
 ## Usage
 1. Install Python
@@ -61,6 +66,9 @@ Articles will be searched for in articles/ which will be in the same directory a
 <title>{{ title }} | Nitratine</title>
 <meta name="description" content="{{ description }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/article.css') }}">
+<link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/article.css') }}">
+<link rel="stylesheet" type="text/css" class="css_light_theme" href="{{ url_for('static', filename='css/syntax_highlighting.css') }}">
+<link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/syntax_highlighting.css') }}">
 <script async src="{{ url_for('static', filename='js/article.js') }}"></script>
 {% endblock %}
 
@@ -135,6 +143,9 @@ Under the Static Descriptions header, you can edit descriptions of home, stats, 
 ### Raw Data Manipulation
 In /admin, there is a "Download JSON" and "Upload JSON" button. This allows you to download JSON to the text box underneath, edit and re-upload it to the server.
 
+### External
+This section allows you to modify the external key's value in data.json. Here you can set a google site verification code, google analytics code, your github username, youtube channel id, youtube data api key and a 300x250 ad code.
+
 ### Article Folder
 In this section you can download the whole /articles folder or upload a zipped file of the /articles folder. This is easier than using an online console to upload, move and unzip.
 
@@ -147,6 +158,9 @@ Too make in-site statistics ignore a specific IP, you can add yourself to the li
 ### Push Per View
 Push per view saves the data in memory to data.json whenever a view is added. This saves you from having to push the data before each restart of the server (can lose data if you forget to push). Set to true to enable (remember in /admin you are editing JavaScript so it needs to be true instead of Python's True).
 
+## Right sidebar
+This is a simple switch to disable or enable the right sidebar. The right sidebar displays a youtube subscribe button, your latest 6 videos, your github profile on a card and the 300x250 ad if provided.
+
 ### Exporting Stats
 In /admin, there is a "Export Stats" button. This buttons will download a .json file of the current sites statistics.
 
@@ -158,11 +172,7 @@ In data.json in the 'external' key there is two more keys. These are passed to t
 These values do not have to be set to what has been stated above; they are just a way to make getting dynamic code in the header easier.
 
 # TODO
-- Documentation for new items
 - Create footer for mobile
     - Contents are right sidebar
 - Integrate Google
     - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats
-
-# SERVER TODO
-- [ads]"enabled" remove
