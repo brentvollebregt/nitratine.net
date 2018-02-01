@@ -15,6 +15,15 @@
         <img src="{{ url_for('static', filename='img/nitratine.png') }}" style="max-width: 880px; width: 100%;">
     </div>
     <p class="welcome_message">The home of <span style="color: #d81b60;">projects</span>, <span style="color: #d81b60;">tutorials</span> and <span style="color: #d81b60;">tools</span>.</p>
+
+    <!-- Search -->
+    <div style="text-align:center; margin-bottom: 10px;">
+        <div class="search">
+            <input id="search_q" placeholder="Search"><!--
+            --><div onclick="window.location.href = window.location.origin + '/search?q=' + encodeURIComponent(document.getElementById('search_q').value)">🔍</div>
+        </div>
+    </div>
+
     <!-- Featured sections -->
     <div class="featured_sections">
         <div>

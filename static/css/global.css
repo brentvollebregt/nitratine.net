@@ -162,6 +162,36 @@ body {
     }
 }
 
+/* - Search */
+
+.search {
+    width: 80%;
+    display: inline-block;
+    border: solid 2px #1976d2;
+    border-radius: 3px;
+    max-width: 700px;
+}
+
+.search input {
+    width: calc(100% - 58px);
+    font-size: 33px;
+    padding: 5px;
+    text-align: center;
+    color: #d81b60;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.search div {
+    cursor: pointer;
+    display: inline;
+    font-size: 33px;
+    padding: 5px;
+    border-left: solid 2px #1976d2;
+    background: transparent;
+}
+
 /* - Content */
 
 @media screen and (min-width: 1140px) {
@@ -309,9 +339,13 @@ input:checked + .slider:before {
 /* Footer */
 
 @media screen and (min-width: 800px) {
-    footer {display: none;}
+    footer {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 799px) {
-    footer {display: block;}
+    footer {
+        display: block;
+    }
 }

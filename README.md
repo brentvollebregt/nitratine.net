@@ -172,7 +172,6 @@ In data.json in the 'external' key there is two more keys. These are passed to t
 These values do not have to be set to what has been stated above; they are just a way to make getting dynamic code in the header easier.
 
 # TODO
-- Create footer for mobile
-    - Contents are right sidebar
+- Search
 - Integrate Google
     - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats

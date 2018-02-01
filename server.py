@@ -1,7 +1,6 @@
 from flask import Flask, render_template, url_for, render_template_string, send_from_directory, abort, session, request, redirect, jsonify, Response
 import data_managers
 import utils
-import ast
 import os
 import json
 import time
@@ -12,6 +11,16 @@ app = Flask(__name__, static_url_path='')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 604800 # 1 Week
 data = data_managers.JSON()
 app.secret_key = data.secrty_key
+
+
+@app.route("/search")
+def searchRoute():
+    # re.sub(r'<(.|\n)*?>', '', a)
+    # re.sub(r'{{(.|\n)*?}}', '', a)
+    # ' '.join(c.split())
+    return render_template('search.html',
+                           skeleton_required=skeleton_required_vars())
+
 
 
 # View Routes

@@ -1,0 +1,29 @@
+{% extends "SKELETON.html" %}
+
+{% block head %}
+<title>Search | Nitratine</title>
+<meta name="description" content="Search" />
+<style>
+    .wrap_search {
+        max-width: 1200px;
+        padding-right: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="text-align:center; padding: 10px; max-width: 1200px;">
+    <div class="search">
+        <input id="search_q" placeholder="Search"><!--
+        --><div onclick="window.location.href = window.location.origin + '/search?q=' + encodeURIComponent(document.getElementById('search_q').value)">🔍</div>
+    </div>
+</div>
+<script>
+    var q = new URL(window.location.href).searchParams.get("q");
+    if (q !== null) { document.getElementById('search_q').value = decodeURIComponent(q); }
+</script>
+
+<div class="wrap_search">
+
+</div>
+{% endblock %}
