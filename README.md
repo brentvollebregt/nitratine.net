@@ -171,7 +171,8 @@ When downloading a zip file, the server cannot delete the file while processing 
 In data.json in the 'external' key there is two more keys. These are passed to the skeleton to be rendered on every page that extends skeleton. The data in 'google-site-verification' is ideally for your google site verification meta tag; make sure to put the whole tag in there, not just the content value. The 'google-analytics' key is ideally for your google analytics code; put all the code you are given here, not just the id.<br>
 These values do not have to be set to what has been stated above; they are just a way to make getting dynamic code in the header easier.
 
-# TODO
-- Search
-- Integrate Google
-    - Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats
+## Custom Search Engine
+Instead of creating my own sites search index, I decided to use Google's CSE to search queries for me. Simply go to https://cse.google.com/cse/all and create a new search engine. After changing settings, click the get code in the Basics tab and copy the value that is associated with the variable 'cx' in the JavaScript provided.
+
+# Maybe Later
+- Integrate Good Analytics? - Analytics Reporting API v4 : Proper stats

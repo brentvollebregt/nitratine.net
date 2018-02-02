@@ -44,6 +44,7 @@ class JSON():
         "external" : {
             "google-site-verification" : "",
             "google-analytics" : "",
+            "custom-search-engine-id" : "",
             "ads" : {
                 "300x250_code" : ""
             },
@@ -344,6 +345,14 @@ class JSON():
     @google_analytics.setter
     def google_analytics(self, value):
         self.data['external']['google-analytics'] = value
+
+    @property
+    def custom_search_engine_id(self):
+        return self.data['external']['custom-search-engine-id']
+
+    @custom_search_engine_id.setter
+    def custom_search_engine_id(self, value):
+        self.data['external']['custom-search-engine-id'] = value
 
     @property
     def github_username(self):

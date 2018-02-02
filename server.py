@@ -13,16 +13,6 @@ data = data_managers.JSON()
 app.secret_key = data.secrty_key
 
 
-@app.route("/search")
-def searchRoute():
-    # re.sub(r'<(.|\n)*?>', '', a)
-    # re.sub(r'{{(.|\n)*?}}', '', a)
-    # ' '.join(c.split())
-    return render_template('search.html',
-                           skeleton_required=skeleton_required_vars())
-
-
-
 # View Routes
 
 @app.route("/")
@@ -33,6 +23,12 @@ def homeRoute():
                            top_articles=top_articles,
                            recent_articles=recent_articles,
                            description=data.getStaticPageDescription('home'),
+                           skeleton_required=skeleton_required_vars())
+
+@app.route("/search")
+def searchRoute():
+    return render_template('search.html',
+                           custom_search_engine_id=data.custom_search_engine_id,
                            skeleton_required=skeleton_required_vars())
 
 @app.route("/projects")
@@ -111,6 +107,7 @@ def adminRoute():
                                    ppv=data.pushPerView,
                                    gsv=data.google_site_verification,
                                    gac=data.google_analytics,
+                                   csei=data.custom_search_engine_id,
                                    skeleton_required=skeleton_required_vars(google_site_verification='', google_analytics=''))
         else:
             return render_template('login.html',
@@ -318,6 +315,8 @@ def adminSetExternalValueRoute():
             data.google_site_verification = value
         elif key == 'google-analytics-code':
             data.google_analytics = value
+        elif key == 'custom-search-engine-id':
+            data.custom_search_engine_id = value
         elif key == 'github-username':
             data.github_username = value
         elif key == 'youtube-channel-id':
