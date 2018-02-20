@@ -30,15 +30,13 @@ It has a dark and light theme and allows you to turn snow particles on.
     - Github card of your profile
     - Optional: 300x250 ad
 
-## Usage
+## Running the Site Locally
 1. Install Python
 2. Install Flask (```pip install Flask```)
-3. Run server.py to make sure data.json generates
-4. Edit data.json
-    - site_location: only needed for robots.txt (e.g. "http://nitratine.pythonanywhere.com")
-    - administration: username and password for logging in at /admin
-    - extra_header_info: A place to stick things like google analytics and verification tokens
-    - descriptions: Edit descriptions of the six major pages (descriptions for articles can be defined in the article itself or use the "description" variable passed to the Jinja template.
+3. Run server.py
+4. Go to /admin
+    - Set variables on this page and change options
+    - Set username and password using "Raw JSON" if needed
 
 ### Articles
 Articles will be searched for in articles/ which will be in the same directory as server.py. They then need to follow a format to be detected on startup.
@@ -145,6 +143,13 @@ In /admin, there is a "Download JSON" and "Upload JSON" button. This allows you 
 
 ### External
 This section allows you to modify the external key's value in data.json. Here you can set a google site verification code, google analytics code, your github username, youtube channel id, youtube data api key and a 300x250 ad code.
+- Google Site Verification: Put the whole meta tag in, e.g. <meta..... />
+- Google Analytics Code: Put all JavaScript code given in, e.g. <!-- Global site tag.....;</script>
+- Google CSE ID: Only provide the ID, e.g. 017111292325601490982:i7jnd7-zn-o
+- Github Username: Your Github username, e.g. brentvollebregt
+- YouTube Channel ID: Your YouTube channel ID, e.g. UCesEknt3SRX9R9W_f93Tb7g
+- YouTube Data API Key: Your YouTube Data API key (Recommend using HTTP referrer restrictions) , e.g. AIza.....BP4
+- 300x250 Ad Code: Raw code from Adsense
 
 ### Article Folder
 In this section you can download the whole /articles folder or upload a zipped file of the /articles folder. This is easier than using an online console to upload, move and unzip.
@@ -166,10 +171,6 @@ In /admin, there is a "Export Stats" button. This buttons will download a .json 
 
 ### Delete /tmp/
 When downloading a zip file, the server cannot delete the file while processing the request as it needs to serve it. Thus the files sit in /tmp/ (beside server.py) so they can be deleted later.
-
-## Google Analytics and Site Verification
-In data.json in the 'external' key there is two more keys. These are passed to the skeleton to be rendered on every page that extends skeleton. The data in 'google-site-verification' is ideally for your google site verification meta tag; make sure to put the whole tag in there, not just the content value. The 'google-analytics' key is ideally for your google analytics code; put all the code you are given here, not just the id.<br>
-These values do not have to be set to what has been stated above; they are just a way to make getting dynamic code in the header easier.
 
 ## Custom Search Engine
 Instead of creating my own sites search index, I decided to use Google's CSE to search queries for me. Simply go to https://cse.google.com/cse/all and create a new search engine. After changing settings, click the get code in the Basics tab and copy the value that is associated with the variable 'cx' in the JavaScript provided.
