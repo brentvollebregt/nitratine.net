@@ -33,6 +33,7 @@ It has a dark and light theme and allows you to turn snow particles on.
 ## Running the Site Locally
 1. Install Python
 2. Install Flask (```pip install Flask```)
+3. Clone this repo and cd into it
 3. Run server.py
 4. Go to /admin
     - Set variables on this page and change options
@@ -163,7 +164,7 @@ Too make in-site statistics ignore a specific IP, you can add yourself to the li
 ### Push Per View
 Push per view saves the data in memory to data.json whenever a view is added. This saves you from having to push the data before each restart of the server (can lose data if you forget to push). Set to true to enable (remember in /admin you are editing JavaScript so it needs to be true instead of Python's True).
 
-## Right sidebar
+### Right Sidebar
 This is a simple switch to disable or enable the right sidebar. The right sidebar displays a youtube subscribe button, your latest 6 videos, your github profile on a card and the 300x250 ad if provided.
 
 ### Exporting Stats

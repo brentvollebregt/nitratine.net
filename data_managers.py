@@ -156,6 +156,7 @@ class JSON():
 
     def moveArticle(self, sub, article, new_sub):
         self.data['articles'][new_sub][article] = self.data['articles'][sub][article]
+        self.data['articles'][new_sub][article]['sub'] = new_sub
         del self.data['articles'][sub][article]
 
     # Redirects
