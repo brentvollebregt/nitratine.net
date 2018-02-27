@@ -25,8 +25,8 @@ It has a dark and light theme and allows you to turn snow particles on.
 
 ## Running the Site Locally
 1. Install Python
-2. Install Flask (```pip install Flask```)
-3. Clone this repo and cd into it
+2. Clone this repo and cd into it
+3. Execute ```pip install -r requirements.txt```
 3. Run server.py
 4. Go to /admin
     - Set variables on this page and change options
