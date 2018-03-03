@@ -6,22 +6,29 @@ I wanted to make a simple site that hosted my projects, tutorials and tools.<br>
 It needed to be easy to add articles and be fully dynamic.<br>
 It has a dark and light theme and allows you to turn snow particles on.
 
-## Features
-- Easily add articles though a file explorer or administration panel
-- Views are recorded for all articles
-- Site split into five categories (the main ones I wanted)
-- Easily edit site settings anywhere
-- Pages displayed by popularity and date
-- Switch between light and dark themes
-- Option to switch snow on
-- Supports smaller screen sizes
-- Has a different menu for smaller devices
-- Run python code server side
-- Right sidebar that appears on wide enough devices with:
-    - YouTube subscribe button
-    - 6 most recent videos
-    - Github card of your profile
-    - Optional: 300x250 ad
+<details>
+  <summary>Features</summary>
+  <ul>
+    <li>Easily add articles though a file explorer or administration panel</li>
+    <li>Views are recorded for all articles</li>
+    <li>Site split into five categories (the main ones I wanted)
+    <li>Easily edit site settings anywhere
+    <li>Pages displayed by popularity and date
+    <li>Switch between light and dark themes
+    <li>Option to switch snow on
+    <li>Supports smaller screen sizes
+    <li>Has a different menu for smaller devices
+    <li>Run python code server side
+    <li>Right sidebar that appears on wide enough devices with:
+        <ul>
+            <li>YouTube subscribe button</li>
+            <li>6 most recent videos</li>
+            <li>Github card of your profile</li>
+            <li>Optional: 300x250 ad</li>
+        </ul>
+    </li>
+  </ul>
+</details>
 
 ## Running the Site Locally
 1. Install Python
@@ -32,7 +39,7 @@ It has a dark and light theme and allows you to turn snow particles on.
     - Set variables on this page and change options
     - Set username and password using "Raw JSON" if needed
 
-### Articles
+### Format and Layout Articles
 Articles will be searched for in articles/ which will be in the same directory as server.py. They then need to follow a format to be detected on startup.
  - articles/
     - sub (e.g. apps, blog, projects...)
@@ -40,6 +47,49 @@ Articles will be searched for in articles/ which will be in the same directory a
             - data.json (Article info)
             - icon.png (Icon for article)
             - view.html (HTML page extending SKELETON.html)
+
+<details>
+  <summary>Article Folder Layout Example</summary>
+    <li>articles
+        <ul>
+            <li>apps
+                <ul>
+                    <li>colour
+                        <ul>
+                            <li>data.json</li>
+                            <li>icon.png</li>
+                            <li>view.html</li>
+                        </ul>
+                    </li>
+                </ul>
+        </li>
+            <li>blog
+                <ul>
+                    <li>colour
+                        <ul>
+                            <li>data.json</li>
+                            <li>icon.png</li>
+                            <li>view.html</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>projects</li>
+            <li>tools
+                <ul>
+                    <li>colour
+                        <ul>
+                            <li>data.json</li>
+                            <li>icon.png</li>
+                            <li>view.html</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>youtube</li>
+        </ul>
+    </li>
+</details>
 
 #### data.json sample:
 ```json
@@ -75,28 +125,8 @@ Articles will be searched for in articles/ which will be in the same directory a
 Here we can see that the two blocks are extended from SKELETON.html. The article CSS file is added and relevant data passed to the template has been used including date, views, description and title; these are pulled from data.json.
 None of this is actually needed to make a page but it is just a structure I have created. Along with the variables passed in the example, extra_header_info and relative_url are also passed; relative_url being /sub/article.
 
-#### Article Layout Example
-- articles
-    - apps
-        - colour
-            - data.json
-            - icon.png
-            - view.html
-    - blog
-        - how-to-make-a-flask-site
-            - data.json
-            - icon.png
-            - view.html
-    - projects
-    - tools
-        - rbg-hex-converter
-            - data.json
-            - icon.png
-            - view.html
-    - youtube
-
 ### Server Side Scripting
-By putting python files in an articles folder, a script can be called at the path /scripts/[sub]/[article]/[script]. The Python file needs to contain a main method that takes the request as a parameter. The main method must return something to be passed back to the client.
+By putting python files in an articles folder, a script can be called at the path /scripts/[sub]/[article]/[script].py. The Python file needs to contain a main method that takes the request as a parameter. The main method must return something to be passed back to the client.
 ```python
 def main(request):
     """Do Stuff"""
