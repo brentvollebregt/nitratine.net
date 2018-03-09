@@ -83,7 +83,7 @@ def statsRoute():
     hourly_data = data.getHourlyData()
 
     return render_template('stats.html',
-                           total_views=str(total_views),
+                           total_views="{:,}".format(total_views),
                            number_of_articles=str(number_of_articles),
                            last_20_day_labels=str(last_20_day_labels),
                            last_20_day_data=str(last_20_day_data),

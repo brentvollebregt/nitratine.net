@@ -12,11 +12,11 @@
 <div id="success" class="success success_hide">Successful</div>
 <div class="wrapper">
     <div class="dual_col">
-        <button onclick="simple_call('/admin/push_json')" class="button_l">Push JSON</button>
-        <button onclick="simple_call('/admin/rescrape')" class="button_l">Re-scrape Pages</button>
+        <button onclick="simple_call('/admin/push_json')" class="button_l">Push JSON<div class="info_btn" title="Write the current data in memory to data.json. Useful if the server is about to be stopped so the data and be re-imported."></div></button>
+        <button onclick="simple_call('/admin/rescrape')" class="button_l">Re-scrape Pages<div class="info_btn" title="Checks all data.json article files for new data and will add any new articles if found."></div></button>
     </div>
 
-    <h1>Download Article</h1>
+    <h1>Download Article<div class="info_btn" title="Downloads an articles contents as a zip file"></div></h1>
     <form action="/admin/article/download" method="POST">
         <select name="sub" title="Sub">
             <option value="projects">Projects</option>
@@ -28,7 +28,7 @@
         <input name="article" placeholder="Article">
         <button>Download</button>
     </form>
-    <h1>Delete Article</h1>
+    <h1>Delete Article<div class="info_btn" title="Delete a specific article"></div></h1>
     <select id="delete_article_sub" title="Sub">
         <option value="projects">Projects</option>
         <option value="blog">Blog</option>
@@ -38,7 +38,7 @@
     </select>
     <input id="delete_article_url" placeholder="Article">
     <button onclick="delete_article()">Delete</button>
-    <h1>Upload Article</h1>
+    <h1>Upload Article<div class="info_btn" title="Upload an articles files as a zip file"></div></h1>
     <select id="upload_article_sub" title="Sub">
         <option value="projects">Projects</option>
         <option value="blog">Blog</option>
@@ -50,7 +50,7 @@
     <button id="upload_article_btn" onclick="upload_article()">Upload</button>
     <input id="upload_article_file" type="file" accept=".zip" style="border: none;">
 
-    <h1>Move Article</h1>
+    <h1>Move Article<div class="info_btn" title="Move an article from one sub to another"></div></h1>
     <select id="move_article_sub_from" title="Sub">
         <option value="projects">Projects</option>
         <option value="blog">Blog</option>
@@ -70,7 +70,7 @@
     <input id="move_article_redirect" type="checkbox" checked><p style="margin: 0 10px 0 3px;">Redirect</p>
     <button onclick="move_article()">Move</button>
 
-    <h1>Redirects</h1>
+    <h1>Redirects<div class="info_btn" title="Redirect from any relative url to any relative url e.g. '/blog/python-hotkeys'. Need to refesh to see newly added redirects."></div></h1>
     {% for item in redirects %}
         <p class="redirects">{{ item }}</p>
     {% endfor %}
@@ -82,7 +82,7 @@
     <input id="redirect_remove" placeholder="Relative Link" style="margin-top: 2px;">
     <button onclick="remove_redirect()">Remove</button>
 
-    <h1>Static Descriptions</h1>
+    <h1>Static Descriptions<div class="info_btn" title="Edit Static descriptions of non-dynamic pages"></div></h1>
     <div class="fiveto1_col">
         <textarea id="staticDesc_home">{{ descriptions['home'] }}</textarea>
         <button onclick="modify_desc('home')">Set Home</button>
@@ -100,25 +100,25 @@
         <button onclick="modify_desc('stats')">Set Stats</button>
     </div>
 
-    <h1>Raw JSON</h1>
+    <h1>Raw JSON<div class="info_btn" title="Download, modify and upload raw JSON data that the server uses"></div></h1>
     <div class="dual_col" style="margin-bottom: 2px;">
         <button onclick="download_json()" class="button_l">Download JSON</button>
         <button onclick="upload_json()" class="button_l">Upload JSON</button>
     </div>
     <textarea id="jsonEdit"></textarea>
 
-    <h1>External</h1>
+    <h1>External<div class="info_btn" title="Keys and values that connect the site to external sources."></div></h1>
     <div style="display: grid; grid-template-columns: 4fr 6fr 1.5fr; grid-gap: 2px;">
-        <p>Google Site Verification:</p><input id="google-site-verification" value="{{ gsv }}"><button onclick="setExternal('google-site-verification')">Set</button>
-        <p>Google Analytics Code:</p><input id="google-analytics-code" value="{{ gac }}"><button onclick="setExternal('google-analytics-code')">Set</button>
-        <p>Google CSE ID:</p><input id="custom-search-engine-id" value="{{ csei }}"><button onclick="setExternal('custom-search-engine-id')">Set</button>
-        <p>Github Username:</p><input id="github-username" value="{{ skeleton_required['github_username'] }}"><button onclick="setExternal('github-username')">Set</button>
-        <p>YouTube Channel ID:</p><input id="youtube-channel-id" value="{{ skeleton_required['youtube_channel_id'] }}"><button onclick="setExternal('youtube-channel-id')">Set</button>
-        <p>YouTube Data API Key:</p><input id="youtube-data-api-key" value="{{ skeleton_required['youtube_data_API_key'] }}"><button onclick="setExternal('youtube-data-api-key')">Set</button>
-        <p>300x250 Ad Code:</p><input id="ad-code-300x250" value="{{ skeleton_required['ad_300x250_code'] }}"><button onclick="setExternal('ad-code-300x250')">Set</button>
+        <p>Google Site Verification:</p><input id="google-site-verification" placeholder="<meta..... />" value="{{ gsv }}"><button onclick="setExternal('google-site-verification')">Set</button>
+        <p>Google Analytics Code:</p><input id="google-analytics-code" placeholder="<!-- Global site tag.....;</script>" value="{{ gac }}"><button onclick="setExternal('google-analytics-code')">Set</button>
+        <div><p>Google CSE ID:</p><div class="info_btn" title="Google's CSE is used as this sites search engine. Simply go to https://cse.google.com/cse/all and create a new search engine. After changing settings, click the get code in the Basics tab and copy the value that is associated with the variable 'cx' in the JavaScript provided."></div></div><input id="custom-search-engine-id" placeholder="017111292325601490982:i7jnd7-zn-o" value="{{ csei }}"><button onclick="setExternal('custom-search-engine-id')">Set</button>
+        <p>Github Username:</p><input id="github-username" placeholder="brentvollebregt" value="{{ skeleton_required['github_username'] }}"><button onclick="setExternal('github-username')">Set</button>
+        <p>YouTube Channel ID:</p><input id="youtube-channel-id" placeholder="UCesEknt3SRX9R9W_f93Tb7g" value="{{ skeleton_required['youtube_channel_id'] }}"><button onclick="setExternal('youtube-channel-id')">Set</button>
+        <p>YouTube Data API Key:</p><input id="youtube-data-api-key" placeholder="AIza.....BP4 (Recommend using HTTP referrer restrictions)" value="{{ skeleton_required['youtube_data_API_key'] }}"><button onclick="setExternal('youtube-data-api-key')">Set</button>
+        <p>300x250 Ad Code:</p><input id="ad-code-300x250" placeholder="Raw code from Adsense" value="{{ skeleton_required['ad_300x250_code'] }}"><button onclick="setExternal('ad-code-300x250')">Set</button>
     </div>
 
-    <h1>Article Folder</h1>
+    <h1>Article Folder<div class="info_btn" title="Download and upload the whole article/ folder"></div></h1>
     <div class="dual_col">
         <form action="/admin/article_folder/download" method="GET">
             <button class="button_m">Download</button>
@@ -130,22 +130,22 @@
     </div>
 
     <div class="dual_col" style="margin-top: 15px;">
-        <button class="button_m" onclick="simple_call('/admin/set_site_location')">Set Site Location</button>
-        <button class="button_m" onclick="simple_call('/admin/add_me_to_ip_blacklist')">Add Me To View IP Blacklist</button>
+        <button class="button_m" onclick="simple_call('/admin/set_site_location')">Set Site Location<div class="info_btn" title="Tell the server where it is located to generate robots.txt properly"></div></button>
+        <button class="button_m" onclick="simple_call('/admin/add_me_to_ip_blacklist')">Add Me To View IP Blacklist<div class="info_btn" title="Add the IP of this client to the IP blacklist so views will not be counted for this IP."></div></button>
         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; grid-gap: 2px;">
-            <p>Push Per View:</p>
+            <div style="height: 25px; margin: 8px 0;"><p>Push Per View:</p><div class="info_btn" title="Save site data every time someone views a page. Not recommended for high traffic. Used to keep backups of small traffic."></div></div>
             <button {% if ppv %}style="background: #d81b60;"{% endif %} id="ppv_on" class="button_m" onclick="set_push_per_view(true)">On</button>
             <button {% if not ppv %}style="background: #d81b60;"{% endif %} id="ppv_off" class="button_m" onclick="set_push_per_view(false)">Off</button>
         </div>
         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; grid-gap: 2px;">
-            <p>Right Sidebar:</p>
+            <div style="height: 25px; margin: 8px 0;"><p>Right Sidebar:</p><div class="info_btn" title="Enable or disable the right sidebar for all pages"></div></div>
             <button {% if skeleton_required['enable_right_sidebar'] %}style="background: #d81b60;"{% endif %} id="ers_on" class="button_m" onclick="set_enable_right_sidebar(true)">On</button>
             <button {% if not skeleton_required['enable_right_sidebar'] %}style="background: #d81b60;"{% endif %} id="ers_off" class="button_m" onclick="set_enable_right_sidebar(false)">Off</button>
         </div>
         <form action="/admin/download_stats" method="GET">
-            <button class="button_m">Export Stats</button>
+            <button class="button_m">Export Stats<div class="info_btn" title="Download the statistics of the website"></div></button>
         </form>
-        <button class="button_m" onclick="simple_call('/admin/remove_tmp')">Delete /tmp/</button>
+        <button class="button_m" onclick="simple_call('/admin/remove_tmp')">Delete /tmp/<div class="info_btn" title="Remove the temporary folder which may contain files that were previously served to a client. (need to be stored on sending)"></div></button>
         <button onclick="logout()" class="button_m" style="grid-column: 1/3;">Logout</button>
     </div>
 </div>
