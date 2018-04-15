@@ -1,0 +1,47 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Brent Vollebregt
+brief-intro: My Projects and Tutorials
+baseurl: 
+url: "https://brentvollebregt.github.io"
+
+permalink: /:title/
+
+# other links
+twitter_username: PyTutorials
+facebook_username:
+github_username: brentvollebregt
+email: brentvollebregt@gmail.com
+youtube_link: PyTutorialsOriginal # Whatever after https://www.youtube.com/
+linkedIn_username:
+
+description_footer: 
+
+disqus_shortname: nitratine
+
+# statistic analysis 
+google_analytics_id: UA-117153268-1
+
+# Build settings
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# url
+category_dir: category/
+tag_dir: tag/
+
+# excerpt
+excerpt_separator: "<!-- more -->"
+
+# paginate
+gems: [jekyll-paginate]
+paginate: 5
