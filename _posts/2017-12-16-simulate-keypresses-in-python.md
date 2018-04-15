@@ -19,11 +19,11 @@ This demonstrates how to press keys with Python. Using pynput we are able to sim
 If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}) to setup pip.
 
 ## Installing Pynput
-We will be using the punput module to listen to mouse events. To install this module execute "pip install pynput" in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
+We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
 ![Installing pynput](/images/how-to-get-mouse-clicks-with-python-pynput1.png)
 
-To double check that it was installed successfully, open up IDLE and execute the command "import pynput"; no errors should occur.
+To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
 ![Testing pynput](/images/how-to-get-mouse-clicks-with-python-pynput2.png)
 

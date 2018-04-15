@@ -14,9 +14,9 @@ This script searches windows for wifi passwords already known and displays them 
 {% include embedYouTube.html content="Z_QAvJ8sr6A" %}
 
 ## Quick Background Idea
-If you type "netsh wlan show profiles" in cmd, you will be shown the profiles for wifi connections your computer has stored.
+If you type ```netsh wlan show profiles``` in cmd, you will be shown the profiles for wifi connections your computer has stored.
 
-If you then type "netsh wlan show profile {Profile Name} key=clear", the output provided will contain the network key which is the WiFi password.
+If you then type ```netsh wlan show profile {Profile Name} key=clear```, the output provided will contain the network key which is the WiFi password.
 
 <!-- more -->
 
@@ -67,7 +67,7 @@ Now put a input call at the end of the script outside the loop so that when the 
 a = input("")
 ```
 
-Save this file with a .py extension and you can now run the script. You can run it by double clicking on the script, running it in IDLE or even cmd using "python {filename}".
+Save this file with a .py extension and you can now run the script. You can run it by double clicking on the script, running it in IDLE or even cmd using ```python {filename}```.
 
 ## Final Script
 

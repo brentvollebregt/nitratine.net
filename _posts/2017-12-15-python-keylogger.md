@@ -19,11 +19,11 @@ This is a python keylogger which will work on windows, mac and linux. This scrip
 If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}) to setup pip. This is needed to install pynput to get keys typed.
 
 ## Installing Pynput
-We will be using the pynput module to listen to mouse events. To install this module execute "pip install pynput" in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
+We will be using the pynput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
 ![Installing pynput](/images/how-to-get-mouse-clicks-with-python-pynput1.png)
 
-To double check that it was installed successfully, open up IDLE and execute the command "import pynput"; no errors should occur.
+To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
 ![Testing pynput](/images/how-to-get-mouse-clicks-with-python-pynput2.png)
 
@@ -69,7 +69,7 @@ To make the script run on startup first go to your startup folder. Hold down the
 
 ![shell:startup example](/images/python-keylogger-run.png)
 
-Now type shell:startup in the dialog and press enter. This will open a window at your startup folder.
+Now type ```shell:startup``` in the dialog and press enter. This will open a window at your startup folder.
 
 Copy the keylogger into this folder and then create a new folder somewhere else for logs to be saved to. Make sure this folder is not in the startup folder or it will be opened every time the computer has started. Open the keylogger in IDLE and now change the log_dir to the location of the folder you just created. Make sure this folder path uses forward slashes ('/') and contains a forward slash at the end.
 

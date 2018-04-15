@@ -22,7 +22,7 @@ First make sure you have [python](https://www.python.org/downloads/) installed a
 If you haven't, create a new [twitter](https://twitter.com/) account. If you want to use an existing one, be aware that this will spam the shit out of your account.
 
 ## Installing Tweepy
-So now that you have setup pip, you can use it to install [tweepy](http://www.tweepy.org/) easily. Open up cmd and execute the command "pip list tweepy". Make sure the output doesn't have any errors and that it states that it was installed successfully.
+So now that you have setup pip, you can use it to install [tweepy](http://www.tweepy.org/) easily. Open up cmd and execute the command ```pip list tweepy```. Make sure the output doesn't have any errors and that it states that it was installed successfully.
 
 Open up IDLE and execute the following line. If no errors appear, it was installed correctly.
 

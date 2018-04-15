@@ -46,7 +46,7 @@ print (os.path.dirname(sys.executable) + '\Scripts\')
 Now type 'pip' in cmd to make sure you have done this correctly. No errors should appear.
 
 ## Usage
-You can now use commands like "pip install pynput" to install a package or "pip list" to look at all packages installed.
+You can now use commands like ```pip install pynput``` to install a package or "pip list" to look at all packages installed.
 
 Some useful commands:
 - ```pip install [package]```: install a package like pynput or pyinstaller
