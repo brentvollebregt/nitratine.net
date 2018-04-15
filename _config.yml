@@ -28,6 +28,9 @@ disqus_shortname: nitratine
 # statistic analysis 
 google_analytics_id: UA-117153268-1
 
+# ads
+google_ad_client: ca-pub-6407227183932047 # ca-pub-XXX...
+
 # Build settings
 markdown: kramdown
 
