@@ -315,9 +315,9 @@ def adminSetExternalValueRoute():
             data.google_site_verification = value
         elif key == 'google-analytics-code':
             data.google_analytics = value
-        elif key == 'custom-search-engine-id':
-            data.google_ad_client = value
         elif key == 'google_ad_client':
+            data.google_ad_client = value
+        elif key == 'custom-search-engine-id':
             data.custom_search_engine_id = value
         elif key == 'github-username':
             data.github_username = value
