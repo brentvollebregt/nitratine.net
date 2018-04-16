@@ -50,7 +50,8 @@ class JSON():
             },
             "youtube_channel_id" : "",
             "youtube_data_API_key" : "",
-            "github_username" : ""
+            "github_username" : "",
+            "google_ad_client" : ""
         }
     }
 
@@ -362,6 +363,14 @@ class JSON():
     @github_username.setter
     def github_username(self, value):
         self.data['external']['github_username'] = value
+
+    @property
+    def google_ad_client(self):
+        return self.data['external']['google_ad_client']
+
+    @google_ad_client.setter
+    def google_ad_client(self, value):
+        self.data['external']['google_ad_client'] = value
 
     # Right sidebar
 
