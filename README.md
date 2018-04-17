@@ -96,9 +96,11 @@ Articles will be searched for in articles/ which will be in the same directory a
 {
   "title" : "Colour",
   "description" : "This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen.",
-  "date" : "18 Nov 17"
+  "date" : "18 Nov 17",
+  "hidden" : false
 }
 ```
+*Note that hidden is not required and defaults to false*
 
 #### view.html sample:
 ```

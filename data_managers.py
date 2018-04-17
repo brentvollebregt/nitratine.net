@@ -125,6 +125,7 @@ class JSON():
                     self.data['articles'][sub][article]['title'] = article_data["title"]
                     self.data['articles'][sub][article]['description'] = article_data["description"]
                     self.data['articles'][sub][article]['date'] = time.mktime( time.strptime(article_data["date"], "%d %b %y") )
+                    self.data['articles'][sub][article]['hidden'] = article_data["hidden"] if 'hidden' in article_data else False
                 except Exception as e:
                     self.data['articles'][sub][article]['error'] = True
                     self.data['articles'][sub][article]['reason'] = str(e)
@@ -237,7 +238,8 @@ class JSON():
         articles = []
         for sub in subs:
             for article in self.data['articles'][sub]:
-                articles.append(self.data['articles'][sub][article])
+                if not self.data['articles'][sub][article]['hidden']:
+                    articles.append(self.data['articles'][sub][article])
 
         return articles
 
