@@ -137,7 +137,7 @@ print ('Calence:', features[0]['valence'])
 
 ```
 
-This example should return: Energy: 0.749Calence: 0.261
+This example should return: Energy: 0.749, Valence: 0.261
 
 ## Conclusion
 Using this data, I had created a [Support Vector Machine with scikit-learn](http://scikit-learn.org/stable/modules/svm.html) which then allowed us to provide a valence and energy value and be given a tag either as HAPPY or SAD back. Different playlists could have been provided to this project to make a different area of moods on the plane to give more variation in the moods returned.
