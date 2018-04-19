@@ -21,9 +21,11 @@ The site has a home page and then five sub areas. Each article is put under one 
 ## Demonstration and Screenshots
 ![Desktop home split light dark snow](/images/the-nitratine-project-nitratine1.png)
 ![Desktop article split light dark](/images/the-nitratine-project-nitratine2.png)
-![App home split light dark](/images/the-nitratine-project-nitratine3.png)
-![App navigation](/images/the-nitratine-project-nitratine4.png)
-![App article split light dark](/images/the-nitratine-project-nitratine5.png)
+<div style="text-align: center;">
+    <img src="/images/the-nitratine-project-nitratine3.png" alt="App home split light dark" style="width: 32%"/>
+    <img src="/images/the-nitratine-project-nitratine4.png" alt="App navigation" style="width: 32%"/>
+    <img src="/images/the-nitratine-project-nitratine5.png" alt="App article split light dark" style="width: 32%"/>
+<div>
 
 <!-- more -->
 
