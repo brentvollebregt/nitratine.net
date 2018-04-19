@@ -143,6 +143,23 @@ layout: default
                 </div>
             </div>
 
+            {% if site.youtube_data_api_key %}
+            <div class="side" id="recentVideosSide" style="display: none;">
+                <div>
+                    <i class="fa fa-video-camera"></i>
+                    Recent Videos
+                </div>
+                <div id="recentVideos">
+
+                </div>
+            </div>
+            <script>
+                let youtube_data_API_key = "{{ site.youtube_data_api_key }}";
+                let youtube_channel_id = "{{ site.youtube_channel_id }}";
+            </script>
+             <script src="{{ "/js/recentYouTubeVideos.js" | prepend: site.baseurl }}" charset="utf-8"></script>
+            {% endif %}
+
             <!-- <div class="side">
                 <div>
                     <i class="fa fa-external-link"></i>
@@ -155,5 +172,3 @@ layout: default
         </div>
     </div>
 </div>
-<!-- <script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
-<!-- <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->

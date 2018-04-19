@@ -31,6 +31,10 @@ google_analytics_id: UA-117153268-1
 # ads
 google_ad_client: ca-pub-6407227183932047 # ca-pub-XXX...
 
+# Recent YouTube videos on index
+youtube_channel_id: UCesEknt3SRX9R9W_f93Tb7g # https://www.youtube.com/account_advanced
+youtube_data_api_key: AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM # Can be obtained at console.developers.google.com
+
 # Build settings
 markdown: kramdown
 
