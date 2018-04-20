@@ -189,4 +189,4 @@ with Listener(on_press=on_press) as listener:
 
 ```
 
-## FAQ
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

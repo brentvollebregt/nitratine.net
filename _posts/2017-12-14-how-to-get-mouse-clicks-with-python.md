@@ -146,5 +146,4 @@ with Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listen
     listener.join()
 ```
 
-## FAQ
-If you have any questions, please go to the video at the top of this article and leave a comment. I aim to reply in less than two days.
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

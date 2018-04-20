@@ -100,7 +100,6 @@ Want to convert this .py to a .exe? Head over to my tutorial at [{{ site.baseurl
 Converting to .exe will allow the script to run on windows computers without python installed (python is pre-installed on mac and most linux computers)
 
 ## FAQ
-If you have any questions, please go to the video at the top of this article and leave a comment. I aim to reply in less than two days.
 
 ### 'python' is not recognized as an internal or external command
 Python hasn't been installed or it hasn't been installed properly. Go to [{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}) and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.
@@ -119,3 +118,5 @@ As documented at [https://pythonhosted.org/pynput/keyboard.html](https://pythonh
 
 ### "Shift + Right Click" action it only gives an option for Power Shell
 Powershell is fine, don't worry, it does the same stuff and more. Use it.
+
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

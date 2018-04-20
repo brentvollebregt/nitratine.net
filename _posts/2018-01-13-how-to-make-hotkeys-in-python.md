@@ -139,4 +139,4 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
-## FAQ
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

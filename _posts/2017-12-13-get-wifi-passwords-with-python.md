@@ -89,7 +89,8 @@ a = input("")
 You can also find the gist for this [on Github here](https://gist.github.com/brentvollebregt/30d278eae98e2ff221add008259d42bb).
 
 ## FAQ
-If you have any questions, please go to the video at the top of this article and leave a comment. I aim to reply in less than two days.
 
 ### Why isn't the password showing for one or more network(s)?
 If a network has a special type of authentication, there is a good chance this will not obtain the password. There will most likely be other methods of finding the password though.
+
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

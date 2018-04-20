@@ -74,8 +74,4 @@ keyboard.type('Nitratine')
 
 This method does also support spaces but when it comes to enters, use a new line character (\n) and a tab character (\t) for tabs.
 
-## FAQ
-If you have any questions, please go to the video at the top of this article and leave a comment. I aim to reply in less than two days.
-
-### ModuleNotFoundError: No module named 'pynput'
-Pynput hasn't been installed correctly. Try again.
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

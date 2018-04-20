@@ -96,4 +96,5 @@ mouse.scroll(5, 0)
 ```
 
 Depending on your mouse settings, you may need to use bigger step values to see movement in the scroll. I have witnessed this myself and sometimes may need to use around 100 steps to move my mouse.
-## FAQ
+
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

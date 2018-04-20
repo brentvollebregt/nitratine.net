@@ -58,7 +58,8 @@ Some useful commands:
 You can find packages from projects on [GitHub](https://github.com/) or [PyPI](https://pypi.python.org/pypi).
 
 ## FAQ
-If you have any questions, please go to the video at the top of this article and leave a comment. I aim to reply in less than two days.
 
 ### When I try to edit the path value it just shows the path name and value, not the full list
 You are using Windows 10 (this is fine!). Just put a semicolon at the end (';') and then put the path (no space between them).
+
+*Please leave questions and comments related to the video on YouTube as they will be replied to faster there*
