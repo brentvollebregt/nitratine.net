@@ -83,6 +83,7 @@ Now we need to create the method that is run when the thread starts. We need to 
             while self.running:
                 mouse.click(self.button)
                 time.sleep(self.delay)
+            time.sleep(0.1)
 ```
 
 Now we want to create an instance of the mouse controller, create a ClickMouse thread and start it to get into the loop in the run method.
@@ -166,6 +167,7 @@ class ClickMouse(threading.Thread):
             while self.running:
                 mouse.click(self.button)
                 time.sleep(self.delay)
+            time.sleep(0.1)
 
 
 mouse = Controller()
