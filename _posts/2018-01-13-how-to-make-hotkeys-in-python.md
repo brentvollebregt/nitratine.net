@@ -77,7 +77,7 @@ def on_press(key):
             execute()
 ```
 
-> In the current state, this script can provide multiple events for one combination detected. To prevent this, append " and not key in current" to the end of the initial if statement (before the colon).
+> In the current state, this script can provide multiple events for one combination detected. To prevent this, append ```and not key in current``` to the end of the initial if statement (before the colon).
 
 Finally we need to modify the on_release method and check that when a key is released, if it is in any of the combinations. If it is we need to removed it from the 'current' set.
 
