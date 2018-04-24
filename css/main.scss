@@ -46,3 +46,34 @@
  */
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import "reset", "header", "post", "page", "syntax-highlighting", "index", "footer", "scrollbar", "backToTop";
+
+.sub_header_text {
+  color: #1976d2;
+  font-size: 20px;
+  text-align: center;
+}
+
+.header_img {
+  max-width: 90%;
+  display: block;
+  margin: 10px auto;
+}
+
+@media screen and (max-width: 770px) {
+  .sub_header_text {
+    font-size: 16px;
+  }
+  .header_img {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width:1200px) and (min-width: 770px) {
+  .sub_header_text {
+    font-size: 20px;
+  }
+}
+
+.sub_header_text_hlght {
+  color: #d81b60;
+}

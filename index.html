@@ -4,8 +4,9 @@ layout: default
 
 <div class="page clearfix" index>
     <div class="left">
-        <h1>Welcome to Brent's Blog!</h1>
-        <small>The home of my projects, tutorials and other things I feel are worth sharing.</small>
+        <h1 style="display: none;">Nitratine</h1>
+        <img src="{{ site.baseurl }}/images/site-banner.png" class="header_img">
+        <p class="sub_header_text">The home of my <span class="sub_header_text_hlght">projects</span>, <span class="sub_header_text_hlght">tutorials</span> and <span class="sub_header_text_hlght">other things</span> I feel are worth sharing.</p>
         <hr>
         <ul>
             {% for post in paginator.posts %}
