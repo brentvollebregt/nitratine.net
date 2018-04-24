@@ -1,3 +1,6 @@
+---
+---
+
 /**
  * [recentYouTubeVideos]
  * Will append 3 or 2 (depending on size) most recent youtube videos i
@@ -9,7 +12,7 @@
     }
 
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", 'https://www.googleapis.com/youtube/v3/search?key=' + youtube_data_API_key + '&channelId=' + youtube_channel_id + '&part=id&order=date&maxResults=' + items + '&type=video', true);
+    xhr.open("GET", 'https://www.googleapis.com/youtube/v3/search?key={{ site.youtube_data_api_key }}&channelId={{ site.youtube_channel_id }}&part=id&order=date&maxResults=' + items + '&type=video', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.overrideMimeType('application/json');
     xhr.send();
