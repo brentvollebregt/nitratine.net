@@ -10,6 +10,7 @@
         <script src="{{ url_for('static', filename='js/global.js') }}"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=0.6">
         <link rel="icon" sizes="100x100" href="{{ url_for('static', filename='img/favicon.ico') }}">
+        {% if skeleton_required['google_ad_client'] %}
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({
@@ -17,6 +18,7 @@
             enable_page_level_ads: true
           });
         </script>
+        {% endif %}
         <script>var youtube_channel_id = "{{ skeleton_required['youtube_channel_id'] }}"; var youtube_data_API_key = "{{ skeleton_required['youtube_data_API_key'] }}"; var enable_right_sidebar = {{ skeleton_required['enable_right_sidebar']|tojson }};</script>
         {% block head %}{% endblock %}
 	</head>
