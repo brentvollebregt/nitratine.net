@@ -6,6 +6,9 @@ categories: Tutorials
 tags: Website
 ---
 
+* content
+{:toc}
+
 After recently making my project [{% link _posts/2018-04-25-hit-counter.md %}]({{ site.baseurl }}{% link _posts/2018-04-25-hit-counter.md %}) public, I was about to make a part to create your own custom badges to the project until I discovered [shields.io](https://shields.io/).
 
 shields.io can be [found on Github](https://github.com/badges/shields) which is a server built in JavaScript to host "Concise, consistent, and legible badges in SVG and raster format". A lot of repositories with README.md files contain badges these days as they provide useful and interesting information.
