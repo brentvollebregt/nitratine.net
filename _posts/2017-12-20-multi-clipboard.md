@@ -17,7 +17,7 @@ A simple clipboard manager so you will never find yourself copying the same thin
 This is a python script which allows you to swap clipboard contents to a type of storage so you don't have to go back and copy something because you just temporarily copied something. The idea of this is to act like a hotbar like in games. The main feature of this project is the GUI but there is support for command line manipulation.
 
 ## Demonstration and Screenshots
-![GUI example](/images/multi-clipboard-gui1.jpg)
+![GUI example](/images/multi-clipboard/gui1.jpg)
 
 <!-- more -->
 

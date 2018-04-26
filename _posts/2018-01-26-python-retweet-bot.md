@@ -35,11 +35,11 @@ Now we need to create a twitter app. This may put some people off but don't stop
 
 Go to [https://apps.twitter.com/](https://apps.twitter.com/) and click "Create New App"
 
-![Create New App](/images/python-retweet-bot-create-app.png)
+![Create New App](/images/python-retweet-bot/create-app.png)
 
 Fill in the form that is now provided and click "Create your Twitter application"
 
-![Create New App Form](/images/python-retweet-bot-create-app2.png)
+![Create New App Form](/images/python-retweet-bot/create-app2.png)
 
 Now go to the "Keys and Access Tokens" tab and find the following keys as shown in the image below:
 - Consumer Key (API Key)
@@ -47,7 +47,7 @@ Now go to the "Keys and Access Tokens" tab and find the following keys as shown 
 - Access Token
 - Access Token Secret
 
-![App tokens](/images/python-retweet-bot-tokens.png)
+![App tokens](/images/python-retweet-bot/tokens.png)
 
 Save these somewhere for the next part of creating the bot.
 

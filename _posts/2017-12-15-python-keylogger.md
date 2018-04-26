@@ -60,14 +60,14 @@ with Listener(on_press=on_press) as listener:
 
 Now save the file with a .pyw file extension to make sure that the console doesn't appear when it's run.
 
-![Save as .pyw](/images/python-keylogger-pyw.png)
+![Save as .pyw](/images/python-keylogger/pyw.png)
 
 Run the script in IDLE to make sure that you haven't made any errors. Errors will show up in here if some do occur.
 
 ## Autostart
 To make the script run on startup first go to your startup folder. Hold down the windows button and press "R" or type run in the windows menu to make the run dialog appear.
 
-![shell:startup example](/images/python-keylogger-run.png)
+![shell:startup example](/images/python-keylogger/run.png)
 
 Now type ```shell:startup``` in the dialog and press enter. This will open a window at your startup folder.
 
@@ -76,7 +76,7 @@ Copy the keylogger into this folder and then create a new folder somewhere else 
 ## Stopping the Keylogger
 To stop the keylogger, open up task manager and look for anything named python as shown below due to windows just showing program names. If you have an older version of windows, I recommend looking for pythonw.exe. Right click on this and end the task.
 
-![Python in task manager](/images/python-keylogger-taskmgr.png)
+![Python in task manager](/images/python-keylogger/taskmgr.png)
 
 ## Final Script
 ```python

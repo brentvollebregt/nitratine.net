@@ -21,11 +21,11 @@ If you haven't used or setup pip before, go to my tutorial at [{% link _posts/20
 ## Installing Pynput
 We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
-![Installing pynput](/images/how-to-get-mouse-clicks-with-python-pynput1.png)
+![Installing pynput](/images/how-to-get-mouse-clicks-with-python/pynput1.png)
 
 To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
-![Testing pynput](/images/how-to-get-mouse-clicks-with-python-pynput2.png)
+![Testing pynput](/images/how-to-get-mouse-clicks-with-python/pynput2.png)
 
 ## Building the Script
 Create a new python file and save it with a .py file extension. You will first want to import Listener from pynput.mouse.
@@ -73,7 +73,7 @@ def on_scroll(x, y, dx, dy):
     print ("Mouse scrolled")
 ```
 
-![Mouse moved demonstration](/images/how-to-get-mouse-clicks-with-python-demo1.png)
+![Mouse moved demonstration](/images/how-to-get-mouse-clicks-with-python/demo1.png)
 
 Using these print statements and the parameters provided, we can give more information when a print. Run this again to make sure it is working properly (example output below).
 
@@ -89,7 +89,7 @@ def on_scroll(x, y, dx, dy):
     print ('Mouse scrolled at ({0}, {1})({2}, {3})'.format(x, y, dx, dy))
 ```
 
-![Mouse moved demonstration with data](/images/how-to-get-mouse-clicks-with-python-demo2.png)
+![Mouse moved demonstration with data](/images/how-to-get-mouse-clicks-with-python/demo2.png)
 
 If you want this script to be run in the background. Click File -> Save As and save it with a .pyw file extension. Now when it is run outside IDLE there will be no console window and it will not look like it is running. But to make sure the console doesn't appear, we need to first remove the print statements.
 

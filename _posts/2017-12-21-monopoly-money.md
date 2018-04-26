@@ -17,10 +17,10 @@ A web app that allows players to keep track of their Monopoly balances securely 
 This project is a substitution for cash/credit cards in the game of Monopoly. A banker creates a game on the server and players then join. The banker can spawn in money and pass it to other players. Players can send money to each other, see how much money is in free parking, see their own amount and see all events that occur (money passed). All events are shown to all players to stop cheating as everyone will know where money goes.
 
 ## Demonstration and Screenshots
-![Player type selection screen](/images/monopoly-money-game1.png)
-![Pin input screen](/images/monopoly-money-game2.png)
-![Banker screen](/images/monopoly-money-game3.png)
-![Player screen](/images/monopoly-money-game4.png)
+![Player type selection screen](/images/monopoly-money/game1.png)
+![Pin input screen](/images/monopoly-money/game2.png)
+![Banker screen](/images/monopoly-money/game3.png)
+![Player screen](/images/monopoly-money/game4.png)
 
 <!-- more -->
 

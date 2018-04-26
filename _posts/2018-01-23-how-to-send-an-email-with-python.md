@@ -23,7 +23,7 @@ Before you start this, make sure you have your gmail username and password ready
 
 Next go to [https://myaccount.google.com/lesssecureapps](https://myaccount.google.com/lesssecureapps) and login if you need to. In this page you will want to flick the Allow less secure apps switch to on. This allows us to use less secure sign-in technology to login to the email server; note that this will make you account more vulnerable.
 
-![Allow less secure apps switch](/images/how-to-send-an-email-with-python-alsa1.png)
+![Allow less secure apps switch](/images/how-to-send-an-email-with-python/alsa1.png)
 
 ## Simple Email
 To start off, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip](/youtube/setup-pip).
@@ -49,7 +49,7 @@ By changing the initial variables at the top, the email will be sent. Make sure 
 - 'send_to_email' to the email address you want to send the message to (can be the same as 'email')
 - 'message' to what the message is you want to send
 
-![Simple Email Example](/images/how-to-send-an-email-with-python-email-example-1.png)
+![Simple Email Example](/images/how-to-send-an-email-with-python/email-example-1.png)
 
 The image above shows the email that I received. It is very basic and has no subject line, we will add that next.
 
@@ -85,7 +85,7 @@ server.quit()
 
 Replacing the previous variables again and setting the new variable 'subject' to the subject line, the email will now send with a subject line when run.
 
-![Better Email Example](/images/how-to-send-an-email-with-python-email-example-2.png)
+![Better Email Example](/images/how-to-send-an-email-with-python/email-example-2.png)
 
 The image above shows the email that I received. It now has a subject and has a to header if you click the little down arrow by 'me'.
 
@@ -139,7 +139,7 @@ server.quit()
 
 Once again, replacing the previous variables but setting the new variable 'file_location' to the location of the tile that you want to send, the email will now send with the file attached.
 
-![Attachment Email Example](/images/how-to-send-an-email-with-python-email-example-3.png)
+![Attachment Email Example](/images/how-to-send-an-email-with-python/email-example-3.png)
 
 The image above shows the email that I received. It now has a file named 'test.py' that I declared in the script attached to the email.
 

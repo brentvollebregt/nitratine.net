@@ -73,7 +73,7 @@ count = xmlHttp.responseText;
 ## Generating Links With A Tool Hosted By The Server
 Going to the location ```/``` on the server, you will be served with a HTML page that contains a tool to create the image tag or markdown element and search up a websites count.
 
-![Interface](/images/hit-counter-interface.png)
+![Interface](/images/hit-counter/interface.png)
 
 ## Hosting Your Own Server
 Running this server is very easy, simple clone the repo (or download the files) and run ```server.py```

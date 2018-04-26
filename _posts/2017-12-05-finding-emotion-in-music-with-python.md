@@ -57,7 +57,7 @@ This meant all we needed to do was get the Spotify id for each song our program 
 ## Gathering Data
 The only piece left was now the data to compare each new song to. I had thought to scrape public Spotify playlist created by people with 'happy' and 'sad' in the titles. With all these songs, I then got their valence and energy and placed them on a plane. This process created the plane below.
 
-![Valence and Energy Patterns Showing Mood of Music](/images/finding-emotion-in-music-with-python-mining-results.png)
+![Valence and Energy Patterns Showing Mood of Music](/images/finding-emotion-in-music-with-python/mining-results.png)
 
 On initial investigation it appears that this plan had worked; and it did. Quite clearly we can see happy songs having high valence and energy where sadder songs have lower values of these properties. There is a bit of cross over which is fine but there are quite a few songs that are in the 'wrong' area. I investigated a few of the outliers and had found quite a majority of these songs were not really meant for the playlist I found them in.
 

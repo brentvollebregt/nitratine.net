@@ -59,9 +59,9 @@ You will now need to add some CSS, whether it is in a style tag in the head or a
 ### Images
 Download the images below and save them (it looks like they are blank but they aren't)
 
-[s1.png](/images/adding-snow-to-your-website-s1.png)
-[s2.png](/images/adding-snow-to-your-website-s2.png)
-[s3.png](/images/adding-snow-to-your-website-s3.png)
+[s1.png](/images/adding-snow-to-your-website/s1.png)
+[s2.png](/images/adding-snow-to-your-website/s2.png)
+[s3.png](/images/adding-snow-to-your-website/s3.png)
 
 Depending on where you save these, you will need to change the background property vale in the snow class.
 

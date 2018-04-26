@@ -18,7 +18,7 @@ File modification time is different however as it is stored in the file. Even th
 
 The modification date can be found by right clicking on a file and selecting properties.
 
-![Properties showing times of a file](/images/change-file-modification-time-in-python-properties.png)
+![Properties showing times of a file](/images/change-file-modification-time-in-python/properties.png)
 
 <!-- more -->
 

@@ -16,7 +16,7 @@ Recently I created a new YouTube channel art and wanted to be a bit creative. Kn
 
 A small sample of what I created is shown below. The script covers the full page and the size can easily be changed.
 
-![Background Code Example](/images/code-background-in-html-example1.png)
+![Background Code Example](/images/code-background-in-html/example1.png)
 
 <!-- more -->
 
@@ -89,13 +89,13 @@ Now go to my highlighter tool at [/tools/pygments-online](http://nitratine.pytho
 
 This may take a few seconds but you should see an output like this:
 
-![Highlighted JavaScript Example](/images/code-background-in-html-example2.png)
+![Highlighted JavaScript Example](/images/code-background-in-html/example2.png)
 
 Click on the "Copy to Clipboard" button and put this straight into the <body> tag.
 
 Now open the .html file in chrome and you will see that the whole background is code.
 
-![Final Example](/images/code-background-in-html-final.png)
+![Final Example](/images/code-background-in-html/final.png)
 
 ## Modifications
 If you want to make this code scroll, remove "overflow: hidden;" in the body css selector.

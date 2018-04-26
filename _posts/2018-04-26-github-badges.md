@@ -18,7 +18,7 @@ In this tutorial I will show you how to create your own and some dynamic ones ho
 ## Creating Your Own Static Badges
 Going to [shields.io/#your-badge](https://shields.io/#your-badge) you will be brought down the page to a tool that lets you create your own badges. This is quite helpful if you want to make a static badge that either relies on human input or just doesn't change.
 
-![Create Your Own Badge](/images/github-badges-static.png)
+![Create Your Own Badge](/images/github-badges/static.png)
 
 Entering a value in ```subject``` will provide the text for the left, ```status``` the value for the right and ```color``` the colour of the right part of the badge.
 

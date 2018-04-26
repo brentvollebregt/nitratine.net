@@ -44,7 +44,7 @@ This project fixed my issue of having to re-copy something after I just put some
 It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. You simply attach the script to a hotkey and when called, select which clipboard you want to use and whatever was in that virtual clipboard will now be in your actual clipboard. It also allows you to add and delete virtual clipboards.
 
 <div style="text-align: center">
-	<img src="{{ site.baseurl }}{% link images/multi-clipboard-gui1.jpg %}" alt="Multi Clipboard GUI"/>
+	<img src="{{ site.baseurl }}{% link images/multi-clipboard/gui1.jpg %}" alt="Multi Clipboard GUI"/>
 </div>
 
 ### [Quick Script]({{ site.baseurl }}{% link _posts/2017-12-20-quick-script.md %})
@@ -53,7 +53,7 @@ This project allowed me to have a lot of small scripts in one place that is easy
 Just like Multi Clipboard, attach this to a hotkey and your scripts you previously added (tutorial in README) will appear. Example scripts come pre-loaded like saving a clipboard image to a file, restarting windows explorer and putting your ip address on your clipboard.
 
 <div style="text-align: center">
-	<img src="{{ site.baseurl }}{% link images/quick-script-gui1.png %}" alt="Quick Script GUI"/>
+	<img src="{{ site.baseurl }}{% link images/quick-script/gui1.png %}" alt="Quick Script GUI"/>
 </div>
 
 ### [Nitratine](http://nitratine.pythonanywhere.com/)
@@ -63,7 +63,7 @@ I is a fully dynamic server with a cms built in. It can do server side scripting
 
 I no longer use it as I felt a static site was much more suitable and easier to maintain.
 
-![Desktop home split light dark snow]({{ site.baseurl }}{% link images/the-nitratine-project-nitratine1.png %})
+![Desktop home split light dark snow]({{ site.baseurl }}{% link images/the-nitratine-project/nitratine1.png %})
 
 ### [Colour]({{ site.baseurl }}{% link _posts/2017-11-18-colour.md %})
 This was an app that I had made as a joke with a neighbour. It demonstrates how something simple can take so long to complete.
@@ -73,9 +73,9 @@ The aim of this app is to collect all the colours by simply tapping the screen t
 I did some math and testing [here]({{ site.baseurl }}{% link _posts/2017-12-07-randomly-generating-numbers-to-fulfil-an-integer-range.md %}) and guessed (based off calculations) it would take about 134 and a half years to finish the app if you tapped then screen at a rate of 400 taps per minute.
 
 <div style="text-align: center">
-	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour-tap-screen.png %}" alt="Main screen"/>
-	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour-colour-viewer.png %}" alt="Colour finder"/>
-	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour-colour-mixer.png %}" alt="Colour mixer"/>
+	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour/tap-screen.png %}" alt="Main screen"/>
+	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour/colour-viewer.png %}" alt="Colour finder"/>
+	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour/colour-mixer.png %}" alt="Colour mixer"/>
 </div>
 
 ## Some Technologies I Have Worked With

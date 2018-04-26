@@ -81,7 +81,7 @@ Initially this script was tested with 1000 runs, min_ of 10, max_ of 500 and a s
 |810|5865.353|
 |860|6321.91|
 
-![First script results for 10-860](/images/randomly-generating-numbers-to-fulfil-an-integer-range-graph1.png)
+![First script results for 10-860](/images/randomly-generating-numbers-to-fulfil-an-integer-range/graph1.png)
 
 This data produced gives a clear pattern and produced a line of best fit with R^2 value of 0.9997 which is excellent. Using this equation to calculate the target value of 16,777,216 I got a value of 3.94x10^11. Even though this is a very large number, it doesn't seem like it is incorrect. There is a slight exponential addition to the equation calculated which will mean that little increases in x will give larger increases in y.  With this looking like a great start I went and tested a couple of bigger numbers.
 
@@ -98,7 +98,7 @@ Due to the time to compute these values, I tested with larger numbers that weren
 
 Looking at this data, the larger the numbers that were tested, the larger the difference between the actual and expected based off the last equation. After adding this data to the last data gathered and graphing it, the new equation is y = 0.0003x2 + 7.8024x - 470.14 with an R^2 of 0.9997. Even though this R^2 value is good, the lower values tested are far off the expected. An example of this difference for 10 being -33.951 for the last equation and -392.09 for this new equation even though the actual value sits around 29.735. This difference however starts to decrease when the range is over 200.
 
-![Results for larger figures of 1000-5000](/images/randomly-generating-numbers-to-fulfil-an-integer-range-graph2.png)
+![Results for larger figures of 1000-5000](/images/randomly-generating-numbers-to-fulfil-an-integer-range/graph2.png)
 
 Even with this decrease being fixed, I am going to have to generate much larger ranges to have a chance of being able to predict the target value. Unfortunately, this isn't as easy as it seems as the current method is quite slow.
 
@@ -352,7 +352,7 @@ Now having the raw data, I was able to calculate the average, min, max and stand
 |11000|200|109195.375|84138|172973|1047.34|
 |12000|200|119634.365|88378|162256|989.33|
 
-![Results for large data randing 500 to 12000](/images/randomly-generating-numbers-to-fulfil-an-integer-range-graph3.png)
+![Results for large data randing 500 to 12000](/images/randomly-generating-numbers-to-fulfil-an-integer-range/graph3.png)
 
 From this data, I discovered that a trendline formula with a power had developed a significant R^2 value and fits visually. I also once again obtained a polynomial function looking similar to the last. These new equations were y = 3.2575x^1.1202 and y = 0.0001x^2 + 8.9649x - 1830.1.
 
@@ -407,7 +407,7 @@ With these, I can now take all the data that has been generated and compare it t
 
 Looking at this table, we can see that the two large data equations have a much better guess to the actual values than the previous two equations. This is because the equations have been formed with more data allowing them to be able to guess larger values more accurately. I will then compare the difference between the average values and the last two equations on a graph.
 
-![Difference for large data equations](/images/randomly-generating-numbers-to-fulfil-an-integer-range-graph4.png)
+![Difference for large data equations](/images/randomly-generating-numbers-to-fulfil-an-integer-range/graph4.png)
 
 ## Conclusion
 By looking at the graph, it appears that the large data polynomial equation was the best at predicting the averages. At about 1500 the equations start to be a bit unreliable but are still staying reasonable close being at most 13% in extreme cases away from the average. This would be because I didn't do enough tests to calculate averages and this theory is definitely shows when the tests go above a range of 6000 as that is where I only calculated averages based off 200 runs due to the time to run the tests.

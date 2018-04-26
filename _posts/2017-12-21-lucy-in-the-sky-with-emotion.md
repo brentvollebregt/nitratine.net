@@ -20,18 +20,18 @@ When the project is first started it will create a sklearn.neighbors.KNeighborsC
 
 ## Demonstration and Screenshots
 ### GUI - Emotion Detection
-![Emotion detection - Lucy in the sky with diamonds](/images/lucy-in-the-sky-with-emotion-gui1.png)
-![Emotion detection - All Star](/images/lucy-in-the-sky-with-emotion-gui2.png)
+![Emotion detection - Lucy in the sky with diamonds](/images/lucy-in-the-sky-with-emotion/gui1.png)
+![Emotion detection - All Star](/images/lucy-in-the-sky-with-emotion/gui2.png)
 
 ### GUI - Valence Energy Graph
-![GUI - Valence Energy Graph](/images/lucy-in-the-sky-with-emotion-valence-plot.png)
+![GUI - Valence Energy Graph](/images/lucy-in-the-sky-with-emotion/valence-plot.png)
 
 ### Visualiser
-![Visualiser control](/images/lucy-in-the-sky-with-emotion-visualiser1.png)
-![Visualiser balls flying](/images/lucy-in-the-sky-with-emotion-visualiser2.png)
-![Visualiser environment view](/images/lucy-in-the-sky-with-emotion-visualiser3.png)
-![Visualiser paused](/images/lucy-in-the-sky-with-emotion-visualiser4.png)
-![Visualiser balls flying colse](/images/lucy-in-the-sky-with-emotion-visualiser5.png)
+![Visualiser control](/images/lucy-in-the-sky-with-emotion/visualiser1.png)
+![Visualiser balls flying](/images/lucy-in-the-sky-with-emotion/visualiser2.png)
+![Visualiser environment view](/images/lucy-in-the-sky-with-emotion/visualiser3.png)
+![Visualiser paused](/images/lucy-in-the-sky-with-emotion/visualiser4.png)
+![Visualiser balls flying colse](/images/lucy-in-the-sky-with-emotion/visualiser5.png)
 
 <!-- more -->
 

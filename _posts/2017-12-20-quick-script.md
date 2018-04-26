@@ -17,9 +17,9 @@ A small GUI that displays home-made scripts to be executed. The scripts will app
 This project was my attempt to stop throwing out useful scripts that I made to make small tasks easier. I had always found myself making things and deleting them later as I didn't think I was going to use them again. This project allows you to attach a script easily to this project which makes things searchable and easy to run. I connected a hotkey to this to run smaller things.
 
 ## Demonstration and Screenshots
-![GUI example](/images/quick-script-gui1.png)
+![GUI example](/images/quick-script/gui1.png)
 
-![Setting GUI](/images/quick-script-gui2.png)
+![Setting GUI](/images/quick-script/gui2.png)
 
 <!-- more -->
 

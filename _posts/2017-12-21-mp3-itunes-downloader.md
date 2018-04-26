@@ -17,7 +17,7 @@ A Python script that allows a user to download a particular song from an iTunes-
 This project allows you to select a song from an album found on the web version of iTunes and download it by sourcing the audio from YouTube and tags from iTunes.
 
 ## Demonstration and Screenshots
-![GUI example](/images/mp3-itunes-downloader-gui1.png)
+![GUI example](/images/mp3-itunes-downloader/gui1.png)
 
 <!-- more -->
 

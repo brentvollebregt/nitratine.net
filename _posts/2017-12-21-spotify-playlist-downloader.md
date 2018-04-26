@@ -17,7 +17,7 @@ A python script to download a Spotify playlist to MP3 using YouTube as audio sou
 This project takes a Spotify playlist uri and will download it's contents by sourcing audio from YouTube and tags/art from Spotify. YouTube videos for audio are found automatically.
 
 ## Demonstration and Screenshots
-![Console example](/images/spotify-playlist-downloader-gui1.png)
+![Console example](/images/spotify-playlist-downloader/gui1.png)
 
 This is a console application, simply paste the uri and press enter.
 
