@@ -15,6 +15,8 @@ Easily Count Hits ðŸ“ˆ on a Website by Requesting a SVG Displaying Hit Count ðŸŽ
     <img src="http://hitcounter.pythonanywhere.com/nocount/tag.svg?url=https%3A%2F%2Fgithub.com%2Fbrentvollebregt%2Fhit-counter" alt="Hits">
 </div>
 
+[Find the project on GitHub here](https://github.com/brentvollebregt/hit-counter)
+
 Live demo hosted at: [hitcounter.pythonanywhere.com](http://hitcounter.pythonanywhere.com/)
 
 ## What is This?
