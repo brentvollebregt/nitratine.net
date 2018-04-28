@@ -34,7 +34,7 @@ First create a new .html file and save it. Now enter the code in below.
 </html>
 ```
 
-Now in the <script> tag enter the css:
+Now in the <style> tag enter the css:
 
 ```css
 body {overflow: hidden;margin: 0;background: #263238;}
