@@ -9,9 +9,13 @@ tags: Python Flask Website
 * content
 {:toc}
 
-This project is this website. It is something that I wanted to host my projects, tutorials and web tools. It took me over two months to make this in my free time.
+The Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months.
+
+I have now decided to relocate the Nitratine project to Github Pages as it has a lot of benefits but I will still keep this repo public as it may be useful for something else one day.
 
 [Find the project on GitHub here](https://github.com/brentvollebregt/nitratine)
+
+This is currently hosted at: [nitratine.pythonanywhere.com](http://nitratine.pythonanywhere.com/)
 
 ## What is this?
 This project is a website that is hosted using Flask in Python. The main idea of it is to be able to add articles easily while still keeping the raw html idea. When the server starts it will look for articles in a user defined directory that is laid out to a certain specification. From then on the servers data can be edited at any time from within the site.
