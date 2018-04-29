@@ -16,9 +16,9 @@ This site first brings you to a loading page; just hit enter and let the resourc
 
 This site demonstrates the design of good music and timing with human interaction. Unbelievably this has been made from JavaScript. Buildings, landscapes, animals, trees and so much more all created with Javascript.
 
-![Rome buildings](/images/interesting-sites/Rome1.png)
-![Rome tracks](/images/interesting-sites/Rome2.png)
-![Rome desert](/images/interesting-sites/Rome3.png)
+![Rome buildings](/images/interesting-sites/Rome1.jpg)
+![Rome tracks](/images/interesting-sites/Rome2.jpg)
+![Rome desert](/images/interesting-sites/Rome3.jpg)
 
 <!-- more -->
 
@@ -44,7 +44,7 @@ This site is quite entertaining and has a awesome idea to it. It's made for mobi
 
 ![Paper planes app plane sent](/images/interesting-sites/paperplanes2.png)
 ![Paper planes app catching planes](/images/interesting-sites/paperplanes3.png)
-![Paper planes desktop](/images/interesting-sites/paperplanes1.png)
+![Paper planes desktop](/images/interesting-sites/paperplanes1.jpg)
 
 A really cool feature of this site is that if you are using mobile, you cause motion your phone like you would to catch a plane with a net and you will catch a paper plane.
 
@@ -52,16 +52,16 @@ A really cool feature of this site is that if you are using mobile, you cause mo
 
 This project was shown by a friend in my COMP241 class which then lead to the idea for one of the classes group projects. After passing the loading page, Lights by Ellie Goulding will play and a terrain of lights will be generated. The lights pulse to the beat and it gets more and more interesting as the song goes. You can steer where the orb flows to by moving your mouse.
 
-![Lights example 1](/images/interesting-sites/lights1.png)
-![Lights example 2](/images/interesting-sites/lights2.png)
+![Lights example 1](/images/interesting-sites/lights1.jpg)
+![Lights example 2](/images/interesting-sites/lights2.jpg)
 
 ## NONI NONI
 This site gets you to draw something and then will find the closest match to the shapes it has. It will then assemble spherical particles to that shape. You can keep drawing and it will find shapes closest to your drawing. Once again this is a great example of what JavaScript can do in a browser. The colours and animations are excellent.
 
-![NONI NONI draw a picture](/images/interesting-sites/noninoni3.png)
-![NONI NONI planet](/images/interesting-sites/noninoni4.png)
+![NONI NONI draw a picture](/images/interesting-sites/noninoni3.jpg)
+![NONI NONI planet](/images/interesting-sites/noninoni4.jpg)
 
 You can also draw letters if you click on the squiggle at the bottom which will prompt you to draw a letter.
 
-![NONI NONI nitratine](/images/interesting-sites/noninoni1.png)
-![NONI NONI in words](/images/interesting-sites/noninoni2.png)
+![NONI NONI nitratine](/images/interesting-sites/noninoni1.jpg)
+![NONI NONI in words](/images/interesting-sites/noninoni2.jpg)

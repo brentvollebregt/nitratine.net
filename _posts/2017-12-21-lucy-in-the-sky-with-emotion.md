@@ -27,11 +27,11 @@ When the project is first started it will create a sklearn.neighbors.KNeighborsC
 ![GUI - Valence Energy Graph](/images/lucy-in-the-sky-with-emotion/valence-plot.png)
 
 ### Visualiser
-![Visualiser control](/images/lucy-in-the-sky-with-emotion/visualiser1.png)
-![Visualiser balls flying](/images/lucy-in-the-sky-with-emotion/visualiser2.png)
-![Visualiser environment view](/images/lucy-in-the-sky-with-emotion/visualiser3.png)
-![Visualiser paused](/images/lucy-in-the-sky-with-emotion/visualiser4.png)
-![Visualiser balls flying colse](/images/lucy-in-the-sky-with-emotion/visualiser5.png)
+![Visualiser control](/images/lucy-in-the-sky-with-emotion/visualiser1.jpg)
+![Visualiser balls flying](/images/lucy-in-the-sky-with-emotion/visualiser2.jpg)
+![Visualiser environment view](/images/lucy-in-the-sky-with-emotion/visualiser3.jpg)
+![Visualiser paused](/images/lucy-in-the-sky-with-emotion/visualiser4.jpg)
+![Visualiser balls flying colse](/images/lucy-in-the-sky-with-emotion/visualiser5.jpg)
 
 <!-- more -->
 
