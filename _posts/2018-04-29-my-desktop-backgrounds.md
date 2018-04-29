@@ -36,7 +36,7 @@ These are the backgrounds that are featured as my background in my YouTube video
 This is currently my favourite as it is so clean and has a very happy feel to it. Icons site nicely on it and it is very clear being 1920x1080. I found this in a Google Image search but [this is the origin](http://www.baltana.com/abstract/material-design-hd-desktop-wallpaper-23164.html)
 
 ### Material Design Blue
-![Material Design Blue](/images/my-desktop-backgrounds/material-design-blue.png)
+![Material Design Blue](/images/my-desktop-backgrounds/material-design-blue.jpg)
 
 You will find I like material design and I used to try and design a lot of my projects to the specifications, this is obviously quite time consuming so I settle for backgrounds, colours and icons.
 
