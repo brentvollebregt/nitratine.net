@@ -18,6 +18,8 @@ You will first want to create a CNAME file for your GitHub pages site. The easie
 
 ![GitHub Settings](/images/how-to-add-a-custom-domain-to-a-github-pages-site/github-settings.png)
 
+<!-- more -->
+
 Scroll down this page until you find the "GitHub Pages" block. In this block, there is a "Custom domain" header with an input field under it. In here put your domain you have registered.
 
 ![Custom Domain](/images/how-to-add-a-custom-domain-to-a-github-pages-site/custom-domain.png)
