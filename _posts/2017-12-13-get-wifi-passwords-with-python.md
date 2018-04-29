@@ -88,6 +88,33 @@ a = input("")
 
 You can also find the gist for this [on Github here](https://gist.github.com/brentvollebregt/30d278eae98e2ff221add008259d42bb).
 
+## UnicodeDecodeError Ignoring - Revision 1
+It has come to my attention that many people are having issues with this raising a UnicodeDecodeError describing that 'utf-8' codec can't decode a specific byte. This is caused by a byte in one of the profile names not being a character that is in the utf-8 encoding.
+
+One way to fix this is changing the encodings from `utf-8` to `cp1252` or another coding which may support your character. **Do this first before trying the next script**
+
+Another way is to ignore the error and catch it later on. So the new code in this case would be.
+
+```python
+import subprocess
+
+a = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('utf-8', errors="ignore").split('\n')
+a = [i.split(":")[1][1:-1] for i in a if "All User Profile" in i]
+for i in a:
+    try:
+        results = subprocess.check_output(['netsh', 'wlan', 'show', 'profile', i, 'key=clear']).decode('utf-8', errors="ignore").split('\n')
+        results = [b.split(":")[1][1:-1] for b in results if "Key Content" in b]
+        try:
+            print ("{:<30}|  {:<}".format(i, results[0]))
+        except IndexError:
+            print ("{:<30}|  {:<}".format(i, ""))
+    except subprocess.CalledProcessError:
+        print ("{:<30}|  {:<}".format(i, "ENCODING ERROR"))
+a = input("")
+```
+
+Please note that profiles which cause an error will still not provide a password as the encoding still isn't correct. You will have to find the password manually as shown at the top of this post.
+
 ## FAQ
 
 ### Why isn't the password showing for one or more network(s)?
