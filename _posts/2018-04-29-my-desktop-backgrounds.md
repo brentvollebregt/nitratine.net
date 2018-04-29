@@ -11,6 +11,8 @@ tags:
 
 Surprisingly I get a lot of people as where I got my backgrounds from in my [YouTube videos](https://www.youtube.com/PyTutorialsOriginal). I've finally decided to just put them all in once place if anyone is interested.
 
+<!-- more -->
+
 I will also add backgrounds I have made at the top of this and add attributions to where I got other backgrounds from.
 
 ## Designed By Me
