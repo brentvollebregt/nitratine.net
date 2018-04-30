@@ -108,17 +108,17 @@ My first thought to fix this time issue was "Is my method inefficient?". I ran t
 |Name|Call Count|Time (ms)|Own Time (ms)|Own Time %|
 |--- |--- |--- |--- |--- |
 |get_generation|1000|282050|222018|78.71|
-|<method 'sort' of 'list' objects>|2000000|29729|29729|10.54|
+|&lt;method 'sort' of 'list' objects&gt;|2000000|29729|29729|10.54|
 |randrange|16247313|24371|12351|4.38|
 |_randbelow|16247313|12019|9285|3.29|
 |randint|16247313|30102|5730|2.03|
-|<method 'getrandbits' of '_random.Random' objects>|16636543|1972|1972|0.70|
-|<method 'bit_length' of 'int' objects>|16247313|762|762|0.27|
-|<method 'append' of 'list' objects>|2000000|134|134|0.05|
-|<listcomp>|1000|66|66|0.02|
-|<module>|1|282072|21|0.01|
-|<listcomp>|1|0|0|0.00|
-|<built-in method builtins.print>|1|0|0|0.00|
+|&lt;method 'getrandbits' of '_random.Random' objects&gt;|16636543|1972|1972|0.70|
+|&lt;method 'bit_length' of 'int' objects&gt;|16247313|762|762|0.27|
+|&lt;method 'append' of 'list' objects&gt;|2000000|134|134|0.05|
+|&lt;listcomp&gt;|1000|66|66|0.02|
+|&lt;module&gt;|1|282072|21|0.01|
+|&lt;listcomp&gt;|1|0|0|0.00|
+|&lt;built-in method builtins.print&gt;|1|0|0|0.00|
 
 From this we can see that only 21ms was spent outside the get_generation method which is good, nothing is causing efficiency issues in the function called and small calculations. Ignoring the get_generation method as a whole and looking at the smaller bits of it, we can see that the .sort() method used quite a bit of the time. 10.5% of the total execution time was just sorting the list. There is no issue with excessive calling as 2000*1000 is 2,000,000 which is what it's call count was. This shows that it might be ideal to substitute this with an alternative way of saying that the list is full and breaking.
 
@@ -150,15 +150,15 @@ The new results from the profiler while using this method for 1000 runs at a 200
 |randrange|16389852|25514|13030|4.22|
 |_randbelow|16389852|12483|9620|3.12|
 |randint|16389852|31797|6283|2.04|
-|<method 'getrandbits' of '_random.Random' objects>|16783354|2073|2073|0.67|
-|<method 'bit_length' of 'int' objects>|16389852|789|789|0.26|
-|<built-in method builtins.len>|2000000|162|162|.05|
-|<method 'append' of 'list' objects>|2000000|148|148|0.05|
-|<listcomp>|1000|69|69|0.02|
-|<module>|1|308647|29|0.01|
-|<built-in method builtins.print>|1|0|0|0.00|
+|&lt;method 'getrandbits' of '_random.Random' objects&gt;|16783354|2073|2073|0.67|
+|&lt;method 'bit_length' of 'int' objects&gt;|16389852|789|789|0.26|
+|&lt;built-in method builtins.len&gt;|2000000|162|162|.05|
+|&lt;method 'append' of 'list' objects&gt;|2000000|148|148|0.05|
+|&lt;listcomp&gt;|1000|69|69|0.02|
+|&lt;module&gt;|1|308647|29|0.01|
+|&lt;built-in method builtins.print&gt;|1|0|0|0.00|
 
-Even though this method did take longer to run as shown in the <module> time, we have removed bulk of the .sort() method. This execution time increase would have been due to the fact different numbers were generated.
+Even though this method did take longer to run as shown in the &lt;module&gt; time, we have removed bulk of the .sort() method. This execution time increase would have been due to the fact different numbers were generated.
 
 ### Method to Test
 To test the two methods, it would be best to 'pull them apart' and use the exact same numbers on them to see what sort of speed increase there really is. My plan is to generate random numbers in a certain range, make sure all numbers in the range are located in the list and then run them through the two methods. This will mean exactly the same data is being passed through to ensure a fairer test. I created a small script to generate random numbers in a range and stop when all the required numbers are present. I moved this method and created modified versions of the methods I was testing allowing them to take in the new list of numbers only. I then timed the two methods. The script and data are as follows.
