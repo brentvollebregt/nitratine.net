@@ -109,6 +109,14 @@ I did some math and testing [here]({{ site.baseurl }}{% link _posts/2017-12-07-r
 </div>
 
 ## Contact
-If you would like to contact me, send an email to [brentvollebregt@gmail.com](mailto:brentvollebregt@gmail.com)
+Please leave questions about videos on YouTube and blog posts in the comments at the bottom of the post. Emails regarding this nature will be referred back to the corresponding platform.
 
-Please leave questions about videos and blog posts in their respectable commenting areas.
+If you would like to contact me for another reason, send an email to <a id="email" href="javascript:displayEmail();">[Display Email Address]</a>
+
+<script>
+function displayEmail() {
+    alert("Please leave questions about videos on YouTube and blog posts in the comments at the bottom of the post.");
+    document.getElementById('email').innerHTML = "brentvollebregt@gmail.com";
+    document.getElementById('email').href = "mailto:brentvollebregt@gmail.com";
+}
+</script>
