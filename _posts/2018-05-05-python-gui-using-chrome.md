@@ -65,14 +65,14 @@ my_options = {
 eel.start('main.html', options=my_options)
 ```
 
-In this example I have set mode to chrome, this will mean that it will use chrome normally and not in app mode; se "chrome-app" to keep app mode (this is default). I set the host to localhost which will then host the server on 127.0.0.1. You could change this to your computers ip on your network so others can access the server. I have also set the port which is useful for clashes between servers and added chrome flags. Chrome flags are appended when calling the executable as usual.
+In this example I have set 'mode' to 'chrome', this will mean that it will use chrome normally and not in app mode; use "chrome-app" to keep app mode (this is default). I set the 'host' to 'localhost' which will then host the server on 127.0.0.1. You could change this to your computers ip on your network so others can access the server. I have also set the port which is useful for clashes between servers and added chrome flags. Chrome flags are appended when calling the executable as usual.
 
 *Remember that you do not have to pass all these options in the dictionary, you can pass one if you want.*
 
 ## Communication
 Before you carry on, you will need to put a JavaScript file in your html file. Simply add to the header:
 
-```
+```html
 <script type="text/javascript" src="/eel.js"></script>
 ```
 
@@ -194,7 +194,7 @@ eel.start('main.html')
 When running server.py, a chrome app window will appear with a button saying "Click to get time". When clicked, this will call the getTime() function in python and then return the value back to JavaScript on the line `let value = await eel.getTime()();`. I then alert this value.
 
 ## Threading in Python
-Due to what Eel uses to run the server, calling thread.sleep() will pause the execution of thw whole server. We are provided with with methods `sleep()` and `spawn()` which allow us to create new threads and sleep. This is also helpful for creating thread in general.
+Due to what Eel uses to run the server, calling thread.sleep() will pause the execution of the whole server. We are provided with with methods `sleep()` and `spawn()` which allow us to create new threads and sleep. This is also helpful for creating thread in general.
 
 An example of using these methods:
 
@@ -223,7 +223,7 @@ This will allow code execution to keep flowing after it reaches this statement. 
 ## Why Use Eel?
 So those who have used Flask, bottle or pyramid before may be asking why not just use those? When using a library like Flask, you need to create the server, setting up all the routes yourself and decide on the layout of the server.
 
-With Eel, you don't need to do any of this; simply importing eel, calling `eel.init('web')` and `eel.start('main.html', size=(650, 612))` will create the whole server for you. Now all you need to do is create your methods and expose them to eel using a decorator.
+With Eel, you don't need to do any of this; simply importing eel, calling `eel.init('web')` and `eel.start('main.html')` will create the whole server for you. Now all you need to do is create your methods and expose them to eel using a decorator.
 
 ## Extra Reading
  - [Eel GitHub Page](https://github.com/ChrisKnott/Eel)
