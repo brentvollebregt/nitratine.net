@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python GUI Using Chrome"
-date: 2018-05-03
+date: 2018-05-05
 categories: Tutorials
 tags: Python GUI Chrome JavaScript
 ---
