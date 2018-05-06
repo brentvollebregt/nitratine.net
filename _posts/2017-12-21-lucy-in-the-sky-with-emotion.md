@@ -3,7 +3,7 @@ layout: post
 title: "Lucy In The Sky With Emotion"
 date: 2017-12-21
 categories: Projects
-tags: Python Unity Machine-Learning
+tags: Python Machine-Learning
 ---
 
 * content
