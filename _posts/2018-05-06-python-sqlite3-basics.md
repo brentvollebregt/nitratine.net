@@ -36,7 +36,7 @@ Now create a cursor object which will let us interact with the database. We can 
 cursor = connection.cursor()
 ```
 
-With these three simple lines, you now have a connection to your database file with cursor.
+With these three simple lines, you now have a connection to your database file and a cursor to execute queries with.
 
 ## Executing Statements
 To execute statements, we can use .execute() on our cursor object. For example:
@@ -69,7 +69,7 @@ When creating tables, adding rows and modifying values, the table is in a tempor
 connection.commit()
 ```
 
-Just like other databases, this will save the changes made.
+Just like other databases, this will save the changes made. If something else is accessing the database file at the same time, it will not be able to see your changes until you have committed.
 
 ### Rolling Back
 If you made changes to a database and want to undo them, regarding you haven't committed these changes yet, you can call .rollback() to the connection object. In this example I would use:
@@ -108,7 +108,7 @@ This will return a sqlite3.Row object which can easily be casted to a tuple. You
 If you have selected more than one item, these items will be in a tuple-like object just like above so once again we can use indexes to get values out for example use `url_id[2]` to get the 3rd (2nd since we start from 0) object out.
 
 ### Fetch All Row In Returned Object
-Like above, we can call .fetchall() one an executed query. This will return multiple rows like above in a list object. For example:
+Like above, we can call .fetchall() on an executed query. This will return multiple rows like above in a list object. For example:
 
 ```python
 cursor.execute('SELECT id, url FROM url')
@@ -129,7 +129,7 @@ It may seem a bit stupid to only be able to use indexes to get data out of a row
 Using .keys() we can get the keys that are used in the row object returned. For example:
 
 ```python
-cursor.execute('SELECT id, url FROM url WHERE url=?', (url, )')
+cursor.execute('SELECT id, url FROM url WHERE url=?', (url, ))
 particualr_id_and_url = cursor.fetchone()
 print (particualr_id_and_url.keys())
 ```
