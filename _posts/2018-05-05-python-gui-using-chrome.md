@@ -69,6 +69,17 @@ In this example I have set 'mode' to 'chrome', this will mean that it will use c
 
 *Remember that you do not have to pass all these options in the dictionary, you can pass one if you want.*
 
+### Setting Window Size
+If you are using chrome in app mode (default) you can specify the size of the window by passing a tuple to the size argument in eel.start(). For example:
+
+```python
+eel.start('main.html', size=(650, 612))
+```
+
+When I have used this in the past, the size doesn't always match up, a good example of this is in my [auto-py-to-exe]({{ site.baseurl }}{% link _posts/2018-03-10-auto-py-to-exe.md %}) project which uses `size=(650, 612)` but renders the window about 636x605. When looking at the inner dimensions of the window using JavaScript; window.innerHeight returns 573 and window.innerWidth returns 634.
+
+This shows you might have to play around with these values until you get them where you want but they do work (just not as expected).
+
 ## Communication
 Before you carry on, you will need to put a JavaScript file in your html file. Simply add to the header:
 
