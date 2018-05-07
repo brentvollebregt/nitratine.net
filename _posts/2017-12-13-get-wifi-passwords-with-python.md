@@ -13,6 +13,8 @@ This script searches windows for wifi passwords already known and displays them 
 
 {% include embedYouTube.html content="Z_QAvJ8sr6A" %}
 
+> Unfortunately on the 7-5-2018 YouTube decided to give me a community guideline strike and has removed the video. I have appealed as it fell under "content that encourages illegal activities or incites users to violate YouTube's guidelines" which it is not; this is an educational video.
+
 ## Quick Background Idea
 If you type ```netsh wlan show profiles``` in cmd, you will be shown the profiles for wifi connections your computer has stored.
 
