@@ -51,6 +51,8 @@ This example imports eel, says where you files are and then starts the server pa
 
 If you do not have chrome installed, you will be asked what browser to open. The only difference when using this method is that you cannot control the initial size of the window.
 
+![Hello World](/images/python-gui-using-chrome/hello-world.png)
+
 ### App Options
 You can set some optional variables when staring the server. To do this, pass a dictionary object to assigned to options as an argument; for example:
 
@@ -203,6 +205,8 @@ eel.start('main.html')
 ```
 
 When running server.py, a chrome app window will appear with a button saying "Click to get time". When clicked, this will call the getTime() function in python and then return the value back to JavaScript on the line `let value = await eel.getTime()();`. I then alert this value.
+
+![Get Time](/images/python-gui-using-chrome/time.png)
 
 ## Threading in Python
 Due to what Eel uses to run the server, calling thread.sleep() will pause the execution of the whole server. We are provided with with methods `sleep()` and `spawn()` which allow us to create new threads and sleep. This is also helpful for creating thread in general.
