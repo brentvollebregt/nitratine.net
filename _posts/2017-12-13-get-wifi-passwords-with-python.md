@@ -13,7 +13,7 @@ This script searches windows for wifi passwords already known and displays them 
 
 {% include embedYouTube.html content="Z_QAvJ8sr6A" %}
 
-> Unfortunately on the 7-5-2018 YouTube decided to give me a community guideline strike and has removed the video. I have appealed as it fell under "content that encourages illegal activities or incites users to violate YouTube's guidelines" which it is not; this is an educational video.
+> Unfortunately on the 7-5-2018 YouTube decided to give me a community guideline strike and has removed the video. I had appealed as it fell under "content that encourages illegal activities or incites users to violate YouTube's guidelines" which it is not; this is an educational video. The appeal was rejected on 9-5-2018.
 
 ## Quick Background Idea
 If you type ```netsh wlan show profiles``` in cmd, you will be shown the profiles for wifi connections your computer has stored.
@@ -32,19 +32,19 @@ import subprocess
 Next, get the output for the command "netsh wlan show profiles" using subprocess.check_output(). Then decode the output with utf-8 and split the string by a newline character to get each line in a separate string. 
 
 ```python
-a = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('utf-8').split('\n')
+data = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('utf-8').split('\n')
 ```
 
 Now that we have a list of strings, we can get lines that only contain "All User Profile". With these lines we then need to split it by a ':', get the right hand side and remove the first and last character
 
 ```python
-a = [i.split(":")[1][1:-1] for i in a if "All User Profile" in i]
+profiles = [i.split(":")[1][1:-1] for i in data if "All User Profile" in i]
 ```
 
 Now that the variable a contains the WiFi profile names, we can get the output for the command "netsh wlan show profile {Profile Name} key=clear" using subprocess.check_output() again for a particular profile while looping through all profiles.
 
 ```python
-for i in a:
+for i in profiles:
     results = subprocess.check_output(['netsh', 'wlan', 'show', 'profile', i, 'key=clear']).decode('utf-8').split('\n')
 ```
 
@@ -66,7 +66,7 @@ Now we should have a list containing one string which is the particular profiles
 Now put a input call at the end of the script outside the loop so that when the script is run it will not immediately stop when results are displayed.
 
 ```python
-a = input("")
+input("")
 ```
 
 Save this file with a .py extension and you can now run the script. You can run it by double clicking on the script, running it in IDLE or even cmd using ```python {filename}```.
@@ -76,16 +76,16 @@ Save this file with a .py extension and you can now run the script. You can run 
 ```python
 import subprocess
 
-a = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('utf-8').split('\n')
-a = [i.split(":")[1][1:-1] for i in a if "All User Profile" in i]
-for i in a:
+data = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('utf-8').split('\n')
+profiles = [i.split(":")[1][1:-1] for i in data if "All User Profile" in i]
+for i in profiles:
     results = subprocess.check_output(['netsh', 'wlan', 'show', 'profile', i, 'key=clear']).decode('utf-8').split('\n')
     results = [b.split(":")[1][1:-1] for b in results if "Key Content" in b]
     try:
         print ("{:<30}|  {:<}".format(i, results[0]))
     except IndexError:
         print ("{:<30}|  {:<}".format(i, ""))
-a = input("")
+input("")
 ```
 
 You can also find the gist for this [on Github here](https://gist.github.com/brentvollebregt/30d278eae98e2ff221add008259d42bb).
@@ -100,9 +100,9 @@ Another way is to ignore the error and catch it later on. So the new code in thi
 ```python
 import subprocess
 
-a = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('utf-8', errors="ignore").split('\n')
-a = [i.split(":")[1][1:-1] for i in a if "All User Profile" in i]
-for i in a:
+data = subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode('utf-8', errors="ignore").split('\n')
+profiles = [i.split(":")[1][1:-1] for i in data if "All User Profile" in i]
+for i in profiles:
     try:
         results = subprocess.check_output(['netsh', 'wlan', 'show', 'profile', i, 'key=clear']).decode('utf-8', errors="ignore").split('\n')
         results = [b.split(":")[1][1:-1] for b in results if "Key Content" in b]
@@ -112,7 +112,7 @@ for i in a:
             print ("{:<30}|  {:<}".format(i, ""))
     except subprocess.CalledProcessError:
         print ("{:<30}|  {:<}".format(i, "ENCODING ERROR"))
-a = input("")
+input("")
 ```
 
 Please note that profiles which cause an error will still not provide a password as the encoding still isn't correct. You will have to find the password manually as shown at the top of this post.
