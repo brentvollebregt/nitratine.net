@@ -11,9 +11,7 @@ tags: Python WiFi
 
 This script searches windows for wifi passwords already known and displays them along side the network name. It will not find passwords that your computer doesn't already know. This is useful for the occasions that you forget your WiFi password.
 
-{% include embedYouTube.html content="Z_QAvJ8sr6A" %}
-
-> Unfortunately on the 7-5-2018 YouTube decided to give me a community guideline strike and has removed the video. I had appealed as it fell under "content that encourages illegal activities or incites users to violate YouTube's guidelines" which it is not; this is an educational video. The appeal was rejected on 9-5-2018.
+{% include embedYouTube.html content="j7ysqGXFJKU" %}
 
 ## Quick Background Idea
 If you type ```netsh wlan show profiles``` in cmd, you will be shown the profiles for wifi connections your computer has stored.
