@@ -162,3 +162,18 @@ h1:before {
     background-size: 100% 100%;
     width: 16px;
 }
+
+blockquote {
+	color: #444;
+    border-left: 5px solid rgb(92, 193, 74);
+    background: rgba(122, 204, 108, 0.73);
+    padding: 10px 20px;
+    margin: 0 0 20px;
+	line-height: 1.6;
+    font-size: 16px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+blockquote p {
+	margin: 0;
+}
