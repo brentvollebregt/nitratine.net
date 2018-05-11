@@ -51,7 +51,7 @@ excerpt_separator: "<!-- more -->"
 
 # paginate
 gems: [jekyll-paginate]
-paginate: 8
+paginate: 6
 
 # Use the following plug-ins
 gems:
