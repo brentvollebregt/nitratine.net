@@ -22,7 +22,7 @@ youtube_link: PyTutorialsOriginal # Whatever after https://www.youtube.com/
 linkedIn_username:
 
 description_footer:
-theme_colour: "#1976d2" # theme-color meta value
+theme_colour: "#222" # theme-color meta value
 
 disqus_shortname: nitratine
 
