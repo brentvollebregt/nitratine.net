@@ -4,6 +4,7 @@ title: About
 permalink: /about/
 icon: user-circle
 type: page
+description: "I am currently studying a Bachelor of Computing and Mathematical Sciences at the University of Waikato and plan to finish my 4th year in 2020. I started learning Python by myself back in 2013 and have learnt all the Python I know myself and most of the CSS/HTML/JavaScript myself."
 ---
 
 * content

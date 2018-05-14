@@ -4,6 +4,7 @@ title: "Python Retweet Bot"
 date: 2018-01-26
 categories: Tutorials
 tags: Python Bot
+description: "This bot retweets tweets in python. It looks for competitions which state you need to retweet and retweets them."
 ---
 
 * content

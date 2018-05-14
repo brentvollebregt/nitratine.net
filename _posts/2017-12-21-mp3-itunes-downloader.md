@@ -4,6 +4,7 @@ title: "MP3-iTunes Downloader"
 date: 2017-12-21
 categories: Projects
 tags: Python iTunes Download youtube-dl
+description: "A Python script that allows a user to download a particular song from an iTunes-listed album. It uses YouTube as an audio source and iTunes to tag the mp3 file."
 ---
 
 * content

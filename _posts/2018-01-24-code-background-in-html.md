@@ -4,6 +4,7 @@ title: "Code Background in HTML"
 date: 2018-01-24
 categories: Tutorials
 tags: HTML CSS
+description: "This HTML code displays a code background which can be used in images and as a general theme. It consists of jQuery code minified and compressed into a background."
 ---
 
 * content

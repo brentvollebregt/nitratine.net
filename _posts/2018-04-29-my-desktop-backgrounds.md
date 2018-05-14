@@ -4,6 +4,7 @@ title: "My Desktop Backgrounds"
 date: 2018-04-25
 categories: General
 tags:
+description: "urprisingly I get a lot of people as where I got my backgrounds from in my YouTube videos. I've finally decided to just put them all in once place if anyone is interested."
 ---
 
 * content

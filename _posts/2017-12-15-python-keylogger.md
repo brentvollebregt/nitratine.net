@@ -4,6 +4,7 @@ title: "Python Keylogger"
 date: 2017-12-15
 categories: Youtube
 tags: Python Keyboard Logging pynput
+description: "This is a python keylogger which will work on windows, mac and linux. This script uses the pynput module. This python keylogger will store typed keys in a file in order of when they were typed."
 ---
 
 * content

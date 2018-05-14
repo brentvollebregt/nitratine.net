@@ -4,6 +4,7 @@ title: "Get WiFi Passwords With Python"
 date: 2017-12-13
 categories: Youtube
 tags: Python WiFi
+description: "This script searches windows for wifi passwords with python already known and displays them along side the network name. It will not find passwords that your computer doesn't already know. This is useful for the occasions that you forget your WiFi password."
 ---
 
 * content

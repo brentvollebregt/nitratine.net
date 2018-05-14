@@ -4,6 +4,7 @@ title: "Python GUI Using Chrome"
 date: 2018-05-05
 categories: Tutorials
 tags: Python GUI Chrome JavaScript
+description: "Eel is a "little Python library for making simple Electron-like HTML/JS GUI apps". This is a library for creating GUI's in a Chrome app window with HTML, CSS and JS. In summary; it hosts a local webserver, then lets you annotate functions in Python so that they can be called from Javascript, and vice versa."
 ---
 
 * content

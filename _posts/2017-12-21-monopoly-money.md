@@ -4,6 +4,7 @@ title: "Monopoly Money"
 date: 2017-12-21
 categories: Projects
 tags: Python Flask
+description: "A web app that allows players to keep track of their Monopoly balances securely in an internet banking like system. The server is built in Flask which can support unlimited games on one server. Each game has one banker amd can have as many players as needed."
 ---
 
 * content

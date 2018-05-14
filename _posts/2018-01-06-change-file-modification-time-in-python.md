@@ -4,6 +4,7 @@ title: "Change File Modification Time In Python"
 date: 2018-01-06
 categories: Tutorials
 tags: Python
+description: "This demonstrates how to change a file modification time in python. No third party modules are required and it will work on windows, mac and linux."
 ---
 
 * content

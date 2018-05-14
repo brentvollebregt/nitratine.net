@@ -4,6 +4,7 @@ title: "Multi Clipboard"
 date: 2017-12-20
 categories: Projects
 tags: Python Clipboard GUI
+description: "A simple clipboard manager so you will never find yourself copying the same thing twice. Images, text and files are supported and unlimited amounts of saved clipboards can be created. Switch clipboard contents using easy commands and a clean UI."
 ---
 
 * content

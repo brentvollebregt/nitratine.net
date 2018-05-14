@@ -4,6 +4,7 @@ title: "Auto Py To Exe"
 date: 2018-03-10
 categories: Projects
 tags: Python pyinstaller Eel GUI
+description: "This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller. The whole idea seems automatic as it cleans up after itself."
 ---
 
 * content

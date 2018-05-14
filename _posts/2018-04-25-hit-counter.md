@@ -4,6 +4,7 @@ title: "Hit Counter"
 date: 2018-04-25
 categories: Projects
 tags: Python Flask
+description: "Easily Count Hits 📈 on a Website by Requesting a SVG Displaying Hit Count 🎯. Works on any site."
 ---
 
 * content

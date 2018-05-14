@@ -4,6 +4,7 @@ title: "Spotify Playlist Downloader"
 date: 2017-12-21
 categories: Projects
 tags: Python Spotify Download youtube-dl
+description: "A python script to download a Spotify playlist to MP3 using YouTube as audio source. The MP3s are tagged and given album art using Spotify"
 ---
 
 * content

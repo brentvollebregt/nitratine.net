@@ -4,6 +4,7 @@ title: "Randomly Generating Numbers to Fulfil an Integer Range"
 date: 2017-12-07
 categories: Investigations
 tags: Python
+description: "This experiment looks at how many randoms numbers will need to be generated to fufil an integer range. I use python to generate random numbers and simulate thousands of tests. This was conducted to find the range of 16,777,216 for an app I had developed."
 ---
 
 * content

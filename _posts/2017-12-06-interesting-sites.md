@@ -4,6 +4,7 @@ title: "Interesting Sites"
 date: 2017-12-06
 categories: General
 tags: Website
+description: "A list of the most interesting and engaging sites I have discovered which I recommend you to visit. I found them while on the hunt for colours and designs for projects."
 ---
 
 * content
