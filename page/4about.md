@@ -73,9 +73,9 @@ The aim of this app is to collect all the colours by simply tapping the screen t
 I did some math and testing [here]({{ site.baseurl }}{% link _posts/2017-12-07-randomly-generating-numbers-to-fulfil-an-integer-range.md %}) and guessed (based off calculations) it would take about 134 and a half years to finish the app if you tapped then screen at a rate of 400 taps per minute.
 
 <div style="text-align: center">
-	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour/tap-screen.png %}" alt="Main screen"/>
-	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour/colour-viewer.png %}" alt="Colour finder"/>
-	<img style="width: 30%;" src="{{ site.baseurl }}{% link images/colour/colour-mixer.png %}" alt="Colour mixer"/>
+	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{% link images/colour/tap-screen.png %}" alt="Main screen"/>
+	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{% link images/colour/colour-viewer.png %}" alt="Colour finder"/>
+	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{% link images/colour/colour-mixer.png %}" alt="Colour mixer"/>
 </div>
 
 ## Some Technologies I Have Worked With
