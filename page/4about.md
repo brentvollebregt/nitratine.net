@@ -82,31 +82,31 @@ I did some math and testing [here]({{ site.baseurl }}{% link _posts/2017-12-07-r
 ## Some Technologies I Have Worked With
 <div style="text-align: center">
     <!-- Python -->
-    <img src="{{ site.baseurl }}/images/icons/python.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/python.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Java -->
-    <img src="{{ site.baseurl }}/images/icons/java.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/java.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- JavaScript -->
-    <img src="{{ site.baseurl }}/images/icons/javascript.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/javascript.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Clojure -->
-    <img src="{{ site.baseurl }}/images/icons/clojure.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/clojure.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- HTML -->
-    <img src="{{ site.baseurl }}/images/icons/html.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/html.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- CSS -->
-    <img src="{{ site.baseurl }}/images/icons/css.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/css.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- SQLite -->
-    <img src="{{ site.baseurl }}/images/icons/sqlite.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/sqlite.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Android -->
-    <img src="{{ site.baseurl }}/images/icons/android.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/android.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Flask -->
-    <img src="{{ site.baseurl }}/images/icons/flask.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/flask.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Git -->
-    <img src="{{ site.baseurl }}/images/icons/git.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/git.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- JetBrains -->
-    <img src="{{ site.baseurl }}/images/icons/jetbrains.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/jetbrains.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Linux -->
-    <img src="{{ site.baseurl }}/images/icons/linux.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/linux.svg" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- PhotoShop -->
-    <img src="{{ site.baseurl }}/images/icons/photoshop.svg" style="width: 80px; margin: 0 5px">
+    <img src="{{ site.baseurl }}/images/icons/photoshop.svg" style="width: 80px; margin: 0 5px; display: inline;">
 </div>
 
 ## Contact
