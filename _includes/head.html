@@ -16,7 +16,7 @@
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml " | prepend: site.baseurl | prepend: site.url }}">
 
-    {% if site.google_analytics_id and (page.show_ads == nil or page.show_ads) %}
+    {% if site.google_analytics_id and page.show_ads == nil %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{site.google_analytics_id}}"></script>
     <script>
