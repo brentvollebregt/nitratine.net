@@ -22,11 +22,11 @@ If you haven't used or setup pip before, go to my tutorial at [{% link _posts/20
 ## Installing Pynput
 We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
-![Installing pynput](/images/how-to-get-mouse-clicks-with-python-pynput1.png)
+![Installing pynput](/images/how-to-get-mouse-clicks-with-python/pynput1.png)
 
 To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
-![Testing pynput](/images/how-to-get-mouse-clicks-with-python-pynput2.png)
+![Testing pynput](/images/how-to-get-mouse-clicks-with-python/pynput2.png)
 
 ## Creating the Script
 First import keyboard from pynput and create a variable called current and set it to a set object to track what keys are pressed currently.
