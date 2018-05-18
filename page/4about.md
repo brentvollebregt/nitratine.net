@@ -1,5 +1,6 @@
 ---
 layout: page
+disable_ads: true
 title: About
 permalink: /about/
 icon: user-circle
