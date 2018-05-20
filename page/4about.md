@@ -26,7 +26,7 @@ Find me on other platforms:
 This is a small list of my favourite projects I have developed.
 
 ### [Auto Py To Exe]({{ site.baseurl }}{% link _posts/2018-03-10-auto-py-to-exe.md %})
-This is the project I am most proud of to date. I wanted to fix the problem of converting (packaging) Python to a windows executable to run on computers without python installed.
+This is the project I am most proud of to date. I wanted to fix the problem of converting (packaging) Python to a windows executable to run on computers without python installed being a confusing job for new-comers.
 
 This project allows someone to easily set up a server that uses chromes app mode as an interface and then call pyinstaller with the parameters provided by the user.
 
@@ -38,7 +38,9 @@ This project allows someone to easily set up a server that uses chromes app mode
 ![Channel Header]({{ site.baseurl }}{% link images/PyTutorials-channel-header.png %})
 When I have time and ideas, I like to make programming tutorials. Currently most of my tutorials are Python related but I also have a few different ones.
 
-Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 150k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 94k views, [Get WIFI Passwords With Python](https://youtu.be/Z_QAvJ8sr6A) with over 52k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 703k views.
+Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 180k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 100k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 740k views.
+
+I give a lot of help in the comments for these videos and try my best to find solutions for issues people are having. This also allows me to gauge what people like in terms of topics and the videos themselves and get great feedback.
 
 ### [Multi Clipboard]({{ site.baseurl }}{% link _posts/2017-12-20-multi-clipboard.md %})
 This project fixed my issue of having to re-copy something after I just put something on my clipboard meaning I lost that last thing I copied.
@@ -59,11 +61,11 @@ Just like Multi Clipboard, attach this to a hotkey and your scripts you previous
 </div>
 
 ### [Nitratine](http://nitratine.pythonanywhere.com/)
-Nitratine was a website I built before this to host all my content.
+Nitratine was a website I built before this site to host all my content.
 
-I is a fully dynamic server with a cms built in. It can do server side scripting, uses Jinja for templating, has mobile support and more.
+It is a fully dynamic server with a cms built in. It can do server side scripting, uses Jinja for templating, has mobile support and more.
 
-I no longer use it as I felt a static site was much more suitable and easier to maintain.
+I no longer use it as I felt a static site was much more suitable and easier to maintain. I still get a bit of traffic to it each day though.
 
 ![Desktop home split light dark snow]({{ site.baseurl }}{% link images/the-nitratine-project/nitratine1.png %})
 
@@ -83,31 +85,31 @@ I did some math and testing [here]({{ site.baseurl }}{% link _posts/2017-12-07-r
 ## Some Technologies I Have Worked With
 <div style="text-align: center">
     <!-- Python -->
-    <img src="{{ site.baseurl }}/images/icons/python.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/python.svg" title="Python" alt="Python" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Java -->
-    <img src="{{ site.baseurl }}/images/icons/java.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/java.svg" title="Java" alt="Java" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- JavaScript -->
-    <img src="{{ site.baseurl }}/images/icons/javascript.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/javascript.svg" title="JavaScript" alt="JavaScript" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Clojure -->
-    <img src="{{ site.baseurl }}/images/icons/clojure.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/clojure.svg" title="Clojure" alt="Clojure" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- HTML -->
-    <img src="{{ site.baseurl }}/images/icons/html.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/html.svg" title="HTML" alt="HTML" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- CSS -->
-    <img src="{{ site.baseurl }}/images/icons/css.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/css.svg" title="CSS" alt="CSS" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- SQLite -->
-    <img src="{{ site.baseurl }}/images/icons/sqlite.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/sqlite.svg" title="SQLite" alt="SQLite" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Android -->
-    <img src="{{ site.baseurl }}/images/icons/android.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/android.svg" title="Android" alt="Android" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Flask -->
-    <img src="{{ site.baseurl }}/images/icons/flask.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/flask.svg" title="Flask" alt="Flask" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Git -->
-    <img src="{{ site.baseurl }}/images/icons/git.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/git.svg" title="Git" alt="Git" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- JetBrains -->
-    <img src="{{ site.baseurl }}/images/icons/jetbrains.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/jetbrains.svg" title="JetBrains" alt="JetBrains" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- Linux -->
-    <img src="{{ site.baseurl }}/images/icons/linux.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/linux.svg" title="Linux" alt="Linux" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- PhotoShop -->
-    <img src="{{ site.baseurl }}/images/icons/photoshop.svg" style="width: 80px; margin: 0 5px; display: inline;">
+    <img src="{{ site.baseurl }}/images/icons/photoshop.svg" title="Adobe PhotoShop" alt="Adobe PhotoShop" style="width: 80px; margin: 0 5px; display: inline;">
 </div>
 
 ## Contact
