@@ -51,7 +51,7 @@ As uneventful some of my repositories are, I'm always curious if there is any ac
 	<tbody>
 	    {% for repository in repos %}
 		<tr>
-			<td>{{ repository.name }}</td>
+			<td><a href="https://github.com/brentvollebregt/{{ repository.name }}">{{ repository.name }}</a></td>
 			<td><object type="image/svg+xml" data="https://img.shields.io/github/stars/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social"></object></td>
 			<td><object type="image/svg+xml" data="https://img.shields.io/github/forks/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social"></object></td>
 			<td><object type="image/svg+xml" data="https://img.shields.io/github/watchers/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social"></object></td>
