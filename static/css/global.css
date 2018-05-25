@@ -331,11 +331,6 @@ input:checked + .slider:before {
     grid-gap: 2px;
 }
 
-.github-card-horz-alig {
-    height: 150px;
-    margin: 5px auto;
-}
-
 /* Footer */
 
 @media screen and (min-width: 800px) {
