@@ -12,9 +12,7 @@ description: "This project allows you to convert python scripts to executables w
 
 This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller.
 
-[Find the project on GitHub here](https://github.com/brentvollebregt/auto-py-to-exe)
-<object type="image/svg+xml" data="https://img.shields.io/github/stars/brentvollebregt/auto-py-to-exe.svg?style=social"></object>
-<object type="image/svg+xml" data="https://img.shields.io/github/forks/brentvollebregt/auto-py-to-exe.svg?style=social"></object>
+{% include addGitHubRepoBadges.html content="brentvollebregt/auto-py-to-exe" %}
 
 ## What is this?
 This application displays a simple interface that allows you to convert py to exe easily. By just selecting the file, if you want it to convert to onefile and if you want a console, you will only need to press convert and wait for the script to do the rest.
