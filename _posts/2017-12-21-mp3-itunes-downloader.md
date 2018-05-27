@@ -12,7 +12,7 @@ description: "A Python script that allows a user to download a particular song f
 
 A Python script that allows a user to download a particular song from an iTunes-listed album. It uses YouTube as an audio source and iTunes to tag the mp3 file.
 
-[Find the project on GitHub here](https://github.com/brentvollebregt/mp3-iTunes)
+{% include addGitHubRepoBadges.html content="brentvollebregt/mp3-iTunes" %}
 
 ## What is this?
 This project allows you to select a song from an album found on the web version of iTunes and download it by sourcing the audio from YouTube and tags from iTunes.

@@ -12,7 +12,7 @@ description: "A simple clipboard manager so you will never find yourself copying
 
 A simple clipboard manager so you will never find yourself copying the same thing twice. Images, text and files are supported and unlimited amounts of saved clipboards can be created. Switch clipboard contents using easy commands and a clean UI. Built in Python using PYQT5, pywin32 and PIL. The idea of this is to easily switch keyboards with simple commands. Map commands to keys to use this easily.
 
-[Find the project on GitHub](https://github.com/brentvollebregt/mutli-clipboard)
+{% include addGitHubRepoBadges.html content="brentvollebregt/mutli-clipboard" %}
 
 ## What is this?
 This is a python script which allows you to swap clipboard contents to a type of storage so you don't have to go back and copy something because you just temporarily copied something. The idea of this is to act like a hotbar like in games. The main feature of this project is the GUI but there is support for command line manipulation.
