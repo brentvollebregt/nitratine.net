@@ -52,9 +52,9 @@ As uneventful some of my repositories are, I'm always curious if there is any ac
 	    {% for repository in repos %}
 		<tr>
 			<td><a href="https://github.com/brentvollebregt/{{ repository.name }}">{{ repository.name }}</a></td>
-			<td><object type="image/svg+xml" data="https://img.shields.io/github/stars/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social"></object></td>
-			<td><object type="image/svg+xml" data="https://img.shields.io/github/forks/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social"></object></td>
-			<td><object type="image/svg+xml" data="https://img.shields.io/github/watchers/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social"></object></td>
+			<td><img src="https://img.shields.io/github/stars/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social" alt="Stars" style="margin-bottom: -5px; display: inline-block;"></td>
+			<td><img src="https://img.shields.io/github/forks/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social" alt="Forks" style="margin-bottom: -5px; display: inline-block;"></td>
+			<td><img src="https://img.shields.io/github/watchers/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social" alt="Watchers" style="margin-bottom: -5px; display: inline-block;"></td>
 		</tr>
 		{% endfor %}
 	</tbody>

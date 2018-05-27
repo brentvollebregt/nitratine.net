@@ -129,32 +129,32 @@ Make sure to encode the uri before requesting. This can be done with the `encode
 
 **?label=healthinesses : Override the default left-hand-side text**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?label=healthinesses" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?label=healthinesses" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?logo=appveyor : Insert one of the [named logos](https://github.com/badges/shields/tree/gh-pages/logo)**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logo=appveyor" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logo=appveyor" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?logo=data:image/png;base64,… : Insert custom logo image (≥ 14px high)**
 
-No example.
+No example as the data for the png will be large.
 
 **?logoWidth=40 : Set the horizontal space to give to the logo**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logoWidth=40" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logoWidth=40" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?link=http://left&link=http://right : Specify what clicking on the left/right of a badge should do**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?link=http://www.example.com&link=http://www.google.com" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+No example as I use img to embed these images (You can use an <object> tag if you want to embed these).
 
 **?colorA=abcdef : Set background of the left part (hex color only)**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?colorA=abcdef" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?colorA=abcdef" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?colorB=fedcba : Set background of the right part (hex color only)**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?colorB=fedcba" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?colorB=fedcba" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?maxAge=360 : Set the HTTP cache lifetime in secs**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?maxAge=360" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?maxAge=360" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
