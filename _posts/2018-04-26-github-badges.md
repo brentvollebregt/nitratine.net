@@ -29,7 +29,7 @@ For example if I wanted to create a badge that says "made with" and then "python
 <img src="https://img.shields.io/badge/made%20with-python-blue.svg" alt="made with python">
 ```
 
-Which will give you: <img src="https://img.shields.io/badge/made%20with-python-blue.svg" alt="made with python" style="margin-bottom: -5px">
+Which will give you: <img src="https://img.shields.io/badge/made%20with-python-blue.svg" alt="made with python" style="margin-bottom: -5px; display: inline-block;">
 
 You can also use hex colour codes instead of names, for example:
 
@@ -37,17 +37,17 @@ You can also use hex colour codes instead of names, for example:
 <img src="https://img.shields.io/badge/this%20is-purple-503040.svg" alt="this is purple">
 ```
 
-This will give: <img src="https://img.shields.io/badge/this%20is-purple-503040.svg" alt="this is purple" style="margin-bottom: -5px">
+This will give: <img src="https://img.shields.io/badge/this%20is-purple-503040.svg" alt="this is purple" style="margin-bottom: -5px; display: inline-block;">
 
 <!-- more -->
 
 ## Styles
 Five different styles are also available to use. These are:
- - Plastic (?style=plastic) <img src="https://img.shields.io/badge/style-plastic-green.svg?longCache=true&style=plastic" alt="Plastic" style="margin-bottom: -5px">
- - Flat (?style=flat) <img src="https://img.shields.io/badge/style-flat-green.svg?longCache=true&style=flat" alt="Flat" style="margin-bottom: -5px">
- - Flat Square (?style=flat-square) <img src="https://img.shields.io/badge/style-flat--square-green.svg?longCache=true&style=flat-square" alt="Flat Square" style="margin-bottom: -5px">
+ - Plastic (?style=plastic) <img src="https://img.shields.io/badge/style-plastic-green.svg?longCache=true&style=plastic" alt="Plastic" style="margin-bottom: -5px; display: inline-block;">
+ - Flat (?style=flat) <img src="https://img.shields.io/badge/style-flat-green.svg?longCache=true&style=flat" alt="Flat" style="margin-bottom: -5px; display: inline-block;">
+ - Flat Square (?style=flat-square) <img src="https://img.shields.io/badge/style-flat--square-green.svg?longCache=true&style=flat-square" alt="Flat Square" style="margin-bottom: -5px; display: inline-block;">
  - For The Badge (?style=for-the-badge) <img src="https://img.shields.io/badge/style-for--the--badge-green.svg?longCache=true&style=for-the-badge" alt="For The Badge" style="margin-bottom: -8px">
- - Social (?style=social) <img src="https://img.shields.io/badge/style-social-green.svg?longCache=true&style=social" alt="Social" style="margin-bottom: -5px">
+ - Social (?style=social) <img src="https://img.shields.io/badge/style-social-green.svg?longCache=true&style=social" alt="Social" style="margin-bottom: -5px; display: inline-block;">
 
 To apply these styles to a badge, simple add `?style=` to the end of the url and then add the style type as shown in the brackets above.
 
@@ -57,7 +57,7 @@ For example, using my badge from before:
 <img src="https://img.shields.io/badge/made%20with-python-blue.svg?style=flat-square" alt="made with python">
 ```
 
-Will create: <img src="https://img.shields.io/badge/made%20with-python-blue.svg?style=flat-square" alt="made with python" style="margin-bottom: -5px">
+Will create: <img src="https://img.shields.io/badge/made%20with-python-blue.svg?style=flat-square" alt="made with python" style="margin-bottom: -5px; display: inline-block;">
 
 ## Dynamic Badges
 When visiting [shields.io](https://shields.io/) you will be introduces with a huge site of dynamic badges that the project supports. Here are a few badges that I like or find useful.
@@ -66,57 +66,57 @@ Remember there are many more badges on shields.io than what is displayed here. T
 
 ### Github
 
-Current GitHub tag: <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub</object>
+Current GitHub tag: <img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/tag/expressjs/express.svg`
 
-GitHub issues: <object type="image/svg+xml" data="https://img.shields.io/github/issues/badges/shields.svg" style="margin-bottom: -5px">GitHub issues</object>
+GitHub issues: <img src="https://img.shields.io/github/issues/badges/shields.svg" alt="GitHub issues" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/issues/badges/shields.svg`
 
-GitHub contributors: <object type="image/svg+xml" data="https://img.shields.io/github/contributors/cdnjs/cdnjs.svg" style="margin-bottom: -5px">GitHub contributors</object>
+GitHub contributors: <img src="https://img.shields.io/github/contributors/cdnjs/cdnjs.svg" alt="GitHub contributors" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/contributors/cdnjs/cdnjs.svg`
 
-License: <object type="image/svg+xml" data="https://img.shields.io/github/license/mashape/apistatus.svg" style="margin-bottom: -5px">License</object>
+License: <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="License" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/license/mashape/apistatus.svg`
 
-GitHub code size in bytes: <object type="image/svg+xml" data="https://img.shields.io/github/languages/code-size/badges/shields.svg" style="margin-bottom: -5px">GitHub code size in bytes</object>
+GitHub code size in bytes: <img src="https://img.shields.io/github/languages/code-size/badges/shields.svg" alt="GitHub code size in bytes" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/languages/code-size/badges/shields.svg`
 
-GitHub top language: <object type="image/svg+xml" data="https://img.shields.io/github/languages/top/badges/shields.svg" style="margin-bottom: -5px">GitHub top language</object>
+GitHub top language: <img src="https://img.shields.io/github/languages/top/badges/shields.svg" alt="GitHub top language" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/languages/top/badges/shields.svg`
 
-GitHub language count: <object type="image/svg+xml" data="https://img.shields.io/github/languages/count/badges/shields.svg" style="margin-bottom: -5px">GitHub language count</object>
+GitHub language count: <img src="https://img.shields.io/github/languages/count/badges/shields.svg" alt="GitHub language count" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/languages/count/badges/shields.svg`
 
 ### Social
 
-GitHub forks: <object type="image/svg+xml" data="https://img.shields.io/github/forks/badges/shields.svg?style=social" style="margin-bottom: -5px">Forks</object>
+GitHub forks: <img src="https://img.shields.io/github/forks/badges/shields.svg?style=social" alt="Forks" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/forks/badges/shields.svg?style=social`
 
-GitHub stars: <object type="image/svg+xml" data="https://img.shields.io/github/stars/badges/shields.svg?style=social" style="margin-bottom: -5px">Stars</object>
+GitHub stars: <img src="https://img.shields.io/github/stars/badges/shields.svg?style=social" alt="Stars" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/stars/badges/shields.svg?style=social`
 
-GitHub watchers: <object type="image/svg+xml" data="https://img.shields.io/github/watchers/badges/shields.svg?style=social" style="margin-bottom: -5px">Watchers</object>
+GitHub watchers: <img src="https://img.shields.io/github/watchers/badges/shields.svg?style=social" alt="Watchers" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/watchers/badges/shields.svg?style=social`
 
-GitHub followers: <object type="image/svg+xml" data="https://img.shields.io/github/followers/espadrine.svg?style=social" style="margin-bottom: -5px">Followers</object>
+GitHub followers: <img src="https://img.shields.io/github/followers/espadrine.svg?style=social" alt="Followers" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/github/followers/espadrine.svg?style=social`
 
-Twitter URL: <object type="image/svg+xml" data="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" style="margin-bottom: -5px">Twitter</object>
+Twitter URL: <img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Twitter" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/twitter/url/http/shields.io.svg?style=social`
 
-Twitter Follow: <object type="image/svg+xml" data="https://img.shields.io/twitter/follow/pytutorials.svg?style=social&label=Follow" style="margin-bottom: -5px">Twitter Follow</object>
+Twitter Follow: <img src="https://img.shields.io/twitter/follow/pytutorials.svg?style=social&label=Follow" alt="Twitter Follow" style="margin-bottom: -5px; display: inline-block;">
 
 `https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Follow`
 
@@ -129,11 +129,11 @@ Make sure to encode the uri before requesting. This can be done with the `encode
 
 **?label=healthinesses : Override the default left-hand-side text**
 
-<object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub tag</object>  will turn into  <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg?label=healthinesses" style="margin-bottom: -5px">Current GitHub tag</object>
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?label=healthinesses" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?logo=appveyor : Insert one of the [named logos](https://github.com/badges/shields/tree/gh-pages/logo)**
 
-<object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub tag</object>  will turn into  <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg?logo=appveyor" style="margin-bottom: -5px">Current GitHub tag</object>
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logo=appveyor" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?logo=data:image/png;base64,… : Insert custom logo image (≥ 14px high)**
 
@@ -141,20 +141,20 @@ No example.
 
 **?logoWidth=40 : Set the horizontal space to give to the logo**
 
-<object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub tag</object>  will turn into  <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg?logoWidth=40" style="margin-bottom: -5px">Current GitHub tag</object>
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logoWidth=40" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?link=http://left&link=http://right : Specify what clicking on the left/right of a badge should do**
 
-<object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub tag</object>  will turn into  <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg?link=http://www.example.com&link=http://www.google.com" style="margin-bottom: -5px">Current GitHub tag</object>
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?link=http://www.example.com&link=http://www.google.com" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?colorA=abcdef : Set background of the left part (hex color only)**
 
-<object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub tag</object>  will turn into  <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg?colorA=abcdef" style="margin-bottom: -5px">Current GitHub tag</object>
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?colorA=abcdef" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?colorB=fedcba : Set background of the right part (hex color only)**
 
-<object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub tag</object>  will turn into  <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg?colorB=fedcba" style="margin-bottom: -5px">Current GitHub tag</object>
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?colorB=fedcba" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **?maxAge=360 : Set the HTTP cache lifetime in secs**
 
-<object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg" style="margin-bottom: -5px">Current GitHub tag</object>  will turn into  <object type="image/svg+xml" data="https://img.shields.io/github/tag/expressjs/express.svg?maxAge=360" style="margin-bottom: -5px">Current GitHub tag</object>
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  ->  <img src="https://img.shields.io/github/tag/expressjs/express.svg?maxAge=360" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
