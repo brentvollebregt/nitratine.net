@@ -17,7 +17,7 @@ This is a python keylogger which will work on windows, mac and linux. This scrip
 <!-- more -->
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}) to setup pip. This is needed to install pynput to get keys typed.
+If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) to setup pip. This is needed to install pynput to get keys typed.
 
 ## Installing Pynput
 We will be using the pynput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
@@ -103,7 +103,7 @@ Converting to .exe will allow the script to run on windows computers without pyt
 ## FAQ
 
 ### 'python' is not recognized as an internal or external command
-Python hasn't been installed or it hasn't been installed properly. Go to [{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}) and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.
+Python hasn't been installed or it hasn't been installed properly. Go to [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.
 
 ### Where are the log files?
 They will be located next to the python file (in the current directory for more advanced users). If it hasn't appeared, make sure you run the script in IDLE to check for errors you have made.

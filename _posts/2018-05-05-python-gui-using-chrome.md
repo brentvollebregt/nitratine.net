@@ -17,7 +17,7 @@ description: "Eel is a little Python library for making simple Electron-like HTM
 > Please note that this content is based off README.md in [Eel's GitHub Repository](https://github.com/ChrisKnott/Eel) with modifications.
 
 ## Setup
-To use Eel you will need to install the library by simply calling `pip install eel` in cmd. Make sure no errors occurred and if you don't have pip head over to [{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-python's-pip.md %}). To make sure Eel is installed, open IDLE and execute `import eel`. If no errors appear then it has installed properly.
+To use Eel you will need to install the library by simply calling `pip install eel` in cmd. Make sure no errors occurred and if you don't have pip head over to [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}). To make sure Eel is installed, open IDLE and execute `import eel`. If no errors appear then it has installed properly.
 
 Although this example will be displaying the use of chromes app mode, you do not actually need [chrome](https://www.google.com/chrome/). When starting the app, if you do not have chrome you will be asked what to open to display the webpage.
 
