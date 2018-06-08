@@ -15,7 +15,7 @@ This post is a place where you can see view counts for all my pages, GitHub repo
 <!-- more -->
 
 ## Post View Counts
-These counts are counted using [hitcounter.pythonanywhere.com](http://hitcounter.pythonanywhere.com). They are not 100% accurate but will be a reasonable idea of the actual views (better than Google Analytics being blocked by ad-blockers)
+These counts are counted using [hitcounter.pythonanywhere.com](https://hitcounter.pythonanywhere.com). They are not 100% accurate but will be a reasonable idea of the actual views (better than Google Analytics being blocked by ad-blockers)
 
 <table>
 	<thead>
@@ -28,7 +28,7 @@ These counts are counted using [hitcounter.pythonanywhere.com](http://hitcounter
 	    {% for post in site.posts %}
 		<tr>
 			<td><a href="{{ post.url }}">{{ post.title }}</a></td>
-			<td><script>document.write('<img src="http://hitcounter.pythonanywhere.com/nocount/tag.svg?url=' + encodeURIComponent("{{ site.url }}{{ post.url }}") + '" alt="Hits" style="margin-bottom: -4px;">')</script></td>
+			<td><script>document.write('<img src="https://hitcounter.pythonanywhere.com/nocount/tag.svg?url=' + encodeURIComponent("{{ site.url }}{{ post.url }}") + '" alt="Hits" style="margin-bottom: -4px;">')</script></td>
 		</tr>
 		{% endfor %}
 	</tbody>
