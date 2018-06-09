@@ -60,8 +60,4 @@ gems:
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
   - jekyll-github-metadata # Get GitHub metadata
 
-# And these
-plugins:
-  - jekyll-redirect-from
-
 repository: brentvollebregt/brentvollebregt.github.io # For local jekyll-github-metadata

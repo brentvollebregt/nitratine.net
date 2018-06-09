@@ -5,7 +5,6 @@ date: 2017-12-13
 categories: Youtube
 tags: Python
 description: "This tutorial demonstrates how to setup Python's PIP. PIP is a package manager for pip that allows you to download third party modules easily. I explain how to find your scripts folder and how to find pip."
-redirect_from: "/how-to-setup-python's-pip/"
 ---
 
 * content
