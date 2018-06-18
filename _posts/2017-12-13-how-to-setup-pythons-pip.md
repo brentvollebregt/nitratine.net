@@ -60,9 +60,7 @@ Some useful commands:
 
 You can find packages from projects on [GitHub](https://github.com/) or [PyPI](https://pypi.python.org/pypi).
 
-## FAQ
-
-### When I try to edit the path value it just shows the path name and value, not the full list
-You are using Windows 10 (this is fine!). Just put a semicolon at the end (';') and then put the path (no space between them).
+## It Still Isn't Working
+Regarding you followed the instructions properly, this will work. One other method to call pip is by calling `python -m pip`. Using this allows us to call pip when the scripts folder is not in the PATH variable. Note that the directory of python.exe must be in the PATH variable for this to work (which means calling `python` in cmd must work first).
 
 *Please leave questions and comments related to the video on YouTube as they will be replied to faster there*
