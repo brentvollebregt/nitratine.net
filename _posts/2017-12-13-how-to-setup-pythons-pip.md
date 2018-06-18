@@ -35,8 +35,6 @@ In the new window that just appeared, go to the second section - "System variabl
 
 Now in the new window, click new on the right and put the folder location of your python scripts folder in. If you don't know where your python scripts folder is can execute this in a python shell or script.
 
-> If you are using an older version of Windows, you will be presented with a one-line input field. Add a semicolon ';' to the end of the text current in the field and then add the path as you would have in the area before. `<current text>;<path>`
-
 ```python
 import os
 import sys
@@ -47,6 +45,8 @@ print (os.path.dirname(sys.executable) + '\Scripts\')
 ![Adding script folder location](/images/how-to-setup-pythons-pip/demo5.png)
 
 Now type 'pip' in cmd to make sure you have done this correctly. No errors should appear.
+
+> If you are using an older version of Windows, you will be presented with a one-line input field. Add a semicolon ';' to the end of the text current in the field and then add the path as you would have in the area before. `<current text>;<path>`
 
 ## Usage
 You can now use commands like ```pip install pynput``` to install a package or "pip list" to look at all packages installed.
