@@ -110,6 +110,8 @@ I did some math and testing [here]({{ site.baseurl }}{% link _posts/2017-12-07-r
     <img src="{{ site.baseurl }}/images/icons/linux.svg" title="Linux" alt="Linux" style="width: 80px; margin: 0 5px; display: inline;">
     <!-- PhotoShop -->
     <img src="{{ site.baseurl }}/images/icons/photoshop.svg" title="Adobe PhotoShop" alt="Adobe PhotoShop" style="width: 80px; margin: 0 5px; display: inline;">
+    <!-- C# -->
+    <img src="{{ site.baseurl }}/images/icons/csharp.svg" title="C#" alt="C#" style="width: 80px; margin: 0 5px; display: inline;">
 </div>
 
 ## Contact
