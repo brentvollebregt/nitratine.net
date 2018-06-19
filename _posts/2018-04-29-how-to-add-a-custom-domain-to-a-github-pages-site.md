@@ -54,20 +54,25 @@ This is all that needs to be done for a www subdomain. GitHub will decided what 
 ### No WWW
 GitHubs article on setting this up can be found [here](https://help.github.com/articles/setting-up-an-apex-domain/) if you want reference.
 
-My site doesn't use www so I made it so that www is still routed to nitratine.net. To do this click "A" in the "Add/Edit a Resource Record" grey box.
+First you will need to add an A Record to 185.199.111.153. To do this click "A" in the "Add/Edit a Resource Record" grey box.
 
 ![Add Resource Record](/images/how-to-add-a-custom-domain-to-a-github-pages-site/add-resource-record.png)
 
-In this you want to insert `192.30.252.153` into "IPV4 ADDRESS" but leave the hostname field blank. You can leave the TTL as it is and click submit.
+In this you want to insert `185.199.111.153` into "IPV4 ADDRESS" but leave the hostname field blank. You can leave the TTL as it is and click submit.
 
 ![First IP](/images/how-to-add-a-custom-domain-to-a-github-pages-site/first-ip.png)
 
-Now do this again but this time put the ip address `192.30.252.154` in.
+Now repeat this another three times and use the ip addresses: `185.199.110.153`, `185.199.109.153` and `185.199.108.153`
 
-After that we will set up the www routing by clicking "CNAME" in the grey box. In here, add www to the HOSTNAME field and your current GitHub pages address to TARGET HOSTNAME. For example I would put brentvollebregt.github.io in this as it is where by GitHub page is currently hosted. Leave the TTL the same again and click submit.
+After that we will set up the www routing by clicking "CNAME" in the grey box. In here, add www to the HOSTNAME field and your current GitHub pages address to TARGET HOSTNAME. For example I would put brentvollebregt.github.io in this as it is where by GitHub page is currently hosted. Leave the TTL the same again and click submit. If you are confused about this look under the WWW sub-heading for how to do this.
 
-You should now have three entries in the "Existing Resource Records".
+You should now have five entries in the "Existing Resource Records" (4 A records and 1 CNAME).
 
 ![Existing Resource Records](/images/how-to-add-a-custom-domain-to-a-github-pages-site/existing-resource-records.png)
 
-GitHub will decided what url to use based on what you put in your Git repositories CNAME. You may have to wait a while until these entries are added by Namesilo but in my experience it is very quick.
+GitHub will decided what url to use based on what you put in your git repositories CNAME. You may have to wait a while until these entries are added by Namesilo but in my experience it is very quick.
+
+### SSL (Green Padlock)
+Following these steps and using the new IP addresses, you will now be provided SSL for free from Github with no extra effort.
+
+If this did not occur (it didn't work my first time I tried), go to the git repo on Github and then go to settings. Scroll down this page until you find the "GitHub Pages" block. In this block, there is a "Custom domain" header with an input field under it (just like we did in Setting Up CNAME in GitHub). Clear this field and click save. Now put your url in the input field (the one you just cleared) and save it. This reset of the url can trigger the SSL certificate generation and you should get SSL on your website in under a day.
