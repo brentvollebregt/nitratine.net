@@ -1,9 +1,7 @@
 ---
-layout: post
+layout: page
+permalink: /data/
 title: "Some Simple Numbers"
-date: 2017-11-01
-categories: General
-tags:
 description: "A place where you can see view counts for all my pages, GitHub repo stats and other numbers related to the work I do. Always up to date."
 ---
 
