@@ -10,8 +10,6 @@ description: "A place where you can see view counts for all my pages, GitHub rep
 
 This post is a place where you can see view counts for all my pages, GitHub repo stats and other numbers related to the work I do.
 
-<!-- more -->
-
 ## Post View Counts
 These counts are counted using [hitcounter.pythonanywhere.com](https://hitcounter.pythonanywhere.com). They are not 100% accurate but will be a reasonable idea of the actual views (better than Google Analytics being blocked by ad-blockers)
 
