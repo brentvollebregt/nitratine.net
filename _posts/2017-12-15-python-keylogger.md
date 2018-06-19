@@ -96,7 +96,7 @@ with Listener(on_press=on_press) as listener:
 ```
 
 ## Compile to EXE
-Want to convert this .py to a .exe? Head over to my tutorial at [{{ site.baseurl }}{% link _posts/2017-12-11-convert-py-to-exe.md %}]({{ site.baseurl }}{% link _posts/2017-12-11-convert-.py-to-.exe.md %}) to do it in a few easy steps. This tutorial also shows you how to remove the console that shows up, make one file executables and even add an icon.
+Want to convert this .py to a .exe? Head over to my tutorial at [{{ site.baseurl }}{% link _posts/2017-12-11-convert-py-to-exe.md %}]({{ site.baseurl }}{% link _posts/2017-12-11-convert-py-to-exe.md %}) to do it in a few easy steps. This tutorial also shows you how to remove the console that shows up, make one file executables and even add an icon.
 
 Converting to .exe will allow the script to run on windows computers without python installed (python is pre-installed on mac and most linux computers)
 
