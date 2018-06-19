@@ -8,7 +8,7 @@ description: "If you want to donate something, this would be the best area to"
 * content
 {:toc}
 
-If enjoy my content and would like to donate something, this would be the best area to. I use PayPal for online transactions as it is quite safe.
+If you enjoy my content and would like to donate something, this would be the best area to. I use PayPal for online transactions as it is quite safe.
 
 If you would like your donation to be added to the public donations list, add your name (optional of course) and a message to the donation when processing in PayPal. If you forget to do this don't hesitate to send me an email to fix it up.
 
@@ -24,3 +24,6 @@ If you would like your donation to be added to the public donations list, add yo
 Any amount is appreciated and any donations will prioritise to the running of this site (mainly the domain name).
 
 ## Public Donations
+
+| Name | Donation | Message |
+|------|----------|---------|
