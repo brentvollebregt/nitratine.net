@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /data/
-title: "Some Simple Numbers"
+title: "Data"
 description: "A place where you can see view counts for all my pages, GitHub repo stats and other numbers related to the work I do. Always up to date."
 ---
 
