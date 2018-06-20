@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /donations/
+disable_ads: true
 title: "Donations"
 description: "If you want to donate something, this would be the best area to"
 ---
