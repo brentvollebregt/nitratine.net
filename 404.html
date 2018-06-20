@@ -1,0 +1,125 @@
+---
+layout: default
+sitemap: false
+disable_ads: true
+permalink: /404.html
+description: "404, that page could not be found."
+---
+
+<div class="page clearfix" index>
+    <div class="left">
+        <h1 style="display: none;">Nitratine</h1>
+        <img src="{{ site.baseurl }}/images/site-banner.png" class="header_img" alt="Nitratine Header">
+        <p class="sub_header_text">The home of my <span class="sub_header_text_hlght">projects</span>, <span class="sub_header_text_hlght">tutorials</span> and <span class="sub_header_text_hlght">other things</span> I feel are worth sharing.</p>
+        <hr>
+        <p style="text-align: center; margin: 0; font-size: 200px; line-height: 150px; font-family: monospace;">
+            <span style="color: #496dd0;">4</span>
+            <span style="color: #d81b60;">0</span>
+            <span style="color: #496dd0;">4</span>
+        </p>
+        <p style="text-align: center; font-size: 20px; font-family: monospace;">That page could not be found.</p>
+    </div>
+
+    <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
+    <div class="right">
+        <div class="wrap">
+            <!-- Content -->
+            <div class="side ">
+                <div>
+                    <i class="fa fa-th-list"></i>
+                    Categories
+                </div>
+                <ul class="content-ul" cate>
+                    {% for category in site.categories %}
+                    <li>
+                        <a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}" class="categories-list-item" cate="{{ category | first }}">
+                            <span class="name">
+                                {{ category | first }}
+                            </span>
+                            <span class="badge">{{ category | last | size }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- Tags -->
+            <div class="side">
+                <div>
+                    <i class="fa fa-tags"></i>
+                    Tags
+                </div>
+                <div class="tags-cloud">
+                    {% assign first = site.tags.first %}
+                    {% assign max = first[1].size %}
+                    {% assign min = max %}
+                    {% for tag in site.tags offset:1 %}
+                      {% if tag[1].size > max %}
+                        {% assign max = tag[1].size %}
+                      {% elsif tag[1].size < min %}
+                        {% assign min = tag[1].size %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if max == min %}
+                        {% assign diff = 1 %}
+                    {% else %}
+                        {% assign diff = max | minus: min %}
+                    {% endif %}
+
+                    {% for tag in site.tags %}
+                      {% assign temp = tag[1].size | minus: min | times: 36 | divided_by: diff %}
+                      {% assign base = temp | divided_by: 4 %}
+                      {% assign remain = temp | modulo: 4 %}
+                      {% if remain == 0 %}
+                        {% assign size = base | plus: 9 %}
+                      {% elsif remain == 1 or remain == 2 %}
+                        {% assign size = base | plus: 9 | append: '.5' %}
+                      {% else %}
+                        {% assign size = base | plus: 10 %}
+                      {% endif %}
+                      {% if remain == 0 or remain == 1 %}
+                        {% assign color = 9 | minus: base %}
+                      {% else %}
+                        {% assign color = 8 | minus: base %}
+                      {% endif %}
+                      <a href="{{ root_url }}/{{ site.tag_dir }}#{{ tag[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ tag[0] }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="side">
+                <div>
+                    <i class="fa fa-youtube"></i>
+                    PyTutorials on YouTube
+                </div>
+                <div style="text-align: center">
+                    <script src="https://apis.google.com/js/platform.js"></script>
+                    <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                </div>
+            </div>
+
+            {% if site.youtube_data_api_key %}
+            <div class="side" id="recentVideosSide" style="display: none;">
+                <div>
+                    <i class="fa fa-video-camera"></i>
+                    Recent Videos
+                </div>
+                <div id="recentVideos">
+
+                </div>
+            </div>
+            <script src="{{ "/js/recentYouTubeVideos.js" | prepend: site.baseurl }}" charset="utf-8"></script>
+            {% endif %}
+
+            <!-- <div class="side">
+                <div>
+                    <i class="fa fa-external-link"></i>
+                    Links
+                </div>
+                <ul  class="content-ul">
+
+                </ul>
+            </div> -->
+        </div>
+    </div>
+</div>
