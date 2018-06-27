@@ -141,6 +141,11 @@ This will return a list of the keys for items in the row object. These keys will
 print ("ID: {}".format( particualr_id_and_url['id'] ))
 ```
 
+## Viewing a Database Without Commands
+A great way to check what is in your database is to go to a site like [SQLite Viewer](http://inloop.github.io/sqlite-viewer/) where you can view a sqlite file online. Simply drop the file in the site and you will be able to look at the contents locally in a very easy matter.
+
+On this site you can also temporarily makes changes to the database which allows you to test commands before running them on data else-where.
+
 ## Why Don't I Just Use MySQL or SQL Server?
 One massive benefit of this package is that you don't need to have any extra server running to execute your commands. Everything is done with a file you have access to and you don't need to install any extra software.
 
