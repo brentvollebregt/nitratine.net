@@ -35,7 +35,7 @@ This project allows someone to easily set up a server that uses chromes app mode
 </div>
 
 ### [PyTutorials YouTube Channel](https://www.youtube.com/PyTutorialsOriginal)
-![Channel Header]({{ site.baseurl }}{% link images/PyTutorials-channel-header.png %})
+![Channel Header]({{ site.baseurl }}{% link images/PyTutorials-channel-header.jpg %})
 When I have time and ideas, I like to make programming tutorials. Currently most of my tutorials are Python related but I also have a few different ones.
 
 Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 180k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 100k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 740k views.
