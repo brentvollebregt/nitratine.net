@@ -122,7 +122,7 @@ If you would like to contact me for another reason, send an email to <a id="emai
 <script>
 function displayEmail() {
     alert("Please leave questions about videos on YouTube and blog posts in the comments at the bottom of the post.");
-    document.getElementById('email').innerHTML = "brentvollebregt@gmail.com";
-    document.getElementById('email').href = "mailto:brentvollebregt@gmail.com";
+    document.getElementById('email').innerHTML = "{{ site.email }}";
+    document.getElementById('email').href = "mailto:{{ site.email }}";
 }
 </script>
