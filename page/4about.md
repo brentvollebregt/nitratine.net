@@ -42,6 +42,10 @@ Some of my videos have quite a bit of attention, for example [Convert PY to EXE]
 
 I give a lot of help in the comments for these videos and try my best to find solutions for issues people are having. This also allows me to gauge what people like in terms of topics and the videos themselves and get great feedback.
 
+### [Price Per Unit]({{ site.baseurl }}{% link _posts/2018-06-28-price-per-unit.md %})
+![Price Per Unit Header]({{ site.baseurl }}{% link images/price-per-unit/FeatureGraphic.png %})
+This project is an Android app that compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money. Simply give a name (optional), enter in the cost, amount and size of each item and the unit per dollar will be calculated.
+
 ### [Multi Clipboard]({{ site.baseurl }}{% link _posts/2017-12-20-multi-clipboard.md %})
 This project fixed my issue of having to re-copy something after I just put something on my clipboard meaning I lost that last thing I copied.
 
