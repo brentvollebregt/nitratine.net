@@ -12,8 +12,12 @@ description: "In this post I will show the basics of python's threading module. 
 
 In this post I will show the basics of python's threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs.
 
+{% include embedYouTube.html content="5JSloPGocSY" %}
+
 ## What is Threading?
 The threading module comes pre-installed with python so there are no downloads or installs for this tutorial. Threading allows us to call a method or class that has extended the `threading.Thread` class to run alongside the main thread (the linear flow that generally happens).
+
+<!-- more -->
 
 One good use for threading is to create multiple instances of things that take time outside your program. A great example of this is sending requests to a server. If you want to send many, instead of waiting for them to finish one-by-one before you send the next request, you can create many threads to request different urls and they will then all be waiting at the same time.
 
@@ -32,8 +36,6 @@ for i in range(4):
     thread_list.append(thread)
     thread.start()
 ```
-
-<!-- more -->
 
 In this example we create a place to store the threads and then loop 4 times as we create the threads. To create the threads, we first initialise a threading.Thread instance passing the method as the target. We then add this thread to our previously create list and start it. This will provide the following output:
 

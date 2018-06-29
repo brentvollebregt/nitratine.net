@@ -52,6 +52,8 @@ This app is ideal to find the best price in supermarkets but will work just in w
 ## Getting Started
 Clone the repo at [github.com/brentvollebregt/price-per-unit](https://github.com/brentvollebregt/price-per-unit) and then use "Import Project" in Android Studio to open the project.
 
+{% include addGitHubRepoBadges.html content="brentvollebregt/price-per-unit" %}
+
 ### Pre-requisites
 - Android SDK 26
 - Android Build Tools v27.0.3
