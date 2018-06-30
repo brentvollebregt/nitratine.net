@@ -12,6 +12,8 @@ description: "Eel is a little Python library for making simple Electron-like HTM
 
 [Eel](https://github.com/ChrisKnott/Eel) is a "little Python library for making simple Electron-like HTML/JS GUI apps". When thinking of what to design [auto-py-to-exe]({{ site.baseurl }}{% link _posts/2018-03-10-auto-py-to-exe.md %}) with, I came across this library for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. In summary; it hosts a local webserver, then lets you annotate functions in Python so that they can be called from Javascript, and vice versa.
 
+{% include embedYouTube.html content="2kbeBzEQfXE" %}
+
 <!-- more -->
 
 > Please note that this content is based off README.md in [Eel's GitHub Repository](https://github.com/ChrisKnott/Eel) with modifications.
@@ -209,10 +211,13 @@ When running server.py, a chrome app window will appear with a button saying "Cl
 
 ![Get Time](/images/python-gui-using-chrome/time.png)
 
-## Threading in Python
-Due to what Eel uses to run the server, calling thread.sleep() will pause the execution of the whole server. We are provided with with methods `sleep()` and `spawn()` which allow us to create new threads and sleep. This is also helpful for creating thread in general.
+## Do NOT use time.sleep()
+`time.sleep()` is very dangerous when used with eel; fortunately we have been given an alternative. Calling `time.sleep()` will pause the execution of the whole server so you should use `eel.sleep()` instead. It has the exact same functionality, just it's one less import you need.
 
-An example of using these methods:
+## Threading in Python
+To reduce the chance of conflicts, eel also provides a interface for creating threads. Use `eel.spawn()` to replace threading instances. This is also helpful for creating thread in general.
+
+An example of using `eel.sleep()` and `eel.spawn()`:
 
 ```python
 import eel
