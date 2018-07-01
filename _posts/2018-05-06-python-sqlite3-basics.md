@@ -124,6 +124,11 @@ for row in ids_and_urls:
     print ("URL: {}".format( row[1] ))
 ```
 
+### Closing a Cursor
+When you are done modifying and getting data from a database, it is recommended to close your cursor. This is so that other programs that may be using the database can access the database as only one cursor is allowed at a time.
+
+This is most certainly not something you have to do if only one script/thread accesses the database at a time, the Python garbage collector will remove the object if you don't when the script ends.
+
 ### Using Keys in Fetched Data
 It may seem a bit stupid to only be able to use indexes to get data out of a row object; and you would be right.
 
