@@ -127,6 +127,12 @@ for row in ids_and_urls:
 ### Using Keys in Fetched Data
 It may seem a bit stupid to only be able to use indexes to get data out of a row object; and you would be right.
 
+First we need to set the connections `row_factory` to `sqlite3.Row`. This needs to be executed before you set your cursor.
+```python
+connection.row_factory = sqlite3.Row
+```
+Now when you set your cursor, you will be returned sqlite3.Row objects instead of tuples.
+
 Using .keys() we can get the keys that are used in the row object returned. For example:
 
 ```python
