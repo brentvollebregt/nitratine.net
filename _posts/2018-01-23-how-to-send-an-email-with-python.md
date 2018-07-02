@@ -73,8 +73,7 @@ msg['From'] = email
 msg['To'] = send_to_email
 msg['Subject'] = subject
 
-body = message
-msg.attach(MIMEText(body, 'plain'))
+msg.attach(MIMEText(message, 'plain'))
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
@@ -111,18 +110,14 @@ message = 'This is my message'
 file_location = 'C:\\Users\\You\\Desktop\\attach.txt'
 
 msg = MIMEMultipart()
-
 msg['From'] = email
 msg['To'] = send_to_email
 msg['Subject'] = subject
 
-body = message
-
-msg.attach(MIMEText(body, 'plain'))
+msg.attach(MIMEText(message, 'plain'))
 
 filename = ntpath.basename(file_location)
 attachment = open(file_location, "rb")
-
 part = MIMEBase('application', 'octet-stream')
 part.set_payload((attachment).read())
 encoders.encode_base64(part)
