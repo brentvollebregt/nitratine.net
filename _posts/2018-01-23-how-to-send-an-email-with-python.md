@@ -139,6 +139,44 @@ Once again, replacing the previous variables but setting the new variable 'file_
 
 The image above shows the email that I received. It now has a file named 'test.py' that I declared in the script attached to the email.
 
+## HTML in Emails
+If you want to add thinks like links or css formatting to the email, you will need to prepare HTML text for the email.
+Make another string which is the plain-text version of the html and then attach them both to the MIMEMultipart object to be sent later on.
+
+```python
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+email = 'myaddress@gmail.com'
+password = 'password'
+send_to_email = 'sentoaddreess@gmail.com'
+subject = 'This is the subject'
+messageHTML = '<p>Visit <a href="https://nitratine.net/">nitratine.net<a> for some great <span style="color: #496dd0">tutorials and projects!</span><p>'
+messagePlain = 'Visit nitratine.net for some great tutorials and projects!'
+
+msg = MIMEMultipart('alternative')
+msg['From'] = email
+msg['To'] = send_to_email
+msg['Subject'] = subject
+
+msg.attach(MIMEText(messagePlain, 'plain'))
+msg.attach(MIMEText(messageHTML, 'html'))
+
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login(email, password)
+text = msg.as_string()
+server.sendmail(email, send_to_email, text)
+server.quit()
+```
+
+As needed before, change the variables at the top but also messageHTML and messagePlain this time, the email will now be displayed using the HTML provided.
+
+![Attachment Email Example](/images/how-to-send-an-email-with-python/email-example-4.png)
+
+The image above shows that I received the email with the link and inline CSS colouring on the specified text.
+
 ## Sources
 - [WikiBooks](https://en.wikibooks.org/wiki/Python_Programming/Email)
 - [naelshiab.com](http://naelshiab.com/tutorial-send-email-python/)
