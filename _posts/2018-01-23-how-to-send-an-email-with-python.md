@@ -90,7 +90,7 @@ Replacing the previous variables again and setting the new variable 'subject' to
 The image above shows the email that I received. It now has a subject and has a to header if you click the little down arrow by 'me'.
 
 ## Attachments
-There are quite a few ways to attach files to an email, but this is one of the simpler ways. This time we will use an encoder and MIMEMultipart from the email module and ntpath to simply get the filename from the provided path.
+There are quite a few ways to attach files to an email, but this is one of the simpler ways. This time we will use an encoder and MIMEMultipart from the email module and os.path to simply get the filename from the provided path.
 
 This method supports text files, images, videos, audio and pdfs.
 
@@ -100,7 +100,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
-import ntpath
+import os.path
 
 email = 'myaddress@gmail.com'
 password = 'password'
@@ -116,7 +116,7 @@ msg['Subject'] = subject
 
 msg.attach(MIMEText(message, 'plain'))
 
-filename = ntpath.basename(file_location)
+filename = os.path.basename(file_location)
 attachment = open(file_location, "rb")
 part = MIMEBase('application', 'octet-stream')
 part.set_payload((attachment).read())
