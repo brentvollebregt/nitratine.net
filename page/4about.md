@@ -34,6 +34,15 @@ This project allows someone to easily set up a server that uses chromes app mode
 	<img src="https://i.imgur.com/EuUlayC.png" alt="Empty interface"/>
 </div>
 
+I uploaded this project to [PyPI](https://pypi.org/project/auto-py-to-exe/) so it can be installed using:
+```
+$ python -m pip install auto-py-to-exe
+```
+and then run using:
+```
+$ auto-py-to-exe
+```
+
 ### [PyTutorials YouTube Channel](https://www.youtube.com/PyTutorialsOriginal)
 ![Channel Header]({{ site.baseurl }}{% link images/PyTutorials-channel-header.jpg %})
 When I have time and ideas, I like to make programming tutorials. Currently most of my tutorials are Python related but I also have a few different ones.
