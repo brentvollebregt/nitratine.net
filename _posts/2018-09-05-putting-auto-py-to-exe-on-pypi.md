@@ -28,11 +28,11 @@ And as the original, you can still pass a file to pre-fill the script you want t
 $ auto-py-to-exe my_script.py
 ```
 
-<p align="center">
-    <img src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version">
-    <img src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions">
-    <img src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License">
-</p>
+<div style="text-align: center;">
+    <img style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version">
+    <img style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions">
+    <img style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License">
+</div>
 
 <!-- more -->
 
