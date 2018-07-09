@@ -40,9 +40,9 @@ Now to run it, execute the following in the terminal:
 $ auto-py-to-exe
 ```
 
-#### Via [This Repository](https://github.com/brentvollebregt/auto-py-to-exe)
+#### Via [The GitHub Repository](https://github.com/brentvollebregt/auto-py-to-exe)
 You can install this project using this repository by following these steps:
-1. Clone/download this repo
+1. Clone/download the repo at [github.com/brentvollebregt/auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe)
 2. Open cmd/terminal and cd to the project
 3. Execute ```pip install -r requirements.txt```
 
@@ -66,7 +66,7 @@ If you need something visual to help you get started, I made a video for the ori
 {% include embedYouTube.html content="OZSZHmWSOeM" %}
 
 ## Looking for the PyPI Version?
-If you are looking for the PyPI version of this repo, go to [auto-py-to-exe-pypi](https://github.com/brentvollebregt/auto-py-to-exe-pypi). This repo has been preserved to keep in line with the provided video but instructions have been provided to use the new method.
+If you are looking for the PyPI version of this repo, go to [auto-py-to-exe-pypi](https://github.com/brentvollebregt/auto-py-to-exe-pypi). The original repo has been preserved to keep in line with the provided video but instructions have been provided to use the new method.
 
 ## Something is Wrong?
 There could be a chance that you were using an old version and I have changed something and your cache is now a mess. Press Shift+F5 in the chrome app to force reload everything.
