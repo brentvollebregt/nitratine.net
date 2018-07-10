@@ -43,7 +43,7 @@ I decided to create a [new repository](https://github.com/brentvollebregt/auto-p
 It took me a few hours to find out how to structure my package and have everything setup properly from the readme to the entry-points.
 
 I use a lot of resources for finer details and looked at a lot of setup.py files but these resources would have been the most helpful:
-- [Analyzing PyPI package downloads](https://packaging.python.org/guides/analyzing-pypi-package-downloads/)
+- [Packaging Python Projects](https://packaging.python.org/tutorials/packaging-projects/)
 - [Publishing your First PyPI Package by/for the Absolute Beginner](https://jonemo.github.io/neubertify/2017/09/13/publishing-your-first-pypi-package/)
 - [GitHub/kennethreitz/setup.py](https://github.com/kennethreitz/setup.py)
 
