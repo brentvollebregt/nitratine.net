@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Putting auto-py-to-exe on PyPI"
-date: 2018-09-05
+date: 2018-07-09
 categories: General
 tags: Python PyPI
 description: "I have finally decided to put auto-py-to-exe on the Python Package Index. Auto-py-to-exe can now be installed using pip by executing 'pip' install auto-py-to-exe."
