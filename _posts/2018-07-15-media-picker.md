@@ -14,7 +14,7 @@ description: "I had been requested to help someone with filtering a lot of image
 
 I had been requested to help someone with filtering a lot of images taken with a camera. This would need to occur regularly so I created an interface that would help them easily select what photos they wanted. After they have selected and moved their images, they are then free to delete the original files/folders if wanted.
 
-![Better Email Example](/images/media-picker/interface.png)
+![Interface](/images/media-picker/interface.png)
 
 <!-- more -->
 
