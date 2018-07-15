@@ -12,6 +12,8 @@ description: "This script sends an email using python. By logging into a gmail a
 
 This script sends an email using python. By logging into a gmail account with python you can send emails using this tutorial.
 
+{% include embedYouTube.html content="YPiHBtddefI" %}
+
 ## Why Bother?
 These scripts are used to send emails from a gmail account (can be configured for other email servers). This will allow you to send emails when your script finishes executing, has come to an error or just needs to send some data to you.
 
@@ -180,4 +182,6 @@ The image above shows that I received the email with the link and inline CSS col
 ## Sources
 - [WikiBooks](https://en.wikibooks.org/wiki/Python_Programming/Email)
 - [naelshiab.com](http://naelshiab.com/tutorial-send-email-python/)
+
+*Most recently modified on 15-7-18 ( added video )*
 
