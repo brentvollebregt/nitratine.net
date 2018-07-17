@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python GUI's with PyQt"
-date: 2018-07-05
+date: 2018-07-17
 categories: Tutorials
 tags: Python GUI PyQt
 description: "This tutorial covers the basics of how to create GUI's in Python using PyQt5. I will demonstrate how to find the designer and basic usage, converting .ui to .py, running the output file and connecting events to methods."
