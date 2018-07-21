@@ -13,7 +13,7 @@ description: "I am currently studying a Bachelor of Computing and Mathematical S
 
 I am currently studying a Bachelor of Computing and Mathematical Sciences at the University of Waikato and plan to finish my 4th year in 2020.
 
-I started learning Python by myself back in 2013 (I was year 10) and have learnt all the Python I know myself and most of the CSS/HTML/JavaScript myself. In University I clicked onto other languages fast and I have had the opportunity to use a variety of languages and frameworks.
+I started learning Python by myself back in 2013 (I was year 10) and have learnt all the Python I know myself and most of the CSS/HTML/JavaScript I know myself. In University I clicked onto other languages fast and I have had the opportunity to use a variety of languages and frameworks.
 
 Find me on other platforms:
 <ul>
@@ -28,7 +28,7 @@ This is a small list of my favourite projects I have developed.
 ### [Auto Py To Exe]({{ site.baseurl }}{% link _posts/2018-03-10-auto-py-to-exe.md %})
 This is the project I am most proud of to date. I wanted to fix the problem of converting (packaging) Python to a windows executable to run on computers without python installed being a confusing job for new-comers.
 
-This project allows someone to easily set up a server that uses chromes app mode as an interface and then call pyinstaller with the parameters provided by the user.
+This project allows someone to easily set up a server that uses chromes app mode as an interface and then calls pyinstaller with the parameters provided by the user.
 
 <div style="text-align: center">
 	<img src="https://i.imgur.com/EuUlayC.png" alt="Empty interface"/>
@@ -47,7 +47,7 @@ $ auto-py-to-exe
 ![Channel Header]({{ site.baseurl }}{% link images/PyTutorials-channel-header.jpg %})
 When I have time and ideas, I like to make programming tutorials. Currently most of my tutorials are Python related but I also have a few different ones.
 
-Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 180k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 100k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 740k views.
+Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 210k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 110k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 790k views.
 
 I give a lot of help in the comments for these videos and try my best to find solutions for issues people are having. This also allows me to gauge what people like in terms of topics and the videos themselves and get great feedback.
 
@@ -56,7 +56,7 @@ I give a lot of help in the comments for these videos and try my best to find so
 This project is an Android app that compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money. Simply give a name (optional), enter in the cost, amount and size of each item and the unit per dollar will be calculated.
 
 ### [Multi Clipboard]({{ site.baseurl }}{% link _posts/2017-12-20-multi-clipboard.md %})
-This project fixed my issue of having to re-copy something after I just put something on my clipboard meaning I lost that last thing I copied.
+This project fixed my issue of having to re-copy something after I just overwrote my clipboard with something else.
 
 It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. You simply attach the script to a hotkey and when called, select which clipboard you want to use and whatever was in that virtual clipboard will now be in your actual clipboard. It also allows you to add and delete virtual clipboards.
 
