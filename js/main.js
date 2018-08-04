@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var nodes = document.getElementsByClassName('embedded_yt');
     var iframeNode;
     for (var i = 0; i < nodes.length; i++) {
-      iframeNode = nodes[i].getElementsByTagName('iframe');
+      iframeNode = nodes[i].getElementsByTagName('iframe')[0];
       if(iframeNode.getAttribute('data-src')) {
           iframeNode.setAttribute('src', iframeNode.getAttribute('data-src'));
       }
