@@ -49,3 +49,15 @@
   //     window.scrollTo(0,0)
   // })
 }());
+
+// Defer embedded YouTube
+document.addEventListener('DOMContentLoaded', function() {
+    var nodes = document.getElementsByClassName('embedded_yt');
+    var iframeNode;
+    for (var i = 0; i < nodes.length; i++) {
+      iframeNode = nodes[i].getElementsByTagName('iframe');
+      if(iframeNode.getAttribute('data-src')) {
+          iframeNode.setAttribute('src', iframeNode.getAttribute('data-src'));
+      }
+    }
+});

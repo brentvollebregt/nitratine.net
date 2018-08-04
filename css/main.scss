@@ -77,3 +77,15 @@
 .sub_header_text_hlght {
   color: #d81b60;
 }
+
+.embedded_yt {
+  width: 100%; max-width: 650px; margin: auto;
+}
+
+.embedded_yt > div {
+  position: relative; padding-bottom: 56.25%; padding-top: 25px; height: 0;
+}
+
+.embedded_yt > div > iframe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
