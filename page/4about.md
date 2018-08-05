@@ -52,7 +52,7 @@ Some of my videos have quite a bit of attention, for example [Convert PY to EXE]
 I give a lot of help in the comments for these videos and try my best to find solutions for issues people are having. This also allows me to gauge what people like in terms of topics and the videos themselves and get great feedback.
 
 ### [Price Per Unit]({{ site.baseurl }}{% link _posts/2018-06-28-price-per-unit.md %})
-![Price Per Unit Header]({{ site.baseurl }}{% link images/price-per-unit/FeatureGraphic.png %})
+![Price Per Unit Header]({{ site.baseurl }}{% link images/price-per-unit/FeatureGraphic.jpg %})
 This project is an Android app that compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money. Simply give a name (optional), enter in the cost, amount and size of each item and the unit per dollar will be calculated.
 
 ### [Multi Clipboard]({{ site.baseurl }}{% link _posts/2017-12-20-multi-clipboard.md %})
@@ -80,7 +80,7 @@ It is a fully dynamic server with a cms built in. It can do server side scriptin
 
 I no longer use it as I felt a static site was much more suitable and easier to maintain. I still get a bit of traffic to it each day though.
 
-![Desktop home split light dark snow]({{ site.baseurl }}{% link images/the-nitratine-project/nitratine1.png %})
+![Desktop home split light dark snow]({{ site.baseurl }}{% link images/the-nitratine-project/nitratine1.jpg %})
 
 ### [Colour]({{ site.baseurl }}{% link _posts/2017-11-18-colour.md %})
 This was an app that I had made as a joke with a neighbour. It demonstrates how something simple can take so long to complete.
