@@ -44,7 +44,7 @@ This will print out a couple of paths, for me it prints: ```['C:\\Python36', 'C:
 ### Using the Designer
 designer.exe is the program that we will use to make designing GUIs a lot easier; remember the location of this or create a shortcut to it and then run it (double click if you wish). You will be welcomed with a selection window; select "Main Window" and then click "Create".
 
-![Initial Display](/images/python-guis-with-pyqt/pyqt5-designer-start.png)
+![Initial Display](/images/python-guis-with-pyqt/pyqt5-designer-start.jpg)
 
 You will now be shown an empty window in the middle of the designer's window with widget options on the left and some other windows to the right.
 

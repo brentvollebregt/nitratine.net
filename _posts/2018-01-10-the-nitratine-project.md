@@ -24,12 +24,12 @@ This project is a website that is hosted using Flask in Python. The main idea of
 The site has a home page and then five sub areas. Each article is put under one sub area. The site has a light and dark theme and even has an option to display snow. Mobile support have been added by adding a different navigation and different breakpoints have been fitted to the site. The site records viewings for each article and can display them.
 
 ## Demonstration and Screenshots
-![Desktop home split light dark snow](/images/the-nitratine-project/nitratine1.png)
-![Desktop article split light dark](/images/the-nitratine-project/nitratine2.png)
+![Desktop home split light dark snow](/images/the-nitratine-project/nitratine1.jpg)
+![Desktop article split light dark](/images/the-nitratine-project/nitratine2.jpg)
 <div style="text-align: center;">
-    <img src="/images/the-nitratine-project/nitratine3.png" alt="App home split light dark" style="width: 32%"/>
-    <img src="/images/the-nitratine-project/nitratine4.png" alt="App navigation" style="width: 32%"/>
-    <img src="/images/the-nitratine-project/nitratine5.png" alt="App article split light dark" style="width: 32%"/>
+    <img src="/images/the-nitratine-project/nitratine3.jpg" alt="App home split light dark" style="width: 32%"/>
+    <img src="/images/the-nitratine-project/nitratine4.jpg" alt="App navigation" style="width: 32%"/>
+    <img src="/images/the-nitratine-project/nitratine5.jpg" alt="App article split light dark" style="width: 32%"/>
 </div>
 
 <!-- more -->
