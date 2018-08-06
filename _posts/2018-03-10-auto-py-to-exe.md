@@ -19,15 +19,16 @@ This application displays a simple interface that allows you to convert py to ex
 
 <div style="text-align: center">
 	<img src="https://i.imgur.com/EuUlayC.png" alt="Empty interface"/>
-	<p>The script is built using <a class="link" href="https://github.com/ChrisKnott/Eel">Eel</a> and uses pyinstaller to convert the script.</p>
+	<p>The script is built using <a class="link" href="https://github.com/ChrisKnott/Eel">Eel</a> and uses <a href="http://www.pyinstaller.org/">PyInstaller</a> to convert the script.</p>
 </div>
 
 <!-- more -->
 
 ## Getting Started
 ### Prerequisites
-- Python : Python 2.7 or Python 3.3+ (basically anything that pyinstaller runs on)
-- Chrome : to run the user interface in; eel uses this (app mode)
+ - Python : Python 2.7, 3.3 - 3.6
+
+*To have the interface displayed in the images, you will need chrome. If chrome is not installed or --no-chrome is supplied the default browser will be used.*
 
 ### Instillation and Usage
 #### Via [PyPI](https://pypi.org/project/auto-py-to-exe/)
@@ -57,8 +58,12 @@ Now to run the application, run the ```run.py``` file with python. A Chrome will
 
 *Easy.*
 
-### Passing the File With Arguments
+### Arguments
 Alternatively you can execute ```python run.py [filename]```. This will open up the window with the filename in the script location.
+
+You can also pass ```--no-chrome``` if you want to use your default browser and not chromes app mode; for example ```python run.py --no-chrome my_script.py```.
+
+> If you installed this package using pip you can call ```auto-py-to-exe``` instead of ```python run.py```
 
 ## Video
 If you need something visual to help you get started, I made a video for the original release of this project, some things may be different but the same concepts still apply.
@@ -67,10 +72,6 @@ If you need something visual to help you get started, I made a video for the ori
 
 ## Looking for the PyPI Version?
 If you are looking for the PyPI version of this repo, go to [auto-py-to-exe-pypi](https://github.com/brentvollebregt/auto-py-to-exe-pypi). The original repo has been preserved to keep in line with the provided video but instructions have been provided to use the new method.
-
-## Something is Wrong?
-There could be a chance that you were using an old version and I have changed something and your cache is now a mess. Press Shift+F5 in the chrome app to force reload everything.
-If this doesn't work please [report it](https://github.com/brentvollebregt/auto-py-to-exe/issues) and I will look into it!
 
 ## Screenshots
 ![Empty interface](https://i.imgur.com/dd0LC2n.png)
@@ -84,3 +85,5 @@ I really wanted to get this project out there so I released a YouTube video demo
 To my surprisement the next morning (about 7 hours) I had more than 300 upvotes which to me was a big thing. I had many replies which I took time to read and reply to. About 44 hours later the post finally lost it's top place on the subreddit and the post is sitting at 454 points with 12.1k views and 75 comments.
 I can't believe how big this got and it means a lot to me when I saw people thanking me for the project. When the couple of issues came to the Github repo I realised people do care about this and I was quick to fix these.
 Once again, thank you for the support; I loved making this project.
+
+*Updated 07-08-18*
