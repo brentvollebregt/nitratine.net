@@ -55,7 +55,7 @@ No create a class that extends threading.Thread that will allow us to control th
 ```python
 class ClickMouse(threading.Thread):
     def __init__(self, delay, button):
-        super().__init__()
+        super(ClickMouse, self).__init__()
         self.delay = delay
         self.button = button
         self.running = False
@@ -147,7 +147,7 @@ exit_key = KeyCode(char='e')
 
 class ClickMouse(threading.Thread):
     def __init__(self, delay, button):
-        super().__init__()
+        super(ClickMouse, self).__init__()
         self.delay = delay
         self.button = button
         self.running = False
@@ -191,5 +191,7 @@ with Listener(on_press=on_press) as listener:
     listener.join()
 
 ```
+
+*Edited 11/08/18: Added Python 2 support*
 
 *Please leave questions and comments related to the video on YouTube as they will be replied to faster there*
