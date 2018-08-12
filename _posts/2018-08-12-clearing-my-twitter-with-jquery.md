@@ -27,7 +27,7 @@ My idea for this was to simulate clicking each of these buttons for every user I
 
 Looking at the source, all these tiles were in a div with a class of 'GridTimeline-items' which was the only tag with this class. A simple call of ```$.find('.GridTimeline-items')[0]``` allowed me to get this. If I didn't get only the tiles in this class, I would be finding follow buttons on the left which when clicked would follow them.
 
-Next I needed to get all the buttons, all these had a class of 'unfollow-text' so once again I could call ```.find('.unfollow-text')``` to get all the instances of the class. So to find all the buttons, I can concatinate them to form ```$($.find('.GridTimeline-items')[0]).find('.unfollow-text')``` which will return all the buttons in a list that relate to all the users I follow.
+Next I needed to get all the buttons which all had a class of 'unfollow-text'. Once again I could call ```.find('.unfollow-text')``` to get all the instances of the class. So to find all the buttons, I can concatenate them to form ```$($.find('.GridTimeline-items')[0]).find('.unfollow-text')``` which will return all the buttons in a list that relate to all the users I follow.
 
 ![Unfollow Button](/images/clearing-my-twitter-with-jquery/followers.png)
 
@@ -114,9 +114,7 @@ function unretweet() {
 Like previous, you can load th page using the scroll methods and then run this method by calling ```unretweet()```.
 
 ## Trying to Access Tweets Over Twitters API
-For those that haven't used bulk tweet-deleters before, the above methods probably worked; for me it didn't because I had used a bulk tweet-deleter.
-
-The final plan I had was to delete retweets them using the API, but this did come with a challenge. If you look at [my twitter profile](https://twitter.com/PyTutorials) now, what you see towards the bottom of my timeline is not what I can see when logged in. In fact, when logged in, I can't see any of these tweets as they are the ones I apparently don't own (will be explained).
+For those that haven't used bulk tweet-deleters before, the above methods probably worked; for me it didn't because I had used a bulk tweet-deleter. The final plan I had was to delete retweets them using the API.
 
 To start this method off, create a new twitter app (or even use an existing if you want) at [apps.twitter.com](https://apps.twitter.com/). Get all your keys/tokens/secrets and create a new Python file. You will need tweepy installed which can be simply achieved using ```python -m pip install tweepy```. In that file created, import tweepy, set your keys/tokens/secrets to variables and then authorise the script.
 
