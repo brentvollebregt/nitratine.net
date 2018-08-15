@@ -58,7 +58,7 @@ This project is an Android app that compares prices for similar items and will c
 ### [Multi Clipboard]({{ site.baseurl }}{% link _posts/2018-08-15-multi-clipboard.md %})
 This project fixed my issue of having to re-copy something after I just overwrote my clipboard with something else.
 
-It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. You simply attach the script to a hotkey and when called, select which clipboard you want to use and whatever was in that virtual clipboard will now be in your actual clipboard. It also allows you to add and delete virtual clipboards.
+It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. The package comes with a listener that listens for ```Ctrl + Windows + C``` which can be enabled and disabled has an option to be started on startup. For maximum speed, you can simply click a virtual clipboard to put it on your clipboard and it will close (can be turned off). It supports unlimited clipboards and many types of clipboard formats.
 
 <div style="text-align: center">
 	<img src="{{ site.baseurl }}{% link images/multi-clipboard/main-gui.png %}" alt="Multi Clipboard GUI"/>
