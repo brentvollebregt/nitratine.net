@@ -61,7 +61,7 @@ This project fixed my issue of having to re-copy something after I just overwrot
 It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. You simply attach the script to a hotkey and when called, select which clipboard you want to use and whatever was in that virtual clipboard will now be in your actual clipboard. It also allows you to add and delete virtual clipboards.
 
 <div style="text-align: center">
-	<img src="{{ site.baseurl }}{% link images/multi-clipboard/gui1.jpg %}" alt="Multi Clipboard GUI"/>
+	<img src="{{ site.baseurl }}{% link images/multi-clipboard/main-gui-with-settings-shown.png %}" alt="Multi Clipboard GUI"/>
 </div>
 
 ### [Quick Script]({{ site.baseurl }}{% link _posts/2017-12-20-quick-script.md %})
