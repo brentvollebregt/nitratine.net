@@ -63,7 +63,7 @@ The site has a home page and then five sub areas. Each article is put under one 
     - Set variables on this page and change options
     - Set username and password using "Raw JSON" if needed
 
-After setting up the server and restarting server.py, the server will be running on the localhost. This can be changed in server.py or app can be imported from server.py from another script. 
+After setting up the server and restarting server.py, the server will be running on the localhost. This can be changed in server.py or app can be imported from server.py from another script.
 
 ### Articles
 To add articles to the site you will need to have defined the articles location in the servers data.json. They then need to follow a format to be detected on startup.
@@ -87,10 +87,10 @@ To add articles to the site you will need to have defined the articles location 
 
 #### view.html sample:
 ```python
-{%- raw -%}
-{%- extends "SKELETON.html" -%}
+{% raw %}
+{% extends "SKELETON.html" %}
 
-{%- block head -%}
+{% block head %}
 <title>{{ title }} | Nitratine</title>
 <meta name="description" content="{{ description }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/article.css') }}">
@@ -98,16 +98,16 @@ To add articles to the site you will need to have defined the articles location 
 <link rel="stylesheet" type="text/css" class="css_light_theme" href="{{ url_for('static', filename='css/syntax_highlighting.css') }}">
 <link rel="stylesheet" type="text/css" class="css_dark_theme" href="{{ url_for('static', filename='css/dark/syntax_highlighting.css') }}">
 <script async src="{{ url_for('static', filename='js/article.js') }}"></script>
-{%- endblock -%}
+{% endblock %}
 
-{%- block content -%}
+{% block content %}
 <div class="article_content">
     <h1>{{ title }}</h1>
     <a class="date">{{ date }}</a><a class="views">{{ views }}</a>
     <p>{{ description }}</p>
 </div>
-{%- endblock -%}
-{%- endraw -%}
+{% endblock %}
+{% endraw %}
 ```
 
 Here we can see that the two blocks are extended from SKELETON.html. The article CSS file is added and relevant data passed to the template has been used including date, views, description and title; these are pulled from data.json.
