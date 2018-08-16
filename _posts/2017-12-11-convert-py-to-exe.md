@@ -12,12 +12,12 @@ description: "A demonstration of how to package a python script into an executab
 
 A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package.
 
-{% include embedYouTube.html content="lOIJIk_maO4" %}
+{%- include embedYouTube.html content="lOIJIk_maO4" -%}
 
 <!-- more -->
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) to setup pip.
+If you haven't used or setup pip before, go to my tutorial at [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) to setup pip.
 
 ## Pyinstaller
 Now that pip has been setup, execute the command ```pip install pyinstaller``` in cmd. Make sure to check the output for errors as if there are errors it would not have installed successfully. Note pyinstaller doesn't support all versions of Python. As of 11-12-17 pyinstaller supports up to Python 3.6. You can check at [http://www.pyinstaller.org/downloads.html](http://www.pyinstaller.org/downloads.html) under Downloads -> Release to see what is supported by the latest release.
@@ -53,7 +53,7 @@ You can combine these flags to make things like onefile executables with no cons
 ## Auto PY to EXE
 In March 2018 I create a python package that allows you to create executables really easily from python scripts. It is built using a simple graphical interface built with Eel in Python.
 
-{% include embedYouTube.html content="OZSZHmWSOeM" %}
+{%- include embedYouTube.html content="OZSZHmWSOeM" -%}
 ![Empty interface](https://i.imgur.com/dd0LC2n.png)
 
 ## FAQ

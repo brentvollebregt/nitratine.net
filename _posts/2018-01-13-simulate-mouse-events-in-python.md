@@ -12,12 +12,12 @@ description: "This demonstrates how to control the mouse with Python. Using pynp
 
 This demonstrates how to control the mouse with Python. Using pynput we are able to simulate mouse events into any window. This will show you how to press buttons, scroll and move the mouse.
 
-{% include embedYouTube.html content="2BXr9U6ZL8Y" %}
+{%- include embedYouTube.html content="2BXr9U6ZL8Y" -%}
 
 <!-- more -->
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) to setup pip.
+If you haven't used or setup pip before, go to my tutorial at [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) to setup pip.
 
 ## Installing Pynput
 We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.

@@ -25,7 +25,7 @@ Find me on other platforms:
 ## Projects
 This is a small list of my favourite projects I have developed.
 
-### [Auto Py To Exe]({{ site.baseurl }}{% link _posts/2018-03-10-auto-py-to-exe.md %})
+### [Auto Py To Exe]({{ site.baseurl }}{%- link _posts/2018-03-10-auto-py-to-exe.md -%})
 This is the project I am most proud of to date. I wanted to fix the problem of converting (packaging) Python to a windows executable to run on computers without python installed being a confusing job for new-comers.
 
 This project allows someone to easily set up a server that uses chromes app mode as an interface and then calls pyinstaller with the parameters provided by the user.
@@ -44,33 +44,33 @@ $ auto-py-to-exe
 ```
 
 ### [PyTutorials YouTube Channel](https://www.youtube.com/PyTutorialsOriginal)
-![Channel Header]({{ site.baseurl }}{% link images/PyTutorials-channel-header.jpg %})
+![Channel Header]({{ site.baseurl }}{%- link images/PyTutorials-channel-header.jpg -%})
 When I have time and ideas, I like to make programming tutorials. Currently most of my tutorials are Python related but I also have a few different ones.
 
 Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 210k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 110k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 790k views.
 
 I give a lot of help in the comments for these videos and try my best to find solutions for issues people are having. This also allows me to gauge what people like in terms of topics and the videos themselves and get great feedback.
 
-### [Price Per Unit]({{ site.baseurl }}{% link _posts/2018-06-28-price-per-unit.md %})
-![Price Per Unit Header]({{ site.baseurl }}{% link images/price-per-unit/FeatureGraphic.jpg %})
+### [Price Per Unit]({{ site.baseurl }}{%- link _posts/2018-06-28-price-per-unit.md -%})
+![Price Per Unit Header]({{ site.baseurl }}{%- link images/price-per-unit/FeatureGraphic.jpg -%})
 This project is an Android app that compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money. Simply give a name (optional), enter in the cost, amount and size of each item and the unit per dollar will be calculated.
 
-### [Multi Clipboard]({{ site.baseurl }}{% link _posts/2018-08-15-multi-clipboard.md %})
+### [Multi Clipboard]({{ site.baseurl }}{%- link _posts/2018-08-15-multi-clipboard.md -%})
 This project fixed my issue of having to re-copy something after I just overwrote my clipboard with something else.
 
 It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. The package comes with a listener that listens for ```Ctrl + Windows + C``` which can be enabled and disabled has an option to be started on startup. For maximum speed, you can simply click a virtual clipboard to put it on your clipboard and it will close (can be turned off). It supports unlimited clipboards and many types of clipboard formats.
 
 <div style="text-align: center">
-	<img src="{{ site.baseurl }}{% link images/multi-clipboard/main-gui.png %}" alt="Multi Clipboard GUI"/>
+	<img src="{{ site.baseurl }}{%- link images/multi-clipboard/main-gui.png -%}" alt="Multi Clipboard GUI"/>
 </div>
 
-### [Quick Script]({{ site.baseurl }}{% link _posts/2017-12-20-quick-script.md %})
+### [Quick Script]({{ site.baseurl }}{%- link _posts/2017-12-20-quick-script.md -%})
 This project allowed me to have a lot of small scripts in one place that is easy to get to.
 
 Just like Multi Clipboard, attach this to a hotkey and your scripts you previously added (tutorial in README) will appear. Example scripts come pre-loaded like saving a clipboard image to a file, restarting windows explorer and putting your ip address on your clipboard.
 
 <div style="text-align: center">
-	<img src="{{ site.baseurl }}{% link images/quick-script/gui1.png %}" alt="Quick Script GUI"/>
+	<img src="{{ site.baseurl }}{%- link images/quick-script/gui1.png -%}" alt="Quick Script GUI"/>
 </div>
 
 ### [Nitratine](http://nitratine.pythonanywhere.com/)
@@ -80,19 +80,19 @@ It is a fully dynamic server with a cms built in. It can do server side scriptin
 
 I no longer use it as I felt a static site was much more suitable and easier to maintain. I still get a bit of traffic to it each day though.
 
-![Desktop home split light dark snow]({{ site.baseurl }}{% link images/the-nitratine-project/nitratine1.jpg %})
+![Desktop home split light dark snow]({{ site.baseurl }}{%- link images/the-nitratine-project/nitratine1.jpg -%})
 
-### [Colour]({{ site.baseurl }}{% link _posts/2017-11-18-colour.md %})
+### [Colour]({{ site.baseurl }}{%- link _posts/2017-11-18-colour.md -%})
 This was an app that I had made as a joke with a neighbour. It demonstrates how something simple can take so long to complete.
 
 The aim of this app is to collect all the colours by simply tapping the screen to get a colour. The trick is that each time you tap the screen, one of the 16,777,216 possible colours to display are generated randomly; thus making it a very long trip to finish the apps purpose.
 
-I did some math and testing [here]({{ site.baseurl }}{% link _posts/2017-12-07-randomly-generating-numbers-to-fulfil-an-integer-range.md %}) and guessed (based off calculations) it would take about 134 and a half years to finish the app if you tapped then screen at a rate of 400 taps per minute.
+I did some math and testing [here]({{ site.baseurl }}{%- link _posts/2017-12-07-randomly-generating-numbers-to-fulfil-an-integer-range.md -%}) and guessed (based off calculations) it would take about 134 and a half years to finish the app if you tapped then screen at a rate of 400 taps per minute.
 
 <div style="text-align: center">
-	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{% link images/colour/tap-screen.png %}" alt="Main screen"/>
-	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{% link images/colour/colour-viewer.png %}" alt="Colour finder"/>
-	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{% link images/colour/colour-mixer.png %}" alt="Colour mixer"/>
+	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{%- link images/colour/tap-screen.png -%}" alt="Main screen"/>
+	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{%- link images/colour/colour-viewer.png -%}" alt="Colour finder"/>
+	<img style="width: 30%; display: inline;" src="{{ site.baseurl }}{%- link images/colour/colour-mixer.png -%}" alt="Colour mixer"/>
 </div>
 
 ## Some Technologies I Have Worked With

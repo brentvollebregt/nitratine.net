@@ -12,7 +12,7 @@ description: "This is a script that allows you to click you mouse repeatedly wit
 
 This is a script that allows you to click you mouse repeatedly with a small delay. It works on windows, mac and linux and can be controlled with user defined keys.
 
-{% include embedYouTube.html content="eamTeszpeZ4" %}
+{%- include embedYouTube.html content="eamTeszpeZ4" -%}
 
 ## What is this?
 This project uses the cross platform module pynput to control the mouse and monitor the keyboard at the same time to create a simple auto clicker.
@@ -20,7 +20,7 @@ This project uses the cross platform module pynput to control the mouse and moni
 <!-- more -->
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) to setup pip.
+If you haven't used or setup pip before, go to my tutorial at [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) to setup pip.
 
 ## Installing Pynput
 We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.

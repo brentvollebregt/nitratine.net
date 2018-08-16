@@ -12,7 +12,7 @@ description: "In this post I will go over some basics of SQLite3. SQLite3 allows
 
 In this post I will go over some basics of SQLite3. SQLite3 allows us to access a database using SQL that doesn't require a separate server. This means the database is stored in a single file and we directly connect to the file rather than through some third-party applications server.
 
-{% include embedYouTube.html content="SQj17D1Q_6s" %}
+{%- include embedYouTube.html content="SQj17D1Q_6s" -%}
 
 <!-- more -->
 

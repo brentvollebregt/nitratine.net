@@ -12,7 +12,7 @@ description: "This project allows you to convert python scripts to executables w
 
 This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller.
 
-{% include addGitHubRepoBadges.html content="brentvollebregt/auto-py-to-exe" %}
+{%- include addGitHubRepoBadges.html content="brentvollebregt/auto-py-to-exe" -%}
 
 ## What is this?
 This application displays a simple interface that allows you to convert py to exe easily. By just selecting the file, if you want it to convert to onefile and if you want a console, you will only need to press convert and wait for the script to do the rest.
@@ -68,7 +68,7 @@ You can also pass ```--no-chrome``` if you want to use your default browser and 
 ## Video
 If you need something visual to help you get started, I made a video for the original release of this project, some things may be different but the same concepts still apply.
 
-{% include embedYouTube.html content="OZSZHmWSOeM" %}
+{%- include embedYouTube.html content="OZSZHmWSOeM" -%}
 
 ## Looking for the PyPI Version?
 If you are looking for the PyPI version of this repo, go to [auto-py-to-exe-pypi](https://github.com/brentvollebregt/auto-py-to-exe-pypi). The original repo has been preserved to keep in line with the provided video but instructions have been provided to use the new method.

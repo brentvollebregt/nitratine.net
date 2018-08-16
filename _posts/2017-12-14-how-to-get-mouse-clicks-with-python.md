@@ -12,12 +12,12 @@ description: "This demonstration will show you how to track mouse clicks, moveme
     
 This demonstration will show you how to track mouse clicks, movements and even scrolls using the pynput module. These can then be logged to a file as no console is displayed. This is very similar to a mouse logger.
 
-{% include embedYouTube.html content="kJshtCfqCsY" %}
+{%- include embedYouTube.html content="kJshtCfqCsY" -%}
 
 <!-- more -->
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) to setup pip.
+If you haven't used or setup pip before, go to my tutorial at [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) to setup pip.
 
 ## Installing Pynput
 We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.

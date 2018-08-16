@@ -12,7 +12,7 @@ description: "This script sends an email using python. By logging into a gmail a
 
 This script sends an email using python. By logging into a gmail account with python you can send emails using this tutorial.
 
-{% include embedYouTube.html content="YPiHBtddefI" %}
+{%- include embedYouTube.html content="YPiHBtddefI" -%}
 
 ## Why Bother?
 These scripts are used to send emails from a gmail account (can be configured for other email servers). This will allow you to send emails when your script finishes executing, has come to an error or just needs to send some data to you.
@@ -29,7 +29,7 @@ Next go to [https://myaccount.google.com/lesssecureapps](https://myaccount.googl
 ![Allow less secure apps switch](/images/how-to-send-an-email-with-python/alsa1.png)
 
 ## Simple Email
-To start off, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}).
+To start off, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}).
 
 ```python
 import smtplib

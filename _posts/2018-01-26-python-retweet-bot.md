@@ -18,7 +18,7 @@ A while ago I had seen someone show all their winnings from using a twitter bot 
 <!-- more -->
 
 ## Setup
-First make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}).
+First make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}).
 
 If you haven't, create a new [twitter](https://twitter.com/) account. If you want to use an existing one, be aware that this will spam the shit out of your account.
 

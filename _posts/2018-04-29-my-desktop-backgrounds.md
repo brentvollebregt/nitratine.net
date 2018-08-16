@@ -24,7 +24,7 @@ These are backgrounds I have created myself either for a purpose or just for the
 
 I created this image to back my YouTube banner. I used JavaScript as it can be compressed unlike Python and I could easily get plenty of it, for example jQuery as I used in this.
 
-I made a tutorial on creating the background at [{% link _posts/2018-01-24-code-background-in-html.md %}]({{ site.baseurl }}{% link _posts/2018-01-24-code-background-in-html.md %}) which uses the "Online Pygments Lexer" tool on my old [Nitratine](http://nitratine.pythonanywhere.com/tools/pygments-online) site.
+I made a tutorial on creating the background at [{%- link _posts/2018-01-24-code-background-in-html.md -%}]({{ site.baseurl }}{%- link _posts/2018-01-24-code-background-in-html.md -%}) which uses the "Online Pygments Lexer" tool on my old [Nitratine](http://nitratine.pythonanywhere.com/tools/pygments-online) site.
 
 A smaller version for smaller screens can be found [here](/images/my-desktop-backgrounds/mass-jquery-small.png).
 

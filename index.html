@@ -11,7 +11,7 @@ description: "The home of my projects, tutorials and other things I feel are wor
         <p class="sub_header_text">The home of my <span class="sub_header_text_hlght">projects</span>, <span class="sub_header_text_hlght">tutorials</span> and <span class="sub_header_text_hlght">other things</span> I feel are worth sharing.</p>
         <hr>
         <ul>
-            {% for post in paginator.posts %}
+            {%- for post in paginator.posts -%}
               <li>
                 <h2>
                   <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
@@ -21,19 +21,19 @@ description: "The home of my projects, tutorials and other things I feel are wor
                         <i class="fa fa-calendar"></i>{{ post.date | date: "%F" }}
                     </div>
                     <div class="label-card">
-                        {% if post.author %}<i class="fa fa-user"></i>{{ post.author }}
-                        {% endif %}
+                        {%- if post.author -%}<i class="fa fa-user"></i>{{ post.author }}
+                        {%- endif -%}
                     </div>
                     <div class="label-card">
-                        {% if page.meta %}<i class="fa fa-key"></i>{{ page.meta }}  {% endif %}
-                    </div>
-
-                    <div class="label-card">
-                    {% include category.html %}
+                        {%- if page.meta -%}<i class="fa fa-key"></i>{{ page.meta }}  {%- endif -%}
                     </div>
 
                     <div class="label-card">
-                    {% include tag.html %}
+                    {%- include category.html -%}
+                    </div>
+
+                    <div class="label-card">
+                    {%- include tag.html -%}
                     </div>
                 </div>
                 <div class="excerpt">
@@ -44,28 +44,28 @@ description: "The home of my projects, tutorials and other things I feel are wor
                 </div>
                 <hr>
               </li>
-            {% endfor %}
+            {%- endfor -%}
         </ul>
 
 
 
         <!-- Pagination links -->
         <div class="pagination">
-          {% if paginator.previous_page %}
+          {%- if paginator.previous_page -%}
             <a href="{{ site.baseurl }}/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="previous"><i class="fa fa-angle-left"></i></a>
-          {% else %}
+          {%- else -%}
             <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
             <span class="previous disable"><i class="fa fa-angle-left"></i></span>
-          {% endif %}
+          {%- endif -%}
           <span class="page_number ">{{ paginator.page }}/{{ paginator.total_pages }}</span>
-          {% if paginator.next_page %}
+          {%- if paginator.next_page -%}
             <a href="{{ paginator.next_page_path }}" class="next"><i class="fa fa-angle-right"></i></a>
             <a href="{{ site.baseurl }}/page{{ paginator.total_pages }}" class="next"><i class="fa fa-angle-double-right"></i></a>
-          {% else %}
+          {%- else -%}
             <span class="next disable"><i class="fa fa-angle-right"></i></span>
             <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
-          {% endif %}
+          {%- endif -%}
         </div>
     </div>
     <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
@@ -78,7 +78,7 @@ description: "The home of my projects, tutorials and other things I feel are wor
                     Categories
                 </div>
                 <ul class="content-ul" cate>
-                    {% for category in site.categories %}
+                    {%- for category in site.categories -%}
                     <li>
                         <a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}" class="categories-list-item" cate="{{ category | first }}">
                             <span class="name">
@@ -87,7 +87,7 @@ description: "The home of my projects, tutorials and other things I feel are wor
                             <span class="badge">{{ category | last | size }}</span>
                         </a>
                     </li>
-                    {% endfor %}
+                    {%- endfor -%}
                 </ul>
             </div>
             <!-- Tags -->
@@ -97,41 +97,41 @@ description: "The home of my projects, tutorials and other things I feel are wor
                     Tags
                 </div>
                 <div class="tags-cloud">
-                    {% assign first = site.tags.first %}
-                    {% assign max = first[1].size %}
-                    {% assign min = max %}
-                    {% for tag in site.tags offset:1 %}
-                      {% if tag[1].size > max %}
-                        {% assign max = tag[1].size %}
-                      {% elsif tag[1].size < min %}
-                        {% assign min = tag[1].size %}
-                      {% endif %}
-                    {% endfor %}
+                    {%- assign first = site.tags.first -%}
+                    {%- assign max = first[1].size -%}
+                    {%- assign min = max -%}
+                    {%- for tag in site.tags offset:1 -%}
+                      {%- if tag[1].size > max -%}
+                        {%- assign max = tag[1].size -%}
+                      {%- elsif tag[1].size < min -%}
+                        {%- assign min = tag[1].size -%}
+                      {%- endif -%}
+                    {%- endfor -%}
 
-                    {% if max == min %}
-                        {% assign diff = 1 %}
-                    {% else %}
-                        {% assign diff = max | minus: min %}
-                    {% endif %}
+                    {%- if max == min -%}
+                        {%- assign diff = 1 -%}
+                    {%- else -%}
+                        {%- assign diff = max | minus: min -%}
+                    {%- endif -%}
 
-                    {% for tag in site.tags %}
-                      {% assign temp = tag[1].size | minus: min | times: 36 | divided_by: diff %}
-                      {% assign base = temp | divided_by: 4 %}
-                      {% assign remain = temp | modulo: 4 %}
-                      {% if remain == 0 %}
-                        {% assign size = base | plus: 9 %}
-                      {% elsif remain == 1 or remain == 2 %}
-                        {% assign size = base | plus: 9 | append: '.5' %}
-                      {% else %}
-                        {% assign size = base | plus: 10 %}
-                      {% endif %}
-                      {% if remain == 0 or remain == 1 %}
-                        {% assign color = 9 | minus: base %}
-                      {% else %}
-                        {% assign color = 8 | minus: base %}
-                      {% endif %}
+                    {%- for tag in site.tags -%}
+                      {%- assign temp = tag[1].size | minus: min | times: 36 | divided_by: diff -%}
+                      {%- assign base = temp | divided_by: 4 -%}
+                      {%- assign remain = temp | modulo: 4 -%}
+                      {%- if remain == 0 -%}
+                        {%- assign size = base | plus: 9 -%}
+                      {%- elsif remain == 1 or remain == 2 -%}
+                        {%- assign size = base | plus: 9 | append: '.5' -%}
+                      {%- else -%}
+                        {%- assign size = base | plus: 10 -%}
+                      {%- endif -%}
+                      {%- if remain == 0 or remain == 1 -%}
+                        {%- assign color = 9 | minus: base -%}
+                      {%- else -%}
+                        {%- assign color = 8 | minus: base -%}
+                      {%- endif -%}
                       <a href="{{ root_url }}/{{ site.tag_dir }}#{{ tag[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ tag[0] }}</a>
-                    {% endfor %}
+                    {%- endfor -%}
                 </div>
             </div>
 
@@ -146,7 +146,7 @@ description: "The home of my projects, tutorials and other things I feel are wor
                 </div>
             </div>
 
-            {% if site.youtube_data_api_key %}
+            {%- if site.youtube_data_api_key -%}
             <div class="side" id="recentVideosSide" style="display: none;">
                 <div>
                     <i class="fa fa-video-camera"></i>
@@ -157,7 +157,7 @@ description: "The home of my projects, tutorials and other things I feel are wor
                 </div>
             </div>
             <script src="{{ "/js/recentYouTubeVideos.js" | prepend: site.baseurl }}"></script>
-            {% endif %}
+            {%- endif -%}
 
             <!-- <div class="side">
                 <div>

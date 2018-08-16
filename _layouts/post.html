@@ -16,20 +16,20 @@ layout: default
             </div>
 
             <div class="label-card">
-                {% if page.author %}<i class="fa fa-user"></i>{{ page.author }}
-                {% endif %}
+                {%- if page.author -%}<i class="fa fa-user"></i>{{ page.author }}
+                {%- endif -%}
             </div>
 
             <div class="label-card">
-                {% if page.meta %}<i class="fa fa-key"></i>{{ page.meta }}  {% endif %}
+                {%- if page.meta -%}<i class="fa fa-key"></i>{{ page.meta }}  {%- endif -%}
             </div>
 
             <div class="label-card">
-            {% include category.html %}
+            {%- include category.html -%}
             </div>
 
             <div class="label-card">
-            {% include tag.html %}
+            {%- include tag.html -%}
             </div>
 
         </div>
@@ -39,37 +39,37 @@ layout: default
         </article>
         <hr>
 
-        {% assign hasSimilar = '' %}
-        {% for post in site.related_posts %}
-            {% assign postHasSimilar = false %}
-            {% for tag in post.tags %}
-                {% for thisTag in page.tags %}
-                    {% if postHasSimilar == false and hasSimilar.size < 6 and post != page and tag == thisTag %}
-                        {% if hasSimilar.size == 0 %}
+        {%- assign hasSimilar = '' -%}
+        {%- for post in site.related_posts -%}
+            {%- assign postHasSimilar = false -%}
+            {%- for tag in post.tags -%}
+                {%- for thisTag in page.tags -%}
+                    {%- if postHasSimilar == false and hasSimilar.size < 6 and post != page and tag == thisTag -%}
+                        {%- if hasSimilar.size == 0 -%}
                         <h2 id="similar_posts">Similar Posts</h2>
                         <ul>
-                        {% endif %}
+                        {%- endif -%}
                         <li class="relatedPost">
                             <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}
-                            {% if post.series %}
+                            {%- if post.series -%}
                                 (Series: {{ post.series }})
-                            {% endif %}
+                            {%- endif -%}
                             </a>
                         </li>
-                        {% capture hasSimilar %}{{ hasSimilar }}*{% endcapture %}
-                        {% assign postHasSimilar = true %}
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
-        {% if hasSimilar.size > 0 %}
+                        {%- capture hasSimilar -%}{{ hasSimilar }}*{%- endcapture -%}
+                        {%- assign postHasSimilar = true -%}
+                    {%- endif -%}
+                {%- endfor -%}
+            {%- endfor -%}
+        {%- endfor -%}
+        {%- if hasSimilar.size > 0 -%}
             </ul>
-        {% endif %}
+        {%- endif -%}
 
-        {% include previousAndNext.html %}
+        {%- include previousAndNext.html -%}
 
         <h2 id="comments">Comments</h2>
-        {% include comments.html %}
+        {%- include comments.html -%}
 
 
     </div>
@@ -83,9 +83,9 @@ layout: default
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    {% if hasSimilar.size > 0 %}
+                    {%- if hasSimilar.size > 0 -%}
                     <li><a href="#similar_posts">Similar Posts</a></li>
-                    {% endif %}
+                    {%- endif -%}
                     <li><a href="#comments">Comments</a></li>
                 </ul>
             </div>

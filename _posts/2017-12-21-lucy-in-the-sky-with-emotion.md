@@ -12,12 +12,12 @@ description: "This project aimed to visualise emotion in music with software dev
 
 This project aimed to visualise emotion in music with software developed by six people from the COMP241 (Software Engineering Development) paper as a group project. The project was successful in the end using Spotify to assist emotion detection.
 
-{% include addGitHubRepoBadges.html content="shash678/Lucy-In-The-Sky-With-Emotion" %}
+{%- include addGitHubRepoBadges.html content="shash678/Lucy-In-The-Sky-With-Emotion" -%}
 
 ## What is this?
 This project takes a local library of music that is tagged and will predict the emotion of the song of either happy or sad. This data can then be passed to a visualiser which will play the selected song along with fiv other recommended songs based off it's emotional position on a valence energy plane.
 
-When the project is first started it will create a sklearn.neighbors.KNeighborsClassifier instance and be provided [previously researched data]({{ site.baseurl }}{% link _posts/2017-12-05-finding-emotion-in-music-with-python.md %}) for points to be compared to later. The Browse button then needs to be clicked and a directory selected. The music library is then scraped for tags and searches for them in Spotify. We then get audio data from Spotify for each song (if possible) and present the data on the GUI. When a user clicks on a song, recommendations of the five nearest songs based off emotion, song data and the point on the emotion gradient are all displayed to the user. When the user clicks the Visualise button, data will be sent to the visualiser and started.
+When the project is first started it will create a sklearn.neighbors.KNeighborsClassifier instance and be provided [previously researched data]({{ site.baseurl }}{%- link _posts/2017-12-05-finding-emotion-in-music-with-python.md -%}) for points to be compared to later. The Browse button then needs to be clicked and a directory selected. The music library is then scraped for tags and searches for them in Spotify. We then get audio data from Spotify for each song (if possible) and present the data on the GUI. When a user clicks on a song, recommendations of the five nearest songs based off emotion, song data and the point on the emotion gradient are all displayed to the user. When the user clicks the Visualise button, data will be sent to the visualiser and started.
 
 ## Demonstration and Screenshots
 ### GUI - Emotion Detection

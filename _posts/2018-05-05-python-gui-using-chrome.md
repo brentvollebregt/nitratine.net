@@ -10,16 +10,16 @@ description: "Eel is a little Python library for making simple Electron-like HTM
 * content
 {:toc}
 
-[Eel](https://github.com/ChrisKnott/Eel) is a "little Python library for making simple Electron-like HTML/JS GUI apps". When thinking of what to design [auto-py-to-exe]({{ site.baseurl }}{% link _posts/2018-03-10-auto-py-to-exe.md %}) with, I came across this library for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. In summary; it hosts a local webserver, then lets you annotate functions in Python so that they can be called from Javascript, and vice versa.
+[Eel](https://github.com/ChrisKnott/Eel) is a "little Python library for making simple Electron-like HTML/JS GUI apps". When thinking of what to design [auto-py-to-exe]({{ site.baseurl }}{%- link _posts/2018-03-10-auto-py-to-exe.md -%}) with, I came across this library for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. In summary; it hosts a local webserver, then lets you annotate functions in Python so that they can be called from Javascript, and vice versa.
 
-{% include embedYouTube.html content="2kbeBzEQfXE" %}
+{%- include embedYouTube.html content="2kbeBzEQfXE" -%}
 
 <!-- more -->
 
 > Please note that this content is based off README.md in [Eel's GitHub Repository](https://github.com/ChrisKnott/Eel) with modifications.
 
 ## Setup
-To use Eel you will need to install the library by simply calling `pip install eel` in cmd. Make sure no errors occurred and if you don't have pip head over to [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}). To make sure Eel is installed, open IDLE and execute `import eel`. If no errors appear then it has installed properly.
+To use Eel you will need to install the library by simply calling `pip install eel` in cmd. Make sure no errors occurred and if you don't have pip head over to [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}). To make sure Eel is installed, open IDLE and execute `import eel`. If no errors appear then it has installed properly.
 
 Although this example will be displaying the use of chromes app mode, you do not actually need [chrome](https://www.google.com/chrome/). When starting the app, if you do not have chrome you will be asked what to open to display the webpage.
 
@@ -81,7 +81,7 @@ If you are using chrome in app mode (default) you can specify the size of the wi
 eel.start('main.html', size=(650, 612))
 ```
 
-When I have used this in the past, the size doesn't always match up, a good example of this is in my [auto-py-to-exe]({{ site.baseurl }}{% link _posts/2018-03-10-auto-py-to-exe.md %}) project which uses `size=(650, 612)` but renders the window about 636x605. When looking at the inner dimensions of the window using JavaScript; window.innerHeight returns 573 and window.innerWidth returns 634.
+When I have used this in the past, the size doesn't always match up, a good example of this is in my [auto-py-to-exe]({{ site.baseurl }}{%- link _posts/2018-03-10-auto-py-to-exe.md -%}) project which uses `size=(650, 612)` but renders the window about 636x605. When looking at the inner dimensions of the window using JavaScript; window.innerHeight returns 573 and window.innerWidth returns 634.
 
 This shows you might have to play around with these values until you get them where you want but they do work (just not as expected).
 

@@ -21,17 +21,17 @@ These counts are counted using [hitcounter.pythonanywhere.com](https://hitcounte
 		</tr>
 	</thead>
 	<tbody>
-	    {% for post in site.posts %}
+	    {%- for post in site.posts -%}
 		<tr>
 			<td><a href="{{ post.url }}">{{ post.title }}</a></td>
 			<td><script>document.write('<img src="https://hitcounter.pythonanywhere.com/nocount/tag.svg?url=' + encodeURIComponent("{{ site.url }}{{ post.url }}") + '" alt="Hits" style="margin-bottom: -4px;">')</script></td>
 		</tr>
-		{% endfor %}
+		{%- endfor -%}
 	</tbody>
 </table>
 
-{% if site.github.public_repositories != null %}
-{% assign repos = site.github.public_repositories | sort: "stargazers_count" | reverse %}
+{%- if site.github.public_repositories != null -%}
+{%- assign repos = site.github.public_repositories | sort: "stargazers_count" | reverse -%}
 ## GitHub Repository Stats
 As uneventful some of my repositories are, I'm always curious if there is any action on them.
 
@@ -45,17 +45,17 @@ As uneventful some of my repositories are, I'm always curious if there is any ac
 		</tr>
 	</thead>
 	<tbody>
-	    {% for repository in repos %}
+	    {%- for repository in repos -%}
 		<tr>
 			<td><a href="https://github.com/brentvollebregt/{{ repository.name }}">{{ repository.name }}</a></td>
 			<td><img src="https://img.shields.io/github/stars/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social" alt="Stars" style="margin-bottom: -5px; display: inline-block;"></td>
 			<td><img src="https://img.shields.io/github/forks/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social" alt="Forks" style="margin-bottom: -5px; display: inline-block;"></td>
 			<td><img src="https://img.shields.io/github/watchers/{{ repository.owner.login }}/{{ repository.name }}.svg?style=social" alt="Watchers" style="margin-bottom: -5px; display: inline-block;"></td>
 		</tr>
-		{% endfor %}
+		{%- endfor -%}
 	</tbody>
 </table>
-{% endif %}
+{%- endif -%}
 
 ## Other
 

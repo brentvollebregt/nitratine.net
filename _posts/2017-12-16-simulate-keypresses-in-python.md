@@ -12,12 +12,12 @@ description: "This demonstrates how to press keys with Python. Using pynput we a
     
 This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence.
 
-{% include embedYouTube.html content="DTnz8wA6wpw" %}
+{%- include embedYouTube.html content="DTnz8wA6wpw" -%}
 
 <!-- more -->
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) to setup pip.
+If you haven't used or setup pip before, go to my tutorial at [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) to setup pip.
 
 ## Installing Pynput
 We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.

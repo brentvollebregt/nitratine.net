@@ -12,12 +12,12 @@ description: "This is a python keylogger which will work on windows, mac and lin
 
 This is a python keylogger which will work on windows, mac and linux. This script uses the pynput module. This python keylogger will store typed keys in a file in order of when they were typed.
 
-{% include embedYouTube.html content="x8GbWt56TlY" %}
+{%- include embedYouTube.html content="x8GbWt56TlY" -%}
 
 <!-- more -->
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) to setup pip. This is needed to install pynput to get keys typed.
+If you haven't used or setup pip before, go to my tutorial at [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) to setup pip. This is needed to install pynput to get keys typed.
 
 ## Installing Pynput
 We will be using the pynput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
@@ -96,14 +96,14 @@ with Listener(on_press=on_press) as listener:
 ```
 
 ## Compile to EXE
-Want to convert this .py to a .exe? Head over to my tutorial at [{{ site.baseurl }}{% link _posts/2017-12-11-convert-py-to-exe.md %}]({{ site.baseurl }}{% link _posts/2017-12-11-convert-py-to-exe.md %}) to do it in a few easy steps. This tutorial also shows you how to remove the console that shows up, make one file executables and even add an icon.
+Want to convert this .py to a .exe? Head over to my tutorial at [{{ site.baseurl }}{%- link _posts/2017-12-11-convert-py-to-exe.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-11-convert-py-to-exe.md -%}) to do it in a few easy steps. This tutorial also shows you how to remove the console that shows up, make one file executables and even add an icon.
 
 Converting to .exe will allow the script to run on windows computers without python installed (python is pre-installed on mac and most linux computers)
 
 ## FAQ
 
 ### 'python' is not recognized as an internal or external command
-Python hasn't been installed or it hasn't been installed properly. Go to [{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}]({{ site.baseurl }}{% link _posts/2017-12-13-how-to-setup-pythons-pip.md %}) and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.
+Python hasn't been installed or it hasn't been installed properly. Go to [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.
 
 ### Where are the log files?
 They will be located next to the python file (in the current directory for more advanced users). If it hasn't appeared, make sure you run the script in IDLE to check for errors you have made.

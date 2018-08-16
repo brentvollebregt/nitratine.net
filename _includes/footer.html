@@ -1,15 +1,15 @@
 <footer class="site-footer">
     <div class="wrapper">
         <p class="description">
-            {% if site.description_footer %} {{site.description_footer}} {% endif %}
+            {%- if site.description_footer -%} {{site.description_footer}} {%- endif -%}
         </p>
         <p class="contact">
-            {% if site.github_username %}<a href="https://github.com/{{site.github_username}}" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> {% endif %}
-            {% if site.email %}<a href="mailto:{{site.email}}" title="Email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> {% endif %}
-            {% if site.youtube_link %}<a href="https://www.youtube.com/{{site.youtube_link}}" title="YouTube"><i class="fa fa-youtube" aria-hidden="true"></i></a> {% endif %}
-            {% if site.twitter_username %}<a href="https://twitter.com/{{site.twitter_username}}" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> {% endif %}
-            {% if site.facebook_username %}<a href="https://www.facebook.com/{{site.facebook_username}}" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a> {% endif %}
-            {% if site.linkedIn_username %}<a href="https://www.linkedin.com/in/{{site.linkedIn_username}}" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a> {% endif %}
+            {%- if site.github_username -%}<a href="https://github.com/{{site.github_username}}" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> {%- endif -%}
+            {%- if site.email -%}<a href="mailto:{{site.email}}" title="Email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> {%- endif -%}
+            {%- if site.youtube_link -%}<a href="https://www.youtube.com/{{site.youtube_link}}" title="YouTube"><i class="fa fa-youtube" aria-hidden="true"></i></a> {%- endif -%}
+            {%- if site.twitter_username -%}<a href="https://twitter.com/{{site.twitter_username}}" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> {%- endif -%}
+            {%- if site.facebook_username -%}<a href="https://www.facebook.com/{{site.facebook_username}}" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a> {%- endif -%}
+            {%- if site.linkedIn_username -%}<a href="https://www.linkedin.com/in/{{site.linkedIn_username}}" title="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a> {%- endif -%}
         </p>
         <p><a style="color: #bbb;" href="{{ site.url }}/data/">Data</a> | <a style="color: #bbb;" href="{{ site.url }}/donations/">Donations</a></p>
         <p class="power">
