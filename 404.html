@@ -64,7 +64,7 @@ description: "404, that page could not be found."
                         {%- assign diff = max | minus: min -%}
                     {%- endif -%}
 
-                    {%- for tag in site.tags -%}
+                    {% for tag in site.tags %}
                       {%- assign temp = tag[1].size | minus: min | times: 36 | divided_by: diff -%}
                       {%- assign base = temp | divided_by: 4 -%}
                       {%- assign remain = temp | modulo: 4 -%}
@@ -81,7 +81,7 @@ description: "404, that page could not be found."
                         {%- assign color = 8 | minus: base -%}
                       {%- endif -%}
                       <a href="{{ root_url }}/{{ site.tag_dir }}#{{ tag[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ tag[0] }}</a>
-                    {%- endfor -%}
+                    {% endfor %}
                 </div>
             </div>
 
