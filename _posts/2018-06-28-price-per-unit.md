@@ -10,7 +10,7 @@ description: "This app compares prices for similar items and will calculate the 
 * content
 {:toc}
 
-<h1 align="center">Price Per Unit</h1>
+<h2 align="center">Price Per Unit</h2>
 <p align="center">A simple Android app that helps you compare prices of similar products. Save money in a smart way.</p>
 
 <div align="center">
@@ -52,7 +52,7 @@ This app is ideal to find the best price in supermarkets but will work just in w
 ## Getting Started
 Clone the repo at [github.com/brentvollebregt/price-per-unit](https://github.com/brentvollebregt/price-per-unit) and then use "Import Project" in Android Studio to open the project.
 
-{%- include addGitHubRepoBadges.html content="brentvollebregt/price-per-unit" -%}
+{% include addGitHubRepoBadges.html content="brentvollebregt/price-per-unit" %}
 
 ### Pre-requisites
 - Android SDK 26

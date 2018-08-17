@@ -12,7 +12,7 @@ description: "This script searches windows for wifi passwords with python alread
 
 This script searches windows for wifi passwords already known and displays them along side the network name. It will not find passwords that your computer doesn't already know. This is useful for the occasions that you forget your WiFi password.
 
-{%- include embedYouTube.html content="j7ysqGXFJKU" -%}
+{% include embedYouTube.html content="j7ysqGXFJKU" %}
 
 ## Quick Background Idea
 If you type ```netsh wlan show profiles``` in cmd, you will be shown the profiles for wifi connections your computer has stored.

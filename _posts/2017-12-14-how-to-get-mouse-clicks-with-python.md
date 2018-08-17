@@ -12,7 +12,7 @@ description: "This demonstration will show you how to track mouse clicks, moveme
     
 This demonstration will show you how to track mouse clicks, movements and even scrolls using the pynput module. These can then be logged to a file as no console is displayed. This is very similar to a mouse logger.
 
-{%- include embedYouTube.html content="kJshtCfqCsY" -%}
+{% include embedYouTube.html content="kJshtCfqCsY" %}
 
 <!-- more -->
 

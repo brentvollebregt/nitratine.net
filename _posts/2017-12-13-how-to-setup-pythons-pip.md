@@ -12,7 +12,7 @@ description: "This tutorial demonstrates how to setup Python's PIP. PIP is a pac
 
 This tutorial demonstrates how to setup Python's PIP. PIP is a package manager for pip that allows you to download third party modules easily.
 
-{%- include embedYouTube.html content="cm6WDGAzDPM" -%}
+{% include embedYouTube.html content="cm6WDGAzDPM" %}
 
 <!-- more -->
 

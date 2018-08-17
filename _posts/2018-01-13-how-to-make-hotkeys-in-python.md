@@ -12,7 +12,7 @@ description: "This demonstrates how to make a script to detect combinations of k
 
 This demonstrates how to make a script to detect combinations of keypresses or even single keys pressed in Python. The script will use pynput to detect keypresses and will work on windows, mac and linux.
 
-{%- include embedYouTube.html content="n_dfv5DLCGI" -%}
+{% include embedYouTube.html content="n_dfv5DLCGI" %}
 
 <!-- more -->
 

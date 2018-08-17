@@ -12,7 +12,7 @@ description: "In this post I will show the basics of python's threading module. 
 
 In this post I will show the basics of python's threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs.
 
-{%- include embedYouTube.html content="5JSloPGocSY" -%}
+{% include embedYouTube.html content="5JSloPGocSY" %}
 
 ## What is Threading?
 The threading module comes pre-installed with python so there are no downloads or installs for this tutorial. Threading allows us to call a method or class that has extended the `threading.Thread` class to run alongside the main thread (the linear flow that generally happens).

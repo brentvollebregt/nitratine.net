@@ -12,7 +12,7 @@ description: "Eel is a little Python library for making simple Electron-like HTM
 
 [Eel](https://github.com/ChrisKnott/Eel) is a "little Python library for making simple Electron-like HTML/JS GUI apps". When thinking of what to design [auto-py-to-exe]({{ site.baseurl }}{%- link _posts/2018-03-10-auto-py-to-exe.md -%}) with, I came across this library for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. In summary; it hosts a local webserver, then lets you annotate functions in Python so that they can be called from Javascript, and vice versa.
 
-{%- include embedYouTube.html content="2kbeBzEQfXE" -%}
+{% include embedYouTube.html content="2kbeBzEQfXE" %}
 
 <!-- more -->
 

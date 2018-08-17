@@ -12,7 +12,7 @@ description: "A demonstration of how to package a python script into an executab
 
 A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package.
 
-{%- include embedYouTube.html content="lOIJIk_maO4" -%}
+{% include embedYouTube.html content="lOIJIk_maO4" %}
 
 <!-- more -->
 
@@ -53,7 +53,7 @@ You can combine these flags to make things like onefile executables with no cons
 ## Auto PY to EXE
 In March 2018 I create a python package that allows you to create executables really easily from python scripts. It is built using a simple graphical interface built with Eel in Python.
 
-{%- include embedYouTube.html content="OZSZHmWSOeM" -%}
+{% include embedYouTube.html content="OZSZHmWSOeM" %}
 ![Empty interface](https://i.imgur.com/dd0LC2n.png)
 
 ## FAQ

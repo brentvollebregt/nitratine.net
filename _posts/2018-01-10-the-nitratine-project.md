@@ -14,7 +14,7 @@ The Nitratine project was originally a place to host my projects, tutorials and 
 
 I have now decided to relocate the Nitratine project to Github Pages as it has a lot of benefits but I will still keep this repo public as it may be useful for something else one day.
 
-{%- include addGitHubRepoBadges.html content="brentvollebregt/nitratine" -%}
+{% include addGitHubRepoBadges.html content="brentvollebregt/nitratine" %}
 
 This is currently hosted at: [nitratine.pythonanywhere.com](http://nitratine.pythonanywhere.com/)
 

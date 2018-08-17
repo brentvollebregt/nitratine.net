@@ -12,7 +12,7 @@ description: "This is a python keylogger which will work on windows, mac and lin
 
 This is a python keylogger which will work on windows, mac and linux. This script uses the pynput module. This python keylogger will store typed keys in a file in order of when they were typed.
 
-{%- include embedYouTube.html content="x8GbWt56TlY" -%}
+{% include embedYouTube.html content="x8GbWt56TlY" %}
 
 <!-- more -->
 

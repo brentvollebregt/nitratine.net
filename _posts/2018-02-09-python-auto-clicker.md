@@ -12,7 +12,7 @@ description: "This is a script that allows you to click you mouse repeatedly wit
 
 This is a script that allows you to click you mouse repeatedly with a small delay. It works on windows, mac and linux and can be controlled with user defined keys.
 
-{%- include embedYouTube.html content="eamTeszpeZ4" -%}
+{% include embedYouTube.html content="eamTeszpeZ4" %}
 
 ## What is this?
 This project uses the cross platform module pynput to control the mouse and monitor the keyboard at the same time to create a simple auto clicker.
