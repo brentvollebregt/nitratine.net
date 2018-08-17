@@ -12,7 +12,7 @@ description: "A python script to download a Spotify playlist to MP3 using YouTub
 
 A python script to download a Spotify playlist to MP3 using YouTube as audio source. The MP3s are tagged and given album art using Spotify
 
-[Find the project on GitHub here](https://github.com/brentvollebregt/spotify-playlist-downloader)
+{% include addGitHubRepoBadges.html content="brentvollebregt/spotify-playlist-downloader" %}
 
 ## What is this?
 This project takes a Spotify playlist uri and will download it's contents by sourcing audio from YouTube and tags/art from Spotify. YouTube videos for audio are found automatically.

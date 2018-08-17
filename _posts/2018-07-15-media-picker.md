@@ -16,6 +16,8 @@ I had been requested to help someone with filtering a lot of images taken with a
 
 ![Interface](/images/media-picker/interface.jpg)
 
+{% include addGitHubRepoBadges.html content="brentvollebregt/media-picker" %}
+
 <!-- more -->
 
 This project is a Flask server hosted by Python that is designed to be opened in a Chrome window. Other browsers will work but due to layouts, images of different sizes will mess with the display.

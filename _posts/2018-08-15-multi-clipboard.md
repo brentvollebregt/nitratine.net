@@ -16,6 +16,8 @@ The idea of this is to easily switch clipboards with a simple click in a GUI. It
 
 ![Main GUI](/images/multi-clipboard/main-gui.png)
 
+{% include addGitHubRepoBadges.html content="brentvollebregt/mutli-clipboard" %}
+
 <!-- more -->
 
 ## What Is This?
