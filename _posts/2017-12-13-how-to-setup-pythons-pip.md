@@ -38,7 +38,7 @@ Now in the new window, click new on the right and put the folder location of you
 ```python
 import os
 import sys
-print (os.path.dirname(sys.executable) + '\Scripts\')
+print (os.path.dirname(sys.executable) + '\Scripts\\')
 
 ```
 

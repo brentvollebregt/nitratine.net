@@ -16,14 +16,12 @@ The idea of this is to easily switch clipboards with a simple click in a GUI. It
 
 ![Main GUI](/images/multi-clipboard/main-gui.png)
 
-{% include addGitHubRepoBadges.html content="brentvollebregt/mutli-clipboard" %}
+{% include addGitHubRepoBadges.html content="brentvollebregt/multi-clipboard" %}
 
 <!-- more -->
 
 ## What Is This?
 This is my solution to constantly overwriting my clipboard. It is a GUI that acts like a hotbar, click on a virtual clipboard to place it on your actual clipboard. Some command line support has also been added in the form of setting and clearing clipboards.
-
-Currently this is the second version, fixing many bugs and making things faster and safer.
 
 ## Getting Started
 
@@ -67,10 +65,14 @@ Don't want to have to install the package? Follow these steps:
 
 ### GUI Usage
 * Click on clipboard to switch to it (will close automatically on selection by default)
+    - You can also use TAB to highlight the clipboards and then press ENTER to set the currently selected keyboard
 * Right click menu on each clipboard to individually delete/set
 * Click on the trash to delete all clipboards
 * Click on the plus button to create a new clipboard
-* Settings for the GUI can be toggled easily in settings window
+* Settings for the GUI can be toggled easily in settings window. In here you can:
+    - Change window settings (opacity, frame, stay on top...)
+    - Toggle the listener
+    - Make the listener start on user login
 
 ### Command Line Usage
 * `multi-clipboard` - Opens GUI
@@ -86,20 +88,7 @@ This package has a built in listener which listens for Ctrl + Windows + C (Left 
 
 ## GUI With Settings Open
 
-![Main GUI](/images/multi-clipboard/main-gui-with-settings-shown.png)
-
-## So What Happens If...
- - I delete all clipboards? -> Clipboard 0 will be created with the current contents
- - I delete the clipboard I am currently on? -> Nothing, your clipboard will be saved back to that clipboard later.
- - I am shown an error saying my clipboard isn't supported? -> Open up an issue with details on what your clipboard contents are, we can see if it can be supported
-
-## Running From Your Project
-If you want to run the GUI from python, first install the package, you can import it and use it:
-```python
-from multi_clipboard import db, ui
-db_manager = db.DatabaseManager()
-ui.show_clipboard_selector(db_manager)
-```
+![Main GUI with Settings](/images/multi-clipboard/main-gui-with-settings-shown.png)
 
 ## Thanks to
 * [Michael Robertson](https://github.com/MBRobertson) for adding file support in previous versions.
