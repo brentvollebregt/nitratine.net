@@ -31,6 +31,13 @@ This application displays a simple interface that allows you to convert py to ex
 
 <!-- more -->
 
+## Demo
+
+<video style="width:90%;height:auto;margin:auto;display:block;" controls="">
+    <source src="/images/auto-py-to-exe/auto-py-to-exe-demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
 ## Getting Started
 
 ### Prerequisites
