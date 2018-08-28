@@ -47,7 +47,7 @@ $ auto-py-to-exe
 ![Channel Header]({{ site.baseurl }}{%- link images/PyTutorials-channel-header.jpg -%})
 When I have time and ideas, I like to make programming tutorials. Currently most of my tutorials are Python related but I also have a few different ones.
 
-Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 210k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 110k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 790k views.
+Some of my videos have quite a bit of attention, for example [Convert PY to EXE](https://youtu.be/lOIJIk_maO4) which has over 240k views, [Python Keylogger](https://youtu.be/x8GbWt56TlY) with more tha 120k views and [Record Your Computer Screen With VLC](https://youtu.be/H-6gxvBBEiw) with more than 800k views.
 
 I give a lot of help in the comments for these videos and try my best to find solutions for issues people are having. This also allows me to gauge what people like in terms of topics and the videos themselves and get great feedback.
 

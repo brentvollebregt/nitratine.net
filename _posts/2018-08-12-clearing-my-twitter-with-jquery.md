@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Clearing My Twitter with jQuery"
+title: "How to Clean a Twitter Account with jQuery"
 date: 2018-08-12
 categories: General
 tags: Twitter JavaScript jQuery API tweepy
@@ -10,16 +10,14 @@ description: ""
 * content
 {:toc}
 
-A while ago I had decided that I would want to keep my Twitter handle that I used for my bot, so I needed to remove all the re-tweets, follows and liked tweets from this account. One option was to create a new account under a different email and move the handle over, but I wanted to keep the handle under the email address it is currently under so that was not an option.
+This article will go over how I used jQuery on twitter.com to delete all my tweets and remove all my likes and accounts I follow.
 
-I then decided to use a bulk tweet deleter tool online to delete tweets on my account; unfortunately this has "broken" my twitter account. There are tweets I have re-tweeted that I can not un-re-tweet and the counts for Tweets and Likes on my profile are now way out.
-
-This article will go over how I used jQuery on twitter.com to get rid of the tweets I still could access and unfollow people in bulk. I was not able to delete everything as I have lost access to some tweets but this got rid of quite a few and I feel this method would work if you haven't used a bulk tool.
+I have seen many people report about how bulk twitter deleters can 'break' an account; this has also occurred to me. At the end of this, I also provide a method to help with deleting broken tweets that you cannot delete/un-retweet.
 
 <!-- more -->
 
 ## Unfollowing Accounts
-I first wanted to remove all the users my bot followed. Going into the ["Following"](https://twitter.com/following) tab in twitter shows everyone you have followed with blue buttons that go red and change text to "Unfollow" when you hover on them.
+I first wanted to remove all the users my [bot](/python-retweet-bot/) followed. Going into the ["Following"](https://twitter.com/following) tab in twitter shows everyone you have followed with blue buttons that go red and change text to "Unfollow" when you hover on them.
 
 ![Unfollow Button](/images/clearing-my-twitter-with-jquery/unfollow_btn.png)
 
@@ -136,7 +134,7 @@ api = tweepy.API(auth)
 
 Running this script should end gracefully, no errors. If there are errors, search them up; I'm sure StackOverflow will have an answer.
 
-We now need to find the id of the re-tweet we want to delete. Go back into ChromeDev Tools on your twitter timeline and select a tweet you want to un-retweet. You might be thinking "why can't I just click the (now green) retweet button to un-retweet?". That is because the function literally just doesn't work in browser anymore, I have no clue why; twitter is broken. When you look at the tweet in the Elements tab, go up the tree until you find the div related to this tweet with a class 'tweet'*[]:
+We now need to find the id of the re-tweet we want to delete. Go back into ChromeDev Tools on your twitter timeline and select a tweet you want to un-retweet. You might be thinking "why can't I just click the (now green) retweet button to un-retweet?". That is because the function literally just doesn't work in browser anymore, I have no clue why; twitter is broken. When you look at the tweet in the Elements tab, go up the tree until you find the div related to this tweet with a class 'tweet'.
 
 An easier way to find this would be to execute ```$.find('.tweet')``` in the Console tab, expand the results and then hover over each item until it highlights your tweet; when it does highlight the tweet you are aiming for, click on it to be shown it in the Elements tab.
 

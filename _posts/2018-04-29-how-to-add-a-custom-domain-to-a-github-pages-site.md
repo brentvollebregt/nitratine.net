@@ -72,7 +72,7 @@ You should now have five entries in the "Existing Resource Records" (4 A records
 
 GitHub will decided what url to use based on what you put in your git repositories CNAME. You may have to wait a while until these entries are added by Namesilo but in my experience it is very quick.
 
-### SSL (Green Padlock)
+## SSL (Green Padlock)
 Following these steps and using the new IP addresses, you will now be provided SSL for free from Github with no extra effort.
 
 If this did not occur (it didn't work my first time I tried), go to the git repo on Github and then go to settings. Scroll down this page until you find the "GitHub Pages" block. In this block, there is a "Custom domain" header with an input field under it (just like we did in Setting Up CNAME in GitHub). Clear this field and click save. Now put your url in the input field (the one you just cleared) and save it. This reset of the url can trigger the SSL certificate generation and you should get SSL on your website in under a day.
