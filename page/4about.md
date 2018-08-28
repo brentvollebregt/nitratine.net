@@ -73,8 +73,8 @@ Just like Multi Clipboard, attach this to a hotkey and your scripts you previous
 	<img src="{{ site.baseurl }}{%- link images/quick-script/gui1.png -%}" alt="Quick Script GUI"/>
 </div>
 
-### [Nitratine](http://nitratine.pythonanywhere.com/)
-Nitratine was a website I built before this site to host all my content.
+### [Nitratine (old)](http://nitratine.pythonanywhere.com/)
+This version of Nitratine was a website I built before this site to host all my content.
 
 It is a fully dynamic server with a cms built in. It can do server side scripting, uses Jinja for templating, has mobile support and more.
 

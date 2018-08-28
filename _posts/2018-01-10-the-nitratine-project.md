@@ -10,11 +10,11 @@ description: "The Nitratine project was originally a place to host my projects, 
 * content
 {:toc}
 
-The Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months.
+This version of the Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months.
 
 I have now decided to relocate the Nitratine project to Github Pages as it has a lot of benefits but I will still keep this repo public as it may be useful for something else one day.
 
-{% include addGitHubRepoBadges.html content="brentvollebregt/nitratine" %}
+{% include addGitHubRepoBadges.html content="brentvollebregt/nitratine-old" %}
 
 This is currently hosted at: [nitratine.pythonanywhere.com](http://nitratine.pythonanywhere.com/)
 
@@ -57,7 +57,7 @@ The site has a home page and then five sub areas. Each article is put under one 
 1. Install Requirements
     - Python 3
     - Flask (pip install Flask)
-2. Clone or download the git repo at [https://github.com/brentvollebregt/nitratine](https://github.com/brentvollebregt/nitratine) and cd into the project
+2. Clone or download the git repo at [https://github.com/brentvollebregt/nitratine](https://github.com/brentvollebregt/nitratine-old) and cd into the project
 3. Run server.py
 4. Go to /admin
     - Set variables on this page and change options
