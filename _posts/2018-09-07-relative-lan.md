@@ -35,12 +35,13 @@ $ relative-lan index.html
 Where index.html is a file in your web project with relative links to other local files.
 
 ### Running With No Instillation Via [Github](https://github.com/brentvollebregt/relative-lan)
-Simply call:
+After downloading/cloning the package, call:
 ```
 > python relative_lan.py index.html
 ```
 
 #### Arguments
+
 | Argument | Description     |
 |----------|-----------------|
 | filename (positional) | Find the root using this file and open it when the server is started |
