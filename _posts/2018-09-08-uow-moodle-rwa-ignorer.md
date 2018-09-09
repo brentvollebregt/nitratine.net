@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "University of Waikato Moodle Ignore Resource Work Around"
+title: "University of Waikato Moodle Resource Work Around Ignorer"
 date: 2018-09-08
 categories: Projects
 tags: JavaScript Chrome
@@ -14,13 +14,13 @@ A chrome extension to solve the Waikato Universities resource work around in Moo
 
 ![Extension Popup](/images/university-of-waikato-moodle-ignore-resource-work-around/extension_popup.png)
 
-{% include addGitHubRepoBadges.html content="brentvollebregt/UoWMoodleIgnoreResourceWorkAround" %}
+{% include addGitHubRepoBadges.html content="brentvollebregt/uow-moodle-rwa-ignorer" %}
 
 <!-- more -->
 
 ## Installation
 ### Using the .crx File
-1. Download the [.crx file](https://github.com/brentvollebregt/UoWMoodleIgnoreResourceWorkAround/raw/master/UoWMoodleIgnoreResourceWorkAround.crx)
+1. Download the [.crx file](https://github.com/brentvollebregt/uow-moodle-rwa-ignorer/raw/master/uow-moodle-rwa-ignorer.crx)
 2. Go to chrome://extensions/
 3. Drag and drop the .crx file onto the extensions page
 4. Click "Add extension"
@@ -28,7 +28,7 @@ A chrome extension to solve the Waikato Universities resource work around in Moo
 > You will be notified that "*This extension is not listed in the Chrome Web Store and may have been added without your knowledge.*". This is because it has not been installed from the Chrome Web Store. If you are worried about this, you can use the method below.
 
 ### By Source
-1. Download or clone the [repository](https://github.com/brentvollebregt/UoWMoodleIgnoreResourceWorkAround)
+1. Download or clone the [repository](https://github.com/brentvollebregt/uow-moodle-rwa-ignorer)
 2. Go to chrome://extensions/
 3. Turn developer mode on using the switch in the upper right
 4. Click "*Load unpacked*" on the top left and select the *src* folder from the downloaded/cloned repository
