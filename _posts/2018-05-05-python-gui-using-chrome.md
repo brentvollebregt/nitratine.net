@@ -246,6 +246,11 @@ So those who have used Flask, bottle or pyramid before may be asking why not jus
 
 With Eel, you don't need to do any of this; simply importing eel, calling `eel.init('web')` and `eel.start('main.html')` will create the whole server for you. Now all you need to do is create your methods and expose them to eel using a decorator.
 
+## Common Issues and Questions
+
+### Is it possible to package eel with pyinstaller?
+Yes, if you look at Eel documentation, go [to the bottom](https://github.com/ChrisKnott/Eel#building-a-distributable-binary﻿) and it explains clearly how to do this.
+
 ## Extra Reading
  - [Eel GitHub Page](https://github.com/ChrisKnott/Eel)
  - [A demo of using Eel in a Python script](https://github.com/brentvollebregt/auto-py-to-exe/blob/master/run.py)

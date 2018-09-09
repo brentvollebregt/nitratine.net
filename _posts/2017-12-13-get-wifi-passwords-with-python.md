@@ -116,7 +116,7 @@ input("")
 
 Please note that profiles which cause an error will still not provide a password as the encoding still isn't correct. You will have to find the password manually as shown at the top of this post.
 
-## FAQ
+## Common Issues and Questions
 
 ### Why isn't the password showing for one or more network(s)?
 If a network has a special type of authentication, there is a good chance this will not obtain the password. There will most likely be other methods of finding the password though.

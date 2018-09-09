@@ -66,7 +66,7 @@ Regarding that the python script runs properly by itself then this would have be
 ### zipimport.ZipImportError: can't find module 'encodings'﻿
 Currently Python 3.7 is not supported by pyinstaller. It seems development for 3.7 is currently occurring but I am unsure on how far support for 3.7 is.
 
-### "Open command window here" isn't shown when I right click?
+### "Open command window here" isn't shown when I shift right click?
 Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work exactly the same for this tutorial; so go ahead and use PowerShell.
 
 ### 'pip' is not recognized as an internal or external command
@@ -81,7 +81,7 @@ Go back to the PyInstaller heading, you have not installed pyinstaller, remember
 ### When editing the PATH variable, I can only edit the variable
 Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.
 
-### the exe does not work on another computer﻿
+### The exe does not work on another computer﻿
 This may be an architecture issue. PyInstaller will create an executable with the architecture of the machine it was built with. You are most likely using a 64bit machine if you are asking this question to compile the .py; thus it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures﻿.
 
 ### My antivirus detected my exe as a virus

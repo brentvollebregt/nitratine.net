@@ -100,7 +100,10 @@ Want to convert this .py to a .exe? Head over to my tutorial at [{{ site.baseurl
 
 Converting to .exe will allow the script to run on windows computers without python installed (python is pre-installed on mac and most linux computers)
 
-## FAQ
+## Common Issues and Questions
+
+### It doesn't work (general things to try)
+Make sure you run the script in IDLE to check for errors you have made
 
 ### 'python' is not recognized as an internal or external command
 Python hasn't been installed or it hasn't been installed properly. Go to [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.
@@ -108,16 +111,16 @@ Python hasn't been installed or it hasn't been installed properly. Go to [{%- li
 ### Where are the log files?
 They will be located next to the python file (in the current directory for more advanced users). If it hasn't appeared, make sure you run the script in IDLE to check for errors you have made.
 
-### What is pynput's GitHub page?
-[https://github.com/moses-palmer/pynput](https://github.com/moses-palmer/pynput)
+### ModuleNotFoundError/ImportError: No module named 'pynput'
+Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
-### It doesn't work
-Make sure you run the script in IDLE to check for errors you have made
+### I got a SyntaxError
+Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
 
 ### How can I stop the listener?
 As documented at [https://pythonhosted.org/pynput/keyboard.html](https://pythonhosted.org/pynput/keyboard.html) you can use pynput.keyboard.Listener.stop() to stop listening.
 
-### "Shift + Right Click" action it only gives an option for Power Shell
-Powershell is fine, don't worry, it does the same stuff and more. Use it.
+### "Open command window here" isn't shown when I shift right click?
+Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work exactly the same for this tutorial; so go ahead and use PowerShell.
 
 *Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

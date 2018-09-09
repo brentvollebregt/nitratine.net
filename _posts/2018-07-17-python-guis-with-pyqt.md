@@ -202,5 +202,10 @@ Running the script now you should be able to type in the text edit item and then
 
 *[Code download: MainWindowAdvanced2.py](/downloads/python-guis-with-pyqt/MainWindowAdvanced2.py)*
 
+## Common Issues and Questions
+
+### Could not find a version that satisfies the requirement pyqt5-tools
+Currently pyqt5-tools does not support Python 3.7. There is a build in progress as noted in the [issue 13](https://github.com/altendky/pyqt5-tools/issues/13).
+
 ## Read More
  - [www.codementor.io](https://www.codementor.io/deepaksingh04/design-simple-dialog-using-pyqt5-designer-tool-ajskrd09n)

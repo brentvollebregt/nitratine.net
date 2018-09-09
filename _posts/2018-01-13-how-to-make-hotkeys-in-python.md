@@ -142,4 +142,15 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
+## Common Issues and Questions
+
+### How can I add different hotkeys for different functions?
+I have not developed this myself yet so it will be something you need to think about. The best way to do this would be to have two lists, one of combinations and one of definitions for each combination. Test each of the combinations on a keypress and if all the keys are pressed, execute the definition in the same index in the definition list.
+
+### ModuleNotFoundError/ImportError: No module named 'pynput'
+Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
+
+### I got a SyntaxError
+Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
+
 *Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

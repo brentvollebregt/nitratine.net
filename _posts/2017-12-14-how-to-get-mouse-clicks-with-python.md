@@ -147,4 +147,12 @@ with Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listen
     listener.join()
 ```
 
+## Common Issues and Questions
+
+### ModuleNotFoundError/ImportError: No module named 'pynput'
+Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
+
+### I got a SyntaxError
+Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
+
 *Please leave questions and comments related to the video on YouTube as they will be replied to faster there*

@@ -75,4 +75,25 @@ keyboard.type('Nitratine')
 
 This method does also support spaces but when it comes to enters, use a new line character (\n) and a tab character (\t) for tabs.
 
+## Common Issues and Questions
+
+### How can I use the keyboard and mouse controllers at the same time?
+When you import the classes, Controller will be set to the last one imported. To show what the issue was, ask yourself, what controller did you use to set the mouse and what one to set the keyboard? You would have used the same, but they need to be from the different classes.  So then you should use:
+```python
+from pynput.keyboard import Key, Controller as KeyboardController
+from pynput.mouse import Button, Controller as MouseController
+```
+
+Now when you want to use the controller for the mouse use MouseController and KeyboardController for the keyboard.
+```
+keyboard = KeyboardController()
+mouse = MouseController()
+```
+
+### ModuleNotFoundError/ImportError : No module named 'pynput'
+Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
+
+### I got a SyntaxError
+Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
+
 *Please leave questions and comments related to the video on YouTube as they will be replied to faster there*
