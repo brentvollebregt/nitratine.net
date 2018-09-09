@@ -34,4 +34,4 @@ Check if you are a participant of a conversation in Gmail. Helps you stop sendin
 4. Click "*Load unpacked*" on the top left and select the *src* folder from the downloaded/cloned repository
 
 ## How Does This Work
-Initially this script will wait for Gmails single-page-app to update the DOM (hopefully) and then get the emails that are used in the current conversation. These emails are then compared to the current email logged in and this used to determine if
+Initially this script will wait for Gmails single-page-app to update the DOM (hopefully) and then get the emails that are used in the current conversation. These emails are then compared to the current email logged in and this used to determine if a warning is needed.
