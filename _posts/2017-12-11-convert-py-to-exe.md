@@ -20,7 +20,7 @@ A demonstration of how to package a python script into an executable file. This 
 If you haven't used or setup pip before, go to my tutorial at [{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}]({{ site.baseurl }}{%- link _posts/2017-12-13-how-to-setup-pythons-pip.md -%}) to setup pip.
 
 ## PyInstaller
-Now that pip has been setup, execute the command ```pip install pyinstaller``` in cmd. Make sure to check the output for errors as if there are errors it would not have installed successfully. Note PyInstaller doesn't support all versions of Python. As of 11-12-17 PyInstaller supports up to Python 3.6. You can check at [http://www.pyinstaller.org/downloads.html](http://www.pyinstaller.org/downloads.html) under Downloads -> Release to see what is supported by the latest release.
+Now that pip has been setup, execute the command ```pip install pyinstaller``` in cmd. Make sure to check the output for errors as if there are errors it would not have installed successfully. PyInstaller now supports Python 2.7 - 3.7 including Python 3.7.
 
 To make sure it installed properly, type ```pyinstaller``` in cmd and make sure no errors appeared.
 
@@ -64,7 +64,7 @@ In March 2018 I create a python package that allows you to create executables re
 Regarding that the python script runs properly by itself then this would have been caused by incorrect configuration or third party modules. The best way to find what the issue is, is to add the -d flag and then re-package it. This will mean the exe is now in a debugging mode. Open up cmd and then run the exe using cmd e.g. "C:/folder/path/myexe.exe". Any errors will be preserved in the console which you were previously missing.
 
 ### zipimport.ZipImportError: can't find module 'encodings'﻿
-Currently Python 3.7 is not supported by pyinstaller. It seems development for 3.7 is currently occurring but I am unsure on how far support for 3.7 is.
+Please upgrade PyInstaller to 3.4 or above using: `python -m pip install --upgrade PyInstaller`
 
 ### "Open command window here" isn't shown when I shift right click?
 Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work exactly the same for this tutorial; so go ahead and use PowerShell.
