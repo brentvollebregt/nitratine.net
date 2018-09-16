@@ -57,7 +57,7 @@ paginate_path: "/page/:num"
 defaults:
   -
     scope:
-      path: "page/:num"
+      path: "page"
     values:
       sitemap: false
 
