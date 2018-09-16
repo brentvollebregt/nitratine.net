@@ -53,13 +53,6 @@ excerpt_separator: "<!-- more -->"
 # paginate
 gems: [jekyll-paginate]
 paginate: 6
-paginate_path: "/page/:num"
-defaults:
-  -
-    scope:
-      path: "page/*"
-    values:
-      sitemap: false
 
 # Use the following plug-ins
 gems:
