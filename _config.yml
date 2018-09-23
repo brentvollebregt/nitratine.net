@@ -7,8 +7,7 @@
 
 # Site settings
 title: Nitratine
-brief-intro: My Projects and Tutorials
-baseurl: 
+baseurl:
 url: "https://nitratine.net"
 
 permalink: /:title/

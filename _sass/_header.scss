@@ -17,7 +17,9 @@ header {
         margin: 0 auto;
         line-height: 52px;
         .brand {
-            font-size: 18px;
+            display: inline;
+            height: 40px;
+            margin: 6px 0 0 0;
         }
         small {
             margin-left: 26px;
@@ -66,7 +68,8 @@ header {
             width: 90%;
             line-height: 50px;
             .brand {
-                font-size: 16px;
+                height: 38px;
+                margin: 5px 0 0 0;
             }
             small {
                 margin-left: 15px;
@@ -102,7 +105,8 @@ header {
             position: relative;
             z-index: 101;
             .brand {
-                font-size: 16px;
+                height: 38px;
+                margin: 5px 0 0 0;
             }
             small {
                 margin-left: 10px;
