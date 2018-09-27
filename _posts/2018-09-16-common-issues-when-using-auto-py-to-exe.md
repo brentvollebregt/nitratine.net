@@ -111,3 +111,8 @@ People that use IDLE all the time don't always understand that these scripts don
 
 ### Permissions Denied?
 You are most likely running in a directory where you haven't given the script enough privileges to modify files. Run auto-py-to-exe using a cmd with admin privileges so it can modify these files.
+
+### My Package isn't working on a particular computer?
+This could be due to the operating system or the architecture (what bit). Make sure you are using the same operating system you packaged your script with. If it is the same operating system, then it may be an issue with the architecture you are using.
+
+Pyinstaller will create an executable with the architecture of the machine it was built with. If you use a 64bit machine to compile the .py, it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures﻿ (or package twice for each architecture).
