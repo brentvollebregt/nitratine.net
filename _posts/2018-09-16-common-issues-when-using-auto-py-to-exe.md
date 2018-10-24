@@ -116,3 +116,8 @@ You are most likely running in a directory where you haven't given the script en
 This could be due to the operating system or the architecture (what bit). Make sure you are using the same operating system you packaged your script with. If it is the same operating system, then it may be an issue with the architecture you are using.
 
 Pyinstaller will create an executable with the architecture of the machine it was built with. If you use a 64bit machine to compile the .py, it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures﻿ (or package twice for each architecture).
+
+### ModuleNotFoundError
+I have been asked about many issues regarding `"ModuleNotFoundError: No module named 'pandas._libs.tslib'"`; this is because PyInstaller hasn't seen that this pandas._libs.tslib is required.
+
+To fix this, add "--hidden-import=pandas._libs.tslibs" as an extra flag at the bottom of the advanced tab﻿. This will tell PyInstaller to include it when packaging.
