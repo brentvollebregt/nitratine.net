@@ -249,7 +249,7 @@ Using the variable *message* you can then encrypt it. To store, you can use the 
 
 ```python
 encrypted = 'data from encryption'
-f = open('test.encrypted', 'w')
+f = open('test.encrypted', 'wb')
 f.write(encrypted)
 f.close()
 ```
