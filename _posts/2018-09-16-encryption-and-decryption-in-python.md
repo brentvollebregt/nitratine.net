@@ -165,7 +165,7 @@ with open(output_file, 'wb') as f:
     f.write(encrypted)
 
 # You can delete input_file if you want
-````
+```
 
 And then to decrypt a file:
 
@@ -185,6 +185,6 @@ with open(output_file, 'wb') as f:
     f.write(encrypted)
 
 # You can delete input_file if you want
-````
+```
 
 > As stated in [Fernet docs](https://cryptography.io/en/latest/fernet/#limitations), beware of large files; Fernet is ideal for encrypting data that easily fits in memory. You may need to think of methods to split larger files up to use this encryption method on large files.
