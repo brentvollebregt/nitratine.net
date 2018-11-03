@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+        <title>Posts By {{ title }}</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+
+        <meta name="description" content="Posts on Nitratine sorted by {{ category }}">
+        <meta name="author" content="{{ site.default_author }}">
+        <meta property="og:title" content="Posts By {{ title }}">
+        <meta property="og:description" content="Posts on Nitratine sorted by {{ category }}">
+        <meta property="og:image" content="{{ site.url }}/assets/img/logo.png">
+        <meta property="og:url" content="{{ site.url + request.path }}">
+        <meta name="twitter:card" content="summary">
+{% endblock head %}
+
+{% block content %}
+             <div class="row">
+
+                <!-- Tags -->
+                <div class="col-md-8 blog-main mb-5">
+                    <h1 class="mb-4">Posts By {{ title }}</h1>
+
+                    {% for category in categories %}
+
+                    <h2 id="{{ category }}" class="mb-2 mt-3 category-title">{{ category }}</h2>
+
+                    {% for post in categories[category] %}
+                        <div>
+                            <a href="/blog/archive/#{{ post.date.year }}" class="mr-2 text-muted">{{ ymd_format(post.date) }}</a>
+                            <a href="{{ url_for('blog_post', path=post.path) }}">{{ post.title }}</a>
+                            <a href="/blog/categories/#{{ post.categories }}" class="badge badge-primary ml-2">{{ post.categories }}</a>
+                            {% for tag in post.tags %}
+                            <a href="/blog/tags/#{{ tag }}" class="badge badge-warning">{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    {% endfor %}
+
+                </div>
+
+                {% include 'blog-sidebar.html' %}
+
+            </div>
+{% endblock content %}

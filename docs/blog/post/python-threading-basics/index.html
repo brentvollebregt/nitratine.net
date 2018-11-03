@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://test.nitratine.net/blog/post/python-threading-basics/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Python Threading Basics - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="This post covers the basics of Python&#39;s threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Python Threading Basics">
+        <meta property="og:description" content="This post covers the basics of Python&#39;s threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs.">
+        <meta property="og:image" content="/post-assets/python-threading-basics/feature.png">
+        <meta property="og:url" content="https://test.nitratine.net/blog/post/python-threading-basics/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorialsOriginal">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-md-8 blog-main">
+
+                    <h1 class="blog-post-title">Python Threading Basics</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2018" class="text-muted">03 May 2018</a>
+                        <a href="/blog/categories/#YouTube" class="badge badge-primary ml-2">YouTube</a>
+                        
+                        <a href="/blog/tags/#Python" class="badge badge-warning">Python</a>
+                        
+                        <a href="/blog/tags/#Threading" class="badge badge-warning">Threading</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">This post covers the basics of Python&#39;s threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#what-is-threading">What is Threading?</a></li>
+<li><a href="#threading-a-method">Threading a Method</a><ul>
+<li><a href="#passing-arguments">Passing Arguments</a></li>
+</ul>
+</li>
+<li><a href="#threading-a-class">Threading a Class</a><ul>
+<li><a href="#passing-arguments_1">Passing Arguments</a></li>
+</ul>
+</li>
+<li><a href="#managing-your-threads">Managing Your Threads</a><ul>
+<li><a href="#naming">Naming</a></li>
+<li><a href="#joining-threads">Joining Threads</a></li>
+<li><a href="#daemon-threads">Daemon Threads</a></li>
+<li><a href="#getting-all-threads">Getting All Threads</a></li>
+<li><a href="#is-a-thread-alive">Is a Thread Alive?</a></li>
+</ul>
+</li>
+<li><a href="#why-it-wont-make-your-script-run-faster">Why it Won't Make Your Script Run Faster</a></li>
+<li><a href="#extra-resources">Extra Resources</a></li>
+</ul>
+</div>
+<div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/5JSloPGocSY"></iframe>
+    </div>
+</div>
+
+<h2 id="what-is-threading">What is Threading?</h2>
+<p>The threading module comes pre-installed with python so there are no downloads or installs for this tutorial. Threading allows us to call a method or class that has extended the <code>threading.Thread</code> class to run alongside the main thread (the linear flow that generally happens).</p>
+<p>One good use for threading is to create multiple instances of things that take time outside your program. A great example of this is sending requests to a server. If you want to send many, instead of waiting for them to finish one-by-one before you send the next request, you can create many threads to request different urls and they will then all be waiting at the same time.</p>
+<h2 id="threading-a-method">Threading a Method</h2>
+<p>A basic example of threading can be seen below:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;Hello World</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># Add \n so a newline is forced</span>
+
+<span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
+    <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+
+
+<p>In this example we create a place to store the threads and then loop 4 times as we create the threads. To create the threads, we first initialise a threading.Thread instance passing the method as the target. We then add this thread to our previously create list and start it. This will provide the following output:</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> python threading_method.py
+
+<span class="go">Hello World</span>
+<span class="go">Hello World</span>
+<span class="go">Hello World</span>
+<span class="go">Hello World</span>
+</pre></div>
+
+
+<p>Note that there are no brackets after worker when defining target. This is because we need to pass the method, not what the method returns (even if it returns nothing).</p>
+<h3 id="passing-arguments">Passing Arguments</h3>
+<p>To pass arguments to a method when creating the thread, we can pass a tuple to args. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;I am thread: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,))</span>
+    <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+
+
+<p>In this expanded example I have added a number parameter to worker which will then be used in the output. When creating the instance of threading.Thread, I pass the i variable to args in a tuple. This will provide the output:</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> python threading_method_args.py
+
+<span class="go">I am thread: 0</span>
+<span class="go">I am thread: 1</span>
+<span class="go">I am thread: 2</span>
+<span class="go">I am thread: 3</span>
+</pre></div>
+
+
+<p>The reason args is set to <code>(i,)</code> and not <code>(i)</code> is because if we left out the comma, the type would no longer be a tuple and would cause an error.</p>
+<h2 id="threading-a-class">Threading a Class</h2>
+<p>Threading a class can be quite useful as you can have many methods particular to a thread and it's easier to keep your data in one place specific to a thread. An example of threading a class is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">class</span> <span class="nc">MyThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># Can setup other things before the thread starts</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Running&quot;</span><span class="p">)</span>
+
+<span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">()</span>
+    <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+
+
+<p>In this example I create a class that extends threading.Thread. I have created the initialisation method with a initialisation call to the super class and a <strong>run method which is what will be run when I call start()</strong>. Just like last time I loop 4 times but this time I only need to use <code>MyThread()</code> to set up the thread variable. This will provide the output:</p>
+<div class="codehilite"><pre><span></span><span class="go">RunningRunningRunningRunning</span>
+</pre></div>
+
+
+<p>See how all the strings are together; this shows that they were all printed at very similar times and then all the new lines were put in. In the above examples this did not occur as I force the newline character.</p>
+<p>Note that if you do not need a initialisation method, you can remove it completely including the super() call.</p>
+<h3 id="passing-arguments_1">Passing Arguments</h3>
+<p>To pass arguments, you just use the class like you would normally. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">class</span> <span class="nc">MyThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
+
+<span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+
+
+<p>In this example I had added a parameter to the class in the initialisation method like you normally would and saved it so it can print it later. Then I simply passed a variable to the class which will be printed. This will output:</p>
+<div class="codehilite"><pre><span></span><span class="go">0123</span>
+</pre></div>
+
+
+<p>Just like last time they concatenated into one string followed by new lines. When passing variables you need to keep the super() call as you are now using the initialisation method unless you pass it in with a different method before calling run.</p>
+<h2 id="managing-your-threads">Managing Your Threads</h2>
+<p>Python has a lot of useful methods, variables and parameter to manage your threads. These are some of the basic ones.</p>
+<h3 id="naming">Naming</h3>
+<p>Setting names for threads can be quite useful for identifying them. To do this, when creating a thread call <code>.setName()</code> and pass a string. For example:</p>
+<div class="codehilite"><pre><span></span><span class="n">thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">()</span>
+<span class="n">thread</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s1">&#39;MyThread 1&#39;</span><span class="p">)</span>
+<span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Now to get the name of the thread just call <code>.getName()</code> on the thread object. There are a few ways of getting the thread object depending on how you stored it. If you are inside the thread and you're in a threading class, you can just use <code>self</code>; for example:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">MyThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
+</pre></div>
+
+
+<p>If you want to get it outside of the class, you can just get the variable you saved it under and use that. For example, when I saved the threads in a list before, I can just use an element from it as they are the threading objects I want. The following example will print the name of the first thread added to this list.</p>
+<div class="codehilite"><pre><span></span><span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s1">&#39;MyThread &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">thread_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
+</pre></div>
+
+
+<h3 id="joining-threads">Joining Threads</h3>
+<p>Joining a thread allow us to wait until it is terminated before we carry on. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">class</span> <span class="nc">MyThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Running&quot;</span><span class="p">)</span>
+
+<span class="n">thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">()</span>
+<span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Thread has finished&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>In this example I create the thread and start it. I then call join which waits until the thread is finished. If the thread called does not finish, the thread that called the <code>.join()</code> method (can be the main thread) will wait indefinitely. This means that you shouldn't use .join() on threads that don't finish unless you want to stop the execution of the thread for another reason.</p>
+<p>You can wait for many thread to finish by calling .join() after you started them all. The following example will wait until all 4 threads are finished before it goes to the print statement.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">class</span> <span class="nc">MyThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># Can setup other things before the thread starts</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Running&quot;</span><span class="p">)</span>
+
+<span class="n">thread_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">()</span>
+    <span class="n">thread_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thread</span><span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">thread_list</span><span class="p">:</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Thread has finished&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="daemon-threads">Daemon Threads</h3>
+<p>A daemon thread is a thread that will keep running even if the rest of the script has stopped. This means setting a threads daemon to true will mean that it will keep going after the main thread has finished (or dropped off).</p>
+<p>The daemon value must be set before .start() is called on the thread. To set if a thread is daemon, you can pass <code>daemon=True</code> (or false) in the same place I put args before:</p>
+<div class="codehilite"><pre><span></span><span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,),</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You can alternatively set a thread to be daemon using .setDaemon(bool) on the thread. If you are threading a class, you can call <code>self.setDaemon(bool)</code> in the initialisation method or .setDaemon(bool) on the thread like if you were threading a method. For example:</p>
+<div class="codehilite"><pre><span></span><span class="n">thread</span> <span class="o">=</span> <span class="n">MyThread</span><span class="p">()</span>
+<span class="n">thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+<span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+
+
+<p>To check if a thread is daemon, you can call <code>.isDaemon()</code> on the thread. This will return a bool.</p>
+<h3 id="getting-all-threads">Getting All Threads</h3>
+<p>If you want to get all the threads that are currently alive, you can call <code>threading.enumerate()</code>. This will return all alive threads including the main thread in a list. If you want to get all the names of the current alive threads, use:</p>
+<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threading</span><span class="o">.</span><span class="n">enumerate</span><span class="p">():</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">thread</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
+</pre></div>
+
+
+<h3 id="is-a-thread-alive">Is a Thread Alive?</h3>
+<p>If you want to check if a particular thread is still alive, you can call <code>.is_alive()</code> on the thread. This will return true if the thread is still running.</p>
+<h2 id="why-it-wont-make-your-script-run-faster">Why it Won't Make Your Script Run Faster</h2>
+<p>In most cases, threading your pre-existing code will not make it run any faster. Python threads are designed to run multiple tasks at the same time, however this is only on one cpu core.</p>
+<p>A normal python script is run on a single core so when you create threads it will not speed up as it is basically doing the same thing just at different times. This issue/feature (if you want to look at it in a positive way) is due to the <a href="https://stackoverflow.com/questions/1294382/what-is-a-global-interpreter-lock-gil">Global Interpreter Lock</a> which in short means that "multiple threads can't effectively make use of multiple cores" which is the reason for no speed increase. <a href="https://www.youtube.com/watch?v=ph374fJqFPE">Here</a> is a great talk on the GIL with <a href="http://www.dabeaz.com/python/GIL.pdf">some great slides</a>.</p>
+<p>If you do want to have multiple tasks running on multiple cores, look at the <a href="https://docs.python.org/3.4/library/multiprocessing.html">multiprocessing module</a>.</p>
+<h2 id="extra-resources">Extra Resources</h2>
+<p>Since this is only a basic look over threading so someone that hasn't used it can understand it better, I have left out things like events, signaling and locks. To read more about threads, you could visit these pages:
+ - <a href="https://pymotw.com/3/threading/">pymotw.com/3/threading/</a>
+ - <a href="https://docs.python.org/3/library/threading.html">Python 3 Threading Documentation</a></p>
+                    </div>
+
+
+
+
+
+
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://test.nitratine.net/blog/post/python-threading-basics/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://test.nitratine.net/blog/post/python-threading-basics/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-md-4 blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorialsOriginal">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            <li>
+                                <a href="/blog/categories/#YouTube">
+                                    🎥 YouTube
+                                    <span class="badge badge-primary ml-3">14</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Projects">
+                                    💾 Projects
+                                    <span class="badge badge-primary ml-3">12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Tutorials">
+                                    📖 Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Apps">
+                                    📱 Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Investigations">
+                                    🔍 Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#General">
+                                    📰 General
+                                    <span class="badge badge-primary ml-3">4</span>
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

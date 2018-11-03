@@ -1,6 +1,2 @@
-_site
-.sass-cache
-.jekyll-metadata
-.vscode
-.idea
-.DS_Store
+.idea/
+venv/

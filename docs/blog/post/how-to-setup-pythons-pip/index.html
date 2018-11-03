@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://test.nitratine.net/blog/post/how-to-setup-pythons-pip/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>How To Setup Python&#39;s PIP - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="This tutorial demonstrates how to setup Python&#39;s PIP. PIP is a package manager for pip that allows you to download third party modules easily. I explain how to find your scripts folder and how to find pip.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="How To Setup Python&#39;s PIP">
+        <meta property="og:description" content="This tutorial demonstrates how to setup Python&#39;s PIP. PIP is a package manager for pip that allows you to download third party modules easily. I explain how to find your scripts folder and how to find pip.">
+        <meta property="og:image" content="/post-assets/how-to-setup-pythons-pip/demo5.png">
+        <meta property="og:url" content="https://test.nitratine.net/blog/post/how-to-setup-pythons-pip/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorialsOriginal">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-md-8 blog-main">
+
+                    <h1 class="blog-post-title">How To Setup Python&#39;s PIP</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2017" class="text-muted">13 Dec 2017</a>
+                        <a href="/blog/categories/#YouTube" class="badge badge-primary ml-2">YouTube</a>
+                        
+                        <a href="/blog/tags/#Python" class="badge badge-warning">Python</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">This tutorial demonstrates how to setup Python&#39;s PIP. PIP is a package manager for pip that allows you to download third party modules easily. I explain how to find your scripts folder and how to find pip.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#setting-up">Setting Up</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#when-editing-the-path-variable-i-can-only-edit-the-variable">When editing the PATH variable, I can only edit the variable</a></li>
+<li><a href="#it-still-isnt-working">It Still Isn't Working</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/cm6WDGAzDPM"></iframe>
+    </div>
+</div>
+
+<h2 id="setting-up">Setting Up</h2>
+<p>If you haven't used pip before on your computer, go to cmd and type 'pip'. If not errors appear you can move to the next step. If pip is not recognised, you need to set it up. Regarding you actually have python installed (you would not believe some of the comments on this video), open windows explorer (file search) and right click om computer in the side menu.</p>
+<p><img alt="Properties for this pc" src="/post-assets/how-to-setup-pythons-pip/demo1.png" /></p>
+<p>Now click on "Advanced system settings" in the sidebar in the control panel.</p>
+<p><img alt="Advanced system settings" src="/post-assets/how-to-setup-pythons-pip/demo2.png" /></p>
+<p>In the new window, make sure you are in the "Advanced" tab (top) and then click the "Environment Variables" button.</p>
+<p><img alt="Advanced tab and environmental variables button" src="/post-assets/how-to-setup-pythons-pip/demo3.png" /></p>
+<p>In the new window that just appeared, go to the second section - "System variables" and scroll down until you find the "Path" variable. Click on it and then click the edit button below.</p>
+<p><img alt="Path variable location" src="/post-assets/how-to-setup-pythons-pip/demo4.png" /></p>
+<p>Now in the new window, click new on the right and put the folder location of your python scripts folder in. If you don't know where your python scripts folder is can execute this in a python shell or script.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\Scripts</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="Adding script folder location" src="/post-assets/how-to-setup-pythons-pip/demo5.png" /></p>
+<p>Now type 'pip' in cmd to make sure you have done this correctly. No errors should appear.</p>
+<blockquote>
+<p>If you are using an older version of Windows, you will be presented with a one-line input field. Add a semicolon ';' to the end of the text current in the field and then add the path as you would have in the area before. <code>&lt;current text&gt;;&lt;path&gt;</code></p>
+</blockquote>
+<h2 id="usage">Usage</h2>
+<p>You can now use commands like <code>pip install pynput</code> to install a package or "pip list" to look at all packages installed.</p>
+<p>Some useful commands:
+- <code>pip install [package]</code>: install a package like pynput or pyinstaller
+- <code>pip uninstall [package]</code>: removes an installed package
+- <code>pip list</code>: shows install packages
+- <code>pip show [package]</code>: shows information about an install package
+- <code>pip install [package] --upgrade</code>:  Updates a package</p>
+<p>You can find packages from projects on <a href="https://github.com/">GitHub</a> or <a href="https://pypi.python.org/pypi">PyPI</a>.</p>
+<h2 id="common-issues-and-questions">Common Issues and Questions</h2>
+<h3 id="when-editing-the-path-variable-i-can-only-edit-the-variable">When editing the PATH variable, I can only edit the variable</h3>
+<p>Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.</p>
+<h3 id="it-still-isnt-working">It Still Isn't Working</h3>
+<p>Regarding you followed the instructions properly, this will work. One other method to call pip is by calling <code>python -m pip</code>. Using this allows us to call pip when the scripts folder is not in the PATH variable. Note that the directory of python.exe must be in the PATH variable for this to work (which means calling <code>python</code> in cmd must work first).</p>
+                    </div>
+
+
+
+
+
+
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://test.nitratine.net/blog/post/how-to-setup-pythons-pip/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://test.nitratine.net/blog/post/how-to-setup-pythons-pip/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-md-4 blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorialsOriginal">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            <li>
+                                <a href="/blog/categories/#YouTube">
+                                    🎥 YouTube
+                                    <span class="badge badge-primary ml-3">14</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Projects">
+                                    💾 Projects
+                                    <span class="badge badge-primary ml-3">12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Tutorials">
+                                    📖 Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Apps">
+                                    📱 Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Investigations">
+                                    🔍 Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#General">
+                                    📰 General
+                                    <span class="badge badge-primary ml-3">4</span>
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

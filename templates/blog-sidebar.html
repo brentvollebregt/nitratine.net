@@ -1,0 +1,70 @@
+                <!-- Sidebar -->
+                <aside class="col-md-4 blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">{{ site.about|safe }}</p>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            <li>
+                                <a href="/blog/categories/#YouTube">
+                                    🎥 YouTube
+                                    <span class="badge badge-primary ml-3">{{ category_numbers['YouTube'] }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Projects">
+                                    💾 Projects
+                                    <span class="badge badge-primary ml-3">{{ category_numbers['Projects'] }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Tutorials">
+                                    📖 Tutorials
+                                    <span class="badge badge-primary ml-3">{{ category_numbers['Tutorials'] }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Apps">
+                                    📱 Apps
+                                    <span class="badge badge-primary ml-3">{{ category_numbers['Apps'] }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#Investigations">
+                                    🔍 Investigations
+                                    <span class="badge badge-primary ml-3">{{ category_numbers['Investigations'] }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/blog/categories/#General">
+                                    📰 General
+                                    <span class="badge badge-primary ml-3">{{ category_numbers['General'] }}</span>
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="{{ site.youtube_channel_name }}" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = '{{ site.youtube_data_api_key }}';
+                        let youtube_channel_id = '{{ site.youtube_channel_id }}';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
