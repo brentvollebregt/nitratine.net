@@ -369,6 +369,10 @@ def redirects(path):
     redirect_to = '/' + REDIRECTS[path] + '/'
     return render_template('redirect.html', redirect_to=redirect_to)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 
 # Asset Routes
 
@@ -436,8 +440,15 @@ if __name__ == '__main__':
                 f.write(redirects(path=redirect))
             f.close()
 
+        # Add CNAME
         f = open(FREEZER_DESTINATION + '/CNAME', 'w')
         f.write(SITE['domain'])
+        f.close()
+
+        # Add 404 page
+        f = open(FREEZER_DESTINATION + '/404.html', 'w')
+        with app.test_request_context():
+            f.write(page_not_found(None)[0])
         f.close()
 
     else:

@@ -23,7 +23,6 @@ This repo is the source for nitratine.net. This README is a TODO list
  - Compress images where they can be (JPEG 2000?)
  - Complete portfolio
  - Next and Previous post navigation at the bottom of posts
- - 404.html?
 
 ## Things to Remember
 - IMPORTANT: Migrate disqus https://nitratine.disqus.com/admin/discussions/migrate/ (use 301s)
