@@ -1,13 +1,11 @@
 import sys
 import time
 import os
-import datetime
 import math
 import markdown
 import socket
 from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for
-from flask_flatpages import FlatPages, pygments_style_defs
-from flask_flatpages.utils import pygmented_markdown
+from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 
 
