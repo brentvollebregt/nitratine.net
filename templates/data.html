@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block head %}
+        <title>Data - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+
+        <meta name="description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
+        <meta name="author" content="{{ site.default_author }}">
+        <meta property="og:title" content="About - Nitratine">
+        <meta property="og:description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
+        <meta property="og:image" content="{{ site.url }}/assets/img/logo.png">
+        <meta property="og:url" content="{{ site.url + request.path }}">
+        <meta name="twitter:card" content="summary">
+{% endblock head %}
+
+{% block content %}
+            <div class="row justify-content-center mb-5">
+                <div class="col-xs-12 col-lg-8">
+                    <h1>Data</h1>
+                    <p>This page is a place where you can see view counts for all my pages, GitHub repo stats and other numbers related to the work I do.</p>
+
+                    <h2>Post View Counts</h2>
+                    <p>These counts are counted using <a href="https://hitcounter.pythonanywhere.com">hitcounter.pythonanywhere.com</a>. They are not 100% accurate but will be a reasonable idea of the actual views (better than Google Analytics being blocked by ad-blockers)</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Post</th>
+                                <th>Hits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                                <tr>
+                                    <td><a href="{{ url_for('blog_post', path=post[0]) }}">{{ post[1] }}</a></td>
+                                    <td><img src="https://hitcounter.pythonanywhere.com/nocount/tag.svg?url={{ site.url }}/blog/post/{{ post[0] }}/" alt="Hits for {{ post[1] }}"></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                    <h2>GitHub Repository Stats</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Repository</th>
+                                <th>Stars</th>
+                                <th>Forks</th>
+                                <th>Watchers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for repo in repos %}
+                                <tr>
+                                    <td><a href="https://github.com/{{ repo[0] }}">{{ repo[0] }}</a></td>
+                                    <td><img src="https://img.shields.io/github/stars/{{ repo[0] }}.svg?style=social" alt="Stars for {{ repo[0] }}"></td>
+                                    <td><img src="https://img.shields.io/github/forks/{{ repo[0] }}.svg?style=social" alt="Forks for {{ repo[0] }}"></td>
+                                    <td><img src="https://img.shields.io/github/watchers/{{ repo[0] }}.svg?style=social" alt="Watchers for {{ repo[0] }}"></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                    <h2>Other</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Statistic</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="https://www.youtube.com/PyTutorialsOriginal">YouTube Subscribers</a></td>
+                                <td>
+                                    <script src="https://apis.google.com/js/platform.js" gapi_processed="true"></script>
+                                    <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="default" data-count="default"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://github.com/brentvollebregt">GitHub Followers</a></td>
+                                <td><img src="https://img.shields.io/github/followers/brentvollebregt.svg?style=social" alt="GitHub Followers"></td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://twitter.com/PyTutorials">Twitter Followers</a></td>
+                                <td><img src="https://img.shields.io/twitter/follow/pytutorials.svg?style=social" alt="Twitter Followers"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+{% endblock content %}
