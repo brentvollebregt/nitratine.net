@@ -3,3 +3,4 @@ Flask-FlatPages
 Frozen-Flask
 Pygments
 Markdown
+requests

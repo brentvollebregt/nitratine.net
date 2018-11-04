@@ -141,7 +141,7 @@
 
 /* GitHub Styled Tables */
 
-.post-content table {
+table {
     display: block;
     width: 100%;
     overflow: auto;
@@ -149,24 +149,24 @@
     margin-bottom: 16px;
 }
 
-.post-content table th {
+table th {
     font-weight: 600
 }
 
-.post-content table th, .post-content table td {
+table th, table td {
     padding: 6px 13px;
     border: 1px solid #dfe2e5
 }
 
-.post-content table tr {
+table tr {
     background-color: #fff;
     border-top: 1px solid #c6cbd1
 }
 
-.post-content table tr:nth-child(2n) {
+table tr:nth-child(2n) {
     background-color: #f6f8fa
 }
 
-.post-content table img {
+table img {
     background-color: initial
 }

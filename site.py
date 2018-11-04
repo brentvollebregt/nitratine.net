@@ -7,6 +7,7 @@ import socket
 from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
+import requests
 
 
 # Renderer
@@ -263,26 +264,25 @@ def get_pagination_nav_data(page):
     minimum = 1
     total = len(available_pages)
     length = 1 + (PAGINATION_EITHER_SIDE * 2)
-    if (length > total):
+    if length > total:
         length = total
     start = page - math.floor(length / 2)
     start = max(start, minimum)
     start = min(start, minimum + total - length)
 
-    data = {
+    navigation = {
         'next': page + 1 if page + 1 in available_pages else None,
         'prev': page - 1 if page - 1 in available_pages else None,
         'current': page,
         'pages': [i for i in range(start, start + length)]
     }
-    return data
+    return navigation
 
 
 # Page Routes
 
 @app.route('/')
 def index():
-
     for tile in HOME_TILES:
         if tile['type'] == 'post':
             page = posts.get(tile['post'])
@@ -305,6 +305,16 @@ def about():
 def portfolio():
     return render_template('portfolio.html')
 
+@app.route('/data/')
+def data():
+    available_posts = [[i, posts._pages[i]['title']] for i in posts._pages]
+
+    req = requests.get('https://api.github.com/users/' + SITE['github_username'] + '/repos')
+    req_data = req.json()
+    available_repos = sorted([[i['full_name'], i['stargazers_count']] for i in req_data], key=lambda x: x[1], reverse=True)
+
+    return render_template('data.html', repos=available_repos, posts=available_posts)
+
 @app.route('/blog/')
 def blog_home():
     page1_posts = paginate_posts(1)
@@ -318,7 +328,7 @@ def blog_pagination(page):
     if page < 1:
         abort(404)
     pagen_posts = paginate_posts(page)
-    if pagen_posts == []:
+    if not pagen_posts:
         abort(404)
     pagination_nav_data = get_pagination_nav_data(page)
     return render_template('blog-home.html', category_numbers=post_numbers_by_category(), pagination_nav=pagination_nav_data, posts=pagen_posts)
