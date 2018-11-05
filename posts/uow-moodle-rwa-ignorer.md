@@ -7,7 +7,7 @@ description: "A chrome extension to solve the Waikato Universities resource work
 
 Simply install this extension in Google Chrome and safely open documents in Moodle in a new tab without wanting to rip your hair out.
 
-![Extension Popup](/post-assets/uow-moodle-rwa-ignorer/extension_popup.png)
+![Extension Popup](/post-assets/uow-moodle-rwa-ignorer/extension-popup.png)
 
 {% with repo="brentvollebregt/uow-moodle-rwa-ignorer" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 

@@ -1,8 +1,8 @@
-# nitratine.net
+# [nitratine.net](https://nitratine.net/)
 This repo is the source for nitratine.net. This README is a TODO list
 
 ## TODO
- - Compress images where they can be (JPEG 2000?)
+ - Compress images where they can be (https://imagecompressor.com/)
  - Next and Previous post navigation at the bottom of posts
 
 ## Things to Remember

@@ -12,7 +12,7 @@ I have seen many people report about how bulk twitter deleters can 'break' an ac
 ## Unfollowing Accounts
 I first wanted to remove all the users my [bot]({{ url_for('blog_post', path='python-retweet-bot') }}) followed. Going into the ["Following"](https://twitter.com/following) tab in twitter shows everyone you have followed with blue buttons that go red and change text to "Unfollow" when you hover on them.
 
-![Unfollow Button](/post-assets/how-to-clean-a-twitter-account-with-jquery/unfollow_btn.png)
+![Unfollow Button](/post-assets/how-to-clean-a-twitter-account-with-jquery/unfollow-btn.png)
 
 My idea for this was to simulate clicking each of these buttons for every user I followed. Thankfully, Twitter uses jQuery so I could use some very simple methods for finding each tile and then clicking on them using ```.click()```.
 
