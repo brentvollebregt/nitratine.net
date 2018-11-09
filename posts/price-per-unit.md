@@ -9,7 +9,7 @@ description: "This app compares prices for similar items and will calculate the 
 <p align="center">A simple Android app that helps you compare prices of similar products. Save money in a smart way.</p>
 
 <div align="center">
-    <img src="/post-assets/price-per-unit/FeatureGraphic.jpg -%}" alt="Header Image">
+    <img src="/post-assets/price-per-unit/FeatureGraphic.jpg" alt="Header Image">
 </div>
 
 <div style="text-align: center"><a href="https://play.google.com/store/apps/details?id=net.nitratine.priceperunit">Download From Google Play</a> | <a href="https://github.com/brentvollebregt/price-per-unit">View the Project on GitHub</a>
@@ -24,7 +24,7 @@ This app is ideal to find the best price in supermarkets but will work just in w
 
 ## Screenshots
 
-<div style="text-align: center">
+<div style="text-align: center" class="mb-3">
     <img style="width: 24%; display: inline;" src="/post-assets/price-per-unit/Gallery1.jpg" alt="Gallery Item 1">
 	<img style="width: 24%; display: inline;" src="/post-assets/price-per-unit/Gallery2.jpg" alt="Gallery Item 2">
 	<img style="width: 24%; display: inline;" src="/post-assets/price-per-unit/Gallery3.jpg" alt="Gallery Item 3">
