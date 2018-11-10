@@ -5,8 +5,7 @@ tags: [Python, sqlite, networking]
 feature: feature.png
 description: "This command line tool allows you to keep records of who is on your network and when. Windows is supported and all data is saved in a sqlite database."
 
-# Who is on my Network?
-This command line tool allows you to keep records of who is on your network and when. Only Windows is supported (I recommend using nmap for Linux) and all data is saved in a sqlite database.
+{% with repo="brentvollebregt/who_is_on_my_network" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 ## How Does This Work?
 This works by trying to ping all hosts using a given network id (default is 192.168.0.1/24). When a host responds, it mac and hostname are obtained and an entry is written to an sqlite database with a timestamp.

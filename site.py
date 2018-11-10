@@ -140,7 +140,7 @@ HOME_TILES = [
     },
     {
         'type': 'post',
-        'post': 'encryption-and-decryption-in-python',
+        'post': 'who-is-on-my-network',
         'reason': 'New'
     },
     {
