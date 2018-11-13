@@ -70,6 +70,9 @@ Don't want to have to install the package? Follow these steps:
     - Change window settings (opacity, frame, stay on top...)
     - Toggle the listener
     - Make the listener start on user login
+    
+### Opening the GUI With A Mouse Click
+If you rather a double click opposed to typing `mutli-clipboard` in the terminal, open the project and then click the settings button. On the right you will see a button labeled "Create Shortcut"; clicking this will ask you where you want to save a shortcut script (VB script).
 
 ### Command Line Usage
 * `multi-clipboard` - Opens GUI
