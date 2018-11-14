@@ -7,6 +7,8 @@ description: "In this post I discuss how to encrypt and decrypt messages in Pyth
 
 [TOC]
 
+{% with video_id="H8t4DJ3Tdrg" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+
 Using the [cryptography](https://cryptography.io/en/latest/) module in Python, we will use an implementation of AES called [Fernet](https://cryptography.io/en/latest/fernet/) to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.
 
 ## Installing cryptography
