@@ -61,6 +61,9 @@ SITE = {
     'youtube_data_api_key': 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM'
 }
 REDIRECTS = {
+    'tag': 'blog/tags',
+    'category': 'blog/categories',
+    'archive': 'blog/archive',
     'donations': 'about',
     'blog/post': 'blog',
     'colour': 'blog/post/colour',
