@@ -1,6 +1,6 @@
 title: "Encryption and Decryption in Python"
 date: 2018-09-16
-categories: Tutorials
+categories: YouTube
 tags: [Python, encryption]
 feature: feature.png
 description: "In this post I discuss how to encrypt and decrypt messages in Python using symmetric encryption. I will demonstrate how to create keys, save keys and how to encrypt messages and text."
