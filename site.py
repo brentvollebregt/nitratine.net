@@ -1,13 +1,16 @@
-import sys
 import time
 import os
 import math
 import markdown
 import socket
-from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for
+from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 import requests
+import argparse
+from urllib.parse import quote_plus
+import subprocess
+import shutil
 
 
 # Renderer
@@ -30,6 +33,9 @@ FLATPAGES_HTML_RENDERER = my_renderer
 FREEZER_DESTINATION = 'docs'
 PAGINATION_PAGE_MAX = 10
 PAGINATION_EITHER_SIDE = 2
+
+ASSETS_LOCATION = 'assets'
+POST_ASSETS_LOCATION = 'post-assets'
 
 
 # Specific Site Statics
@@ -307,9 +313,15 @@ def index():
             tile['text'] = page.meta.get('description', 'INVALID')
             tile['date'] = ymd_format(page.meta.get('date', 'INVALID'))
             if 'feature' in page.meta:
-                tile['image_url'] = 'post-assets/' + tile['post'] + '/' + page.meta.get('feature', 'INVALID')
+                tile['image_url'] = url_for(
+                    'post_assets',
+                    path=tile['post'] + '/' + page.meta.get('feature', 'INVALID')
+                )
             else:
-                tile['image_url'] = 'assets/img/default-feature.png'
+                tile['image_url'] = url_for(
+                    'assets',
+                    path='img/default-feature.png'
+                )
 
     return render_template(
         'home.html',
@@ -468,12 +480,12 @@ def page_not_found(e):
 
 @app.route('/assets/<path:path>')
 def assets(path):
-    return send_from_directory('assets', path)
+    return send_from_directory(ASSETS_LOCATION, path)
 
 
 @app.route('/post-assets/<path:path>')
 def post_assets(path):
-    return send_from_directory('post-assets', path)
+    return send_from_directory(POST_ASSETS_LOCATION, path)
 
 
 # Injectors
@@ -498,52 +510,150 @@ app.jinja_env.globals.update(ymd_format=ymd_format)
 
 @freezer.register_generator
 def assets():
-    location = "assets/"
+    location = ASSETS_LOCATION
     for root, dirs, files in os.walk(location, topdown=False):
         for name in files:
-            yield {'path': root[len(location):].replace('\\', '/') + '/' + name}
+            # Get the root and remove the location plus \. Then replace any \ with / and add the file name
+            yield {'path': root[len(location)+1:].replace('\\', '/') + '/' + name}
 
 
 @freezer.register_generator
 def post_assets():
-    location = "post-assets/"
+    location = POST_ASSETS_LOCATION
     for root, dirs, files in os.walk(location, topdown=False):
         for name in files:
-            print(os.path.join(root, name))
-            yield {'path': root[len(location):].replace('\\', '/') + '/' + name}
+            yield {'path': root[len(location)+1:].replace('\\', '/') + '/' + name}
+
+
+# Argument functions
+
+
+def build():
+    print('Freezing')
+    freezer.freeze()
+
+    # Create redirects (because Frozen-Flask doesn't have an option)
+    for r in REDIRECTS:
+        file_path = FREEZER_DESTINATION + '/' + r
+        file = file_path + '/index.html'
+        # Check where we are writing
+        if os.path.exists(file):
+            print('WARN: Overwriting ' + file_path)
+        if not os.path.isdir(file_path):
+            os.makedirs(file_path)
+        # Write redirect
+        f = open(file, 'w')
+        with app.app_context():
+            f.write(redirects(path=r))
+        f.close()
+    print('Added Redirects')
+
+    # Add CNAME
+    f = open(FREEZER_DESTINATION + '/CNAME', 'w')
+    f.write(SITE['domain'])
+    f.close()
+    print('Added CNAME')
+
+    # Add 404 page
+    f = open(FREEZER_DESTINATION + '/404.html', 'w')
+    with app.test_request_context():
+        f.write(page_not_found(None)[0])
+    f.close()
+    print('Added 404')
+
+
+def new_post():
+    print('New post will be saved to {0}'.format(FLATPAGES_ROOT))
+    title = input('Title: ')
+    date = time.strftime('%Y-%m-%d')
+
+    # Category selection
+    while True:
+        print('Select a category from the following list by its index')
+        categories = [i for i in posts_by_category()]
+        for i, value in enumerate(categories):
+            print('{0}) {1}'.format(i, value))
+        selection = input('Category: ')
+        try:
+            category = categories[int(selection)]
+            break
+        except ValueError:
+            print('Please provide an option number')
+        except IndexError:
+            print('That index does not exist')
+
+    tags = input('Tags (separated by comma): ')
+
+    post_id = quote_plus(title.lower().replace(' ', '-'))
+    print('Post Id: {0}'.format(post_id))
+
+    # Write file
+    filename = post_id + '.md'
+    f = open(FLATPAGES_ROOT + filename, 'w')
+    f.write('title: "{0}"\n'.format(title))
+    f.write('date: {0}\n'.format(date))
+    f.write('categories: {0}\n'.format(category))
+    f.write('tags: [{0}]\n'.format(tags))
+    f.write('feature: feature.png\n')
+    f.write('description: ""\n')
+    f.write('\n[TOC]\n')
+    f.write('\n## Content\n')
+    f.write("{% with video_id=\"XXXXXXXXXXX\" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}")
+    f.close()
+    print('\nCreated {0}'.format(FLATPAGES_ROOT + filename))
+
+    # Create assets folder and add feature
+    post_assets_location = POST_ASSETS_LOCATION + '/' + post_id + '/'
+    if not os.path.isdir(post_assets_location):
+        os.makedirs(post_assets_location)
+        print('Created: {0}'.format(post_assets_location))
+    feature_img = POST_ASSETS_LOCATION + '/' + post_id + '/feature.png'
+    if not os.path.isfile(feature_img):
+        shutil.copyfile(
+            ASSETS_LOCATION + '/img/default-feature.png',
+            POST_ASSETS_LOCATION + '/' + post_id + '/feature.png'
+        )
+        print('Created: {0}'.format(feature_img))
+
+
+def serve_build():
+    try:
+        process = subprocess.Popen(
+            'python -m http.server',
+            cwd=FREEZER_DESTINATION,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        print('http://{0}:8000'.format(socket.gethostbyname(socket.gethostname())))
+        input('Press enter to stop the server')
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(e)
+    finally:
+        process.terminate()
+
+
+def run():
+    print('WARN: This server is designed to be used in production')
+    app.run(port=8000, host=socket.gethostbyname(socket.gethostname()))
 
 
 # On Execution
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == "build":
-        freezer.freeze()
+    parser = argparse.ArgumentParser(description='Script to run and build nitratine.net')
+    parser.add_argument('-b', '--build', action="store_true", default=False, help='Build site to static files')
+    parser.add_argument('-n', '--new-post', action="store_true", default=False, help='Create a new post')
+    parser.add_argument('-s', '--serve-build', action="store_true", default=False, help='Serve the built site')
+    args = parser.parse_args()
 
-        # Create redirects (because Frozen-Flask doesn't have an option)
-        for redirect in REDIRECTS:
-            file_path = FREEZER_DESTINATION + '/' + redirect
-            file = file_path + '/index.html'
-            if os.path.exists(file):
-                print('WARN: Overwirting ' + file_path)
-            if not os.path.isdir(file_path):
-                os.makedirs(file_path)
-            f = open(file, 'w')
-            with app.app_context():
-                f.write(redirects(path=redirect))
-            f.close()
-
-        # Add CNAME
-        f = open(FREEZER_DESTINATION + '/CNAME', 'w')
-        f.write(SITE['domain'])
-        f.close()
-
-        # Add 404 page
-        f = open(FREEZER_DESTINATION + '/404.html', 'w')
-        with app.test_request_context():
-            f.write(page_not_found(None)[0])
-        f.close()
-
+    if args.build:
+        build()
+    elif args.new_post:
+        new_post()
+    elif args.serve_build:
+        serve_build()
     else:
-        print('WARN: This server is designed to be used in production')
-        app.run(port=8000, host=socket.gethostbyname(socket.gethostname()))
+        run()
