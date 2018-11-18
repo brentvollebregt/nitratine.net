@@ -113,7 +113,8 @@ REDIRECTS = {
     'am-i-a-participant': 'blog/post/am-i-a-participant',
     'asymmetric-encryption-and-decryption-in-python': 'blog/post/asymmetric-encryption-and-decryption-in-python',
     'common-issues-when-using-auto-py-to-exe': 'blog/post/common-issues-when-using-auto-py-to-exe',
-    'encryption-and-decryption-in-python': 'blog/post/encryption-and-decryption-in-python'
+    'encryption-and-decryption-in-python': 'blog/post/encryption-and-decryption-in-python',
+    'blog/post/common-issues-when-using-auto-py-to-exe': 'blog/post/issues-when-using-auto-py-to-exe'
 }
 HOME_TILES = [
     {
@@ -144,7 +145,7 @@ HOME_TILES = [
     },
     {
         'type': 'post',
-        'post': 'common-issues-when-using-auto-py-to-exe',
+        'post': 'issues-when-using-auto-py-to-exe',
         'reason': 'New'
     },
     {
