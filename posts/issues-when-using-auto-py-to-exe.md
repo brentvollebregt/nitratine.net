@@ -135,7 +135,7 @@ If you double click to run your Python script, what happens? Does it open and cl
 
 You most likely think the output should stay visible because you are always using IDLE or an IDE and that's what those tools do. Add a statement like `input()` at the end of your script to block execution and wait for you to press enter before closing. 
 
-### "'python'/'pip'/'auto-py-to-exe' is not recognised as an internal or external command, operable program or batch file.
+### 'python'/'pip'/'auto-py-to-exe' is not recognised as an internal or external command, operable program or batch file.
 This occurs because the path that these executables are located in is not on your path; thus cmd doesn't know where to look for them. You need to add these paths to the PATH environment variable, to find these execute the correct command to find the path.
 
 ```python

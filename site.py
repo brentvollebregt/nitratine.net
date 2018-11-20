@@ -301,6 +301,29 @@ def get_pagination_nav_data(page):
     return navigation
 
 
+def get_previous_and_next_posts(post):
+    """ Get the next and previous post for a particular post """
+    # So we don't call it over and over again
+    all_posts = get_posts()
+
+    # Find it's index
+    title = post.meta['title']
+    post_index = next((i for (i, d) in enumerate(all_posts) if d.meta['title'] == title), None)
+
+    # Calculate next and previous
+    prev_and_next = {}
+    if post_index != 0:
+        prev_and_next['next'] = all_posts[post_index - 1]
+    else:
+        prev_and_next['next'] = None
+    if post_index < len(all_posts) - 1:
+        prev_and_next['prev'] = all_posts[post_index + 1]
+    else:
+        prev_and_next['prev'] = None
+
+    return prev_and_next
+
+
 # Page Routes
 
 
@@ -425,6 +448,7 @@ def blog_post(path):
     return render_template(
         'blog-post.html',
         category_numbers=post_numbers_by_category(),
+        prev_and_next=get_previous_and_next_posts(page),
         page=page
     )
 

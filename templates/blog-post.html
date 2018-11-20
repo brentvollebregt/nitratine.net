@@ -48,11 +48,14 @@
                         {{ page.html|safe }}
                     </div>
 
-{#                    TODO Add movement in posts #}
-{#                    <nav class="blog-pagination text-center mb-5 mt-4">#}
-{#                        <a class="btn btn-outline-primary" href="#">Previous Post</a>#}
-{#                        <a class="btn btn-outline-secondary disabled" href="#">Next Post</a>#}
-{#                    </nav>#}
+                    <nav class="blog-pagination text-center mb-5 mt-4">
+                        {% if prev_and_next['prev'] is not none %}
+                            <a class="btn btn-outline-primary mt-1" href="{{ url_for('blog_post', path=prev_and_next['prev'].path) }}">&larr; {{ prev_and_next['prev'].title | truncate(30,true,'...') }}</a>
+                        {% endif %}
+                        {% if prev_and_next['next'] is not none %}
+                            <a class="btn btn-outline-primary mt-1" href="{{ url_for('blog_post', path=prev_and_next['next'].path) }}">{{ prev_and_next['next'].title | truncate(30,true,'...') }} &rarr;</a>
+                        {% endif %}
+                    </nav>
 
                     {% if site.disqus_shortname %}
                     <div id="disqus_thread"></div>

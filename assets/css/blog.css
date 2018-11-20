@@ -176,3 +176,9 @@ table tr:nth-child(2n) {
 table img {
     background-color: initial
 }
+
+/* Sidebar */
+
+.blog-sidebar > div {
+    overflow: hidden;
+}
