@@ -12,4 +12,3 @@ This repo is the source for nitratine.net. The files in the `docs\` folder are h
     - body {font-size: 0.94rem;}
     - h1 {font-size: 2rem;}
  - Compress images where they can be (https://imagecompressor.com/)
- - Internally: 

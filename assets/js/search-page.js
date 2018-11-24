@@ -98,5 +98,13 @@ function read_query() {
     }
 }
 
-document.getElementById('search-submit').addEventListener('click', function () { search(); });
+document.getElementById('search-submit').addEventListener('click', function () {
+    search();
+});
+document.getElementById('search').addEventListener('keyup', function (e) {
+    e.preventDefault();
+    if ((e.keyCode ? e.keyCode : e.which) === 13) {
+        search();
+    }
+});
 read_query();
