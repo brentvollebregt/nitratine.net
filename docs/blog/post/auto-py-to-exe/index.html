@@ -127,23 +127,37 @@
 <p><em>To have the interface displayed in the images, you will need chrome. If chrome is not installed or --no-chrome is supplied, the default browser will be used.</em></p>
 <h3 id="installation-and-usage">Installation and Usage</h3>
 <h4 id="installing-via-pypi">Installing Via <a href="https://pypi.org/project/auto-py-to-exe/">PyPI</a></h4>
-<p>You can install this project using the PyPI:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> pip install auto-py-to-exe
+<p>You can install this project using PyPI:</p>
+<div class="codehilite"><pre><span></span>$ pip install auto-py-to-exe
 </pre></div>
 
 
-<p>Now to run it, execute the following in the terminal:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> auto-py-to-exe
+<p>Then to run it, execute the following in the terminal:</p>
+<div class="codehilite"><pre><span></span>$ auto-py-to-exe
 </pre></div>
 
 
-<h4 id="running-locally-via-the-github-repository">Running Locally Via the <a href="https://github.com/brentvollebregt/auto-py-to-exe">Github Repository</a></h4>
+<h3 id="installing-via-github">Installing Via <a href="https://github.com/brentvollebregt/auto-py-to-exe">GitHub</a></h3>
+<div class="codehilite"><pre><span></span>$ git clone https://github.com/brentvollebregt/auto-py-to-exe.git
+$ <span class="nb">cd</span> auto-py-to-exe
+$ python setup.py install
+</pre></div>
+
+
+<p>Then to run it, execute the following in the terminal:</p>
+<div class="codehilite"><pre><span></span>$ auto-py-to-exe
+</pre></div>
+
+
+<h4 id="running-locally-via-github-no-install">Running Locally Via <a href="https://github.com/brentvollebregt/auto-py-to-exe">Github</a> (no install)</h4>
 <p>You can run this project locally by following these steps:
 1. Clone/download the <a href="https://github.com/brentvollebregt/auto-py-to-exe">repo</a>
 2. Open cmd/terminal and cd into the project
-3. Execute <code>pip install -r requirements.txt</code></p>
-<p>Now to run the application, run the <code>run.py</code> file with python. A Chrome window in app mode will open with the project running inside.</p>
-<p><em>Note: The repository linked above is not what is hosted on PyPI. It has been preserved to keep in line with the provided video but instructions have been provided to use the new method. The PyPI version is hosted <a href="https://github.com/brentvollebregt/auto-py-to-exe-pypi">here</a>.</em></p>
+3. Execute <code>python -m pip install -r requirements.txt</code></p>
+<p>Now to run the application, execute <code>python -m auto_py_to_exe</code>. A Chrome window in app mode will open with the project running inside.</p>
+<blockquote>
+<p>Make sure you are in the directory below auto_py_to_exe (you will be after step 3) when calling <code>python -m auto_py_to_exe</code> or you will need to reference the folder auto_py_to_exe absolutely/relatively to where you currently are.</p>
+</blockquote>
 <h2 id="using-the-application">Using the Application</h2>
 <ol>
 <li>Select your script location (paste in or use a file explorer)<ul>
@@ -159,10 +173,12 @@
 <p>Alternatively you can execute <code>auto-py-to-exe [filename]</code>. This will open up the window with the filename in the script location.</p>
 <p>You can also pass <code>--no-chrome</code> if you want to use your default browser and not chromes app mode; for example <code>auto-py-to-exe --no-chrome my_script.py</code>.</p>
 <blockquote>
-<p>If you installed this package locally, you will need to call <code>python run.py</code> instead of <code>auto-py-to-exe</code></p>
+<p>If you are running this package locally, you will need to call <code>python -m auto_py_to_exe</code> instead of <code>auto-py-to-exe</code></p>
 </blockquote>
 <h2 id="video">Video</h2>
 <p>If you need something visual to help you get started, <a href="https://youtu.be/OZSZHmWSOeM">I made a video for the original release of this project</a>; some things may be different but the same concepts still apply.</p>
+<h2 id="issues-using-the-tool">Issues Using the Tool</h2>
+<p>If you're having issues with the packaged executable or using this tool in general, I recommend you read <a href="https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/">my blog post on common issues when using auto-py-to-exe</a>. This post covers things you should know about packaging Python scripts and fixes for things that commonly go wrong.</p>
 <h2 id="screenshots">Screenshots</h2>
 <p><img alt="Empty interface" src="/post-assets/auto-py-to-exe/empty-interface.png" /></p>
 <p><img alt="Filled out" src="/post-assets/auto-py-to-exe/filled-out.png" /></p>
