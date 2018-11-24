@@ -1,6 +1,6 @@
 title: "Github Badges"
 date: 2018-04-25
-categories: Tutorials
+category: Tutorials
 tags: [Website]
 feature: static.png
 description: "A small demonstration of using GitHub badges from shields.io and how to manipulate them. Basic badges are demonstrated that would be most used by people."

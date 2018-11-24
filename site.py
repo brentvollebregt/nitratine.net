@@ -219,7 +219,7 @@ def posts_by_category():
     """ Get posts by category : {category: [post, post, ...]} """
     categories = {c: [] for c in CATEGORIES}
     for post in get_posts():
-        category = post.meta.get('categories', 'General')
+        category = post.meta.get('category', 'General')
         categories[category].append(post)
     return categories
 
@@ -625,7 +625,7 @@ def new_post():
     f = open(FLATPAGES_ROOT + filename, 'w')
     f.write('title: "{0}"\n'.format(title))
     f.write('date: {0}\n'.format(date))
-    f.write('categories: {0}\n'.format(category))
+    f.write('category: {0}\n'.format(category))
     f.write('tags: [{0}]\n'.format(tags))
     f.write('feature: feature.png\n')
     f.write('description: ""\n')

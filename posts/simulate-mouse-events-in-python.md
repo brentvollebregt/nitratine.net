@@ -1,6 +1,6 @@
 title: "Simulate Mouse Events In Python"
 date: 2018-01-13
-categories: YouTube
+category: YouTube
 tags: [Python, Mouse, pynput]
 feature: feature.jpg
 description: "This demonstrates how to control the mouse with Python. Using pynput we are able to simulate mouse events into any window. This will show you how to press buttons, scroll and move the mouse."

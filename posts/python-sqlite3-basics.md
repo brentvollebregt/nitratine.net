@@ -1,6 +1,6 @@
 title: "Python SQLite3 Basics"
 date: 2018-05-06
-categories: YouTube
+category: YouTube
 tags: [Python, SQL]
 feature: feature.png
 description: "This post covers some basics of SQLite3. SQLite3 allows us to access a database using SQL that doesn't require a separate server. This means the database is stored in a single file and we directly connect to the file rather than through some third-party applications server."

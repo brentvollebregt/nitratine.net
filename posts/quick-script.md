@@ -1,6 +1,6 @@
 title: "Quick Script"
 date: 2017-12-20
-categories: Projects
+category: Projects
 tags: [Python, GUI]
 feature: gui1.png
 description: "A small GUI that displays home-made scripts to be executed. The scripts will appear in a scroll window and on selection they will run and the window will then close (can be configured). Sample scripts included."

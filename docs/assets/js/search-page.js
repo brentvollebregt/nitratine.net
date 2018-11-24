@@ -14,7 +14,7 @@ function search() {
         // Add points to scores based off matches
         Object.keys(site_content).forEach(function (post) {
             let title = site_content[post]['title'].toLowerCase();
-            let category = site_content[post]['categories'].toLowerCase();
+            let category = site_content[post]['category'].toLowerCase();
             let description = site_content[post]['description'].toLowerCase();
             let tags = site_content[post]['tags'].map(x => x.toLowerCase());
 
@@ -65,8 +65,8 @@ function search() {
                     category.classList.add('badge');
                     category.classList.add('badge-primary');
                     category.classList.add('ml-2');
-                    category.href = '/blog/categories/#' + site_content[search_result]['categories'];
-                    category.innerText = site_content[search_result]['categories'];
+                    category.href = '/blog/categories/#' + site_content[search_result]['category'];
+                    category.innerText = site_content[search_result]['category'];
                     specifics.appendChild(category);
                     site_content[search_result]['tags'].forEach(function (tag) {
                         let tmp_tag = document.createElement('a');

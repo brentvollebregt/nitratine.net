@@ -1,6 +1,6 @@
 title: "How To Add a Custom Domain To a GitHub Pages Site"
 date: 2018-04-29
-categories: Tutorials
+category: Tutorials
 tags: [Website, Domain]
 feature: existing-resource-records.png
 description: "In this tutorial I explain how to configure your domain for GitHub Pages using a domain from Namesilo. You will first want to create a CNAME file for your GitHub pages site."

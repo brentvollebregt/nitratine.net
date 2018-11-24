@@ -1,6 +1,6 @@
 title: "Finding Emotion In Music With Python"
 date: 2017-12-05
-categories: Investigations
+category: Investigations
 tags: [Python, Spotify, Machine-Learning]
 feature: mining-results.png
 description: "This investigation looks at detecting emotion in music. Using data from Spotify I attempted to predict mood in music using Python. The script looks at valence and energy to determine there it lies on an emotion plane."
