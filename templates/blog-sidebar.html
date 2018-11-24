@@ -6,6 +6,15 @@
                         <p class="mb-0">{{ site.about|safe }}</p>
                     </div>
 
+                    <div class="input-group mb-3">
+                      <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <script>let searchUrl = "{{ url_for('search') }}";</script>
+                    <script type="text/javascript" defer src="/assets/js/search.js"></script>
+
                     <div class="card p-3 mb-3 bg-light">
                         <h4 class="text-center text-lg-left">Categories</h4>
                         <ol class="list-unstyled mb-0 text-center text-lg-left">

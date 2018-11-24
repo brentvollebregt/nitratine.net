@@ -382,6 +382,14 @@ def data():
     )
 
 
+@app.route('/search/')
+def search():
+    return render_template(
+        'search.html',
+        site_content={post.path: post.meta for post in get_posts()}
+    )
+
+
 @app.route('/blog/')
 def blog_home():
     page1_posts = paginate_posts(1)
