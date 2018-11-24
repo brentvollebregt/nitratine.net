@@ -8,7 +8,4 @@ This repo is the source for nitratine.net. The files in the `docs\` folder are h
  - `-n` / `--new-post`: Create a new post. Will create the .md file with a small template and create a folder for assets as well as copy in the default feature image.
 
 ### TODO
- - Fix site font sizes on smaller devices
-    - body {font-size: 0.94rem;}
-    - h1 {font-size: 2rem;}
  - Compress images where they can be (https://imagecompressor.com/)
