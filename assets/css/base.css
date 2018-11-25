@@ -29,3 +29,5 @@ main {
     background: #ded28f;
     color: black;
 }
+
+a { word-break: break-word; }
