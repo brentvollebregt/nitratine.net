@@ -324,9 +324,11 @@
 <p>A normal python script is run on a single core so when you create threads it will not speed up as it is basically doing the same thing just at different times. This issue/feature (if you want to look at it in a positive way) is due to the <a href="https://stackoverflow.com/questions/1294382/what-is-a-global-interpreter-lock-gil">Global Interpreter Lock</a> which in short means that "multiple threads can't effectively make use of multiple cores" which is the reason for no speed increase. <a href="https://www.youtube.com/watch?v=ph374fJqFPE">Here</a> is a great talk on the GIL with <a href="http://www.dabeaz.com/python/GIL.pdf">some great slides</a>.</p>
 <p>If you do want to have multiple tasks running on multiple cores, look at the <a href="https://docs.python.org/3.4/library/multiprocessing.html">multiprocessing module</a>.</p>
 <h2 id="extra-resources">Extra Resources</h2>
-<p>Since this is only a basic look over threading so someone that hasn't used it can understand it better, I have left out things like events, signaling and locks. To read more about threads, you could visit these pages:
- - <a href="https://pymotw.com/3/threading/">pymotw.com/3/threading/</a>
- - <a href="https://docs.python.org/3/library/threading.html">Python 3 Threading Documentation</a></p>
+<p>Since this is only a basic look over threading so someone that hasn't used it can understand it better, I have left out things like events, signaling and locks. To read more about threads, you could visit these pages:</p>
+<ul>
+<li><a href="https://pymotw.com/3/threading/">pymotw.com/3/threading/</a></li>
+<li><a href="https://docs.python.org/3/library/threading.html">Python 3 Threading Documentation</a></li>
+</ul>
                     </div>
 
                     <nav class="blog-pagination text-center mb-5 mt-4">

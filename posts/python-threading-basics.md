@@ -252,5 +252,6 @@ If you do want to have multiple tasks running on multiple cores, look at the [mu
 
 ## Extra Resources
 Since this is only a basic look over threading so someone that hasn't used it can understand it better, I have left out things like events, signaling and locks. To read more about threads, you could visit these pages:
+
  - [pymotw.com/3/threading/](https://pymotw.com/3/threading/)
  - [Python 3 Threading Documentation](https://docs.python.org/3/library/threading.html)
