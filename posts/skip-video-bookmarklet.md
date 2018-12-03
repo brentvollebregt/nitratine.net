@@ -1,7 +1,7 @@
 title: "Skip Video Bookmarklet"
 date: 2018-12-03
 category: General
-tags: [video]
+tags: [JavaScript]
 feature:
 description: "This bookmarklet allows you to skip videos that are playing on the current site. This means it can be used to skip forced videos like YouTube ads. Not all video players are supported."
 hidden: true
