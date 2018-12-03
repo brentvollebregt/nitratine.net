@@ -39,6 +39,9 @@
                         {% for tag in page.tags %}
                         <a href="/blog/tags/#{{ tag }}" class="badge badge-warning">{{ tag }}</a>
                         {% endfor %}
+                        {%- if page.hidden -%}
+                        <span class="badge badge-danger">Hidden</span>
+                        {% endif %}
                         <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
                     </p>
                     <p class="lead">{{ page.description }}</p>
