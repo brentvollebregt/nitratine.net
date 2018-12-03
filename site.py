@@ -658,6 +658,7 @@ def new_post():
 
 
 def serve_build():
+    process = None
     try:
         process = subprocess.Popen(
             'python -m http.server',
@@ -672,7 +673,8 @@ def serve_build():
     except Exception as e:
         print(e)
     finally:
-        process.terminate()
+        if process is not None:
+            process.terminate()
 
 
 def run():
