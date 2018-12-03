@@ -208,9 +208,9 @@ freezer = Freezer(app)
 # Helpers
 
 
-def get_posts():
-    """ Get all vaiable posts in order of date """
-    all_posts = [p for p in posts]
+def get_posts(hidden=False, force_post=None):
+    """ Get all posts in order of date. Posts can be hidden. """
+    all_posts = [p for p in posts if hidden or 'hidden' not in p.meta or force_post == p.path]
     all_posts.sort(key=lambda x: x.meta['date'], reverse=True)
     return all_posts
 
@@ -304,7 +304,7 @@ def get_pagination_nav_data(page):
 def get_previous_and_next_posts(post):
     """ Get the next and previous post for a particular post """
     # So we don't call it over and over again
-    all_posts = get_posts()
+    all_posts = get_posts(force_post=post.path)
 
     # Find it's index
     title = post.meta['title']
@@ -365,7 +365,8 @@ def portfolio():
 
 @app.route('/data/')
 def data():
-    available_posts = [[i, posts._pages[i]['title']] for i in posts._pages]
+    public_posts = get_posts()
+    available_posts = [[p.path, p['title']] for p in public_posts]
 
     req = requests.get('https://api.github.com/users/' + SITE['github_username'] + '/repos')
     req_data = req.json()
