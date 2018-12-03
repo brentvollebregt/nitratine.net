@@ -543,6 +543,13 @@ app.jinja_env.globals.update(ymd_format=ymd_format)
 
 
 @freezer.register_generator
+def blog_post():
+    all_posts = get_posts(hidden=True)
+    for post in all_posts:
+        yield {'path': post.path}
+
+
+@freezer.register_generator
 def assets():
     location = ASSETS_LOCATION
     for root, dirs, files in os.walk(location, topdown=False):
