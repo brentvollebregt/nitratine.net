@@ -27,7 +27,7 @@ def my_renderer(text):
 DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = '.md'
-FLATPAGES_ROOT = 'posts/'
+FLATPAGES_ROOT = 'posts'
 FLATPAGES_MARKDOWN_EXTENSIONS = ['codehilite', 'extra', 'toc']
 FLATPAGES_HTML_RENDERER = my_renderer
 FREEZER_DESTINATION = 'docs'
@@ -469,7 +469,7 @@ def blog_post(path):
 def sitemap():
     pages = []
     for post in get_posts():
-        file_location = FLATPAGES_ROOT + post.path + '.md'
+        file_location = os.path.join(FLATPAGES_ROOT, post.path + '.md')
         pages.append({
             'loc': url_for('blog_post', path=post.path),
             'lastmod': time.strftime('%Y-%m-%d', time.localtime(os.path.getmtime(file_location)))
@@ -575,8 +575,8 @@ def build():
 
     # Create redirects (because Frozen-Flask doesn't have an option)
     for r in REDIRECTS:
-        file_path = FREEZER_DESTINATION + '/' + r
-        file = file_path + '/index.html'
+        file_path = os.path.join(FREEZER_DESTINATION, r)
+        file = os.path.join(file_path, 'index.html')
         # Check where we are writing
         if os.path.exists(file):
             print('WARN: Overwriting ' + file_path)
@@ -590,13 +590,13 @@ def build():
     print('Added Redirects')
 
     # Add CNAME
-    f = open(FREEZER_DESTINATION + '/CNAME', 'w')
+    f = open(os.path.join(FREEZER_DESTINATION, 'CNAME'), 'w')
     f.write(SITE['domain'])
     f.close()
     print('Added CNAME')
 
     # Add 404 page
-    f = open(FREEZER_DESTINATION + '/404.html', 'w')
+    f = open(os.path.join(FREEZER_DESTINATION, '404.html'), 'w')
     with app.test_request_context():
         f.write(page_not_found(None)[0])
     f.close()
@@ -630,7 +630,8 @@ def new_post():
 
     # Write file
     filename = post_id + '.md'
-    f = open(FLATPAGES_ROOT + filename, 'w')
+    file_path = os.path.join(FLATPAGES_ROOT, filename)
+    f = open(file_path, 'w')
     f.write('title: "{0}"\n'.format(title))
     f.write('date: {0}\n'.format(date))
     f.write('category: {0}\n'.format(category))
@@ -641,18 +642,18 @@ def new_post():
     f.write('\n## Content\n')
     f.write("{% with video_id=\"XXXXXXXXXXX\" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}")
     f.close()
-    print('\nCreated {0}'.format(FLATPAGES_ROOT + filename))
+    print('\nCreated {0}'.format(file_path))
 
     # Create assets folder and add feature
-    post_assets_location = POST_ASSETS_LOCATION + '/' + post_id + '/'
+    post_assets_location = os.path.join(POST_ASSETS_LOCATION, post_id)
     if not os.path.isdir(post_assets_location):
         os.makedirs(post_assets_location)
         print('Created: {0}'.format(post_assets_location))
-    feature_img = POST_ASSETS_LOCATION + '/' + post_id + '/feature.png'
+    feature_img = os.path.join(POST_ASSETS_LOCATION, post_id, 'feature.png')
     if not os.path.isfile(feature_img):
         shutil.copyfile(
-            ASSETS_LOCATION + '/img/default-feature.png',
-            POST_ASSETS_LOCATION + '/' + post_id + '/feature.png'
+            os.path.join(ASSETS_LOCATION, 'img', 'default-feature.png'),
+            feature_img
         )
         print('Created: {0}'.format(feature_img))
 
