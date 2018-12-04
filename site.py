@@ -11,6 +11,7 @@ import argparse
 from urllib.parse import quote_plus
 import subprocess
 import shutil
+from collections import defaultdict
 
 
 # Renderer
@@ -41,14 +42,7 @@ POST_ASSETS_LOCATION = 'post-assets'
 # Specific Site Statics
 
 
-CATEGORIES = [
-    'YouTube',
-    'Projects',
-    'Tutorials',
-    'Apps',
-    'Investigations',
-    'General'
-]
+# TODO Move to config
 SITE = {
     'title': 'Nitratine',
     'url': 'https://nitratine.net',
@@ -217,23 +211,20 @@ def get_posts(hidden=False, force_post=None):
 
 def posts_by_category():
     """ Get posts by category : {category: [post, post, ...]} """
-    categories = {c: [] for c in CATEGORIES}
+    categories = defaultdict(list)
     for post in get_posts():
         category = post.meta.get('category', 'General')
         categories[category].append(post)
-    return categories
+    return {t: categories[t] for t in sorted(categories)}
 
 
 def posts_by_tag():
     """ Get posts by tag : {tag: [post, post, ...]} """
-    tags = {}
+    tags = defaultdict(list)
     for post in get_posts():
         post_tags = post.meta.get('tags', [])
         for tag in post_tags:
-            if tag in tags:
-                tags[tag].append(post)
-            else:
-                tags[tag] = [post]
+            tags[tag].append(post)
     return {t: tags[t] for t in sorted(tags)}
 
 
