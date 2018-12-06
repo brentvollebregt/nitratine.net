@@ -47,18 +47,36 @@ DEFAULT = {
     },
     'redirects': {
         'home': '',
+        'from/this/route': 'to/here',
     },
     'home-tiles': [
         {
+            'type': 'image',
+            'link': 'https://youtu.be/ksW59gYEl6Q',
+            'image_url': 'https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg'
+        },
+        {
+            'type': 'post',
+            'post': 'auto-py-to-exe',
+            'reason': 'popular'
+        },
+        {
+            'type': 'img-content',
+            'link': 'https://github.com/brentvollebregt/auto-py-to-exe',
+            'image_url': '/post-assets/auto-py-to-exe/feature.png',
+            'content_raw': '<div class="text-center">Here you can add an image and your own content below</div>'
+        },
+        {
             'type': 'raw',
-            'link': '/',
-            'content': 'Add tiles in config.json'
+            'link': '#',
+            'content': 'This is a raw home tiles. Any HTML will be added straight into the template'
         }
     ],
 
 }
 
 LOCATION = 'config.json'
+SAMPLE_ADDITION = '.sample'
 
 
 def get(*args):
@@ -76,7 +94,7 @@ if os.path.exists(LOCATION):
     with open(LOCATION, 'r') as f:
         config_data = json.load(f)
 else:
-    with open(LOCATION, 'w') as f:
+    with open(LOCATION + SAMPLE_ADDITION, 'w') as f:
         json.dump(DEFAULT, f, indent=4)
-    print('{0} does not exist, a template has been generated'.format(LOCATION))
-    raise FileNotFoundError('{0} does not exist'.format(LOCATION))
+    print('{0} does not exist, a template has been generated'.format(LOCATION + SAMPLE_ADDITION))
+    raise FileNotFoundError('{0} does not exist'.format(LOCATION + SAMPLE_ADDITION))
