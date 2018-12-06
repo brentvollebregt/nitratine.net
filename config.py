@@ -35,7 +35,15 @@ DEFAULT = {
         'google_ad_client': '',
         'youtube_channel_name': '',
         'youtube_channel_id': '',
-        'youtube_data_api_key': ''
+        'youtube_data_api_key': '',
+        'category-extra': {
+            "YouTube": "&#x1F3A5;",
+            "Projects": "&#x1F4BE;",
+            "Tutorials": "&#x1F4D6;",
+            "Apps": "&#x1F4F1;",
+            "Investigations": "&#x1F50D;",
+            "General": "&#x1F4F0;"
+        }
     },
     'people': {
         'Brent Vollebregt': 'https://github.com/brentvollebregt'
@@ -62,7 +70,7 @@ def get(*args):
     try:
         for arg in args:
             traversal = traversal[arg]
-    except:
+    except KeyError:
         raise KeyError('Cannot get {0} from {1}'.format(':'.join([str(arg) for arg in args]), LOCATION))
     return traversal
 

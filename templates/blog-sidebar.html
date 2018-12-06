@@ -18,42 +18,14 @@
                     <div class="card p-3 mb-3 bg-light">
                         <h4 class="text-center text-lg-left">Categories</h4>
                         <ol class="list-unstyled mb-0 text-center text-lg-left">
-                            <li>
-                                <a href="/blog/categories/#YouTube">
-                                    🎥 YouTube
-                                    <span class="badge badge-primary ml-3">{{ category_numbers['YouTube'] }}</span>
+                            {% for category in category_numbers %}
+                                <li>
+                                <a href="/blog/categories/#{{ category }}">
+                                    {%- if category in site['category-extra'] -%}{{ site['category-extra'][category]|safe }}{% endif %} {{ category }}
+                                    <span class="badge badge-primary ml-3">{{ category_numbers[category] }}</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/blog/categories/#Projects">
-                                    💾 Projects
-                                    <span class="badge badge-primary ml-3">{{ category_numbers['Projects'] }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/blog/categories/#Tutorials">
-                                    📖 Tutorials
-                                    <span class="badge badge-primary ml-3">{{ category_numbers['Tutorials'] }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/blog/categories/#Apps">
-                                    📱 Apps
-                                    <span class="badge badge-primary ml-3">{{ category_numbers['Apps'] }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/blog/categories/#Investigations">
-                                    🔍 Investigations
-                                    <span class="badge badge-primary ml-3">{{ category_numbers['Investigations'] }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/blog/categories/#General">
-                                    📰 General
-                                    <span class="badge badge-primary ml-3">{{ category_numbers['General'] }}</span>
-                                </a>
-                            </li>
+                            {% endfor %}
                         </ol>
                     </div>
 
