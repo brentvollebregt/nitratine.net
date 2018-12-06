@@ -47,7 +47,6 @@ POST_ASSETS_LOCATION = config.get('serve-and-build', 'paths', 'post-assets')
 SITE = config.get('site')
 REDIRECTS = config.get('redirects')
 HOME_TILES = config.get('home-tiles')
-PEOPLE = config.get('people')
 
 
 # App instances

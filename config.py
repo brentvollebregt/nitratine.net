@@ -45,9 +45,6 @@ DEFAULT = {
             "General": "&#x1F4F0;"
         }
     },
-    'people': {
-        'Brent Vollebregt': 'https://github.com/brentvollebregt'
-    },
     'redirects': {
         'home': '',
     },
