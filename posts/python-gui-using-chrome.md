@@ -209,7 +209,7 @@ When running server.py, a chrome app window will appear with a button saying "Cl
 ## Do NOT use time.sleep()
 `time.sleep()` is very dangerous when used with eel; fortunately we have been given an alternative. Calling `time.sleep()` will pause the execution of the whole server so you should use `eel.sleep()` instead. It has the exact same functionality, just it's one less import you need.
 
-## Threading in Python
+## Threading using Eel
 To reduce the chance of conflicts, eel also provides a interface for creating threads. Use `eel.spawn()` to replace threading instances. This is also helpful for creating thread in general.
 
 An example of using `eel.sleep()` and `eel.spawn()`:
@@ -235,6 +235,24 @@ eel.start('main.html', block=False)
 ```
 
 This will allow code execution to keep flowing after it reaches this statement. Do note that when your code underneath eel.start() is complete the server will stop as the whole script has stopped.
+
+### Executing Code When the Window is Closed
+If you do not set block to false, you can detect when the window is closed. Since Eel uses a bottle server in the background, we know that this can throw either `SystemExit`, `MemoryError` or `KeyboardInterrupt`. This means we can catch there exceptions by wrapping `eel.start()` in a try/expect block. For example:
+
+```python
+import eel
+
+eel.init('web')
+
+try:
+    eel.start('main.html')
+except (SystemExit, MemoryError, KeyboardInterrupt):
+    # We can do something here if needed
+    # But if we don't catch these safely, the script will crash
+    pass 
+
+print ('This is printed when the window is closed!')
+```
 
 ## Why Use Eel?
 So those who have used Flask, bottle or pyramid before may be asking why not just use those? When using a library like Flask, you need to create the server, setting up all the routes yourself and decide on the layout of the server.
