@@ -321,7 +321,7 @@
 
 <p>This will allow code execution to keep flowing after it reaches this statement. Do note that when your code underneath eel.start() is complete the server will stop as the whole script has stopped.</p>
 <h3 id="executing-code-when-the-window-is-closed">Executing Code When the Window is Closed</h3>
-<p>If you do not set block to false, you can detect when the window is closed. Since Eel uses a bottle server in the background, we know that this can throw either <code>SystemExit</code>, <code>MemoryError</code> or <code>KeyboardInterrupt</code>. This means we can catch there exceptions by wrapping <code>eel.start()</code> in a try/expect block. For example:</p>
+<p>If you don't set block to false, you can detect when the window is closed. Since Eel uses a bottle server in the background, we know this will throw either <code>SystemExit</code>, <code>MemoryError</code> or <code>KeyboardInterrupt</code>. This means we can catch the exception by wrapping <code>eel.start()</code> in a try/expect block and stop the script from ending. For example:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">eel</span>
 
 <span class="n">eel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s1">&#39;web&#39;</span><span class="p">)</span>

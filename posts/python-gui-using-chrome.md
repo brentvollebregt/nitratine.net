@@ -237,7 +237,7 @@ eel.start('main.html', block=False)
 This will allow code execution to keep flowing after it reaches this statement. Do note that when your code underneath eel.start() is complete the server will stop as the whole script has stopped.
 
 ### Executing Code When the Window is Closed
-If you do not set block to false, you can detect when the window is closed. Since Eel uses a bottle server in the background, we know that this can throw either `SystemExit`, `MemoryError` or `KeyboardInterrupt`. This means we can catch there exceptions by wrapping `eel.start()` in a try/expect block. For example:
+If you don't set block to false, you can detect when the window is closed. Since Eel uses a bottle server in the background, we know this will throw either `SystemExit`, `MemoryError` or `KeyboardInterrupt`. This means we can catch the exception by wrapping `eel.start()` in a try/expect block and stop the script from ending. For example:
 
 ```python
 import eel
