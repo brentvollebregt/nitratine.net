@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://nitratine.net/blog/post/python-size-and-time-cache-decorator/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css">
+        <link rel="stylesheet" href="/assets/css/custom-bootstrap.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Python Size and Time Cache Decorator - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="A Python decorator that allows developers to cache function return values and include expirations on remembered values.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Python Size and Time Cache Decorator">
+        <meta property="og:description" content="A Python decorator that allows developers to cache function return values and include expirations on remembered values.">
+        <meta property="og:image" content="/post-assets/python-size-and-time-cache-decorator/feature.png">
+        <meta property="og:url" content="https://nitratine.net/blog/post/python-size-and-time-cache-decorator/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-blog-content blog-main">
+
+                    <h1 class="blog-post-title">Python Size and Time Cache Decorator</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2018" class="text-muted">15 Dec 2018</a>
+                        <a href="/blog/categories/#General" class="badge badge-primary ml-2">General</a>
+                        
+                        <a href="/blog/tags/#python" class="badge badge-warning">python</a>
+                        
+                        <a href="/blog/tags/#decorator" class="badge badge-warning">decorator</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">A Python decorator that allows developers to cache function return values and include expirations on remembered values.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#decorators">Decorators</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</div>
+<h2 id="introduction">Introduction</h2>
+<p>Python's standard library comes with a memoization function in the <code>functools</code> module named <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache"><code>@functools.lru_cache</code></a>. This can be very useful for pure functions <em>(functions that always will return the same output given an input)</em> as it can be used to speed up an application by remembering a return value. This is because next time a function is called with the same arguments, the value can be simply returned and computation will not have to occur again.</p>
+<p>Sometimes though, you might want to remember the return value of a non-pure function for a specific amount of time. The function below is a decorators that allows you to remember return value but also have an expiry on them.</p>
+<h2 id="decorators">Decorators</h2>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">size_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quick_key_access</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">time</span>
+        <span class="n">storage</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ttls</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Generate a key based on arguments being passed</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+
+            <span class="c1"># Check if they return value is already known</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">storage</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">storage</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If not, get the result</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">storage</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+                <span class="c1"># If a ttl has been set, remember when it is going to expire</span>
+                <span class="k">if</span> <span class="n">ttl</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ttls</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">ttl</span>
+
+                <span class="c1"># If quick_key_access is being used, remember the key</span>
+                <span class="k">if</span> <span class="n">quick_key_access</span><span class="p">:</span>
+                    <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+                <span class="c1"># If a size limit has been set, make sure the size hasn&#39;t been exceeded</span>
+                <span class="k">if</span> <span class="n">size_limit</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">size_limit</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">quick_key_access</span><span class="p">:</span>
+                        <span class="n">oldest_key</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">del</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">oldest_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">storage</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">del</span> <span class="n">storage</span><span class="p">[</span><span class="n">oldest_key</span><span class="p">]</span>
+
+            <span class="c1"># Check ttls if it is enabled</span>
+            <span class="k">if</span> <span class="n">ttl</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">quick_key_access</span><span class="p">:</span>
+                        <span class="n">oldest_key</span> <span class="o">=</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">oldest_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">storage</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="c1"># If they key has expired, remove the entry and it&#39;s quick access key if quick_key_access=True</span>
+                    <span class="k">if</span> <span class="n">ttls</span><span class="p">[</span><span class="n">oldest_key</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">():</span>
+                        <span class="k">del</span> <span class="n">storage</span><span class="p">[</span><span class="n">oldest_key</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">quick_key_access</span><span class="p">:</span>
+                            <span class="k">del</span> <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">break</span>
+
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+</pre></div>
+
+
+<h2 id="usage">Usage</h2>
+<p>To use this method, add it to your project/script. Then decorate your functions that you want to cache, for example:</p>
+<div class="codehilite"><pre><span></span><span class="nd">@cache</span>
+<span class="k">def</span> <span class="nf">my_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">d</span> <span class="o">+</span> <span class="n">e</span>
+</pre></div>
+
+
+<p>Now when you call <code>my_sum(...)</code> values will be remembered and the addition will not have to occur each time. In this example, all the defaults are used which means it has unlimited storage (can be dangerous) and will live forever; this is the same as memoization will unlimited entries.</p>
+<p>The first parameter for the <code>cache</code> function is called <code>size_limit</code>. This is the maximum amount of entries to be stored until values that have been stored for the longest are removed (only the oldest will be deleted in Python 3.7 and above due to the ordering of dictionaries). When this is set to <code>0</code>, the size limit is storage.</p>
+<p><code>ttl</code> is the second parameter for this decorator. This is the amount of seconds that each entry can exist for before it is removed from memory. When this is set to <code>0</code> entries will never expire.</p>
+<p>There is also another parameter that can be passed called <code>quick_key_access</code>. When set to <code>true</code>, a lookup table is stored for each key that is generated. This is set to <code>false</code> by default but if you're remembering a lot of values, then this may help get a speed boost at the cost of taking up more space. Simply, when set to <code>false</code>, this is slower but will take up less space, when set to <code>true</code>, this is faster but will take up more space.</p>
+<h2 id="summary">Summary</h2>
+<p>If you want a simple memoization function, I still recommend using the built in <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache"><code>@functools.lru_cache</code></a> decorator but if you are looking for memoization decorator with a time factor added in, then this is something that you're looking for.</p>
+                    </div>
+
+                    <nav class="blog-pagination text-center mb-5 mt-4">
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/issues-when-using-auto-py-to-exe/">&larr; Issues When Using auto-py-to-exe</a>
+                        
+                        
+                    </nav>
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://nitratine.net/blog/post/python-size-and-time-cache-decorator/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://nitratine.net/blog/post/python-size-and-time-cache-decorator/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-blog-sidebar blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <script>let searchUrl = "/search/";</script>
+                    <script type="text/javascript" defer src="/assets/js/search.js"></script>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            
+                                <li>
+                                <a href="/blog/categories/#Apps">&#x1F4F1; Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#General">&#x1F4F0; General
+                                    <span class="badge badge-primary ml-3">5</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Investigations">&#x1F50D; Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Projects">&#x1F4BE; Projects
+                                    <span class="badge badge-primary ml-3">13</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Tutorials">&#x1F4D6; Tutorials
+                                    <span class="badge badge-primary ml-3">7</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#YouTube">&#x1F3A5; YouTube
+                                    <span class="badge badge-primary ml-3">15</span>
+                                </a>
+                            </li>
+                            
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

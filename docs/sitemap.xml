@@ -2,6 +2,11 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+    <loc>https://nitratine.net/blog/post/python-size-and-time-cache-decorator/</loc>
+    <lastmod>2018-12-15</lastmod>
+</url>
+
+<url>
     <loc>https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/</loc>
     <lastmod>2018-12-06</lastmod>
 </url>
