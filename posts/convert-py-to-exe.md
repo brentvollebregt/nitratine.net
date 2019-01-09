@@ -40,13 +40,24 @@ If you want all the files to be packed into one .exe you will need to add the 'F
 ## Adding an Icon
 To add an icon to the final .exe (normal or onefile) add the 'i' flag and then the location of the .ico file (do not rename a .png/.jpg/.bmp to a .ico - I have had dumb people in the comments do this). You can find some nice icons [here](http://goo.gl/EfpGD0).
 
-Thus the new statement will be ```pyinstaller -i {icon location} {python file}```, remember to not forget about extensions
+Thus the new statement will be ```pyinstaller -i {icon location} {python file}```, remember to not forget about extensions.
+
+## Adding Other Files
+Since pyinstaller only searches for Python files, you need to add data files like images, databases and JSON files yourself. To do this, simply provide the [`--add-data`](https://pyinstaller.readthedocs.io/en/v3.3.1/spec-files.html#adding-data-files) flag with the source and destination of your file as many times as required.
+
+As described in the documentation, to use this flag, it must be formatted as `--add-data SRC;DST`. SRC is the source file path of the file you want to add, for example `C:\Users\me\Desktop\my-image.jpg`, this can be either an absolute or relative path to the current working directory. DST is the destination in the packaged folder/executable. I recommend using a `.` to put a file in the root path. You can also specify a folder, for example `images` which will then create a folder named `images` and copy the file to there.
+
+An example of this is when I want to put the file `C:\my-file.png` into the `img\` folder in the packaged folder/executable. To do this I would use `--add-data "my-file.png";"img/"` *(I used `"` so spaces in either paths don't cause errors)*. Now in Python, I will need to look in the img\ folder in the root of the packaged folder/executable to get the image.
+
+If you can't get this to work, I recommend trying out my project called auto-py-to-exe mentioned below. The application takes care of moving extra files and many other things so you don't have to.
+
+> The separator between the SRC and DST can be different on different platforms. Windows uses `;` whereas most other operating systems like OSX and Linux use `:`.
 
 ## End Notes
 You can combine these flags to make things like onefile executables with no console and an icon by using a statement like : ```pyinstaller -w -F -i {icon location} {python file}```
 
 ## Auto PY to EXE
-In March 2018 I create a python package that allows you to create executables really easily from python scripts. It is built using a simple graphical interface built with Eel in Python.
+In March 2018 I created an application that allows you to create executables really easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.
 
 {% with video_id="OZSZHmWSOeM" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 

@@ -98,6 +98,7 @@
 <li><a href="#no-console">No Console</a></li>
 <li><a href="#onefile">Onefile</a></li>
 <li><a href="#adding-an-icon">Adding an Icon</a></li>
+<li><a href="#adding-other-files">Adding Other Files</a></li>
 <li><a href="#end-notes">End Notes</a></li>
 <li><a href="#auto-py-to-exe">Auto PY to EXE</a></li>
 <li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
@@ -144,11 +145,19 @@
 </blockquote>
 <h2 id="adding-an-icon">Adding an Icon</h2>
 <p>To add an icon to the final .exe (normal or onefile) add the 'i' flag and then the location of the .ico file (do not rename a .png/.jpg/.bmp to a .ico - I have had dumb people in the comments do this). You can find some nice icons <a href="http://goo.gl/EfpGD0">here</a>.</p>
-<p>Thus the new statement will be <code>pyinstaller -i {icon location} {python file}</code>, remember to not forget about extensions</p>
+<p>Thus the new statement will be <code>pyinstaller -i {icon location} {python file}</code>, remember to not forget about extensions.</p>
+<h2 id="adding-other-files">Adding Other Files</h2>
+<p>Since pyinstaller only searches for Python files, you need to add data files like images, databases and JSON files yourself. To do this, simply provide the <a href="https://pyinstaller.readthedocs.io/en/v3.3.1/spec-files.html#adding-data-files"><code>--add-data</code></a> flag with the source and destination of your file as many times as required.</p>
+<p>As described in the documentation, to use this flag, it must be formatted as <code>--add-data SRC;DST</code>. SRC is the source file path of the file you want to add, for example <code>C:\Users\me\Desktop\my-image.jpg</code>, this can be either an absolute or relative path to the current working directory. DST is the destination in the packaged folder/executable. I recommend using a <code>.</code> to put a file in the root path. You can also specify a folder, for example <code>images</code> which will then create a folder named <code>images</code> and copy the file to there.</p>
+<p>An example of this is when I want to put the file <code>C:\my-file.png</code> into the <code>img\</code> folder in the packaged folder/executable. To do this I would use <code>--add-data "my-file.png";"img/"</code> <em>(I used <code>"</code> so spaces in either paths don't cause errors)</em>. Now in Python, I will need to look in the img\ folder in the root of the packaged folder/executable to get the image.</p>
+<p>If you can't get this to work, I recommend trying out my project called auto-py-to-exe mentioned below. The application takes care of moving extra files and many other things so you don't have to.</p>
+<blockquote>
+<p>The separator between the SRC and DST can be different on different platforms. Windows uses <code>;</code> whereas most other operating systems like OSX and Linux use <code>:</code>.</p>
+</blockquote>
 <h2 id="end-notes">End Notes</h2>
 <p>You can combine these flags to make things like onefile executables with no console and an icon by using a statement like : <code>pyinstaller -w -F -i {icon location} {python file}</code></p>
 <h2 id="auto-py-to-exe">Auto PY to EXE</h2>
-<p>In March 2018 I create a python package that allows you to create executables really easily from python scripts. It is built using a simple graphical interface built with Eel in Python.</p>
+<p>In March 2018 I created an application that allows you to create executables really easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.</p>
 <div class="embedded_yt my-3">
     <div>
         <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/OZSZHmWSOeM"></iframe>
