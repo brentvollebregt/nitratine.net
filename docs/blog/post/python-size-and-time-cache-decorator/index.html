@@ -93,7 +93,7 @@
                         <div class="toc">
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#decorators">Decorators</a></li>
+<li><a href="#decorator">Decorator</a></li>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#summary">Summary</a></li>
 </ul>
@@ -101,7 +101,7 @@
 <h2 id="introduction">Introduction</h2>
 <p>Python's standard library comes with a memoization function in the <code>functools</code> module named <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache"><code>@functools.lru_cache</code></a>. This can be very useful for pure functions <em>(functions that always will return the same output given an input)</em> as it can be used to speed up an application by remembering a return value. This is because next time a function is called with the same arguments, the value can be simply returned and computation will not have to occur again.</p>
 <p>Sometimes though, you might want to remember the return value of a non-pure function for a specific amount of time. The function below is a decorators that allows you to remember return value but also have an expiry on them.</p>
-<h2 id="decorators">Decorators</h2>
+<h2 id="decorator">Decorator</h2>
 <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">size_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quick_key_access</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">time</span>
@@ -169,9 +169,16 @@
 
 
 <p>Now when you call <code>my_sum(...)</code> values will be remembered and the addition will not have to occur each time. In this example, all the defaults are used which means it has unlimited storage (can be dangerous) and will live forever; this is the same as memoization will unlimited entries.</p>
-<p>The first parameter for the <code>cache</code> function is called <code>size_limit</code>. This is the maximum amount of entries to be stored until values that have been stored for the longest are removed (only the oldest will be deleted in Python 3.7 and above due to the ordering of dictionaries). When this is set to <code>0</code>, the size limit is storage.</p>
+<p>The first parameter for the <code>cache</code> function is called <code>size_limit</code>. This is the maximum amount of entries to be stored until values that have been stored for the longest are removed (only the oldest will be deleted in Python 3.7 and above due to the ordering of dictionaries). When this is set to <code>0</code>, there is no size limit.</p>
 <p><code>ttl</code> is the second parameter for this decorator. This is the amount of seconds that each entry can exist for before it is removed from memory. When this is set to <code>0</code> entries will never expire.</p>
 <p>There is also another parameter that can be passed called <code>quick_key_access</code>. When set to <code>true</code>, a lookup table is stored for each key that is generated. This is set to <code>false</code> by default but if you're remembering a lot of values, then this may help get a speed boost at the cost of taking up more space. Simply, when set to <code>false</code>, this is slower but will take up less space, when set to <code>true</code>, this is faster but will take up more space.</p>
+<p>An example of using this decorator with a size limit of 10 cached entries, a time to live of 5min and using quick key access is shown below:</p>
+<div class="codehilite"><pre><span></span><span class="nd">@cache</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">my_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">d</span> <span class="o">+</span> <span class="n">e</span>
+</pre></div>
+
+
 <h2 id="summary">Summary</h2>
 <p>If you want a simple memoization function, I still recommend using the built in <a href="https://docs.python.org/3/library/functools.html#functools.lru_cache"><code>@functools.lru_cache</code></a> decorator but if you are looking for memoization decorator with a time factor added in, then this is something that you're looking for.</p>
                     </div>
@@ -180,6 +187,8 @@
                         
                             <a class="btn btn-outline-primary mt-1" href="/blog/post/issues-when-using-auto-py-to-exe/">&larr; Issues When Using auto-py-to-exe</a>
                         
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/python-requests-tutorial/">Python requests Tutorial &rarr;</a>
                         
                     </nav>
 
