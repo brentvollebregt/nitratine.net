@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
     <head>
+        <title>Page Redirection</title>
         <meta charset="UTF-8">
         <meta http-equiv="refresh" content="0; url={{ redirect_to }}">
         <script type="text/javascript">
             window.location.href = "{{ redirect_to }}"
         </script>
-        <title>Page Redirection</title>
+        <meta name="robots" content="noindex">
     </head>
     <body>
         This page has been moved. If you are not redirected automatically, follow this <a href='{{ redirect_to }}'>link</a>.
