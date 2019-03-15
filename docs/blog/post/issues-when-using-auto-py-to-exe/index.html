@@ -108,7 +108,7 @@
 <li><a href="#permissionerror-errno-13-permission-denied">PermissionError: [Errno 13] Permission denied: ...</a></li>
 <li><a href="#recursionerror">RecursionError</a></li>
 <li><a href="#attributeerror-module-enum-has-no-attribute-intflag">AttributeError: module 'enum' has no attribute 'IntFlag'</a></li>
-<li><a href="#modulenotfounderror-no-module-named-x">ModuleNotFoundError: No module named 'x'</a></li>
+<li><a href="#modulenotfounderror-no-module-named-x-importerror-no-module-named-x">ModuleNotFoundError: No module named x / ImportError: No module named x</a></li>
 <li><a href="#err_connection_refused">ERR_CONNECTION_REFUSED</a></li>
 <li><a href="#command-python-setuppy-egg_info-failed-with-error-code-1">Command “python setup.py egg_info” failed with error code 1﻿</a></li>
 <li><a href="#filenotfounderror">FileNotFoundError</a></li>
@@ -218,9 +218,10 @@
 <p>Go into the advanced tab and toggle the "Enable Recursion Limit" to on. This will set the recursion limit to 5000 and hopefully stop this from being raised.</p>
 <h4 id="attributeerror-module-enum-has-no-attribute-intflag">AttributeError: module 'enum' has no attribute 'IntFlag'</h4>
 <p>Try executing <code>python -m pip uninstall enum34</code> to stop enum conflicts. This is also a fix for the similar issue "Fatal Python error: Py_Initialize: unable to load the file system codec".</p>
-<h4 id="modulenotfounderror-no-module-named-x">ModuleNotFoundError: No module named 'x'</h4>
-<p>Make sure the module is installed and then add it to --hidden-import in the advanced tab. If you need to add more than one, separate them by a comma (<code>,</code>).</p>
-<p>For example, I have seen this occur with <code>pandas._libs.tslib</code> many of times before so add that to the input by --hidden-import. If you need to add more missing modules, you can use <code>pandas._libs.tslib, my_missing_module</code>.</p>
+<h4 id="modulenotfounderror-no-module-named-x-importerror-no-module-named-x">ModuleNotFoundError: No module named x / ImportError: No module named x</h4>
+<p>This means a particular module ('x' in this case) was not added to the package. I have seen this occur with packages in the pandas library and win32api; as long as you can identify the package (e.g. 'x'), then it is very easy to fix.</p>
+<p>To fix this in the UI, open the advanced tab and find the <code>--hidden-import</code> input. Simply paste the module name into this input and then repackage. If the original error is still appearing, you have done this incorrectly.</p>
+<p>For example, if you are missing <code>pandas._libs.tslib</code>, add 'pandas._libs.tslib' into the input by --hidden-import. Additionally you can add more than one module, for example <code>pandas._libs.tslib, win32api</code>. <em>(See the question mark by the input for more information)</em>.</p>
 <h4 id="err_connection_refused">ERR_CONNECTION_REFUSED</h4>
 <p>You need to be connected to the internet. This error appears when you cannot reach the servers.﻿</p>
 <h4 id="command-python-setuppy-egg_info-failed-with-error-code-1">Command “python setup.py egg_info” failed with error code 1﻿</h4>

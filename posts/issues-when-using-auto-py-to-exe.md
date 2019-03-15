@@ -111,10 +111,12 @@ Go into the advanced tab and toggle the "Enable Recursion Limit" to on. This wil
 #### AttributeError: module 'enum' has no attribute 'IntFlag'
 Try executing `python -m pip uninstall enum34` to stop enum conflicts. This is also a fix for the similar issue "Fatal Python error: Py_Initialize: unable to load the file system codec".
 
-#### ModuleNotFoundError: No module named 'x'
-Make sure the module is installed and then add it to --hidden-import in the advanced tab. If you need to add more than one, separate them by a comma (`,`).
+#### ModuleNotFoundError: No module named x / ImportError: No module named x
+This means a particular module ('x' in this case) was not added to the package. I have seen this occur with packages in the pandas library and win32api; as long as you can identify the package (e.g. 'x'), then it is very easy to fix.
 
-For example, I have seen this occur with `pandas._libs.tslib` many of times before so add that to the input by --hidden-import. If you need to add more missing modules, you can use `pandas._libs.tslib, my_missing_module`.
+To fix this in the UI, open the advanced tab and find the `--hidden-import` input. Simply paste the module name into this input and then repackage. If the original error is still appearing, you have done this incorrectly.
+
+For example, if you are missing `pandas._libs.tslib`, add 'pandas._libs.tslib' into the input by --hidden-import. Additionally you can add more than one module, for example `pandas._libs.tslib, win32api`. *(See the question mark by the input for more information)*.
 
 #### ERR_CONNECTION_REFUSED
 You need to be connected to the internet. This error appears when you cannot reach the servers.﻿
