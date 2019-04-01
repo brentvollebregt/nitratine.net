@@ -61,6 +61,8 @@ Now repeat this another three times and use the ip addresses: `185.199.110.153`,
 
 After that we will set up the www routing by clicking "CNAME" in the grey box. In here, add www to the HOSTNAME field and your current GitHub pages address to TARGET HOSTNAME. For example I would put brentvollebregt.github.io in this as it is where by GitHub page is currently hosted. Leave the TTL the same again and click submit. If you are confused about this look under the WWW sub-heading for how to do this.
 
+> You do not have to add a www in this situation but I feel it is good to have www.example.com and example.com point to the same place for consistency.
+
 You should now have five entries in the "Existing Resource Records" (4 A records and 1 CNAME).
 
 ![Existing Resource Records](/post-assets/how-to-add-a-custom-domain-to-a-github-pages-site/existing-resource-records.png)
@@ -71,3 +73,10 @@ GitHub will decided what url to use based on what you put in your git repositori
 Following these steps and using the new IP addresses, you will now be provided SSL for free from Github with no extra effort.
 
 If this did not occur (it didn't work my first time I tried), go to the git repo on Github and then go to settings. Scroll down this page until you find the "GitHub Pages" block. In this block, there is a "Custom domain" header with an input field under it (just like we did in Setting Up CNAME in GitHub). Clear this field and click save. Now put your url in the input field (the one you just cleared) and save it. This reset of the url can trigger the SSL certificate generation and you should get SSL on your website in under a day.
+
+## Sub Domains
+Sometimes when having your domain `example.com` point to your main site, you may also want `subdomain1.example.com` to point to a different site and `subdomain2.example.com` point to yet another. This is a lot easier to do as it seems; first add a CNAME file to the GitHub repository you are going to use, for example `subdomain1.example.com`, to set up the domain on GitHub's side.
+
+Next you'll want to go back to the "Manage DNS" page we have been using previously (may be different on other domain register sites) and add a new CNAME record like in the www tutorial above. Now in the hostname field, instead of www, add `subdomain1` and put your GitHub pages url in the target hostname (mine is brentvollebregt.github.io).
+
+Now wait for changes to be applied to the dns and you can now visit `subdomain1.example.com` to visit your new site.
