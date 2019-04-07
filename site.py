@@ -205,7 +205,7 @@ def index():
 
 @app.route('/about/')
 def about():
-    return render_template('about.html')
+    return render_template('about.html', build=os.getenv('build', 'Not Specified'))
 
 
 @app.route('/portfolio/')
@@ -530,6 +530,7 @@ def serve_build():
 
 def run():
     print('WARN: This server is designed to be used in production')
+    os.environ['build'] = 'Development'
     app.run(port=8000, host=socket.gethostbyname(socket.gethostname()))
 
 
