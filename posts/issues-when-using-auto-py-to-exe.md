@@ -100,13 +100,16 @@ When everything is done and there are no more bugs in the modes you want, you ca
 ### How to Fix Specific Issues
 These are some of the issues I have come across or others have asked me about and ways to fix them.
 
+#### Fatal Error: failed to execute <script.py>
+This means something has gone wrong as it's giving you a visual warning about it; this is not an error, it's a warning, the real error has been printed to stdout/stderr. If you open the executable using the terminal or something else that will preserve the console output, you will most likely see a Python error telling you what went wrong. Fixing this and repackaging is the solution to this issue.
+
 #### PermissionError: [Errno 13] Permission denied: ...
 This occurs because you are trying to modify files in a directory you do not have access to. A way to fix this is to run the script with admin privileges by opening cmd as admin and then running `auto-py-to-exe` one you have cd'ed to the directory you want the output to be in.
 
 One reason this could occur is that you have opened cmd and am in System32. Make sure you do not accidentally modify files in this directory so make sure you are in a directory where you want to write files to when running `auto-py-to-exe`.
 
 #### RecursionError
-Go into the advanced tab and toggle the "Enable Recursion Limit" to on. This will set the recursion limit to 5000 and hopefully stop this from being raised.
+This error is now prevented by the application by default bu setting the recursion limit to 5000. If you want to disable this, there is an option in the Advanced tab to.
 
 #### AttributeError: module 'enum' has no attribute 'IntFlag'
 Try executing `python -m pip uninstall enum34` to stop enum conflicts. This is also a fix for the similar issue "Fatal Python error: Py_Initialize: unable to load the file system codec".
