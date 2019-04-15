@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://nitratine.net/blog/post/simulate-mouse-events-in-python/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css">
+        <link rel="stylesheet" href="/assets/css/custom-bootstrap.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Simulate Mouse Events In Python - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="This demonstrates how to control the mouse with Python. Using pynput we are able to simulate mouse events into any window. This will show you how to press buttons, scroll and move the mouse.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Simulate Mouse Events In Python">
+        <meta property="og:description" content="This demonstrates how to control the mouse with Python. Using pynput we are able to simulate mouse events into any window. This will show you how to press buttons, scroll and move the mouse.">
+        <meta property="og:image" content="/post-assets/simulate-mouse-events-in-python/feature.jpg">
+        <meta property="og:url" content="https://nitratine.net/blog/post/simulate-mouse-events-in-python/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-blog-content blog-main">
+
+                    <h1 class="blog-post-title">Simulate Mouse Events In Python</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2018" class="text-muted">13 Jan 2018</a>
+                        <a href="/blog/categories/#YouTube" class="badge badge-primary ml-2">YouTube</a>
+                        
+                        <a href="/blog/tags/#Python" class="badge badge-warning">Python</a>
+                        
+                        <a href="/blog/tags/#Mouse" class="badge badge-warning">Mouse</a>
+                        
+                        <a href="/blog/tags/#pynput" class="badge badge-warning">pynput</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">This demonstrates how to control the mouse with Python. Using pynput we are able to simulate mouse events into any window. This will show you how to press buttons, scroll and move the mouse.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#pip">PIP</a></li>
+<li><a href="#installing-pynput">Installing Pynput</a></li>
+<li><a href="#simulating-mouse-events">Simulating Mouse Events</a><ul>
+<li><a href="#finding-the-position-of-the-mouse">Finding the Position of the Mouse</a></li>
+<li><a href="#setting-the-position-of-the-mouse">Setting the Position of the Mouse</a></li>
+<li><a href="#moving-the-mouse-relative-to-its-position">Moving the Mouse Relative to it's Position</a></li>
+<li><a href="#clicking-buttons-on-the-mouse">Clicking Buttons on the Mouse</a></li>
+<li><a href="#pressing-and-releasing-buttons">Pressing and Releasing Buttons</a></li>
+<li><a href="#scrolling">Scrolling</a></li>
+</ul>
+</li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#how-can-i-use-the-keyboard-and-mouse-controllers-at-the-same-time">How can I use the keyboard and mouse controllers at the same time?</a></li>
+<li><a href="#modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError: No module named 'pynput'</a></li>
+<li><a href="#i-got-a-syntaxerror">I got a SyntaxError</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/2BXr9U6ZL8Y"></iframe>
+    </div>
+</div>
+
+<h2 id="pip">PIP</h2>
+<p>If you haven't used or setup pip before, go to my tutorial at <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a> to setup pip.</p>
+<h2 id="installing-pynput">Installing Pynput</h2>
+<p>We will be using the punput module to listen to mouse events. To install this module execute <code>pip install pynput</code> in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.</p>
+<p><img alt="Installing pynput" src="/post-assets/how-to-get-mouse-clicks-with-python/pynput1.png" /></p>
+<p>To double check that it was installed successfully, open up IDLE and execute the command <code>import pynput</code>; no errors should occur.</p>
+<p><img alt="Testing pynput" src="/post-assets/how-to-get-mouse-clicks-with-python/pynput2.png" /></p>
+<h2 id="simulating-mouse-events">Simulating Mouse Events</h2>
+<p>Create a new script and save it somewhere so you can easily run the script. Import Button and Controller from pynput.mouse.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pynput.mouse</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Controller</span>
+</pre></div>
+
+
+<p>Make a variable called mouse and set it to an instance of Controller. Now using the mouse variable we can control the mouse.</p>
+<div class="codehilite"><pre><span></span><span class="n">mouse</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">()</span>
+</pre></div>
+
+
+<h3 id="finding-the-position-of-the-mouse">Finding the Position of the Mouse</h3>
+<p>To find the position of the mouse we can use mouse.position. This will return a tuple of two integers. The first integer is the x position and the second integer is the y position. This is relative to the top left of the screen; x getting bigger is going right and y getting bigger is going down.</p>
+<div class="codehilite"><pre><span></span><span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Current position: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mouse</span><span class="o">.</span><span class="n">position</span><span class="p">))</span>
+</pre></div>
+
+
+<h3 id="setting-the-position-of-the-mouse">Setting the Position of the Mouse</h3>
+<p>To set the position of the mouse we can use mouse.position again. By setting this to an x and y point, the mouse position will be updated immediately.</p>
+<div class="codehilite"><pre><span></span><span class="n">mouse</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="moving-the-mouse-relative-to-its-position">Moving the Mouse Relative to it's Position</h3>
+<p>Instead of getting the mouses position and calculating where it needs to be moved to if you want to move it a distance relative, we can use mouse.move. Passing an x and y integers to this will move the mouse relative to it's current position. For example, if I wanted to move it to the right by 20 pixels and up by 13 pixels, I would use:</p>
+<div class="codehilite"><pre><span></span><span class="n">mouse</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">13</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="clicking-buttons-on-the-mouse">Clicking Buttons on the Mouse</h3>
+<p>To click buttons on the mouse, we would use mouse.click. Passing a button from the Button class imported and an integer, we can preform single, double and triple clicks for any button.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Click the left button</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Click the right button</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Click the middle button</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">middle</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Double click the left button</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Click the left button ten times</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="pressing-and-releasing-buttons">Pressing and Releasing Buttons</h3>
+<p>We can also click a button using press and release methods. This would also allow us to drag an object by pressing, moving and then releasing. To press we would use the mouse.press method and to release we would use the mouse.release method. Both these methods need a button passed which can include the left, middle and right as shown above. More buttons can also be included depending what operating system is being used.</p>
+<div class="codehilite"><pre><span></span><span class="n">mouse</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="scrolling">Scrolling</h3>
+<p>To scroll we need to use the mouse.scroll passing two integers for horizontal and vertical scroll. The first integer is for horizontal which is left to right scroll; a positive integer will scroll right vice versa. The second integer is for vertical which is up to down scroll; a positive integer will scroll up vice versa.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Scroll up two steps</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Scroll right five steps</span>
+<span class="n">mouse</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Depending on your mouse settings, you may need to use bigger step values to see movement in the scroll. I have witnessed this myself and sometimes may need to use around 100 steps to move my mouse.</p>
+<h2 id="common-issues-and-questions">Common Issues and Questions</h2>
+<h3 id="how-can-i-use-the-keyboard-and-mouse-controllers-at-the-same-time">How can I use the keyboard and mouse controllers at the same time?</h3>
+<p>When you import the classes, Controller will be set to the last one imported. To show what the issue was, ask yourself, what controller did you use to set the mouse and what one to set the keyboard? You would have used the same, but they need to be from the different classes.  So then you should use:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Controller</span> <span class="k">as</span> <span class="n">KeyboardController</span>
+<span class="kn">from</span> <span class="nn">pynput.mouse</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Controller</span> <span class="k">as</span> <span class="n">MouseController</span>
+</pre></div>
+
+
+<p>Now when you want to use the controller for the mouse use MouseController and KeyboardController for the keyboard.</p>
+<div class="codehilite"><pre><span></span>keyboard = KeyboardController()
+mouse = MouseController()
+</pre></div>
+
+
+<h3 id="modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError: No module named 'pynput'</h3>
+<p>Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.</p>
+<h3 id="i-got-a-syntaxerror">I got a SyntaxError</h3>
+<p>Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs <a href="https://docs.python.org/2/tutorial/errors.html#syntax-errors">here</a>.</p>
+                    </div>
+
+                    <nav class="blog-pagination text-center mb-5 mt-4">
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/the-nitratine-project/">&larr; The Nitratine Project</a>
+                        
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-make-hotkeys-in-python/">How to Make Hotkeys in Python &rarr;</a>
+                        
+                    </nav>
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://nitratine.net/blog/post/simulate-mouse-events-in-python/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://nitratine.net/blog/post/simulate-mouse-events-in-python/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-blog-sidebar blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <script>let searchUrl = "/search/";</script>
+                    <script type="text/javascript" defer src="/assets/js/search.js"></script>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            
+                                <li>
+                                <a href="/blog/categories/#Apps">&#x1F4F1; Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#General">&#x1F4F0; General
+                                    <span class="badge badge-primary ml-3">5</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Investigations">&#x1F50D; Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Projects">&#x1F4BE; Projects
+                                    <span class="badge badge-primary ml-3">13</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Tutorials">&#x1F4D6; Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#YouTube">&#x1F3A5; YouTube
+                                    <span class="badge badge-primary ml-3">15</span>
+                                </a>
+                            </li>
+                            
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

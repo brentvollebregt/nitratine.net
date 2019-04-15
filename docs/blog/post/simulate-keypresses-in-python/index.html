@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://nitratine.net/blog/post/simulate-keypresses-in-python/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css">
+        <link rel="stylesheet" href="/assets/css/custom-bootstrap.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Simulate Keypresses In Python - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Simulate Keypresses In Python">
+        <meta property="og:description" content="This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence.">
+        <meta property="og:image" content="/post-assets/simulate-keypresses-in-python/feature.jpg">
+        <meta property="og:url" content="https://nitratine.net/blog/post/simulate-keypresses-in-python/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-blog-content blog-main">
+
+                    <h1 class="blog-post-title">Simulate Keypresses In Python</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2017" class="text-muted">16 Dec 2017</a>
+                        <a href="/blog/categories/#YouTube" class="badge badge-primary ml-2">YouTube</a>
+                        
+                        <a href="/blog/tags/#Python" class="badge badge-warning">Python</a>
+                        
+                        <a href="/blog/tags/#Keyboard" class="badge badge-warning">Keyboard</a>
+                        
+                        <a href="/blog/tags/#pynput" class="badge badge-warning">pynput</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#pip">PIP</a></li>
+<li><a href="#installing-pynput">Installing Pynput</a></li>
+<li><a href="#simulating-keys">Simulating Keys</a><ul>
+<li><a href="#pressing-and-releasing-keys">Pressing and Releasing Keys</a></li>
+<li><a href="#pressing-and-releasing-special-keys">Pressing and Releasing Special Keys</a></li>
+<li><a href="#typing-multiple-keys">Typing Multiple Keys</a></li>
+</ul>
+</li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#how-can-i-use-the-keyboard-and-mouse-controllers-at-the-same-time">How can I use the keyboard and mouse controllers at the same time?</a></li>
+<li><a href="#modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError : No module named 'pynput'</a></li>
+<li><a href="#i-got-a-syntaxerror">I got a SyntaxError</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/DTnz8wA6wpw"></iframe>
+    </div>
+</div>
+
+<h2 id="pip">PIP</h2>
+<p>If you haven't used or setup pip before, go to my tutorial at <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a> to setup pip.</p>
+<h2 id="installing-pynput">Installing Pynput</h2>
+<p>We will be using the punput module to listen to mouse events. To install this module execute <code>pip install pynput</code> in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.</p>
+<p><img alt="Installing pynput" src="/post-assets/how-to-get-mouse-clicks-with-python/pynput1.png" /></p>
+<p>To double check that it was installed successfully, open up IDLE and execute the command <code>import pynput</code>; no errors should occur.</p>
+<p><img alt="Testing pynput" src="/post-assets/how-to-get-mouse-clicks-with-python/pynput2.png" /></p>
+<h2 id="simulating-keys">Simulating Keys</h2>
+<p>Create a new script and save it somewhere so you can easily run the script. Import Key and Controller from pynput.keyboard.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Controller</span>
+</pre></div>
+
+
+<p>Make a variable called keyboard and set it to an instance of Controller. Now using the keyboard variable we can press and release keys.</p>
+<div class="codehilite"><pre><span></span><span class="n">keyboard</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">()</span>
+</pre></div>
+
+
+<h3 id="pressing-and-releasing-keys">Pressing and Releasing Keys</h3>
+<p>Using keyboard.press we can press keys and with keyboard.release we can release a key. This allows us to type a key by pressing and releasing. You can only supply this method with one key at a time. Here is an example of how to type the letter 'a'.</p>
+<div class="codehilite"><pre><span></span><span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="pressing-and-releasing-special-keys">Pressing and Releasing Special Keys</h3>
+<p>For special keys that can't be put into a string like shift or control, you will need to refer to the page <a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key">here</a> to look at the Key class for supported keys. Using these in the press or release methods will press/release the key matching it. For example, if I wanted to press the windows key, I would look at <a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key">that</a> page for the key. 'cmd' has the description "A generic command button. On PC platforms, this corresponds to the Super key or Windows key, and on Mac it corresponds to the Command key" which is what I am looking for. Now for the code.</p>
+<div class="codehilite"><pre><span></span><span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">cmd</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">cmd</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This method also allows us to press a key while holding another key, for example ctrl+c to copy. To do this we will need to press ctrl, press and release c and then release ctrl.</p>
+<div class="codehilite"><pre><span></span><span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="typing-multiple-keys">Typing Multiple Keys</h3>
+<p>A cool feature supplied by the class is the type method. This method allows us to type more than one key at a time but it has to be a string of characters. So if we wanted to type "Nitratine" we would execute:</p>
+<div class="codehilite"><pre><span></span><span class="n">keyboard</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="s1">&#39;Nitratine&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This method does also support spaces but when it comes to enters, use a new line character (\n) and a tab character (\t) for tabs.</p>
+<h2 id="common-issues-and-questions">Common Issues and Questions</h2>
+<h3 id="how-can-i-use-the-keyboard-and-mouse-controllers-at-the-same-time">How can I use the keyboard and mouse controllers at the same time?</h3>
+<p>When you import the classes, Controller will be set to the last one imported. To show what the issue was, ask yourself, what controller did you use to set the mouse and what one to set the keyboard? You would have used the same, but they need to be from the different classes.  So then you should use:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Controller</span> <span class="k">as</span> <span class="n">KeyboardController</span>
+<span class="kn">from</span> <span class="nn">pynput.mouse</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Controller</span> <span class="k">as</span> <span class="n">MouseController</span>
+</pre></div>
+
+
+<p>Now when you want to use the controller for the mouse use MouseController and KeyboardController for the keyboard.</p>
+<div class="codehilite"><pre><span></span>keyboard = KeyboardController()
+mouse = MouseController()
+</pre></div>
+
+
+<h3 id="modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError : No module named 'pynput'</h3>
+<p>Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.</p>
+<h3 id="i-got-a-syntaxerror">I got a SyntaxError</h3>
+<p>Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs <a href="https://docs.python.org/2/tutorial/errors.html#syntax-errors">here</a>.</p>
+                    </div>
+
+                    <nav class="blog-pagination text-center mb-5 mt-4">
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/python-keylogger/">&larr; Python Keylogger</a>
+                        
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/quick-script/">Quick Script &rarr;</a>
+                        
+                    </nav>
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://nitratine.net/blog/post/simulate-keypresses-in-python/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://nitratine.net/blog/post/simulate-keypresses-in-python/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-blog-sidebar blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <script>let searchUrl = "/search/";</script>
+                    <script type="text/javascript" defer src="/assets/js/search.js"></script>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            
+                                <li>
+                                <a href="/blog/categories/#Apps">&#x1F4F1; Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#General">&#x1F4F0; General
+                                    <span class="badge badge-primary ml-3">5</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Investigations">&#x1F50D; Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Projects">&#x1F4BE; Projects
+                                    <span class="badge badge-primary ml-3">13</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Tutorials">&#x1F4D6; Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#YouTube">&#x1F3A5; YouTube
+                                    <span class="badge badge-primary ml-3">15</span>
+                                </a>
+                            </li>
+                            
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

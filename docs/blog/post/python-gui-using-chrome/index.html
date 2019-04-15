@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://nitratine.net/blog/post/python-gui-using-chrome/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css">
+        <link rel="stylesheet" href="/assets/css/custom-bootstrap.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Python GUI Using Chrome - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="Eel is a little Python library for making simple Electron-like HTML/JS GUI apps. This used for creating GUI&#39;s in a Chrome app window with HTML, CSS and JS. In summary it hosts a local webserver, then provides features to communicate between JavaScript and Python.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Python GUI Using Chrome">
+        <meta property="og:description" content="Eel is a little Python library for making simple Electron-like HTML/JS GUI apps. This used for creating GUI&#39;s in a Chrome app window with HTML, CSS and JS. In summary it hosts a local webserver, then provides features to communicate between JavaScript and Python.">
+        <meta property="og:image" content="/post-assets/python-gui-using-chrome/feature.png">
+        <meta property="og:url" content="https://nitratine.net/blog/post/python-gui-using-chrome/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-blog-content blog-main">
+
+                    <h1 class="blog-post-title">Python GUI Using Chrome</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2018" class="text-muted">05 May 2018</a>
+                        <a href="/blog/categories/#YouTube" class="badge badge-primary ml-2">YouTube</a>
+                        
+                        <a href="/blog/tags/#Python" class="badge badge-warning">Python</a>
+                        
+                        <a href="/blog/tags/#GUI" class="badge badge-warning">GUI</a>
+                        
+                        <a href="/blog/tags/#Chrome" class="badge badge-warning">Chrome</a>
+                        
+                        <a href="/blog/tags/#JavaScript" class="badge badge-warning">JavaScript</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">Eel is a little Python library for making simple Electron-like HTML/JS GUI apps. This used for creating GUI&#39;s in a Chrome app window with HTML, CSS and JS. In summary it hosts a local webserver, then provides features to communicate between JavaScript and Python.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#creating-the-file-structure">Creating the File Structure</a></li>
+<li><a href="#creating-the-app">Creating the App</a><ul>
+<li><a href="#app-options">App Options</a></li>
+<li><a href="#setting-window-size">Setting Window Size</a></li>
+</ul>
+</li>
+<li><a href="#communication">Communication</a></li>
+<li><a href="#making-python-functions-you-can-call-in-javascript">Making Python Functions you Can Call in JavaScript</a></li>
+<li><a href="#making-javascript-functions-you-can-call-in-python">Making JavaScript Functions you Can Call in Python</a></li>
+<li><a href="#returning-values">Returning Values</a><ul>
+<li><a href="#callbacks">Callbacks</a></li>
+<li><a href="#synchronous-returns">Synchronous Returns</a></li>
+</ul>
+</li>
+<li><a href="#a-simple-example">A Simple Example</a></li>
+<li><a href="#do-not-use-timesleep">Do NOT use time.sleep()</a></li>
+<li><a href="#threading-using-eel">Threading using Eel</a><ul>
+<li><a href="#dont-block-eelstart">Don't block eel.start()</a></li>
+<li><a href="#executing-code-when-the-window-is-closed">Executing Code When the Window is Closed</a></li>
+</ul>
+</li>
+<li><a href="#why-use-eel">Why Use Eel?</a></li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#is-it-possible-to-package-eel-with-pyinstaller">Is it possible to package eel with pyinstaller?</a></li>
+</ul>
+</li>
+<li><a href="#extra-reading">Extra Reading</a></li>
+</ul>
+</div>
+<p>When thinking of what to design <a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a> with, I came across <a href="https://github.com/ChrisKnott/Eel">Eel</a> for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. Hosting a local webserver and using Chromes app mode was exactly what I needed to make this project look great. Also this library ets you annotate functions in Python so that they can be called from Javascript, and vice versa.</p>
+<div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/2kbeBzEQfXE"></iframe>
+    </div>
+</div>
+
+<blockquote>
+<p>Please note that this content is based off README.md in <a href="https://github.com/ChrisKnott/Eel">Eel's GitHub Repository</a> with modifications.</p>
+</blockquote>
+<h2 id="setup">Setup</h2>
+<p>To use Eel you will need to install the library by simply calling <code>pip install eel</code> in cmd. Make sure no errors occurred and if you don't have pip head over to <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a>. To make sure Eel is installed, open IDLE and execute <code>import eel</code>. If no errors appear then it has installed properly.</p>
+<p>Although this example will be displaying the use of chromes app mode, you do not actually need <a href="https://www.google.com/chrome/">chrome</a>. When starting the app, if you do not have chrome you will be asked what to open to display the webpage.</p>
+<h2 id="creating-the-file-structure">Creating the File Structure</h2>
+<p>When setting up your file structure, the files to be served to the chrome window need to be in a single directory. In this example I will be putting my file in the <code>web/</code> directory; you can use a different folder name if you want.</p>
+<div class="codehilite"><pre><span></span><span class="go">server.py         &lt;-- Python scripts</span>
+<span class="go">another_module.py</span>
+<span class="go">web/              &lt;-- Web folder</span>
+<span class="go">  main.html</span>
+<span class="go">  css/</span>
+<span class="go">    style.css</span>
+<span class="go">  img/</span>
+<span class="go">    logo.png</span>
+<span class="go">  js/</span>
+<span class="go">    myscript.js</span>
+</pre></div>
+
+
+<p>Python files will still sit outside the web/ folder and I recommend that you put the web/ folder right beside your python script to make it easier to reference when setting up the server. You can split the web/ folder into further folders if you want but this is not required.</p>
+<h2 id="creating-the-app">Creating the App</h2>
+<p>The simplest form of creating this app is three lines:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">eel</span>
+<span class="n">eel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s1">&#39;web&#39;</span><span class="p">)</span>
+<span class="n">eel</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s1">&#39;main.html&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This example imports eel, says where you files are and then starts the server passing the index page (page to display). When running the script, a chrome in app mode will appear and render the filename you passed in eel.start(). Chrome app mode is the same as chrome with the URL and bookmarks bar hidden.</p>
+<p>If you do not have chrome installed, you will be asked what browser to open. The only difference when using this method is that you cannot control the initial size of the window.</p>
+<p><img alt="Hello World" src="/post-assets/python-gui-using-chrome/hello-world.png" /></p>
+<h3 id="app-options">App Options</h3>
+<p>You can set some optional variables when staring the server. To do this, pass a dictionary object to assigned to options as an argument; for example:</p>
+<div class="codehilite"><pre><span></span><span class="n">my_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s2">&quot;chrome&quot;</span><span class="p">,</span> <span class="c1">#or &quot;chrome-app&quot;,</span>
+    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
+    <span class="s1">&#39;chromeFlags&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;--start-fullscreen&quot;</span><span class="p">,</span> <span class="s2">&quot;--browser-startup-dialog&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">eel</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s1">&#39;main.html&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">my_options</span><span class="p">)</span>
+</pre></div>
+
+
+<p>In this example I have set 'mode' to 'chrome', this will mean that it will use chrome normally and not in app mode; use "chrome-app" to keep app mode (this is default). I set the 'host' to 'localhost' which will then host the server on 127.0.0.1. You could change this to your computers ip on your network so others can access the server. I have also set the port which is useful for clashes between servers and added chrome flags. Chrome flags are appended when calling the executable as usual.</p>
+<p><em>Remember that you do not have to pass all these options in the dictionary, you can pass one if you want.</em></p>
+<h3 id="setting-window-size">Setting Window Size</h3>
+<p>If you are using chrome in app mode (default) you can specify the size of the window by passing a tuple to the size argument in eel.start(). For example:</p>
+<div class="codehilite"><pre><span></span><span class="n">eel</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s1">&#39;main.html&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">650</span><span class="p">,</span> <span class="mi">612</span><span class="p">))</span>
+</pre></div>
+
+
+<p>When I have used this in the past, the size doesn't always match up, a good example of this is in my <a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a> project which uses <code>size=(650, 612)</code> but renders the window about 636x605. When looking at the inner dimensions of the window using JavaScript; window.innerHeight returns 573 and window.innerWidth returns 634.</p>
+<p>This shows you might have to play around with these values until you get them where you want but they do work (just not as expected).</p>
+<h2 id="communication">Communication</h2>
+<p>Before you carry on, you will need to put a JavaScript file in your html file. Simply add to the header:</p>
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/eel.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>This will allow JavaScript and Python to communicate as the client now has the code needed. There is nothing else you need to do apart from creating your functions.</p>
+<h2 id="making-python-functions-you-can-call-in-javascript">Making Python Functions you Can Call in JavaScript</h2>
+<p>To make a Python function that you can call from JavaScript decorate it with <code>@eel.expose</code> like this:</p>
+<div class="codehilite"><pre><span></span><span class="nd">@eel.expose</span>
+<span class="k">def</span> <span class="nf">my_python_method</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+    <span class="k">print</span> <span class="p">(</span><span class="n">param1</span> <span class="o">+</span> <span class="n">param2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Now when you call <code>eel.my_python_method('Hello ', 'world!');</code> in JavaScript, Python will print "Hello World!". This shows that the code is executed in the python instance, not in the chrome window; remember that - you cannot run Python code in JavaScript. You can however return data from Python back to JavaScript; I will describe this later.</p>
+<h2 id="making-javascript-functions-you-can-call-in-python">Making JavaScript Functions you Can Call in Python</h2>
+<p>To make a JavaScript function that you can call from Python wrap the function name in <code>eel.expose</code> before creating it like this:</p>
+<div class="codehilite"><pre><span></span><span class="nx">eel</span><span class="p">.</span><span class="nx">expose</span><span class="p">(</span><span class="nx">my_javascript_function</span><span class="p">);</span>
+<span class="kd">function</span> <span class="nx">my_javascript_function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Now when you call <code>eel.my_javascript_function('Hello ', 'world!')</code> in Python, it will print "Hello World!" in the browsers console. This shows that the code was execute in JavaScript by calling the method in Python.</p>
+<h2 id="returning-values">Returning Values</h2>
+<p>Even though it may seem like Python and JavaScript are working together, there is still a barrier between them as they are running in different processes. Eel supports two ways to return values; callbacks and synchronous returns.</p>
+<p>It's also good to note that passing complex objects between Python and JavaScript may not be possible due to the functions moving the data and the compatibility of the two languages for example you can't pass an instance of a class from Python to JavaScript.</p>
+<h3 id="callbacks">Callbacks</h3>
+<p>Callbacks allow us to execute a function with the data returned as the argument. When the data is returned, the function will be called and the return value will be passed as a parameter to the function. This method works both ways.</p>
+<p>If I wanted to use a callback in Python, I would create my method in JavaScript which returns a value that is exposed using eel. Then in Python:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">print_return</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Return from Javascript: &#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Call Javascript function, and pass explicit callback function</span>
+<span class="n">eel</span><span class="o">.</span><span class="n">js_function</span><span class="p">()(</span><span class="n">print_return</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This example will call js_function() in JavaScript and will pass the returned value to print_num() in Python.</p>
+<p>You can also do this in JavaScript the other way around. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">print_return</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">eel</span><span class="p">.</span><span class="nx">python_function</span><span class="p">()(</span><span class="nx">print_return</span><span class="p">);</span>
+</pre></div>
+
+
+<h3 id="synchronous-returns">Synchronous Returns</h3>
+<p>When calling a JavaScript function from Python, we can get the return value directly using a double pair of brackets; for example:</p>
+<div class="codehilite"><pre><span></span><span class="n">return_value</span> <span class="o">=</span> <span class="n">eel</span><span class="o">.</span><span class="n">js_random</span><span class="p">()()</span>  <span class="c1"># This immeadiately returns the value</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Got this from Javascript: &#39;</span><span class="p">,</span> <span class="n">return_value</span><span class="p">)</span>
+</pre></div>
+
+
+<p>These must be called after eel.start(). This can be done by calling a Python function in JavaScript which calls this demonstrated method. Also I will explain soon about the non-blocking eel.start() which then means you could do this after the eel.start().</p>
+<p>Calling a Python function with a return value from JavaScript is a bit harder due to the JavaScript language. Simply making a function async and using await will fix this though:</p>
+<div class="codehilite"><pre><span></span><span class="nx">async</span> <span class="kd">function</span> <span class="nx">run</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">return_value</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">eel</span><span class="p">.</span><span class="nx">py_random</span><span class="p">()();</span> <span class="c1">// Must prefix call with &#39;await&#39;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Got this from Python: &#39;</span> <span class="o">+</span> <span class="nx">return_value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">run</span><span class="p">();</span>
+</pre></div>
+
+
+<p>This will allows us to wait for the value to be returned from the server. If you leave out await, you will be given a <a href="https://developers.google.com/web/fundamentals/primers/promises">Promise object</a> which will only be given the actual value of return when the data is returned which will be a lot later due to the speed of transferring the data (fast for us but too slow for a computer).</p>
+<h2 id="a-simple-example">A Simple Example</h2>
+<p>In this example I will create to files, one being the Python script and the other being main.html in the web/ folder beside the Python script.</p>
+<p><em>server.py</em></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">eel</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">eel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s1">&#39;web&#39;</span><span class="p">)</span>
+
+<span class="nd">@eel.expose</span>
+<span class="k">def</span> <span class="nf">getTime</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">eel</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s1">&#39;main.html&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p><em>web/main.html</em></p>
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>My Page<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/eel.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+            <span class="nx">async</span> <span class="kd">function</span> <span class="nx">getTime</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">eel</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()();</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;getTime()&quot;</span><span class="p">&gt;</span>Click to get time<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>When running server.py, a chrome app window will appear with a button saying "Click to get time". When clicked, this will call the getTime() function in python and then return the value back to JavaScript on the line <code>let value = await eel.getTime()();</code>. I then alert this value.</p>
+<p><img alt="Get Time" src="/post-assets/python-gui-using-chrome/time.png" /></p>
+<h2 id="do-not-use-timesleep">Do NOT use time.sleep()</h2>
+<p><code>time.sleep()</code> is very dangerous when used with eel; fortunately we have been given an alternative. Calling <code>time.sleep()</code> will pause the execution of the whole server so you should use <code>eel.sleep()</code> instead. It has the exact same functionality, just it's one less import you need.</p>
+<h2 id="threading-using-eel">Threading using Eel</h2>
+<p>To reduce the chance of conflicts, eel also provides a interface for creating threads. Use <code>eel.spawn()</code> to replace threading instances. This is also helpful for creating thread in general.</p>
+<p>An example of using <code>eel.sleep()</code> and <code>eel.spawn()</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">eel</span>
+<span class="n">eel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s1">&#39;web&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">my_other_thread</span><span class="p">():</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I&#39;m a thread&quot;</span><span class="p">)</span>
+        <span class="n">eel</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">eel</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">my_other_thread</span><span class="p">)</span>
+<span class="n">eel</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s1">&#39;main.html&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="dont-block-eelstart">Don't block eel.start()</h3>
+<p>If you want to execute code underneath eel.start() you can pass block=False as an argument to stop it from blocking. For example:</p>
+<div class="codehilite"><pre><span></span><span class="n">eel</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s1">&#39;main.html&#39;</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This will allow code execution to keep flowing after it reaches this statement. Do note that when your code underneath eel.start() is complete the server will stop as the whole script has stopped.</p>
+<h3 id="executing-code-when-the-window-is-closed">Executing Code When the Window is Closed</h3>
+<p>If you don't set block to false, you can detect when the window is closed. Since Eel uses a bottle server in the background, we know this will throw either <code>SystemExit</code>, <code>MemoryError</code> or <code>KeyboardInterrupt</code>. This means we can catch the exception by wrapping <code>eel.start()</code> in a try/expect block and stop the script from ending. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">eel</span>
+
+<span class="n">eel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s1">&#39;web&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">eel</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s1">&#39;main.html&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">SystemExit</span><span class="p">,</span> <span class="ne">MemoryError</span><span class="p">,</span> <span class="ne">KeyboardInterrupt</span><span class="p">):</span>
+    <span class="c1"># We can do something here if needed</span>
+    <span class="c1"># But if we don&#39;t catch these safely, the script will crash</span>
+    <span class="k">pass</span> 
+
+<span class="k">print</span> <span class="p">(</span><span class="s1">&#39;This is printed when the window is closed!&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="why-use-eel">Why Use Eel?</h2>
+<p>So those who have used Flask, bottle or pyramid before may be asking why not just use those? When using a library like Flask, you need to create the server, setting up all the routes yourself and decide on the layout of the server.</p>
+<p>With Eel, you don't need to do any of this; simply importing eel, calling <code>eel.init('web')</code> and <code>eel.start('main.html')</code> will create the whole server for you. Now all you need to do is create your methods and expose them to eel using a decorator.</p>
+<h2 id="common-issues-and-questions">Common Issues and Questions</h2>
+<h3 id="is-it-possible-to-package-eel-with-pyinstaller">Is it possible to package eel with pyinstaller?</h3>
+<p>Yes, if you look at Eel documentation, go <a href="https://github.com/ChrisKnott/Eel#building-a-distributable-binary﻿">to the bottom</a> and it explains clearly how to do this.</p>
+<h2 id="extra-reading">Extra Reading</h2>
+<ul>
+<li><a href="https://github.com/ChrisKnott/Eel">Eel GitHub Page</a></li>
+<li><a href="https://github.com/brentvollebregt/auto-py-to-exe/blob/master/run.py">A demo of using Eel in a Python script</a></li>
+</ul>
+                    </div>
+
+                    <nav class="blog-pagination text-center mb-5 mt-4">
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/python-threading-basics/">&larr; Python Threading Basics</a>
+                        
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/python-sqlite3-basics/">Python SQLite3 Basics &rarr;</a>
+                        
+                    </nav>
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://nitratine.net/blog/post/python-gui-using-chrome/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://nitratine.net/blog/post/python-gui-using-chrome/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-blog-sidebar blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <script>let searchUrl = "/search/";</script>
+                    <script type="text/javascript" defer src="/assets/js/search.js"></script>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            
+                                <li>
+                                <a href="/blog/categories/#Apps">&#x1F4F1; Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#General">&#x1F4F0; General
+                                    <span class="badge badge-primary ml-3">5</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Investigations">&#x1F50D; Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Projects">&#x1F4BE; Projects
+                                    <span class="badge badge-primary ml-3">13</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Tutorials">&#x1F4D6; Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#YouTube">&#x1F3A5; YouTube
+                                    <span class="badge badge-primary ml-3">15</span>
+                                </a>
+                            </li>
+                            
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://nitratine.net/blog/post/colour/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css">
+        <link rel="stylesheet" href="/assets/css/custom-bootstrap.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Colour - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen. This figure is the amount of colours a screen can display today and it&#39;s your challenge to find them all.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Colour">
+        <meta property="og:description" content="This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen. This figure is the amount of colours a screen can display today and it&#39;s your challenge to find them all.">
+        <meta property="og:image" content="/post-assets/colour/feature.png">
+        <meta property="og:url" content="https://nitratine.net/blog/post/colour/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-blog-content blog-main">
+
+                    <h1 class="blog-post-title">Colour</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2017" class="text-muted">18 Nov 2017</a>
+                        <a href="/blog/categories/#Apps" class="badge badge-primary ml-2">Apps</a>
+                        
+                        <a href="/blog/tags/#Android" class="badge badge-warning">Android</a>
+                        
+                        <a href="/blog/tags/#Java" class="badge badge-warning">Java</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">This app is based off the goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen. This figure is the amount of colours a screen can display today and it&#39;s your challenge to find them all.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/x56o7b9Uor8"></iframe>
+    </div>
+</div>
+
+<p><a href="https://play.google.com/store/apps/details?id=com.pythonanywhere.brentvollebregt.colour">
+    <img src="/post-assets/colour/google-play.png" alt="Get it on Google Play" style="height: 60px;"/>
+</a></p>
+<h2 id="the-idea">The Idea</h2>
+<p>One night I was having a chat with a friend on how stupid apps always seem to make it to the top. We started to think of stupid apps and thus this app was born. Based off the simple idea of just tapping the screen to randomly generate colours I managed to turn an idea into an app in a couple of months in between my study.
+This idea also made me wonder how long would it actually take to complete an app of this nature for users? The investigation can be found <a href="/blog/post/randomly-generating-numbers-to-fulfil-an-integer-range/">here</a>.</p>
+<h2 id="the-goal">The Goal</h2>
+<p>So the app has a pretty simple goal; find all the colours. Now it may seem that all you have to do is tap the screen 16,777,216 times to finish but colours are randomly generated. This means if you did get to 16,777,215 colours, you would have a 1 in 16,777,216 of finishing.
+On the chance that you get two of one colour, you can merge it with another duplicate colour you have in the colour mixer to find another colour.</p>
+<h2 id="screenshots">Screenshots</h2>
+<p><div style="text-align: center;">
+    <img src="/post-assets/colour/tap-screen.png" alt="Main screen" style="width: 24%; display: inline;"/>
+    <img src="/post-assets/colour/colour-viewer.png" alt="Colour finder" style="width: 24%; display: inline;"/>
+    <img src="/post-assets/colour/colour-mixer.png" alt="Colour mixer" style="width: 24%; display: inline;"/>
+    <img src="/post-assets/colour/previous-colours.png" alt="Recent colours" style="width: 24%; display: inline;"/>
+</div></p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Recent Colours: Hold down on the tap screen on swipe to the right to look at the 10 most recent colours found</li>
+<li>View Colours: Look at the colours you currently have</li>
+<li>Status: On the tap screen your taps, progress and current colour count are displayed</li>
+<li>Mix Colours: When you find duplicates of colours, mix them together to find a new colour</li>
+<li>Achievements: Get milestone achievements as you play</li>
+<li>Gestures: Swipe to get to different areas of the app (can be toggled)</li>
+</ul>
+<h2 id="bug-reporting-and-feedback">Bug Reporting and Feedback</h2>
+<p>Think you've found a bug or just want to give back some feedback? Send me an <a href="mailto://brent@nitratine.net?subject=Colour%20Bug%20Report">email</a> and i'll look into it!
+For bug reports please include:
+- Your name
+- Model of your phone
+- Android version
+- A summary of the bug
+- How you found the bug (how to reproduce it)</p>
+<h2 id="other-projects-used">Other Projects Used</h2>
+<ul>
+<li><a href="https://github.com/chiralcode/Android-Color-Picker">github.com/chiralcode/Android-Color-Picker</a></li>
+<li><a href="https://github.com/balysv/material-ripple">github.com/balysv/material-ripple</a></li>
+<li><a href="https://materialdesignicons.com">materialdesignicons.com</a></li>
+<li><a href="https://material.io/icons/">material.io/icons/</a></li>
+</ul>
+                    </div>
+
+                    <nav class="blog-pagination text-center mb-5 mt-4">
+                        
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/finding-emotion-in-music-with-python/">Finding Emotion In Music Wi... &rarr;</a>
+                        
+                    </nav>
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://nitratine.net/blog/post/colour/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://nitratine.net/blog/post/colour/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-blog-sidebar blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <script>let searchUrl = "/search/";</script>
+                    <script type="text/javascript" defer src="/assets/js/search.js"></script>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            
+                                <li>
+                                <a href="/blog/categories/#Apps">&#x1F4F1; Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#General">&#x1F4F0; General
+                                    <span class="badge badge-primary ml-3">5</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Investigations">&#x1F50D; Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Projects">&#x1F4BE; Projects
+                                    <span class="badge badge-primary ml-3">13</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Tutorials">&#x1F4D6; Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#YouTube">&#x1F3A5; YouTube
+                                    <span class="badge badge-primary ml-3">15</span>
+                                </a>
+                            </li>
+                            
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

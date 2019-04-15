@@ -1,0 +1,35 @@
+.col-blog-content, .col-blog-sidebar {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+@media (min-width: 992px) {
+    .col-blog-content {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 72%;
+        flex: 0 0 72%;
+        max-width: 72%
+    }
+
+    .col-blog-sidebar {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 28%;
+        flex: 0 0 28%;
+        max-width: 28%
+    }
+}
+
+@media (max-width: 767.98px) {
+    body {font-size: 0.9rem}
+    .lead {font-size: 1.15rem}
+    pre {font-size: 0.8rem}
+    h1 {font-size: 2rem}
+    h2 {font-size: 1.8rem}
+    h3 {font-size: 1.6rem}
+    h4 {font-size: 1.4rem}
+    h5 {font-size: 1.2rem}
+    h6 {font-size: 1rem}
+}

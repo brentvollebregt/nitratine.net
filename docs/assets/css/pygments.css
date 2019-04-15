@@ -1,0 +1,136 @@
+.codehilite code, .codehilite pre {
+    color: #fdce93;
+    background-color: #3f3f3f;
+}
+
+.codehilite .hll {
+    background-color: #222;
+}
+
+.codehilite .err {
+    color: #e37170;
+    background-color: #3d3535;
+}
+
+.codehilite .k {
+    color: #f0dfaf;
+}
+
+.codehilite .p {
+    color: #41706f;
+}
+
+.codehilite .cs {
+    color: #cd0000;
+    font-weight: 700;
+}
+
+.codehilite .gd {
+    color: #cd0000;
+}
+
+.codehilite .ge {
+    color: #ccc;
+    font-style: italic;
+}
+
+.codehilite .gr {
+    color: red;
+}
+
+.codehilite .go {
+    color: white;
+}
+
+.codehilite .gs {
+    color: #ccc;
+    font-weight: 700;
+}
+
+.codehilite .gu {
+    color: purple;
+    font-weight: 700;
+}
+
+.codehilite .gt {
+    color: #0040D0;
+}
+
+.codehilite .kc {
+    color: #dca3a3;
+}
+
+.codehilite .kd {
+    color: #ffff86;
+}
+
+.codehilite .kn {
+    color: #dfaf8f;
+    font-weight: 700;
+}
+
+.codehilite .kp {
+    color: #cdcf99;
+}
+
+.codehilite .kr {
+    color: #cdcd00;
+}
+
+.codehilite .ni {
+    color: #c28182;
+}
+
+.codehilite .ne {
+    color: #c3bf9f;
+    font-weight: 700;
+}
+
+.codehilite .nn {
+    color: #8fbede;
+}
+
+.codehilite .vi {
+    color: #ffffc7;
+}
+
+.codehilite .c, .codehilite .g, .codehilite .cm, .codehilite .cp, .codehilite .c1 {
+    color: #7f9f7f;
+}
+
+.codehilite .l, .codehilite .x, .codehilite .no, .codehilite .nd, .codehilite .nl, .codehilite .nx, .codehilite .py, .codehilite .w {
+    color: #ccc;
+}
+
+.codehilite .n, .codehilite .nv, .codehilite .vg {
+    color: #dcdccc;
+}
+
+.codehilite .o, .codehilite .ow {
+    color: #f0efd0;
+}
+
+.codehilite .gh, .codehilite .gp {
+    color: #dcdccc;
+    font-weight: 700;
+}
+
+.codehilite .gi, .codehilite .kt {
+    color: #00cd00;
+}
+
+.codehilite .ld, .codehilite .s, .codehilite .sb, .codehilite .sc, .codehilite .sd, .codehilite .s2, .codehilite .se, .codehilite .sh, .codehilite .si, .codehilite .sx, .codehilite .sr, .codehilite .s1, .codehilite .ss {
+    color: #cc9393;
+}
+
+.codehilite .m, .codehilite .mf, .codehilite .mh, .codehilite .mi, .codehilite .mo, .codehilite .il {
+    color: #8cd0d3;
+}
+
+.codehilite .na, .codehilite .nt {
+    color: #9ac39f;
+}
+
+.codehilite .nb, .codehilite .nc, .codehilite .nf, .codehilite .bp, .codehilite .vc {
+    color: #efef8f;
+}

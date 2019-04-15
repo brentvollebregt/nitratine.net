@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="/assets/img/favicon.ico">
+        <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/base.css">
+        <link rel="stylesheet" href="/assets/css/custom-bootstrap.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script>
+        <title>Issues When Using auto-py-to-exe - Nitratine</title>
+        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/assets/css/pygments.css">
+
+        <meta name="description" content="After helping many of people fix issues with auto-py-to-exe and PyInstaller, this post contains what I think you should understand and ways to fix issues you are having with auto-py-to-exe.">
+        <meta name="author" content="Brent Vollebregt">
+        <meta property="og:title" content="Issues When Using auto-py-to-exe">
+        <meta property="og:description" content="After helping many of people fix issues with auto-py-to-exe and PyInstaller, this post contains what I think you should understand and ways to fix issues you are having with auto-py-to-exe.">
+        <meta property="og:image" content="/post-assets/issues-when-using-auto-py-to-exe/feature.png">
+        <meta property="og:url" content="https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/">
+        <meta name="twitter:card" content="summary"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-6407227183932047",
+                      enable_page_level_ads: true
+                 });
+            </script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/assets/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="container">
+
+            
+            <div class="row">
+                <div class="col-blog-content blog-main">
+
+                    <h1 class="blog-post-title">Issues When Using auto-py-to-exe</h1>
+                    <p class="text-muted">
+                        <a href="/blog/archive/#2018" class="text-muted">17 Nov 2018</a>
+                        <a href="/blog/categories/#General" class="badge badge-primary ml-2">General</a>
+                        
+                        <a href="/blog/tags/#Python" class="badge badge-warning">Python</a>
+                        
+                        <a href="/blog/tags/#pyinstaller" class="badge badge-warning">pyinstaller</a>
+                        
+                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+                    </p>
+                    <p class="lead">After helping many of people fix issues with auto-py-to-exe and PyInstaller, this post contains what I think you should understand and ways to fix issues you are having with auto-py-to-exe.</p>
+                    <hr>
+
+                    <div class="post-content">
+                        <div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#a-small-disclaimer">A Small Disclaimer</a></li>
+</ul>
+</li>
+<li><a href="#what-is-auto-py-to-exe">What is auto-py-to-exe?</a></li>
+<li><a href="#installation">Installation</a><ul>
+<li><a href="#possible-gevent-issue">Possible Gevent Issue</a></li>
+</ul>
+</li>
+<li><a href="#layout-of-the-interface-and-what-things-do">Layout of the Interface and What Things Do</a></li>
+<li><a href="#general-steps">General Steps</a></li>
+<li><a href="#debugging">Debugging</a><ul>
+<li><a href="#how-to-fix-specific-issues">How to Fix Specific Issues</a><ul>
+<li><a href="#fatal-error-failed-to-execute">Fatal Error: failed to execute <script.py></a></li>
+<li><a href="#permissionerror-errno-13-permission-denied">PermissionError: [Errno 13] Permission denied: ...</a></li>
+<li><a href="#recursionerror">RecursionError</a></li>
+<li><a href="#attributeerror-module-enum-has-no-attribute-intflag">AttributeError: module 'enum' has no attribute 'IntFlag'</a></li>
+<li><a href="#modulenotfounderror-no-module-named-x-importerror-no-module-named-x">ModuleNotFoundError: No module named x / ImportError: No module named x</a></li>
+<li><a href="#err_connection_refused">ERR_CONNECTION_REFUSED</a></li>
+<li><a href="#command-python-setuppy-egg_info-failed-with-error-code-1">Command “python setup.py egg_info” failed with error code 1﻿</a></li>
+<li><a href="#filenotfounderror">FileNotFoundError</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#general-questions-constantly-asked">General Questions Constantly Asked</a><ul>
+<li><a href="#how-do-i-convert-all-my-python-files">How do I Convert All My Python Files?</a></li>
+<li><a href="#the-terminal-just-opens-and-closes-but-there-are-no-errors">The Terminal Just Opens and Closes But There Are No Errors</a></li>
+<li><a href="#pythonpipauto-py-to-exe-is-not-recognised-as-an-internal-or-external-command-operable-program-or-batch-file">'python'/'pip'/'auto-py-to-exe' is not recognised as an internal or external command, operable program or batch file.</a></li>
+<li><a href="#the-exe-doesnt-work-on-another-computer">The exe Doesn't Work on Another Computer﻿</a></li>
+<li><a href="#what-is-the-9595pycache9595-folder">What is the __pycache__ folder?</a></li>
+<li><a href="#my-antivirus-detected-the-exe-as-a-virus">My Antivirus Detected the exe as a Virus</a></li>
+<li><a href="#lots-of-errors-appear-in-the-output">Lots of Errors Appear in the Output</a></li>
+</ul>
+</li>
+<li><a href="#additional-information-and-explanations">Additional Information and Explanations</a><ul>
+<li><a href="#the-difference-between-one-directory-and-one-file">The Difference Between One Directory and One File</a><ul>
+<li><a href="#demonstration-of-files-references-after-packaging">Demonstration of Files References After Packaging</a><ul>
+<li><a href="#running-this-un-packaged-py">Running this un-packaged (.py)</a></li>
+<li><a href="#running-this-when-packaged-using-one-directory">Running this when packaged using one directory</a></li>
+<li><a href="#running-this-when-packaged-using-one-file">Running this when packaged using one file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#the-one-file-resource-wrapper">The one-file Resource Wrapper</a></li>
+</ul>
+</li>
+<li><a href="#basic-things-to-remember">Basic Things To Remember</a></li>
+</ul>
+</div>
+<h2 id="introduction">Introduction</h2>
+<p>A while ago I wrote an article on common issues when using <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. In this post I aim to replace that post and explain more in greater depth.</p>
+<p>This is going to be long, but hopefully your question can be answered in here. I'll go over installing auto-py-to-exe, the interfaces content, how to use it, debugging and common issues that I see appear time and time again.</p>
+<p>Please do not feel offended if I have referred you to this page, it's just the case that many other people have asked the exact same question you are asking and you haven't been able to find the answers I or others have provided.</p>
+<h3 id="a-small-disclaimer">A Small Disclaimer</h3>
+<p>I cannot guarantee this post or any advice I give will fix all your issues with auto-py-to-exe and <a href="http://www.pyinstaller.org/">PyInstaller</a>. This tool allows you to select options and give data to be fed into PyInstaller, that means that a lot of the errors that occur will be raised by PyInstaller, meaning I can't go and change how it works. Typically though, errors brought up in PyInstaller are due to incorrect configuration, thus this post aims to help you fix anything setup incorrectly.</p>
+<p>If you have an issue that isn't mentioned in ths post, chuck it in the comments below and I will look into adding it if we can find a solution.</p>
+<h2 id="what-is-auto-py-to-exe">What is auto-py-to-exe?</h2>
+<p>auto-py-to-exe is a project I made in my free time to make packaging Python scripts to an executable/bundle easier. The interface uses Chromes app mode and a small Python server in the backend.</p>
+<p>When the user presses "Convert .py to .exe", all the data in the interface is sent to PyInstaller and then the output from PyInstaller is sent back to the interface. auto-py-to-exe then cleans things up in the background when done (files/folders generated by PyInstaller) and allows you to find your project in the output folder in your current working directory.</p>
+<h2 id="installation">Installation</h2>
+<p>To install auto-py-to-exe, make sure you have Python 2.7 or above installed. Ideally you will also want Chrome installed but this is not a must; it will open in your default browser and the only thing different will be the interface size. Execute the following in the command prompt / terminal to install auto-py-to-exe:</p>
+<div class="codehilite"><pre><span></span><span class="go">python -m pip install auto-py-to-exe</span>
+</pre></div>
+
+
+<p>Wait for this to finish and make sure that the last line contains "Successfully installed auto-py-to-exe" dash some version. You might get a message about your version of pip but you can ignore it. Now to run the project, execute the following in the terminal:</p>
+<div class="codehilite"><pre><span></span><span class="go">auto-py-to-exe</span>
+</pre></div>
+
+
+<p>This will open auto-py-to-exe and the output will be saved in output/ in where your current working directory is.</p>
+<h3 id="possible-gevent-issue">Possible Gevent Issue</h3>
+<p>There could be a situation when installing auto-py-to-exe that you are told you require Microsoft Visual C++ Build Tools. This occurs because the file that was downloaded from <a href="https://pypi.org/">PyPI</a> to be installed needs to be built and these tools will build it.</p>
+<p>Generally the way to fix this would be to install the tools and run it again, but instead you can get a pre-built version. To do this, go to gevents PyPI page and click "Download files" on the right to bring you to <a href="https://pypi.org/project/gevent/#files">the files that are on PyPI for this project</a>. You will want to find the file that matches your setup and is a .whl file, for example, I am using Python 3.7 on Windows so I would look for cp37 in the "Python version" column, Wheel in the "File type" column and then in the files that match these two criteria, match my OS - Windows. This means the file I will want is gevent-1.3.7-cp37-cp37m-win_amd64.whl (currently gevent is at 1.3.7).</p>
+<h2 id="layout-of-the-interface-and-what-things-do">Layout of the Interface and What Things Do</h2>
+<p>At the top of the interface, you are asked for the script location. This is the script you call to run your project, so if your project is one script, put that here, if your project is more than one script, put the script that starts it here. The inputs outline will become blue if the file exists, otherwise it will be red.</p>
+<p>Next you need to choose between one-file and one-directory. These are relatively similar but when using one-file with extra files like images or data files you need to modify your script to account for path changes. The difference between these methods and people ignoring the extra step required generally result in the bulk of complaints I get.</p>
+<p>Under that is a selection of whether you want a console window to appear or not. Simply if you are developing a GUI application or something that doesn't need the console to appear, use "Window Based". If you do want the console to appear, keep "Console Based Selected" but keep in mind that the script needs to block somewhere otherwise execution will end and the terminal will disappear immediately; a work-around for this is to put <code>input()</code> at the end of the script to hold execution until input is provided.</p>
+<p>After this you can select an icon for your executable. Make sure that the files are .ico and don't just rename a file to be a .ico, that is not how file types work.</p>
+<p>Next there is a section to add files to your executable that are not Python files. Since PyInstaller doesn't find extra files like images you need to add them manually. When adding an entry, the file path/folder path needs to the in the box on the left and the destination on the right; the destination is the folder in the executable. </p>
+<ul>
+<li>If you put a folder on the left, all files will be placed in the folder (and sub-directories keeping structure) specified on the right. </li>
+<li>If you put a file on the left, this file will be put in the folder specified with the filename the same as the original.</li>
+</ul>
+<p>If you're using one-file mode, you'll be provided a <a href="https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile/13790741#13790741">link to stackoverflow</a> which tells you how to implement a small wrapper to find the files you added. I explain why you have to do this <a href="#additional-information-and-explanations">towards the bottom of this post</a> including an example; <strong>if you do not follow this step errors will occur</strong>.</p>
+<p>Under this is the advanced tab which holds all PyInstallers extra flags as well as where to save the project and setting the maximum recursion depth. Here are a few flags/options that can help with things:</p>
+<ul>
+<li><strong>Enable Recursion Limit</strong>: If a RecursionError occurs, try using this to set the depth to 5000.</li>
+<li><strong>-n</strong>: The name of the output folder/executable</li>
+<li><strong>--hidden-import</strong>: If the executable says a module is missing, make sure you have it installed and add it here; you can separate multiple modules by a comma.</li>
+<li><strong>--debug</strong>: Set this to <code>all</code> to help make debugging a lot easier</li>
+<li><strong>Extra Command Data</strong>: If you want to manually add arguments, paste them in this input.</li>
+</ul>
+<p>The "Current Command" section tells you what would be called if you wanted to execute this in a terminal and the convert button is under this. After conversion you can clear the output or open the output folder where the executable/package was saved.</p>
+<h2 id="general-steps">General Steps</h2>
+<p>The process of packaging a Python project to an executable is simple in most cases.</p>
+<ol>
+<li>Start auto-py-to-exe by executing <code>auto-py-to-exe</code> in the terminal</li>
+<li>Search for your script</li>
+<li>Decide on whether you want the output to be a single executable or a directory (a directory has many benefits discussed later)</li>
+<li>Decide if you want a console window or not</li>
+<li>Add an icon if you desire</li>
+<li>Add any extra files your project requires that aren't Python files (e.g. images, csv, databases, ...)</li>
+<li>Click the big blue button at the bottom to package the project</li>
+<li>Open the location of the executable/package and run it</li>
+</ol>
+<p>If you have any issues with running your script, it may be due to incorrect configuration. This means you will now have to go though a debugging process to find what is occurring.</p>
+<h2 id="debugging">Debugging</h2>
+<p>To debug, make sure you have setup the fields in auto-py-to-exe like you had previously - all your extra files and other settings. Now go to the "Advanced" section and under the title "How to generate" put <code>all</code> in the box beside --debug. This will print out messages to the console to help you debug.</p>
+<p>When debugging, make sure you select the "Console Based" button and using "One Directory" will help remove basic problems; you can switch back to "One File" when there are no more bugs and then fix the ones associated with "One File" mode. When all bugs are removed, you can go back to "Window Based" if you wish.</p>
+<p>Re-package your project and open up the command prompt / terminal and <a href="https://www.digitalcitizen.life/command-prompt-how-use-basic-commands">cd</a> to the directory where the executable / package was output to. If you are using one-directory cd into that directory. Now execute <code>./my_project.exe</code> <em>(substitute the names)</em>. This will run the executable file and any errors you were missing before will be output to the console and preserved.</p>
+<p>Look at what these errors are saying and fix them. Now repackage like you just did and keep fixing bugs and repackaging until there are no more left and your project is working properly. After this, you can then move to one-file if you were using one-directory and want one-file, and repeat the process by still staring it with cmd and debugging on.</p>
+<p>When everything is done and there are no more bugs in the modes you want, you can enable "Window Based" if you want and remove <code>all</code> from --debug.</p>
+<blockquote>
+<p>Not every project can be converted to one-file. This is due to files being used by the application being lost every time the application starts/stops. To understand this more go down to <a href="#demonstration-of-files-references-after-packaging">"Demonstration of Files References After Packaging"</a>.</p>
+</blockquote>
+<h3 id="how-to-fix-specific-issues">How to Fix Specific Issues</h3>
+<p>These are some of the issues I have come across or others have asked me about and ways to fix them.</p>
+<h4 id="fatal-error-failed-to-execute">Fatal Error: failed to execute <script.py></h4>
+<p>This means something has gone wrong as it's giving you a visual warning about it; this is not an error, it's a warning, the real error has been printed to stdout/stderr. If you open the executable using the terminal or something else that will preserve the console output, you will most likely see a Python error telling you what went wrong. Fixing this and repackaging is the solution to this issue.</p>
+<h4 id="permissionerror-errno-13-permission-denied">PermissionError: [Errno 13] Permission denied: ...</h4>
+<p>This occurs because you are trying to modify files in a directory you do not have access to. A way to fix this is to run the script with admin privileges by opening cmd as admin and then running <code>auto-py-to-exe</code> one you have cd'ed to the directory you want the output to be in.</p>
+<p>One reason this could occur is that you have opened cmd and am in System32. Make sure you do not accidentally modify files in this directory so make sure you are in a directory where you want to write files to when running <code>auto-py-to-exe</code>.</p>
+<h4 id="recursionerror">RecursionError</h4>
+<p>This error is now prevented by the application by default bu setting the recursion limit to 5000. If you want to disable this, there is an option in the Advanced tab to.</p>
+<h4 id="attributeerror-module-enum-has-no-attribute-intflag">AttributeError: module 'enum' has no attribute 'IntFlag'</h4>
+<p>Try executing <code>python -m pip uninstall enum34</code> to stop enum conflicts. This is also a fix for the similar issue "Fatal Python error: Py_Initialize: unable to load the file system codec".</p>
+<h4 id="modulenotfounderror-no-module-named-x-importerror-no-module-named-x">ModuleNotFoundError: No module named x / ImportError: No module named x</h4>
+<p>This means a particular module ('x' in this case) was not added to the package. I have seen this occur with packages in the pandas library and win32api; as long as you can identify the package (e.g. 'x'), then it is very easy to fix.</p>
+<p>To fix this in the UI, open the advanced tab and find the <code>--hidden-import</code> input. Simply paste the module name into this input and then repackage. If the original error is still appearing, you have done this incorrectly.</p>
+<p>For example, if you are missing <code>pandas._libs.tslib</code>, add 'pandas._libs.tslib' into the input by --hidden-import. Additionally you can add more than one module, for example <code>pandas._libs.tslib, win32api</code>. <em>(See the question mark by the input for more information)</em>.</p>
+<h4 id="err_connection_refused">ERR_CONNECTION_REFUSED</h4>
+<p>You need to be connected to the internet. This error appears when you cannot reach the servers.﻿</p>
+<h4 id="command-python-setuppy-egg_info-failed-with-error-code-1">Command “python setup.py egg_info” failed with error code 1﻿</h4>
+<p>Update setuptools using <code>pip install --upgrade setuptools</code>.</p>
+<h4 id="filenotfounderror">FileNotFoundError</h4>
+<p>Make sure the file you are referencing actually exists, this error says that the file you are referencing doesn't exist. If you are using one-file mode, make sure you have followed the necessary steps.</p>
+<h2 id="general-questions-constantly-asked">General Questions Constantly Asked</h2>
+<h3 id="how-do-i-convert-all-my-python-files">How do I Convert All My Python Files?</h3>
+<p>Add the entry point in the script location. PyInstaller searches for imports to get the rest of the Python files required to run, so as long as you use the <code>import</code> keyword, your files will be added.</p>
+<h3 id="the-terminal-just-opens-and-closes-but-there-are-no-errors">The Terminal Just Opens and Closes But There Are No Errors</h3>
+<p>If you double click to run your Python script, what happens? Does it open and close also? That means this tool has done it's job correctly and the script is finishing just like it should.</p>
+<p>You most likely think the output should stay visible because you are always using IDLE or an IDE and that's what those tools do. Add a statement like <code>input()</code> at the end of your script to block execution and wait for you to press enter before closing. </p>
+<h3 id="pythonpipauto-py-to-exe-is-not-recognised-as-an-internal-or-external-command-operable-program-or-batch-file">'python'/'pip'/'auto-py-to-exe' is not recognised as an internal or external command, operable program or batch file.</h3>
+<p>This occurs because the path that these executables are located in is not on your path; thus cmd doesn't know where to look for them. You need to add these paths to the PATH environment variable, to find these execute the correct command to find the path.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+
+<span class="c1"># If &#39;python&#39; is not recognised</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">))</span>
+
+<span class="c1"># If &#39;pip&#39;/&#39;auto-py-to-exe&#39;/... is not recognised</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">Scripts&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Now go to my <a href="https://youtu.be/cm6WDGAzDPM">video on how to setup Pythons PIP</a> and follow the instructions on how to add the path that was printed to the PATH environment variable.</p>
+<blockquote>
+<p>If you are using something older than Windows 10, setting the PATH environment variable will be a bit different. If it is just one line, add a <code>;</code> to the end and then paste the path after the <code>;</code>.</p>
+</blockquote>
+<h3 id="the-exe-doesnt-work-on-another-computer">The exe Doesn't Work on Another Computer﻿</h3>
+<p>This may be an architecture issue. PyInstaller will build an executable using the architecture of the machine it was built with. This means if you are using a 32bit machine, it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures﻿.</p>
+<h3 id="what-is-the-9595pycache9595-folder">What is the __pycache__ folder?</h3>
+<p>This is <a href="https://stackoverflow.com/questions/16869024/what-is-pycache">Python bytecode generated by Python</a>. You can delete this if you wish.</p>
+<h3 id="my-antivirus-detected-the-exe-as-a-virus">My Antivirus Detected the exe as a Virus</h3>
+<p>This is your anti-virus vendors fault. Check out <a href="https://github.com/pyinstaller/pyinstaller/issues/2501#issuecomment-286230354">this</a>. There is nothing I or PyInstaller can do to stop this.</p>
+<h3 id="lots-of-errors-appear-in-the-output">Lots of Errors Appear in the Output</h3>
+<p>These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after-all, they are only warnings.</p>
+<h2 id="additional-information-and-explanations">Additional Information and Explanations</h2>
+<p>Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions of why and how things occur.</p>
+<h3 id="the-difference-between-one-directory-and-one-file">The Difference Between One Directory and One File</h3>
+<p>One directory puts all your files in one folder. You can easily add and remove files like you normally would in a folder. When your script modifies a file in it's folder, the file will still be modified when you run the script again.</p>
+<p>One file mode is a bit different, instead of putting all the files in a folder, it puts them in something like a zip file which is contained in the end executable. When you run the executable, the files contained internally are unpacked to a new temporary directory. Due to one file unpacking on startup, it is a lot slower to start.</p>
+<p>Also due to the files being unpacked to a new temporary directory on execution, your files that you modified added that were in the same directory as the executable will not be there on the next run because they are now in a different unknown folder. This means when creating files, you will want to use an absolute path that is not where the project files are (could use something like APPDATA on Windows).</p>
+<h4 id="demonstration-of-files-references-after-packaging">Demonstration of Files References After Packaging</h4>
+<p>I made a small Python file that finds where it is located and then tries to print the contents of a file if it exists otherwise will create a new one.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;frozen&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span> <span class="c1"># we are running in a bundle</span>
+    <span class="n">bundle_dir</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_MEIPASS</span> <span class="c1"># This is where the files are unpacked to</span>
+<span class="k">else</span><span class="p">:</span> <span class="c1"># normal Python environment</span>
+    <span class="n">bundle_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s1">&#39;Location : &#39;</span> <span class="o">+</span> <span class="n">bundle_dir</span><span class="p">)</span> <span class="c1"># Where the base file exists</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">bundle_dir</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">test.txt&#39;</span>
+<span class="k">print</span> <span class="p">(</span><span class="s1">&#39;File is at: &#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span> <span class="c1"># Absolute path of target file</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;Contents:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span> <span class="c1"># Print contents of file if it exists</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">&#39;Created a new file&#39;</span><span class="p">)</span> <span class="c1"># Create a file if it doesn&#39;t exist</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;New Line</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># Add a new line to see if is there next time</span>
+
+<span class="nb">input</span><span class="p">()</span> <span class="c1"># Block to keep terminal alive</span>
+</pre></div>
+
+
+<h5 id="running-this-un-packaged-py">Running this un-packaged (.py)</h5>
+<p>The first time it will create a file beside the script. Every time it is run, the new line will be added and this will be shown in the output. This means When you modify a file, it will stay modified.</p>
+<h5 id="running-this-when-packaged-using-one-directory">Running this when packaged using one directory</h5>
+<p>The first time it will create a file in the directory (which will be beside the .exe). Every time it is run, the new line will be added and this will be shown in the output. This means When you modify a file, it will stay modified.</p>
+<h5 id="running-this-when-packaged-using-one-file">Running this when packaged using one file</h5>
+<p>Every time this is run, it will create a new file in the temporary directory. This occurs because the .exe unpacks to a new directory every time it is run, so instead of finding old files (which can disappear any time because they are in the temp folder) you may as well use an absolute reference to somewhere else.</p>
+<h3 id="the-one-file-resource-wrapper">The one-file Resource Wrapper</h3>
+<p>As described in the section above, non-python files that are bundled into an executable when using one-file mode need care when being referenced due to how they are un-packaged.</p>
+<p>In the interface, when one-file mode is selected and the additional files section is expanded, a note can be found that references a stackoverflow question regarding <a href="https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile">"Bundling data files with PyInstaller (--onefile)"</a>. The first answer provides a nice snippet of code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="k">def</span> <span class="nf">resource_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get absolute path to resource, works for dev and for PyInstaller &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># PyInstaller creates a temp folder and stores path in _MEIPASS</span>
+        <span class="n">base_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_MEIPASS</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+</pre></div>
+
+
+<p>When referencing files using <em>relative references</em>, instead of using <code>open('folder/my-file.jpg')</code>, you will want to use <code>open(resource_path('folder/my-file.jpg'))</code>. This appends the relative path you provided to the current / extracted location to make an absolute file reference which is safe to use.</p>
+<h2 id="basic-things-to-remember">Basic Things To Remember</h2>
+<ul>
+<li>When using relative directories for file names, these are relative to the current working directory, not the location of the programs files. This is exactly the same as when you use a Python script normally. So depending on where you run the executable from, relative files my end up in different places than beside the executable.</li>
+</ul>
+                    </div>
+
+                    <nav class="blog-pagination text-center mb-5 mt-4">
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/who-is-on-my-network/">&larr; Who is on my Network</a>
+                        
+                        
+                            <a class="btn btn-outline-primary mt-1" href="/blog/post/python-size-and-time-cache-decorator/">Python Size and Time Cache ... &rarr;</a>
+                        
+                    </nav>
+
+                    
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function() {
+                            this.page.url = 'https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/'; // Your page's canonical URL variable
+                            this.page.identifier = 'https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/'; // Your page's unique identifier variable
+                        };
+                        (function() {
+                            var d = document,
+                                s = d.createElement('script');
+                            s.src = '//nitratine.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                    
+
+                </div>
+
+                                <!-- Sidebar -->
+                <aside class="col-blog-sidebar blog-sidebar">
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">About</h4>
+                        <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTurorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.</p>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button id="search-submit" class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <script>let searchUrl = "/search/";</script>
+                    <script type="text/javascript" defer src="/assets/js/search.js"></script>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Categories</h4>
+                        <ol class="list-unstyled mb-0 text-center text-lg-left">
+                            
+                                <li>
+                                <a href="/blog/categories/#Apps">&#x1F4F1; Apps
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#General">&#x1F4F0; General
+                                    <span class="badge badge-primary ml-3">5</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Investigations">&#x1F50D; Investigations
+                                    <span class="badge badge-primary ml-3">2</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Projects">&#x1F4BE; Projects
+                                    <span class="badge badge-primary ml-3">13</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#Tutorials">&#x1F4D6; Tutorials
+                                    <span class="badge badge-primary ml-3">8</span>
+                                </a>
+                            </li>
+                            
+                                <li>
+                                <a href="/blog/categories/#YouTube">&#x1F3A5; YouTube
+                                    <span class="badge badge-primary ml-3">15</span>
+                                </a>
+                            </li>
+                            
+                        </ol>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">PyTutorials on YouTube</h4>
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div style="text-align: center">
+                            <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Recent Videos</h4>
+                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                    </div>
+
+                    <script>
+                        let youtube_data_api_key = 'AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM';
+                        let youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g';
+                    </script>
+                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
+
+                </aside>
+
+            </div>
+
+
+        </main>
+
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>
