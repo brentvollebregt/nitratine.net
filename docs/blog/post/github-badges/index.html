@@ -83,7 +83,7 @@
                         <a href="/blog/archive/#2018" class="text-muted">25 Apr 2018</a>
                         <a href="/blog/categories/#Tutorials" class="badge badge-primary ml-2">Tutorials</a>
                         
-                        <a href="/blog/tags/#Website" class="badge badge-warning">Website</a>
+                        <a href="/blog/tags/#website" class="badge badge-warning">website</a>
                         
                         <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
                     </p>
@@ -123,12 +123,14 @@
 
 <p>This will give: <img src="https://img.shields.io/badge/this%20is-purple-503040.svg" alt="this is purple" style="margin-bottom: -5px; display: inline-block;"></p>
 <h2 id="styles">Styles</h2>
-<p>Five different styles are also available to use. These are:
- - Plastic (?style=plastic) <img src="https://img.shields.io/badge/style-plastic-green.svg?longCache=true&style=plastic" alt="Plastic" style="margin-bottom: -5px; display: inline-block;">
- - Flat (?style=flat) <img src="https://img.shields.io/badge/style-flat-green.svg?longCache=true&style=flat" alt="Flat" style="margin-bottom: -5px; display: inline-block;">
- - Flat Square (?style=flat-square) <img src="https://img.shields.io/badge/style-flat--square-green.svg?longCache=true&style=flat-square" alt="Flat Square" style="margin-bottom: -5px; display: inline-block;">
- - For The Badge (?style=for-the-badge) <img src="https://img.shields.io/badge/style-for--the--badge-green.svg?longCache=true&style=for-the-badge" alt="For The Badge" style="margin-bottom: -8px">
- - Social (?style=social) <img src="https://img.shields.io/badge/style-social-green.svg?longCache=true&style=social" alt="Social" style="margin-bottom: -5px; display: inline-block;"></p>
+<p>Five different styles are also available to use. These are:</p>
+<ul>
+<li>Plastic (?style=plastic) <img src="https://img.shields.io/badge/style-plastic-green.svg?longCache=true&style=plastic" alt="Plastic" style="margin-bottom: -5px; display: inline-block;"></li>
+<li>Flat (?style=flat) <img src="https://img.shields.io/badge/style-flat-green.svg?longCache=true&style=flat" alt="Flat" style="margin-bottom: -5px; display: inline-block;"></li>
+<li>Flat Square (?style=flat-square) <img src="https://img.shields.io/badge/style-flat--square-green.svg?longCache=true&style=flat-square" alt="Flat Square" style="margin-bottom: -5px; display: inline-block;"></li>
+<li>For The Badge (?style=for-the-badge) <img src="https://img.shields.io/badge/style-for--the--badge-green.svg?longCache=true&style=for-the-badge" alt="For The Badge" style="margin-bottom: -8px"></li>
+<li>Social (?style=social) <img src="https://img.shields.io/badge/style-social-green.svg?longCache=true&style=social" alt="Social" style="margin-bottom: -5px; display: inline-block;"></li>
+</ul>
 <p>To apply these styles to a badge, simple add <code>?style=</code> to the end of the url and then add the style type as shown in the brackets above.</p>
 <p>For example, using my badge from before:</p>
 <div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://img.shields.io/badge/made%20with-python-blue.svg?style=flat-square&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;made with python&quot;</span><span class="p">&gt;</span>
@@ -170,7 +172,9 @@
 <h2 id="additional-options">Additional Options</h2>
 <p>shields.io has also provided some parameters we can pass to allow for some customisation. To add these to the badge, just put <code>...svg?parameter=value</code>. If you already have a parameter, you can chain them using <code>&amp;</code>.</p>
 <p>For example, from <code>.svg?style=flat-square</code> to <code>.svg?style=flat-square&amp;label=Tag&amp;colorA=ff69b4</code></p>
+<blockquote>
 <p>Make sure to encode the uri before requesting. This can be done with the <code>encodeURIComponent()</code> method in JavaScript. For example encodeURIComponent(' ') is '%20'.</p>
+</blockquote>
 <p><strong>?label=healthinesses : Override the default left-hand-side text</strong></p>
 <p><img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?label=healthinesses" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;"></p>
 <p><strong>?logo=appveyor : Insert one of the <a href="https://github.com/badges/shields/tree/gh-pages/logo">named logos</a></strong></p>
