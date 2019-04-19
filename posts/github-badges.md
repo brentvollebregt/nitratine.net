@@ -38,6 +38,7 @@ This will give: <img src="https://img.shields.io/badge/this%20is-purple-503040.s
 
 ## Styles
 Five different styles are also available to use. These are:
+
  - Plastic (?style=plastic) <img src="https://img.shields.io/badge/style-plastic-green.svg?longCache=true&style=plastic" alt="Plastic" style="margin-bottom: -5px; display: inline-block;">
  - Flat (?style=flat) <img src="https://img.shields.io/badge/style-flat-green.svg?longCache=true&style=flat" alt="Flat" style="margin-bottom: -5px; display: inline-block;">
  - Flat Square (?style=flat-square) <img src="https://img.shields.io/badge/style-flat--square-green.svg?longCache=true&style=flat-square" alt="Flat Square" style="margin-bottom: -5px; display: inline-block;">
@@ -120,7 +121,7 @@ shields.io has also provided some parameters we can pass to allow for some custo
 
 For example, from `.svg?style=flat-square` to `.svg?style=flat-square&label=Tag&colorA=ff69b4`
 
-Make sure to encode the uri before requesting. This can be done with the `encodeURIComponent()` method in JavaScript. For example encodeURIComponent(' ') is '%20'.
+> Make sure to encode the uri before requesting. This can be done with the `encodeURIComponent()` method in JavaScript. For example encodeURIComponent(' ') is '%20'.
 
 **?label=healthinesses : Override the default left-hand-side text**
 
