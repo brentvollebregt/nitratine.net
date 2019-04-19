@@ -1,7 +1,7 @@
 title: "Simulate Keypresses In Python"
 date: 2017-12-16
 category: YouTube
-tags: [Python, Keyboard, pynput]
+tags: [python, keyboard, pynput]
 feature: feature.jpg
 description: "This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence."
 

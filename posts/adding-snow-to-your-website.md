@@ -1,7 +1,7 @@
 title: "Adding Snow to Your Website"
 date: 2017-12-31
 category: Tutorials
-tags: [HTML, CSS, Website]
+tags: [html, css, website]
 feature: feature.png
 description: "This is a quick and basic tutorial on how to add snow to your website. Files are provided and an example of this can be shown on the whole site. This will work on any website that has access to the raw html."
 

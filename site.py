@@ -84,7 +84,8 @@ def posts_by_tag():
         post_tags = post.meta.get('tags', [])
         for tag in post_tags:
             tags[tag].append(post)
-    return {t: tags[t] for t in sorted(tags)}
+    posts_by_tag_unsorted = {t: tags[t] for t in sorted(tags)}
+    return dict(sorted(posts_by_tag_unsorted.items()))
 
 
 def posts_by_date():
@@ -473,7 +474,7 @@ def new_post():
         except IndexError:
             print('That index does not exist')
 
-    tags = input('Tags (separated by comma): ')
+    tags = input('Tags (separated by comma): ').lower()
 
     post_id = quote_plus(title.lower().replace(' ', '-'))
     print('Post Id: {0}'.format(post_id))

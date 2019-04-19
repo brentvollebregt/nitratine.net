@@ -1,7 +1,7 @@
 title: "The Nitratine Project"
 date: 2018-01-10
 category: Projects
-tags: [Python, Flask, Website]
+tags: [python, flask, website]
 feature: nitratine1.jpg
 description: "The Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months."
 

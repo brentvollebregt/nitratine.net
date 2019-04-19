@@ -1,7 +1,7 @@
 title: "Price Per Unit"
 date: 2018-06-28
 category: Apps
-tags: [Android, Java, Money]
+tags: [android, java, money]
 feature: FeatureGraphic.jpg
 description: "This app compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money."
 

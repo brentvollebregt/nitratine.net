@@ -1,7 +1,7 @@
 title: "How to Make Hotkeys in Python"
 date: 2018-01-13
 category: YouTube
-tags: [Python, Keyboard, pynput]
+tags: [python, keyboard, pynput]
 feature: feature.jpg
 description: "This demonstrates how to make a script to detect combinations of keypresses or even single keys pressed in Python. The script will use pynput to detect keypresses and will work on windows, mac and linux."
 

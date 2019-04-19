@@ -1,7 +1,7 @@
 title: "Lucy In The Sky With Emotion"
 date: 2017-12-21
 category: Projects
-tags: [Python, Machine-Learning]
+tags: [python, machine-learning]
 feature: visualiser5.jpg
 description: "This project aimed to visualise emotion in music with software developed by six people from the COMP241 (Software Engineering Development) paper as a group project. The project was successful in the end using Spotify to assist emotion detection."
 

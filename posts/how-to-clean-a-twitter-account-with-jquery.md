@@ -1,7 +1,7 @@
 title: "How to Clean a Twitter Account with jQuery"
 date: 2018-08-12
 category: Tutorials
-tags: [Twitter, JavaScript, jQuery, tweepy]
+tags: [twitter, javascript, jquery, tweepy]
 feature: followers.png
 description: "This article covers how I used jQuery on twitter.com to delete all my tweets and remove all my likes and accounts I follow."
 

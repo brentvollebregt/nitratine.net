@@ -1,7 +1,7 @@
 title: "University of Waikato Moodle Resource Work Around Ignorer"
 date: 2018-09-08
 category: Projects
-tags: [JavaScript, Chrome]
+tags: [javascript, chrome-extension]
 feature: target.png
 description: "A chrome extension to solve the Waikato Universities resource work around in Moodle."
 

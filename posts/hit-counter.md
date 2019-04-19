@@ -1,7 +1,7 @@
 title: "Hit Counter"
 date: 2018-04-25
 category: Projects
-tags: [Python, Flask]
+tags: [python, flask]
 feature: feature.png
 description: "Easily Count Hits on a Website by Requesting a SVG Displaying Hit Count. Works on any site."
 

@@ -1,7 +1,7 @@
 title: "Am I A Participant"
 date: 2018-09-09
 category: Projects
-tags: [JavaScript, Chrome]
+tags: [javascript, chrome-extension]
 feature: feature.png
 description: "Check if you are a participant of a conversation in Gmail. Helps you stop sending emails with the wrong address."
 

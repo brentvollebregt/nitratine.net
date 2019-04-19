@@ -1,7 +1,7 @@
 title: "Issues When Using auto-py-to-exe"
 date: 2018-11-17
 category: General
-tags: [Python, pyinstaller]
+tags: [python, pyinstaller]
 feature: feature.png
 description: "After helping many of people fix issues with auto-py-to-exe and PyInstaller, this post contains what I think you should understand and ways to fix issues you are having with auto-py-to-exe."
 

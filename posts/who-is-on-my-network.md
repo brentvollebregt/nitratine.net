@@ -1,7 +1,7 @@
 title: "Who is on my Network"
 date: 2018-10-11
 category: Projects
-tags: [Python, sqlite, networking]
+tags: [python, sqlite, networking]
 feature: feature.png
 description: "This command line tool allows you to keep records of who is on your network and when. Windows is supported and all data is saved in a sqlite database."
 

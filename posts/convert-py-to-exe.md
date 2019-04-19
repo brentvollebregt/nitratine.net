@@ -1,7 +1,7 @@
 title: "Convert .py to .exe"
 date: 2017-12-11
 category: YouTube
-tags: [Python, pyinstaller]
+tags: [python, pyinstaller]
 feature: demo6.png
 description: "A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package."
 

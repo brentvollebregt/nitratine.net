@@ -1,7 +1,7 @@
 title: "Interesting Sites"
 date: 2017-12-06
 category: General
-tags: [Website]
+tags: [website]
 feature: Rome1.jpg
 description: "A list of the most interesting and engaging sites I have discovered which I recommend you to visit. I found them while on the hunt for colours and designs for projects."
 
