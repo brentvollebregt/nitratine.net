@@ -13,7 +13,7 @@ description: "This is a script that allows you to click you mouse repeatedly wit
 This project uses the cross platform module pynput to control the mouse and monitor the keyboard at the same time to create a simple auto clicker.
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [2017-12-13-how-to-setup-pythons-pip.md](/blog/post/how-to-setup-pythons-pip/) to setup pip.
+If you haven't used or setup pip before, look at my tutorial on [how to setup python's pip](/blog/post/how-to-setup-pythons-pip/) to setup pip.
 
 ## Installing Pynput
 We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
