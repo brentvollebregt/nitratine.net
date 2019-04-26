@@ -33,6 +33,24 @@ hashlib.algorithms_guaranteed
 
 ## Hashing a File
 - Code to hash a file
+```python
+import hashlib
+
+file = ".\myfile.txt"
+BLOCK_SIZE = 65536
+
+file_hash = hashlib.sha256()
+with open(file, 'rb') as f:
+    fb = f.read(BLOCK_SIZE)
+    while len(fb) > 0:
+        file_hash.update(fb)
+        fb = f.read(BLOCK_SIZE)
+        
+print (file_hash.hexdigest())
+```
+
+- .digest to get bytes
+- .hex digest to get a string object of double length, containing only hexadecimal digits. This may be used to exchange the value safely in email or other non-binary environments.
 
 ## Why do I Need to Worry About the Buffer Size?
 - Don't want to dump a movie in memory
