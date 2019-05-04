@@ -3,11 +3,13 @@ date: 2019-04-24
 category: Tutorials
 tags: [python]
 feature: feature.png
-description: ""
+description: "Hashing files and strings have many useful Hashing files can be helpful for easily checking if two files are identical "
 
 [TOC]
 
-## What Does it Mean to Hash a File in Python?
+## What Does it Mean to Hash a File?
+Hashing a file is when a file is read and used in a function to compute a fixed-length value from it. This fixed length value is different
+
 - "A hash function is any function that can be used to map data of arbitrary size onto data of a fixed size." 
 - "A "hash" is a function h referred to as hash function that takes as input objects and outputs a string or number."
 - You can make your own easy
@@ -52,7 +54,7 @@ print (file_hash.hexdigest())
 - .digest to get bytes
 - .hex digest to get a string object of double length, containing only hexadecimal digits. This may be used to exchange the value safely in email or other non-binary environments.
 
-## Why do I Need to Worry About the Buffer Size?
+### Why do I Need to Worry About the Buffer Size?
 - Don't want to dump a movie in memory
 
 ## Further Reading
