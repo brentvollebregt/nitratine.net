@@ -4,6 +4,7 @@ category: General
 tags: [javascript, bookmarklet]
 feature: feature.png
 description: "A few days ago the site New Zealand Herald started to introduce premium content on their site. Using the JavaScript code in a bookmark found in this post is a very easy way to get around the monthly fee for \"premium content\"."
+hidden: true
 
 [TOC]
 
@@ -23,7 +24,7 @@ This is the most recent version of the JavaScript bookmarklet. If you want to se
 
 <script>
     function copyCode() {
-        let content = "javascript:(function(){ $('#article-content.premium-content .paywall').css('display', 'block'); document.head.insertAdjacentHTML('beforeEnd', '<style>#article-content.premium-content:before, #article-content.premium-content .ellipsis:after {content: none !important}</style>'); $('.article-offer').css('display', 'none'); })();";
+        let content = "javascript:(function(){ $('head').append( '<style>' + '#main { height: auto !important } ' + '#article-content.premium-content:before, #article-content.premium-content .ellipsis:after, .article-offer { display: none !important } ' + '</style>' ); $('.paywall').removeClass('paywall'); })();";
         let textarea = document.createElement("textarea");
         textarea.textContent = content;
         document.body.appendChild(textarea);
@@ -57,6 +58,22 @@ The original script does three main things:
 	$('#article-content.premium-content .paywall').css('display', 'block');
 	document.head.insertAdjacentHTML('beforeEnd', '<style>#article-content.premium-content:before, #article-content.premium-content .ellipsis:after {content: none !important}</style>');
 	$('.article-offer').css('display', 'none');
+})();
+```
+
+### Revision 1
+Looking in reddit, I found a [post](https://www.reddit.com/r/newzealand/comments/bj9fdu/nz_herald_premium_content_for_free/) that had done the same task I had set out to do. Taking what I found here, I improved the original script and made it easier to read the source.
+
+```javascript
+(function(){
+    $('head').append(
+        '<style>' +
+            '#main { height: auto !important }' + 
+            '#article-content.premium-content:before, #article-content.premium-content .ellipsis:after, .article-offer { display: none !important }' + // Paywall fix
+            // '.pb-f-article-related-articles, .pb-f-global-recommend, .pb-f-global-blank-html { display: none !important }' + // General advertisement removal (I don't include it in the button but you can remove the recommended articles if you wish)
+        '</style>'
+    );
+    $('.paywall').removeClass('paywall'); 
 })();
 ```
 
