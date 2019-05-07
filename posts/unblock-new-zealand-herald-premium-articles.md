@@ -21,6 +21,9 @@ This post contains JavaScript code (that runs on browsers) to help you easily re
 This is the most recent version of the JavaScript bookmarklet. If you want to see the code, previous versions or a description of why this works, these will be found below.
 
 <a class="btn btn-primary" href="javascript:copyCode()" role="button">Copy the Unblock Code</a>
+<div class="alert alert-success" role="alert" id="copyCodeSuccess" style="display: none">
+  JavaSript code has been copied!
+</div>
 
 <script>
     function copyCode() {
@@ -32,6 +35,8 @@ This is the most recent version of the JavaScript bookmarklet. If you want to se
         if (!document.execCommand("copy")) {
             window.prompt("Copy this then click OK",content);
         }
+        document.getElementById('copyCodeSuccess').style.display = 'block';
+        setTimeout(function(){ document.getElementById('copyCodeSuccess').style.display = 'none'; }, 2000);
     }
 </script>
 
