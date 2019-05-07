@@ -60,7 +60,7 @@ description: "This is a tool to help you quickly look at function return types o
     document.getElementById('setDateToNow').addEventListener('click', setDateToNow);
     document.getElementById('dateInput').addEventListener('blur', function(e) {
         console.log(e.target.value);
-        setDate(new Date(e.target.value + 'Z'));
+        setDate(adjustDateToMakeISOCurrentTimezone(new Date(e.target.value)));
     });
     
     // Load
