@@ -24,7 +24,7 @@ This is the most recent version of the JavaScript bookmarklet. If you want to se
 
 <script>
     function copyCode() {
-        let content = "javascript:(function(){ $('head').append( '<style>' + '#main { height: auto !important } ' + '#article-content.premium-content:before, #article-content.premium-content .ellipsis:after, .article-offer { display: none !important } ' + '</style>' ); $('.paywall').removeClass('paywall'); })();";
+        let content = "javascript:javascript:$('head').append( '<style>' + '#main { height: auto !important; }' + '#article-content > * { display: block !important; color: #000 !important; opacity: 1 !important; }' + '.article-offer { display: none !important; }' + '.ad-container, .pb-f-article-related-articles { display: none !important; }' + '</style>' ); function mode(arr) { return arr.sort((a,b) => arr.filter(v => v===a).length - arr.filter(v => v===b).length ).pop(); }; let classes = []; $('#article-content').children().each((index, e) => { e.classList.forEach(i => classes.push(i)); }); let possible_premium_class = mode(classes); $('.' + possible_premium_class).removeClass(possible_premium_class); $('#article-content') .removeClass('premium-content') .addClass('full-content');";
         let textarea = document.createElement("textarea");
         textarea.textContent = content;
         document.body.appendChild(textarea);
@@ -75,6 +75,46 @@ Looking in reddit, I found a [post](https://www.reddit.com/r/newzealand/comments
     );
     $('.paywall').removeClass('paywall'); 
 })();
+```
+
+### Revision 2 (7-5-19)
+This one was a bit bigger because they are now making the css class that used to be `paywall` now a little bit more random. This can easily be solved by looking at all the classes in the articles content and picking out the mode (not 100% accurate but does the job).
+
+There is still a backup for any direct children of `#article-content` if this fails. Scrolling is turned back on, the offer is removed and some ads are removed.
+
+```javascript
+/* Throw some CSS in the head */
+$('head').append(
+    '<style>' +
+        '#main { height: auto !important; }' + /* Allow for scrolling */
+        '#article-content > * { display: block !important; color: #000 !important; opacity: 1 !important; }' + /* Show content (backup for class guess later) */
+        '.article-offer { display: none !important; }' + /* Remove 'offer' */
+        '.ad-container, .pb-f-article-related-articles { display: none !important; }' + /* Remove advertisements */
+    '</style>'
+);
+
+/* A simple array mode function */
+function mode(arr) {
+    return arr.sort((a,b) =>
+          arr.filter(v => v===a).length
+        - arr.filter(v => v===b).length
+    ).pop();
+};
+
+/* Get all the classes */
+let classes = [];
+$('#article-content').children().each((index, e) => {
+    e.classList.forEach(i => classes.push(i));
+});
+
+/* Try to find the mode of these classes and remove it (most likely the premium class) */
+let possible_premium_class = mode(classes);
+$('.' + possible_premium_class).removeClass(possible_premium_class);
+
+/* Remove the premium-content class. Removes fade out, ellipsis' */
+$('#article-content')
+    .removeClass('premium-content')
+    .addClass('full-content');
 ```
 
 ## Why Did I Write This?
