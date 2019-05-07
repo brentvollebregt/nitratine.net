@@ -88,3 +88,8 @@ Did you install pynput? This error will not occur if you installed it properly. 
 
 ### I got a SyntaxError
 Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
+
+### The Key Presses Work in Notepad But Not My Game 
+pynput uses a Win32API function called `SendInput`. The SendInput function will insert input events into the same queue as a hardware device but the events are marked with a `LLMHF_INJECTED` flag that can be detected by hooks and [then filtered](https://stackoverflow.com/a/19383403). To avoid this flag you probably have to write a custom driver *(ref: [stackoverflow/Anders](https://stackoverflow.com/a/44931001))*.
+
+It would be ideal for most games to look for these events if they want to reduce 'bot' activity as it stops packages like these being used.

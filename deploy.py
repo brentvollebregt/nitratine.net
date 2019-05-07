@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import tempfile
 import subprocess
@@ -15,7 +16,12 @@ with open('deploy-config.json') as f:
 # Create temporary directory
 temporary_directory = tempfile.gettempdir() + '\\deployment-build_' + config['repository']['name']
 if os.path.exists(temporary_directory):
-    shutil.rmtree(temporary_directory)
+    try:
+        shutil.rmtree(temporary_directory)
+    except PermissionError:
+        print('Please delete the directory at {0}'.format(temporary_directory))
+        os.startfile(temporary_directory, operation='explore')
+        sys.exit(1)
 os.makedirs(temporary_directory)
 print('[Deploy] Using: ' + temporary_directory)
 
