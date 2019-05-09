@@ -24,21 +24,7 @@ This is the most recent version of the JavaScript bookmarklet. If you want to se
 <div class="alert alert-success" role="alert" id="copyCodeSuccess" style="display: none">
   JavaSript code has been copied!
 </div>
-
-<script>
-    function copyCode() {
-        let content = "javascript:javascript:$('head').append( '<style>' + '#main { height: auto !important; }' + '#article-content > * { display: block !important; color: #000 !important; opacity: 1 !important; }' + '.article-offer { display: none !important; }' + '.ad-container, .pb-f-article-related-articles { display: none !important; }' + '</style>' ); function mode(arr) { return arr.sort((a,b) => arr.filter(v => v===a).length - arr.filter(v => v===b).length ).pop(); }; let classes = []; $('#article-content').children().each((index, e) => { e.classList.forEach(i => classes.push(i)); }); let possible_premium_class = mode(classes); $('.' + possible_premium_class).removeClass(possible_premium_class); $('#article-content') .removeClass('premium-content') .addClass('full-content');";
-        let textarea = document.createElement("textarea");
-        textarea.textContent = content;
-        document.body.appendChild(textarea);
-        textarea.select();
-        if (!document.execCommand("copy")) {
-            window.prompt("Copy this then click OK",content);
-        }
-        document.getElementById('copyCodeSuccess').style.display = 'block';
-        setTimeout(function(){ document.getElementById('copyCodeSuccess').style.display = 'none'; }, 2000);
-    }
-</script>
+<script type="text/javascript" src="/post-assets/unblock-new-zealand-herald-premium-articles/copy-to-clipboard.js"></script>
 
 The button above copies the bookmarklet to your clipboard. Click this and then create a new bookmark (name it what you want) and paste the code copied into the bookmark address.
 
@@ -104,11 +90,13 @@ function mode(arr) {
           arr.filter(v => v===a).length
         - arr.filter(v => v===b).length
     ).pop();
-};
+}
+
+let article_content = $('#article-content');
 
 /* Get all the classes */
 let classes = [];
-$('#article-content').children().each((index, e) => {
+article_content.children().each((index, e) => {
     e.classList.forEach(i => classes.push(i));
 });
 
@@ -117,7 +105,7 @@ let possible_premium_class = mode(classes);
 $('.' + possible_premium_class).removeClass(possible_premium_class);
 
 /* Remove the premium-content class. Removes fade out, ellipsis' */
-$('#article-content')
+article_content
     .removeClass('premium-content')
     .addClass('full-content');
 ```
