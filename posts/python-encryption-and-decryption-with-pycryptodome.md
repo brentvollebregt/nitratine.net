@@ -129,6 +129,8 @@ key = PBKDF2(password, salt, dkLen=32) # Your key that you can encrypt with
 
 Now in `key`, you will have the key that you can use in encryption. You do not have to store this key now as you can see that this can be generated every time regarding the user provides the same password.
 
+> Even though it may be ok to hard code a salt for your own projects, it is recommended to generate a new salt for each object encrypted. When storing data (as you will see later), you can write the salt to the beginning of the file (assuming your storage method is a file) as it is a fixed length. When decrypting the file, read out the salt first, then generate the key with the password and then continue to read the rest of the data out of the file to decrypt.
+
 ## Encrypting
 Now that we have the key, we can encrypt files. These methods encrypt bytes objects, so if you have a string, you can call `.encode()` on it, otherwise for other objects, make sure they are of type bytes. 
 
