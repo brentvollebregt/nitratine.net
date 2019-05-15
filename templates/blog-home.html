@@ -25,9 +25,9 @@
 
                     {% for post in posts %}
 
-                    <div class="card mb-4 blog-card-lg">
-                        <div>
-                            <img alt="Thumbnail" src="{% if post.feature %}/post-assets/{{ post.path }}/{{ post.feature }}{% else %}/assets/img/default-feature.png{% endif %}">
+                    <div class="card mb-4 blog-card">
+                        <div class="thumbnail-wrapper">
+                            <img class="thumbnail" alt="Thumbnail" src="{% if post.feature %}/post-assets/{{ post.path }}/{{ post.feature }}{% else %}/assets/img/default-feature.png{% endif %}">
                         </div>
                         <div class="p-3">
                             <h3 class="mb-0">
