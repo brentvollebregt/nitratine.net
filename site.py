@@ -12,6 +12,7 @@ from urllib.parse import quote_plus
 import subprocess
 import shutil
 from collections import defaultdict
+import string
 
 import config
 
@@ -476,7 +477,9 @@ def new_post():
 
     tags = input('Tags (separated by comma): ').lower()
 
-    post_id = quote_plus(title.lower().replace(' ', '-'))
+    post_id = quote_plus(''.join(
+        [i for i in title.lower().replace(' ', '-') if i in string.ascii_letters + string.digits + '-']
+    ))
     print('Post Id: {0}'.format(post_id))
 
     # Write file
