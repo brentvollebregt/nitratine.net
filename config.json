@@ -109,8 +109,13 @@
         },
         {
             "type": "post",
-            "post": "python-auto-clicker",
+            "post": "issues-when-using-auto-py-to-exe",
             "reason": "Popular"
+        },
+        {
+            "type": "post",
+            "post": "python-encryption-and-decryption-with-pycryptodome",
+            "reason": "New"
         },
         {
             "type": "image",
@@ -121,11 +126,6 @@
             "type": "image",
             "link": "https://youtu.be/YPiHBtddefI",
             "image_url": "https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg"
-        },
-        {
-            "type": "post",
-            "post": "issues-when-using-auto-py-to-exe",
-            "reason": "New"
         },
         {
             "type": "post",
@@ -144,13 +144,13 @@
         },
         {
             "type": "post",
-            "post": "simulate-keypresses-in-python",
-            "reason": "Popular"
+            "post": "how-to-hash-files-in-python",
+            "reason": "New"
         },
         {
             "type": "post",
-            "post": "who-is-on-my-network",
-            "reason": "New"
+            "post": "simulate-keypresses-in-python",
+            "reason": "Popular"
         }
     ]
 }
