@@ -1,7 +1,7 @@
 title: "How to Hash Files in Python"
 date: 2019-05-07
 category: Tutorials
-tags: [python]
+tags: [python, hashing, cyber-security]
 feature: feature.png
 description: "Hashing files allows us to generate a string/byte sequence that can help identify a file. This can then be used by comparing the hashes of two or more files to see if these files are the same as well as other applications."
 

@@ -1,7 +1,7 @@
 title: "How To Hash Passwords In Python"
 date: 2019-05-20
 category: Tutorials
-tags: [python, cyber-security]
+tags: [python, hashing, cyber-security]
 feature: feature.png
 description: "In this tutorial I cover the usage of PBKDF2_HMAC to encrypt passwords with a salt using Python."
 

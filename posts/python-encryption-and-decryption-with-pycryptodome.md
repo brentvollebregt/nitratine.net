@@ -1,7 +1,7 @@
 title: "Python Encryption and Decryption with PyCryptodome"
 date: 2019-05-14
 category: Tutorials
-tags: [python, encryption]
+tags: [python, encryption, cyber-security]
 feature: feature.png
 description: "PyCryptodome is a fork of PyCrypto that brings enhancements on top of the now unmaintained PyCrypto library. This tutorial demonstrates using the library by encrypting strings and files using AES."
 
