@@ -340,6 +340,11 @@ def sitemap():
     )
 
 
+@app.route('/ads.txt')
+def ads_txt():
+    return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(SITE['google_adsense_publisher_id'])
+
+
 @app.route('/<path:path>/')
 def redirects(path):
     if path not in REDIRECTS:

@@ -32,7 +32,7 @@ DEFAULT = {
         'default_author': 'Brent Vollebregt',
         'disqus_shortname': 'nitratine',
         'google_analytics_id': '',
-        'google_ad_client': '',
+        'google_adsense_publisher_id': '',
         'youtube_channel_name': '',
         'youtube_channel_id': '',
         'youtube_data_api_key': '',
