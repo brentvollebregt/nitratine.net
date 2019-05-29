@@ -49,6 +49,20 @@ SITE = config.get('site')
 REDIRECTS = config.get('redirects')
 HOME_TILES = config.get('home-tiles')
 
+# Get latest YouTube Videos (made the images static - no dynamic calls)
+requested_videos = requests.get(
+    'https://www.googleapis.com/youtube/v3/search?key=' + SITE['youtube_data_api_key'] + '&channelId=' + SITE['youtube_channel_id'] + '&part=id&order=date&maxResults=6&type=video'
+).json()['items']
+
+recent_videos = []
+for video in requested_videos:
+    if 'videoId' not in video['id']:
+        continue
+    recent_videos.append({
+        'thumb_src': 'https://img.youtube.com/vi/' + video['id']['videoId'] + '/mqdefault.jpg',
+        'href': 'https://www.youtube.com/watch?v=' + video['id']['videoId']
+    })
+
 
 # App instances
 
@@ -385,6 +399,11 @@ def post_assets(path):
 @app.context_processor
 def inject_site():
     return dict(site=SITE)
+
+
+@app.context_processor
+def inject_recent_videos():
+    return dict(recent_videos=recent_videos)
 
 
 def ymd_format(date):
