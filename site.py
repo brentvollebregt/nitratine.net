@@ -63,6 +63,15 @@ for video in requested_videos:
         'href': 'https://www.youtube.com/watch?v=' + video['id']['videoId']
     })
 
+# Get GitHub repository stats
+github_repos_request = requests.get('https://api.github.com/users/' + SITE['github_username'] + '/repos')
+github_repos_request_data = github_repos_request.json()
+available_repos = sorted(
+    [[i['full_name'], i['stargazers_count']] for i in github_repos_request_data],
+    key=lambda x: x[1],
+    reverse=True
+)
+
 
 # App instances
 
@@ -233,14 +242,6 @@ def portfolio():
 def data():
     public_posts = get_posts()
     available_posts = [[p.path, p['title']] for p in public_posts]
-
-    req = requests.get('https://api.github.com/users/' + SITE['github_username'] + '/repos')
-    req_data = req.json()
-    available_repos = sorted(
-        [[i['full_name'], i['stargazers_count']] for i in req_data],
-        key=lambda x: x[1],
-        reverse=True
-    )
 
     return render_template(
         'data.html',

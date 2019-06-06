@@ -1,6 +1,6 @@
 title: "JavaScript Date Methods Return Values"
 date: 2019-05-08
-category: General
+category: Tools
 tags: [javascript, tool]
 feature: feature.png
 description: "This is a tool to help you quickly look at function return types of a JavaScript date object and change the date to see what happens"
