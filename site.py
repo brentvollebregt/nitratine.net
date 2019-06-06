@@ -29,20 +29,20 @@ def my_renderer(text):
 
 
 # Flat pages and freezing
-FLATPAGES_AUTO_RELOAD = config.get('serve-and-build', 'flatpages', 'debug')
-FLATPAGES_EXTENSION = config.get('serve-and-build', 'flatpages', 'extension')
-FLATPAGES_ROOT = config.get('serve-and-build', 'flatpages', 'root')
-FLATPAGES_MARKDOWN_EXTENSIONS = config.get('serve-and-build', 'flatpages', 'markdown-extensions')
+FLATPAGES_AUTO_RELOAD = True
+FLATPAGES_EXTENSION = '.md'
+FLATPAGES_ROOT = 'posts'
+FLATPAGES_MARKDOWN_EXTENSIONS = ['codehilite', 'extra', 'toc']
 FLATPAGES_HTML_RENDERER = my_renderer
 
 # Pagination
-PAGINATION_PAGE_MAX = config.get('serve-and-build', 'pagination', 'max-per-page')
-PAGINATION_EITHER_SIDE = config.get('serve-and-build', 'pagination', 'pages-either-side-in-nav')
+PAGINATION_PAGE_MAX = 10 # Max amount of posts per page
+PAGINATION_EITHER_SIDE = 2 # Number of tiles beside current tile/page in pagination navigation e.g. 2 = P P C N N
 
 # Paths
-FREEZER_DESTINATION = config.get('serve-and-build', 'paths', 'build-destination')
-ASSETS_LOCATION = config.get('serve-and-build', 'paths', 'assets')
-POST_ASSETS_LOCATION = config.get('serve-and-build', 'paths', 'post-assets')
+FREEZER_DESTINATION = 'docs' # Build location
+ASSETS_LOCATION = 'assets' # Site assets location
+POST_ASSETS_LOCATION = 'post-assets' # Assets that only posts use (images, files, JavaScript...)
 
 # Site specific
 SITE = config.get('site')

@@ -1,25 +1,4 @@
 {
-    "serve-and-build": {
-        "flatpages": {
-            "debug": true,
-            "extension": ".md",
-            "root": "posts",
-            "markdown-extensions": [
-                "codehilite",
-                "extra",
-                "toc"
-            ]
-        },
-        "pagination": {
-            "max-per-page": 10,
-            "pages-either-side-in-nav": 2
-        },
-        "paths": {
-            "build-destination": "docs",
-            "assets": "assets",
-            "post-assets": "post-assets"
-        }
-    },
     "site": {
         "title": "Nitratine",
         "url": "https://nitratine.net",
