@@ -35,6 +35,9 @@
                     <h1 class="blog-post-title">{{ page.title }}</h1>
                     <p class="text-muted">
                         <a href="/blog/archive/#{{ page.date.year }}" class="text-muted">{{ ymd_format(page.date) }}</a>
+                        {%- if page.author -%}
+                        <span> by <a {% if page.author_link %}href="{{ page.author_link | safe }}"{% endif %} class="text-muted">{{ page.author }}</a></span>
+                        {% endif %}
                         <a href="/blog/categories/#{{ page.category }}" class="badge badge-primary ml-2">{{ page.category }}</a>
                         {% for tag in page.tags %}
                         <a href="/blog/tags/#{{ tag }}" class="badge badge-warning">{{ tag }}</a>
