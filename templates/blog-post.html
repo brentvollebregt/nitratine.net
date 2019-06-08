@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/assets/css/pygments.css">
 
         <meta name="description" content="{{ page.description }}">
-        <meta name="author" content="{%- if page.author -%}{{ page.author }}{%- else -%}{{ site.default_author }}{%- endif -%}">
+        <meta name="author" content="{{ page.author or site.default_author }}">
         <meta property="og:title" content="{{ page.title }}">
         <meta property="og:description" content="{{ page.description }}">
         <meta property="og:image" content="{% if page.feature %}/post-assets/{{ page.path }}/{{ page.feature }}{% else %}/assets/img/default-feature.png{% endif %}">
