@@ -9,6 +9,3 @@ This repo is the source for nitratine.net. The files in the `gh-pages` branch ar
  
 ## Deployment
 An automated deployment system can be found in `deploy.py` which when run, will build the site, clone `gh-pages` branch from GitHub, swap out the build, commit, tag and push. 
-
-### TODO
- - Compress images where they can be (https://imagecompressor.com/)
