@@ -35,3 +35,7 @@ with open(input_file, "r") as source:
                 del row[col_index]
             writer.writerow(row)
 ```
+
+## Other Useful and Related CSV Tools
+ - [CSV Splitter](https://gist.github.com/jrivero/1085501/a2401c345e8abb46f3623e08afbe36e59923f94e): Splits a CSV file into multiple files with a row limit per file
+ - [CSV to Sqlite](https://github.com/zblesk/csv-to-sqlite): A command-line tool that copies data from CSV files into a SQLite database.
