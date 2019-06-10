@@ -21,22 +21,24 @@ Next go to [https://myaccount.google.com/lesssecureapps](https://myaccount.googl
 
 ![Allow less secure apps switch](/post-assets/how-to-send-an-email-with-python/alsa1.png)
 
+> If you want/do have 2-Step Verification enabled, read up on how to [sign in using an app password](https://support.google.com/accounts/answer/185833). This allows you to generate a password specifically for this 'application' which allows this script to be compatible with a Google account using 2-Step Verification.
+
 ## Simple Email
 To start off, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
 
 ```python
 import smtplib
 
-email = 'myaddress@gmail.com'
-password = 'password'
-send_to_email = 'sentoaddreess@gmail.com'
-message = 'This is my message'
+email = 'myaddress@gmail.com' # Your email
+password = 'password' # Your email account password
+send_to_email = 'sentoaddreess@gmail.com' # Who you are sending the message to
+message = 'This is my message' # The message in the email
 
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.starttls()
-server.login(email, password)
-server.sendmail(email, send_to_email , message)
-server.quit()
+server = smtplib.SMTP('smtp.gmail.com', 587) # Connect to the server
+server.starttls() # Use TLS
+server.login(email, password) # Login to the email server
+server.sendmail(email, send_to_email , message) # Send the email
+server.quit() # Logout of the email server
 ```
 
 By changing the initial variables at the top, the email will be sent. Make sure to change:
@@ -60,7 +62,7 @@ from email.mime.multipart import MIMEMultipart
 email = 'myaddress@gmail.com'
 password = 'password'
 send_to_email = 'sentoaddreess@gmail.com'
-subject = 'This is the subject'
+subject = 'This is the subject' # The subject line
 message = 'This is my message'
 
 msg = MIMEMultipart()
@@ -68,12 +70,13 @@ msg['From'] = email
 msg['To'] = send_to_email
 msg['Subject'] = subject
 
+ # Attach the message to the MIMEMultipart object
 msg.attach(MIMEText(message, 'plain'))
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
 server.login(email, password)
-text = msg.as_string()
+text = msg.as_string() # You now need to convert the MIMEMultipart object to a string to send
 server.sendmail(email, send_to_email, text)
 server.quit()
 ```
@@ -111,13 +114,15 @@ msg['Subject'] = subject
 
 msg.attach(MIMEText(message, 'plain'))
 
+# Setup the attachment
 filename = os.path.basename(file_location)
 attachment = open(file_location, "rb")
 part = MIMEBase('application', 'octet-stream')
-part.set_payload((attachment).read())
+part.set_payload(attachment.read())
 encoders.encode_base64(part)
 part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
 
+# Attach the attachment to the MIMEMultipart object
 msg.attach(part)
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -155,6 +160,7 @@ msg['From'] = email
 msg['To'] = send_to_email
 msg['Subject'] = subject
 
+# Attach both plain and HTML versions
 msg.attach(MIMEText(messagePlain, 'plain'))
 msg.attach(MIMEText(messageHTML, 'html'))
 
@@ -172,9 +178,75 @@ As needed before, change the variables at the top but also messageHTML and messa
 
 The image above shows that I received the email with the link and inline CSS colouring on the specified text.
 
+## Sending to Multiple Emails
+If you want to send the same email to many email addresses, the best method would be to first create all the objects you want in the email, login and then make each `MIMEMultipart` individually for each email.
+
+```python
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+import os.path
+
+email = 'myaddress@gmail.com'
+password = 'password'
+send_to_emails = ['sentoaddreess@gmail.com', 'sentoaddreess2@gmail.com'] # List of email addresses
+subject = 'This is the subject'
+message = 'This is my message'
+file_location = 'C:\\Users\\You\\Desktop\\attach.txt'
+
+# Create the attachment file (only do it once)
+filename = os.path.basename(file_location)
+attachment = open(file_location, "rb")
+part = MIMEBase('application', 'octet-stream')
+part.set_payload(attachment.read())
+encoders.encode_base64(part)
+part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+# Connect and login to the email server
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login(email, password)
+
+# Loop over each email to send to
+for send_to_email in send_to_emails:
+    # Setup MIMEMultipart for each email address (if we don't do this, the emails will concat on each email sent)
+    msg = MIMEMultipart()
+    msg['From'] = email
+    msg['To'] = send_to_email
+    msg['Subject'] = subject
+
+    # Attach the message to the MIMEMultipart object
+    msg.attach(MIMEText(message, 'plain'))
+    # Attach the attachment file
+    msg.attach(part)
+    
+    # Send the email to this specific email address
+    server.sendmail(email, send_to_email, msg.as_string()) 
+
+# Quit the email server when everything is done
+server.quit()
+```
+
+This method also makes sure that everyone that receives the email will not see the email of everyone else that the email was sent to. If you want to send one email to many addresses and let each recipient see who the email was sent to, you can simply set `msg['To']` to the recipient emails split by commas and then call `server.send_message` to send the email passing `msg` not as a string. 
+
+```python
+send_to_emails = ['volleys2468@gmail.com', 'fayvandermeulen1@gmail.com']
+
+# Was: msg['To'] = send_to_email
+msg['To'] = ', '.join(send_to_emails)
+
+# Was: server.sendmail(email, send_to_email, text) where text = msg.as_string()
+server.send_message(msg) 
+```
+
+> These lines are examples of lines switched in examples above excluding the snippet in "Sending to Multiple Emails"
+
 ## Sources
 - [WikiBooks](https://en.wikibooks.org/wiki/Python_Programming/Email)
 - [naelshiab.com](http://naelshiab.com/tutorial-send-email-python/)
+- [Python docs email examples](https://docs.python.org/3.4/library/email-examples.html)
 
 *Most recently modified on 15-7-18 ( added video )*
 

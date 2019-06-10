@@ -1,7 +1,7 @@
 title: "Asymmetric Encryption and Decryption in Python"
 date: 2018-09-16
 category: Tutorials
-tags: [python, encryption]
+tags: [python, encryption, cyber-security]
 feature: feature.png
 description: "In this post I demonstrate the usage of the cryptography module in Python by using using the asymmetric key method RSA to encrypt and decrypt messages."
 

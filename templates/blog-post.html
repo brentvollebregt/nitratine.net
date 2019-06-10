@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/assets/css/pygments.css">
 
         <meta name="description" content="{{ page.description }}">
-        <meta name="author" content="{%- if page.author -%}{{ page.author }}{%- else -%}{{ site.default_author }}{%- endif -%}">
+        <meta name="author" content="{{ page.author or site.default_author }}">
         <meta property="og:title" content="{{ page.title }}">
         <meta property="og:description" content="{{ page.description }}">
         <meta property="og:image" content="{% if page.feature %}/post-assets/{{ page.path }}/{{ page.feature }}{% else %}/assets/img/default-feature.png{% endif %}">
@@ -16,11 +16,11 @@
         {%- if page.disable_ads -%}
             <!-- Ads are disabled for this page -->
         {%- else -%}
-            {%- if site.google_ad_client -%}
+            {%- if site.google_adsense_publisher_id -%}
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({
-                      google_ad_client: "{{ site.google_ad_client }}",
+                      google_ad_client: "ca-{{ site.google_adsense_publisher_id }}",
                       enable_page_level_ads: true
                  });
             </script>
@@ -35,6 +35,9 @@
                     <h1 class="blog-post-title">{{ page.title }}</h1>
                     <p class="text-muted">
                         <a href="/blog/archive/#{{ page.date.year }}" class="text-muted">{{ ymd_format(page.date) }}</a>
+                        {%- if page.author -%}
+                        <span> by <a {% if page.author_link %}href="{{ page.author_link | safe }}"{% endif %} class="text-muted">{{ page.author }}</a></span>
+                        {% endif %}
                         <a href="/blog/categories/#{{ page.category }}" class="badge badge-primary ml-2">{{ page.category }}</a>
                         {% for tag in page.tags %}
                         <a href="/blog/tags/#{{ tag }}" class="badge badge-warning">{{ tag }}</a>

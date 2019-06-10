@@ -16,7 +16,7 @@
         "upstream": "https://github.com/brentvollebregt/nitratine.net.git"
     },
     "versioning": {
-        "build": 260,
+        "build": 261,
         "version": "v3.0.0"
     }
 }

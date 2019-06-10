@@ -3,23 +3,6 @@ import os
 
 
 DEFAULT = {
-    'serve-and-build': {
-        'flatpages': {
-            'debug': True,
-            'extension': '.md',
-            'root': 'posts',
-            'markdown-extensions': ['codehilite', 'extra', 'toc'],
-        },
-        'pagination': {
-            'max-per-page': 10,
-            'pages-either-side-in-nav': 2,
-        },
-        'paths': {
-            'build-destination': 'docs',
-            'assets': 'assets',
-            'post-assets': 'post-assets',
-        }
-    },
     'site': {
         'title': 'Nitratine',
         'url': 'https://nitratine.net',
@@ -32,7 +15,7 @@ DEFAULT = {
         'default_author': 'Brent Vollebregt',
         'disqus_shortname': 'nitratine',
         'google_analytics_id': '',
-        'google_ad_client': '',
+        'google_adsense_publisher_id': '',
         'youtube_channel_name': '',
         'youtube_channel_id': '',
         'youtube_data_api_key': '',
@@ -42,6 +25,7 @@ DEFAULT = {
             "Tutorials": "&#x1F4D6;",
             "Apps": "&#x1F4F1;",
             "Investigations": "&#x1F50D;",
+            "Tools": "&#x1F6E0;",
             "General": "&#x1F4F0;"
         }
     },

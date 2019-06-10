@@ -1,25 +1,4 @@
 {
-    "serve-and-build": {
-        "flatpages": {
-            "debug": true,
-            "extension": ".md",
-            "root": "posts",
-            "markdown-extensions": [
-                "codehilite",
-                "extra",
-                "toc"
-            ]
-        },
-        "pagination": {
-            "max-per-page": 10,
-            "pages-either-side-in-nav": 2
-        },
-        "paths": {
-            "build-destination": "docs",
-            "assets": "assets",
-            "post-assets": "post-assets"
-        }
-    },
     "site": {
         "title": "Nitratine",
         "url": "https://nitratine.net",
@@ -32,7 +11,7 @@
         "default_author": "Brent Vollebregt",
         "disqus_shortname": "nitratine",
         "google_analytics_id": "UA-117153268-2",
-        "google_ad_client": "ca-pub-6407227183932047",
+        "google_adsense_publisher_id": "pub-6407227183932047",
         "youtube_channel_name": "PrivateSplat",
         "youtube_channel_id": "UCesEknt3SRX9R9W_f93Tb7g",
         "youtube_data_api_key": "AIzaSyDz6QJ7H1Ca575XwvKnO8Q4MVATUxLdHYM",
@@ -42,6 +21,8 @@
           "Tutorials": "&#x1F4D6;",
           "Apps": "&#x1F4F1;",
           "Investigations": "&#x1F50D;",
+          "Tools": "&#x1F6E0;",
+          "Snippets": "&#x2702;",
           "General": "&#x1F4F0;"
         }
     },
@@ -109,8 +90,13 @@
         },
         {
             "type": "post",
-            "post": "python-auto-clicker",
+            "post": "issues-when-using-auto-py-to-exe",
             "reason": "Popular"
+        },
+        {
+            "type": "post",
+            "post": "python-encryption-and-decryption-with-pycryptodome",
+            "reason": "New"
         },
         {
             "type": "image",
@@ -121,11 +107,6 @@
             "type": "image",
             "link": "https://youtu.be/YPiHBtddefI",
             "image_url": "https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg"
-        },
-        {
-            "type": "post",
-            "post": "issues-when-using-auto-py-to-exe",
-            "reason": "New"
         },
         {
             "type": "post",
@@ -144,13 +125,13 @@
         },
         {
             "type": "post",
-            "post": "simulate-keypresses-in-python",
-            "reason": "Popular"
+            "post": "how-to-hash-files-in-python",
+            "reason": "New"
         },
         {
             "type": "post",
-            "post": "who-is-on-my-network",
-            "reason": "New"
+            "post": "simulate-keypresses-in-python",
+            "reason": "Popular"
         }
     ]
 }

@@ -39,13 +39,10 @@
 
                     <div class="card p-3 mb-3 bg-light">
                         <h4 class="text-center text-lg-left">Recent Videos</h4>
-                        <div id="recent-yt-videos" class="yt_video_container"></div>
+                        <div id="recent-yt-videos" class="yt_video_container">
+                            {% for video in recent_videos %}
+                                <img src="{{ video.thumb_src }}" onclick="window.open('{{ video.href }}', '_blank')">
+                            {% endfor %}
+                        </div>
                     </div>
-
-                    <script>
-                        let youtube_data_api_key = '{{ site.youtube_data_api_key }}';
-                        let youtube_channel_id = '{{ site.youtube_channel_id }}';
-                    </script>
-                    <script type="text/javascript" defer src="/assets/js/getRecentYouTubeVideos.js"></script>
-
                 </aside>

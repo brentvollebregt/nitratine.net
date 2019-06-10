@@ -12,6 +12,7 @@ from urllib.parse import quote_plus
 import subprocess
 import shutil
 from collections import defaultdict
+import string
 
 import config
 
@@ -28,25 +29,48 @@ def my_renderer(text):
 
 
 # Flat pages and freezing
-FLATPAGES_AUTO_RELOAD = config.get('serve-and-build', 'flatpages', 'debug')
-FLATPAGES_EXTENSION = config.get('serve-and-build', 'flatpages', 'extension')
-FLATPAGES_ROOT = config.get('serve-and-build', 'flatpages', 'root')
-FLATPAGES_MARKDOWN_EXTENSIONS = config.get('serve-and-build', 'flatpages', 'markdown-extensions')
+FLATPAGES_AUTO_RELOAD = True
+FLATPAGES_EXTENSION = '.md'
+FLATPAGES_ROOT = 'posts'
+FLATPAGES_MARKDOWN_EXTENSIONS = ['codehilite', 'extra', 'toc']
 FLATPAGES_HTML_RENDERER = my_renderer
 
 # Pagination
-PAGINATION_PAGE_MAX = config.get('serve-and-build', 'pagination', 'max-per-page')
-PAGINATION_EITHER_SIDE = config.get('serve-and-build', 'pagination', 'pages-either-side-in-nav')
+PAGINATION_PAGE_MAX = 10 # Max amount of posts per page
+PAGINATION_EITHER_SIDE = 2 # Number of tiles beside current tile/page in pagination navigation e.g. 2 = P P C N N
 
 # Paths
-FREEZER_DESTINATION = config.get('serve-and-build', 'paths', 'build-destination')
-ASSETS_LOCATION = config.get('serve-and-build', 'paths', 'assets')
-POST_ASSETS_LOCATION = config.get('serve-and-build', 'paths', 'post-assets')
+FREEZER_DESTINATION = 'docs' # Build location
+ASSETS_LOCATION = 'assets' # Site assets location
+POST_ASSETS_LOCATION = 'post-assets' # Assets that only posts use (images, files, JavaScript...)
 
 # Site specific
 SITE = config.get('site')
 REDIRECTS = config.get('redirects')
 HOME_TILES = config.get('home-tiles')
+
+# Get latest YouTube Videos (made the images static - no dynamic calls)
+requested_videos = requests.get(
+    'https://www.googleapis.com/youtube/v3/search?key=' + SITE['youtube_data_api_key'] + '&channelId=' + SITE['youtube_channel_id'] + '&part=id&order=date&maxResults=6&type=video'
+).json()['items']
+
+recent_videos = []
+for video in requested_videos:
+    if 'videoId' not in video['id']:
+        continue
+    recent_videos.append({
+        'thumb_src': 'https://img.youtube.com/vi/' + video['id']['videoId'] + '/mqdefault.jpg',
+        'href': 'https://www.youtube.com/watch?v=' + video['id']['videoId']
+    })
+
+# Get GitHub repository stats
+github_repos_request = requests.get('https://api.github.com/users/' + SITE['github_username'] + '/repos')
+github_repos_request_data = github_repos_request.json()
+available_repos = sorted(
+    [[i['full_name'], i['stargazers_count']] for i in github_repos_request_data],
+    key=lambda x: x[1],
+    reverse=True
+)
 
 
 # App instances
@@ -219,14 +243,6 @@ def data():
     public_posts = get_posts()
     available_posts = [[p.path, p['title']] for p in public_posts]
 
-    req = requests.get('https://api.github.com/users/' + SITE['github_username'] + '/repos')
-    req_data = req.json()
-    available_repos = sorted(
-        [[i['full_name'], i['stargazers_count']] for i in req_data],
-        key=lambda x: x[1],
-        reverse=True
-    )
-
     return render_template(
         'data.html',
         repos=available_repos,
@@ -339,6 +355,11 @@ def sitemap():
     )
 
 
+@app.route('/ads.txt')
+def ads_txt():
+    return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(SITE['google_adsense_publisher_id'])
+
+
 @app.route('/<path:path>/')
 def redirects(path):
     if path not in REDIRECTS:
@@ -379,6 +400,11 @@ def post_assets(path):
 @app.context_processor
 def inject_site():
     return dict(site=SITE)
+
+
+@app.context_processor
+def inject_recent_videos():
+    return dict(recent_videos=recent_videos)
 
 
 def ymd_format(date):
@@ -476,7 +502,9 @@ def new_post():
 
     tags = input('Tags (separated by comma): ').lower()
 
-    post_id = quote_plus(title.lower().replace(' ', '-'))
+    post_id = quote_plus(''.join(
+        [i for i in title.lower().replace(' ', '-') if i in string.ascii_letters + string.digits + '-']
+    ))
     print('Post Id: {0}'.format(post_id))
 
     # Write file

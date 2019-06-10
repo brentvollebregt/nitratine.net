@@ -14,9 +14,8 @@ with open('deploy-config.json') as f:
 
 # Create temporary directory
 temporary_directory = tempfile.gettempdir() + '\\deployment-build_' + config['repository']['name']
-if os.path.exists(temporary_directory):
-    shutil.rmtree(temporary_directory)
-os.makedirs(temporary_directory)
+if not os.path.exists(temporary_directory):
+    os.makedirs(temporary_directory)
 print('[Deploy] Using: ' + temporary_directory)
 
 
@@ -32,28 +31,57 @@ os.environ['build'] = str(next_build)
 site.build()
 
 
-# Clone branch
-print('[Deploy] Cloning branch')
-username = config['repository']['auth']['username'] or input('Username: ')
-password = config['repository']['auth']['password'] or input('Password: ')
-git_repo = config['repository']['upstream']
-url = git_repo.split('://')[0] + '://' + username + ':' + password.replace('@', '%40') + '@' + git_repo.split('://')[1]
-process = subprocess.Popen(
-    ['git', 'clone', '-b', 'gh-pages', '--single-branch', url],
-    stdout=subprocess.PIPE,
-    cwd=temporary_directory,
-    universal_newlines=True,
-    shell=True
-)
-for stdout_line in iter(process.stdout.readline, ""):
-    print(stdout_line, end='')
-process.stdout.close()
-process.wait()
+# Check if we need to clone
+cloned_git_root_dir = temporary_directory + '\\' + config['repository']['name'] + '\\'
+if not os.path.exists(cloned_git_root_dir):
+    # Clone branch
+    print('[Deploy] Cloning branch')
+    username = config['repository']['auth']['username'] or input('Username: ')
+    password = config['repository']['auth']['password'] or input('Password: ')
+    git_repo = config['repository']['upstream']
+    url = git_repo.split('://')[0] + '://' + username + ':' + password.replace('@', '%40') + '@' + git_repo.split('://')[1]
+    process = subprocess.Popen(
+        ['git', 'clone', '-b', 'gh-pages', '--single-branch', url],
+        stdout=subprocess.PIPE,
+        cwd=temporary_directory,
+        universal_newlines=True,
+        shell=True
+    )
+    for stdout_line in iter(process.stdout.readline, ""):
+        print(stdout_line, end='')
+    process.stdout.close()
+    process.wait()
+else:
+    # Checkout any modifications and pull
+    print('[Deploy] Checking out current changes')
+    process = subprocess.Popen(
+        ['git', 'checkout', 'gh-pages'],
+        stdout=subprocess.PIPE,
+        cwd=cloned_git_root_dir,
+        universal_newlines=True,
+        shell=True
+    )
+    for stdout_line in iter(process.stdout.readline, ""):
+        print(stdout_line, end='')
+    process.stdout.close()
+    process.wait()
+
+    print('[Deploy] Pulling latest changes')
+    process = subprocess.Popen(
+        ['git', 'pull', 'origin', 'gh-pages'],
+        stdout=subprocess.PIPE,
+        cwd=cloned_git_root_dir,
+        universal_newlines=True,
+        shell=True
+    )
+    for stdout_line in iter(process.stdout.readline, ""):
+        print(stdout_line, end='')
+    process.stdout.close()
+    process.wait()
 
 
 # Clear previous build from repo
 print('[Deploy] Clearing previous build')
-cloned_git_root_dir = temporary_directory + '\\' + config['repository']['name'] + '\\'
 for entry in [i for i in os.listdir(cloned_git_root_dir) if i not in ['.git'] + config['repository']['ignore']]:
     if os.path.isfile(cloned_git_root_dir + entry):
         os.remove(cloned_git_root_dir + entry)
@@ -162,8 +190,3 @@ else:
 # Clear build
 print('[Deploy] Clearing build')
 shutil.rmtree(build_dir)
-
-# Delete push environment
-question = input('Delete push environment? ')
-if question.lower() in ['yes', 'y', 'yea']:
-    shutil.rmtree(temporary_directory)
