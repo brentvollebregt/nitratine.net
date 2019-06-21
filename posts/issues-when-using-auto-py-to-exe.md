@@ -141,7 +141,11 @@ If you double click to run your Python script, what happens? Does it open and cl
 You most likely think the output should stay visible because you are always using IDLE or an IDE and that's what those tools do. Add a statement like `input()` at the end of your script to block execution and wait for you to press enter before closing. 
 
 ### 'python'/'pip'/'auto-py-to-exe' is not recognised as an internal or external command, operable program or batch file.
-This occurs because the path that these executables are located in is not on your path; thus cmd doesn't know where to look for them. You need to add these paths to the PATH environment variable, to find these execute the correct command to find the path.
+This occurs because the path that these executables are located in is not on your path; thus cmd doesn't know where to look for them. You need to add these paths to the PATH environment variable so cmd knows where to look for the executable you are trying to execute.
+
+I created a script that can help setup these paths automatically, which can be found in my "[Fix: 'python' is not recognized as an internal or external command](/blog/post/fix-python-is-not-recognized-as-an-internal-or-external-command/)" post. 
+
+If you want a more manual approach to understand what is occurring, watch my [video on how to setup Pythons PIP](https://youtu.be/cm6WDGAzDPM). This will show you how to add the `\Scripts` folder, but I also recommend you add the root Python directory (same path without '\Scripts') also so the `python` command will work. The paths you will need to add can be found using the commands below:
 
 ```python
 import os, sys
@@ -153,9 +157,7 @@ print (os.path.dirname(sys.executable))
 print (os.path.dirname(sys.executable) + "\\Scripts")
 ```
 
-Now go to my [video on how to setup Pythons PIP](https://youtu.be/cm6WDGAzDPM) and follow the instructions on how to add the path that was printed to the PATH environment variable.
-
-> If you are using something older than Windows 10, setting the PATH environment variable will be a bit different. If it is just one line, add a `;` to the end and then paste the path after the `;`.
+> If you are using something older than Windows 10, setting the PATH environment variable will be a bit different than what is demonstrated in the video. If it is just one line, add a `;` to the end and then paste the path after the `;`.
 
 ### The exe Doesn't Work on Another Computer﻿
 This may be an architecture issue. PyInstaller will build an executable using the architecture of the machine it was built with. This means if you are using a 32bit machine, it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures﻿.
@@ -169,6 +171,7 @@ This is your anti-virus vendors fault. Check out [this](https://github.com/pyins
 ### Lots of Errors Appear in the Output
 These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after-all, they are only warnings.
 
+[Khajiit Haswares had mentioned in a comment](https://www.youtube.com/watch?v=lOIJIk_maO4&lc=UgyAMbxkJiMcMpRb92R4AaABAg) on the video related to this project that if you add `C:\Windows\System32\downlevel` to your PATH variable, these dlls that were previously not being found can now be found. This is because the files missing are commonly found in this folder. Adding this folder to your path to now successfully locate these files can also speed up packaging times.
 
 ## Additional Information and Explanations
 Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions of why and how things occur.
