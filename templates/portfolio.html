@@ -45,11 +45,13 @@
 
                     <hr>
 
-                    <a href="{{ url_for('blog_post', path='the-nitratine-project') }}"><h2 class="mt-3 text-center">Nitratine (Version 1)</h2></a>
-                    <img src="/post-assets/the-nitratine-project/nitratine1.jpg" alt="PyTutorials Channel Header" style="width: 100%;" class="mb-2">
-                    <p>This version of Nitratine was the original website I built to host all my content.</p>
-                    <p>It is a fully dynamic server with a cms built in. It can do server side scripting, uses Jinja for templating, has mobile support and more.</p>
-                    <p>I no longer use it as I felt a static site was much more suitable and easier to maintain. I still get a bit of traffic to it each day though.</p>
+                    <a href="https://github.com/brentvollebregt/multi-clipboard"><h2 class="mt-3 text-center">Multi Clipboard</h2></a>
+                    <img src="/post-assets/multi-clipboard/main-gui.png" alt="PyTutorials Channel Header" style="width: 100%;" class="mb-2">
+                    <p>This project fixed my issue of having to re-copy something after I just overwrote my clipboard with something else.</p>
+                    <p>It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. The package comes with a listener that listens for <code>Ctrl + Windows + C</code> which can be enabled and disabled has an option to be started on startup. For maximum speed, you can simply click a virtual clipboard to put it on your clipboard and it will close (can be turned off). It supports unlimited clipboards and many types of clipboard formats.</p>
+                    <blockquote>
+                        <p>Associated <a href="{{ url_for('blog_post', path='multi-clipboard') }}">post</a></p>
+                    </blockquote>
 
                 </div>
                 <div class="col-xs-12 col-sm-6 col-centered">
@@ -68,13 +70,11 @@
 
                     <hr>
 
-                    <a href="https://github.com/brentvollebregt/multi-clipboard"><h2 class="mt-3 text-center">Multi Clipboard</h2></a>
-                    <img src="/post-assets/multi-clipboard/main-gui.png" alt="PyTutorials Channel Header" style="width: 100%;" class="mb-2">
-                    <p>This project fixed my issue of having to re-copy something after I just overwrote my clipboard with something else.</p>
-                    <p>It does this by opening a simple GUI that allows you to have temporary clipboards like a hotbar. The package comes with a listener that listens for <code>Ctrl + Windows + C</code> which can be enabled and disabled has an option to be started on startup. For maximum speed, you can simply click a virtual clipboard to put it on your clipboard and it will close (can be turned off). It supports unlimited clipboards and many types of clipboard formats.</p>
-                    <blockquote>
-                        <p>Associated <a href="{{ url_for('blog_post', path='multi-clipboard') }}">post</a></p>
-                    </blockquote>
+                    <a href="https://nitratine.net/"><h2 class="mt-3 text-center">nitratine.net</h2></a>
+                    <img src="/assets/img/logo.png" alt="Nitratine Logo" style="width: 100%;" class="mb-2">
+                    <p>Nitratine is a website where I share projects developed by me and tutorials on topics that I'm interested in. Currently this is the third version of the site and is hosted statically using GitHub Pages and built with a <a href="https://github.com/brentvollebregt/nitratine.net">custom Python build script</a>.</p>
+                    <p>When developing and writing posts, the website can be hosted locally using Flask which then changes to be viewed without having to re-build the site on each modification. Posts are written in markdown which are converted to HTML using <a href="https://github.com/Flask-FlatPages/Flask-FlatPages">Flask-FlatPages</a>.</p>
+                    <p>Due to the static nature of the site, I use <a href="https://github.com/Frozen-Flask/Frozen-Flask">Frozen-Flask</a> to freeze the site into a static version that can easily be hosted on GitHub pages. A deploy script then commits, tags and pushes all changes on a separate branch.</p>
 
                     <hr>
 
