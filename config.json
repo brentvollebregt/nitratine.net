@@ -94,6 +94,11 @@
             "reason": "Popular"
         },
         {
+            "type": "raw",
+            "link": "https://emotionify.nitratine.net/",
+            "content": "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/post-assets/emotionify/emotionify-banner.png\" alt=\"Emotionify Banner\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Sort Spotify playlists using Spotify's pre-calculated audio features to attempt to emotionally gradient playlists.</p> </div>"
+        },
+        {
             "type": "post",
             "post": "python-encryption-and-decryption-with-pycryptodome",
             "reason": "New"
@@ -125,7 +130,7 @@
         },
         {
             "type": "post",
-            "post": "how-to-hash-files-in-python",
+            "post": "how-to-hash-passwords-in-python",
             "reason": "New"
         },
         {
