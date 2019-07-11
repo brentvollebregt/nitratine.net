@@ -9,6 +9,7 @@ description: "Emotionify is a webapp that allows users to login to Spotify, sele
 
 <div align="center" style="padding: 20px 20px 40px 20px">
     <img src="/post-assets/emotionify/emotionify-banner.png" alt="Emotionify Banner">
+    <a href="https://emotionify.nitratine.net/"><button class="btn btn-outline-secondary" type="button">Visit Emotionify</button></a>
 </div>
 
 ## What is This?
