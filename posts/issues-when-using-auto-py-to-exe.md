@@ -173,6 +173,9 @@ These warnings can be ignored in most cases. I have not currently found a situat
 
 [Khajiit Haswares had mentioned in a comment](https://www.youtube.com/watch?v=lOIJIk_maO4&lc=UgyAMbxkJiMcMpRb92R4AaABAg) on the video related to this project that if you add `C:\Windows\System32\downlevel` to your PATH variable, these dlls that were previously not being found can now be found. This is because the files missing are commonly found in this folder. Adding this folder to your path to now successfully locate these files can also speed up packaging times.
 
+### "VCRUNTIME140.dll" is either not designed to run on Windows or it contains an error
+Try selecting the `--noupx` button in the advanced tab.
+
 ## Additional Information and Explanations
 Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions of why and how things occur.
 
