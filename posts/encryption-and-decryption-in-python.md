@@ -65,7 +65,7 @@ If you have previously saved your key using the method I showed, you can read th
 
 ```python
 file = open('key.key', 'rb')
-key = file.read(key) # The key will be type bytes
+key = file.read() # The key will be type bytes
 file.close()
 ```
 
