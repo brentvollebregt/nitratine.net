@@ -214,23 +214,23 @@ print ("Thread has finished")
 ```
 
 ### Daemon Threads
-A daemon thread is a thread that will keep running even if the rest of the script has stopped. This means setting a threads daemon to true will mean that it will keep going after the main thread has finished (or dropped off).
-
-The daemon value must be set before .start() is called on the thread. To set if a thread is daemon, you can pass `daemon=True` (or false) in the same place I put args before:
+A daemon thread is a thread that will not keep running if the rest of the script has stopped and there are no more non-daemon threads left. We can tell the main thread is non-daemon as it is not abruptly stopped when it's the only thread running.
+ 
+This means setting a threads daemon value to `True` will mean that it will not keep running after the main thread has finished (or other non-daemon threads); we can set `daemon` to `False` to make sure the thread keeps running even when the main thread finishes. The daemon value must be set before `.start()` is called on the thread. To set if a thread is daemon, you can pass `daemon=True` (or `False`) in the same place I put args before:
 
 ```python
 thread = threading.Thread(target=worker, args=(i,), daemon=True)
 ```
 
-You can alternatively set a thread to be daemon using .setDaemon(bool) on the thread. If you are threading a class, you can call `self.setDaemon(bool)` in the initialisation method or .setDaemon(bool) on the thread like if you were threading a method. For example:
+You can alternatively set a thread to be daemon using `.daemon = bool` on the thread. If you are threading a class, you can call `self.daemon = bool` in the initialisation method or `.daemon = bool` on the thread like if you were threading a method. For example:
 
 ```python
 thread = MyThread()
-thread.setDaemon(true)
+thread.daemon = True
 thread.start()
 ```
 
-To check if a thread is daemon, you can call `.isDaemon()` on the thread. This will return a bool.
+To check if a thread is daemon, you can check `.daemon` on the thread; this is a bool.
 
 ### Getting All Threads
 If you want to get all the threads that are currently alive, you can call `threading.enumerate()`. This will return all alive threads including the main thread in a list. If you want to get all the names of the current alive threads, use:
