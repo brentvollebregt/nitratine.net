@@ -135,6 +135,52 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
+## An Improved Script
+A lot of people had been asking for a solution that can handle different functions for different combinations. [Christopher Walters](https://www.youtube.com/channel/UCzGG-Z4QAgkt2uYMH6VTpQQ) commented on the original video with a snippet that allowed users to declare a function per combination. 
+
+I modified the original script as it didn't work out-of-the-box (the idea was there though which is the most important part) and added some comments to make it more understandable *(even though it was already quite good)*:
+
+```python
+from pynput.keyboard import Key, KeyCode, Listener
+
+# Your functions
+
+def function_1():
+    print('Executed function_1')
+
+def function_2():
+    print('Executed function_2')
+
+# Create a mapping of keys to function (use frozenset as sets are not hashable - so they can't be used as keys)
+combination_to_function = {
+	frozenset([Key.shift, KeyCode(char='a')]): function_1, # No `()` after function_1 because we want to pass the function, not the value of the function
+	frozenset([Key.shift, KeyCode(char='A')]): function_1,
+	frozenset([Key.shift, KeyCode(char='b')]): function_2,
+	frozenset([Key.shift, KeyCode(char='B')]): function_2,
+}
+
+# Currently pressed keys
+current_keys = set()
+
+def on_press(key):
+    # When a key is pressed, add it to the set we are keeping track of and check if this set is in the dictionary
+    current_keys.add(key)
+    if frozenset(current_keys) in combination_to_function:
+        # If the current set of keys are in the mapping, execute the function
+        combination_to_function[frozenset(current_keys)]()
+
+def on_release(key):
+    # When a key is released, remove it from the set of keys we are keeping track of
+    current_keys.remove(key)
+
+with Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
+```
+
+When executing this script and pressing Shift + A (in any order), this will execute `function_1` and print "Executed function_1". Also when pressing Shift + B (in any order), `function_2` will be executed.
+
+To create new combinations, duplicate a line in the `combination_to_function` dictionary and replace the keys inside of `frozenset` and the value (function - not the value of the function).
+
 ## Common Issues and Questions
 
 ### How can I add different hotkeys for different functions?
