@@ -179,6 +179,23 @@ Try selecting the `--noupx` button in the advanced tab.
 ## Additional Information and Explanations
 Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions of why and how things occur.
 
+### Using `concurrent.futures`
+It was brought to my attention by [William Lake](https://github.com/William-Lake) in [this GitHub issue](https://github.com/brentvollebregt/auto-py-to-exe/issues/67) that when using `concurrent.futures` for any multi-threading/processing, it is recommended to add the following import:
+
+```python
+from multiprocessing import freeze_support
+```
+
+and this line to your main:
+
+```python
+freeze_support()
+```
+
+William had stated that before adding these lines, he kept getting errors regarding `concurrent.futures` even though it worked fine before packaging.
+ 
+> [A related issue on bugs.python.org recommending the fix](https://bugs.python.org/issue21505)
+
 ### The Difference Between One Directory and One File
 One directory puts all your files in one folder. You can easily add and remove files like you normally would in a folder. When your script modifies a file in it's folder, the file will still be modified when you run the script again.
 
