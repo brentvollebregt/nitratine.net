@@ -26,8 +26,11 @@ This can help you identify similar playlists and see what is different about a p
 
 ![Example Visualisation Comparison of a Personal Playlists](/post-assets/emotionify/emotionify-compare-box-plot.png)
 
+## Playlist Tools
+Select playlists and add filters in a sequence to create a more focused playlist.
 
-## The Future of Emotionify
-I plan to eventually add "playlist tools" to help making more detailed playlists.
+This allows you to perform functions like sort by an audio feature, reverse and filter by an audio feature value to produce a playlist for any occasion.
+
+![Example of Applying Filters to Playlists](/post-assets/emotionify/emotionifytools-page-demo.png)
 
 > Currently the source is not being released as early development occurs.
