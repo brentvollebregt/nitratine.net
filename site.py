@@ -40,7 +40,7 @@ PAGINATION_PAGE_MAX = 10 # Max amount of posts per page
 PAGINATION_EITHER_SIDE = 2 # Number of tiles beside current tile/page in pagination navigation e.g. 2 = P P C N N
 
 # Paths
-FREEZER_DESTINATION = 'docs' # Build location
+FREEZER_DESTINATION = 'build' # Build location
 ASSETS_LOCATION = 'assets' # Site assets location
 POST_ASSETS_LOCATION = 'post-assets' # Assets that only posts use (images, files, JavaScript...)
 

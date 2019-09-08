@@ -1,6 +1,6 @@
 {
     "project": {
-        "build": "docs/"
+        "build": "build/"
     },
     "repository": {
         "auth": {
