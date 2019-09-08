@@ -7,7 +7,7 @@ description: "This project aimed to visualise emotion in music with software dev
 
 [TOC]
 
-{% with repo="shash678/Lucy-In-The-Sky-With-Emotion" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
+{% with repo="brentvollebregt/Lucy-In-The-Sky-With-Emotion" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 ## What is this?
 This project takes a local library of music that is tagged and will predict the emotion of the song of either happy or sad. This data can then be passed to a visualiser which will play the selected song along with fiv other recommended songs based off it's emotional position on a valence energy plane.
@@ -30,7 +30,7 @@ When the project is first started it will create a sklearn.neighbors.KNeighborsC
 ![Visualiser balls flying colse](/post-assets/lucy-in-the-sky-with-emotion/visualiser5.jpg)
 
 ### Installation and Setup
-1. First clone the repository at [https://github.com/shash678/Lucy-In-The-Sky-With-Emotion](https://github.com/shash678/Lucy-In-The-Sky-With-Emotion)
+1. First clone the repository at [https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion](https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion)
 2. Install Python (tested with 3.5.2)
 3. If using Windows, run install_dependencies.bat. If not using windows, run the pip commands in the bat file. This will install most of the modules.
 4. Install scipy by first dowloading it at [http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy) and then running ```pip install [file]```
