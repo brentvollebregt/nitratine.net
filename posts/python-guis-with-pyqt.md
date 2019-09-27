@@ -34,6 +34,8 @@ print (site.getsitepackages())
 
 This will print out a couple of paths, for me it prints: ```['C:\\Python36', 'C:\\Python36\\lib\\site-packages']```. Here we can see my Python distribution location and the site-packages folder. Open up a file explorer and navigate to the site-packages folder. In this folder you then want to locate the ```pyqt5-tools``` folder and open it. In this folder you should find a few files, one named designer.exe.
 
+After recent updates to `pyqt5-tools`, designer.exe has been moved to the 'Scripts' folder in your Python distribution. To find this using the paths we found before, go to the first path returned ('C:\\Python36' in my case) and then go into the 'Scripts' folder; you should find designer.exe in here.
+
 ### Using the Designer
 designer.exe is the program that we will use to make designing GUIs a lot easier; remember the location of this or create a shortcut to it and then run it (double click if you wish). You will be welcomed with a selection window; select "Main Window" and then click "Create".
 
