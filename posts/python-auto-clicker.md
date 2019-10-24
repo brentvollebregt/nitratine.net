@@ -117,10 +117,11 @@ This script can be saved as a .pyw to run in the background. It can easily be st
 ## Using the Script
 
 To use this script set the variables at the top to what you want.
-- delay: They delay between each mouse click
-- button: The mouse button to click (Button.left&#124;Button.middle&#124;Button.right)
-- start_stop_key: They key to start and stop clicking. Make sure this is either from the Key class or set using a KeyCode as shown.
-- exit_key: The key to stop the program.Make sure this is either from the Key class or set using a KeyCode as shown.
+
+- `delay`: They delay between each mouse click (in seconds)
+- `button`: The mouse button to click; `Button.left` &#124; `Button.middle` &#124; `Button.right`
+- `start_stop_key`: They key to start and stop clicking. Make sure this is either from the Key class or set using a KeyCode as shown.
+- `exit_key`: The key to stop the program. Make sure this is either from the Key class or set using a KeyCode as shown.
 
 Then run the script and use the start/stop key when wanted. Press the set exit key to exit.
 
