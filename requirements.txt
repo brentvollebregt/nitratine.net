@@ -4,3 +4,4 @@ Frozen-Flask
 Pygments
 Markdown
 requests
+python-dotenv
