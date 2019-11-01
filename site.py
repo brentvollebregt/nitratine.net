@@ -16,12 +16,6 @@ from flask import Flask, render_template, send_from_directory, abort, render_tem
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
 import requests
-from dotenv import load_dotenv
-
-
-# Setup Environment Variables
-
-load_dotenv(verbose=True)
 
 
 # Renderer
@@ -58,7 +52,7 @@ HOME_TILES = config.get('home-tiles')
 
 # Get latest YouTube Videos (made the images static - no dynamic calls)
 requested_videos = requests.get(
-    'https://www.googleapis.com/youtube/v3/search?key=' + os.getenv('YOUTUBE_DATA_API_KEY') + '&channelId=' + SITE['youtube_channel_id'] + '&part=id&order=date&maxResults=6&type=video'
+    'https://www.googleapis.com/youtube/v3/search?key=' + SITE['youtube_data_api_key'] + '&channelId=' + SITE['youtube_channel_id'] + '&part=id&order=date&maxResults=6&type=video'
 ).json()['items']
 
 recent_videos = []
