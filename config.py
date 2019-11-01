@@ -18,7 +18,6 @@ DEFAULT = {
         'google_adsense_publisher_id': '',
         'youtube_channel_name': '',
         'youtube_channel_id': '',
-        'youtube_data_api_key': '',
         'category-extra': {
             "YouTube": "&#x1F3A5;",
             "Projects": "&#x1F4BE;",
