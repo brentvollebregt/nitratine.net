@@ -1,12 +1,7 @@
 import time
 import os
 import math
-import markdown
 import socket
-from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
-from flask_flatpages import FlatPages
-from flask_frozen import Freezer
-import requests
 import argparse
 from urllib.parse import quote_plus
 import subprocess
@@ -15,6 +10,18 @@ from collections import defaultdict
 import string
 
 import config
+
+import markdown
+from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
+from flask_flatpages import FlatPages
+from flask_frozen import Freezer
+import requests
+from dotenv import load_dotenv
+
+
+# Setup Environment Variables
+
+load_dotenv(verbose=True)
 
 
 # Renderer
@@ -230,7 +237,10 @@ def index():
 
 @app.route('/about/')
 def about():
-    return render_template('about.html', build=os.getenv('build', 'Not Specified'))
+    build_version = os.getenv('BUILD_VERSION', 'Unspecified')
+    if build_version == 'production': # Add date to production builds
+        build_version += f" ({time.strftime('%d/%m/%Y %H:%M:%S')})"
+    return render_template('about.html', build=build_version)
 
 
 @app.route('/portfolio/')
@@ -558,7 +568,6 @@ def serve_build():
 
 
 def run():
-    print('WARN: This server is designed to be used in production')
     os.environ['build'] = 'Development'
     app.run(port=8000, host=socket.gethostbyname(socket.gethostname()))
 
