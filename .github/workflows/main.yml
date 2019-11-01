@@ -20,3 +20,4 @@ jobs:
           FOLDER: build
           BUILD_SCRIPT: pip install -r requirements.txt && python site.py --build
           BUILD_VERSION: production
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
