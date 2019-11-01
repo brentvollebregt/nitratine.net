@@ -25,6 +25,9 @@ jobs:
 
       - name: Build
         run: python site.py --build
+        env:
+          BUILD_VERSION: production
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2.5.0
