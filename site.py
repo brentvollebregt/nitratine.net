@@ -58,7 +58,7 @@ HOME_TILES = config.get('home-tiles')
 
 # Get latest YouTube Videos (made the images static - no dynamic calls)
 requested_videos = requests.get(
-    'https://www.googleapis.com/youtube/v3/search?key=' + SITE['youtube_data_api_key'] + '&channelId=' + SITE['youtube_channel_id'] + '&part=id&order=date&maxResults=6&type=video'
+    'https://www.googleapis.com/youtube/v3/search?key=' + os.getenv('YOUTUBE_DATA_API_KEY') + '&channelId=' + SITE['youtube_channel_id'] + '&part=id&order=date&maxResults=6&type=video'
 ).json()['items']
 
 recent_videos = []
