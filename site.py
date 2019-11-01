@@ -237,7 +237,10 @@ def index():
 
 @app.route('/about/')
 def about():
-    return render_template('about.html', build=os.getenv('BUILD_VERSION', 'Unspecified'))
+    build_version = os.getenv('BUILD_VERSION', 'Unspecified')
+    if build_version == 'production': # Add date to production builds
+        build_version += f" ({time.strftime('%d/%m/%Y %H:%M:%S')})"
+    return render_template('about.html', build=build_version)
 
 
 @app.route('/portfolio/')
