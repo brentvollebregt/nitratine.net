@@ -258,7 +258,7 @@ def data():
 def search():
     return render_template(
         'search.html',
-        site_content={post.path: post.meta for post in get_posts()}
+        site_content=[{'meta': post.meta, 'path': post.path} for post in get_posts()]
     )
 
 
