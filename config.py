@@ -1,9 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv(verbose=True)
-
 
 config_data = {
     'site': {

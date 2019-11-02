@@ -10,6 +10,10 @@
         <meta property="og:image" content="{{ site.url }}/assets/img/logo.png">
         <meta property="og:url" content="{{ site.url + request.path }}">
         <meta name="twitter:card" content="summary">
+
+        <script type="text/javascript" defer src="/assets/js/fuzzysort.js"></script>
+        <script type="text/javascript" defer src="/assets/js/search-page.js"></script>
+        <script>let site_content = {{ site_content | tojson }};</script>
 {% endblock head %}
 
 {% block content %}
@@ -18,16 +22,9 @@
                 <h1 class="text-center">Local Nitratine.net Search</h1>
 
                 <div class="input-group my-4">
-                    <input id="search" type="text" class="form-control" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button id="search-submit" class="btn btn-outline-primary px-md-5" type="button">Search</button>
-                    </div>
+                    <input id="search" type="text" class="form-control text-center" placeholder="Search" aria-label="Search">
                 </div>
 
                 <div id="results"></div>
-
             </div>
-
-            <script type="text/javascript" defer src="/assets/js/search-page.js"></script>
-            <script>let site_content = {{ site_content | tojson }};</script>
 {% endblock content %}
