@@ -21,14 +21,14 @@ config_data = {
         'youtube_channel_id': 'UCesEknt3SRX9R9W_f93Tb7g',
         'youtube_data_api_key': os.getenv('YOUTUBE_DATA_API_KEY'),
         'category-extra': {
-          'YouTube': '&#x1F3A5;',
-          'Projects': '&#x1F4BE;',
-          'Tutorials': '&#x1F4D6;',
-          'Apps': '&#x1F4F1;',
-          'Investigations': '&#x1F50D;',
-          'Tools': '&#x1F6E0;',
-          'Snippets': '&#x2702;',
-          'General': '&#x1F4F0;'
+            'YouTube': '&#x1F3A5;',
+            'Projects': '&#x1F4BE;',
+            'Tutorials': '&#x1F4D6;',
+            'Apps': '&#x1F4F1;',
+            'Investigations': '&#x1F50D;',
+            'Tools': '&#x1F6E0;',
+            'Snippets': '&#x2702;',
+            'General': '&#x1F4F0;'
         }
     },
     'redirects': {
@@ -132,6 +132,11 @@ config_data = {
             'type': 'image',
             'link': 'https://youtu.be/OZSZHmWSOeM',
             'image_url': 'https://img.youtube.com/vi/OZSZHmWSOeM/mqdefault.jpg'
+        },
+        {
+            'type': 'raw',
+            'link': 'https://spotify-lyrics-viewer.nitratine.net/',
+            'content': "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/post-assets/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png\" alt=\"Spotify Lyrics Viewer\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing in.</p> </div>"
         },
         {
             'type': 'post',
