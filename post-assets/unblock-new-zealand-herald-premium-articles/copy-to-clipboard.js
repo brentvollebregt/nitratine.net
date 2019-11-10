@@ -5,8 +5,9 @@ function copyCode() {
     document.body.appendChild(textarea);
     textarea.select();
     if (!document.execCommand("copy")) {
-        window.prompt("Copy this then click OK",content);
+        window.prompt("Copy this then click OK", content);
     }
+    textarea.remove();
     document.getElementById('copyCodeSuccess').style.display = 'block';
     setTimeout(function(){ document.getElementById('copyCodeSuccess').style.display = 'none'; }, 2000);
 }
