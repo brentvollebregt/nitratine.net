@@ -8,4 +8,4 @@ This repo is the source for nitratine.net. The files in the `gh-pages` branch ar
  - `-n` / `--new-post`: Create a new post. Will create the .md file with a small template and create a folder for assets as well as copy in the default feature image.
  
 ## Deployment
-An automated deployment system can be found in `deploy.py` which when run, will build the site, clone `gh-pages` branch from GitHub, swap out the build, commit, tag and push. 
+Automated deployment is done using GitHub actions. The workflow to build and deploy the site can be found in [main.yml](/.github/workflows/main.yml).
