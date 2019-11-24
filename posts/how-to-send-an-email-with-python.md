@@ -232,7 +232,7 @@ server.quit()
 This method also makes sure that everyone that receives the email will not see the email of everyone else that the email was sent to. If you want to send one email to many addresses and let each recipient see who the email was sent to, you can simply set `msg['To']` to the recipient emails split by commas and then call `server.send_message` to send the email passing `msg` not as a string. 
 
 ```python
-send_to_emails = ['volleys2468@gmail.com', 'fayvandermeulen1@gmail.com']
+send_to_emails = ['recipient_1@gmail.com', 'recipient_2@gmail.com']
 
 # Was: msg['To'] = send_to_email
 msg['To'] = ', '.join(send_to_emails)
