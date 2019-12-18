@@ -154,6 +154,51 @@ article_content
     .addClass('full-content');
 ```
 
+### Revision 4 (18-12-19)
+It seems `window.pwdf` is no longer used, I found a couple of solutions; going to use them both to potentially delay a new revision.
+
+```javascript
+/* Disable some tamper check? */
+window.prtn = { f: btoa(window.env.HASH + window.location.href) };
+isMobile.any = () => true;
+
+/* Throw some CSS in the head */
+$('head').append(
+    '<style>' +
+        '#main { height: auto !important; } ' + /* Allow for scrolling */
+		'#article-content { height: auto !important; overflow: auto !important; } ' + /* Show content in full height */
+        '#article-content > * { display: block !important; color: #000 !important; opacity: 1 !important; } ' + /* Show content (backup for class guess later) */
+        '.article-offer { display: none !important; } ' + /* Remove 'offer' */
+        '.ad-container, .pb-f-article-related-articles { display: none !important; } ' + /* Remove advertisements */
+    '</style>'
+);
+
+/* A simple array mode function */
+function mode(arr) {
+    return arr.sort((a,b) =>
+          arr.filter(v => v===a).length
+        - arr.filter(v => v===b).length
+    ).pop();
+}
+
+let article_content = $('#article-content');
+
+/* Get all the classes */
+let classes = [];
+article_content.children().each((index, e) => {
+    e.classList.forEach(i => classes.push(i));
+});
+
+/* Try to find the mode of these classes and remove it (most likely the premium class) */
+let possible_premium_class = mode(classes);
+$('.' + possible_premium_class).css('display', '').removeClass(possible_premium_class);
+
+/* Remove the premium-content class. Removes fade out, ellipsis' */
+article_content
+    .removeClass('premium-content')
+    .addClass('full-content');
+```
+
 ## Why Did I Write This?
 People asked me to and I put it here for easy access. I don't even read the news.
 
