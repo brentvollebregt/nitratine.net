@@ -10,12 +10,12 @@ from collections import defaultdict
 import string
 
 import config
+import external
 
 import markdown
 from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
-import requests
 
 
 # Renderer
@@ -51,26 +51,15 @@ REDIRECTS = config.get('redirects')
 HOME_TILES = config.get('home-tiles')
 
 # Get latest YouTube Videos (made the images static - no dynamic calls)
-requested_videos = requests.get(
-    f'https://www.googleapis.com/youtube/v3/search?key={SITE["youtube_data_api_key"]}&channelId={SITE["youtube_channel_id"]}&part=id&order=date&maxResults=6&type=video'
-).json()['items']
-
-recent_videos = []
-for video in requested_videos:
-    if 'videoId' not in video['id']:
-        continue
-    recent_videos.append({
-        'thumb_src': f'https://img.youtube.com/vi/{video["id"]["videoId"]}/mqdefault.jpg',
-        'href': f'https://www.youtube.com/watch?v={video["id"]["videoId"]}'
-    })
+recent_youtube_videos = external.get_most_recent_youtube_videos(
+    youtube_data_api_key=SITE["youtube_data_api_key"],
+    youtube_channel_id=SITE["youtube_channel_id"],
+    max_results=6
+)
 
 # Get GitHub repository stats
-github_repos_request = requests.get(f'https://api.github.com/users/{SITE["github_username"]}/repos')
-github_repos_request_data = github_repos_request.json()
-available_repos = sorted(
-    [[i['full_name'], i['stargazers_count']] for i in github_repos_request_data],
-    key=lambda x: x[1],
-    reverse=True
+github_user_repos = external.get_github_user_repos(
+    github_username=SITE["github_username"]
 )
 
 
@@ -249,7 +238,7 @@ def data():
 
     return render_template(
         'data.html',
-        repos=available_repos,
+        repos=github_user_repos,
         posts=available_posts
     )
 
@@ -408,7 +397,7 @@ def inject_site():
 
 @app.context_processor
 def inject_recent_videos():
-    return dict(recent_videos=recent_videos)
+    return dict(recent_videos=recent_youtube_videos)
 
 
 def ymd_format(date):
