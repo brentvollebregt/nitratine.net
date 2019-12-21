@@ -52,7 +52,7 @@ HOME_TILES = config.get('home-tiles')
 
 # Get latest YouTube Videos (made the images static - no dynamic calls)
 requested_videos = requests.get(
-    'https://www.googleapis.com/youtube/v3/search?key=' + SITE['youtube_data_api_key'] + '&channelId=' + SITE['youtube_channel_id'] + '&part=id&order=date&maxResults=6&type=video'
+    f'https://www.googleapis.com/youtube/v3/search?key={SITE["youtube_data_api_key"]}&channelId={SITE["youtube_channel_id"]}&part=id&order=date&maxResults=6&type=video'
 ).json()['items']
 
 recent_videos = []
@@ -60,12 +60,12 @@ for video in requested_videos:
     if 'videoId' not in video['id']:
         continue
     recent_videos.append({
-        'thumb_src': 'https://img.youtube.com/vi/' + video['id']['videoId'] + '/mqdefault.jpg',
-        'href': 'https://www.youtube.com/watch?v=' + video['id']['videoId']
+        'thumb_src': f'https://img.youtube.com/vi/{video["id"]["videoId"]}/mqdefault.jpg',
+        'href': f'https://www.youtube.com/watch?v={video["id"]["videoId"]}'
     })
 
 # Get GitHub repository stats
-github_repos_request = requests.get('https://api.github.com/users/' + SITE['github_username'] + '/repos')
+github_repos_request = requests.get(f'https://api.github.com/users/{SITE["github_username"]}/repos')
 github_repos_request_data = github_repos_request.json()
 available_repos = sorted(
     [[i['full_name'], i['stargazers_count']] for i in github_repos_request_data],
@@ -215,7 +215,7 @@ def index():
             if 'feature' in page.meta:
                 tile['image_url'] = url_for(
                     'post_assets',
-                    path=tile['post'] + '/' + page.meta.get('feature', 'INVALID')
+                    path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}'
                 )
             else:
                 tile['image_url'] = url_for(
@@ -232,7 +232,7 @@ def index():
 @app.route('/about/')
 def about():
     build_version = os.getenv('BUILD_VERSION', 'Unspecified')
-    if build_version == 'production': # Add date to production builds
+    if build_version == 'production':  # Add date to production builds
         build_version += f" ({time.strftime('%d/%m/%Y %H:%M:%S')})"
     return render_template('about.html', build=build_version)
 
@@ -340,7 +340,7 @@ def blog_post(path):
 def sitemap():
     pages = []
     for post in get_posts():
-        file_location = os.path.join(FLATPAGES_ROOT, post.path + '.md')
+        file_location = os.path.join(FLATPAGES_ROOT, f'{post.path}.md')
         pages.append({
             'loc': url_for('blog_post', path=post.path),
             'lastmod': time.strftime('%Y-%m-%d', time.localtime(os.path.getmtime(file_location)))
@@ -368,7 +368,7 @@ def ads_txt():
 def redirects(path):
     if path not in REDIRECTS:
         abort(404)
-    redirect_to = '/' + REDIRECTS[path] + '/'
+    redirect_to = f'/{REDIRECTS[path]}/'
     return render_template(
         'redirect.html',
         redirect_to=redirect_to
@@ -460,7 +460,7 @@ def build():
         file = os.path.join(file_path, 'index.html')
         # Check where we are writing
         if os.path.exists(file):
-            print('WARN: Overwriting ' + file_path)
+            print(f'WARN: Overwriting {file_path}')
         if not os.path.isdir(file_path):
             os.makedirs(file_path)
         # Write redirect
@@ -507,12 +507,12 @@ def new_post():
     tags = input('Tags (separated by comma): ').lower()
 
     post_id = quote_plus(''.join(
-        [i for i in title.lower().replace(' ', '-') if i in string.ascii_letters + string.digits + '-']
+        [i for i in title.lower().replace(' ', '-') if i in f'{string.ascii_letters}{string.digits}-']
     ))
     print('Post Id: {0}'.format(post_id))
 
     # Write file
-    filename = post_id + '.md'
+    filename = f'{post_id}.md'
     file_path = os.path.join(FLATPAGES_ROOT, filename)
     f = open(file_path, 'w')
     f.write('title: "{0}"\n'.format(title))
