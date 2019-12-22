@@ -36,7 +36,7 @@ On the chance that you get two of one colour, you can merge it with another dupl
 - Gestures: Swipe to get to different areas of the app (can be toggled)
 
 ## Bug Reporting and Feedback
-Think you've found a bug or just want to give back some feedback? Send me an [email](mailto://{{ site.email }}?subject=Colour%20Bug%20Report) and i'll look into it!
+Think you've found a bug or just want to give back some feedback? Send me an [email](mailto://{{ site_config.email }}?subject=Colour%20Bug%20Report) and i'll look into it!
 For bug reports please include:
 - Your name
 - Model of your phone
