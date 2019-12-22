@@ -4,11 +4,11 @@
         <title>About - Nitratine</title>
 
         <meta name="description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
-        <meta name="author" content="{{ site.default_author }}">
+        <meta name="author" content="{{ site_config.default_author }}">
         <meta property="og:title" content="About - Nitratine">
         <meta property="og:description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
-        <meta property="og:image" content="{{ site.url }}/assets/img/logo.png">
-        <meta property="og:url" content="{{ site.url + request.path }}">
+        <meta property="og:image" content="{{ site_config.url }}/assets/img/logo.png">
+        <meta property="og:url" content="{{ site_config.url + request.path }}">
         <meta name="twitter:card" content="summary">
 
         <!-- Build: {{ build }} -->
@@ -59,8 +59,8 @@
                     <script>
                         function displayEmail() {
                             alert("Please leave questions about videos on YouTube and blog posts in the comments at the bottom of the post.");
-                            document.getElementById('email').innerText = "{{ site.email }}";
-                            document.getElementById('email').href = "mailto:{{ site.email }}";
+                            document.getElementById('email').innerText = "{{ site_config.email }}";
+                            document.getElementById('email').href = "mailto:{{ site_config.email }}";
                         }
                     </script>
                 </div>

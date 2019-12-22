@@ -3,6 +3,53 @@ from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
 
+
+class SiteConfig:
+    def __init__(self, data: dict):
+        self.title = data['title']
+        self.url = data['url']
+        self.domain = data['domain']
+        self.about = data['about']
+        self.theme_colour = data['theme_colour']
+        self.email = data['email']
+        self.youtube_link = data['youtube_link']
+        self.github_username = data['github_username']
+        self.default_author = data['default_author']
+        self.disqus_shortname = data['disqus_shortname']
+        self.google_analytics_id = data['google_analytics_id']
+        self.google_adsense_publisher_id = data['google_adsense_publisher_id']
+        self.youtube_channel_name = data['youtube_channel_name']
+        self.youtube_channel_id = data['youtube_channel_id']
+        self.youtube_data_api_key = data['youtube_data_api_key']
+        self.category_icons = data['category-extra']  # TODO Rename to category_icons
+
+
+class Config:
+    def __init__(self, data: dict):
+        self.site = SiteConfig(data['site'])
+        self.redirects = data['redirects']
+        self.home_tiles = data['home-tiles']
+
+        # Validate home tiles
+        for tile in self.home_tiles:
+            assert 'type' in tile  # All must have a type
+            if tile['type'] == 'img-content':
+                assert 'link' in tile
+                assert 'image_url' in tile
+                assert 'content_raw' in tile
+            elif tile['type'] == 'image':
+                assert 'link' in tile
+                assert 'image_url' in tile
+            elif tile['type'] == 'post':
+                assert 'post' in tile
+                assert 'reason' in tile
+            elif tile['type'] == 'raw':
+                assert 'link' in tile
+                assert 'content' in tile
+            else:
+                raise Exception(f"Unexpected home tile type: {tile['type']}")
+
+
 config_data = {
     'site': {
         'title': 'Nitratine',
@@ -151,13 +198,4 @@ config_data = {
     ]
 }
 
-
-def get(*args):
-    """ Traverse the config data to get a value """
-    traversal = config_data
-    try:
-        for arg in args:
-            traversal = traversal[arg]
-    except KeyError:
-        raise KeyError(f'Invalid key {args}')
-    return traversal
+config = Config(config_data)
