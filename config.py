@@ -21,7 +21,7 @@ class SiteConfig:
         self.youtube_channel_name = data['youtube_channel_name']
         self.youtube_channel_id = data['youtube_channel_id']
         self.youtube_data_api_key = data['youtube_data_api_key']
-        self.category_icons = data['category-extra']  # TODO Rename to category_icons
+        self.category_icons = data['category-extra']
 
 
 class Config:

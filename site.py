@@ -411,6 +411,7 @@ app.jinja_env.globals.update(ymd_format=ymd_format)
 def blog_post():
     all_posts = get_posts(hidden=True)
     for post in all_posts:
+        print(f'Post: {post.path}')
         yield {'path': post.path}
 
 
@@ -419,8 +420,9 @@ def assets():
     location = ASSETS_LOCATION
     for root, dirs, files in os.walk(location, topdown=False):
         for name in files:
-            # Get the root and remove the location plus \. Then replace any \ with / and add the file name
-            yield {'path': root[len(location)+1:].replace('\\', '/') + '/' + name}
+            path_in_location = root[len(location)+1:].replace('\\', '/') + '/' + name
+            print(f'Asset: {ASSETS_LOCATION}/{name}')
+            yield {'path': path_in_location}
 
 
 @freezer.register_generator
@@ -428,7 +430,9 @@ def post_assets():
     location = POST_ASSETS_LOCATION
     for root, dirs, files in os.walk(location, topdown=False):
         for name in files:
-            yield {'path': root[len(location)+1:].replace('\\', '/') + '/' + name}
+            path_in_location = root[len(location) + 1:].replace('\\', '/') + '/' + name
+            print(f'Post Asset: {POST_ASSETS_LOCATION}/{path_in_location}')
+            yield {'path': path_in_location}
 
 
 # Argument functions
@@ -452,20 +456,20 @@ def build():
         with app.app_context():
             f.write(redirects(path=r))
         f.close()
-    print('Added Redirects')
+        print(f'Redirect: /{r}')
 
     # Add CNAME
     f = open(os.path.join(FREEZER_DESTINATION, 'CNAME'), 'w')
     f.write(config.site.domain)
     f.close()
-    print('Added CNAME')
+    print('CNAME')
 
     # Add 404 page
     f = open(os.path.join(FREEZER_DESTINATION, '404.html'), 'w')
     with app.test_request_context():
         f.write(page_not_found(None)[0])
     f.close()
-    print('Added 404')
+    print('404.html')
 
 
 def new_post():
