@@ -9,7 +9,7 @@ import shutil
 from collections import defaultdict
 import string
 
-import config
+from config import config
 import external
 
 import markdown
@@ -45,21 +45,16 @@ FREEZER_DESTINATION = 'build' # Build location
 ASSETS_LOCATION = 'assets' # Site assets location
 POST_ASSETS_LOCATION = 'post-assets' # Assets that only posts use (images, files, JavaScript...)
 
-# Site specific
-SITE = config.get('site')
-REDIRECTS = config.get('redirects')
-HOME_TILES = config.get('home-tiles')
-
 # Get latest YouTube Videos (made the images static - no dynamic calls)
 recent_youtube_videos = external.get_most_recent_youtube_videos(
-    youtube_data_api_key=SITE["youtube_data_api_key"],
-    youtube_channel_id=SITE["youtube_channel_id"],
+    youtube_data_api_key=config.site.youtube_data_api_key,
+    youtube_channel_id=config.site.youtube_channel_id,
     max_results=6
 )
 
 # Get GitHub repository stats
 github_user_repos = external.get_github_user_repos(
-    github_username=SITE["github_username"]
+    github_username=config.site.github_username
 )
 
 
@@ -194,7 +189,7 @@ def get_previous_and_next_posts(post):
 
 @app.route('/')
 def index():
-    for tile in HOME_TILES:
+    for tile in config.home_tiles:
         if tile['type'] == 'post':
             page = posts.get(tile['post'])
             tile['link'] = url_for('blog_post', path=tile['post'])
@@ -214,7 +209,7 @@ def index():
 
     return render_template(
         'home.html',
-        tiles=HOME_TILES
+        tiles=config.home_tiles
     )
 
 
@@ -350,14 +345,14 @@ def sitemap():
 
 @app.route('/ads.txt')
 def ads_txt():
-    return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(SITE['google_adsense_publisher_id'])
+    return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(config.site.google_adsense_publisher_id)
 
 
 @app.route('/<path:path>/')
 def redirects(path):
-    if path not in REDIRECTS:
+    if path not in config.redirects:
         abort(404)
-    redirect_to = f'/{REDIRECTS[path]}/'
+    redirect_to = f'/{config.redirects[path]}/'
     return render_template(
         'redirect.html',
         redirect_to=redirect_to
@@ -392,7 +387,7 @@ def post_assets(path):
 
 @app.context_processor
 def inject_site():
-    return dict(site=SITE)
+    return dict(site_config=config.site)
 
 
 @app.context_processor
@@ -444,7 +439,7 @@ def build():
     freezer.freeze()
 
     # Create redirects (because Frozen-Flask doesn't have an option)
-    for r in REDIRECTS:
+    for r in config.redirects:
         file_path = os.path.join(FREEZER_DESTINATION, r)
         file = os.path.join(file_path, 'index.html')
         # Check where we are writing
@@ -461,7 +456,7 @@ def build():
 
     # Add CNAME
     f = open(os.path.join(FREEZER_DESTINATION, 'CNAME'), 'w')
-    f.write(SITE['domain'])
+    f.write(config.site.domain)
     f.close()
     print('Added CNAME')
 

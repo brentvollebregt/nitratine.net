@@ -6,11 +6,11 @@
         {% if pagination_nav['current'] != 1 %}<meta name="robots" content="noindex">{% endif %}
 
         <meta name="description" content="New posts and links with resources to my YouTube videos will appear here.">
-        <meta name="author" content="{{ site.default_author }}">
+        <meta name="author" content="{{ site_config.default_author }}">
         <meta property="og:title" content="Nitratine Blog Feed">
         <meta property="og:description" content="New posts and links with resources to my YouTube videos will appear here.">
-        <meta property="og:image" content="{{ site.url }}/assets/img/logo.png">
-        <meta property="og:url" content="{{ site.url + request.path }}">
+        <meta property="og:image" content="{{ site_config.url }}/assets/img/logo.png">
+        <meta property="og:url" content="{{ site_config.url + request.path }}">
         <meta name="twitter:card" content="summary">
 {% endblock head %}
 

@@ -6,18 +6,18 @@
         <link rel="stylesheet" href="/assets/css/pygments.css">
 
         <meta name="description" content="{{ page.description }}">
-        <meta name="author" content="{{ page.author or site.default_author }}">
+        <meta name="author" content="{{ page.author or site_config.default_author }}">
         <meta property="og:title" content="{{ page.title }}">
         <meta property="og:description" content="{{ page.description }}">
         <meta property="og:image" content="{% if page.feature %}/post-assets/{{ page.path }}/{{ page.feature }}{% else %}/assets/img/default-feature.png{% endif %}">
-        <meta property="og:url" content="{{ site.url + request.path }}">
+        <meta property="og:url" content="{{ site_config.url + request.path }}">
         <meta name="twitter:card" content="summary">
 
         {%- if page.disable_ads -%}
             <!-- Ads are disabled for this page -->
         {%- else -%}
-            {%- if site.google_adsense_publisher_id -%}
-            <script data-ad-client="ca-{{ site.google_adsense_publisher_id }}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            {%- if site_config.google_adsense_publisher_id -%}
+            <script data-ad-client="ca-{{ site_config.google_adsense_publisher_id }}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             {%- endif -%}
         {%- endif -%}
 {% endblock head %}
@@ -57,17 +57,17 @@
                         {% endif %}
                     </nav>
 
-                    {% if site.disqus_shortname %}
+                    {% if site_config.disqus_shortname %}
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function() {
-                            this.page.url = '{{ site.url + request.path }}'; // Your page's canonical URL variable
-                            this.page.identifier = '{{ site.url + request.path }}'; // Your page's unique identifier variable
+                            this.page.url = '{{ site_config.url + request.path }}'; // Your page's canonical URL variable
+                            this.page.identifier = '{{ site_config.url + request.path }}'; // Your page's unique identifier variable
                         };
                         (function() {
                             var d = document,
                                 s = d.createElement('script');
-                            s.src = '//{{site.disqus_shortname}}.disqus.com/embed.js';
+                            s.src = '//{{site_config.disqus_shortname}}.disqus.com/embed.js';
                             s.setAttribute('data-timestamp', +new Date());
                             (d.head || d.body).appendChild(s);
                         })();
