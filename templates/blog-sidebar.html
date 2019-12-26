@@ -45,4 +45,15 @@
                             {% endfor %}
                         </div>
                     </div>
+
+                    <div class="card p-3 mb-3 bg-light">
+                        <h4 class="text-center text-lg-left">Featured Sites</h4>
+                        <div class="featured-sites">
+                            {% for site in site_config.featured_sites %}
+                                <a title="{{ site.title }}" href="{{ site.url }}">
+                                    <img src="{{ site.image_url }}" />
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </aside>

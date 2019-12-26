@@ -22,6 +22,13 @@ class SiteConfig:
         self.youtube_channel_id = data['youtube_channel_id']
         self.youtube_data_api_key = data['youtube_data_api_key']
         self.category_icons = data['category-extra']
+        self.featured_sites = data['featured-sites']
+
+        # Validate featured sites
+        for site in self.featured_sites:
+            assert 'title' in site
+            assert 'url' in site and site['url'] != ''
+            assert 'image_url' in site and site['image_url'] != ''
 
 
 class Config:
@@ -76,7 +83,24 @@ config_data = {
             'Tools': '&#x1F6E0;',
             'Snippets': '&#x2702;',
             'General': '&#x1F4F0;'
-        }
+        },
+        'featured-sites': [
+            {
+                'title': 'Emotionify',
+                'url': 'https://emotionify.nitratine.net/',
+                'image_url': '/assets/img/featured-sites/emotionify.png',
+            },
+            {
+                'title': 'Spotify Lyrics Viewer',
+                'url': 'https://spotify-lyrics-viewer.nitratine.net/',
+                'image_url': '/assets/img/featured-sites/spotify-lyrics-viewer.png',
+            },
+            {
+                'title': 'Hit Counter',
+                'url': 'https://hitcounter.pythonanywhere.com/',
+                'image_url': '/assets/img/featured-sites/hit-counter.png',
+            },
+        ]
     },
     'redirects': {
         'tag': 'blog/tags',
