@@ -18,6 +18,25 @@
 }
 
 
+/* Featured Sites */
+
+.featured-sites a {
+    padding: 7px;
+    transition: background .4s;
+    border-radius: 7px;
+    display: block;
+    text-align: center;
+}
+
+.featured-sites a img {
+    max-width: 100%;
+    max-height: 30px;
+}
+
+.featured-sites a:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
 /* Blog Feature Cards (Multiple Sizes) */
 
 .blog-card img.thumbnail {
