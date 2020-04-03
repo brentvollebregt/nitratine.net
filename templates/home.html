@@ -28,14 +28,6 @@
 
                 {% for tile in tiles %}
 
-                    {% if tile.type == 'image' %}
-                        <a href="{{ tile.link }}">
-                            <div class="card card-hover-effect">
-                                <img class="card-img" src="{{ tile.image_url }}" alt="Thumbnail">
-                            </div>
-                        </a>
-                    {% endif %}
-
                     {% if tile.type == 'post' %}
                         <a href="{{ tile.link }}">
                             <div class="card card-hover-effect">
@@ -50,13 +42,10 @@
                         </a>
                     {% endif %}
 
-                    {% if tile.type == 'img-content' %}
+                    {% if tile.type == 'post-image' %}
                         <a href="{{ tile.link }}">
                             <div class="card card-hover-effect">
-                                <img class="card-img-top" src="{{ tile.image_url }}" alt="Thumbnail">
-                                <div class="card-body">
-                                    {{ tile.content_raw|safe }}
-                                </div>
+                                <img class="card-img" src="{{ tile.image_url }}" alt="Thumbnail">
                             </div>
                         </a>
                     {% endif %}

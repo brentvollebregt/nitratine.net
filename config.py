@@ -40,12 +40,8 @@ class Config:
         # Validate home tiles
         for tile in self.home_tiles:
             assert 'type' in tile  # All must have a type
-            if tile['type'] == 'img-content':
-                assert 'link' in tile
-                assert 'image_url' in tile
-                assert 'content_raw' in tile
-            elif tile['type'] == 'image':
-                assert 'link' in tile
+            if tile['type'] == 'post-image':
+                assert 'post' in tile
                 assert 'image_url' in tile
             elif tile['type'] == 'post':
                 assert 'post' in tile
@@ -154,14 +150,23 @@ config_data = {
     },
     'home-tiles': [
         {
-            'type': 'img-content',
-            'link': 'https://github.com/brentvollebregt/auto-py-to-exe',
-            'image_url': '/posts/auto-py-to-exe/feature.png',
-            'content_raw': '<div class=\"text-center\"> <h5 class=\"card-title mb-1\">Auto Py to Exe</h5> <img alt=\"Total downloads for auto-py-to-exe project\" src=\"https://pepy.tech/badge/auto-py-to-exe\"> <br> <small class=\"text-muted\">pip install auto-py-to-exe</small> </div>'
+            'type': 'raw',
+            'link': '/blog/post/auto-py-to-exe/',
+            'content': """
+                <img class="card-img-top" src="/posts/auto-py-to-exe/feature.png" alt="Thumbnail">
+                <div class="card-body">
+                    <div class=\"text-center\">
+                        <h5 class=\"card-title mb-1\">Auto Py to Exe</h5>
+                        <img alt=\"Total downloads for auto-py-to-exe project\" src=\"https://pepy.tech/badge/auto-py-to-exe\">
+                        <br>
+                        <small class=\"text-muted\">pip install auto-py-to-exe</small>
+                    </div>
+                </div>
+            """
         },
         {
-            'type': 'image',
-            'link': 'https://youtu.be/H8t4DJ3Tdrg',
+            'type': 'post-image',
+            'post': 'encryption-and-decryption-in-python',
             'image_url': 'https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg'
         },
         {
@@ -171,8 +176,13 @@ config_data = {
         },
         {
             'type': 'raw',
-            'link': 'https://emotionify.nitratine.net/',
-            'content': "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/posts/emotionify/emotionify-banner.png\" alt=\"Emotionify Banner\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Sort Spotify playlists using Spotify's pre-calculated audio features to attempt to emotionally gradient playlists.</p> </div>"
+            'link': '/blog/post/emotionify/',
+            'content': """
+                <div class=\"text-center\">
+                    <img class=\"card-img-top\" src=\"/posts/emotionify/emotionify-banner.png\" alt=\"Emotionify Banner\" style=\"padding: 20px 10px 20px 10px\">
+                    <p class=\"mx-2\">Sort Spotify playlists using Spotify's pre-calculated audio features to attempt to emotionally gradient playlists.</p>
+                </div>
+            """
         },
         {
             'type': 'post',
@@ -180,13 +190,13 @@ config_data = {
             'reason': 'New'
         },
         {
-            'type': 'image',
-            'link': 'https://youtu.be/ksW59gYEl6Q',
+            'type': 'post-image',
+            'post': 'python-guis-with-pyqt',
             'image_url': 'https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg'
         },
         {
-            'type': 'image',
-            'link': 'https://youtu.be/YPiHBtddefI',
+            'type': 'post-image',
+            'post': 'how-to-send-an-email-with-python',
             'image_url': 'https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg'
         },
         {
@@ -200,14 +210,19 @@ config_data = {
             'reason': 'Popular'
         },
         {
-            'type': 'image',
-            'link': 'https://youtu.be/OZSZHmWSOeM',
+            'type': 'post-image',
+            'post': 'auto-py-to-exe/',
             'image_url': 'https://img.youtube.com/vi/OZSZHmWSOeM/mqdefault.jpg'
         },
         {
             'type': 'raw',
-            'link': 'https://spotify-lyrics-viewer.nitratine.net/',
-            'content': "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/posts/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png\" alt=\"Spotify Lyrics Viewer\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing in.</p> </div>"
+            'link': '/blog/post/spotify-lyrics-viewer/',
+            'content': """
+                <div class=\"text-center\">
+                    <img class=\"card-img-top\" src=\"/posts/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png\" alt=\"Spotify Lyrics Viewer\" style=\"padding: 20px 10px 20px 10px\">
+                    <p class=\"mx-2\">Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing in.</p>
+                </div>
+            """
         },
         {
             'type': 'post',

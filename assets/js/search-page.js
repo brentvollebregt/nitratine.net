@@ -16,8 +16,13 @@ function search() {
                 // Clear current results
                 clearResults(resultsNode);
 
+                // It seems that fuzzysort can return duplicate results (e.g. when searching "spotify" on this site)
+                const uniqueSearchResults = searchResults.filter(
+                    (value, index, self) => self.indexOf(self.find(v => v.path === value.path)) !== index
+                );
+
                 // Show the results
-                searchResults.map(result => displayResult(result.obj, resultsNode));
+                uniqueSearchResults.forEach(result => displayResult(result.obj, resultsNode));
             });
     } else {
         clearResults(resultsNode);
