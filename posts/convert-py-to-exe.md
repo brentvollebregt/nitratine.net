@@ -68,7 +68,7 @@ In March 2018 I created an application that allows you to create executables rea
 ### My script runs fine in IDLE but won't run when packaged to exe
 Regarding that the python script runs properly by itself then this would have been caused by incorrect configuration or third party modules. The best way to find what the issue is, is to add the -d flag and then re-package it. This will mean the exe is now in a debugging mode. Open up cmd and then run the exe using cmd e.g. "C:/folder/path/myexe.exe". Any errors will be preserved in the console which you were previously missing.
 
-### zipimport.ZipImportError: can't find module 'encodings'﻿
+### zipimport.ZipImportError: can't find module 'encodings'
 Please upgrade PyInstaller to 3.4 or above using: `python -m pip install --upgrade PyInstaller`
 
 ### "Open command window here" isn't shown when I shift right click?
@@ -86,8 +86,8 @@ Go back to the PyInstaller heading, you have not installed pyinstaller, remember
 ### When editing the PATH variable, I can only edit the variable
 Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.
 
-### The exe does not work on another computer﻿
-This may be an architecture issue. PyInstaller will create an executable with the architecture of the machine it was built with. You are most likely using a 64bit machine if you are asking this question to compile the .py; thus it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures﻿.
+### The exe does not work on another computer
+This may be an architecture issue. PyInstaller will create an executable with the architecture of the machine it was built with. You are most likely using a 64bit machine if you are asking this question to compile the .py; thus it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures.
 
 ### My antivirus detected my exe as a virus
 This is your anti-virus vendors fault. Check out [this](https://github.com/pyinstaller/pyinstaller/issues/2501#issuecomment-286230354).
@@ -95,8 +95,8 @@ This is your anti-virus vendors fault. Check out [this](https://github.com/pyins
 ### I get lots of WARNINGs when running pyinstaller
 These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after-all, they are only warnings.
 
-### Will this add my other scripts? / Will this work with external Python modules?﻿
+### Will this add my other scripts? / Will this work with external Python modules?
 Regarding that your main script imports your others scripts, then yes. PyInstaller looks at imports to figure out what to bundle, so it will add your other scripts just like if you were to import os or time.
 
-### [is it available in Walmart?????﻿](https://www.youtube.com/watch?v=lOIJIk_maO4&lc=UgxFJKkC5nzr7MiscOd4AaABAg)
+### [is it available in Walmart?????](https://www.youtube.com/watch?v=lOIJIk_maO4&lc=UgxFJKkC5nzr7MiscOd4AaABAg)
 I don't believe so, sorry.

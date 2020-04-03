@@ -262,7 +262,7 @@ With Eel, you don't need to do any of this; simply importing eel, calling `eel.i
 ## Common Issues and Questions
 
 ### Is it possible to package eel with pyinstaller?
-Yes, if you look at Eel documentation, go [to the bottom](https://github.com/ChrisKnott/Eel#building-a-distributable-binary﻿) and it explains clearly how to do this.
+Yes, if you look at Eel documentation, go [to the bottom](https://github.com/ChrisKnott/Eel#building-a-distributable-binary) and it explains clearly how to do this.
 
 ## Extra Reading
  - [Eel GitHub Page](https://github.com/ChrisKnott/Eel)
