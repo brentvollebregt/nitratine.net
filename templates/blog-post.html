@@ -9,7 +9,7 @@
         <meta name="author" content="{{ page.author or site_config.default_author }}">
         <meta property="og:title" content="{{ page.title }}">
         <meta property="og:description" content="{{ page.description }}">
-        <meta property="og:image" content="{% if page.feature %}/post-assets/{{ page.path }}/{{ page.feature }}{% else %}/assets/img/default-feature.png{% endif %}">
+        <meta property="og:image" content="/posts/{{ page.path }}/{{ page.feature }}">
         <meta property="og:url" content="{{ site_config.url + request.path }}">
         <meta name="twitter:card" content="summary">
 
