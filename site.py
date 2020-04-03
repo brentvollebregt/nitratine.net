@@ -222,6 +222,8 @@ def index():
                 'post_assets',
                 path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}'
             )
+        elif tile['type'] == 'post-image':
+            tile['link'] = url_for('blog_post', path=tile['post'])
 
     return render_template(
         'home.html',
