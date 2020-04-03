@@ -99,15 +99,12 @@ def posts_by_tag():
 
 def posts_by_date():
     """ Get posts by year : {year: [post, post, ...]} """
-    years = {}
+    years = defaultdict(list)
     for post in get_posts():
         post_date = post.meta.get('date', '1970-01-01')
         struct_time = time.strptime(str(post_date), '%Y-%m-%d')
         year = str(struct_time.tm_year)
-        if year not in years:
-            years[year] = [post]
-        else:
-            years[year].append(post)
+        years[year].append(post)
     return years
 
 
