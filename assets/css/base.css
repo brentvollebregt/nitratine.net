@@ -22,7 +22,7 @@ main {
 
 .tech-icon-container > img {
     width: 60px;
-    margin: 0 5px;
+    margin: 0 5px 5px 5px;
 }
 
 *::selection {

@@ -99,15 +99,12 @@ def posts_by_tag():
 
 def posts_by_date():
     """ Get posts by year : {year: [post, post, ...]} """
-    years = {}
+    years = defaultdict(list)
     for post in get_posts():
         post_date = post.meta.get('date', '1970-01-01')
         struct_time = time.strptime(str(post_date), '%Y-%m-%d')
         year = str(struct_time.tm_year)
-        if year not in years:
-            years[year] = [post]
-        else:
-            years[year].append(post)
+        years[year].append(post)
     return years
 
 
@@ -277,12 +274,14 @@ def blog_pagination(page):
 
 
 @app.route('/blog/categories/')
+@app.route('/blog/categories/')
 def blog_categories():
     return render_template(
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
         categories=posts_by_category(),
-        title='Categories'
+        title='Categories',
+        sort_type='category'
     )
 
 
@@ -292,7 +291,8 @@ def blog_tags():
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
         categories=posts_by_tag(),
-        title='Tags'
+        title='Tags',
+        sort_type='tag'
     )
 
 
@@ -302,7 +302,8 @@ def blog_archive():
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
         categories=posts_by_date(),
-        title='Date'
+        title='Date',
+        sort_type='date'
     )
 
 
