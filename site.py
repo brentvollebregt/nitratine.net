@@ -71,7 +71,11 @@ freezer = Freezer(app)
 
 
 def get_posts(hidden=False, force_post=None):
-    """ Get all posts in order of date. Posts can be hidden. """
+    """ Get all posts in order of date.
+    :param hidden: Whether to return hidden posts or not
+    :param force_post: Whether to return a particular post no matter what (is used so hidden posts can see themselves in prev/next calculations)
+    :return: Available posts
+    """
     all_posts = [p for p in posts if hidden or 'hidden' not in p.meta or force_post == p.path]
     all_posts.sort(key=lambda x: x.meta['date'], reverse=True)
     for post in all_posts:
@@ -80,7 +84,9 @@ def get_posts(hidden=False, force_post=None):
 
 
 def posts_by_category():
-    """ Get posts by category : {category: [post, post, ...]} """
+    """ Get posts by category
+    :return: {category: [post, post, ...]}
+    """
     categories = defaultdict(list)
     for post in get_posts():
         category = post.meta.get('category', 'General')
@@ -89,7 +95,9 @@ def posts_by_category():
 
 
 def posts_by_tag():
-    """ Get posts by tag : {tag: [post, post, ...]} """
+    """ Get posts by tag
+    :return: {tag: [post, post, ...]}
+    """
     tags = defaultdict(list)
     for post in get_posts():
         post_tags = post.meta.get('tags', [])
@@ -100,7 +108,9 @@ def posts_by_tag():
 
 
 def posts_by_date():
-    """ Get posts by year : {year: [post, post, ...]} """
+    """ Get posts by year
+    :return: {year: [post, post, ...]}
+    """
     years = defaultdict(list)
     for post in get_posts():
         post_date = post.meta.get('date', '1970-01-01')
@@ -111,19 +121,24 @@ def posts_by_date():
 
 
 def post_numbers_by_category():
-    """ Get number of posts per category : {category: count} """
+    """ Get number of posts per category
+    :return: {category: count}
+    """
     categories = posts_by_category()
     return {c: len(categories[c]) for c in categories}
 
 
 def chunk_list(l, n):
-    """ Yield successive n-sized chunks from l. """
+    """ Yield successive n-sized chunks from l. src: https://stackoverflow.com/a/312464 """
     for i in range(0, len(l), n):
         yield l[i:i + n]
 
 
 def paginate_posts(page):
-    """ Get posts for a particular page """
+    """ Get posts for a particular page
+    :param page: The page number (0-indexed)
+    :return: A list of posts on this page
+    """
     page = page - 1 # Adjust to start a 0
     chunked_posts = list(chunk_list(get_posts(), PAGINATION_PAGE_MAX))
     if page > len(chunked_posts) - 1:
@@ -132,13 +147,18 @@ def paginate_posts(page):
 
 
 def available_pagination_pages():
-    """ Get the available pages """
+    """ Get the available pages
+    :return: A list of page numbers that are available
+    """
     chunked_posts = list(chunk_list(get_posts(), PAGINATION_PAGE_MAX))
-    return [i for i in range(1, len(chunked_posts) + 1)]
+    return list(range(1, len(chunked_posts) + 1))
 
 
 def get_pagination_nav_data(page):
-    """ Calculate pages to show in navigation """
+    """ Calculate pages to show in navigation
+    :param page: The page to get navigation data for
+    :return: An object to create the pagination buttons
+    """
     available_pages = available_pagination_pages()
 
     # Calculate pagination nav
@@ -161,7 +181,10 @@ def get_pagination_nav_data(page):
 
 
 def get_previous_and_next_posts(post):
-    """ Get the next and previous post for a particular post """
+    """ Get the next and previous post for a particular post
+    :param post: The post to get the previous and next post for
+    :return: The previous and next post (either could be None)
+    """
     # So we don't call it over and over again
     all_posts = get_posts(force_post=post.path)
 
@@ -188,6 +211,7 @@ def get_previous_and_next_posts(post):
 
 @app.route('/')
 def index():
+    """ The home page """
     for tile in config.home_tiles:
         if tile['type'] == 'post':
             page = posts.get(tile['post'] + f'/{POST_FILENAME}')
@@ -208,6 +232,7 @@ def index():
 
 @app.route('/about/')
 def about():
+    """ The about page """
     build_version = os.getenv('BUILD_VERSION', 'Unspecified')
     if build_version == 'production':  # Add date to production builds
         build_version += f" ({time.strftime('%d/%m/%Y %H:%M:%S')})"
@@ -216,11 +241,13 @@ def about():
 
 @app.route('/portfolio/')
 def portfolio():
+    """ The portfolio page """
     return render_template('portfolio.html')
 
 
 @app.route('/data/')
 def data():
+    """ The data page """
     public_posts = get_posts()
     available_posts = [[p.path, p['title']] for p in public_posts]
 
@@ -233,6 +260,7 @@ def data():
 
 @app.route('/search/')
 def search():
+    """ The search page """
     return render_template(
         'search.html',
         site_content=[{'meta': post.meta, 'path': post.path} for post in get_posts()]
@@ -241,18 +269,19 @@ def search():
 
 @app.route('/blog/')
 def blog_home():
+    """ Page 1 of the blog feed """
     page1_posts = paginate_posts(1)
-    pagination_nav_data = get_pagination_nav_data(1)
     return render_template(
         'blog-home.html',
         category_numbers=post_numbers_by_category(),
-        pagination_nav=pagination_nav_data,
+        pagination_nav=get_pagination_nav_data(1),
         posts=page1_posts
     )
 
 
 @app.route('/blog/page/<int:page>/')
 def blog_pagination(page):
+    """ Page n of the blog feed (or 404 if the page does not exist) """
     if page == 1:
         return redirect(url_for('blog_home'))
     if page < 1:
@@ -260,18 +289,17 @@ def blog_pagination(page):
     pagen_posts = paginate_posts(page)
     if not pagen_posts:
         abort(404)
-    pagination_nav_data = get_pagination_nav_data(page)
     return render_template(
         'blog-home.html',
         category_numbers=post_numbers_by_category(),
-        pagination_nav=pagination_nav_data,
+        pagination_nav=get_pagination_nav_data(page),
         posts=pagen_posts
     )
 
 
 @app.route('/blog/categories/')
-@app.route('/blog/categories/')
 def blog_categories():
+    """ Posts grouped by categories """
     return render_template(
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
@@ -283,6 +311,7 @@ def blog_categories():
 
 @app.route('/blog/tags/')
 def blog_tags():
+    """ Posts grouped by tags """
     return render_template(
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
@@ -294,6 +323,7 @@ def blog_tags():
 
 @app.route('/blog/archive/')
 def blog_archive():
+    """ Posts grouped and sorted by date """
     return render_template(
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
@@ -305,6 +335,7 @@ def blog_archive():
 
 @app.route('/blog/post/<path:path>/')
 def blog_post(path):
+    """ A post. Renders the .md file. """
     page = posts.get_or_404(f'{path}/{POST_FILENAME}')
     return render_template(
         'blog-post.html',
@@ -319,9 +350,10 @@ def blog_post(path):
 
 @app.route('/sitemap.xml')
 def sitemap():
+    """ The XML sitemap """
     pages = []
     for post in get_posts():
-        file_location = os.path.join(FLATPAGES_ROOT, f'{post.path}.md')
+        file_location = os.path.join(FLATPAGES_ROOT, post.path, f'{POST_FILENAME}.md')
         pages.append({
             'loc': url_for('blog_post', path=post.path),
             'lastmod': time.strftime('%Y-%m-%d', time.localtime(os.path.getmtime(file_location)))
@@ -342,16 +374,19 @@ def sitemap():
 
 @app.route('/ads.txt')
 def ads_txt():
+    """ An easy way to generate ads.txt """
     return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(config.site.google_adsense_publisher_id)
 
 
 @app.route('/assets/<path:path>')
 def assets(path):
+    """ Calls for files in the asset location """
     return send_from_directory(ASSETS_LOCATION, path)
 
 
 @app.route('/posts/<path:path>')
 def post_assets(path):
+    """ Calls for post assets. Technically this could return the post .md file but this has been disabled. """
     if path.endswith(f'/{POST_FILENAME}.md'):
         abort(403)  # This file is not meant to be accessible from this route
     return send_from_directory(FLATPAGES_ROOT, path)
@@ -359,6 +394,7 @@ def post_assets(path):
 
 @app.route('/<path:path>/')
 def redirects(path):
+    """ Catches any routes not handled by the previous functions. Used to identify potential redirects. """
     if path not in config.redirects:
         abort(404)
     redirect_to = f'/{config.redirects[path]}/'
@@ -370,6 +406,7 @@ def redirects(path):
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """ The page to display on a 404 """
     return render_template('404.html'), 404
 
 
@@ -378,11 +415,13 @@ def page_not_found(e):
 
 @app.context_processor
 def inject_site():
+    """ Provide site_config to Jinja templates """
     return dict(site_config=config.site)
 
 
 @app.context_processor
 def inject_recent_videos():
+    """ Provide recent_videos to Jinja templates """
     return dict(recent_videos=recent_youtube_videos)
 
 
@@ -392,7 +431,7 @@ def ymd_format(date):
     return time.strftime('%d %b %Y', struct_time)
 
 
-app.jinja_env.globals.update(ymd_format=ymd_format)
+app.jinja_env.globals.update(ymd_format=ymd_format)  # Allow ymd_format to be called in a Jinja template
 
 
 # Build Generators
@@ -400,6 +439,7 @@ app.jinja_env.globals.update(ymd_format=ymd_format)
 
 @freezer.register_generator
 def blog_post():
+    """ Freezer function to identify all posts """
     all_posts = get_posts(hidden=True)
     for post in all_posts:
         print(f'Post: {post.path}')
@@ -408,6 +448,7 @@ def blog_post():
 
 @freezer.register_generator
 def assets():
+    """ Freezer function to identify all assets """
     location = ASSETS_LOCATION
     for root, dirs, files in os.walk(location, topdown=False):
         for name in files:
@@ -418,6 +459,7 @@ def assets():
 
 @freezer.register_generator
 def post_assets():
+    """ Freezer function to identify all post assets (not the post .md file) """
     location = FLATPAGES_ROOT
     for root, dirs, files in os.walk(location, topdown=False):
         for name in files:
@@ -432,6 +474,7 @@ def post_assets():
 
 
 def build():
+    """ Build the site and dump it in FREEZER_DESTINATION """
     print('Freezing')
     freezer.freeze()
 
@@ -523,6 +566,7 @@ def build():
 
 
 def serve_build():
+    """ Server a build locally """
     process = None
     try:
         process = subprocess.Popen(
