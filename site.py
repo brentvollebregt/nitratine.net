@@ -193,16 +193,10 @@ def index():
             tile['title'] = page.meta.get('title', 'INVALID')
             tile['text'] = page.meta.get('description', 'INVALID')
             tile['date'] = ymd_format(page.meta.get('date', 'INVALID'))
-            if 'feature' in page.meta:
-                tile['image_url'] = url_for(
-                    'post_assets',
-                    path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}'
-                )
-            else:
-                tile['image_url'] = url_for(
-                    'assets',
-                    path='img/default-feature.png'
-                )
+            tile['image_url'] = url_for(
+                'post_assets',
+                path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}'
+            )
 
     return render_template(
         'home.html',
