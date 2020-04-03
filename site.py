@@ -29,7 +29,7 @@ def my_renderer(text):
 # Statics
 
 
-# Flat pages and freezing
+# Flat pages and freezing (documented at https://pythonhosted.org/Flask-FlatPages/#configuration)
 FLATPAGES_AUTO_RELOAD = True
 FLATPAGES_EXTENSION = '.md'
 FLATPAGES_ROOT = 'posts'
@@ -43,7 +43,7 @@ PAGINATION_EITHER_SIDE = 2 # Number of tiles beside current tile/page in paginat
 # Paths
 FREEZER_DESTINATION = 'build' # Build location
 ASSETS_LOCATION = 'assets' # Site assets location
-POST_ASSETS_LOCATION = 'post-assets' # Assets that only posts use (images, files, JavaScript...)
+POST_FILENAME = 'post'  # The name of the .md files used as the post page
 
 # Get latest YouTube Videos (made the images static - no dynamic calls)
 recent_youtube_videos = external.get_most_recent_youtube_videos(
@@ -58,7 +58,7 @@ github_user_repos = external.get_github_user_repos(
 )
 
 
-# App instances
+# App instance
 
 
 app = Flask(__name__)
@@ -74,6 +74,8 @@ def get_posts(hidden=False, force_post=None):
     """ Get all posts in order of date. Posts can be hidden. """
     all_posts = [p for p in posts if hidden or 'hidden' not in p.meta or force_post == p.path]
     all_posts.sort(key=lambda x: x.meta['date'], reverse=True)
+    for post in all_posts:
+        post.path = post.path.replace(f'/{POST_FILENAME}', '')
     return all_posts
 
 
@@ -188,7 +190,7 @@ def get_previous_and_next_posts(post):
 def index():
     for tile in config.home_tiles:
         if tile['type'] == 'post':
-            page = posts.get(tile['post'])
+            page = posts.get(tile['post'] + f'/{POST_FILENAME}')
             tile['link'] = url_for('blog_post', path=tile['post'])
             tile['title'] = page.meta.get('title', 'INVALID')
             tile['text'] = page.meta.get('description', 'INVALID')
@@ -303,7 +305,7 @@ def blog_archive():
 
 @app.route('/blog/post/<path:path>/')
 def blog_post(path):
-    page = posts.get_or_404(path)
+    page = posts.get_or_404(f'{path}/{POST_FILENAME}')
     return render_template(
         'blog-post.html',
         category_numbers=post_numbers_by_category(),
@@ -343,6 +345,18 @@ def ads_txt():
     return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(config.site.google_adsense_publisher_id)
 
 
+@app.route('/assets/<path:path>')
+def assets(path):
+    return send_from_directory(ASSETS_LOCATION, path)
+
+
+@app.route('/posts/<path:path>')
+def post_assets(path):
+    if path.endswith(f'/{POST_FILENAME}.md'):
+        abort(403)  # This file is not meant to be accessible from this route
+    return send_from_directory(FLATPAGES_ROOT, path)
+
+
 @app.route('/<path:path>/')
 def redirects(path):
     if path not in config.redirects:
@@ -357,24 +371,6 @@ def redirects(path):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
-
-
-# Asset Routes
-
-
-# @app.route('/assets/css/pygments.css')
-# def pygments_css():
-#     return pygments_style_defs('native'), 200, {'Content-Type': 'text/css'}
-
-
-@app.route('/assets/<path:path>')
-def assets(path):
-    return send_from_directory(ASSETS_LOCATION, path)
-
-
-@app.route('/post-assets/<path:path>')
-def post_assets(path):
-    return send_from_directory(POST_ASSETS_LOCATION, path)
 
 
 # Injectors
@@ -422,11 +418,13 @@ def assets():
 
 @freezer.register_generator
 def post_assets():
-    location = POST_ASSETS_LOCATION
+    location = FLATPAGES_ROOT
     for root, dirs, files in os.walk(location, topdown=False):
         for name in files:
+            if name == f'{POST_FILENAME}.md':
+                continue  # No need to freeze this file
             path_in_location = root[len(location) + 1:].replace('\\', '/') + '/' + name
-            print(f'Post Asset: {POST_ASSETS_LOCATION}/{path_in_location}')
+            print(f'Post Asset: {FLATPAGES_ROOT}/{path_in_location}')
             yield {'path': path_in_location}
 
 
@@ -467,61 +465,61 @@ def build():
     print('404.html')
 
 
-def new_post():
-    print('New post will be saved to {0}'.format(FLATPAGES_ROOT))
-    title = input('Title: ')
-    date = time.strftime('%Y-%m-%d')
-
-    # Category selection
-    while True:
-        print('Select a category from the following list by its index')
-        categories = [i for i in posts_by_category()]
-        for i, value in enumerate(categories):
-            print('{0}) {1}'.format(i, value))
-        selection = input('Category: ')
-        try:
-            category = categories[int(selection)]
-            break
-        except ValueError:
-            print('Please provide an option number')
-        except IndexError:
-            print('That index does not exist')
-
-    tags = input('Tags (separated by comma): ').lower()
-
-    post_id = quote_plus(''.join(
-        [i for i in title.lower().replace(' ', '-') if i in f'{string.ascii_letters}{string.digits}-']
-    ))
-    print('Post Id: {0}'.format(post_id))
-
-    # Write file
-    filename = f'{post_id}.md'
-    file_path = os.path.join(FLATPAGES_ROOT, filename)
-    f = open(file_path, 'w')
-    f.write('title: "{0}"\n'.format(title))
-    f.write('date: {0}\n'.format(date))
-    f.write('category: {0}\n'.format(category))
-    f.write('tags: [{0}]\n'.format(tags))
-    f.write('feature: feature.png\n')
-    f.write('description: ""\n')
-    f.write('\n[TOC]\n')
-    f.write('\n## Content\n')
-    f.write("{% with video_id=\"XXXXXXXXXXX\" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}")
-    f.close()
-    print('\nCreated {0}'.format(file_path))
-
-    # Create assets folder and add feature
-    post_assets_location = os.path.join(POST_ASSETS_LOCATION, post_id)
-    if not os.path.isdir(post_assets_location):
-        os.makedirs(post_assets_location)
-        print('Created: {0}'.format(post_assets_location))
-    feature_img = os.path.join(POST_ASSETS_LOCATION, post_id, 'feature.png')
-    if not os.path.isfile(feature_img):
-        shutil.copyfile(
-            os.path.join(ASSETS_LOCATION, 'img', 'default-feature.png'),
-            feature_img
-        )
-        print('Created: {0}'.format(feature_img))
+# def new_post():
+#     print('New post will be saved to {0}'.format(FLATPAGES_ROOT))
+#     title = input('Title: ')
+#     date = time.strftime('%Y-%m-%d')
+#
+#     # Category selection
+#     while True:
+#         print('Select a category from the following list by its index')
+#         categories = [i for i in posts_by_category()]
+#         for i, value in enumerate(categories):
+#             print('{0}) {1}'.format(i, value))
+#         selection = input('Category: ')
+#         try:
+#             category = categories[int(selection)]
+#             break
+#         except ValueError:
+#             print('Please provide an option number')
+#         except IndexError:
+#             print('That index does not exist')
+#
+#     tags = input('Tags (separated by comma): ').lower()
+#
+#     post_id = quote_plus(''.join(
+#         [i for i in title.lower().replace(' ', '-') if i in f'{string.ascii_letters}{string.digits}-']
+#     ))
+#     print('Post Id: {0}'.format(post_id))
+#
+#     # Write file
+#     filename = f'{post_id}.md'
+#     file_path = os.path.join(FLATPAGES_ROOT, filename)
+#     f = open(file_path, 'w')
+#     f.write('title: "{0}"\n'.format(title))
+#     f.write('date: {0}\n'.format(date))
+#     f.write('category: {0}\n'.format(category))
+#     f.write('tags: [{0}]\n'.format(tags))
+#     f.write('feature: feature.png\n')
+#     f.write('description: ""\n')
+#     f.write('\n[TOC]\n')
+#     f.write('\n## Content\n')
+#     f.write("{% with video_id=\"XXXXXXXXXXX\" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}")
+#     f.close()
+#     print('\nCreated {0}'.format(file_path))
+#
+#     # Create assets folder and add feature
+#     post_assets_location = os.path.join(POST_ASSETS_LOCATION, post_id)
+#     if not os.path.isdir(post_assets_location):
+#         os.makedirs(post_assets_location)
+#         print('Created: {0}'.format(post_assets_location))
+#     feature_img = os.path.join(POST_ASSETS_LOCATION, post_id, 'feature.png')
+#     if not os.path.isfile(feature_img):
+#         shutil.copyfile(
+#             os.path.join(ASSETS_LOCATION, 'img', 'default-feature.png'),
+#             feature_img
+#         )
+#         print('Created: {0}'.format(feature_img))
 
 
 def serve_build():
@@ -555,14 +553,14 @@ def run():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Script to run and build nitratine.net')
     parser.add_argument('-b', '--build', action="store_true", default=False, help='Build site to static files')
-    parser.add_argument('-n', '--new-post', action="store_true", default=False, help='Create a new post')
+    # parser.add_argument('-n', '--new-post', action="store_true", default=False, help='Create a new post')
     parser.add_argument('-s', '--serve-build', action="store_true", default=False, help='Serve the built site')
     args = parser.parse_args()
 
     if args.build:
         build()
-    elif args.new_post:
-        new_post()
+    # elif args.new_post:
+    #     new_post()
     elif args.serve_build:
         serve_build()
     else:

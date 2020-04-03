@@ -156,7 +156,7 @@ config_data = {
         {
             'type': 'img-content',
             'link': 'https://github.com/brentvollebregt/auto-py-to-exe',
-            'image_url': '/post-assets/auto-py-to-exe/feature.png',
+            'image_url': '/posts/auto-py-to-exe/feature.png',
             'content_raw': '<div class=\"text-center\"> <h5 class=\"card-title mb-1\">Auto Py to Exe</h5> <img alt=\"Total downloads for auto-py-to-exe project\" src=\"https://pepy.tech/badge/auto-py-to-exe\"> <br> <small class=\"text-muted\">pip install auto-py-to-exe</small> </div>'
         },
         {
@@ -172,7 +172,7 @@ config_data = {
         {
             'type': 'raw',
             'link': 'https://emotionify.nitratine.net/',
-            'content': "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/post-assets/emotionify/emotionify-banner.png\" alt=\"Emotionify Banner\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Sort Spotify playlists using Spotify's pre-calculated audio features to attempt to emotionally gradient playlists.</p> </div>"
+            'content': "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/posts/emotionify/emotionify-banner.png\" alt=\"Emotionify Banner\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Sort Spotify playlists using Spotify's pre-calculated audio features to attempt to emotionally gradient playlists.</p> </div>"
         },
         {
             'type': 'post',
@@ -207,7 +207,7 @@ config_data = {
         {
             'type': 'raw',
             'link': 'https://spotify-lyrics-viewer.nitratine.net/',
-            'content': "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/post-assets/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png\" alt=\"Spotify Lyrics Viewer\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing in.</p> </div>"
+            'content': "<div class=\"text-center\"> <img class=\"card-img-top\" src=\"/posts/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png\" alt=\"Spotify Lyrics Viewer\" style=\"padding: 20px 10px 20px 10px\"> <p class=\"mx-2\">Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing in.</p> </div>"
         },
         {
             'type': 'post',
