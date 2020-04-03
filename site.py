@@ -277,12 +277,14 @@ def blog_pagination(page):
 
 
 @app.route('/blog/categories/')
+@app.route('/blog/categories/')
 def blog_categories():
     return render_template(
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
         categories=posts_by_category(),
-        title='Categories'
+        title='Categories',
+        sort_type='category'
     )
 
 
@@ -292,7 +294,8 @@ def blog_tags():
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
         categories=posts_by_tag(),
-        title='Tags'
+        title='Tags',
+        sort_type='tag'
     )
 
 
@@ -302,7 +305,8 @@ def blog_archive():
         'blog-categories.html',
         category_numbers=post_numbers_by_category(),
         categories=posts_by_date(),
-        title='Date'
+        title='Date',
+        sort_type='date'
     )
 
 
