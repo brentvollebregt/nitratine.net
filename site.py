@@ -508,61 +508,57 @@ def build():
     print('404.html')
 
 
-# def new_post():
-#     print('New post will be saved to {0}'.format(FLATPAGES_ROOT))
-#     title = input('Title: ')
-#     date = time.strftime('%Y-%m-%d')
-#
-#     # Category selection
-#     while True:
-#         print('Select a category from the following list by its index')
-#         categories = [i for i in posts_by_category()]
-#         for i, value in enumerate(categories):
-#             print('{0}) {1}'.format(i, value))
-#         selection = input('Category: ')
-#         try:
-#             category = categories[int(selection)]
-#             break
-#         except ValueError:
-#             print('Please provide an option number')
-#         except IndexError:
-#             print('That index does not exist')
-#
-#     tags = input('Tags (separated by comma): ').lower()
-#
-#     post_id = quote_plus(''.join(
-#         [i for i in title.lower().replace(' ', '-') if i in f'{string.ascii_letters}{string.digits}-']
-#     ))
-#     print('Post Id: {0}'.format(post_id))
-#
-#     # Write file
-#     filename = f'{post_id}.md'
-#     file_path = os.path.join(FLATPAGES_ROOT, filename)
-#     f = open(file_path, 'w')
-#     f.write('title: "{0}"\n'.format(title))
-#     f.write('date: {0}\n'.format(date))
-#     f.write('category: {0}\n'.format(category))
-#     f.write('tags: [{0}]\n'.format(tags))
-#     f.write('feature: feature.png\n')
-#     f.write('description: ""\n')
-#     f.write('\n[TOC]\n')
-#     f.write('\n## Content\n')
-#     f.write("{% with video_id=\"XXXXXXXXXXX\" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}")
-#     f.close()
-#     print('\nCreated {0}'.format(file_path))
-#
-#     # Create assets folder and add feature
-#     post_assets_location = os.path.join(POST_ASSETS_LOCATION, post_id)
-#     if not os.path.isdir(post_assets_location):
-#         os.makedirs(post_assets_location)
-#         print('Created: {0}'.format(post_assets_location))
-#     feature_img = os.path.join(POST_ASSETS_LOCATION, post_id, 'feature.png')
-#     if not os.path.isfile(feature_img):
-#         shutil.copyfile(
-#             os.path.join(ASSETS_LOCATION, 'img', 'default-feature.png'),
-#             feature_img
-#         )
-#         print('Created: {0}'.format(feature_img))
+def new_post():
+    """ Automatically setup a new posts file structure """
+    title = input('Title: ')
+    post_id = quote_plus(''.join(
+        [i for i in title.lower().replace(' ', '-') if i in f'{string.ascii_letters}{string.digits}-']
+    ))
+    post_directory = os.path.join(FLATPAGES_ROOT, post_id)
+    print('Post will be found in {0}'.format(post_directory))
+
+    # Category selection
+    while True:
+        print('Select a category from the following list by its index')
+        categories = list(posts_by_category())
+        for i, value in enumerate(categories):
+            print('{0}) {1}'.format(i, value))
+        selection = input('Category: ')
+        try:
+            category = categories[int(selection)]
+            break
+        except ValueError:
+            print('Please provide an option number')
+        except IndexError:
+            print('That index does not exist')
+
+    tags = input('Tags (separated by a space): ').lower().split(' ')
+
+    # Create the directory
+    if not os.path.isdir(post_directory):
+        os.makedirs(post_directory)
+
+    # Write post file
+    file_path = os.path.join(post_directory, f'{POST_FILENAME}.md')
+    f = open(file_path, 'w')
+    f.write('title: "{0}"\n'.format(title))
+    f.write('date: {0}\n'.format(time.strftime('%Y-%m-%d')))
+    f.write('category: {0}\n'.format(category))
+    f.write('tags: [{0}]\n'.format(', '.join(tags)))
+    f.write('feature: feature.png\n')
+    f.write('description: ""\n')
+    f.write('\n[TOC]\n')
+    f.write('\n## Content\n')
+    f.write("{% with video_id=\"XXXXXXXXXXX\" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}")
+    f.close()
+    print('\nCreated {0}'.format(file_path))
+
+    # Create feature image file (no contents)
+    feature_img = os.path.join(post_directory, 'feature.png')
+    if not os.path.isfile(feature_img):
+        f = open(feature_img, 'w')
+        f.close()
+        print('Created: {0}'.format(feature_img))
 
 
 def serve_build():
@@ -597,14 +593,14 @@ def run():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Script to run and build nitratine.net')
     parser.add_argument('-b', '--build', action="store_true", default=False, help='Build site to static files')
-    # parser.add_argument('-n', '--new-post', action="store_true", default=False, help='Create a new post')
+    parser.add_argument('-n', '--new-post', action="store_true", default=False, help='Create a new post')
     parser.add_argument('-s', '--serve-build', action="store_true", default=False, help='Serve the built site')
     args = parser.parse_args()
 
     if args.build:
         build()
-    # elif args.new_post:
-    #     new_post()
+    elif args.new_post:
+        new_post()
     elif args.serve_build:
         serve_build()
     else:
