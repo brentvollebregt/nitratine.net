@@ -124,7 +124,7 @@ For example, if you are missing `pandas._libs.tslib`, add 'pandas._libs.tslib' i
 #### ERR_CONNECTION_REFUSED
 You need to be connected to the internet. This error appears when you cannot reach the servers.﻿
 
-#### Command “python setup.py egg_info” failed with error code 1﻿
+#### Command "python setup.py egg_info" failed with error code 1﻿
 Update setuptools using `pip install --upgrade setuptools`.
 
 #### FileNotFoundError
