@@ -5,7 +5,6 @@ import socket
 import argparse
 from urllib.parse import quote_plus
 import subprocess
-import shutil
 from collections import defaultdict
 import string
 
