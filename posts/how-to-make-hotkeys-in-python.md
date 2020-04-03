@@ -13,7 +13,7 @@ description: "This demonstrates how to make a script to detect combinations of k
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.
 
 ## Installing Pynput
-We will be using the punput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
+We will be using the pynput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
 ![Installing pynput](/post-assets/how-to-get-mouse-clicks-with-python/pynput1.png)
 
