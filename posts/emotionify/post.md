@@ -1,6 +1,6 @@
 title: "Emotionify"
 date: 2019-07-09
-category: Apps
+category: Projects
 tags: [react, javascript, typescript, spotify]
 feature: feature.png
 description: "Emotionify is a webapp that allows users to login to Spotify, select a playlist and then sort them using Spotify's pre-calculated audio feature values."
@@ -9,7 +9,8 @@ description: "Emotionify is a webapp that allows users to login to Spotify, sele
 
 <div align="center" style="padding: 20px 20px 40px 20px">
     <img src="/posts/emotionify/emotionify-banner.png" alt="Emotionify Banner">
-    <a href="https://emotionify.nitratine.net/"><button class="btn btn-outline-secondary" type="button">Visit Emotionify</button></a>
+    <p class="text-center">Create emotionally gradiented Spotify playlists and more.</p>
+    <a href="https://emotionify.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit emotionify.nitratine.net →</button></a>
 </div>
 
 {% with repo="brentvollebregt/emotionify" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
