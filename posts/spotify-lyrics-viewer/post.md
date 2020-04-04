@@ -3,7 +3,7 @@ date: 2019-11-07
 category: Projects
 tags: [spotify, react, typescript, javascript, express]
 feature: feature.png
-description: "Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing in."
+description: "Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing into Spotify."
 
 [TOC]
 
