@@ -3,13 +3,14 @@ date: 2019-11-07
 category: Projects
 tags: [spotify, react, typescript, javascript, express]
 feature: feature.png
-description: "Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing in."
+description: "Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing into Spotify."
 
 [TOC]
 
 <div align="center" style="padding: 20px 20px 40px 20px">
     <img src="/posts/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png" alt="Spotify Lyrics Viewer Banner" style="margin-bottom: 10px;">
-    <a href="https://spotify-lyrics-viewer.nitratine.net/"><button class="btn btn-outline-secondary" type="button">Go to the Spotify Lyrics Viewer</button></a>
+    <p class="text-center">View the lyrics of the current playing Spotify song in your browser.</p>
+    <a href="https://spotify-lyrics-viewer.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit spotify-lyrics-viewer.nitratine.net →</button></a>
 </div>
 
 {% with repo="brentvollebregt/spotify-lyrics-viewer" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}

@@ -146,7 +146,8 @@ config_data = {
         'asymmetric-encryption-and-decryption-in-python': 'blog/post/asymmetric-encryption-and-decryption-in-python',
         'common-issues-when-using-auto-py-to-exe': 'blog/post/common-issues-when-using-auto-py-to-exe',
         'encryption-and-decryption-in-python': 'blog/post/encryption-and-decryption-in-python',
-        'blog/post/common-issues-when-using-auto-py-to-exe': 'blog/post/issues-when-using-auto-py-to-exe'
+        'blog/post/common-issues-when-using-auto-py-to-exe': 'blog/post/issues-when-using-auto-py-to-exe',
+        'blog/post/who-is-on-my-network': 'blog/post/whos-on-my-network'
     },
     'home-tiles': [
         {
