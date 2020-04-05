@@ -4,10 +4,9 @@ category: Projects
 tags: [python, machine-learning]
 feature: visualiser5.jpg
 description: "This project aimed to visualise emotion in music with software developed by six people from the COMP241 (Software Engineering Development) paper as a group project. The project was successful in the end using Spotify to assist emotion detection."
+github: brentvollebregt/Lucy-In-The-Sky-With-Emotion
 
 [TOC]
-
-{% with repo="brentvollebregt/Lucy-In-The-Sky-With-Emotion" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 ## What is this?
 This project takes a local library of music that is tagged and will predict the emotion of the song of either happy or sad. This data can then be passed to a visualiser which will play the selected song along with fiv other recommended songs based off it's emotional position on a valence energy plane.

@@ -4,12 +4,11 @@ category: Projects
 tags: [javascript, chrome-extension]
 feature: feature.png
 description: "Check if you are a participant of a conversation in Gmail. Helps you stop sending emails with the wrong address."
+github: brentvollebregt/uow-moodle-rwa-ignorer
 
 With this Chrome extension, a red outline around "Reply" and "Reply All" will appear if the currently logged in gmail account is not part of the conversation.
 
 ![Extension Popup](/posts/am-i-a-participant/buttons.png)
-
-{% with repo="brentvollebregt/UoWMoodleIgnoreResourceWorkAround" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 ## Installation
 ### Using the .crx File

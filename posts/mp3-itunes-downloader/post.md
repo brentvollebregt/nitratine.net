@@ -4,8 +4,7 @@ category: Projects
 tags: [python, itunes, download, youtube-dl]
 feature: gui1.png
 description: "A Python script that allows a user to download a particular song from an iTunes-listed album. It uses YouTube as an audio source and iTunes to tag the mp3 file."
-
-{% with repo="brentvollebregt/mp3-iTunes" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
+github: brentvollebregt/mp3-iTunes
 
 ## What is this?
 This project allows you to select a song from an album found on the web version of iTunes and download it by sourcing the audio from YouTube and tags from iTunes.

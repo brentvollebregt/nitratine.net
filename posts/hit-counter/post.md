@@ -4,12 +4,11 @@ category: Projects
 tags: [python, flask]
 feature: feature.png
 description: "Easily Count Hits on a Website by Requesting a SVG Displaying Hit Count. Works on any site."
+github: brentvollebregt/hit-counter
 
 <div style="text-align: center">
     <img src="https://hitcounter.pythonanywhere.com/nocount/tag.svg?url=https%3A%2F%2Fgithub.com%2Fbrentvollebregt%2Fhit-counter" alt="Hits">
 </div>
-
-{% with repo="brentvollebregt/hit-counter" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 Live demo hosted at: [hitcounter.pythonanywhere.com](https://hitcounter.pythonanywhere.com/)
 

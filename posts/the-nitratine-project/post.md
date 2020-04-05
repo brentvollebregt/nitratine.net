@@ -4,12 +4,11 @@ category: Projects
 tags: [python, flask, website]
 feature: nitratine1.jpg
 description: "The Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months."
+github: brentvollebregt/nitratine-old
 
 This version of the Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months.
 
 I have now decided to relocate the Nitratine project to Github Pages as it has a lot of benefits but I will still keep this repo public as it may be useful for something else one day.
-
-{% with repo="brentvollebregt/nitratine-old" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 This is currently hosted at: [nitratine.pythonanywhere.com](http://nitratine.pythonanywhere.com/)
 

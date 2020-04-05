@@ -4,12 +4,11 @@ category: Projects
 tags: [javascript, chrome-extension]
 feature: target.png
 description: "A chrome extension to solve the Waikato Universities resource work around in Moodle."
+github: brentvollebregt/uow-moodle-rwa-ignorer
 
 Simply install this extension in Google Chrome and safely open documents in Moodle in a new tab without wanting to rip your hair out.
 
 ![Extension Popup](/posts/uow-moodle-rwa-ignorer/extension-popup.png)
-
-{% with repo="brentvollebregt/uow-moodle-rwa-ignorer" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 ## Installation
 ### Using the .crx File

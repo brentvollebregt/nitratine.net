@@ -337,12 +337,22 @@ def blog_archive():
 @app.route('/blog/post/<path:path>/')
 def blog_post(path):
     """ A post. Renders the .md file. """
-    page = posts.get_or_404(f'{path}/{POST_FILENAME}')
+    post = posts.get_or_404(f'{path}/{POST_FILENAME}')
+
+    github_repo = None
+    if 'github' in post.meta:
+        try:
+            github_repo = [r for r in github_user_repos if r['full_name'] == post.meta.get('github')][0]
+        except IndexError as e:
+            print(f'The repository {post.meta.get("github")} was not found in github_user_repos')
+            raise e
+
     return render_template(
         'blog-post.html',
         category_numbers=post_numbers_by_category(),
-        prev_and_next=get_previous_and_next_posts(page),
-        page=page
+        prev_and_next=get_previous_and_next_posts(post),
+        page=post,
+        github_repo=github_repo
     )
 
 

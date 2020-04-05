@@ -4,14 +4,13 @@ category: Projects
 tags: [python, clipboard, gui]
 feature: main-gui-with-settings-shown.png
 description: "A simple clipboard manager so you will never find yourself copying the same thing twice. Images, text and files are supported and unlimited amounts of saved clipboards can be created. Switch clipboard contents using a simple GUI."
+github: brentvollebregt/multi-clipboard
 
 Switch clipboard contents using a simple GUI<br />
 Images, text, files and other formats are supported with unlimited amounts of saved clipboards able to be created.<br />
 The idea of this is to easily switch clipboards with a simple click in a GUI. It comes with a built in listener for Ctrl + Windows + C
 
 ![Main GUI](/posts/multi-clipboard/main-gui.png)
-
-{% with repo="brentvollebregt/multi-clipboard" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 ## What Is This?
 This is my solution to constantly overwriting my clipboard. It is a GUI that acts like a hotbar, click on a virtual clipboard to place it on your actual clipboard. Some command line support has also been added in the form of setting and clearing clipboards.

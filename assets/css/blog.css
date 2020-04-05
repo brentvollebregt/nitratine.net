@@ -183,3 +183,25 @@ table img {
 .blog-sidebar > div {
     overflow: hidden;
 }
+
+/* GitHub Component */
+
+.github-summary {
+    transform: translate(0); /* Need to put this here as the bootstrap stretched-link class will expand too far out */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.github-summary:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.github-summary .repo-name {
+    display: inline-flex;
+    align-items: center;
+}
+
+.github-summary .repo-name img {
+    max-height: 20px;
+    max-width: 20px;
+}
