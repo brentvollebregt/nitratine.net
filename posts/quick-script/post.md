@@ -4,8 +4,7 @@ category: Projects
 tags: [python, gui]
 feature: gui1.png
 description: "A small GUI that displays home-made scripts to be executed. The scripts will appear in a scroll window and on selection they will run and the window will then close (can be configured). Sample scripts included."
-
-{% with repo="brentvollebregt/quick-script" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
+github: brentvollebregt/quick-script
 
 ## What is this?
 This project was my attempt to stop throwing out useful scripts that I made to make small tasks easier. I had always found myself making things and deleting them later as I didn't think I was going to use them again. This project allows you to attach a script easily to this project which makes things searchable and easy to run. I connected a hotkey to this to run smaller things.

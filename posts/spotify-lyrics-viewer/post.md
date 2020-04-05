@@ -4,6 +4,7 @@ category: Projects
 tags: [spotify, react, typescript, javascript, express]
 feature: feature.png
 description: "Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing into Spotify."
+github: brentvollebregt/spotify-lyrics-viewer
 
 [TOC]
 
@@ -12,8 +13,6 @@ description: "Spotify Lyrics Viewer is a tool that allows you to view the lyrics
     <p class="text-center">View the lyrics of the current playing Spotify song in your browser.</p>
     <a href="https://spotify-lyrics-viewer.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit spotify-lyrics-viewer.nitratine.net →</button></a>
 </div>
-
-{% with repo="brentvollebregt/spotify-lyrics-viewer" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 The Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify.
 

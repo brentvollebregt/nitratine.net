@@ -4,6 +4,7 @@ category: Projects
 tags: [react, javascript, typescript, spotify]
 feature: feature.png
 description: "Emotionify is a webapp that allows users to login to Spotify, select a playlist and then sort them using Spotify's pre-calculated audio feature values."
+github: brentvollebregt/emotionify
 
 [TOC]
 
@@ -12,8 +13,6 @@ description: "Emotionify is a webapp that allows users to login to Spotify, sele
     <p class="text-center">Create emotionally gradiented Spotify playlists and more.</p>
     <a href="https://emotionify.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit emotionify.nitratine.net →</button></a>
 </div>
-
-{% with repo="brentvollebregt/emotionify" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 ## Sorting Playlists
 Emotionfy is a webapp that allows users to easily sort their playlists using Spotify's pre-calculated audio feature values. By default, this project aims to create emotionally gradiented Spotify playlists for smoother emotional transitions. It does this by sorting songs based off the two features `Valence` and `Energy` [calculated by Spotify](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/) based on distance from the origin.

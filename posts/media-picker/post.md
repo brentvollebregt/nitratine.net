@@ -4,14 +4,13 @@ category: Projects
 tags: [python, images]
 feature: interface.jpg
 description: "I had been requested to help someone with filtering a lot of images taken with a camera. This would need to occur regularly so I created an interface that would help them easily select what photos they wanted."
+github: brentvollebregt/media-picker
 
 *Easily chose which images to keep with a simple interface.*
 
 I had been requested to help someone with filtering a lot of images taken with a camera. This would need to occur regularly so I created an interface that would help them easily select what photos they wanted. After they have selected and moved their images, they are then free to delete the original files/folders if wanted.
 
 ![Interface](/posts/media-picker/interface.jpg)
-
-{% with repo="brentvollebregt/media-picker" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
 
 This project is a Flask server hosted by Python that is designed to be opened in a Chrome window. Other browsers will work but due to layouts, images of different sizes will mess with the display.
 

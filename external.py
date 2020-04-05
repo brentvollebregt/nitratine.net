@@ -26,8 +26,8 @@ def get_github_user_repos(github_username: str):
     github_repos_request = requests.get(f'https://api.github.com/users/{github_username}/repos')
     github_repos_request_data = github_repos_request.json()
     available_repos = sorted(
-        [[i['full_name'], i['stargazers_count']] for i in github_repos_request_data],
-        key=lambda x: x[1],
+        github_repos_request_data,
+        key=lambda x: x['stargazers_count'],
         reverse=True
     )
     return available_repos

@@ -4,8 +4,7 @@ category: Projects
 tags: [python, flask]
 feature: feature.jpg
 description: "A web app that allows players to keep track of their Monopoly balances securely in an internet banking like system. The server is built in Flask which can support unlimited games on one server. Each game has one banker amd can have as many players as needed."
-
-{% with repo="brentvollebregt/monopoly-money" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
+github: brentvollebregt/monopoly-money
 
 ## What is this?
 This project is a substitution for cash/credit cards in the game of Monopoly. A banker creates a game on the server and players then join. The banker can spawn in money and pass it to other players. Players can send money to each other, see how much money is in free parking, see their own amount and see all events that occur (money passed). All events are shown to all players to stop cheating as everyone will know where money goes.

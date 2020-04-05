@@ -4,8 +4,7 @@ category: Projects
 tags: [python, spotify, download, youtube-dl]
 feature: feature.jpg
 description: "A Python script to download a Spotify playlist to MP3 using YouTube as audio source. The MP3s are tagged and given album art using Spotify"
-
-{% with repo="brentvollebregt/spotify-playlist-downloader" %}{% include 'blog-post-addGitHubRepoBadges.html' %}{% endwith %}
+github: brentvollebregt/spotify-playlist-downloader
 
 ## What is this?
 This project takes a Spotify playlist uri and will download it's contents by sourcing audio from YouTube and tags/art from Spotify. YouTube videos for audio are found automatically.

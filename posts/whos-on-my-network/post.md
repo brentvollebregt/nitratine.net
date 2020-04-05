@@ -4,6 +4,7 @@ category: Projects
 tags: [python, react, typescript, sqlite, networking]
 feature: feature.png
 description: "This tool helps you keep and eye on who is on your network and when. Simply periodically scan your network, assign devices to people and view who is on your network."
+github: brentvollebregt/whos-on-my-network
 
 [TOC]
 
