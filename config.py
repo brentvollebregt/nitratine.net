@@ -212,7 +212,7 @@ config_data = {
         },
         {
             'type': 'post-image',
-            'post': 'auto-py-to-exe/',
+            'post': 'auto-py-to-exe',
             'image_url': 'https://img.youtube.com/vi/OZSZHmWSOeM/mqdefault.jpg'
         },
         {
