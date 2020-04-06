@@ -22,20 +22,20 @@ To double check that it was installed successfully, open up IDLE and execute the
 ![Testing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput2.png)
 
 ## Simulating Keys
-Create a new script and save it somewhere so you can easily run the script. Import Key and Controller from pynput.keyboard.
+Create a new script and save it somewhere so you can easily run the script. Import `Key` and `Controller` from `pynput.keyboard`.
 
 ```python
 from pynput.keyboard import Key, Controller
 ```
 
-Make a variable called keyboard and set it to an instance of Controller. Now using the keyboard variable we can press and release keys.
+Make a variable called keyboard and set it to an instance of `Controller`. Now using the keyboard variable we can press and release keys.
 
 ```python
 keyboard = Controller()
 ```
 
 ### Pressing and Releasing Keys
-Using keyboard.press we can press keys and with keyboard.release we can release a key. This allows us to type a key by pressing and releasing. You can only supply this method with one key at a time. Here is an example of how to type the letter 'a'.
+Using `keyboard.press` we can press keys and with `keyboard.release` we can release a key. This allows us to type a key by pressing and releasing. You can only supply this method with one key at a time. Here is an example of how to type the letter 'a'.
 
 ```python
 keyboard.press('a')
@@ -43,7 +43,7 @@ keyboard.release('a')
 ```
 
 ### Pressing and Releasing Special Keys
-For special keys that can't be put into a string like shift or control, you will need to refer to the page [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) to look at the Key class for supported keys. Using these in the press or release methods will press/release the key matching it. For example, if I wanted to press the windows key, I would look at [that](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) page for the key. 'cmd' has the description "A generic command button. On PC platforms, this corresponds to the Super key or Windows key, and on Mac it corresponds to the Command key" which is what I am looking for. Now for the code.
+For special keys that can't be put into a string like shift or control, you will need to refer to the page [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) to look at the Key class for supported keys. Using these in the press or release methods will press/release the key matching it. For example, if I wanted to press the windows key, I would look at [that page](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) for the key. 'cmd' has the description *"A generic command button. On PC platforms, this corresponds to the Super key or Windows key, and on Mac it corresponds to the Command key"* which is what I am looking for. Now for the code.
 
 ```python
 keyboard.press(Key.cmd)
@@ -59,6 +59,21 @@ keyboard.release('c')
 keyboard.release(Key.ctrl)
 ```
 
+Here are a few other common special keys:
+
+- [Key.alt_l](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.alt_l): Left ALT
+- [Key.backspace](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.backspace): Backspace
+- [Key.ctrl_l](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.ctrl_l): Left Ctrl
+- [Key.delete](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.delete): Delete
+- [Key.enter](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.enter): Enter
+- [Key.esc](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.esc): Escape
+- [Key.f1](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.f1): F1
+- [Key.f5](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.f5): F5
+- [Key.media_play_pause](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.media_play_pause): Play/Pause
+- [Key.page_down](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.page_down): Page Down
+- [Key.up](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.up): Up Arrow Key
+- The rest can be found in the [pynput docs for the Key class](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key).
+
 ### Typing Multiple Keys
 A cool feature supplied by the class is the type method. This method allows us to type more than one key at a time but it has to be a string of characters. So if we wanted to type "Nitratine" we would execute:
 
@@ -67,6 +82,29 @@ keyboard.type('Nitratine')
 ```
 
 This method does also support spaces but when it comes to enters, use a new line character (\n) and a tab character (\t) for tabs.
+
+```python
+keyboard.type('This is one line.\nAnd this is the next line.\n\tThis line has been tabbed in.')
+```
+
+### Putting A Random Delay Between Each Keypress
+To put a random delay between each keypress, you can use `time.sleep` with a random number passed to it. Here is a small example function I made:
+
+```python
+import time
+import random
+from pynput.keyboard import Controller
+
+keyboard = Controller()  # Create the controller
+
+def type_string_with_delay(string):
+    for character in string:  # Loop over each character in the string
+        keyboard.type(character)  # Type the character
+        delay = random.uniform(0, 2)  # Generate a random number between 0 and 10
+        time.sleep(delay)  # Sleep for the amount of seconds generated
+        
+type_string_with_delay("This is my string typed with a delay")
+```
 
 ## Common Issues and Questions
 
