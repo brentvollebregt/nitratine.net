@@ -40,6 +40,12 @@ Now type 'pip' in cmd to make sure you have done this correctly. No errors shoul
 
 > If you are using an older version of Windows, you will be presented with a one-line input field. Add a semicolon ';' to the end of the text current in the field and then add the path as you would have in the area before. `<current text>;<path>`
 
+## A Shortcut
+A while ago I made a script that automatically sets up the `python` and `pip` commands on Windows by putting their directories on the users PATH variable automatically.
+
+You can find this script in my ["Fix: 'python' is not recognized as an internal or external command"](/blog/post/fix-python-is-not-recognized-as-an-internal-or-external-command/) post. 
+
+
 ## Usage
 You can now use commands like ```pip install pynput``` to install a package or "pip list" to look at all packages installed.
 

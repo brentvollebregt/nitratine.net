@@ -149,3 +149,5 @@ else:
 ```
 
 You should now be able to execute `python` and `pip` in the terminal with no errors.
+
+> Note that if you have more than one Python installation, this script will add paths corresponding to what installation you ran the script with.
