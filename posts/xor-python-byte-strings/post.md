@@ -73,20 +73,20 @@ In the CTF challenge we were given this table:
 | bVkmcyU2L14RKiBjMiddVSY9YzgrVV40 | The flag is hidden below |
 | X10iNHk5fQ4HIGBxPnwPU3c=         | [REDACTED]               |
 
-It was pretty easy to guess that the last row contained the flag and we could assume all the other rows used the same key. Since *[plaintext XOR key = cipher text]* then *[cipher text XOR plaintext = key]*; this meant I only need one chipher text and it's corresponding plain text to get the key. Using Python, I could get the key using this method:
+It was pretty easy to guess that the last row contained the flag and we could assume all the other rows used the same key. Since *[plaintext XOR key = cipher-text]* then *[cipher-text XOR plaintext = key]*; this meant I only need one cipher-text and it's corresponding plain text to get the key. Using Python, I could get the key using this method:
 
 ```python
 import base64
 
-base64_chiphertext = 'bVkmcyU2L14RKiBjMiddVSY9YzgrVV40'
+base64_ciphertext = 'bVkmcyU2L14RKiBjMiddVSY9YzgrVV40'
 plaintext = 'The flag is hidden below'
 
 def byte_xor(ba1, ba2):
     """ XOR two byte strings """
     return bytes([_a ^ _b for _a, _b in zip(ba1, ba2)])
     
-# Decode the cipher text to a byte string and make the plaintext a byte string
-key = byte_xor(base64.b64decode(base64_chiphertext), plaintext.encode())
+# Decode the cipher-text to a byte string and make the plaintext a byte string
+key = byte_xor(base64.b64decode(base64_ciphertext), plaintext.encode())
 ```
 
 The key produced from this was `91CSCZN91CSCZN91CSCZN91C`. We can see this repeats so we could say `91CSCZN` is the "base key" that repeats. Now to use this key on the final row, since `bxor` will zip to whatever byte string is the shortest, we do not have to make the key the correct size.
@@ -94,14 +94,14 @@ The key produced from this was `91CSCZN91CSCZN91CSCZN91C`. We can see this repea
 ```python
 import base64
 
-base64_chiphertext = 'X10iNHk5fQ4HIGBxPnwPU3c='
+base64_ciphertext = 'X10iNHk5fQ4HIGBxPnwPU3c='
 key = '91CSCZN91CSCZN91CSCZN91C'
 
 def bxor(ba1, ba2):
     """ XOR two byte strings """
     return bytes([_a ^ _b for _a, _b in zip(ba1, ba2)])
 
-flag = bxor(base64.b64decode(base64_chiphertext), key.encode())
+flag = bxor(base64.b64decode(base64_ciphertext), key.encode())
 ```
 
 This gives `flag:c376c32d26b4`.

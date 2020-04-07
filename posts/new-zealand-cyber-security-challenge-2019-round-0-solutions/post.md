@@ -33,20 +33,20 @@ We are told that a simple XOR cipher is used to "protect our communications" and
 | bVkmcyU2L14RKiBjMiddVSY9YzgrVV40 | The flag is hidden below |
 | X10iNHk5fQ4HIGBxPnwPU3c=         | [REDACTED]               |
 
-It was pretty easy to guess that the last row contained the flag and we could assume all the other rows used the same key. Since *[plaintext XOR key = cipher text]* then *[cipher text XOR plaintext = key]*; this means we only need one chipher text and it's corresponding plain text to get the key. Using Python, I could get the key using this method:
+It was pretty easy to guess that the last row contained the flag and we could assume all the other rows used the same key. Since *[plaintext XOR key = cipher-text]* then *[cipher-text XOR plaintext = key]*; this means we only need one cipher-text and it's corresponding plain text to get the key. Using Python, I could get the key using this method:
 
 ```python
 import base64
 
-base64_chiphertext = 'bVkmcyU2L14RKiBjMiddVSY9YzgrVV40'
+base64_ciphertext = 'bVkmcyU2L14RKiBjMiddVSY9YzgrVV40'
 plaintext = 'The flag is hidden below'
 
 def bxor(ba1, ba2):
     """ XOR two byte strings """
     return bytes([_a ^ _b for _a, _b in zip(ba1, ba2)])
     
-# Decode the cipher text to a byte string and make the plaintext a byte string
-key = bxor(base64.b64decode(base64_chiphertext), plaintext.encode())
+# Decode the cipher-text to a byte string and make the plaintext a byte string
+key = bxor(base64.b64decode(base64_ciphertext), plaintext.encode())
 ```
 
 The key produced from this was `91CSCZN91CSCZN91CSCZN91C`. We can see this repeats so we could say `91CSCZN` is the "base key" that repeats. Now to use this key on the final row, since `bxor` will zip to whatever byte string is the shortest, we do not have to make the key the correct size.
@@ -54,32 +54,32 @@ The key produced from this was `91CSCZN91CSCZN91CSCZN91C`. We can see this repea
 ```python
 import base64
 
-base64_chiphertext = 'X10iNHk5fQ4HIGBxPnwPU3c='
+base64_ciphertext = 'X10iNHk5fQ4HIGBxPnwPU3c='
 key = '91CSCZN91CSCZN91CSCZN91C'
 
 def bxor(ba1, ba2):
     """ XOR two byte strings """
     return bytes([_a ^ _b for _a, _b in zip(ba1, ba2)])
 
-flag = bxor(base64.b64decode(base64_chiphertext), key.encode())
+flag = bxor(base64.b64decode(base64_ciphertext), key.encode())
 ```
 
 > This gives `flag:c376c32d26b4`
 
 ### Challenge 2*
-In the DOM of challenge 2, there is another chiphertext hidden: `fnQXc211KwwAJ2B2PyoXUyo9`. Using the key on this:
+In the DOM of challenge 2, there is another ciphertext hidden: `fnQXc211KwwAJ2B2PyoXUyo9`. Using the key on this:
 
 ```python
 import base64
 
-base64_chiphertext = 'fnQXc211KwwAJ2B2PyoXUyo9'
+base64_ciphertext = 'fnQXc211KwwAJ2B2PyoXUyo9'
 key = '91CSCZN91CSCZN91CSCZN91C'
 
 def bxor(ba1, ba2):
     """ XOR two byte strings """
     return bytes([_a ^ _b for _a, _b in zip(ba1, ba2)])
 
-text = bxor(base64.b64decode(base64_chiphertext), key.encode())
+text = bxor(base64.b64decode(base64_ciphertext), key.encode())
 ```
 
 This gives text = `GET ./e51d35ed.bin`. Making an anchor tag on the page again to go to that relative URL like I did previously, the [file](https://nzcsc.org.nz/competition/2019/r0/2/challenge/e51d35ed.bin) is downloaded.
