@@ -2,8 +2,8 @@ title: "How to Detect Key Presses In Python"
 date: 2020-04-07
 category: Tutorials
 tags: [python, keyboard, logging, pynput]
-feature: feature.png
-description: "TODO"
+feature: demo2.png
+description: "This demonstration shows you how to detect key presses using the pynput module. These can then be logged to a file as no console is displayed. This is very similar to a key logger."
 
 [TOC]
 
