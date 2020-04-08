@@ -28,7 +28,7 @@ Create a new python file and save it with a .py file extension. You will first w
 from pynput.mouse import Listener
 ```
 
-Setup the listener by creating an instance in a with statement and using it's .join() method to join it to the main thread.
+Setup the listener by creating an instance in a with statement and using it's `.join()` method to join it to the main thread.
 
 ```python
 with Listener() as listener:
@@ -48,7 +48,7 @@ def on_scroll(x, y, dx, dy):
     pass
 ```
 
-Link these methods to the listener instance with the function names as the args; I have named the methods as the are defined in the listener class. Now when an action occurs, one of these methods will be run.
+Link these methods to the listener instance with the function names as the args; I have named the methods as they are defined in the listener class. Now when an action occurs, one of these methods will be run.
 
 ```python
 with Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener:
@@ -69,7 +69,7 @@ def on_scroll(x, y, dx, dy):
 
 ![Mouse moved demonstration](/posts/how-to-get-mouse-clicks-with-python/demo1.png)
 
-Using these print statements and the parameters provided, we can give more information when a print. Run this again to make sure it is working properly (example output below).
+Using these print statements and the parameters provided, we can give more information when printing. Run this again to make sure it is working properly (example output below).
 
 ```python
 def on_move(x, y):
@@ -94,7 +94,7 @@ import logging
 ```
 
 ```python
-logging.basicConfig(filename=("mouse_log.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
+logging.basicConfig(filename="mouse_log.txt", level=logging.DEBUG, format='%(asctime)s: %(message)s')
 ```
 
 ```python
@@ -113,17 +113,19 @@ Now when the script is run, nothing should be printed to the console. This is be
 
 Save and close IDLE. Open the file named mouse_log.txt next to your python script; all the events should be logged in here.
 
-## The Listener Thread
-Just as a quick note, the Listener class is a thread which means as soon as it has joined to the main thread no code will be executed after the .join() until the Listener is stopped.
+> The actual location of this file will be in the current working directory of where you run the script from
 
-As stated [here in the pynput docs on readthedocs.io](https://pynput.readthedocs.io/en/latest/mouse.html#controlling-the-mouse), we can call pynput.mouse.Listener.stop anywhere in the script to stop the thread or return False from a callback to stop the listener. As shown in my video, we can also just call listener.stop() in one of the definitions due to the fact that that the listener is now in scope and is an instance os Listener.
+## The Listener Thread
+Just as a quick note, the Listener class is a thread which means as soon as it has joined to the main thread no code will be executed after the `.join()` until the Listener is stopped.
+
+As stated [here in the pynput docs on readthedocs.io](https://pynput.readthedocs.io/en/latest/mouse.html#monitoring-the-mouse), we can call `pynput.mouse.Listener.stop` anywhere in the script to stop the thread or return False from a callback to stop the listener. As shown in my video, we can also just call `listener.stop()` in one of the definitions due to the fact that that the listener is now in scope and is an instance os Listener.
 
 ## Final Script
 ```python
 from pynput.mouse import Listener
 import logging
 
-logging.basicConfig(filename=("mouse_log.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
+logging.basicConfig(filename="mouse_log.txt", level=logging.DEBUG, format='%(asctime)s: %(message)s')
 
 def on_move(x, y):
     logging.info("Mouse moved to ({0}, {1})".format(x, y))
