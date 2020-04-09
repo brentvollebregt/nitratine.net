@@ -7,7 +7,7 @@ description: "A list of the most interesting and engaging sites I have discovere
 
 [TOC]
 
-## ROME
+## [ROME](http://www.ro.me/)
 This site first brings you to a loading page; just hit enter and let the resources load. For those that have a data cap, be aware that this site uses a lot of data.
 
 This site demonstrates the design of good music and timing with human interaction. Unbelievably this has been made from JavaScript. Buildings, landscapes, animals, trees and so much more all created with Javascript.
@@ -32,7 +32,9 @@ Through The Dark is a collaboration between Hilltop Hoods and Google Play Music.
 
 Liam is now living cancer free.
 
-## Paper Planes
+> This site has now been taken down. See it on the [web archive](https://web.archive.org/web/20180331215441/https://throughthedark.withgoogle.com/).
+
+## [Paper Planes](https://paperplanes.world/)
 
 This site is quite entertaining and has a awesome idea to it. It's made for mobile but is supported by desktop also by just showing where planes are coming from with animations. The idea of the site is to send a paper plane out with a stamp of your relative location (nearest city). You then catch other planes sent out by others 'flying around the world' which you can then see stamps from others and put your own stamp on it. You then send the paper plane back off to be found by someone else as it collects stamps for more to see.
 
@@ -49,7 +51,9 @@ This project was shown by a friend in my COMP241 class which then lead to the id
 ![Lights example 1](/posts/interesting-sites/lights1.jpg)
 ![Lights example 2](/posts/interesting-sites/lights2.jpg)
 
-## NONI NONI
+> This site has now been taken down. Here is [the old home page](https://helloenjoy.com/lights) (still up).
+
+## [NONI NONI](https://noni.cmiscm.com/)
 This site gets you to draw something and then will find the closest match to the shapes it has. It will then assemble spherical particles to that shape. You can keep drawing and it will find shapes closest to your drawing. Once again this is a great example of what JavaScript can do in a browser. The colours and animations are excellent.
 
 ![NONI NONI draw a picture](/posts/interesting-sites/noninoni3.jpg)
