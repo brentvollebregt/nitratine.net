@@ -96,6 +96,11 @@ config_data = {
                 'url': 'https://hitcounter.pythonanywhere.com/',
                 'image_url': '/assets/img/featured-sites/hit-counter.png',
             },
+            {
+                'title': 'Monopoly Money',
+                'url': 'https://monopoly-money.nitratine.net/',
+                'image_url': '/posts/monopoly-money/banner.png',
+            }
         ]
     },
     'redirects': {

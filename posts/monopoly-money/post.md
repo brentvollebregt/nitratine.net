@@ -1,59 +1,45 @@
 title: "Monopoly Money"
-date: 2017-12-21
+date: 2020-04-18
 category: Projects
-tags: [python, flask]
-feature: feature.jpg
-description: "A web app that allows players to keep track of their Monopoly balances securely in an internet banking like system. The server is built in Flask which can support unlimited games on one server. Each game has one banker amd can have as many players as needed."
+tags: [react, typescript, javascript, express, lerna]
+feature: feature.png
+description: "A Node.js server and React frontend that helps you manage your finances in a game of Monopoly from the browser."
 github: brentvollebregt/monopoly-money
 
-## What is this?
-This project is a substitution for cash/credit cards in the game of Monopoly. A banker creates a game on the server and players then join. The banker can spawn in money and pass it to other players. Players can send money to each other, see how much money is in free parking, see their own amount and see all events that occur (money passed). All events are shown to all players to stop cheating as everyone will know where money goes.
+<div align="center" style="padding: 20px 20px 40px 20px">
+    <img src="/posts/monopoly-money/banner.png" alt="Monopoly Money Banner" style="margin-bottom: 10px;">
+    <p class="text-center">Manage your finances in a game of Monopoly from the browser.</p>
+    <a href="https://monopoly-money.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit monopoly-money.nitratine.net →</button></a>
+</div>
 
-## Demonstration and Screenshots
-![Player type selection screen](/posts/monopoly-money/game1.png)
-![Pin input screen](/posts/monopoly-money/game2.png)
-![Banker screen](/posts/monopoly-money/game3.png)
-![Player screen](/posts/monopoly-money/game4.png)
+Monopoly Money is a webapp designed for mobile that allows multiple players to track their balances collectively in a game of monopoly and transfer money from one another.
 
-## Installation and Setup
-1. Install Python
-2. Install Flask (pip install Flask)
-3. Download or clone the repository at [https://github.com/brentvollebregt/monopoly-money](https://github.com/brentvollebregt/monopoly-money)
-4. Visit address displayed
-5. Choose if you are the banker or another player and supply your name
-6. If you are a player, enter the pin supplied by your banker
+## How Can This Help You?
+
+If you have every played the credit card edition of Monopoly, you will appreciate how much faster the game moves without having to count cash. This webapp substitutes the need for cash in a game of monopoly for a mobile-banking-like solution where players can easily send each other virtual currency.
+
+Using this method for finance management also allows you to keep a full history of your game and have clarity over every movement.
 
 ## Usage
-After the server has been started, the player who is going to be the banker can visit the address displayed on the console, enter their name and click banker.
 
-By clicking on the bank icon in the top left side, the banker can switch between the bank and their account.
+To start using the webapp, follow the basic following steps:
 
-For other players, go to the address displayed, enter your name and click player. This will now ask for a pin, this can be received from the banker.
+- Get all participants to go to [monopoly-money.nitratine.net](https://monopoly-money.nitratine.net/) in a browser of their choosing.
+- Whoever is the banker should select "New Game" to create a new game after providing their name.
+- All other participants should then selected "Join Game" and using the game id provided by the banker and their name, join the game.
 
-When all players have joined the game, the banker can lock the game by going to the banking screen and clicking the button on the bottom left. This will make sure no one else can join the game. This can be clicked again to open the game back up to more players.
-
-The banker can now give money to everyone and play the game as it normally would be played.
-
-Players can send money by selecting what player they want to send money to, changing the amount and clicking go.
-
-The top of the banker screen allows the banker to send money to a player. Under that allows the banker to send free parking to a particular player. Under than the banker can manage players. Next the banker can set a players balance and finally the "Who starts first?" button will select a player at random and display their name. The "Open/Close" button manages if the game is open or closes to more players and the "End" button will end the game.
+When everyone is in the game, the banker can then close the game to stop others joining and then start distributing out the initial balances.
 
 ## Features
-### Server
-- Games that generate when a player makes themself a banker
-- Free parking
-- Log that says what has happened (Shows all money values in K)
 
-### Players
-- Easily join a game using a pin
-- Auto refresh in the background (still manual button in /play/ if its too slow)
-- Self chosen names (can be changed by banker)
-- Simple to send money to players/bank/free parking
-- Clicking on amounts with 'M' or 'k' will switch them.
-
-### Banker
-- Banker can edit player names and remove people
-- Ask who starts first (random selection of current players)
-- Can set players balances
-- Lock the game so no one else can come in while you are in the middle of a game
-- End game easily
+- Multiple games can be hosted on the server at once
+- Each player uses their own device; everyone joins one game.
+- Send money between players quickly
+- The person that created the game is the banker. This person can:
+    - Give money to players from the bank (and take money)
+    - Give free parking to players
+    - Update player names
+    - Delete players
+    - Stop new people from joining the game
+    - End the game completely
+- History is recorded of each game event that can be viewed by all players
