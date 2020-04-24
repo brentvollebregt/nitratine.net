@@ -135,51 +135,171 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
-## An Improved Script
-A lot of people had been asking for a solution that can handle different functions for different combinations. [Christopher Walters](https://www.youtube.com/channel/UCzGG-Z4QAgkt2uYMH6VTpQQ) commented on the original video with a snippet that allowed users to declare a function per combination. 
+## Issues With Character Casing (Revision 1)
+In the example above I have defined two combinations, one for `shift+a` and `shift+A`; this handles the two cases when you press A before shift and shift before A. However this mixing of case can also cause issues when tracking the currently pressed keys.
 
-I modified the original script as it didn't work out-of-the-box (the idea was there though which is the most important part) and added some comments to make it more understandable *(even though it was already quite good)*:
+A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the A key can give two different keys depending on if you are holding shift or not (a or A); but pynput can actually see that the A key itself is pressed. To track what physical key is pressed, we can use the `vk`. 
+
+> `vk` is short for "virtual key" and is a code associated with each key. For example: a = 65, b = 66, enter = 13, shift = 130
+
+To get the vk, we can read the `vk` attribute in the `KeyCode` object provided by pynput in the `on_press` and `on_release`. Using the `vk` codes to track what keys are pressed will take a bit more effort but can simplify some things.
+
+Below is a script I developed to watch for `shift+a`. This will now be able to handle `shift+a` pressed in many different ways.
+
+```python
+from pynput import keyboard
+
+# The key combinations to look for
+COMBINATIONS = [
+    {keyboard.Key.shift, keyboard.KeyCode(vk=65)}  # shift + a (see below how to get vks)
+]
+
+
+def execute():
+    """ My function to execute when a combination is pressed """
+    print("Do Something")
+
+
+# The currently pressed keys (initially empty)
+pressed_vks = set()
+
+
+def get_vk(key):
+    """
+    Get the virtual key code from a key.
+    These are used so case/shift modifications are ignored.
+    """
+    return key.vk if hasattr(key, 'vk') else key.value.vk
+
+
+def is_combination_pressed(combination):
+    """ Check if a combination is satisfied using the keys pressed in pressed_vks """
+    return all([get_vk(key) in pressed_vks for key in combination])
+
+
+def on_press(key):
+    """ When a key is pressed """
+    vk = get_vk(key)  # Get the key's vk
+    pressed_vks.add(vk)  # Add it to the set of currently pressed keys
+
+    for combination in COMBINATIONS:  # Loop though each combination
+        if is_combination_pressed(combination):  # And check if all keys are pressed
+            execute()  # If they are all pressed, call your function
+            break  # Don't allow execute to be called more than once per key press
+
+
+def on_release(key):
+    """ When a key is released """
+    vk = get_vk(key)  # Get the key's vk
+    pressed_vks.remove(vk)  # Remove it from the set of currently pressed keys
+
+
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()  # Join the listener thread to the current thread so we don't exit before it stops
+```
+
+At the top of this script you will see that the `COMBINATIONS` value looks a bit different. This is because `keyboard.KeyCode(char='a')` does not populate the `vk` attribute, so we need to find the `vk` code ourselves. 
+
+Doing this can easily be done using a simple script. If you run the following and press a key, it will print out the `vk` code for the pressed key which you can then use in the script above.
+
+```python
+from pynput import keyboard
+
+def on_press(key):
+    vk = key.vk if hasattr(key, 'vk') else key.value.vk
+    print('vk =', vk)
+
+with keyboard.Listener(on_press=on_press) as listener:
+    listener.join()
+```
+
+If you pressed shift, you would have also noticed that the `vk` for `keyboard.Key.shift` is 160. Instead of using `keyboard.Key.shift` in the `COMBINATIONS`, this shows you could also use `keyboard.KeyCode(vk=160)`. The reason we could leave the shift key as `keyboard.Key.shift` in `COMBINATIONS` is because pynput is able to populate the `vk` value in the key object.
+
+Here are some other `vk` codes, you can find missing ones by running the script above and pressing keys:
+
+| Key        | vk code |
+|------------|---------|
+| a          | 65      |
+| b          | 66      |
+| y          | 89      |
+| z          | 90      |
+| Top row 1  | 49      |
+| Num pad 1  | 97      |
+| Insert     | 45      |
+| Enter      | 13      |
+| Left ctrl  | 162     |
+| Right ctrl | 163     |
+
+> An interesting thing to note from this table is that you can tell the difference between 1 in the top row being pressed and 1 on the num pad being pressed.
+
+## An Improved Script
+A lot of people had been asking for a solution that can handle different functions for different combinations. [Christopher Walters](https://www.youtube.com/channel/UCzGG-Z4QAgkt2uYMH6VTpQQ) commented on the original video with a snippet that allowed users to declare a function per combination.
+
+I modified the original script and after revisions made to the original script, here is a script that can handle multiple combinations that execute their own function:
 
 ```python
 from pynput.keyboard import Key, KeyCode, Listener
 
-# Your functions
 
 def function_1():
+    """ One of your functions to be executed by a combination """
     print('Executed function_1')
 
+
 def function_2():
+    """ Another one of your functions to be executed by a combination """
     print('Executed function_2')
 
-# Create a mapping of keys to function (use frozenset as sets are not hashable - so they can't be used as keys)
+
+# Create a mapping of keys to function (use frozenset as sets/lists are not hashable - so they can't be used as keys)
+# Note the missing `()` after function_1 and function_2 as want to pass the function, not the return value of the function
 combination_to_function = {
-	frozenset([Key.shift, KeyCode(char='a')]): function_1, # No `()` after function_1 because we want to pass the function, not the value of the function
-	frozenset([Key.shift, KeyCode(char='A')]): function_1,
-	frozenset([Key.shift, KeyCode(char='b')]): function_2,
-	frozenset([Key.shift, KeyCode(char='B')]): function_2,
+    frozenset([Key.shift, KeyCode(vk=65)]): function_1,  # shift + a
+    frozenset([Key.shift, KeyCode(vk=66)]): function_2,  # shift + b
+    frozenset([Key.alt_l, KeyCode(vk=71)]): function_2,  # left alt + g
 }
 
-# Currently pressed keys
-current_keys = set()
+
+# The currently pressed keys (initially empty)
+pressed_vks = set()
+
+
+def get_vk(key):
+    """
+    Get the virtual key code from a key.
+    These are used so case/shift modifications are ignored.
+    """
+    return key.vk if hasattr(key, 'vk') else key.value.vk
+
+
+def is_combination_pressed(combination):
+    """ Check if a combination is satisfied using the keys pressed in pressed_vks """
+    return all([get_vk(key) in pressed_vks for key in combination])
+
 
 def on_press(key):
-    # When a key is pressed, add it to the set we are keeping track of and check if this set is in the dictionary
-    current_keys.add(key)
-    if frozenset(current_keys) in combination_to_function:
-        # If the current set of keys are in the mapping, execute the function
-        combination_to_function[frozenset(current_keys)]()
+    """ When a key is pressed """
+    vk = get_vk(key)  # Get the key's vk
+    pressed_vks.add(vk)  # Add it to the set of currently pressed keys
+
+    for combination in combination_to_function:  # Loop through each combination
+        if is_combination_pressed(combination):  # Check if all keys in the combination are pressed
+            combination_to_function[combination]()  # If so, execute the function
+
 
 def on_release(key):
-    # When a key is released, remove it from the set of keys we are keeping track of
-    current_keys.remove(key)
+    """ When a key is released """
+    vk = get_vk(key)  # Get the key's vk
+    pressed_vks.remove(vk)  # Remove it from the set of currently pressed keys
+
 
 with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
-When executing this script and pressing Shift + A (in any order), this will execute `function_1` and print "Executed function_1". Also when pressing Shift + B (in any order), `function_2` will be executed.
+When executing this script and pressing Shift + A (in any order), this will execute `function_1` and print "Executed function_1". When pressing Shift + B (in any order), `function_2` will be executed. Also when pressing Left Alt + G (in any order), `function_2` will be executed.
 
-To create new combinations, duplicate a line in the `combination_to_function` dictionary and replace the keys inside of `frozenset` and the value (function - not the value of the function).
+To create new combinations, duplicate a line in the `combination_to_function` dictionary and replace the keys inside of `frozenset` and the value (function - not the return value of the function).
 
 ## Common Issues and Questions
 
