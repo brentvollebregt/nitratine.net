@@ -3,7 +3,7 @@ date: 2018-04-25
 category: Projects
 tags: [python, flask]
 feature: feature.png
-description: "Easily Count Hits on a Website by Requesting a SVG Displaying Hit Count. Works on any site."
+description: "Easily Count Hits on a Website by Requesting an SVG Displaying Hit Count. Works on any site."
 github: brentvollebregt/hit-counter
 
 <div style="text-align: center">
@@ -13,21 +13,21 @@ github: brentvollebregt/hit-counter
 Live demo hosted at: [hitcounter.pythonanywhere.com](https://hitcounter.pythonanywhere.com/)
 
 ## What is This?
-This is a server that allows a client to request for a svg file that displays views for a url. This url can either be passed as a query parameter or the referrer (or referer) value in the header will be used.
+This is a server that allows a client to request an SVG file that displays views for a URL. This URL can either be passed as a query parameter or the referrer (or referer) value in the header will be used.
 
-These is also a small method to prevent the refresh count increase issue (if you want to call it an issue, I see it as annoying) which uses cookies.
+There is also a small method to prevent the refresh count increase issue (if you want to call it an issue, I see it as annoying) which uses cookies.
 
-**This makes is very easy too keep track of views on static sites like Github Pages.** (can also be uses on non-static sites as a general counter)
+**This makes it very easy to keep track of views on static sites like Github Pages.** (can also be used on non-static sites as a general counter)
 
 ## How Can I Use it?
 ### Getting an SVG
-To get an image for the current url (for example is image is being requested by www.example.com), simply get the image as you normally would:
+To get an image for the current URL (for example is image is being requested by www.example.com), simply get the image as you normally would:
 
 ```html
 <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits">
 ```
 
-In this example a hit would be added to the websites count on the server. To stop this form occurring but still get the svg file, use:
+In this example, a hit would be added to the websites count on the server. To stop this from occurring but still get the SVG file, use:
 
 ```html
 <img src="https://hitcounter.pythonanywhere.com/nocount/tag.svg" alt="Hits">
@@ -44,9 +44,9 @@ count = xmlHttp.responseText;
 ```
 
 ### Getting a Count For a Site That Isn't Me
-There may be circumstances that the referrer may not be sent or you may want to request a SVG or count for another site. To do this, add a query with ```url``` as the name and the url you want to get (encoded obviously).
+There may be circumstances that the referrer may not be sent or you may want to request an SVG or count for another site. To do this, add a query with ```url``` as the name and the URL you want to get (encoded obviously).
 
-For example, getting an svg:
+For example, getting an SVG:
 
 ```html
 <img src="https://hitcounter.pythonanywhere.com/nocount/tag.svg?url=www.example.com" alt="Hits">
@@ -66,12 +66,12 @@ count = xmlHttp.responseText;
 > There are also some situations where a client will not send the Referer in the header. This is a simple solution to the server not being able to find where the request came from.
 
 ## Generating Links With A Tool Hosted By The Server
-Going to the location ```/``` on the server, you will be served with a HTML page that contains a tool to create the image tag or markdown element and search up a websites count.
+Going to the location ```/``` on the server, you will be served with an HTML page that contains a tool to create the image tag or markdown element and search up a websites count.
 
 ![Interface](/posts/hit-counter/interface.png)
 
 ## Hosting Your Own Server
-Running this server is very easy, simple clone the repo (or download the files) and run ```server.py```
+Running this server is very easy, simply clone the repo (or download the files) and run ```server.py```
 
 I host this on pythonaywhere.com; to do this make sure you have cloned the repo into the filesystem and then create a new project. Modify the "WSGI configuration file" under the "Code" header in the "Web" tab. Change line 16 to import your script and restart the application using the green button at the top.
 
@@ -82,9 +82,9 @@ from server import app as application
 If you want to enable HTTPS on pythonaywhere, uncomment lines 5 and 8 in server.py to enable flask_sslify (is already installed on pythonaywhere, so you don't need to install it)
 
 ## How it Works
-This server has been built with Flask. Calling one of the ```/count``` or ```/nocount``` methods will interact with the local SQLite3 database (file) and keep track of urls, views and the counts for urls. Data will be returned based off what is in the database at the current time.
+This server has been built with Flask. Calling one of the ```/count``` or ```/nocount``` methods will interact with the local SQLite3 database (file) and keep track of URLs, views and the counts for URLs. Data will be returned based on what is in the database at the current time.
 
-Cookies are used to prevent multiple counts for the same client in a specified period of time. These are simply the url as the key and a random string generated server side as the value.
+Cookies are used to prevent multiple counts for the same client in a specified period. These are simply the URL as the key and a random string generated server-side as the value.
 
 ## Configuration
 In config.py there are a few configurations that can be made
@@ -92,7 +92,7 @@ In config.py there are a few configurations that can be made
 This is the name of the SQLite3 database to be used, if it doesn't exist, it will be created. You don't need to worry about this unless you have conflicts with other applications.
 
 ### COOKIE_TIMEOUT
-This is the amount of time for a client to count as a view again. When a view is counted, the SVG/count is returned with a cookie for that site. Currently that is set at 1min (60 seconds) but can be changed.
+This is the amount of time for a client to count as a view again. When a view is counted, the SVG/count is returned with a cookie for that site. Currently, that is set at 1min (60 seconds) but can be changed.
 
 To disable this feature simply set this to 0; the cookies stored on the server will be flushed from the database after each new view.
 
@@ -100,7 +100,7 @@ To disable this feature simply set this to 0; the cookies stored on the server w
 This is the template of the SVG returned. ```{count}``` must always be in this string so that python can add the count before giving it as a response.
 
 ### RANDOM_VALUE_LENGTH
-This is the length of the value of the cookie stored both server and client side. Making this longer will stop collisions from occurring but will increase storage. Each value generated is completely random from the characters [0-9][a-z][A-Z].
+This is the length of the value of the cookie stored both server and client-side. Making this longer will stop collisions from occurring but will increase storage. Each value generated is completely random from the characters [0-9][a-z][A-Z].
 
 ## Inspiration
 This project was inspired by [github.com/dwyl/hits](https://github.com/dwyl/hits) which is a "General purpose hits (page views) counter" which unfortunately will count GitHub repo views. This was my idea to expand on this and add some features with also making it compatible with any site.

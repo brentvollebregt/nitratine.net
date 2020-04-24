@@ -3,7 +3,7 @@ date: 2017-12-13
 category: YouTube
 tags: [python, wifi]
 feature: feature.jpg
-description: "This script searches windows for wifi passwords with python already known and displays them along side the network name. It will not find passwords that your computer doesn't already know. This is useful for the occasions that you forget your WiFi password."
+description: "This script searches windows for wifi passwords with python already known and displays them alongside the network name. It will not find passwords that your computer doesn't already know. This is useful for the occasions that you forget your WiFi password."
 
 [TOC]
 
@@ -55,13 +55,13 @@ Now we should have a list containing one string which is the particular profiles
         print ("{:<30}|  {:<}".format(i, ""))
 ```
 
-Now put a input call at the end of the script outside the loop so that when the script is run it will not immediately stop when results are displayed.
+Now put an input call at the end of the script outside the loop so that when the script is run it will not immediately stop when results are displayed.
 
 ```python
 input("")
 ```
 
-Save this file with a .py extension and you can now run the script. You can run it by double clicking on the script, running it in IDLE or even cmd using ```python {filename}```.
+Save this file with a .py extension and you can now run the script. You can run it by double-clicking on the script, running it in IDLE or even cmd using ```python {filename}```.
 
 ## Final Script
 

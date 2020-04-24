@@ -8,9 +8,9 @@ description: "This is tutorial on how to fix the classic error, 'python' is not 
 [TOC]
 
 ## Why You Are Getting This Error
-When executing `python` or `pip` from the terminal (or whatever application you are using), if your environment isn't setup correctly, you will be given an error saying `'python' is not recognized as an internal or external command, operable program or batch file.` (or `pip` when executing `pip`).
+When executing `python` or `pip` from the terminal (or whatever application you are using), if your environment isn't set up correctly, you will be given an error saying `'python' is not recognized as an internal or external command, operable program or batch file.` (or `pip` when executing `pip`).
 
-When you execute the command `python` in the terminal, the terminal will look though all the paths on the systems PATH environment variable to look for an executable `python.exe`. Since there are no paths/folders on the PATH environment variable that contain `python.exe`, this error is shown because it does not know what executable to execute.
+When you execute the command `python` in the terminal, the terminal will look through all the paths on the systems PATH environment variable to look for an executable `python.exe`. Since there are no paths/folders on the PATH environment variable that contains `python.exe`, this error is shown because it does not know what executable to execute.
 
 > Please note, these solutions will only work on Windows as it describes how to add paths to the systems PATH environment variable
 

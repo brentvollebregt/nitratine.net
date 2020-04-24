@@ -17,7 +17,7 @@ We will be using the pynput module to listen to mouse events. To install this mo
 
 ![Installing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput1.png)
 
-To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
+To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
 ![Testing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput2.png)
 
@@ -43,14 +43,14 @@ keyboard.release('a')
 ```
 
 ### Pressing and Releasing Special Keys
-For special keys that can't be put into a string like shift or control, you will need to refer to the page [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) to look at the Key class for supported keys. Using these in the press or release methods will press/release the key matching it. For example, if I wanted to press the windows key, I would look at [that page](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) for the key. 'cmd' has the description *"A generic command button. On PC platforms, this corresponds to the Super key or Windows key, and on Mac it corresponds to the Command key"* which is what I am looking for. Now for the code.
+For special keys that can't be put into a string like shift or control, you will need to refer to the page [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) to look at the Key class for supported keys. Using these in the press or release methods will press/release the key matching it. For example, if I wanted to press the Windows key, I would look at [that page](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key) for the key. 'cmd' has the description *"A generic command button. On PC platforms, this corresponds to the Super key or Windows key, and on Mac it corresponds to the Command key"* which is what I am looking for. Now for the code.
 
 ```python
 keyboard.press(Key.cmd)
 keyboard.release(Key.cmd)
 ```
 
-This method also allows us to press a key while holding another key, for example ctrl+c to copy. To do this we will need to press ctrl, press and release c and then release ctrl.
+This method also allows us to press a key while holding another key, for example, ctrl+c to copy. To do this we will need to press ctrl, press and release c and then release ctrl.
 
 ```python
 keyboard.press(Key.ctrl)
@@ -125,7 +125,7 @@ mouse = MouseController()
 Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
 ### I got a SyntaxError
-Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
+Syntax errors are caused by you and there is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally, people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
 
 ### The Key Presses Work in Notepad But Not My Game 
 pynput uses a Win32API function called `SendInput`. The SendInput function will insert input events into the same queue as a hardware device but the events are marked with a `LLMHF_INJECTED` flag that can be detected by hooks and [then filtered](https://stackoverflow.com/a/19383403). To avoid this flag you probably have to write a custom driver *(ref: [stackoverflow/Anders](https://stackoverflow.com/a/44931001))*.

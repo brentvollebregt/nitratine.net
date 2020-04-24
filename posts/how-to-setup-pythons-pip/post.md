@@ -3,14 +3,14 @@ date: 2017-12-13
 category: YouTube
 tags: [python]
 feature: demo5.png
-description: "This tutorial demonstrates how to setup Python's PIP. PIP is a package manager for pip that allows you to download third party modules easily. I explain how to find your scripts folder and how to find pip."
+description: "This tutorial demonstrates how to set up Python's PIP. PIP is a package manager for pip that allows you to download third-party modules easily. I explain how to find your scripts folder and how to find pip."
 
 [TOC]
 
 {% with video_id="cm6WDGAzDPM" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## Setting Up
-If you haven't used pip before on your computer, go to cmd and type 'pip'. If not errors appear you can move to the next step. If pip is not recognised, you need to set it up. Regarding you actually have python installed (you would not believe some of the comments on this video), open windows explorer (file search) and right click om computer in the side menu.
+If you haven't used pip before on your computer, go to cmd and type 'pip'. If not errors appear you can move to the next step. If pip is not recognised, you need to set it up. Regarding you have python installed (you would not believe some of the comments on this video), open windows explorer (file search) and right-click on computer in the side menu.
 
 ![Properties for this pc](/posts/how-to-setup-pythons-pip/demo1.png)
 

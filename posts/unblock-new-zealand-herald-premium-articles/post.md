@@ -11,7 +11,7 @@ hidden: true
 ## What is This?
 A few days ago the site *New Zealand Herald* started to introduce premium content on their site. This premium content contains articles that require you to pay a monthly fee to read. When looking at the source of the pages received, it's clear to see that full articles are still being sent to clients whether they are premium content or not.
 
-I fully understand why they would do this; people now buy less papers so this is kind of like paying for the paper every week, just with this subscription you get a lot more. Unfortunately the "paywall" that they have set up currently is a horrible attempt. I feel like they may be in a trial stage for the paywall's implementation which makes it very easy to get around.
+I fully understand why they would do this; people now buy fewer papers so this is kind of like paying for the paper every week, just with this subscription you get a lot more. Unfortunately, the "paywall" that they have set up currently is a horrible attempt. I feel like they may be in a trial stage for the paywall's implementation which makes it very easy to get around.
 
 This post contains JavaScript code (that runs on browsers) to help you easily remove the "mask" that hides premium article content.
 
@@ -31,7 +31,7 @@ The button above copies the bookmarklet to your clipboard. Click this and then c
 > On some devices you may find it easier to create a bookmark first with anything and then edit it to insert the code. Make sure the code copied starts with `javascript:` (it will if you copied it using the button).
 
 ### How to Use the Bookmarklet
-When you're on a NZ Herald premium content page, simply open up your bookmarks and click on the bookmark you created. This will execute the code in the background and un-hide the post content.
+When you're on an NZ Herald premium content page, simply open up your bookmarks and click on the bookmark you created. This will execute the code in the background and un-hide the post content.
 
 > Websites Change: Please note that NZ Herald can change their site at any time, which means this could stop working at any time. If it has stopped working, feel free to comment below and I will look at what has changed.
 
@@ -53,7 +53,7 @@ The original script does three main things:
 ```
 
 ### Revision 1
-Looking in reddit, I found a [post](https://www.reddit.com/r/newzealand/comments/bj9fdu/nz_herald_premium_content_for_free/) that had done the same task I had set out to do. Taking what I found here, I improved the original script and made it easier to read the source.
+Looking in Reddit, I found a [post](https://www.reddit.com/r/newzealand/comments/bj9fdu/nz_herald_premium_content_for_free/) that had done the same task I had set out to do. Taking what I found here, I improved the original script and made it easier to read the source.
 
 ```javascript
 (function(){
@@ -69,7 +69,7 @@ Looking in reddit, I found a [post](https://www.reddit.com/r/newzealand/comments
 ```
 
 ### Revision 2 (7-5-19)
-This one was a bit bigger because they are now making the css class that used to be `paywall` now a little bit more random. This can easily be solved by looking at all the classes in the articles content and picking out the mode (not 100% accurate but does the job).
+This one was a bit bigger because they are now making the CSS class that used to be `paywall` now a little bit more random. This can easily be solved by looking at all the classes in the content of the article and picking out the mode (not 100% accurate but does the job).
 
 There is still a backup for any direct children of `#article-content` if this fails. Scrolling is turned back on, the offer is removed and some ads are removed.
 

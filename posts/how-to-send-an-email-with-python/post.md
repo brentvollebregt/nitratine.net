@@ -3,28 +3,28 @@ date: 2018-01-23
 category: YouTube
 tags: [python, email]
 feature: email-example-3.png
-description: "This script sends an email using python. By logging into a gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached."
+description: "This script sends an email using python. By logging in to a Gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached."
 
 [TOC]
 
 {% with video_id="YPiHBtddefI" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## Why Bother?
-These scripts are used to send emails from a gmail account (can be configured for other email servers). This will allow you to send emails when your script finishes executing, has come to an error or just needs to send some data to you.
+These scripts are used to send emails from a Gmail account (can be configured for other email servers). This will allow you to send emails when your script finishes executing, has come to an error or just needs to send some data to you.
 
 This data could be anything, statistics of a website, crash reports or even files! This is particularly helpful for scripts running in the cloud or other places that take longer than 5 seconds to get access to. Getting reports sent straight to your email is convenient and can be helpful for storage. Python 3 is used in this tutorial.
 
 ## Before You Start
-Before you start this, make sure you have your gmail username and password ready. The account you are going to use must not have 2-Step Verification enabled as we will no longer be able to log in.
+Before you start this, make sure you have your Gmail username and password ready. The account you are going to use must not have 2-Step Verification enabled as we will no longer be able to log in.
 
-Next go to [https://myaccount.google.com/lesssecureapps](https://myaccount.google.com/lesssecureapps) and login if you need to. In this page you will want to flick the Allow less secure apps switch to on. This allows us to use less secure sign-in technology to login to the email server; note that this will make you account more vulnerable.
+Next, go to [https://myaccount.google.com/lesssecureapps](https://myaccount.google.com/lesssecureapps) and log in if you need to. On this page, you will want to flick the Allow less secure apps switch to on. This allows us to use less secure sign-in technology to login to the email server; note that this will make your account more vulnerable.
 
 ![Allow less secure apps switch](/posts/how-to-send-an-email-with-python/alsa1.png)
 
 > If you want/do have 2-Step Verification enabled, read up on how to [sign in using an app password](https://support.google.com/accounts/answer/185833). This allows you to generate a password specifically for this 'application' which allows this script to be compatible with a Google account using 2-Step Verification.
 
 ## Simple Email
-To start off, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
+To start, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
 
 ```python
 import smtplib
@@ -85,7 +85,7 @@ Replacing the previous variables again and setting the new variable 'subject' to
 
 ![Better Email Example](/posts/how-to-send-an-email-with-python/email-example-2.png)
 
-The image above shows the email that I received. It now has a subject and has a to header if you click the little down arrow by 'me'.
+The image above shows the email that I received. It now has a subject and has a `to` header if you click the little down arrow by 'me'.
 
 ## Attachments
 There are quite a few ways to attach files to an email, but this is one of the simpler ways. This time we will use an encoder and MIMEMultipart from the email module and os.path to simply get the filename from the provided path.
@@ -140,8 +140,8 @@ Once again, replacing the previous variables but setting the new variable 'file_
 The image above shows the email that I received. It now has a file named 'test.py' that I declared in the script attached to the email.
 
 ## HTML in Emails
-If you want to add thinks like links or css formatting to the email, you will need to prepare HTML text for the email.
-Make another string which is the plain-text version of the html and then attach them both to the MIMEMultipart object to be sent later on.
+If you want to add things like links or CSS formatting to the email, you will need to prepare HTML text for the email.
+Make another string which is the plain-text version of the HTML and then attach them both to the MIMEMultipart object to be sent later on.
 
 ```python
 import smtplib
@@ -229,7 +229,7 @@ for send_to_email in send_to_emails:
 server.quit()
 ```
 
-This method also makes sure that everyone that receives the email will not see the email of everyone else that the email was sent to. If you want to send one email to many addresses and let each recipient see who the email was sent to, you can simply set `msg['To']` to the recipient emails split by commas and then call `server.send_message` to send the email passing `msg` not as a string. 
+This method also makes sure that everyone that receives the email will not see the email of everyone else that the email was sent to. If you want to send one email to many addresses and let each recipient see who the email was sent to, you can simply set `msg['To']` to the recipient emails split by commas and then call `server.send_message` to send the email, passing `msg` not as a string. 
 
 ```python
 send_to_emails = ['recipient_1@gmail.com', 'recipient_2@gmail.com']

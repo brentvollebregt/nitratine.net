@@ -3,7 +3,7 @@ date: 2020-04-04
 category: Projects
 tags: [python, react, typescript, sqlite, networking]
 feature: feature.png
-description: "This tool helps you keep and eye on who is on your network and when. Simply periodically scan your network, assign devices to people and view who is on your network."
+description: "This tool helps you keep an eye on who is on your network and when. Simply periodically scan your network, assign devices to people and view who is on your network."
 github: brentvollebregt/whos-on-my-network
 
 [TOC]
@@ -33,7 +33,7 @@ All scans can then be identified in the interface where a user can create profil
 ## Getting the Tool Yourself
 On every official version change, a [GitHub release](https://github.com/brentvollebregt/whos-on-my-network/releases) is made which contains two files:
 
-- `whos_on_my_network.zip`: The whos_on_my_network module with the webapp pre-built.
+- `whos_on_my_network.zip`: The whos_on_my_network module with the web app pre-built.
 - `whos_on_my_network_binary.zip`: A Windows executable of whos_on_my_network (does not support plugins)
 
 > The pre-built Windows executable does not use a plugin and will default to the built-in method. To make a build containing a particular plugin yourself, execute `bash package.sh {plugin-name}`; this will produce whos_on_my_network.exe which will use the declared plugin.
@@ -61,7 +61,7 @@ Execute `python -m whos_on_my_network start` and go to `localhost:8080` in your 
 
 The scans page shows scans that have been made.
 
-On the scans page, you can select a date range and view all the scans in that period. When clicking on a scan (row on the table), you will be directed to more focused data on that scan in particular, showing the time, network id used and details about each device.
+On the scans page, you can select a date range and view all the scans in that period. When clicking on a scan (row on the table), you will be directed to more focused data on that scan, in particular, showing the time, network id used and details about each device.
 
 ![Who's On My Network Scan Screenshot](/posts/whos-on-my-network/scan-screenshot.png)
 
@@ -93,7 +93,7 @@ By default, this tool uses [scapy](https://scapy.net/) to send ARP packets to al
 
 Plugins are supported by this application to allow custom methods of scanning a network. An example has been provided for WiFi networks that use a [ASUS RT-AC58 router](https://github.com/brentvollebregt/whos-on-my-network/blob/master/whos_on_my_network/plugins/asus-rt-ac58u.py). This plugin demonstrates how you can instead look at the active devices connected to your router rather than scanning the network.
 
-All data collected by the application is stored locally in a SQLite database.
+All data collected by the application is stored locally in an SQLite database.
 
 ## What Happened to the Original Version?
 The original version is preserved in the git history under the [tag v1.0.0](https://github.com/brentvollebregt/whos-on-my-network/tree/v1.0.0).

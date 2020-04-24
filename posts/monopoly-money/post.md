@@ -3,7 +3,7 @@ date: 2020-04-18
 category: Projects
 tags: [react, typescript, javascript, express, lerna]
 feature: feature.png
-description: "A Node.js server and React frontend that helps you manage your finances in a game of Monopoly from the browser."
+description: "A Node.js server and React web app that helps you manage your finances in a game of Monopoly from the browser."
 github: brentvollebregt/monopoly-money
 
 <div align="center" style="padding: 20px 20px 40px 20px">
@@ -12,23 +12,23 @@ github: brentvollebregt/monopoly-money
     <a href="https://monopoly-money.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit monopoly-money.nitratine.net →</button></a>
 </div>
 
-Monopoly Money is a webapp designed for mobile that allows multiple players to track their balances collectively in a game of monopoly and transfer money from one another.
+Monopoly Money is a web app designed for mobile that allows multiple players to track their balances collectively in a game of monopoly and transfer money from one another.
 
 ## How Can This Help You?
 
-If you have every played the credit card edition of Monopoly, you will appreciate how much faster the game moves without having to count cash. This webapp substitutes the need for cash in a game of monopoly for a mobile-banking-like solution where players can easily send each other virtual currency.
+If you have ever played the credit card edition of Monopoly, you will appreciate how much faster the game moves without having to count cash. This web app substitutes the need for cash in a game of monopoly for a mobile-banking-like solution where players can easily send each other virtual currency.
 
 Using this method for finance management also allows you to keep a full history of your game and have clarity over every movement.
 
 ## Usage
 
-To start using the webapp, follow the basic following steps:
+To start using the web app, follow the basic following steps:
 
 - Get all participants to go to [monopoly-money.nitratine.net](https://monopoly-money.nitratine.net/) in a browser of their choosing.
 - Whoever is the banker should select "New Game" to create a new game after providing their name.
-- All other participants should then selected "Join Game" and using the game id provided by the banker and their name, join the game.
+- All other participants should then select "Join Game" and using the game id provided by the banker and their name, join the game.
 
-When everyone is in the game, the banker can then close the game to stop others joining and then start distributing out the initial balances.
+When everyone is in the game, the banker can then close the game to stop others from joining and then start distributing out the initial balances.
 
 ## Features
 

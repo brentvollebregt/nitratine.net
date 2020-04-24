@@ -3,7 +3,7 @@ date: 2019-09-08
 category: Tools
 tags: [website]
 feature: feature.png
-description: "Downloading and setting up a tool to preform a basic action can be a lot of effort compared to using something online. This is a list of tools I actively use for everyday development."
+description: "Downloading and setting up a tool to perform a basic action can be a lot of effort compared to using something online. This is a list of tools I actively use for everyday development."
 
 [TOC]
 
@@ -75,7 +75,7 @@ When moving code from an IDE to paper for something like an assessment, black te
 - [SQLite Viewer (doesn't break on blobs)](http://sqliteviewer.flowsoft7.com/)
     - Similar to the one above but doesn't break on blobs (not as nice-looking)
 - [Test small SQL commands (MySQL, Oracle, PostgreSQL, SQLite, MS SQL Server)](http://www.sqlfiddle.com)
-    - Build a small schema and then execute commands based off the schema creation
+    - Build a small schema and then execute commands based on the schema creation
     - Restricted to internal request character length 
 
 ## Time

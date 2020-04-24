@@ -30,4 +30,4 @@ If you are a student of the University of Waikato and have tried to use "Open in
 
 ![Extension Popup](/posts/uow-moodle-rwa-ignorer/target.png)
 
-It gets pretty annoying and it's quite unpredictable when it will occur. This chrome extension will look at pages where urls match a pattern and search for the `resourceworkaround` class. If found, it will redirect the user to the actual file.
+It gets pretty annoying and it's quite unpredictable when it will occur. This chrome extension will look at pages where URLs match a pattern and search for the `resourceworkaround` class. If found, it will redirect the user to the actual file.

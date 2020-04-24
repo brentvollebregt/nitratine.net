@@ -3,7 +3,7 @@ date: 2017-12-20
 category: Projects
 tags: [python, gui]
 feature: gui1.png
-description: "A small GUI that displays home-made scripts to be executed. The scripts will appear in a scroll window and on selection they will run and the window will then close (can be configured). Sample scripts included."
+description: "A small GUI that displays home-made scripts to be executed. The scripts will appear in a scrolling window and on selection they will run and the window will then close (can be configured). Sample scripts included."
 github: brentvollebregt/quick-script
 
 ## What is this?
@@ -51,13 +51,13 @@ def main():
 
 The scripts can be named anything as long as they are in /scripts/ with a .py extension. The script does not have to have name, description or tags, they will just be rendered as none.
 
-A parameter can be added to the main() method and as long as their is only one parameter required, the window class will be passed to main() so the method will now have access to the window and can use functions like dialogCritical().
+A parameter can be added to the main() method and as long as there is only one parameter required, the window class will be passed to main() so the method will now have access to the window and can use functions like dialogCritical().
 
 ## Scripts Included
 - [Remove edge quotes](https://github.com/brentvollebregt/quick-script/blob/master/scripts/remove_edge_quotes.py): Will remove edge quotes from the string in your current clipboard (one or both sides)
 - [Save Clipboard to File](https://github.com/brentvollebregt/quick-script/blob/master/scripts/save_clipboard_to_file.py): Will request where to save the current clipboard contents to. Supports images and text (will save to .bmp/.txt)
 - [Put IP on Clipboard](https://github.com/brentvollebregt/quick-script/blob/master/scripts/ip_to_clipboard.py): Will set your local IP to the clipboard.
-- [Restart Windows Exporer](https://github.com/brentvollebregt/quick-script/blob/master/scripts/restart_window_explorer.py): Restarts windows explorer.
+- [Restart Windows Explorer](https://github.com/brentvollebregt/quick-script/blob/master/scripts/restart_window_explorer.py): Restarts windows explorer.
 - [UI to PY from Clipboard](https://github.com/brentvollebregt/quick-script/blob/master/scripts/ui_to_py_from_clipboard.py): Gets the current .ui file in the clipboard and will convert it to py using pyuic5 and stores it where the .ui file is located.
 - [Open Clipboard Directory](https://github.com/brentvollebregt/quick-script/blob/master/open_clipboard_directory.py): Open the location in the clipboard in windows explorer.
 

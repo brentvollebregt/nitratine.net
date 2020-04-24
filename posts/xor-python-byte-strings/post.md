@@ -35,7 +35,7 @@ Even though my issue that I was trying to solve was using Python byte strings, I
 
 ## String XOR
 
-I found [an answer on stackoverflow](https://stackoverflow.com/a/2612730/) showing how to XOR two strings to form a resulting string:
+I found [an answer on StackOverflow](https://stackoverflow.com/a/2612730/) showing how to XOR two strings to form a resulting string:
 
 ```python
 def sxor(s1,s2):    

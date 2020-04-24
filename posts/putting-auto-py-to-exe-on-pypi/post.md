@@ -34,9 +34,9 @@ auto-py-to-exe my_script.py
 
 ## General Talk About the Process
 
-I decided to create a [new repository](https://github.com/brentvollebregt/auto-py-to-exe-pypi) for the package that would be [hosted on PyPI](https://pypi.org/project/auto-py-to-exe/) as the video that I provided will still help people understand what is going on. In the old repo I have provided a link to the new one and added in the instructions for instillation using pip.
+I decided to create a [new repository](https://github.com/brentvollebregt/auto-py-to-exe-pypi) for the package that would be [hosted on PyPI](https://pypi.org/project/auto-py-to-exe/) as the video that I provided will still help people understand what is going on. In the old repo I have provided a link to the new one and added in the instructions for installation using pip.
 
-It took me a few hours to find out how to structure my package and have everything setup properly from the readme to the entry-points.
+It took me a few hours to find out how to structure my package and have everything set up properly from the readme to the entry-points.
 
 I use a lot of resources for finer details and looked at a lot of setup.py files but these resources would have been the most helpful:
 - [Packaging Python Projects](https://packaging.python.org/tutorials/packaging-projects/)
@@ -51,10 +51,10 @@ I had completely forgotten though that when importing packages normally in Pytho
 So to take from this: hyphens < underscore in package names.
 
 ### Issues With README
-The next issue was with PyPI's Warehouse itself (afterwards). I wanted to render my README in PyPI but it wasn't doing it for some reason. I had later found that when looking at the [setup.py for Eel](https://github.com/ChrisKnott/Eel/blob/master/setup.py) I had thought it was a great idea to take the long_description value being set to `open('README.md', encoding='utf-8').readlines()[1]`. I thought very little about this and in the end actually decided to test it and found that it was only taking the first line from my README; copy and pasting is dangerous.
+The next issue was with PyPI's Warehouse itself (afterwards). I wanted to render my README in PyPI but it wasn't doing it for some reason. I had later found that when looking at the [setup.py for Eel](https://github.com/ChrisKnott/Eel/blob/master/setup.py) I had thought it was a great idea to take the long_description value being set to `open('README.md', encoding='utf-8').readlines()[1]`. I thought very little about this and in the end, actually decided to test it and found that it was only taking the first line from my README; copy and pasting is dangerous.
 
 Next was the fact that you needed a version of setup tools that was waaaay higher than what I had; a simple fix of course using `pip install setuptools --upgrade`.
 
-Lastly I had to add `long_description_content_type='text/markdown'` to setup.py but in all honesty did it in the middle of trying to solve the above two issues so am not 100% sure if this actually changed anything.
+Lastly, I had to add `long_description_content_type='text/markdown'` to setup.py but in all honesty, did it in the middle of trying to solve the above two issues so am not 100% sure if this actually changed anything.
 
-Lesson to take from this; know what you're copying and StackOverflow is very helpful (as I didn't already know that...)
+The lesson to take from this; know what you're copying and StackOverflow is very helpful (as I didn't already know that...)

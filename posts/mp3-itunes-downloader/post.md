@@ -21,7 +21,7 @@ This project allows you to select a song from an album found on the web version 
 2. cd into the directory: `cd mp3-iTunes`
 3. Install the requirements: `pip install -r requirements.txt`
 2. Go to [http://ffmpeg.zeranoe.com/builds/](http://ffmpeg.zeranoe.com/builds/) and download ffmpeg.
-3. Extract the files and copy ffmpeg.exe, ffplay.exe abd ffprobe.exe from the /bin folder to the location of music_downloader_with_YT_iTunes.py *(you can also put these in a location that is reference by the PATH variable if you wish)*
+3. Extract the files and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of music_downloader_with_YT_iTunes.py *(you can also put these in a location that is referenced by the PATH variable if you wish)*
 
 ## Usage
 1. Go to the browser version of iTunes and find the album your desired song is in (e.g. [https://itunes.apple.com/nz/album/wolves/id1227716339](https://itunes.apple.com/nz/album/wolves/id1227716339) and copy the url.

@@ -11,12 +11,12 @@ description: "This bot retweets tweets in python. It looks for competitions whic
 A while ago I had seen someone show all their winnings from using a twitter bot to retweet tweets. Today is a bit more advanced and now people ask to like, follow and sometimes tag. This bot does not tag others but it does retweet, like and follow people mentioned in the tweet.
 
 ## Setup
-First make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
+First, make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
 
 If you haven't, create a new [twitter](https://twitter.com/) account. If you want to use an existing one, be aware that this will spam the shit out of your account.
 
 ## Installing Tweepy
-So now that you have setup pip, you can use it to install [tweepy](http://www.tweepy.org/) easily. Open up cmd and execute the command ```pip list tweepy```. Make sure the output doesn't have any errors and that it states that it was installed successfully.
+So now that you have set up pip, you can use it to install [tweepy](http://www.tweepy.org/) easily. Open up cmd and execute the command ```pip list tweepy```. Make sure the output doesn't have any errors and that it states that it was installed successfully.
 
 Open up IDLE and execute the following line. If no errors appear, it was installed correctly.
 
@@ -47,9 +47,9 @@ Save these somewhere for the next part of creating the bot.
 
 ## Creating the Script
 
-Now that everything is setup and we have the keys we need, we can make the script. Open IDLE, create a new script and save it as a .py.
+Now that everything is set up and we have the keys we need, we can make the script. Open IDLE, create a new script and save it as a .py.
 
-First we will want to import the tweepy module.
+First, we will want to import the tweepy module.
 
 ```python
 import tweepy
@@ -64,7 +64,7 @@ access_token = '79**********************************************nA'
 access_token_secret = 'PS*****************************************dO'
 ```
 
-Now we need to setup the twitter api by using OAuthHandler and API classes.
+Now we need to set up the twitter API by using OAuthHandler and API classes.
 
 ```python
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -72,30 +72,30 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 ```
 
-Next we will set two simple variables. One will hold different search queries and the other will be max tweets per query. These will be used later. You can freely modify these later after you understand what they do (noted in "Running the Script").
+Next, we will set two simple variables. One will hold different search queries and the other will be max tweets per query. These will be used later. You can freely modify these later after you understand what they do (noted in "Running the Script").
 
 ```python
 queries = ["rt to win", "retweet to win"]
 tweets_per_query  = 50
 ```
 
-Now set a variable to count the amount of tweets re-tweeted to use at the end and create a loop looping though the queries declared previously.
+Now set a variable to count the number of tweets re-tweeted to use at the end and create a loop looping through the queries declared previously.
 
 ```python
 new_tweets = 0
-for querry in queries:
+for query in queries:
 ```
 
-In this for loop, print what query we are querying and then create another for loop that loops though tweets that are returned from the api search using the query in the current loop.
+In this for loop, print what query we are querying and then create another for loop that loops through tweets that are returned from the API search using the query in the current loop.
 
 ```python
-print ("Starting new querry: " + querry)
-for tweet in tweepy.Cursor(api.search, q=querry, tweet_mode="extended").items(tweets_per_query ):
+print ("Starting new query: " + query)
+for tweet in tweepy.Cursor(api.search, q=query, tweet_mode="extended").items(tweets_per_query ):
 ```
 
 Now inside this loop, we will focus on each individual tweet which is now in the 'tweet' variable.
 
-Get the users screen name that tweeted the tweet, id and then create and print the url. This is mainly for output purposes but will be used later.
+Get the user's screen name that tweeted the tweet, id and then create and print the URL. This is mainly for output purposes but will be used later.
 
 ```python
 user = tweet.user.screen_name
@@ -104,7 +104,7 @@ url = 'https://twitter.com/' + user +  '/status/' + str(id)
 print (url)
 ```
 
-Since we used the extended tweet_mode in the search querry, we will be given all the text in the tweet rather than the normal 140 returned by the api.
+Since we used the extended tweet_mode in the search query, we will be given all the text in the tweet rather than the normal 140 returned by the API.
 
 This text will be sitting in tweet.retweeted_status.full_text if the tweet we are looking at is a re-tweeted tweet or in tweet.full_text if this is the original tweet. Convert the text to lowercase to make it easier to deal with later.
 
@@ -165,7 +165,7 @@ print ("New Tweets: " + str(new_tweets))
 ## Running the Script
 To use this script, put queries you want to search for in the 'queries' list towards the top. Set tweets_per_query  to how many tweets per query you want to loop at; remember too many interactions with the API and you may get restricted access due to usage limits. Also going back too far with large queries could potentially be an issue.
 
-Now simply run the script by hitting F5 in IDLE or double clicking on the script. Wait and you should see what the script is up to until it's done.
+Now simply run the script by hitting F5 in IDLE or double-clicking on the script. Wait and you should see what the script is up to until it's done.
 
 ## Final Script
 ```python
@@ -184,9 +184,9 @@ queries = ["rt to win", "retweet to win"]
 tweets_per_query  = 50
 
 new_tweets = 0
-for querry in queries:
-    print ("Starting new querry: " + querry)
-    for tweet in tweepy.Cursor(api.search, q=querry, tweet_mode="extended").items(tweets_per_query ):
+for query in queries:
+    print ("Starting new query: " + query)
+    for tweet in tweepy.Cursor(api.search, q=query, tweet_mode="extended").items(tweets_per_query ):
 
         user = tweet.user.screen_name
         id = tweet.id
@@ -227,6 +227,6 @@ print ("New Tweets: " + str(new_tweets))
 ```
 
 ## Final Notes
-Unfortunately I didn't add a "tag your friend" command because I didn't want to annoy anyone and didn't bother making another account. This could be a bit hard to impliment because sometimes this is an arbitrary number requested.
+Unfortunately, I didn't add a "tag your friend" command because I didn't want to annoy anyone and didn't bother making another account. This could be a bit hard to implement because sometimes this is an arbitrary number requested.
 
 I am not responsible for any harm that may come from this.

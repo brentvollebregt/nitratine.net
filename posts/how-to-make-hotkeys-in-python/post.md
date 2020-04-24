@@ -17,7 +17,7 @@ We will be using the pynput module to listen to mouse events. To install this mo
 
 ![Installing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput1.png)
 
-To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
+To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
 ![Testing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput2.png)
 

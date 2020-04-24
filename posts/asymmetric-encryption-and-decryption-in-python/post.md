@@ -3,14 +3,14 @@ date: 2018-09-16
 category: Tutorials
 tags: [python, encryption, cyber-security]
 feature: feature.png
-description: "In this post I demonstrate the usage of the cryptography module in Python by using using the asymmetric key method RSA to encrypt and decrypt messages."
+description: "In this post, I demonstrate the usage of the cryptography module in Python by using using the asymmetric key method RSA to encrypt and decrypt messages."
 
 [TOC]
 
 Using the [cryptography](https://cryptography.io/en/latest/) module in Python, this post will look into methods of generating keys, storing keys and using the asymmetric encryption method [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) to encrypt and decrypt messages and files. We will be using [cryptography.hazmat.primitives.asymmetric.rsa](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/) to generate keys.
 
 ## Installing cryptography
-Since Python does not come with anything that can encrypt files, we will need to use a third party module.
+Since Python does not come with anything that can encrypt files, we will need to use a third-party module.
 
 [PyCrypto](https://github.com/dlitz/pycrypto) is quite popular but since it does not offer built wheels, if you don't have Microsoft Visual C++ Build Tools installed, you will be told to install it. Instead of installing extra tools just to build this, I will be using the cryptography module. To install this, execute:
 
@@ -29,7 +29,7 @@ If no errors appeared it has been installed correctly.
 ## What is Asymmetric Encryption?
 If you read my article on [Encryption and Decryption in Python]({{ url_for('blog_post', path='encryption-and-decryption-in-python') }}), you will see that I only used one key to encrypt and decrypt.
 
-[Asymmetric encryption](https://en.wikipedia.org/wiki/Public-key_cryptography) uses two keys - a private key and a public keys. Public keys are given out for anyone to use, you make them public information. Anyone can encrypt data with your public key and then only those with the private key can decrypt the message. This also works the other way around but it is convention to keep your private key secret.
+[Asymmetric encryption](https://en.wikipedia.org/wiki/Public-key_cryptography) uses two keys - a private key and a public key. Public keys are given out for anyone to use, you make them public information. Anyone can encrypt data with your public key and then only those with the private key can decrypt the message. This also works the other way around but it is a convention to keep your private key secret.
 
 ## Getting a Key
 To generate the two keys, we can call rsa.generate_private_key with some general parameters. The public key will be found in the object that holds the creation of the private key.
@@ -114,7 +114,7 @@ with open("public_key.pem", "rb") as key_file:
 The variable *public_key* will now have the public key.
 
 ## Encrypting
-Due to how asymmetric encryption algorithms like RSA work, encrypting with either one is fine, you just will need to use the other to decrypt. Applying a bit of logic to this can create some useful scenarios like [signining](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#signing) and [verification](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#verification). For this example I will assume that you keep both keys safe and don't release them since this example is only for local encryption (can be applied to wider though when keys are exchanged).
+Due to how asymmetric encryption algorithms like RSA work, encrypting with either one is fine, you just will need to use the other to decrypt. Applying a bit of logic to this can create some useful scenarios like [signing](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#signing) and [verification](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#verification). For this example, I will assume that you keep both keys safe and don't release them since this example is only for local encryption (can be applied to wider though when keys are exchanged).
 
 This means you can use either key but I will demonstrate using the public key to encrypt, this will mean anyone with the private key can decrypt the message.
 
@@ -231,7 +231,7 @@ True
 ```
 
 ## Encrypting and Decrypting Files
-To encrypt and decrypt files, you will need to use read and write binary when opening files. You can simply substitute the values I previous used for message with the contents of a file. For example:
+To encrypt and decrypt files, you will need to use read and write binary when opening files. You can simply substitute the values I previously used for `message` with the contents of a file. For example:
 
 ```python
 f = open('test.txt', 'rb')

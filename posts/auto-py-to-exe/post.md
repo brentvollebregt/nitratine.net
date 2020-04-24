@@ -98,7 +98,7 @@ If you're having issues with the packaged executable or using this tool in gener
 ![Converting](/posts/auto-py-to-exe/converting.png)
 
 ## Response
-I really wanted to get this project out there so I released a YouTube video demonstrating how to setup and use the interface (video above). A day later I made a post in the /r/Python sub reddit titled ["Auto Py to Exe is Complete"](https://www.reddit.com/r/Python/comments/84kwb8/auto_py_to_exe_is_complete/).
-To my surprisement the next morning (about 7 hours) I had more than 300 upvotes which to me was a big thing. I had many replies which I took time to read and reply to. About 44 hours later the post finally lost it's top place on the subreddit and the post is sitting at 454 points with 12.1k views and 75 comments.
-I can't believe how big this got and it means a lot to me when I saw people thanking me for the project. When the couple of issues came to the Github repo I realised people do care about this and I was quick to fix these.
+I really wanted to get this project out there so I released a YouTube video demonstrating how to set up and use the interface (video above). A day later I made a post in the /r/Python subreddit titled ["Auto Py to Exe is Complete"](https://www.reddit.com/r/Python/comments/84kwb8/auto_py_to_exe_is_complete/).
+To my surprise, the next morning (about 7 hours) I had more than 300 upvotes which to me was a big thing. I had many replies which I took time to read and reply to. About 44 hours later the post finally lost its top place on the subreddit and the post is sitting at 454 points with 12.1k views and 75 comments.
+I can't believe how big this got and it means a lot to me when I saw people thanking me for the project. When a couple of issues came to the Github repo I realised people do care about this and I was quick to fix these.
 Once again, thank you for the support; I loved making this project.

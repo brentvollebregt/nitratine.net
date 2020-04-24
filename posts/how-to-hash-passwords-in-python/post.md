@@ -3,7 +3,7 @@ date: 2019-05-20
 category: Tutorials
 tags: [python, hashing, cyber-security]
 feature: feature.png
-description: "In this tutorial I cover the usage of PBKDF2_HMAC to encrypt passwords with a salt using Python."
+description: "In this tutorial, I cover the usage of PBKDF2_HMAC to encrypt passwords with a salt using Python."
 
 [TOC]
 
@@ -12,19 +12,19 @@ Whenever verifying a user or something similar with a password, you must **never
 
 A common method used today is to hash passwords when a password is provided. It is recommended to use a salt when hashing and store the salt with the hashed password. 
 
-## Why Not to Use [SHA-256](https://en.wikipedia.org/wiki/SHA-2) or Something Similar?
-Secure Hash Algorithm's are [one way functions](https://en.wikipedia.org/wiki/One-way_function), that is, once plaintext is hashed, we cannot get the plaintext from the hash. This is good because it keeps the password hidden and allows for simple verification by hashing a password provided by the user and comparing it to the stored hash of the actual password.
+## Why Not Use [SHA-256](https://en.wikipedia.org/wiki/SHA-2) or Something Similar?
+Secure Hash Algorithms are [one-way functions](https://en.wikipedia.org/wiki/One-way_function), that is, once plaintext is hashed, we cannot get the plaintext from the hash. This is good because it keeps the password hidden and allows for simple verification by hashing a password provided by the user and comparing it to the stored hash of the actual password.
 
-Unfortunately hashing algorithms like SHA-256 are very quick to compute, meaning many combinations of strings can be calculated at a high speed to try and match a particular hash. If an attacker  has gotten hold of password hashes that were hashed with something like SHA-256, they could try to generate every password possible and hash these to find a match for the password hashes; this is called brute forcing. 
+Unfortunately, hashing algorithms like SHA-256 are very quick to compute, meaning many combinations of strings can be calculated at a high speed to try and match a particular hash. If an attacker  has gotten hold of password hashes that were hashed with something like SHA-256, they could try to generate every password possible and hash these to find a match for the password hashes; this is called brute-forcing. 
 
 While today this is not very practical due to the search space for most passwords, a smaller subset approach can be taken called a dictionary attack. In plain terms, this is where a file/database is previously constructed containing possible passwords that are better guesses than generating every possible password. Another tactic to matching hashes is using [rainbow tables](https://en.wikipedia.org/wiki/Rainbow_table), which takes a more grouped approach on randomly generating passwords.
 
 ## Hashing Passwords With `pbkdf2_hmac`
-One deference to these matching methods is to use a slower hashing method. Using a slower hashing method will mean that it takes longer to compute many hashes in a specific period of time thus making it unrealistic to find matches in our lifetime.
+One deference to these matching methods is to use a slower hashing method. Using a slower hashing method will mean that it takes longer to compute many hashes in a specific period, thus making it unrealistic to find matches in our lifetime.
 
-[PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) is a key derivation function where the user can set the computational cost; this aims to slow down the calculation of the key to make it more impractical to brute force. In usage terms, it takes a password, salt and a number or iterations to produce a certain key length which can also be compared to a hash as it is also a one way function.
+[PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) is a key derivation function where the user can set the computational cost; this aims to slow down the calculation of the key to making it more impractical to brute force. In usage terms, it takes a password, salt and a number of iterations to produce a certain key length which can also be compared to a hash as it is also a one-way function.
 
-With iterations set to a large number, the algorithm takes longer to calculate the end result. This is completely fine for someone that only needs to make one or a couple attempts at checking if a password is correct, however trying billions will take a very long time.
+With iterations set to a large number, the algorithm takes longer to calculate the result. This is completely fine for someone that only needs to make one or a couple of attempts at checking if a password is correct, however trying billions will take a very long time.
 
 > Please note that using this method does not stop brute force / dictionary attacks or the use of rainbow tables, it simply makes these methods more computationally difficult.
 
@@ -33,11 +33,11 @@ With iterations set to a large number, the algorithm takes longer to calculate t
  - `hash_name`: hash digest algorithm for HMAC
  - `password`: the password being turned into the key
  - `salt`: a randomly generated salt
- - `iterations`: iterations in calculation (higher means more computation required)
+ - `iterations`: iterations in the calculation (higher means more computation required)
  - `dklen`: length of the output key (not required)
 
 ### Generating a Salt
-Before generating the key using `pbkdf2_hmac`, you need to generate a random salt. Salts make the search space larger in the case of brute forcing and adds difficulty for rainbow tables; using a salt only requires you to do a little more work and store an extra random byte sequence.
+Before generating the key using `pbkdf2_hmac`, you need to generate a random salt. Salts make the search space larger in the case of brute-forcing and adds difficulty for rainbow tables; using a salt only requires you to do a little more work and store an extra random byte sequence.
 
 Salts do not need to be hidden, encrypted or hashed; this is because they are simply combined with the password to make the input cover a larger range. This combination is done by the `pbkdf2_hmac` so do not do it yourself.
 
@@ -49,9 +49,9 @@ import os
 salt = os.urandom(32)
 ```
 
-> 32 is the size returned in bytes. You can chose any size but I recommend making it over 16 bytes.
+> 32 is the size returned in bytes. You can choose any size but I recommend making it over 16 bytes.
 
-The output from this will be used in `pbkdf2_hmac` and then stored beside the output key (we will use it as a hash) from  `pbkdf2_hmac`. Every password relating to a user/entity must have it's own hash, **do not use the same hash for all user's/entities passwords**.
+The output from this will be used in `pbkdf2_hmac` and then stored beside the output key (we will use it as a hash) from  `pbkdf2_hmac`. Every password relating to a user/entity must have its own hash, **do not use the same hash for all user's/entities passwords**.
 
 ### Hashing
 Now that the basics of these concepts are out of the way, we can get down to executing some code. The best way to learn is by example and application, so here is an example:

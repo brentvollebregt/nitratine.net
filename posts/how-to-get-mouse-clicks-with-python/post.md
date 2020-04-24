@@ -17,7 +17,7 @@ We will be using the pynput module to listen to mouse events. To install this mo
 
 ![Installing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput1.png)
 
-To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
+To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
 ![Testing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput2.png)
 
@@ -28,7 +28,7 @@ Create a new python file and save it with a .py file extension. You will first w
 from pynput.mouse import Listener
 ```
 
-Setup the listener by creating an instance in a with statement and using it's `.join()` method to join it to the main thread.
+Setup the listener by creating an instance in a `with` statement and using it's `.join()` method to join it to the main thread.
 
 ```python
 with Listener() as listener:
@@ -54,7 +54,7 @@ Link these methods to the listener instance with the function names as the args;
 with Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener:
 ```
 
-To make sure these are running, add some print statements to each method. Save and run the script. Move your mouse around a bit, you should see output as below.
+To make sure these are running, add some print statements to each method. Save and run the script. Move your mouse around a bit, you should see output like below.
 
 ```python
 def on_move(x, y):
@@ -147,4 +147,4 @@ with Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listen
 Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
 ### I got a SyntaxError
-Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
+Syntax errors are caused by you and there is not much I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).

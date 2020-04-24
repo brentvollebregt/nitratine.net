@@ -3,7 +3,7 @@ date: 2018-09-16
 category: YouTube
 tags: [python, encryption, cyber-security]
 feature: feature.png
-description: "In this post I discuss how to encrypt and decrypt messages in Python using symmetric encryption. I will demonstrate how to create keys, save keys and how to encrypt messages and text."
+description: "In this post, I discuss how to encrypt and decrypt messages in Python using symmetric encryption. I will demonstrate how to create keys, save keys and how to encrypt messages and text."
 
 [TOC]
 
@@ -12,7 +12,7 @@ description: "In this post I discuss how to encrypt and decrypt messages in Pyth
 Using the [cryptography](https://cryptography.io/en/latest/) module in Python, we will use an implementation of AES called [Fernet](https://cryptography.io/en/latest/fernet/) to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.
 
 ## Installing cryptography
-Since Python does not come with anything that can encrypt files, we will need to use a third party module.
+Since Python does not come with anything that can encrypt files, we will need to use a third-party module.
 
 [PyCrypto](https://github.com/dlitz/pycrypto) is quite popular but since it does not offer built wheels, if you don't have Microsoft Visual C++ Build Tools installed, you will be told to install it. Instead of installing extra tools just to build this, I will be using the cryptography module. To install this, execute:
 
@@ -45,7 +45,7 @@ from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 ```
 
-The variable *key* will now have the value of a url safe base64 encoded key. When using these keys to encrypt, make sure to keep them safe, if you lose them you will not be able to decrypt your message.
+The variable *key* will now have the value of a URL safe base64 encoded key. When using these keys to encrypt, make sure to keep them safe, if you lose them you will not be able to decrypt your message.
 
 This key will have a type of bytes, so if you want a string you can call `key.decode()` to convert from UTF-8 to Pythons string type.
 
@@ -109,7 +109,7 @@ f = Fernet(key)
 encrypted = f.encrypt(message)
 ```
 
-The variable *encrypted* will now have the value of the message encrypted as type bytes. This is also be a url safe base64 encoded key.
+The variable *encrypted* will now have the value of the message encrypted as type bytes. This is also  a URL safe base64 encoded key.
 
 ## Decrypting
 To decrypt a message, you will need the same key and the encrypted message (still in bytes).
@@ -142,7 +142,7 @@ True
 This example shows a key being generated, you will want to make sure you have already sorted your key out and put it in a file for later use.
 
 ## Encrypting and Decrypting Files
-We can also encrypt files using this method since files can be read as bytes. Simply open the file, read the bytes, encrypt the data and the write them out to a new file. To encrypt:
+We can also encrypt files using this method since files can be read as bytes. Simply open the file, read the bytes, encrypt the data and write them out to a new file. To encrypt:
 
 ```python
 from cryptography.fernet import Fernet

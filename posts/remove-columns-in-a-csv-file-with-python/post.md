@@ -3,14 +3,14 @@ date: 2019-06-10
 category: Tools
 tags: [python, csv]
 feature: feature.png
-description: "Need to remove columns from a large CSV file? Simply provide this script the indexes of columns you want to be deleted and it will create a copy CSV file with those columns removed."
+description: "Need to remove columns from a large CSV file? Simply provide this script with the indexes of columns you want to be deleted and it will create a copy CSV file with those columns removed."
 
 [TOC]
 
 ## What is This?
-This script takes an input CSV file and outputs a copy of the CSV file with particular columns removed. Provide `cols_to_remove` a list containing the indexes of **columns** in the CSV file that you want removed (starting from index 0 - so the first column would be 0).
+This script takes an input CSV file and outputs a copy of the CSV file with particular columns removed. Provide `cols_to_remove` with a list containing the indexes of **columns** in the CSV file that you want to be removed (starting from index 0 - so the first column would be 0).
 
-I have used indexes because they are easier to use programmatically and if I did use header titles, one character or space would have put it off. This method scales very well and can remove columns where MS Execl can't open a large file.
+I have used indexes because they are easier to use programmatically and if I did use header titles, one character or space would have put it off. This method scales very well and can remove columns where MS Excel can't open a large file.
 
 ## Code
 

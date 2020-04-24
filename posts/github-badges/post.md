@@ -9,9 +9,9 @@ description: "A small demonstration of using GitHub badges from shields.io and h
 
 After recently making my project [hit-counter]({{ url_for('blog_post', path='hit-counter') }}) public, I was about to make a part to create your own custom badges to the project until I discovered [shields.io](https://shields.io/).
 
-shields.io can be [found on Github](https://github.com/badges/shields) which is a server built in JavaScript to host "Concise, consistent, and legible badges in SVG and raster format". A lot of repositories with README.md files contain badges these days as they provide useful and interesting information.
+shields.io is a server built using JavaScript to host "Concise, consistent, and legible badges in SVG and raster format" which can be [found on Github](https://github.com/badges/shields). A lot of repositories with README.md files contain badges these days as they provide useful and interesting information.
 
-In this tutorial I will show you how to create your own and some dynamic ones hosted by shields.io.
+In this tutorial, I will show you how to create your own and some dynamic ones hosted by shields.io.
 
 ## Creating Your Own Static Badges
 Going to [shields.io/#your-badge](https://shields.io/#your-badge) you will be brought down the page to a tool that lets you create your own badges. This is quite helpful if you want to make a static badge that either relies on human input or just doesn't change.
@@ -20,7 +20,7 @@ Going to [shields.io/#your-badge](https://shields.io/#your-badge) you will be br
 
 Entering a value in ```subject``` will provide the text for the left, ```status``` the value for the right and ```color``` the colour of the right part of the badge.
 
-For example if I wanted to create a badge that says "made with" and then "python" with a blue background, I would do:
+For example, if I wanted to create a badge that says "made with" and then "python" with a blue background, I would do:
 
 ```html
 <img src="https://img.shields.io/badge/made%20with-python-blue.svg" alt="made with python">
@@ -56,7 +56,7 @@ For example, using my badge from before:
 Will create: <img src="https://img.shields.io/badge/made%20with-python-blue.svg?style=flat-square" alt="made with python" style="margin-bottom: -5px; display: inline-block;">
 
 ## Dynamic Badges
-When visiting [shields.io](https://shields.io/) you will be introduces with a huge site of dynamic badges that the project supports. Here are a few badges that I like or find useful.
+When visiting [shields.io](https://shields.io/) you will be introduced with a huge site of dynamic badges that the project supports. Here are a few badges that I like or find useful.
 
 Remember there are many more badges on shields.io than what is displayed here. This is just a teaser and small examples of what is to offer.
 

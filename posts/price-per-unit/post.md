@@ -33,7 +33,7 @@ This app is ideal to find the best price in supermarkets but will work just in w
 </div>
 
 ## Features
-- 4 unit types (Weight, Volume, Length and Pieces) with sub units
+- 4 unit types (Weight, Volume, Length and Pieces) with sub-units
 - Easily change the currency symbol
 - Summary of calculated unit/$
 - Can view all items converted to one single unit

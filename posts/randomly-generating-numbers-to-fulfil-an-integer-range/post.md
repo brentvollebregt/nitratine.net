@@ -3,7 +3,7 @@ date: 2017-12-07
 category: Investigations
 tags: [python]
 feature: graph2.png
-description: "This experiment looks at how many randoms numbers will need to be generated to fufil an integer range. I use python to generate random numbers and simulate thousands of tests. This was conducted to find the range of 16,777,216 for an app I had developed."
+description: "This experiment looks at how many randoms numbers will need to be generated to fulfil an integer range. I use python to generate random numbers and simulate thousands of tests. This was conducted to find the range of 16,777,216 for an app I had developed."
 
 [TOC]
 
@@ -11,10 +11,10 @@ description: "This experiment looks at how many randoms numbers will need to be 
 I was recently discussing 'stupid' apps with a flatmate and how they do so well on app stores. We were thinking of really stupid apps and had come up with the idea of just changing the colour when a user tapped on the screen. Obviously, there would be more to the app but it seemed very achievable and something fun to make. [My idea was to generate the colours as hexadecimal values and display them to the user along with the colour]({{ url_for('blog_post', path='colour') }}). I then thought about making the aim of the app to get all the colours; a user would randomly generate colours until they have gotten them all. With there being 16,777,216 different colours that can be represented using hexadecimal I noticed very quickly that this is very unachievable for a user, but how unachievable really was it?
 
 ## Plan
-My plan to finding how 'unachievable' the problem is, is to generate random numbers in a range until all individual numbers in that range are generated. This will be done a few times for certain ranges to get averages and then will be plotted to get a line of best fit. With this line of best fit I should be able to predict ranges much larger than I will be testing with.
+My plan to finding how 'unachievable' the problem is, is to generate random numbers in a range until all individual numbers in that range are generated. This will be done a few times for certain ranges to get averages and then will be plotted to get a line of best fit. With this line of best fit, I should be able to predict ranges much larger than I will be testing with.
 
-## Creating Initial Method
-Sitting in my girlfriend's English lecture at Victoria University seemed like the best place to start this. The plan was to make a definition that took a range integer and randomly generate values until all values in the range were found. It would then return how many generations it took to get all values. To check when I had all values, I sorted the list using pythons built in list sort and then checked if it was identical to a generated list containing 1 to the range in order which was created using the range function in list comprehension.
+## Creating An Initial Method
+Sitting in my girlfriend's English lecture at Victoria University seemed like the best place to start this. The plan was to make a definition that took a range integer and randomly generates values until all values in the range were found. It would then return how many generations it took to get all values. To check when I had all values, I sorted the list using pythons built-in list sort and then checked if it was identical to a generated list containing 1 to the range in order which was created using the range function in list comprehension.
 
 ```python
 import random
@@ -51,7 +51,7 @@ for range_aim in ranges_to_run:
 This script was clean and was easy to use; all I had to do was change the four runs, min_, max_ and step_ variables to change looping for average calculation and the integers tested.
 
 ## Testing Small Numbers
-Initially this script was tested with 1000 runs, min_ of 10, max_ of 500 and a step_ of 50; the results are as follows.
+Initially, this script was tested with 1000 runs, min_ of 10, max_ of 500 and a step_ of 50; the results are as follows.
 
 |Range|Average Number Generations|
 |--- |--- |
@@ -79,7 +79,7 @@ Initially this script was tested with 1000 runs, min_ of 10, max_ of 500 and a s
 This data produced gives a clear pattern and produced a line of best fit with R^2 value of 0.9997 which is excellent. Using this equation to calculate the target value of 16,777,216 I got a value of 3.94x10^11. Even though this is a very large number, it doesn't seem like it is incorrect. There is a slight exponential addition to the equation calculated which will mean that little increases in x will give larger increases in y.  With this looking like a great start I went and tested a couple of bigger numbers.
 
 ### Bigger Numbers
-Due to the time to compute these values, I tested with larger numbers that weren't too much bigger than the previously tested numbers. I tested 1000, 2000, 3000, 4000 and 5000 and compared them to the expected value based off the last equation generated.
+Due to the time to compute these values, I tested with larger numbers that weren't too much bigger than the previously tested numbers. I tested 1000, 2000, 3000, 4000 and 5000 and compared them to the expected value based on the last equation generated.
 
 |Range|Average Number Generations|Expected|
 |--- |--- |--- |
@@ -89,7 +89,7 @@ Due to the time to compute these values, I tested with larger numbers that weren
 |4000|35629.988|47289.44|
 |5000|45216.905|66135.944|
 
-Looking at this data, the larger the numbers that were tested, the larger the difference between the actual and expected based off the last equation. After adding this data to the last data gathered and graphing it, the new equation is y = 0.0003x2 + 7.8024x - 470.14 with an R^2 of 0.9997. Even though this R^2 value is good, the lower values tested are far off the expected. An example of this difference for 10 being -33.951 for the last equation and -392.09 for this new equation even though the actual value sits around 29.735. This difference however starts to decrease when the range is over 200.
+Looking at this data, the larger the numbers that were tested, the larger the difference between the actual and expected based on the last equation. After adding this data to the last data gathered and graphing it, the new equation is y = 0.0003x2 + 7.8024x - 470.14 with an R^2 of 0.9997. Even though this R^2 value is good, the lower values tested are far off the expected. An example of this difference for 10 being -33.951 for the last equation and -392.09 for this new equation even though the actual value sits around 29.735. This difference however, starts to decrease when the range is over 200.
 
 ![Results for larger figures of 1000-5000](/posts/randomly-generating-numbers-to-fulfil-an-integer-range/graph2.png)
 
@@ -237,7 +237,7 @@ Since this method didn't speed processing up (and if it did, not by much), I dec
 ### Method
 After some quick planning, I completed the new script to how I had planned. Some quick testing and formatting of the CSV output then had it ready to be fully run.
 
-This did in fact speed up the process of getting the data but threads were not called as fast as expected and it still did have difficulty on higher numbers. To give a bit of feedback I added a method to look at what was running and provide more useful messages. With this output, I noted that threads were peaking at just over 270, this wasn't currently an issue, just interesting. This was the final script for the threading version.
+This did in-fact speed up the process of getting the data but threads were not called as fast as expected and it still did have difficulty on higher numbers. To give a bit of feedback I added a method to look at what was running and provide more useful messages. With this output, I noted that threads were peaking at just over 270, this wasn't currently an issue, just interesting. This was the final script for the threading version.
 
 ```python
 import threading
@@ -316,9 +316,9 @@ for range_value in range_values:
 ```
 
 ### Results
-Once again, the bigger the range, the longer it took to compute. Even with threads, 6000 was a stretch. I decided to bring down the run number to 200 to test some bigger numbers; this will be reflected in the standard error. I understand this will give less accurate data but hopefully it will be accurate enough to give a reasonable line of best fit.
+Once again, the bigger the range, the longer it took to compute. Even with threads, 6000 was a stretch. I decided to bring down the run number to 200 to test some bigger numbers; this will be reflected in the standard error. I understand this will give less accurate data but hopefully, it will be accurate enough to give a reasonable line of best fit.
 
-I compared the threading with the original method but running them both at the same time. Interestingly it wasn't that much faster as the threading had completed when the original method had completed 196/200. I will still use the threading method as it has better output and gives more information on current status.
+I compared the threading with the original method but running them both at the same time. Interestingly it wasn't that much faster as the threading had completed when the original method had completed 196/200. I will still use the threading method as it has a better output and gives more information on the current status.
 
 Now having the raw data, I was able to calculate the average, min, max and standard error of each of the samples. Using excel I simply just inserted formulas and then took in the row of data. The data is as follows.
 
@@ -400,12 +400,10 @@ Looking at this table, we can see that the two large data equations have a much 
 ![Difference for large data equations](/posts/randomly-generating-numbers-to-fulfil-an-integer-range/graph4.png)
 
 ## Conclusion
-By looking at the graph, it appears that the large data polynomial equation was the best at predicting the averages. At about 1500 the equations start to be a bit unreliable but are still staying reasonable close being at most 13% in extreme cases away from the average. This would be because I didn't do enough tests to calculate averages and this theory is definitely shows when the tests go above a range of 6000 as that is where I only calculated averages based off 200 runs due to the time to run the tests.
+By looking at the graph, it appears that the large data polynomial equation was the best at predicting the averages. At about 1500 the equations start to be a bit unreliable but are still staying reasonable close being at most 13% in extreme cases away from the average. This would be because I didn't do enough tests to calculate averages and this theory definitely shows when the tests go above a range of 6000 as that is where I only calculated averages based off 200 runs due to the time to run the tests.
 
 Thus, from these tests, I believe the most reliable equation to test the range of 16,777,216 with is y = 0.0001x^2 + 8.9649x - 1830.1.
 
 And then the calculation; y = 0.0001*(16777216)^2 + 8.9649*(16777216) - 1830.1, y = 28,297,901,904.684002
 
-28 and a quarter billion is still a very big number but a large number was expected. If someone could keep a rate of 400 taps per minute (it would get much slower over time but this is theoretical), it would take them over 134 and a half years to reach this number on average. Even if someone got lucky and had little duplicates compared to an average, I feel this game (Colour) would still not be possible to achieve in anyone lifetime currently.
-
-The data from this investigation can be downloaded here (xlsx 109KB)
+28 and a quarter billion is still a very big number but a large number was expected. If someone could keep a rate of 400 taps per minute (it would get much slower over time but this is theoretical), it would take them over 134 and a half years to reach this number on average. Even if someone got lucky and had little duplicates compared to an average, I feel this game (Colour) would still not be possible to achieve in anyone's lifetime currently.

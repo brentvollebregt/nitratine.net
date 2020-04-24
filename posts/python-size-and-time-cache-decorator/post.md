@@ -10,7 +10,7 @@ description: "A Python decorator that allows developers to cache function return
 ## Introduction
 Python's standard library comes with a memoization function in the `functools` module named [`@functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache). This can be very useful for pure functions *(functions that always will return the same output given an input)* as it can be used to speed up an application by remembering a return value. This is because next time a function is called with the same arguments, the value can be simply returned and computation will not have to occur again.
 
-Sometimes though, you might want to remember the return value of a non-pure function for a specific amount of time. The function below is a decorators that allows you to remember return value but also have an expiry on them.
+Sometimes though, you might want to remember the return value of a non-pure function for a specific amount of time. The function below is a decorator that allows you to remember return value but also have an expiry on them.
 
 ## Decorator
 ```python
@@ -84,7 +84,7 @@ Now when you call `my_sum(...)` values will be remembered and the addition will 
 
 The first parameter for the `cache` function is called `size_limit`. This is the maximum amount of entries to be stored until values that have been stored for the longest are removed (only the oldest will be deleted in Python 3.7 and above due to the ordering of dictionaries). When this is set to `0`, there is no size limit.
 
-`ttl` is the second parameter for this decorator. This is the amount of seconds that each entry can exist for before it is removed from memory. When this is set to `0` entries will never expire.
+`ttl` is the second parameter for this decorator. This is the number of seconds that each entry can exist for before it is removed from memory. When this is set to `0` entries will never expire.
 
 There is also another parameter that can be passed called `quick_key_access`. When set to `true`, a lookup table is stored for each key that is generated. This is set to `false` by default but if you're remembering a lot of values, then this may help get a speed boost at the cost of taking up more space. Simply, when set to `false`, this is slower but will take up less space, when set to `true`, this is faster but will take up more space.
 
@@ -97,4 +97,4 @@ def my_sum(a, b, c, d=1, e=5):
 ```
 
 ## Summary
-If you want a simple memoization function, I still recommend using the built in [`@functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache) decorator but if you are looking for memoization decorator with a time factor added in, then this is something that you're looking for.
+If you want a simple memoization function, I still recommend using the built-in [`@functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache) decorator but if you are looking for memoization decorator with a time factor added in, then this is something that you're looking for.

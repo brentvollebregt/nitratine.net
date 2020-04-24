@@ -8,7 +8,7 @@ description: "This is a basic Python requests tutorial to help you get started w
 [TOC]
 
 ## Introduction
-The [`requests`](https://github.com/requests/requests) Python package is a HTTP library created by [Kenneth Reitz](https://github.com/kennethreitz). It is a very well known package in the Python community for making HTTP requests easy to create and call. This tutorial will cover the basics that you will need to know and will want to know when making HTTP requests in Python.
+The [`requests`](https://github.com/requests/requests) Python package is an HTTP library created by [Kenneth Reitz](https://github.com/kennethreitz). It is a very well known package in the Python community for making HTTP requests easy to create and call. This tutorial will cover the basics that you will need to know and will want to know when making HTTP requests in Python.
 
 Learning how to send HTTP requests allows you to query websites and API's for data or even a webpage so you can scrape data out with something like [Beatifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/).
 
@@ -32,7 +32,7 @@ In this example, I have called `requests.get` passing my URL to be fetched. This
 > When a browser calls a web page, it initially requests the URL being visited and then calls other URLs that are referenced in the HTML document to render the page with the CSS, JS, image and other files required.
 
 ## Attributes You Should Know About
-The `Response` object that was returned in the example above contains many useful attributes. Here are some ones your should know about:
+The `Response` object that was returned in the example above contains many useful attributes. Here are some ones you should know about:
  
  - `.content`: The raw content of the request
  - `.text`: The text content of the request
@@ -40,7 +40,7 @@ The `Response` object that was returned in the example above contains many usefu
  - `.headers`: The headers of the response
  - `.cookies`: The cookies returned in the response. You can access cookie value like you would use a dict: `response.cookies['logged_in']`.
  
-To get the value of these attributes, use them like I did in the previous code example.
+To get the value of these attributes, use them as I did in the previous code example.
 
 ### .json()
 If a site returns a JSON response, you can call `.json()` on the `Response` object to convert the JSON object in the response to a Python dictionary.
@@ -89,7 +89,7 @@ if r.status_code == 200:
 ## Different Methods
 When making a request to a URL/URI, different 'methods' can be used. These tell the server what sort of action you want to perform. HTTP defines actions like GET, POST, PUT, DELETE and many others.
 
-To use these different methods, simply replace the `.get` with `.post`/`.put`/`.delete` or whatever method you are using. For example if I wanted to delete a record in a REST API, I could use:
+To use these different methods, simply replace the `.get` with `.post`/`.put`/`.delete` or whatever method you are using. For example, if I wanted to delete a record in a REST API, I could use:
 
 ```python
 import requests
@@ -99,7 +99,7 @@ assert r.status_code == 200 # Check for HTTP 200 (OK)
 ```
 
 ## Parameters in URLs
-Instead of constructing a url to add parameters to it, the requests module offers a method to add them automatically for you. Simply create your key value pairs in a Python dictionary and then pass this to the `params` argument in the request method. For example:
+Instead of constructing a URL to add parameters to it, the requests module offers a method to add them automatically for you. Simply create your key-value pairs in a Python dictionary and then pass this to the `params` argument in the request method. For example:
 
 ```python
 import requests
@@ -126,7 +126,7 @@ print (prepared.url)
 When making calls to endpoints that require data in the body, we can use form-encoded, JSON or raw bodies.
 
 ### Form Encoded Body
-In cases where you want to send some form-encoded data (like a HTML form would submit), we can pass key value pairs like we used above to the `data` parameter. The dictionary of your data will be form-encoded when the request is made. For example:
+In cases where you want to send some form-encoded data (like a HTML form would submit), we can pass key-value pairs as we used above to the `data` parameter. The dictionary of your data will be form-encoded when the request is made. For example:
 
 ```python
 import requests
@@ -136,9 +136,9 @@ r = requests.post('https://example.com/create-something', data=body_data)
 ```
 
 ### JSON Body
-Today, JSON bodies are becoming more popular over form-encoded key value pairs; I believe this is due to how easy it is for JavaScript to dump it's data in a request body. Fortunately JSON bodies are as easy to create in the request module as form-encoded are.
+Today, JSON bodies are becoming more popular over form-encoded key-value pairs; this is due to how much more compact JSON is over XML (XML and JSON are typically used to carry larger payloads). Fortunately, JSON bodies are as easy to create in the request module as form-encoded are.
 
-Instead of passing your dictionary to the `data` parameter, pass it to `json`. When the request it made, the `Content-Type` header will automatically be set to `application/json` to tell the server that this is a JSON request.
+Instead of passing your dictionary to the `data` parameter, pass it to `json`. When the request is made, the `Content-Type` header will automatically be set to `application/json` to tell the server that this is a JSON request.
 
 ```python
 import requests
@@ -158,7 +158,7 @@ r = requests.post('https://example.com/create-something', data=body_data)
 ```
 
 ## Custom headers
-Previously I discussed that the `Content-Type` header will automatically be set to `application/json` when passing data to `json`. We can set headers manually is a very similar way to how we have been sending data. Once again, create the header key value pairs in a Python dictionary and then pass them to the `headers` parameter.
+Previously I discussed that the `Content-Type` header will automatically be set to `application/json` when passing data to `json`. We can set headers manually is a very similar way to how we have been sending data. Once again, create the header key-value pairs in a Python dictionary and then pass them to the `headers` parameter.
 
 ```python
 import requests
@@ -171,9 +171,9 @@ r = requests.post('https://example.com/', headers=header_data)
 ```
 
 ## This is Only The Basics
-Please know that these are only the basics of the requests library and there is a lot more to offer from this library; this tutorial however should help you understand what you need to do to request and send data.
+Please know that these are only the basics of the requests library and there is a lot more to offer from this library; this tutorial however, should help you understand what you need to do to request and send data.
 
 If you want to read up more on this library, Google is full of answers but the docs at [docs.python-requests.org](http://docs.python-requests.org/en/master/user/quickstart/) is great for reference material.
 
 ## I Don't Have s Server, How Can I Test These?
-[hookbin.com](https://hookbin.com/) is an amazing place to test requests. Simply create a new endpoint on the site (big pink button) and copy the URL at the top of rendered page. Now whenever you make a request to that URL, refresh the page and you will be able to see the content of the request you made.
+[hookbin.com](https://hookbin.com/) is an amazing place to test requests. Simply create a new endpoint on the site (big pink button) and copy the URL at the top of the rendered page. Now whenever you make a request to that URL, refresh the page and you will be able to see the content of the request you made.

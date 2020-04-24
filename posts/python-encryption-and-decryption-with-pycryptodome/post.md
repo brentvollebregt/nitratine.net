@@ -44,7 +44,7 @@ import pycryptodome
 If no errors appeared it has been installed correctly.
 
 ## What is AES?
-In this tutorial I'll be using the implementation of [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) (AES) to encrypt strings and files. If you do not know what AES is, I highly recommend you understand what it is and how it works before you continue with the examples. Not understanding the different modes of AES and how it is designed could lead to insecure encryptions.
+In this tutorial, I'll be using the implementation of [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) (AES) to encrypt strings and files. If you do not know what AES is, I highly recommend you understand what it is and how it works before you continue with the examples. Not understanding the different modes of AES and how it is designed could lead to insecure encryptions.
 
 AES has a block size of 128 bits and this implementation of AES supports 3 sizes of keys, 16, 24 or 32 bytes long respectively for *AES-128*, *AES-192* or *AES-256*. Many modes are [supported by this implementation of AES](https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html), including:
 
@@ -66,7 +66,7 @@ key = get_random_bytes(32) # 32 bytes * 8 = 256 bits (1 byte = 8 bits)
 print(key)
 ```
 
-When running this snippet, a new key that is of type bytes will generated on each run. When using this method for creating a key, it will need to be stored somewhere to be used again.
+When running this snippet, a new key that is of type bytes will be generated on each run. When using this method for creating a key, it will need to be stored somewhere to be used again.
 
 > Remember, the key we will use to decrypt will have to be the same key we encrypted with. So don't lose the key otherwise you lose the file contents!
 
@@ -134,9 +134,9 @@ Now in `key`, you will have the key that you can use in encryption. You do not h
 ## Encrypting
 Now that we have the key, we can encrypt files. These methods encrypt bytes objects, so if you have a string, you can call `.encode()` on it, otherwise for other objects, make sure they are of type bytes. 
 
-> In these examples I will show a variable named `key` which will be where your key should be (as generated from the instructions above).
+> In these examples, I will show a variable named `key` which will be where your key should be (as generated from the instructions above).
 
-You can find examples in the documentation for [legacy ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html) and [modern ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html); I will cover a couple of examples from the documentations to help you understand how to encrypt and save the data required for decryption. 
+You can find examples in the documentation for [legacy ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html) and [modern ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html); I will cover a couple of examples from the documentation to help you understand how to encrypt and save the data required for decryption. 
 
 Different modes will require you to store different values for decryption like an iv, nonce or tag. If you want to use a mode that I do not cover here, simply find the example in the docs (from the links above for legacy and modern ciphers) and identify what values need to be stored.
 
@@ -157,7 +157,7 @@ ciphered_data = cipher.encrypt(pad(data, AES.block_size)) # Pad the input data a
 
 file_out = open(output_file, "wb") # Open file to write bytes
 file_out.write(cipher.iv) # Write the iv to the output file (will be required for decryption)
-file_out.write(ciphered_data) # Write the varying length cipher text to the file (this is the encrypted data)
+file_out.write(ciphered_data) # Write the varying length ciphertext to the file (this is the encrypted data)
 file_out.close()
 ```
 
@@ -205,7 +205,7 @@ file_out.close()
 ```
 
 ### How To Use All The Outputs From These Encryptions?
-Many of these modes will output more than one value; this could be in the form of a iv, nonce or something else. To pack all this data in a file, put the data that have static lengths (always the same) at the top of the file, then ciphered content after this. Now when you read out the file, you can read x amount of bytes using `.read(x)` to get the known-length values (can be multiple) and then call `.read(-1)` to get the rest of the data.
+Many of these modes will output more than one value; this could be in the form of an iv, nonce or something else. To pack all this data in a file, put the data that has  static lengths (always the same) at the top of the file, then ciphered content after this. Now when you read out the file, you can read x amount of bytes using `.read(x)` to get the known-length values (can be multiple) and then call `.read(-1)` to get the rest of the data.
 
 In the examples above, this is how I saved all the data required to a file, but you do not have to save the data this way. When only using the data internally or in something like a database, it can be easier to just keep them separate in their own variable or column.
 
@@ -240,7 +240,7 @@ iv = input_json['iv']
 ```
  
 ## Decrypting
-Now that you have your data, stored it somewhere, you will want to read it and decrypt it. Based off the encryption examples above, these are the examples to decrypt. If you did not store the data in a file, you can populate the require fields using whatever method you used to store them.
+Now that you have your data, stored it somewhere, you will want to read it and decrypt it. Based on the encryption examples above, these are the examples to decrypt. If you did not store the data in a file, you can populate the required fields using whatever method you used to store them.
 
 ### CBC Example
 When the file for the CBC encryption example was written, the iv was first written and then the ciphered data. Since we know the length of the iv (16 bytes), first read that from the start of the file and the read the rest of the file to get the ciphered data.
@@ -301,12 +301,12 @@ original_data = cipher.decrypt_and_verify(ciphered_data, tag) # Decrypt and veri
 ```
 
 ## Examples
-In these examples I will use the CFB mode to show that the input data can be encrypted and then decrypted to give the original input data. 
+In these examples, I will use the CFB mode to show that the input data can be encrypted and then decrypted to give the original input data. 
 
 In each example I will generate a new key that will be used in the session; as described before, you will need to generate a key yourself and save it for encryption and decryption since encryption and decryption most likely won't be done in the same session (you can't rely on `get_random_bytes` to get your key back).
 
 ### String Example Proof
-In this proof I will demonstrate how to encrypt and decrypt a string.
+In this proof, I will demonstrate how to encrypt and decrypt a string.
 
 ```python
 from Crypto.Cipher import AES
@@ -347,7 +347,7 @@ assert data_to_encrypt == decrypted_data, 'Original data does not match the resu
 ```
 
 ### File Example Proof
-In this proof I will demonstrate how to encrypt and decrypt a file. This example will be a bit different to the examples above as I will be reading and writing to and from files using a buffer. This allows me to encrypt much larger files without the whole file having to be loaded into memory.
+In this proofm I will demonstrate how to encrypt and decrypt a file. This example will be a bit different from the examples above as I will be reading and writing to and from files using a buffer. This allows me to encrypt much larger files without the whole file having to be loaded into memory.
 
 ```python
 from Crypto.Cipher import AES

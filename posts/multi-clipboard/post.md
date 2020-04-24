@@ -8,12 +8,12 @@ github: brentvollebregt/multi-clipboard
 
 Switch clipboard contents using a simple GUI<br />
 Images, text, files and other formats are supported with unlimited amounts of saved clipboards able to be created.<br />
-The idea of this is to easily switch clipboards with a simple click in a GUI. It comes with a built in listener for Ctrl + Windows + C
+The idea of this is to easily switch clipboards with a simple click in a GUI. It comes with a built-in listener for Ctrl + Windows + C
 
 ![Main GUI](/posts/multi-clipboard/main-gui.png)
 
 ## What Is This?
-This is my solution to constantly overwriting my clipboard. It is a GUI that acts like a hotbar, click on a virtual clipboard to place it on your actual clipboard. Some command line support has also been added in the form of setting and clearing clipboards.
+This is my solution to constantly overwriting my clipboard. It is a GUI that acts like a hotbar, click on a virtual clipboard to place it on your actual clipboard. Some command-line support has also been added in the form of setting and clearing clipboards.
 
 ## A Simple Demo
 
@@ -62,16 +62,16 @@ Don't want to have to install the package? Follow these steps:
 ### GUI Usage
 * Click on clipboard to switch to it (will close automatically on selection by default)
     - You can also use TAB to highlight the clipboards and then press ENTER to set the currently selected keyboard
-* Right click menu on each clipboard to individually delete/set
+* Right-click menu on each clipboard to individually delete/set
 * Click on the trash to delete all clipboards
 * Click on the plus button to create a new clipboard
-* Settings for the GUI can be toggled easily in settings window. In here you can:
+* Settings for the GUI can be toggled easily in the settings window. In here you can:
     - Change window settings (opacity, frame, stay on top...)
     - Toggle the listener
     - Make the listener start on user login
     
 ### Opening the GUI With A Mouse Click
-If you rather a double click opposed to typing `mutli-clipboard` in the terminal, open the project and then click the settings button. On the right you will see a button labeled "Create Shortcut"; clicking this will ask you where you want to save a shortcut script (VB script).
+If you rather a double click opposed to typing `mutli-clipboard` in the terminal, open the project and then click the settings button. On the right you will see a button labelled "Create Shortcut"; clicking this will ask you where you want to save a shortcut script (VB script).
 
 ### Command Line Usage
 * `multi-clipboard` - Opens GUI
@@ -83,7 +83,7 @@ If you rather a double click opposed to typing `mutli-clipboard` in the terminal
 * `multi-clipboard --current` - Check what clipboard you are currently on
 
 ## The Listener
-This package has a built in listener which listens for Ctrl + Windows + C (Left control). This can be enabled in the GUI's settings under "Toggle Listener" or by arguments as described above. This also comes with a feature to make the listener start on startup. To enable this, go into the GUI's settings and click "Listener Autostart" to toggle it on/off.
+This package has a built-in listener which listens for Ctrl + Windows + C (Left control). This can be enabled in the GUI's settings under "Toggle Listener" or by arguments as described above. This also comes with a feature to make the listener start on startup. To enable this, go into the GUI's settings and click "Listener Autostart" to toggle it on/off.
 
 ## GUI With Settings Open
 

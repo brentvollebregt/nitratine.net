@@ -13,13 +13,13 @@ description: "A demonstration of how to package a python script into an executab
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.
 
 ## PyInstaller
-Now that pip has been setup, execute the command ```pip install pyinstaller``` in cmd. Make sure to check the output for errors as if there are errors it would not have installed successfully. PyInstaller now supports Python 2.7 - 3.7 including Python 3.7.
+Now that pip has been set up, execute the command ```pip install pyinstaller``` in cmd. Make sure to check the output for errors as if there are errors it would not have installed successfully. PyInstaller now supports Python 2.7 - 3.7 including Python 3.7.
 
 To make sure it installed properly, type ```pyinstaller``` in cmd and make sure no errors appeared.
 
 ![pyinstaller command output](/posts/convert-py-to-exe/demo6.png)
 ## Basic Compiling
-Created a new folder and put your python file in it and any other modules or files it may need. Then hold shift and right click in the folder, in the menu that popped up, click "Open PowerShell Window Here" or "Open command window here" for older versions of windows. If this option doesn't appear, try again or open cmd and type ```cd {folder location}``` to move to that folder.
+Created a new folder and put your python file in it and any other modules or files it may need. Then hold shift and right-click in the folder, in the menu that popped up, click "Open PowerShell Window Here" or "Open command window here" for older versions of windows. If this option doesn't appear, try again or open cmd and type ```cd {folder location}``` to move to that folder.
 
 ![Open PowerShell window here](/posts/convert-py-to-exe/demo7.png)
 
@@ -45,19 +45,19 @@ Thus the new statement will be ```pyinstaller -i {icon location} {python file}``
 ## Adding Other Files
 Since pyinstaller only searches for Python files, you need to add data files like images, databases and JSON files yourself. To do this, simply provide the [`--add-data`](https://pyinstaller.readthedocs.io/en/v3.3.1/spec-files.html#adding-data-files) flag with the source and destination of your file as many times as required.
 
-As described in the documentation, to use this flag, it must be formatted as `--add-data SRC;DST`. SRC is the source file path of the file you want to add, for example `C:\Users\me\Desktop\my-image.jpg`, this can be either an absolute or relative path to the current working directory. DST is the destination in the packaged folder/executable. I recommend using a `.` to put a file in the root path. You can also specify a folder, for example `images` which will then create a folder named `images` and copy the file to there.
+As described in the documentation, to use this flag, it must be formatted as `--add-data SRC;DST`. SRC is the source file path of the file you want to add, for example `C:\Users\me\Desktop\my-image.jpg`, this can be either an absolute or relative path to the current working directory. DST is the destination in the packaged folder/executable. I recommend using a `.` to put a file in the root path. You can also specify a folder, for example, `images` which will then create a folder named `images` and copy the file to there.
 
-An example of this is when I want to put the file `C:\my-file.png` into the `img\` folder in the packaged folder/executable. To do this I would use `--add-data "my-file.png";"img/"` *(I used `"` so spaces in either paths don't cause errors)*. Now in Python, I will need to look in the img\ folder in the root of the packaged folder/executable to get the image.
+An example of this is when I want to put the file `C:\my-file.png` into the `img\` folder in the packaged folder/executable. To do this I would use `--add-data "my-file.png";"img/"` *(I used `"` so spaces in the paths don't cause errors)*. Now in Python, I will need to look in the img\ folder in the root of the packaged folder/executable to get the image.
 
 If you can't get this to work, I recommend trying out my project called auto-py-to-exe mentioned below. The application takes care of moving extra files and many other things so you don't have to.
 
 > The separator between the SRC and DST can be different on different platforms. Windows uses `;` whereas most other operating systems like OSX and Linux use `:`.
 
 ## End Notes
-You can combine these flags to make things like onefile executables with no console and an icon by using a statement like : ```pyinstaller -w -F -i {icon location} {python file}```
+You can combine these flags to make things like onefile executables with no console and an icon by using a statement like: ```pyinstaller -w -F -i {icon location} {python file}```
 
 ## Auto PY to EXE
-In March 2018 I created an application that allows you to create executables really easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.
+In March 2018 I created an application that allows you to create executables easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.
 
 {% with video_id="OZSZHmWSOeM" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
@@ -66,13 +66,13 @@ In March 2018 I created an application that allows you to create executables rea
 ## Common Issues and Questions
 
 ### My script runs fine in IDLE but won't run when packaged to exe
-Regarding that the python script runs properly by itself then this would have been caused by incorrect configuration or third party modules. The best way to find what the issue is, is to add the -d flag and then re-package it. This will mean the exe is now in a debugging mode. Open up cmd and then run the exe using cmd e.g. "C:/folder/path/myexe.exe". Any errors will be preserved in the console which you were previously missing.
+Regarding that the python script runs properly by itself then this would have been caused by an incorrect configuration or third-party modules. The best way to identify the issue is to add `-d all` to the command and then re-package it. This will mean the exe is now in a debugging mode. Open up cmd and then run the exe using cmd e.g. "C:/folder/path/myexe.exe". Any errors will be preserved in the console which you were previously missing.
 
 ### zipimport.ZipImportError: can't find module 'encodings'
 Please upgrade PyInstaller to 3.4 or above using: `python -m pip install --upgrade PyInstaller`
 
 ### "Open command window here" isn't shown when I shift right click?
-Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work exactly the same for this tutorial; so go ahead and use PowerShell.
+Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work the same for this tutorial, so go ahead and use PowerShell.
 
 ### 'pip' is not recognized as an internal or external command
 Please follow the pip setup again, you have done something wrong. Alternatively, you can try to use `python -m pip {command}`.
@@ -93,10 +93,10 @@ This may be an architecture issue. PyInstaller will create an executable with th
 This is your anti-virus vendors fault. Check out [this](https://github.com/pyinstaller/pyinstaller/issues/2501#issuecomment-286230354).
 
 ### I get lots of WARNINGs when running pyinstaller
-These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after-all, they are only warnings.
+These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after all, they are only warnings.
 
 ### Will this add my other scripts? / Will this work with external Python modules?
-Regarding that your main script imports your others scripts, then yes. PyInstaller looks at imports to figure out what to bundle, so it will add your other scripts just like if you were to import os or time.
+If your main script imports your others scripts, then yes. PyInstaller looks at imports to figure out what to bundle, so it will add your other scripts just like if you were to import os or time.
 
 ### [is it available in Walmart?????](https://www.youtube.com/watch?v=lOIJIk_maO4&lc=UgxFJKkC5nzr7MiscOd4AaABAg)
 I don't believe so, sorry.

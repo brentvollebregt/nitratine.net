@@ -8,9 +8,9 @@ description: "These are my solutions to the challenges I solved in the New Zeala
 [TOC]
 
 ## What is the [New Zealand Cyber Security Challenge](https://nzcsc.org.nz/)?
-Each year the University of Waikato holds a "cyber security" competition which involves CTF for rounds 1 and 2, policy creation/identification for round 3 and attack/defend servers for the top 5 teams. Side Challenges are also held which varies with the theme per year.
+Each year the University of Waikato holds a "cybersecurity" competition which involves CTF for rounds 1 and 2, policy creation/identification for round 3 and attack/defend servers for the top 5 teams. Side Challenges are also held which varies with the theme per year.
 
-> Unfortunately I was not able to solve all challenges in round 0 this year so this solution guide will be incomplete unless extra contributions are provided. 
+> Unfortunately, I was not able to solve all challenges in round 0 this year so this solution guide will be incomplete unless extra contributions are provided. 
 
 ## Solutions
 
@@ -82,7 +82,7 @@ def bxor(ba1, ba2):
 text = bxor(base64.b64decode(base64_ciphertext), key.encode())
 ```
 
-This gives text = `GET ./e51d35ed.bin`. Making an anchor tag on the page again to go to that relative URL like I did previously, the [file](https://nzcsc.org.nz/competition/2019/r0/2/challenge/e51d35ed.bin) is downloaded.
+This gives text = `GET ./e51d35ed.bin`. Making an anchor tag on the page again to go to that relative URL as I did previously, the [file](https://nzcsc.org.nz/competition/2019/r0/2/challenge/e51d35ed.bin) is downloaded.
 
  This file is 50KB in size and was the end of the line for me unfortunately. No magic bytes match this file and [hexedit](https://hexed.it/) couldn't tell me the file type. I tried many things with this file but nothing gave a flag. I did notice though that there were no bytes in the file that had a value above 127; not sure if this hinted anything.
 
@@ -112,7 +112,7 @@ This challenge is a basic SQL injection. Searching the provided name `Fitzgerald
 ### Challenge 6
 This challenge supplies you a .ova file you can import to virtual box. When imported, a small Linux OS is presented with the file `validate` at /home/tc. When run, it asks you for a flag and waits a few seconds before saying if it's correct for not.
 
-When I was first attempting this, I had written a shell script using vi on the VM (lord help me) to get all the strings out of `validate` and run them though the program. Obviously this didn't work because they learnt their lesson from last year.
+When I was first attempting this, I had written a shell script using vi on the VM (lord help me) to get all the strings out of `validate` and run them through the program. Obviously this didn't work because they learnt their lesson from last year.
 
 I decided to extract the ova file using 7-Zip on a windows machine and then unzipped `VM-disk001.vmdk` within. Looking in \home\tc I could then easily access the `validate` file. I then went to [onlinedisassembler.com](https://onlinedisassembler.com/static/home/index.html) for a dirty way to look at what this binary contained.
 

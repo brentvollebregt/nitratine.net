@@ -3,7 +3,7 @@ date: 2018-04-25
 category: General
 tags: [backgrounds]
 feature: lhc-blocks.jpg
-description: "Surprisingly I get a lot of people as where I got my backgrounds from in my YouTube videos. I've finally decided to just put them all in once place if anyone is interested."
+description: "Surprisingly I get a lot of people asking where I got my backgrounds from in my YouTube videos. I've finally decided to just put them all in once place if anyone is interested."
 
 [TOC]
 
@@ -32,14 +32,14 @@ This is currently my favourite as it is so clean and has a very happy feel to it
 ### Material Design Blue
 ![Material Design Blue](/posts/my-desktop-backgrounds/material-design-blue.jpg)
 
-You will find I like material design and I used to try and design a lot of my projects to the specifications, this is obviously quite time consuming so I settle for backgrounds, colours and icons.
+You will find I like material design and I used to try and design a lot of my projects to the specifications, this is obviously quite time-consuming so I settle for backgrounds, colours and icons.
 
 This was also found by Google Image search but [originated here](http://wallpaperswide.com/material_design-wallpapers.html)
 
 ### Fluorescent Face
 ![Fluorescent Face](/posts/my-desktop-backgrounds/fluorescent-face.jpg)
 
-I really liked the colours in this background. Monitors that render colour well makes this image look amazing. Unfortunately I don't remember where this image came from and a reverse image search is not providing hints by giving me 30 different results at the same resolution.
+I really liked the colours in this background. Monitors that render colour well makes this image look amazing. Unfortunately, I don't remember where this image came from and a reverse image search is not providing hints by giving me 30 different results at the same resolution.
 
 ### LHC Blocks
 ![LHC Blocks](/posts/my-desktop-backgrounds/lhc-blocks.jpg)

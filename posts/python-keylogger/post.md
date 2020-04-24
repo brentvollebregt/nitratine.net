@@ -17,7 +17,7 @@ We will be using the pynput module to listen to mouse events. To install this mo
 
 ![Installing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput1.png)
 
-To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
+To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
 ![Testing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput2.png)
 
@@ -29,7 +29,7 @@ from pynput.keyboard import Key, Listener
 import logging
 ```
 
-Next set a variable which points to where you want to save the logs; leave this as an empty string to save the log beside the python script. Then setup the logging module as shown below.
+Next set a variable which points to where you want to save the logs; leave this as an empty string to save the log beside the python script. Then set up the logging module as shown below.
 
 ```python
 log_dir = ""
@@ -37,14 +37,14 @@ log_dir = ""
 logging.basicConfig(filename=(log_dir + "key_log.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
 ```
 
-Then create a definition for keypresses called on_press which takes key as a parameter. In this definition we want to log using the info method the key type casted to a string.
+Then create a definition for keypresses called on_press which takes key as a parameter. In this definition, we want to log the key using the logging info method. The key will need to be casted to a string before logging it.
 
 ```python
 def on_press(key):
     logging.info(str(key))
 ```
 
-Next setup an instance of Listener and define the on_press method in a with statement and then join the instance to the main thread.
+Next setup an instance of Listener and define the on_press method in a `with` statement and then `.join()` the thread to the main thread.
 
 ```python
 with Listener(on_press=on_press) as listener:
@@ -67,7 +67,7 @@ Now type ```shell:startup``` in the dialog and press enter. This will open a win
 Copy the keylogger into this folder and then create a new folder somewhere else for logs to be saved to. Make sure this folder is not in the startup folder or it will be opened every time the computer has started. Open the keylogger in IDLE and now change the log_dir to the location of the folder you just created. Make sure this folder path uses forward slashes ('/') and contains a forward slash at the end.
 
 ## Stopping the Keylogger
-To stop the keylogger, open up task manager and look for anything named python as shown below due to windows just showing program names. If you have an older version of windows, I recommend looking for pythonw.exe. Right click on this and end the task.
+To stop the keylogger, open up task manager and look for anything named python as shown below due to windows just showing program names. If you have an older version of windows, I recommend looking for pythonw.exe. Right-click on this and end the task.
 
 ![Python in task manager](/posts/python-keylogger/taskmgr.png)
 
@@ -90,7 +90,7 @@ with Listener(on_press=on_press) as listener:
 ## Compile to EXE
 Want to convert this .py to a .exe? Head over to my tutorial at [convert-py-to-exe]({{ url_for('blog_post', path='convert-py-to-exe') }}) to do it in a few easy steps. This tutorial also shows you how to remove the console that shows up, make one file executables and even add an icon.
 
-Converting to .exe will allow the script to run on windows computers without python installed (python is pre-installed on mac and most linux computers)
+Converting to .exe will allow the script to run on Windows computers without python installed (python is pre-installed on Mac and most Linux computers)
 
 ## Common Issues and Questions
 
@@ -107,10 +107,10 @@ They will be located next to the python file (in the current directory for more 
 Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
 ### I got a SyntaxError
-Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
+Syntax errors are caused by you and there is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally, people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
 
 ### How can I stop the listener?
 As documented at [https://pythonhosted.org/pynput/keyboard.html](https://pythonhosted.org/pynput/keyboard.html) you can use pynput.keyboard.Listener.stop() to stop listening.
 
-### "Open command window here" isn't shown when I shift right click?
+### "Open command window here" isn't shown when I shift right-click?
 Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work exactly the same for this tutorial; so go ahead and use PowerShell.

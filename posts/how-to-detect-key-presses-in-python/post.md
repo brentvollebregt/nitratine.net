@@ -15,7 +15,7 @@ We will be using the pynput module to listen to keyboard events. To install this
 
 ![Installing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput1.png)
 
-To double check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
+To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
 ![Testing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput2.png)
 
@@ -26,7 +26,7 @@ Create a new python file and save it with a .py file extension. You will first w
 from pynput.keyboard import Listener
 ```
 
-Setup the listener by creating an instance in a with statement and using it's `.join()` method to join it to the main thread.
+Setup the listener by creating an instance in a `with` statement and using it's `.join()` method to join it to the main thread.
 
 ```python
 with Listener() as listener:
@@ -49,7 +49,7 @@ Link these methods to the listener instance with the function names as the args;
 with Listener(on_press=on_press, on_release=on_release) as listener:
 ```
 
-To make sure these are running, add some print statements to each method. Save and run the script. Press a few keys, you should see output as below.
+To make sure these are running, add some print statements to each method. Save and run the script. Press a few keys, you should see output like below.
 
 ```python
 def on_press(key):
@@ -75,7 +75,7 @@ def on_release(key):
 
 If you want this script to be run in the background. Click File -> Save As and save it with a .pyw file extension. Now when it is run outside IDLE there will be no console window and it will not look like it is running. But to make sure the console doesn't appear, we need to first remove the print statements.
 
-Import logging and setup the basic configuration as I have below. After that, change all print statements to logging.info.
+Import logging and set up the basic configuration as I have below. After that, change all print statements to logging.info.
 
 ```python
 import logging

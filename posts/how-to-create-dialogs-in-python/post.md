@@ -3,7 +3,7 @@ date: 2019-05-26
 category: Tutorials
 tags: [python, gui, dialog]
 feature: question-dialogs.png
-description: "In this post I demonstrate dialogs that are provided in the Python standard library by showing you how to use them and what they look like."
+description: "In this post, I demonstrate dialogs that are provided in the Python standard library by showing you how to use them and what they look like."
 
 [TOC]
 
@@ -17,7 +17,7 @@ Each dialog does something different, takes different input to be created and re
 
 > Some of these dialogs make sounds as you would typically find with dialogs displaying an error
 
-In these examples I will be referencing a `parent`. This parent is a `tkinter.Tk` object which acts like the "base" of the dialogs. Using a parent also allows you to **set an icon** on the dialog window and task-bar item. Here is an example:
+In these examples, I will be referencing a `parent`. This parent is a `tkinter.Tk` object which acts as the "base" of the dialogs. Using a parent also allows you to **set an icon** on the dialog window and task-bar item. Here is an example:
 
 ```python
 import tkinter

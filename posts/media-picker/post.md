@@ -23,7 +23,7 @@ This project is a Flask server hosted by Python that is designed to be opened in
  - Clicking on the image (in the centre) will enlarge it
  - Clicking to the right/left of the image will go to the next corresponding image
  - View all images in a scrollable bar at the bottom
- - Server will close itself when it detects that there is no more activity
+ - The server will close itself when it detects that there is no more activity
 
 ## Getting Started
 
@@ -31,12 +31,12 @@ This project is a Flask server hosted by Python that is designed to be opened in
  - Python : Python 2.7, 3.4 - 3.6
  - Chrome : to run the user interface
 
-### Instillation
+### Installation
 1. Clone/download the repo at [github.com/brentvollebregt/media-picker](https://github.com/brentvollebregt/media-picker)
 2. Open cmd/terminal and cd to the project
 3. Execute pip install -r requirements.txt
 
 ### Usage
-Execute ```run.py``` by either calling it as an argument with Python, in IDLE or double clicking on it. Chrome should open and display the interface.
+Execute ```run.py``` by either calling it as an argument with Python, in IDLE or double-clicking on it. Chrome should open and display the interface.
 
 Click the blue "Add Files" button and add your desired files. Use the red/green button to select what images to keep and then click export when you have finished your selection (you do not need to select all the images to do this, blue will be ignored like red).

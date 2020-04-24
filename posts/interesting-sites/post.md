@@ -36,13 +36,13 @@ Liam is now living cancer free.
 
 ## [Paper Planes](https://paperplanes.world/)
 
-This site is quite entertaining and has a awesome idea to it. It's made for mobile but is supported by desktop also by just showing where planes are coming from with animations. The idea of the site is to send a paper plane out with a stamp of your relative location (nearest city). You then catch other planes sent out by others 'flying around the world' which you can then see stamps from others and put your own stamp on it. You then send the paper plane back off to be found by someone else as it collects stamps for more to see.
+This site is quite entertaining and has an awesome idea to it. It's made for mobile but is supported by desktop also by just showing where planes are coming from with animations. The idea of the site is to send a paper plane out with a stamp of your relative location (nearest city). You then catch other planes sent out by others 'flying around the world' which you can then see stamps from others and put your own stamp on it. You then send the paper plane back off to be found by someone else as it collects stamps for more to see.
 
 ![Paper planes app plane sent](/posts/interesting-sites/paperplanes2.png)
 ![Paper planes app catching planes](/posts/interesting-sites/paperplanes3.png)
 ![Paper planes desktop](/posts/interesting-sites/paperplanes1.jpg)
 
-A really cool feature of this site is that if you are using mobile, you cause motion your phone like you would to catch a plane with a net and you will catch a paper plane.
+A cool feature of this site is that if you are using mobile, you cause motion your phone like you would to catch a plane with a net and you will catch a paper plane.
 
 ## Lights
 

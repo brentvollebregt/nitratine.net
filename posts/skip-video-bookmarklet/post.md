@@ -16,7 +16,7 @@ To add the bookmarket, simply click and drag the link below into your bookmark b
 
 <a href="javascript:videos = document.getElementsByTagName('video'); for (i = 0; i < videos.length; i++) { videos[i].currentTime = videos[i].duration; }">Skip Video</a>
 
-If you cannot drag this onto the bookmark bar, right click on it and copy the link address. Next create a new bookmark and add this as the url.
+If you cannot drag this onto the bookmark bar, right-click on it and copy the link address. Next, create a new bookmark and add this as the URL.
 
 ## The Code
 You don't need to copy this code (*instructions above*); this is simply for curiosity.

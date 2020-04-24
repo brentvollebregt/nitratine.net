@@ -10,12 +10,10 @@ This version of the Nitratine project was originally a place to host my projects
 
 I have now decided to relocate the Nitratine project to Github Pages as it has a lot of benefits but I will still keep this repo public as it may be useful for something else one day.
 
-This is currently hosted at: [nitratine.pythonanywhere.com](http://nitratine.pythonanywhere.com/)
-
 ## What is this?
-This project is a website that is hosted using Flask in Python. The main idea of it is to be able to add articles easily while still keeping the raw html idea. When the server starts it will look for articles in a user defined directory that is laid out to a certain specification. From then on the servers data can be edited at any time from within the site.
+This project is a website that is hosted using Flask in Python. The main idea of it is to be able to add articles easily while still keeping the raw HTML idea. When the server starts it will look for articles in a user-defined directory that is laid out to a certain specification. From then on the server's data can be edited at any time from within the site.
 
-The site has a home page and then five sub areas. Each article is put under one sub area. The site has a light and dark theme and even has an option to display snow. Mobile support have been added by adding a different navigation and different breakpoints have been fitted to the site. The site records viewings for each article and can display them.
+The site has a home page and then five sub-areas; each article is put under one sub-area. The site has a light and dark theme and even has an option to display snow. Mobile support has been added by adding different navigation and different breakpoints have been fitted to the site. The site records viewings for each article and can display them.
 
 ## Demonstration and Screenshots
 ![Desktop home split light dark snow](/posts/the-nitratine-project/nitratine1.jpg)
@@ -36,7 +34,7 @@ The site has a home page and then five sub areas. Each article is put under one 
 - Option to switch snow on
 - Supports smaller screen sizes
 - Has a different menu for smaller devices
-- Run python code server side
+- Run python code server-side
 - Right sidebar that appears on wide enough devices with:
     - YouTube subscribe button
     - 6 most recent videos
@@ -125,7 +123,7 @@ Here we can see that the two blocks are extended from SKELETON.html. The article
     - youtube
 
 ## Server Side Scripting
-By putting python files in an articles folder, a script can be called at the path /scripts/[sub]/[article]/[script]. The Python file needs to contain a main method that takes the request as a parameter. The main method must return something to be passed back to the client.
+By putting python files in an articles folder, a script can be called at the path /scripts/[sub]/[article]/[script]. The Python file needs to contain a `main` method that takes the request as a parameter. The main method must return something to be passed back to the client.
 
 ```python
 def main(request):
@@ -133,7 +131,7 @@ def main(request):
     return {"success" : True}
 ```
 
-The object returned from the main method is what will be returned to the client. This means if you want to return a JSON object, it would be recommended to jsonify it first.
+The object returned from the main method is what will be returned to the client. This means if you want to return a JSON object, it would be recommended to `jsonify` it first.
 
 ## Administration Features
 ### Pushing JSON
@@ -147,7 +145,7 @@ In /admin, under "Download Article" you can enter a sub and an article name to d
 
 Under that is a "Delete Article" section. This allows you to delete an article by entering a sub and an article name.
 
-Under that is a "Upload Article" section. This allows you to upload a zip file of an article by adding a file and entering a sub and an article name. These files need to be in the zip immediately (top level). You will need to re-scrape to add these new articles.
+Under that is an "Upload Article" section. This allows you to upload a zip file of an article by adding a file and entering a sub and an article name. These files need to be in the zip immediately (top-level). You will need to re-scrape to add these new articles.
 
 These articles will be found at www.yourdomain.com/sub/article. e.g. nitratine.pythonanywhere.com/apps/colour
 
@@ -168,7 +166,7 @@ Under the Static Descriptions header, you can edit descriptions of home, stats, 
 In /admin, there is a "Download JSON" and "Upload JSON" button. This allows you to download JSON to the text box underneath, edit and re-upload it to the server.
 
 ### External
-This section allows you to modify the external key's value in data.json. Here you can set a google site verification code, google analytics code, your github username, youtube channel id, youtube data api key and a 300x250 ad code.
+This section allows you to modify the external key's value in data.json. Here you can set a google site verification code, google analytics code, your GitHub username, youtube channel id, youtube data API key and a 300x250 ad code.
 
 - Google Site Verification: Put the whole meta tag in, e.g. &lt;meta..... /&gt;
 - Google Analytics Code: Put all JavaScript code given in, e.g. &lt;!-- Global site tag.....;&lt;/script&gt;
@@ -179,22 +177,22 @@ This section allows you to modify the external key's value in data.json. Here yo
 - 300x250 Ad Code: Raw code from Adsense
 
 ### Article Folder
-In this section you can download the whole /articles folder or upload a zipped file of the /articles folder. This is easier than using an online console to upload, move and unzip.
+In this section, you can download the whole /articles folder or upload a zipped file of the /articles folder. This is easier than using an online console to upload, move and unzip.
 
 ### Set Site Location
-This is just a button that will allow the server know what the sites location is in terms of it's url to generate robots.txt and sitemap.xml
+This is just a button that will allow the server to know what the site's location is in terms of its URL to generate robots.txt and sitemap.xml
 
 ### Add Me To View IP Blacklist
-Too make in-site statistics ignore a specific IP, you can add yourself to the list that contains ignored ips when counting views. Your ip will be added when clicking this button.
+Too make in-site statistics ignore a specific IP, you can add yourself to the list that contains ignored IPs when counting views. Your IP will be added when clicking this button.
 
 ### Push Per View
 Push per view saves the data in memory to data.json whenever a view is added. This saves you from having to push the data before each restart of the server (can lose data if you forget to push). Set to true to enable (remember in /admin you are editing JavaScript so it needs to be true instead of Python's True).
 
 ### Right sidebar
-This is a simple switch to disable or enable the right sidebar. The right sidebar displays a youtube subscribe button, your latest 6 videos, your github profile on a card and the 300x250 ad if provided.
+This is a simple switch to disable or enable the right sidebar. The right sidebar displays a youtube subscribe button, your latest 6 videos, your GitHub profile on a card and the 300x250 ad if provided.
 
 ### Exporting Stats
-In /admin, there is a "Export Stats" button. This buttons will download a .json file of the current sites statistics.
+In /admin, there is an "Export Stats" button. This buttons will download a .json file of the current site's statistics.
 
 ### Delete /tmp/
 When downloading a zip file, the server cannot delete the file while processing the request as it needs to serve it. Thus the files sit in /tmp/ (beside server.py) so they can be deleted later.

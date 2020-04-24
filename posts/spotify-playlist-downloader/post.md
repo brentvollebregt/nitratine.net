@@ -3,16 +3,16 @@ date: 2017-12-21
 category: Projects
 tags: [python, spotify, download, youtube-dl]
 feature: feature.jpg
-description: "A Python script to download a Spotify playlist to MP3 using YouTube as audio source. The MP3s are tagged and given album art using Spotify"
+description: "A Python script to download a Spotify playlist to MP3 using YouTube as an audio source. The MP3s are tagged and given album art using Spotify"
 github: brentvollebregt/spotify-playlist-downloader
 
 ## What is this?
-This project takes a Spotify playlist uri and will download it's contents by sourcing audio from YouTube and tags/art from Spotify. YouTube videos for audio are found automatically.
+This project takes a Spotify playlist URI and will download its contents by sourcing audio from YouTube and tags/art from Spotify. YouTube videos for audio are found automatically.
 
 ## Demonstration and Screenshots
 ![Console example](/posts/spotify-playlist-downloader/gui1.png)
 
-This is a console application, simply paste the uri and press enter.
+This is a console application, simply paste the URI and press enter.
 
 ## Requirements
 * Python (tested with 3.5)
@@ -25,7 +25,7 @@ This is a console application, simply paste the uri and press enter.
 4. Go to [https://developer.spotify.com/my-applications](https://developer.spotify.com/my-applications) and create an app to get a client_id and client_secret key pair
 5. Put these keys in settings.json
 6. Go to [http://ffmpeg.zeranoe.com/builds/](http://ffmpeg.zeranoe.com/builds/) and download ffmpeg.
-7. Extract the files from the zip and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of spotify_album_downloader.py *(you can also put these in a location that is reference by the PATH variable if you wish)*
+7. Extract the files from the zip and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of spotify_album_downloader.py *(you can also put these in a location that is referenced by the PATH variable if you wish)*
 
 ## Usage
 1. Get the URI of a Spotify playlist by clicking the three dots at the top to show then menu and click share. In this sub-menu, click "Copy Spotify URI"; this will copy the URI to your clipboard.
