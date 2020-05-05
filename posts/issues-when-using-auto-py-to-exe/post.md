@@ -130,6 +130,9 @@ Update setuptools using `pip install --upgrade setuptools`.
 #### FileNotFoundError
 Make sure the file you are referencing actually exists, this error says that the file you are referencing doesn't exist. If you are using one-file mode, make sure you have followed the necessary steps.
 
+#### struct.error: unpack requires a buffer of 16 bytes
+This typically occurs when you have supplied `--icon` / `-i` with a file that is not a `.ico` file. Please note that simply changing the extension of a file to .ico does not make it a .ico file; you will need to use a converter of some sort to convert your file (e.g. png, jpg) into a .ico.
+
 ## General Questions Constantly Asked
 
 ### How do I Convert All My Python Files?
