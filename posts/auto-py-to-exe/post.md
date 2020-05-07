@@ -15,16 +15,17 @@ This application displays a simple interface that allows you to convert py to ex
 </div>
 
 <div style="text-align: center">
-    <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version"></a>
-    <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions"></a>
-    <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License"></a>
-    <a href="http://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="http://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
-    <a href="http://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" alt="Downloads Per Month"></a>
+    <a href="https://pypi.org/project/auto-py-to-exe/"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version"></a>
+    <a href="https://pypi.org/project/auto-py-to-exe/"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions"></a>
+    <a href="https://pypi.org/project/auto-py-to-exe/"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License"></a>
+    <a href="http://pepy.tech/project/auto-py-to-exe"><img class="mt-1" style="display: inline;" src="http://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
+    <a href="http://pepy.tech/project/auto-py-to-exe"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" alt="Downloads Per Month"></a>
+    <a href="https://pyinstaller.readthedocs.io/en/stable/requirements.html"><img class="mt-1" src="https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey" alt="Supported Platforms"></a>
 </div>
 
 ## Demo
 
-<video style="width:90%;height:auto;margin:auto;display:block;" controls="">
+<video style="width:90%;height:auto;margin:auto;display:block;" controls="" class="mb-3">
     <source src="/posts/auto-py-to-exe/auto-py-to-exe-demo.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
@@ -91,11 +92,13 @@ If you need something visual to help you get started, [I made a video for the or
 If you're having issues with the packaged executable or using this tool in general, I recommend you read [my blog post on common issues when using auto-py-to-exe](https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/). This post covers things you should know about packaging Python scripts and fixes for things that commonly go wrong.
 
 ## Screenshots
-![Empty interface](/posts/auto-py-to-exe/empty-interface.png)
 
-![Filled out](/posts/auto-py-to-exe/filled-out.png)
-
-![Converting](/posts/auto-py-to-exe/converting.png)
+<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px;">
+    <a href="/posts/auto-py-to-exe/empty-interface.png"><img src="/posts/auto-py-to-exe/empty-interface.png" alt="Empty interface" /></a>
+    <a href="/posts/auto-py-to-exe/filled-out.png"><img src="/posts/auto-py-to-exe/filled-out.png" alt="Filled out" /></a>
+    <a href="/posts/auto-py-to-exe/converting.png"><img src="/posts/auto-py-to-exe/converting.png" alt="Converting" /></a>
+    <a href="/posts/auto-py-to-exe/completed.png"><img src="/posts/auto-py-to-exe/completed.png" alt="Completed" /></a>
+</div>
 
 ## Response
 I really wanted to get this project out there so I released a YouTube video demonstrating how to set up and use the interface (video above). A day later I made a post in the /r/Python subreddit titled ["Auto Py to Exe is Complete"](https://www.reddit.com/r/Python/comments/84kwb8/auto_py_to_exe_is_complete/).
