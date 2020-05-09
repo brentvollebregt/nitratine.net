@@ -58,7 +58,7 @@ config_data = {
         'title': 'Nitratine',
         'url': 'https://nitratine.net',
         'domain': 'nitratine.net',
-        'about': 'Owner of <a href=\"https://www.youtube.com/PyTutorials\">PyTurorials</a> and creator of <a href=\"https://github.com/brentvollebregt/auto-py-to-exe\">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.',
+        'about': 'Owner of <a href=\"https://www.youtube.com/PyTutorials\">PyTutorials</a> and creator of <a href=\"https://github.com/brentvollebregt/auto-py-to-exe\">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and  tools that help fix small things.',
         'theme_colour': '#343a40',
         'email': 'brent@nitratine.net',
         'youtube_link': 'https://www.youtube.com/PyTutorials',
