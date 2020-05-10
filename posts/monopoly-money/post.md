@@ -30,16 +30,28 @@ To start using the web app, follow the basic following steps:
 
 When everyone is in the game, the banker can then close the game to stop others from joining and then start distributing out the initial balances.
 
+## Screenshots
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 6px;">
+    <a href="/posts/monopoly-money/screenshot-1.png"><img src="/posts/monopoly-money/screenshot-1.png" alt="Funds page with game id" /></a>
+    <a href="/posts/monopoly-money/screenshot-2.png"><img src="/posts/monopoly-money/screenshot-2.png" alt="Transfering funds" /></a>
+    <a href="/posts/monopoly-money/screenshot-3.png"><img src="/posts/monopoly-money/screenshot-3.png" alt="Game history" /></a>
+    <a href="/posts/monopoly-money/screenshot-4.png"><img src="/posts/monopoly-money/screenshot-4.png" alt="Bankers actions page" /></a>
+    <a href="/posts/monopoly-money/screenshot-5.png"><img src="/posts/monopoly-money/screenshot-5.png" alt="Settings page" /></a>
+    <a href="/posts/monopoly-money/screenshot-6.png"><img src="/posts/monopoly-money/screenshot-6.png" alt="Funds page without game id" /></a>
+</div>
+
 ## Features
 
 - Multiple games can be hosted on the server at once
-- Each player uses their own device; everyone joins one game.
-- Send money between players quickly
+- Each player uses their own device; everyone joins one game
+- Send money between players with ease - no need to sort out change
+- Realtime - players get notified when an event occurs immediately.
 - The person that created the game is the banker. This person can:
-    - Give money to players from the bank (and take money)
-    - Give free parking to players
-    - Update player names
-    - Delete players
-    - Stop new people from joining the game
-    - End the game completely
+  - Give money to players from the bank (and take money)
+  - Give free parking to players
+  - Update player names
+  - Delete players
+  - Stop new people from joining the game
+  - End the game completely
 - History is recorded of each game event that can be viewed by all players
