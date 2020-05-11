@@ -10,8 +10,6 @@ description: "After helping many of people fix issues with auto-py-to-exe and Py
 ## Introduction
 A while ago I wrote an article on common issues when using [auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe). In this post, I aim to replace that post and explain more in greater depth.
 
-This is going to be long, but hopefully your question can be answered in here. I'll go over installing auto-py-to-exe, the content of the interface, how to use it, debugging and common issues that I see appear time and time again.
-
 Please do not feel offended if I have referred you to this page, it's just the case that many other people have asked the same question you are asking and you haven't been able to find the answers I or others have provided.
 
 ### A Small Disclaimer
@@ -45,6 +43,9 @@ There could be a situation when installing auto-py-to-exe that you are told you 
 Generally, the way to fix this would be to install the tools and run it again, but instead, you can get a pre-built version. To do this, go to gevents PyPI page and click "Download files" on the right to bring you to [the files that are on PyPI for this project](https://pypi.org/project/gevent/#files). You will want to find the file that matches your setup and is a .whl file, for example, I am using Python 3.7 on Windows so I would look for cp37 in the "Python version" column, Wheel in the "File type" column and then in the files that match these two criteria, match my OS - Windows. This means the file I will want is gevent-1.3.7-cp37-cp37m-win_amd64.whl (currently gevent is at 1.3.7).
 
 ## The Layout of the Interface and What Things Do
+
+<img src="https://nitratine.net/posts/auto-py-to-exe/empty-interface.png" alt="auto-py-to-exe empty interface" style="max-height: 400px;" />
+
 At the top of the interface, you are asked for the script location. This is the script you call to run your project, so if your project is one script, put that here, if your project is more than one script, put the script that starts it here. The inputs outline will become blue if the file exists, otherwise it will be red.
 
 Next, you need to choose between one-file and one-directory. These are relatively similar but when using one-file with extra files like images or data files you need to modify your script to account for path changes. The difference between these methods and people ignoring the extra step required generally result in the bulk of complaints I get.
@@ -62,11 +63,15 @@ If you're using one-file mode, you'll be provided a [link to stackoverflow](http
 
 Under this is the advanced tab which holds all PyInstallers extra flags as well as where to save the project and setting the maximum recursion depth. Here are a few flags/options that can help with things:
 
-- **Enable Recursion Limit**: If a RecursionError occurs, try using this to set the depth to 5000.
-- **-n**: The name of the output folder/executable
+- **--name**: The name of the output folder/executable
 - **--hidden-import**: If the executable says a module is missing, make sure you have it installed and add it here; you can separate multiple modules by a comma.
 - **--debug**: Set this to `all` to help make debugging a lot easier
-- **Extra Command Data**: If you want to manually add arguments, paste them in this input.
+
+The last tab is for auto-py-to-exe specific settings:
+
+- **Output Directory**: The directory that the output of the application is put into.
+- **Increase Recursion Limit**: If a RecursionError occurs, make sure this is enabled to set the depth to 5000.
+- **Manual Argument Input**: A simple input to manually add to the current command.
 
 The "Current Command" section tells you what would be called if you wanted to execute this in a terminal and the convert button is under this. After the conversion, you can clear the output or open the output folder where the executable/package was saved.
 
@@ -101,7 +106,7 @@ When everything is done and there are no more bugs in the modes you want, you ca
 These are some of the issues I have come across or others have asked me about and ways to fix them.
 
 #### Fatal Error: failed to execute <script.py>
-This means something has gone wrong as it's giving you a visual warning about it; this is not an error, it's a warning, the real error has been printed to stdout/stderr. If you open the executable using the terminal or something else that will preserve the console output, you will most likely see a Python error telling you what went wrong. Fixing this and repackaging is the solution to this issue.
+This means something has gone wrong as it's giving you a visual warning about it; this is not an error, it's a warning; the real error has been printed to stdout/stderr. If you open the executable using the terminal or something else that will preserve the console output, you will most likely see a Python error telling you what went wrong. Fixing this and repackaging is the solution to this issue.
 
 #### PermissionError: [Errno 13] Permission denied: ...
 This occurs because you are trying to modify files in a directory you do not have access to. A way to fix this is to run the script with admin privileges by opening cmd as admin and then running `auto-py-to-exe` one you have cd'ed to the directory you want the output to be in.
@@ -109,7 +114,7 @@ This occurs because you are trying to modify files in a directory you do not hav
 One reason this could occur is that you have opened cmd and am in System32. Make sure you do not accidentally modify files in this directory so make sure you are in a directory where you want to write files to when running `auto-py-to-exe`.
 
 #### RecursionError
-This error is now prevented by the application by default bu setting the recursion limit to 5000. If you want to disable this, there is an option in the Advanced tab to.
+This error is now prevented by the application by default by setting the recursion limit to 5000. If you want to disable this, there is an option in the *Settings* tab to.
 
 #### AttributeError: module 'enum' has no attribute 'IntFlag'
 Try executing `python -m pip uninstall enum34` to stop enum conflicts. This is also a fix for the similar issue "Fatal Python error: Py_Initialize: unable to load the file system codec".
@@ -143,6 +148,8 @@ If you double click to run your Python script, what happens? Does it open and cl
 
 You most likely think the output should stay visible because you are always using IDLE or an IDE and that's what those tools do. Add a statement like `input()` at the end of your script to block execution and wait for you to press enter before closing. 
 
+Alternatively, there may be an error occurring which means you need to follow the debugging steps above.
+
 ### 'python'/'pip'/'auto-py-to-exe' is not recognised as an internal or external command, operable program or batch file.
 This occurs because the path that these executables are located in is not on your path; thus cmd doesn't know where to look for them. You need to add these paths to the PATH environment variable so cmd knows where to look for the executable you are trying to execute.
 
@@ -174,7 +181,7 @@ This is your anti-virus vendors fault. Check out [this](https://github.com/pyins
 ### Lots of Warnings Appear in the Output
 These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after all, they are only warnings. These warnings typically match the format `WARNING: lib not found: api-ms-win-crt-<specific dll> dependency of <file>`.
 
-[Khajiit Haswares had mentioned in a comment](https://www.youtube.com/watch?v=lOIJIk_maO4&lc=UgyAMbxkJiMcMpRb92R4AaABAg) on the video related to this project that if you add `C:\Windows\System32\downlevel` to your PATH variable, these DLLS that were previously not being found can now be found. This is because the files missing are commonly found in this folder. Adding this folder to your path to now successfully locate these files can also speed up packaging times.
+A YouTube user comment on the video related to this project that if you add `C:\Windows\System32\downlevel` to your PATH variable, these DLLS that were previously not being found can now be found. This is because the files missing are commonly found in this folder. Adding this folder to your path to now successfully locate these files can also speed up packaging times.
 
 ### "VCRUNTIME140.dll" is either not designed to run on Windows or it contains an error
 Try selecting the `--noupx` button in the advanced tab.
@@ -258,6 +265,3 @@ def resource_path(relative_path):
 ```
 
 When referencing files using *relative references*, instead of using `open('folder/my-file.jpg')`, you will want to use `open(resource_path('folder/my-file.jpg'))`. This appends the relative path you provided to the current / extracted location to make an absolute file reference which is safe to use.
-
-## Basic Things To Remember
-- When using relative directories for file names, these are relative to the current working directory, not the location of the programs files. This is the same as when you use a Python script normally. So depending on where you run the executable from, relative files may end up in different places than beside the executable.
