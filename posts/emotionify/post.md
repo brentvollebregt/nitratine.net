@@ -19,14 +19,14 @@ Emotionfy is a web app that allows users to easily sort their playlists using Sp
 
 Users have the option to change what songs are sorted by and how they are sorted. It is also possible to select more than one playlist when sorting songs. Below is a visualisation of one of my playlists being sorted:
 
-![Example Visualisation Sort of a Personal Playlist](/posts/emotionify/emotionify-sort-comparison.png)
+![Example Sort Visualisation of a Personal Playlist](/posts/emotionify/emotionify-sort-comparison.png)
 
 ## Comparing Playlists
 By selecting any number of playlists, a user can compare them one or two dimensions for any audio feature or seven dimensions for specific audio features.
 
 This can help you identify similar playlists and see what is different about a playlist's tracks on average using audio features calculated by Spotify.
 
-![Example Visualisation Comparison of a Personal Playlists](/posts/emotionify/emotionify-compare-box-plot.png)
+![Example Comparison Visualisation of a Personal Playlists](/posts/emotionify/emotionify-compare-box-plot.png)
 
 ## Playlist Tools
 Select playlists and add filters in a sequence to create a more focused playlist.
