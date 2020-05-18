@@ -10,7 +10,7 @@ description: "This tutorial describes how to identify stored WiFi passwords in W
 A while ago I made a tutorial on [Getting WiFi Passwords With Python](/blog/post/get-wifi-passwords-with-python/) which provides a script that automates the following process. For those that don't want to install Python, this is how to identify stored WiFi passwords manually.
 
 ## Identifying the Target Profile
-First you need to identify the profile associated with the stored WiFi connection. To do this, open the command prompt and execute the following.
+First, you need to identify the profile associated with the stored WiFi connection. To do this, open the command prompt and execute the following.
 
 ```bash
 netsh wlan show profiles
