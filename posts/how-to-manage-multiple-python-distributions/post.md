@@ -1,5 +1,5 @@
 title: "How to Manage Multiple Python Distributions"
-date: 2020-05-19
+date: 2020-05-20
 category: Tutorials
 tags: [python]
 feature: feature.png
@@ -10,7 +10,7 @@ description: "Having multiple distributions of Python installed and not managing
 ## The Issue / Potential Confusion
 Quite often, I get comments from people telling me that a module doesn't work, that they have installed the library/module:
 
-```cmd
+```bash
 pip install xyz
 ```
 
@@ -35,7 +35,7 @@ Aside from the situation outlined above, there are better methods of proving tha
 
 For example, to identify what executable is executed when I execute `python`, I would execute:
 
-```cmd
+```bash
 where python
 ```
 
@@ -49,7 +49,7 @@ C:\Python37\python.exe
 
 To find the location of pip, I would then execute:
 
-```cmd
+```bash
 where pip
 ``` 
 
@@ -86,7 +86,7 @@ The terminal has found these by searching the PATH environment variable. The PAT
 
 To look at your PATH environment variable, execute:
 
-```cmd
+```bash
 echo %PATH%
 ```
 
@@ -118,7 +118,7 @@ There are many tutorials on setting up virtual environments in Python and there 
 #### Setting Up The Virtual Environment
 To set up a virtual environment, open a terminal and execute the following:
 
-```cmd
+```bash
 python -m venv venv_folder
 ``` 
 
@@ -129,7 +129,7 @@ Before activating the virtual environment, executing `python` and `pip` will sti
 
 While beside the `venv_folder` folder (or whatever you named it) in cmd, execute:
 
-```cmd
+```bash
 venv_folder/Scripts/activate
 ```
 
@@ -140,7 +140,7 @@ Now when you execute `where python` and `where pip`, you will see that executabl
 #### Deactivating The Virtual Environment
 To deactivate the virtual environment, go back to the same folder in cmd beside `venv_folder` and execute:
 
-```cmd
+```bash
 venv_folder/Scripts/deactivate
 ```
 
