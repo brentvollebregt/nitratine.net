@@ -170,3 +170,5 @@ This will print out two paths; one which is the root folder for the Python distr
 Following my tutorial on [How To Setup Python's PIP](/blog/post/how-to-setup-pythons-pip/), add these two paths to the *beginning/top* of the PATH environment variable.
 
 Now when you execute `where python` and `where pip`, `python.exe` and `pip.exe` should be found in these two folders you added first.
+
+> When making these changes to the PATH environment variable, you can also identify folders from other Python distribution that you don't actively use and remove them from the PATH environment variable. Then to use these other distributions of Python, absolutely reference the executable in cmd, e.g. `C:/my/second/python/distribution/python.exe`.
