@@ -1,10 +1,11 @@
 import React from "react";
 import Base from "../../components/Base";
+import Blog from "../../components/Blog";
 
-const Blog = ({}) => (
+const BlogFeed = ({}) => (
   <Base>
-    <div>Blog</div>
+    <Blog />
   </Base>
 );
 
-export default Blog;
+export default BlogFeed;

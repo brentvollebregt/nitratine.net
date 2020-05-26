@@ -1,6 +1,5 @@
 import React from "react";
 import { graphql } from "gatsby";
-import PropTypes from "prop-types";
 import Base from "../components/Base";
 
 interface IAboutPageTemplate {
@@ -76,10 +75,6 @@ const AboutPage = ({ data }) => {
   );
 };
 
-AboutPage.propTypes = {
-  data: PropTypes.object.isRequired
-};
-
 export default AboutPage;
 
 export const aboutPageQuery = graphql`
@@ -98,16 +93,3 @@ export const aboutPageQuery = graphql`
     }
   }
 `;
-// export const aboutPageQuery = graphql`
-//   query AboutPage($id: String!) {
-//     markdownRemark(id: { eq: $id }) {
-//       html
-//       frontmatter {
-//         experience {
-//           title
-//         }
-//         email
-//       }
-//     }
-//   }
-// `;

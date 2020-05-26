@@ -23,7 +23,6 @@
     "lodash-webpack-plugin": "^0.11.4",
     "netlify-cms-app": "^2.9.6",
     "node-sass": "^4.14.0",
-    "prop-types": "^15.6.0",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.8.4",
