@@ -12,6 +12,7 @@
     "gatsby-plugin-react-helmet": "^3.2.5",
     "gatsby-plugin-sass": "^2.2.4",
     "gatsby-plugin-sharp": "^2.5.7",
+    "gatsby-plugin-typescript": "^2.4.3",
     "gatsby-remark-copy-linked-files": "^2.2.4",
     "gatsby-remark-images": "^3.2.6",
     "gatsby-remark-relative-images": "^0.3.0",
@@ -27,6 +28,7 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.8.4",
     "react-helmet": "^6.0.0",
+    "react-markdown": "^4.3.1",
     "uuid": "^7.0.0"
   },
   "keywords": [
@@ -44,6 +46,7 @@
     "netlify-cms-proxy-server": "netlify-cms-proxy-server"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.0.0",
     "netlify-cms-proxy-server": "^1.2.7",
     "prettier": "^2.0.5"
   }
