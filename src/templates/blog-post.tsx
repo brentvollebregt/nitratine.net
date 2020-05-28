@@ -1,25 +1,54 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Base from "../components/Base";
+import BlogBase from "../components/Blog/BlogBase";
 
-export const BlogPostTemplate = ({ id, html, date, description, title, tags }) => {
-  return <div>Blog Post Template</div>;
+interface IBlogPostTemplate {
+  title: string;
+  date: Date;
+  category: string;
+  tags: string[];
+  description: string;
+  body: React.FC;
+}
+
+export const BlogPostTemplate: React.FC<IBlogPostTemplate> = ({
+  title,
+  date,
+  category,
+  tags,
+  description,
+  body
+}) => {
+  return (
+    <div>
+      <h1>Blog Post Template</h1>
+      <p>TODO: Title section</p>
+      <p>TODO: GitHub link</p>
+      <p>TODO: Post</p>
+      <p>TODO: Previous / next</p>
+      <p>TODO: Comments</p>
+    </div>
+  );
 };
 
 const BlogPost = ({ data }) => {
-  const { id, html } = data.markdownRemark;
-  const { date, title, description, tags } = data.markdownRemark.frontmatter;
+  const { title, date, category, tags, description } = data.markdownRemark.frontmatter;
+
+  const body = () => <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />;
 
   return (
     <Base>
-      <BlogPostTemplate
-        id={id}
-        html={html}
-        date={date}
-        description={description}
-        title={title}
-        tags={tags}
-      />
+      <BlogBase>
+        <BlogPostTemplate
+          title={title}
+          date={date}
+          category={category}
+          tags={tags}
+          description={description}
+          body={body}
+        />
+      </BlogBase>
     </Base>
   );
 };
@@ -32,10 +61,11 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         title
-        description
+        date
+        category
         tags
+        description
       }
     }
   }
