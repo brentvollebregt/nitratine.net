@@ -11,6 +11,8 @@ const PostPreview = ({ entry }) => {
       category={data.category}
       tags={data.tags}
       description={data.description}
+      hidden={data.hidden}
+      githubRepository={data.githubRepository}
       body={() => <ReactMarkdown source={data.body} />}
     />
   );

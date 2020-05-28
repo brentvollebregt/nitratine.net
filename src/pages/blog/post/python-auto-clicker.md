@@ -5,7 +5,9 @@ date: 2018-02-09T00:00:00.000+13:00
 category: YouTube
 tags: [python, mouse, pynput]
 featured: false
-image:
+hidden: false
+githubRepository: null
+image: null
 description: "This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys."
 ---
 

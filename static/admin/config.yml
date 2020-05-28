@@ -25,6 +25,8 @@ collections:
       - { label: "Category", name: "category", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list" }
       - { label: "Featured Post", name: "featured", widget: "boolean" }
+      - { label: "Hidden", name: "hidden", widget: boolean }
+      - { label: "GitHub Repository", name: "githubRepository", widget: string }
       - { label: "Featured Image", name: "image", widget: image }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Description", name: "description", widget: "text" }
