@@ -1,5 +1,6 @@
 {
   "configKey": "sidebar",
+  "about": "Owner of [PyTutorials](https://www.youtube.com/PyTutorials) and creator of\r [auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe). I enjoy\r making quick tutorials for people new to particular topics in Python and tools that help\r fix small things.",
   "categoryPrefixes": [
     {
       "category": "Tutorials",
@@ -11,5 +12,26 @@
     }
   ],
   "recentVideos": [],
-  "featuredSites": []
+  "featuredSites": [
+    {
+      "imageSrc": "/img/featured-site-emotionify.png",
+      "title": "Emotionify",
+      "href": "https://emotionify.nitratine.net/"
+    },
+    {
+      "title": "Spotify Lyrics Viewer",
+      "href": "https://spotify-lyrics-viewer.nitratine.net/",
+      "imageSrc": "/img/featured-site-spotify-lyrics-viewer.png"
+    },
+    {
+      "title": "Hit Counter",
+      "href": "https://hitcounter.pythonanywhere.com/",
+      "imageSrc": "/img/featured-site-hit-counter.png"
+    },
+    {
+      "title": "Monopoly Money",
+      "href": "https://monopoly-money.nitratine.net/",
+      "imageSrc": "/img/featured-site-monopoly-money.png"
+    }
+  ]
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
+import ReactMarkdown from "react-markdown";
 import sideBarConfig from "../../../config/sidebar.json";
 import "./SideBar.scss";
 
@@ -43,6 +44,7 @@ const SideBar: React.FC = () => {
     x => x.node.frontmatter.category
   );
 
+  const about: string = sideBarConfig["about"];
   const categories: ICategories[] = categoryOccurrences
     .reduce((acc, category) => {
       const existing = acc.find(c => c.name === category);
@@ -69,14 +71,9 @@ const SideBar: React.FC = () => {
 
   return (
     <aside className="col-blog-sidebar blog-sidebar">
-      <div className="card p-3 mb-3 bg-light">
+      <div className="card p-3 mb-3 bg-light about">
         <h4 className="text-center text-lg-left">About</h4>
-        <p className="mb-0">
-          Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of
-          <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy
-          making quick tutorials for people new to particular topics in Python and tools that help
-          fix small things.
-        </p>
+        <ReactMarkdown source={about} />
       </div>
 
       <div className="input-group mb-3">
@@ -98,7 +95,7 @@ const SideBar: React.FC = () => {
         <h4 className="text-center text-lg-left">Categories</h4>
         <ol className="list-unstyled mb-0 text-center text-lg-left">
           {categories.map(({ name, postCount }) => (
-            <li>
+            <li key={name}>
               <a href={`/blog/categories/#${name}`}>
                 {getCategoryPrefix(name)} {name}
                 <span className="badge badge-primary ml-3">{postCount}</span>
@@ -135,7 +132,7 @@ const SideBar: React.FC = () => {
         <div className="featured-sites">
           {featuredSites.map(({ title, imageSrc, href }) => (
             <a title={title} href={href}>
-              <img src={imageSrc} />
+              <img src={imageSrc} className="mw-100" />
             </a>
           ))}
         </div>

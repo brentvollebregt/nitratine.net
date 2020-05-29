@@ -1,3 +1,32 @@
-.blog-sidebar > div {
-  overflow: hidden;
+.blog-sidebar {
+  & > div {
+    overflow: hidden;
+  }
+
+  .about {
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Featured Sites */
+
+  .featured-sites {
+    a {
+      padding: 7px;
+      transition: background 0.4s;
+      border-radius: 7px;
+      display: block;
+      text-align: center;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 30px;
+      }
+    }
+  }
 }

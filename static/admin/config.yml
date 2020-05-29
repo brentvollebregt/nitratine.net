@@ -90,6 +90,7 @@ collections:
         name: "sidebar"
         fields:
           - { label: "Config Key", name: "configKey", widget: "hidden", default: "sidebar" }
+          - { label: "About", name: "about", widget: "markdown" }
           - {
               label: Category Prefixes,
               name: categoryPrefixes,
