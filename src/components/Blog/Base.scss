@@ -22,3 +22,55 @@
     max-width: 28%;
   }
 }
+
+// GitHub Styled Tables
+
+table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  margin-top: 0;
+  margin-bottom: 16px;
+
+  th {
+    font-weight: 600;
+  }
+
+  th,
+  td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+
+  tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+  }
+
+  tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+
+  img {
+    background-color: initial;
+  }
+}
+
+// Allow headers to wrap
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  word-break: break-word;
+}
+
+// Blockquotes ( > )
+
+blockquote {
+  border-left: 0.25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
+}

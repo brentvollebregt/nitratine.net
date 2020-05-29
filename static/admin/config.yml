@@ -81,3 +81,43 @@ collections:
                   { label: Image, name: img, widget: image },
                 ],
             }
+
+  - name: "config"
+    label: "Config"
+    files:
+      - file: "src/config/sidebar.json"
+        label: "SideBar"
+        name: "sidebar"
+        fields:
+          - { label: "Config Key", name: "configKey", widget: "hidden", default: "sidebar" }
+          - {
+              label: Category Prefixes,
+              name: categoryPrefixes,
+              widget: list,
+              fields:
+                [
+                  { label: Category, name: category, widget: string },
+                  { label: Prefix, name: prefix, widget: string },
+                ],
+            }
+          - {
+              label: Recent Videos,
+              name: recentVideos,
+              widget: list,
+              fields:
+                [
+                  { label: Thumbnail Source (YouTube), name: thumbnailSrc, widget: string },
+                  { label: Link, name: href, widget: string },
+                ],
+            }
+          - {
+              label: Featured Sites,
+              name: featuredSites,
+              widget: list,
+              fields:
+                [
+                  { label: Title, name: title, widget: string },
+                  { label: Image, name: imageSrc, widget: image },
+                  { label: Link, name: href, widget: string },
+                ],
+            }

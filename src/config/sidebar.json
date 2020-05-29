@@ -1,0 +1,15 @@
+{
+  "configKey": "sidebar",
+  "categoryPrefixes": [
+    {
+      "category": "Tutorials",
+      "prefix": "📖"
+    },
+    {
+      "category": "YouTube",
+      "prefix": "🎥"
+    }
+  ],
+  "recentVideos": [],
+  "featuredSites": []
+}

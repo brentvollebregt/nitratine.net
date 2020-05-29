@@ -1,10 +1,16 @@
 import React from "react";
-
-// TODO Break into smaller components
+import { useStaticQuery, graphql } from "gatsby";
+import sideBarConfig from "../../../config/sidebar.json";
+import "./SideBar.scss";
 
 interface ICategories {
   name: string;
   postCount: number;
+}
+
+interface ICategoryPrefix {
+  category: string;
+  prefix: number;
 }
 
 interface IRecentVideos {
@@ -19,9 +25,47 @@ interface IFeaturedSites {
 }
 
 const SideBar: React.FC = () => {
-  const categories: ICategories[] = [];
-  const recentVideos: IRecentVideos[] = [];
-  const featuredSites: IFeaturedSites[] = [];
+  const { allMarkdownRemark } = useStaticQuery(graphql`
+    query HeaderQuery {
+      allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "blog-post" } } }) {
+        edges {
+          node {
+            frontmatter {
+              category
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const categoryOccurrences: string[] = allMarkdownRemark.edges.map(
+    x => x.node.frontmatter.category
+  );
+
+  const categories: ICategories[] = categoryOccurrences
+    .reduce((acc, category) => {
+      const existing = acc.find(c => c.name === category);
+      return [
+        ...acc.filter(c => c.name !== category),
+        existing !== undefined
+          ? {
+              name: category,
+              postCount: existing.postCount + 1
+            }
+          : {
+              name: category,
+              postCount: 1
+            }
+      ];
+    }, [] as ICategories[])
+    .sort();
+  const categoryPrefixes: ICategoryPrefix[] = sideBarConfig["categoryPrefixes"];
+  const recentVideos: IRecentVideos[] = sideBarConfig["recentVideos"];
+  const featuredSites: IFeaturedSites[] = sideBarConfig["featuredSites"];
+
+  const getCategoryPrefix = (category: string) =>
+    categoryPrefixes.find(c => c.category === category)?.prefix ?? "";
 
   return (
     <aside className="col-blog-sidebar blog-sidebar">
@@ -56,7 +100,7 @@ const SideBar: React.FC = () => {
           {categories.map(({ name, postCount }) => (
             <li>
               <a href={`/blog/categories/#${name}`}>
-                {name}
+                {getCategoryPrefix(name)} {name}
                 <span className="badge badge-primary ml-3">{postCount}</span>
               </a>
             </li>
