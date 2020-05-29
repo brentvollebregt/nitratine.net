@@ -15,18 +15,26 @@ export const BlogFeedPageTemplate: React.FC<IBlogFeedPageTemplate> = ({ posts, p
   return <Feed posts={posts} pagination={pagination} />;
 };
 
-const BlogPost = ({ data }) => {
-  // const { id, html } = data.markdownRemark;
-  // const { title, date, category, tags, description } = data.markdownRemark.frontmatter;
+const BlogPost = ({ data, pageContext }) => {
+  const rawPosts = data.allMarkdownRemark.edges;
 
-  const posts: IPostTile[] = [];
+  const posts: IPostTile[] = rawPosts.map(p => ({
+    title: p.node.frontmatter.title,
+    href: p.node.fields.slug,
+    date: new Date(p.node.frontmatter.date),
+    category: p.node.frontmatter.category,
+    tags: p.node.frontmatter.tags,
+    description: p.node.frontmatter.description,
+    thumbnailSrc: p.node.frontmatter.image.publicURL
+  }));
+
   const pagination: IPagination = {
-    previous: undefined,
-    current: 1,
-    next: undefined,
-    visiblePages: [1],
-    getPageRoute: (page: number) => (page === 1 ? `/blog` : `/blog/page${page}`)
+    current: pageContext.currentPage,
+    pageCount: pageContext.numPages,
+    getPageRoute: (page: number) => (page === 1 ? `/blog` : `/blog/page/${page}`)
   };
+
+  console.log("pageContext", pageContext);
 
   return (
     <Base>
@@ -40,16 +48,29 @@ const BlogPost = ({ data }) => {
 export default BlogPost;
 
 export const pageQuery = graphql`
-  query BlogFeed($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      id
-      html
-      frontmatter {
-        title
-        date
-        category
-        tags
-        description
+  query BlogFeed($skip: Int!, $limit: Int!) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { templateKey: { eq: "blog-post" }, hidden: { eq: false } } }
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            date
+            category
+            tags
+            description
+            image {
+              publicURL
+            }
+          }
+        }
       }
     }
   }

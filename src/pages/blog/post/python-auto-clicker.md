@@ -7,7 +7,7 @@ tags: [python, mouse, pynput]
 featured: false
 hidden: false
 githubRepository: null
-image: null
+image: /img/python-auto-clicker-feature.jpg
 description: "This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys."
 ---
 

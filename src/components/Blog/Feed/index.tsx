@@ -11,7 +11,7 @@ const Feed: React.FC<IFeed> = ({ posts, pagination }) => (
   <div>
     <h1>Nitratine Blog Feed</h1>
     {posts.map(post => (
-      <PostTile {...post} />
+      <PostTile {...post} key={post.href} />
     ))}
     <Pagination {...pagination} />
   </div>

@@ -122,7 +122,11 @@ const SideBar: React.FC = () => {
         <h4 className="text-center text-lg-left">Recent Videos</h4>
         <div id="recent-yt-videos" className="yt_video_container">
           {recentVideos.map(({ thumbnailSrc, href }) => (
-            <img src={thumbnailSrc} onClick={() => window.open(href, "_blank")} />
+            <img
+              key={thumbnailSrc}
+              src={thumbnailSrc}
+              onClick={() => window.open(href, "_blank")}
+            />
           ))}
         </div>
       </div>
@@ -131,7 +135,7 @@ const SideBar: React.FC = () => {
         <h4 className="text-center text-lg-left">Featured Sites</h4>
         <div className="featured-sites">
           {featuredSites.map(({ title, imageSrc, href }) => (
-            <a title={title} href={href}>
+            <a key={title} title={title} href={href}>
               <img src={imageSrc} className="mw-100" />
             </a>
           ))}

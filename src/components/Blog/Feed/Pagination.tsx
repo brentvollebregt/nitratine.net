@@ -1,26 +1,37 @@
 import React from "react";
 
+const PAGINATION_EITHER_SIDE = 2; // TODO MOVE
+
+const getViewablePages = (current: number, pageCount: number) => {
+  const minimum = 1;
+  let length = 1 + PAGINATION_EITHER_SIDE * 2;
+  if (length > pageCount) {
+    length = pageCount;
+  }
+  let start = current - Math.floor(length / 2);
+  start = Math.max(start, minimum);
+  start = Math.min(start, minimum + pageCount - length);
+  return Array.from({ length }, (_, i) => i + start);
+};
+
 export interface IPagination {
   current: number;
-  previous: number | undefined;
-  next: number | undefined;
-  visiblePages: number[];
+  pageCount: number;
   getPageRoute: (page: number) => string; // TODO Account for 1 => home
 }
 
-const Pagination: React.FC<IPagination> = ({
-  current,
-  previous,
-  next,
-  visiblePages,
-  getPageRoute
-}) => {
+const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute }) => {
+  const isPreviousPage = current !== 1;
+  const isNextPage = current < pageCount;
+
+  const viewablePages = getViewablePages(current, pageCount);
+
   return (
     <nav className="blog-pagination text-center mb-5 mt-4">
       <ul className="pagination justify-content-center">
-        <li className={`page-item ${previous !== undefined ? "disabled" : ""}`}>
-          {previous !== undefined ? (
-            <a className="page-link" href={getPageRoute(previous)}>
+        <li className={`page-item ${isPreviousPage ? "" : "disabled"}`}>
+          {isPreviousPage ? (
+            <a className="page-link" href={getPageRoute(current - 1)}>
               Previous
             </a>
           ) : (
@@ -30,7 +41,7 @@ const Pagination: React.FC<IPagination> = ({
           )}
         </li>
 
-        {visiblePages.map(page =>
+        {viewablePages.map(page =>
           page === current ? (
             <li className="page-item active">
               <a className="page-link" href="">
@@ -46,9 +57,9 @@ const Pagination: React.FC<IPagination> = ({
           )
         )}
 
-        <li className={`page-item ${previous !== undefined ? "disabled" : ""}`}>
-          {next !== undefined ? (
-            <a className="page-link" href={getPageRoute(previous)}>
+        <li className={`page-item ${isNextPage ? "" : "disabled"}`}>
+          {isNextPage ? (
+            <a className="page-link" href={getPageRoute(current + 1)}>
               Next
             </a>
           ) : (
