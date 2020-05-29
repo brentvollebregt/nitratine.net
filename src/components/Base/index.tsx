@@ -6,8 +6,7 @@ const Base = ({ children }) => {
   return (
     <>
       <Navigation />
-
-      <main role="main" className="container">
+      <main role="main" className="container mt-4">
         {children}
       </main>
     </>

@@ -1,0 +1,28 @@
+.blog-post-header {
+  .post-hits {
+    height: 18px;
+    margin-top: -2px;
+  }
+
+  .github-summary {
+    transform: translate(
+      0
+    ); /* Need to put this here as the bootstrap stretched-link class will expand too far out */
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .repo-name {
+      display: inline-flex;
+      align-items: center;
+
+      img {
+        max-height: 20px;
+        max-width: 20px;
+      }
+    }
+  }
+}

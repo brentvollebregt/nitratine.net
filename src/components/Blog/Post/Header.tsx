@@ -1,4 +1,6 @@
 import React from "react";
+import GitHubLogoImage from "../../../img/github-icon.svg";
+import "./Header.scss";
 
 interface IHeader {
   title: string;
@@ -20,17 +22,17 @@ const Header: React.FC<IHeader> = ({
   description
 }) => {
   return (
-    <>
+    <div className="blog-post-header">
       <h1 className="blog-post-title">{title}</h1>
       <div className="mb-3">
         <a href={`/blog/archive/${date.getFullYear()}`} className="text-muted">
-          {date.toISOString()}
+          {date.getDay()} {date.toLocaleString("default", { month: "short" })} {date.getFullYear()}
         </a>
-        <a href={`/blog/categories/${category}`} className="badge badge-primary ml-2">
+        <a href={`/blog/categories/${category}`} className="badge badge-primary ml-2 mr-1">
           {category}
         </a>
         {tags.map(tag => (
-          <a href={`/blog/tags/${tag}`} className="badge badge-warning" key={tag}>
+          <a href={`/blog/tags/${tag}`} className="badge badge-warning mr-1" key={tag}>
             {tag}
           </a>
         ))}
@@ -47,8 +49,8 @@ const Header: React.FC<IHeader> = ({
       {githubRepository !== null && (
         <>
           <div className="github-summary py-3 d-block text-center">
-            <a className="repo-name stretched-link" href="{{ github_repo.html_url }}">
-              <img src="/assets/img/github-icon.png" alt="GitHub Icon" />
+            <a className="repo-name stretched-link" href={`https://github.com/${githubRepository}`}>
+              <img src={(GitHubLogoImage as unknown) as string} alt="GitHub Icon" />
               <span className="ml-2">{githubRepository}</span>
             </a>
 
@@ -56,10 +58,12 @@ const Header: React.FC<IHeader> = ({
               <img
                 alt="GitHub stars"
                 src={`https://img.shields.io/github/stars/${githubRepository}?style=social`}
+                className="mr-1"
               />
               <img
                 alt="GitHub forks"
                 src={`https://img.shields.io/github/forks/${githubRepository}?style=social`}
+                className="mr-1"
               />
               <img
                 alt="GitHub top language"
@@ -70,7 +74,7 @@ const Header: React.FC<IHeader> = ({
           <hr className="my-0" />
         </>
       )}
-    </>
+    </div>
   );
 };
 

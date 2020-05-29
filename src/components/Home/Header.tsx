@@ -2,9 +2,9 @@ import React from "react";
 import { Button } from "react-bootstrap";
 
 const Header = ({ image, leadText, buttons }) => (
-  <section className="jumbotron jumbotron-fluid text-center header">
+  <section className="jumbotron jumbotron-fluid text-center" style={{ background: "transparent" }}>
     <h1 className="sr-only">Nitratine</h1>
-    <img src={image} className="img-fluid mb-2" />
+    <img src={image} className="img-fluid mb-2" style={{ maxHeight: 150 }} />
     <p className="lead text-muted">{leadText}</p>
     <p>
       {buttons.map(({ text, link, type }) => (

@@ -1,1 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
+
+// Links that are too long can be broken
+a {
+  word-break: break-word;
+}
+
+// Yellow background selection
+*::selection {
+  background: #ded28f;
+  color: black;
+}

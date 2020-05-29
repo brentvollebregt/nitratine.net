@@ -37,6 +37,7 @@ experience:
   - title: Haskell
     img: /img/icons/haskell.svg
 ---
+# About Me
 
 My name is [Brent](https://github.com/brentvollebregt) and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.
 
