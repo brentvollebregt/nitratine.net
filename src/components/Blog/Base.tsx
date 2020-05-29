@@ -1,16 +1,16 @@
 import React from "react";
 import SideBar from "./SideBar";
-import "./BlogBase.scss";
+import "./Base.scss";
 
-interface IBlog {
+interface IBase {
   children: React.ReactNode;
 }
 
-const Blog: React.FC<IBlog> = ({ children }) => (
+const Base: React.FC<IBase> = ({ children }) => (
   <div className="row">
     <div className="col-blog-content blog-main">{children}</div>
     <SideBar />
   </div>
 );
 
-export default Blog;
+export default Base;

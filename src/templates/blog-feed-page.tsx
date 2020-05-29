@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Base from "../components/Base";
-import BlogBase from "../components/Blog/BlogBase";
+import BlogBase from "../components/Blog/Base";
 import { IPostTile } from "../components/Blog/Feed/PostTile";
 import { IPagination } from "../components/Blog/Feed/Pagination";
 import Feed from "../components/Blog/Feed";
