@@ -1,4 +1,5 @@
 import React from "react";
+import { formatDate } from "../../utils";
 import GitHubLogoImage from "../../../img/github-icon.svg";
 import "./Header.scss";
 
@@ -26,7 +27,7 @@ const Header: React.FC<IHeader> = ({
       <h1 className="blog-post-title">{title}</h1>
       <div className="mb-3">
         <a href={`/blog/archive/${date.getFullYear()}`} className="text-muted">
-          {date.getDay()} {date.toLocaleString("default", { month: "short" })} {date.getFullYear()}
+          {formatDate(date)}
         </a>
         <a href={`/blog/categories/${category}`} className="badge badge-primary ml-2 mr-1">
           {category}

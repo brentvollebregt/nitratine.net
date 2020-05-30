@@ -1,4 +1,6 @@
 import React from "react";
+import { formatDate } from "../../utils";
+import "./PostTile.scss";
 
 export interface IPostTile {
   title: string;
@@ -32,13 +34,13 @@ const PostTile: React.FC<IPostTile> = ({
         </h3>
         <div className="mb-1">
           <a href={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
-            {date.toISOString()}
+            {formatDate(date)}
           </a>
-          <a href={`/blog/categories/#${category}`} className="badge badge-primary ml-2">
+          <a href={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
             {category}
           </a>
           {tags.map(tag => (
-            <a href={`/blog/tags/#${tag}`} className="badge badge-warning">
+            <a href={`/blog/tags/#${tag}`} className="badge badge-warning mr-1">
               {tag}
             </a>
           ))}
