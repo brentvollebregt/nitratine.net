@@ -1,14 +1,19 @@
 ---
 templateKey: blog-post
-title: "How to Hash Files in Python"
-date: 2019-05-07T00:00:00.000+12:00
+title: How to Hash Files in Python
+date: 2019-05-06T12:00:00.000Z
 category: Tutorials
-tags: [python, hashing, cyber-security]
+tags:
+  - python
+  - hashing
+  - cyber-security
 featured: false
 hidden: false
-githubRepository: "brentvollebregt/auto-py-to-exe"
-image: /img/how-to-hash-files-in-python-feature.png
-description: "Hashing files allows us to generate a string/byte sequence that can help identify a file. This can then be used by comparing the hashes of two or more files to see if these files are the same as well as other applications."
+githubRepository: brentvollebregt/auto-py-to-exe
+image: feature.png
+description: Hashing files allows us to generate a string/byte sequence that can
+  help identify a file. This can then be used by comparing the hashes of two or
+  more files to see if these files are the same as well as other applications.
 ---
 
 [TOC]

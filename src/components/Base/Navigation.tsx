@@ -30,7 +30,7 @@ const Navigation = () => (
     <Container>
       <Navbar.Brand>
         <img
-          src="/img/logo.png"
+          src="/assets/logo.png"
           height="30"
           className="d-inline-block align-top"
           alt="Nitratine Logo"

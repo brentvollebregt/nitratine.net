@@ -1,6 +1,6 @@
 ---
 templateKey: home-page
-image: /img/logo.png
+image: /assets/logo.png
 leadText: "A place where I share projects developed by me and tutorials on topics that I'm interested in."
 buttons:
   - text: "Visit Blog"

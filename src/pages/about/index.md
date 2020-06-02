@@ -3,40 +3,41 @@ templateKey: about-page
 email: test@nitratine.net
 experience:
   - title: Python
-    img: /img/icons/python.svg
+    img: /assets/icons/python.svg
   - title: JavaScript
-    img: /img/icons/javascript.svg
+    img: /assets/icons/javascript.svg
   - title: React
-    img: /img/icons/react.svg
+    img: /assets/icons/react.svg
   - title: TypeScript
-    img: /img/icons/typescript.svg
+    img: /assets/icons/typescript.svg
   - title: Java
-    img: /img/icons/java.svg
+    img: /assets/icons/java.svg
   - title: Clojure
-    img: /img/icons/clojure.svg
+    img: /assets/icons/clojure.svg
   - title: HTML
-    img: /img/icons/html.svg
+    img: /assets/icons/html.svg
   - title: CSS
-    img: /img/icons/css.svg
+    img: /assets/icons/css.svg
   - title: SQLite
-    img: /img/icons/sqlite.svg
+    img: /assets/icons/sqlite.svg
   - title: Android SDK
-    img: /img/icons/android.svg
+    img: /assets/icons/android.svg
   - title: Flask
-    img: /img/icons/flask.svg
+    img: /assets/icons/flask.svg
   - title: Git
-    img: /img/icons/git.svg
+    img: /assets/icons/git.svg
   - title: JetBrains
-    img: /img/icons/jetbrains.svg
+    img: /assets/icons/jetbrains.svg
   - title: Linux
-    img: /img/icons/linux.svg
+    img: /assets/icons/linux.svg
   - title: Adobe PhotoShop
-    img: /img/icons/photoshop.svg
+    img: /assets/icons/photoshop.svg
   - title: C#
-    img: /img/icons/csharp.svg
+    img: /assets/icons/csharp.svg
   - title: Haskell
-    img: /img/icons/haskell.svg
+    img: /assets/icons/haskell.svg
 ---
+
 # About Me
 
 My name is [Brent](https://github.com/brentvollebregt) and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.

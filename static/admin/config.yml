@@ -9,15 +9,17 @@ backend:
     uploadMedia: "[skip ci] Upload '{{path}}'"
     deleteMedia: "[skip ci] Delete '{{path}}'"
 
-media_folder: static/img
-public_folder: /img
+media_folder_relative: true
+media_folder: static/assets
+public_folder: /assets
 
 collections:
   - name: "post"
     label: "Blog"
     folder: "src/pages/blog/post"
     create: true
-    slug: "{{slug}}"
+    slug: "index"
+    path: "{{title}}/{{slug}}"
     fields:
       - { label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post" }
       - { label: "Title", name: "title", widget: "string" }
@@ -26,10 +28,10 @@ collections:
       - { label: "Tags", name: "tags", widget: "list" }
       - { label: "Featured Post", name: "featured", widget: "boolean" }
       - { label: "Hidden", name: "hidden", widget: boolean }
-      - { label: "GitHub Repository", name: "githubRepository", widget: string }
+      - { label: "GitHub Repository", name: "githubRepository", widget: string, required: false }
       - { label: "Featured Image", name: "image", widget: image }
-      - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Description", name: "description", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "pages"
     label: "Pages"

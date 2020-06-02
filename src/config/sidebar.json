@@ -14,24 +14,24 @@
   "recentVideos": [],
   "featuredSites": [
     {
-      "imageSrc": "/img/featured-site-emotionify.png",
+      "imageSrc": "/assets/featured-site-emotionify.png",
       "title": "Emotionify",
       "href": "https://emotionify.nitratine.net/"
     },
     {
       "title": "Spotify Lyrics Viewer",
       "href": "https://spotify-lyrics-viewer.nitratine.net/",
-      "imageSrc": "/img/featured-site-spotify-lyrics-viewer.png"
+      "imageSrc": "/assets/featured-site-spotify-lyrics-viewer.png"
     },
     {
       "title": "Hit Counter",
       "href": "https://hitcounter.pythonanywhere.com/",
-      "imageSrc": "/img/featured-site-hit-counter.png"
+      "imageSrc": "/assets/featured-site-hit-counter.png"
     },
     {
       "title": "Monopoly Money",
       "href": "https://monopoly-money.nitratine.net/",
-      "imageSrc": "/img/featured-site-monopoly-money.png"
+      "imageSrc": "/assets/featured-site-monopoly-money.png"
     }
   ]
 }
