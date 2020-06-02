@@ -10,7 +10,7 @@ tags:
 featured: false
 hidden: false
 githubRepository: brentvollebregt/auto-py-to-exe
-image: feature.png
+image: feature.png # Same as: /pages/blog/post/how-to-hash-files-in-python/feature.png
 description: Hashing files allows us to generate a string/byte sequence that can
   help identify a file. This can then be used by comparing the hashes of two or
   more files to see if these files are the same as well as other applications.

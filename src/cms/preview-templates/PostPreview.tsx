@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 
 const PostPreview = ({ entry }) => {
   const data = entry.get("data").toJS();
-  console.log("data", data);
   return (
     <BlogPostTemplate
       title={data.title || ""}
