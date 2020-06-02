@@ -9,6 +9,9 @@ backend:
     uploadMedia: "[skip ci] Upload '{{path}}'"
     deleteMedia: "[skip ci] Delete '{{path}}'"
 
+site_url: "https://nitratine.net"
+display_url: "https://nitratine.net"
+
 media_folder_relative: true
 media_folder: static/assets
 public_folder: /assets

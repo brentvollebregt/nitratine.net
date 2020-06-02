@@ -15,6 +15,11 @@ description: "This is a script that allows you to click your mouse repeatedly wi
 
 {% with video_id="eamTeszpeZ4" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
+```js
+const a = 5;
+console.log(a);
+```
+
 ## What is this?
 
 This project uses the cross-platform module pynput to control the mouse and monitor the keyboard at the same time to create a simple auto clicker.
