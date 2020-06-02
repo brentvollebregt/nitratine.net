@@ -1,10 +1,13 @@
 import React from "react";
+import { useSiteMetadata } from "../../../hooks/useSiteMetadata";
 
-const PAGINATION_EITHER_SIDE = 2; // TODO MOVE
-
-const getViewablePages = (current: number, pageCount: number) => {
+const getViewablePages = (
+  current: number,
+  pageCount: number,
+  pagesEitherSideOfCurrentInPagination: number
+) => {
   const minimum = 1;
-  let length = 1 + PAGINATION_EITHER_SIDE * 2;
+  let length = 1 + pagesEitherSideOfCurrentInPagination * 2;
   if (length > pageCount) {
     length = pageCount;
   }
@@ -17,14 +20,20 @@ const getViewablePages = (current: number, pageCount: number) => {
 export interface IPagination {
   current: number;
   pageCount: number;
-  getPageRoute: (page: number) => string; // TODO Account for 1 => home
+  getPageRoute: (page: number) => string;
 }
 
 const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute }) => {
+  const siteMetadata = useSiteMetadata();
+
   const isPreviousPage = current !== 1;
   const isNextPage = current < pageCount;
 
-  const viewablePages = getViewablePages(current, pageCount);
+  const viewablePages = getViewablePages(
+    current,
+    pageCount,
+    siteMetadata.blogFeed.pagesEitherSideOfCurrentInPagination
+  );
 
   return (
     <nav className="blog-pagination text-center mb-5 mt-4">

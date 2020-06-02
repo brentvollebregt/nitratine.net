@@ -1,7 +1,10 @@
 module.exports = {
   siteMetadata: {
-    // TODO MOVE THIS OUT
-    title: "Nitratine"
+    title: "Nitratine",
+    blogFeed: {
+      postsPerPage: 10,
+      pagesEitherSideOfCurrentInPagination: 2
+    }
   },
   plugins: [
     "gatsby-plugin-react-helmet",

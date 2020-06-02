@@ -8,6 +8,14 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const result = await graphql(`
     {
+      site {
+        siteMetadata {
+          blogFeed {
+            postsPerPage
+          }
+        }
+      }
+
       allMarkdownRemark(
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 1000
@@ -31,7 +39,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   // Create blog-feed-page pages
   const posts = result.data.allMarkdownRemark.edges;
-  const postsPerPage = 10;
+  const postsPerPage = result.data.site.siteMetadata.blogFeed.postsPerPage;
   const numPages = Math.ceil(posts.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
