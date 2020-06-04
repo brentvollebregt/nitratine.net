@@ -16,8 +16,6 @@ description: Hashing files allows us to generate a string/byte sequence that can
   more files to see if these files are the same as well as other applications.
 ---
 
-[TOC]
-
 > Note: This post assumes you already know what a hash is, if you don't, read up on hashes before reading this post. Sites like [this](https://cs.stackexchange.com/a/55472) or [this](https://stackoverflow.com/a/506035) can help you out.
 
 ## What Does it Mean to Hash a File?

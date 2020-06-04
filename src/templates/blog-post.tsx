@@ -5,6 +5,7 @@ import BlogBase from "../components/Blog/Base";
 import Header from "../components/Blog/Post/Header";
 import Pagination, { IPagination } from "../components/Blog/Post/Pagination";
 import Comments from "../components/Blog/Post/Comments";
+import "../components/Blog/Post/Post.scss";
 
 interface IBlogPostTemplate {
   title: string;
@@ -15,6 +16,7 @@ interface IBlogPostTemplate {
   githubRepository: string | null;
   description: string;
   body: React.FC;
+  tableOfContents: React.FC;
 }
 
 export const BlogPostTemplate: React.FC<IBlogPostTemplate> = ({
@@ -25,9 +27,11 @@ export const BlogPostTemplate: React.FC<IBlogPostTemplate> = ({
   hidden,
   githubRepository,
   description,
-  body
+  body,
+  tableOfContents
 }) => {
   const Body = body;
+  const TableOfContents = tableOfContents;
   return (
     <>
       <Header
@@ -41,6 +45,10 @@ export const BlogPostTemplate: React.FC<IBlogPostTemplate> = ({
       />
 
       <div className="post-content mt-3">
+        <div className="toc">
+          <TableOfContents />
+        </div>
+        <hr className="my-3" />
         <Body />
       </div>
     </>
@@ -57,6 +65,9 @@ const BlogPost = ({ data }) => {
   const description: string = data.markdownRemark.frontmatter.description;
 
   const body = () => <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />;
+  const tableOfContents = () => (
+    <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.tableOfContents }} />
+  );
 
   const pagination: IPagination = {
     previous: undefined,
@@ -75,6 +86,7 @@ const BlogPost = ({ data }) => {
           githubRepository={githubRepository}
           description={description}
           body={body}
+          tableOfContents={tableOfContents}
         />
         <Pagination previous={pagination.previous} next={pagination.next} />
         <Comments />
@@ -90,6 +102,7 @@ export const pageQuery = graphql`
     markdownRemark(id: { eq: $id }) {
       id
       html
+      tableOfContents
       frontmatter {
         title
         date

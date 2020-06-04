@@ -25,7 +25,7 @@ const Header: React.FC<IHeader> = ({
   return (
     <div className="blog-post-header">
       <h1 className="blog-post-title">{title}</h1>
-      <div className="mb-3">
+      <div className="mb-2">
         <a href={`/blog/archive/${date.getFullYear()}`} className="text-muted">
           {formatDate(date)}
         </a>

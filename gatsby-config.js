@@ -35,7 +35,17 @@ module.exports = {
     {
       resolve: "gatsby-transformer-remark",
       options: {
+        tableOfContents: {
+          heading: null,
+          maxDepth: 3
+        },
         plugins: [
+          {
+            resolve: "gatsby-remark-autolink-headers",
+            options: {
+              offsetY: "60" // Header height (56) + a little more (4)
+            }
+          },
           {
             resolve: "gatsby-remark-relative-images",
             options: {
@@ -56,14 +66,7 @@ module.exports = {
             options: {
               destinationDir: "static"
             }
-          }
-        ]
-      }
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {

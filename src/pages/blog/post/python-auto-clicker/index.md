@@ -11,14 +11,7 @@ image: feature.jpg
 description: "This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys."
 ---
 
-[TOC]
-
 {% with video_id="eamTeszpeZ4" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
-
-```js
-const a = 5;
-console.log(a);
-```
 
 ## What is this?
 

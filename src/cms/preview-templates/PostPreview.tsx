@@ -31,6 +31,7 @@ const PostPreview = ({ entry }) => {
         hidden={data.hidden || false}
         githubRepository={data.githubRepository || null}
         body={() => <ReactMarkdown source={data.body || ""} />}
+        tableOfContents={() => <div className="text-center">Table Of Contents Placeholder</div>}
       />
     </div>
   );
