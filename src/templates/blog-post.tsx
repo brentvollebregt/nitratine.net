@@ -24,24 +24,22 @@ const BlogPost = ({ data }) => {
   );
 
   // Pagination
-  const id: string = data.post.id;
-  const postSummaries = data.allPosts.edges;
-  const postIndex: number = postSummaries.findIndex(x => x.node.id === id);
-
+  const nextPost = data.next;
+  const previousPost = data.previous;
   const pagination: IPagination = {
     previous:
-      postIndex - 1 === -1
+      previousPost === null
         ? undefined
         : {
-            title: postSummaries[postIndex - 1].node.frontmatter.title,
-            href: postSummaries[postIndex - 1].node.fields.slug
+            title: previousPost.frontmatter.title,
+            href: previousPost.fields.slug
           },
     next:
-      postIndex + 1 === postSummaries.length
+      nextPost === null
         ? undefined
         : {
-            title: postSummaries[postIndex + 1].node.frontmatter.title,
-            href: postSummaries[postIndex + 1].node.fields.slug
+            title: nextPost.frontmatter.title,
+            href: nextPost.fields.slug
           }
   };
 
@@ -69,7 +67,7 @@ const BlogPost = ({ data }) => {
 export default BlogPost;
 
 export const pageQuery = graphql`
-  query BlogPostByID($id: String!) {
+  query BlogPostByID($id: String!, $nextPostId: String, $previousPostId: String) {
     post: markdownRemark(id: { eq: $id }) {
       id
       html
@@ -84,20 +82,20 @@ export const pageQuery = graphql`
         description
       }
     }
-    allPosts: allMarkdownRemark(
-      filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
-      sort: { order: ASC, fields: [frontmatter___date] }
-    ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-          }
-          fields {
-            slug
-          }
-        }
+    next: markdownRemark(id: { eq: $nextPostId }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+      }
+    }
+    previous: markdownRemark(id: { eq: $previousPostId }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
       }
     }
   }

@@ -3,10 +3,11 @@ const path = require("path");
 const { createFilePath } = require("gatsby-source-filesystem");
 const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 
-exports.createPages = async ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
 
-  const result = await graphql(`
+  // Get all posts to create post-related pages
+  const { errors: postErrors, data: postData } = await graphql(`
     {
       site {
         siteMetadata {
@@ -16,30 +17,43 @@ exports.createPages = async ({ actions, graphql }) => {
         }
       }
 
-      allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
-        limit: 1000
+      posts: allMarkdownRemark(
         filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+        sort: { fields: [frontmatter___date], order: ASC }
       ) {
         edges {
           node {
+            id
             fields {
               slug
             }
+            frontmatter {
+              tags
+              templateKey
+            }
+          }
+          next {
+            id
+          }
+          previous {
+            id
           }
         }
       }
     }
   `);
 
-  if (result.errors) {
+  if (postErrors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
+    postErrors.forEach(e => console.error(e.toString()));
     return;
   }
 
+  // Data from the query
+  const postsPerPage = postData.site.siteMetadata.blogFeed.postsPerPage;
+  const posts = postData.posts.edges;
+
   // Create blog-feed-page pages
-  const posts = result.data.allMarkdownRemark.edges;
-  const postsPerPage = result.data.site.siteMetadata.blogFeed.postsPerPage;
   const numPages = Math.ceil(posts.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
@@ -54,9 +68,27 @@ exports.createPages = async ({ actions, graphql }) => {
     });
   });
 
-  return graphql(`
+  // Create blog pages
+  posts.forEach(edge => {
+    const id = edge.node.id;
+    const nextPostId = edge.next === null ? null : edge.next.id;
+    const previousPostId = edge.previous === null ? null : edge.previous.id;
+    createPage({
+      path: edge.node.fields.slug,
+      tags: edge.node.frontmatter.tags,
+      component: path.resolve(`src/templates/${String(edge.node.frontmatter.templateKey)}.tsx`),
+      context: {
+        id,
+        nextPostId,
+        previousPostId
+      }
+    });
+  });
+
+  // Get all non-post pages
+  const { errors: pageErrors, data: pageData } = await graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      allMarkdownRemark(filter: { frontmatter: { templateKey: { ne: "blog-post" } } }) {
         edges {
           node {
             id
@@ -64,58 +96,57 @@ exports.createPages = async ({ actions, graphql }) => {
               slug
             }
             frontmatter {
-              tags
               templateKey
             }
           }
         }
       }
     }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()));
-      return Promise.reject(result.errors);
-    }
+  `);
 
-    const posts = result.data.allMarkdownRemark.edges;
+  if (pageErrors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    pageErrors.forEach(e => console.error(e.toString()));
+    return;
+  }
 
-    posts.forEach(edge => {
-      const id = edge.node.id;
-      createPage({
-        path: edge.node.fields.slug,
-        tags: edge.node.frontmatter.tags,
-        component: path.resolve(`src/templates/${String(edge.node.frontmatter.templateKey)}.tsx`),
-        // additional data can be passed via context
-        context: {
-          id
-        }
-      });
+  const pages = pageData.allMarkdownRemark.edges;
+
+  // Create each non-post page
+  pages.forEach(edge => {
+    const id = edge.node.id;
+    createPage({
+      path: edge.node.fields.slug,
+      component: path.resolve(`src/templates/${String(edge.node.frontmatter.templateKey)}.tsx`),
+      context: {
+        id
+      }
     });
-
-    // // Tag pages:
-    // let tags = [];
-    // // Iterate through each post, putting all found tags into `tags`
-    // posts.forEach(edge => {
-    //   if (_.get(edge, `node.frontmatter.tags`)) {
-    //     tags = tags.concat(edge.node.frontmatter.tags);
-    //   }
-    // });
-    // // Eliminate duplicate tags
-    // tags = _.uniq(tags);
-
-    // // Make tag pages
-    // tags.forEach(tag => {
-    //   const tagPath = `/tags/${_.kebabCase(tag)}/`;
-
-    //   createPage({
-    //     path: tagPath,
-    //     component: path.resolve(`src/templates/tags.js`),
-    //     context: {
-    //       tag
-    //     }
-    //   });
-    // });
   });
+
+  // // Tag pages:
+  // let tags = [];
+  // // Iterate through each post, putting all found tags into `tags`
+  // posts.forEach(edge => {
+  //   if (_.get(edge, `node.frontmatter.tags`)) {
+  //     tags = tags.concat(edge.node.frontmatter.tags);
+  //   }
+  // });
+  // // Eliminate duplicate tags
+  // tags = _.uniq(tags);
+
+  // // Make tag pages
+  // tags.forEach(tag => {
+  //   const tagPath = `/tags/${_.kebabCase(tag)}/`;
+
+  //   createPage({
+  //     path: tagPath,
+  //     component: path.resolve(`src/templates/tags.js`),
+  //     context: {
+  //       tag
+  //     }
+  //   });
+  // });
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
