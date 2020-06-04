@@ -3,9 +3,7 @@ import { graphql } from "gatsby";
 import Base from "../components/Base";
 import Home, { IHome } from "../components/Home";
 
-export const HomePageTemplate: React.FC<IHome> = ({ image, leadText, buttons }) => (
-  <Home image={image} leadText={leadText} buttons={buttons} />
-);
+export const HomePageTemplate: React.FC<IHome> = props => <Home {...props} />;
 
 const HomePage = ({ data }) => {
   const { frontmatter } = data.markdownRemark;

@@ -3,8 +3,8 @@ import { graphql } from "gatsby";
 import Base from "../components/Base";
 import About, { IAbout, IAboutExperience } from "../components/About";
 
-export const AboutPageTemplate: React.FC<IAbout> = ({ email, experience, body }) => {
-  return <About body={body} experience={experience} email={email} />;
+export const AboutPageTemplate: React.FC<IAbout> = props => {
+  return <About {...props} />;
 };
 
 const AboutPage = ({ data }) => {

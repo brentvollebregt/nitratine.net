@@ -4,15 +4,10 @@ import Base from "../components/Base";
 import BlogBase from "../components/Blog/Base";
 import { IPostTile } from "../components/Blog/Feed/PostTile";
 import { IPagination } from "../components/Blog/Feed/Pagination";
-import Feed from "../components/Blog/Feed";
+import Feed, { IFeed } from "../components/Blog/Feed";
 
-interface IBlogFeedPageTemplate {
-  posts: IPostTile[];
-  pagination: IPagination;
-}
-
-export const BlogFeedPageTemplate: React.FC<IBlogFeedPageTemplate> = ({ posts, pagination }) => {
-  return <Feed posts={posts} pagination={pagination} />;
+export const BlogFeedPageTemplate: React.FC<IFeed> = props => {
+  return <Feed {...props} />;
 };
 
 const BlogPost = ({ data, pageContext }) => {

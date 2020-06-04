@@ -2,7 +2,7 @@ import React from "react";
 import PostTile, { IPostTile } from "./PostTile";
 import Pagination, { IPagination } from "./Pagination";
 
-interface IFeed {
+export interface IFeed {
   posts: IPostTile[];
   pagination: IPagination;
 }
