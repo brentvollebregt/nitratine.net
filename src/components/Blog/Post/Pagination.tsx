@@ -1,11 +1,5 @@
 import React from "react";
-
-const truncate = (string: string, maxLength: number) => {
-  if (string.length <= maxLength) {
-    return string;
-  }
-  return `${string.substring(0, maxLength)}...`;
-};
+import { truncateString } from "../../utils";
 
 interface PaginationSummary {
   title: string;
@@ -19,15 +13,16 @@ export interface IPagination {
 
 const Pagination: React.FC<IPagination> = ({ previous, next }) => {
   return (
-    <nav className="blog-pagination text-center mb-5 mt-4">
+    <nav className="text-center">
       {previous !== undefined && (
-        <a className="btn btn-outline-primary mt-1" href={previous.href}>
-          &larr; {truncate(previous.title, 30)}
+        <a className="btn btn-outline-primary" href={previous.href}>
+          &larr; {truncateString(previous.title, 30)}
         </a>
       )}
+
       {next !== undefined && (
-        <a className="btn btn-outline-primary mt-1" href={next.href}>
-          {truncate(next.title, 30)} &rarr;
+        <a className="btn btn-outline-primary ml-1" href={next.href}>
+          {truncateString(next.title, 30)} &rarr;
         </a>
       )}
     </nav>

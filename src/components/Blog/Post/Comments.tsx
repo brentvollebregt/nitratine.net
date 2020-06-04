@@ -5,9 +5,8 @@ interface IComments {}
 const Comments: React.FC<IComments> = ({}) => {
   // TODO gatsby-plugin-disqus
   return (
-    <div>
-      TODO Disqus Comments
-      {/* 
+    <div className="text-center">TODO Disqus Comments</div>
+    /* 
         {% if site_config.disqus_shortname %}
         <div id="disqus_thread"></div>
         <script>
@@ -25,8 +24,7 @@ const Comments: React.FC<IComments> = ({}) => {
         </script>
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
         {% endif %} 
-      */}
-    </div>
+      */
   );
 };
 

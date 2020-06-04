@@ -24,8 +24,14 @@ const BlogPost = ({ data }) => {
   );
 
   const pagination: IPagination = {
-    previous: undefined,
-    next: undefined
+    previous: {
+      title: "TODO Previous Post ",
+      href: "/"
+    },
+    next: {
+      title: "TODO Next Post",
+      href: "/"
+    }
   };
 
   return (

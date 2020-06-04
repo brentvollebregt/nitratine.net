@@ -22,8 +22,14 @@ const PostPreview = ({ entry }) => {
   }, [data]);
 
   const pagination: IPagination = {
-    previous: undefined,
-    next: undefined
+    previous: {
+      title: "Previous Post Title",
+      href: ""
+    },
+    next: {
+      title: "Next Post Title",
+      href: ""
+    }
   };
 
   return (

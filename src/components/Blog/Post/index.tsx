@@ -39,7 +39,7 @@ const Post: React.FC<IPost> = ({
         description={description}
       />
 
-      <div className="post-content mt-3">
+      <div className="mt-3">
         <div className="toc">
           <TableOfContents />
         </div>
@@ -47,8 +47,14 @@ const Post: React.FC<IPost> = ({
         <Body />
       </div>
 
-      <Pagination previous={pagination.previous} next={pagination.next} />
-      {showComments && <Comments />}
+      <div className="mt-5">
+        <Pagination previous={pagination.previous} next={pagination.next} />
+      </div>
+      {showComments && (
+        <div className="mt-5">
+          <Comments />
+        </div>
+      )}
     </>
   );
 };

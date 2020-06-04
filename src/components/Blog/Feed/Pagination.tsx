@@ -36,7 +36,7 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
   );
 
   return (
-    <nav className="blog-pagination text-center mb-5 mt-4">
+    <nav className="text-center mb-5 mt-4">
       <ul className="pagination justify-content-center">
         <li className={`page-item ${isPreviousPage ? "" : "disabled"}`}>
           {isPreviousPage ? (
