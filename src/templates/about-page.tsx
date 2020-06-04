@@ -13,6 +13,7 @@ const AboutPage = ({ data }) => {
     title: e.title,
     img: e.img.publicURL
   }));
+
   const body = () => <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />;
 
   return (

@@ -2,57 +2,11 @@ import React from "react";
 import { graphql } from "gatsby";
 import Base from "../components/Base";
 import BlogBase from "../components/Blog/Base";
-import Header from "../components/Blog/Post/Header";
-import Pagination, { IPagination } from "../components/Blog/Post/Pagination";
-import Comments from "../components/Blog/Post/Comments";
-import "../components/Blog/Post/Post.scss";
+import Post, { IPost } from "../components/Blog/Post";
+import { IPagination } from "../components/Blog/Post/Pagination";
 
-interface IBlogPostTemplate {
-  title: string;
-  date: Date;
-  category: string;
-  tags: string[];
-  hidden: boolean;
-  githubRepository: string | null;
-  description: string;
-  body: React.FC;
-  tableOfContents: React.FC;
-}
-
-export const BlogPostTemplate: React.FC<IBlogPostTemplate> = ({
-  title,
-  date,
-  category,
-  tags,
-  hidden,
-  githubRepository,
-  description,
-  body,
-  tableOfContents
-}) => {
-  const Body = body;
-  const TableOfContents = tableOfContents;
-  return (
-    <>
-      <Header
-        title={title}
-        date={date}
-        category={category}
-        tags={tags}
-        hidden={hidden}
-        githubRepository={githubRepository}
-        description={description}
-      />
-
-      <div className="post-content mt-3">
-        <div className="toc">
-          <TableOfContents />
-        </div>
-        <hr className="my-3" />
-        <Body />
-      </div>
-    </>
-  );
+export const BlogPostTemplate: React.FC<IPost> = props => {
+  return <Post {...props} />;
 };
 
 const BlogPost = ({ data }) => {
@@ -72,7 +26,7 @@ const BlogPost = ({ data }) => {
   const pagination: IPagination = {
     previous: undefined,
     next: undefined
-  }; // TODO
+  };
 
   return (
     <Base>
@@ -87,9 +41,9 @@ const BlogPost = ({ data }) => {
           description={description}
           body={body}
           tableOfContents={tableOfContents}
+          pagination={pagination}
+          showComments={true}
         />
-        <Pagination previous={pagination.previous} next={pagination.next} />
-        <Comments />
       </BlogBase>
     </Base>
   );

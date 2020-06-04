@@ -3,7 +3,7 @@ import { formatDate } from "../../utils";
 import GitHubLogoImage from "../../../img/github-icon.svg";
 import "./Header.scss";
 
-interface IHeader {
+export interface IHeader {
   title: string;
   date: Date;
   category: string;
@@ -25,26 +25,33 @@ const Header: React.FC<IHeader> = ({
   return (
     <div className="blog-post-header">
       <h1 className="blog-post-title">{title}</h1>
+
       <div className="mb-2">
         <a href={`/blog/archive/${date.getFullYear()}`} className="text-muted">
           {formatDate(date)}
         </a>
+
         <a href={`/blog/categories/${category}`} className="badge badge-primary ml-2 mr-1">
           {category}
         </a>
+
         {tags.map(tag => (
           <a href={`/blog/tags/${tag}`} className="badge badge-warning mr-1" key={tag}>
             {tag}
           </a>
         ))}
+
         {hidden && <span className="badge badge-danger">Hidden</span>}
+
         <img
           src="https://hitcounter.pythonanywhere.com/count/tag.svg"
           alt="Hits"
           className="post-hits"
         />
       </div>
+
       <p className="lead">{description}</p>
+
       <hr className="mt-3 mb-0" />
 
       {githubRepository !== null && (

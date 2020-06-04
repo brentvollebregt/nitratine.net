@@ -7,6 +7,7 @@ import "prismjs/components/prism-python";
 import "prismjs/components/prism-markup";
 import "prismjs/components/prism-css";
 import { BlogPostTemplate } from "../../templates/blog-post";
+import { IPagination } from "../../components/Blog/Post/Pagination";
 import "../../components/Blog/prism-theme.css";
 
 const PostPreview = ({ entry }) => {
@@ -20,6 +21,11 @@ const PostPreview = ({ entry }) => {
     }
   }, [data]);
 
+  const pagination: IPagination = {
+    previous: undefined,
+    next: undefined
+  };
+
   return (
     <div ref={root}>
       <BlogPostTemplate
@@ -30,8 +36,10 @@ const PostPreview = ({ entry }) => {
         description={data.description || ""}
         hidden={data.hidden || false}
         githubRepository={data.githubRepository || null}
+        pagination={pagination}
         body={() => <ReactMarkdown source={data.body || ""} />}
         tableOfContents={() => <div className="text-center">Table Of Contents Placeholder</div>}
+        showComments={false}
       />
     </div>
   );

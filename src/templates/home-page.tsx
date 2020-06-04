@@ -1,25 +1,10 @@
 import React from "react";
 import { graphql } from "gatsby";
-
 import Base from "../components/Base";
-import Header from "../components/Home/Header";
-import FeaturedPosts from "../components/Home/FeaturedPosts";
+import Home, { IHome } from "../components/Home";
 
-interface IHomePageTemplate {
-  image: string;
-  leadText: string;
-  buttons: {
-    text: string;
-    link: string;
-    type: string;
-  }[];
-}
-
-export const HomePageTemplate: React.FC<IHomePageTemplate> = ({ image, leadText, buttons }) => (
-  <>
-    <Header image={image} leadText={leadText} buttons={buttons} />
-    <FeaturedPosts />
-  </>
+export const HomePageTemplate: React.FC<IHome> = ({ image, leadText, buttons }) => (
+  <Home image={image} leadText={leadText} buttons={buttons} />
 );
 
 const HomePage = ({ data }) => {
