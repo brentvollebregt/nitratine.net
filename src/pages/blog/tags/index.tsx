@@ -5,22 +5,24 @@ import BlogBase from "../../../components/Blog/Base";
 import Categories, { IPostsByCategory } from "../../../components/Categories";
 
 const TagsPage = ({ data }) => {
-  const rawCategories: CategoryFromQuery[] = data.allMarkdownRemark.group;
-  const categories: IPostsByCategory[] = rawCategories.map(c => ({
-    category: c.fieldValue,
-    posts: c.edges.map(({ node }) => ({
-      slug: node.fields.slug,
-      title: node.frontmatter.title,
-      date: new Date(node.frontmatter.date),
-      category: node.frontmatter.category,
-      tags: node.frontmatter.tags
+  const rawTags: CategoryFromQuery[] = data.allMarkdownRemark.group;
+  const postsGroupedByTags: IPostsByCategory[] = rawTags
+    .map(c => ({
+      category: c.fieldValue,
+      posts: c.edges.map(({ node }) => ({
+        slug: node.fields.slug,
+        title: node.frontmatter.title,
+        date: new Date(node.frontmatter.date),
+        category: node.frontmatter.category,
+        tags: node.frontmatter.tags
+      }))
     }))
-  }));
+    .sort((c1, c2) => (c1.category > c2.category ? 1 : -1));
 
   return (
     <Base>
       <BlogBase>
-        <Categories categoryType="Tag" postsByCategory={categories} />
+        <Categories categoryType="Tag" postsByCategory={postsGroupedByTags} />
       </BlogBase>
     </Base>
   );
@@ -47,7 +49,7 @@ interface CategoryFromQuery {
 
 export const pageQuery = graphql`
   {
-    allMarkdownRemark(limit: 1000) {
+    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "blog-post" } } }) {
       group(field: frontmatter___tags) {
         fieldValue
         edges {
