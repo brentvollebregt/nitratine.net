@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "gatsby";
+import { Location } from "@reach/router";
 
 const navbarLinks = [
   {
@@ -40,28 +41,21 @@ const Navigation = () => (
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          {navbarLinks.map(({ path, title }) =>
-            path.startsWith("http://") || path.startsWith("https://") ? (
-              <Nav.Link
-                key={path}
-                href={path}
-                /* TODO Remove window.location.pathname */
-                active={window.location.pathname === path}
-              >
-                {title}
-              </Nav.Link>
-            ) : (
-              <Nav.Link
-                key={path}
-                /* TODO Remove window.location.pathname */
-                active={window.location.pathname === path}
-                as={Link}
-                to={path}
-              >
-                {title}
-              </Nav.Link>
-            )
-          )}
+          {navbarLinks.map(({ path, title }) => (
+            <Location>
+              {locationProps => (
+                <Nav.Link
+                  key={path}
+                  href={path}
+                  as={path.startsWith("http://") || path.startsWith("https://") ? undefined : Link}
+                  to={path} // to is for Link
+                  active={locationProps.location.pathname === path}
+                >
+                  {title}
+                </Nav.Link>
+              )}
+            </Location>
+          ))}
         </Nav>
       </Navbar.Collapse>
     </Container>
