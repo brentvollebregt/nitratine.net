@@ -40,7 +40,7 @@ const PostTile: React.FC<IPostTile> = ({
             {category}
           </a>
           {tags.map(tag => (
-            <a href={`/blog/tags/#${tag}`} className="badge badge-warning mr-1">
+            <a key={tag} href={`/blog/tags/#${tag}`} className="badge badge-warning mr-1">
               {tag}
             </a>
           ))}
