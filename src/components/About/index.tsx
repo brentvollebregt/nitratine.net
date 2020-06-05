@@ -15,7 +15,13 @@ export interface IAbout {
 const About: React.FC<IAbout> = ({ body, experience, email }) => {
   const [emailDisplayed, setEmailDisplayed] = useState(false);
 
-  const displayEmailAddress = () => {
+  const displayEmailAddress = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    // Stop the redirect - we need this because the a tag node will techincally be the same and
+    // React will just swap out the contents. When this onClick completes, the browser will then
+    // go to the href unless we stop it.
+    event.preventDefault();
+
+    // Show the alert
     alert(
       "Please leave questions about videos on YouTube and blog posts in the comments at the bottom of the post."
     );
@@ -66,8 +72,8 @@ const About: React.FC<IAbout> = ({ body, experience, email }) => {
           Emails regarding this nature will be referred back to the corresponding platform.
         </p>
         <p>
-          If you would like to contact me for another reason, send an email to
-          {emailDisplayed ? (
+          If you would like to contact me for another reason, send an email to{" "}
+          {!emailDisplayed ? (
             <a href="#" onClick={displayEmailAddress}>
               [Display Email Address]
             </a>
