@@ -9,7 +9,7 @@ const navbarLinks = [
     title: "Home"
   },
   {
-    path: "/blog",
+    path: "/blog/",
     title: "Blog"
   },
   {
@@ -21,7 +21,7 @@ const navbarLinks = [
     title: "GitHub"
   },
   {
-    path: "/about",
+    path: "/about/",
     title: "About"
   }
 ];
@@ -42,7 +42,7 @@ const Navigation = () => (
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           {navbarLinks.map(({ path, title }) => (
-            <Location>
+            <Location key={path}>
               {locationProps => (
                 <Nav.Link
                   key={path}

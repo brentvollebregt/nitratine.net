@@ -29,8 +29,6 @@ const BlogPost = ({ data, pageContext }) => {
     getPageRoute: (page: number) => (page === 1 ? `/blog` : `/blog/page/${page}`)
   };
 
-  console.log("pageContext", pageContext);
-
   return (
     <Base>
       <BlogBase>

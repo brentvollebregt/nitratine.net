@@ -52,13 +52,13 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
 
         {viewablePages.map(page =>
           page === current ? (
-            <li className="page-item active">
+            <li key={page} className="page-item active">
               <a className="page-link" href="">
                 {page} <span className="sr-only">(current)</span>
               </a>
             </li>
           ) : (
-            <li className="page-item">
+            <li key={page} className="page-item">
               <a className="page-link" href={getPageRoute(page)}>
                 {page}
               </a>
