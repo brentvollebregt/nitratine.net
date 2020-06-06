@@ -143,3 +143,18 @@ collections:
                   { label: Link, name: href, widget: string },
                 ],
             }
+      - file: "src/config/navigation.json"
+        label: "Navigation"
+        name: "navigation"
+        fields:
+          - { label: "Config Key", name: "configKey", widget: "hidden", default: "navigation" }
+          - {
+              label: Links,
+              name: links,
+              widget: list,
+              fields:
+                [
+                  { label: Title, name: title, widget: string },
+                  { label: Link, name: path, widget: string },
+                ],
+            }

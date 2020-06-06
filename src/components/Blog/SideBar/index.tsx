@@ -27,7 +27,7 @@ interface IFeaturedSites {
 
 const SideBar: React.FC = () => {
   const { allMarkdownRemark } = useStaticQuery(graphql`
-    query HeaderQuery {
+    query SidebarQuery {
       allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "blog-post" } } }) {
         edges {
           node {

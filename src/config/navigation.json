@@ -1,0 +1,25 @@
+{
+  "configKey": "navigation",
+  "links": [
+    {
+      "title": "Home",
+      "path": "/"
+    },
+    {
+      "title": "Blog",
+      "path": "/blog/"
+    },
+    {
+      "title": "YouTube",
+      "path": "https://www.youtube.com/c/PyTutorials"
+    },
+    {
+      "title": "GitHub",
+      "path": "https://github.com/brentvollebregt"
+    },
+    {
+      "title": "About",
+      "path": "/about/"
+    }
+  ]
+}

@@ -2,16 +2,15 @@ import React from "react";
 import "./Portfolio.scss";
 
 export interface IPortfolio {
-  leftContent: React.FC;
-  rightContent: React.FC;
+  snippets: React.FC[];
 }
 
-const Portfolio: React.FC<IPortfolio> = ({ leftContent, rightContent }) => {
-  const LeftContent = leftContent;
-  const RightContent = rightContent;
+const Portfolio: React.FC<IPortfolio> = ({ snippets }) => {
+  const leftSnippets = snippets.filter((_, i) => i % 2 === 0);
+  const rightSnippets = snippets.filter((_, i) => i % 2 === 1);
 
   return (
-    <div className="row justify-content-center mb-5">
+    <div className="portfolio row justify-content-center">
       <div className="col-xs-12 col-lg-8">
         <h1 className="text-center">Portfolio</h1>
         <p className="lead text-center">
@@ -20,11 +19,36 @@ const Portfolio: React.FC<IPortfolio> = ({ leftContent, rightContent }) => {
         </p>
       </div>
 
-      <div className="col-sm-12 col-md-6 col-centered">
-        <LeftContent />
+      {/* Dual column */}
+      <div className="dual-column col-12">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: 10 }}>
+          <div>
+            {leftSnippets.map((Snippet, i) => (
+              <div key={i} className="snippet">
+                <Snippet />
+                {i !== leftSnippets.length - 1 && <hr className="my-4" />}
+              </div>
+            ))}
+          </div>
+          <div>
+            {rightSnippets.map((Snippet, i) => (
+              <div key={i} className="snippet">
+                <Snippet />
+                {i !== rightSnippets.length - 1 && <hr className="my-4" />}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="col-xs-12 col-sm-6 col-centered">
-        <RightContent />
+
+      {/* Single column */}
+      <div className="single-column col-12">
+        {snippets.map((Snippet, i) => (
+          <div key={i} className="snippet">
+            <Snippet />
+            {i !== snippets.length - 1 && <hr className="my-4" />}
+          </div>
+        ))}
       </div>
     </div>
   );
