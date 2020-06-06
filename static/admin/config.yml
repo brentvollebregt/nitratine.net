@@ -69,7 +69,7 @@ collections:
                   },
                 ],
             }
-      - file: "src/pages/about/index.md"
+      - file: "src/pages/about.md"
         label: "About"
         name: "about"
         fields:
@@ -85,6 +85,22 @@ collections:
                   { label: Title, name: title, widget: string },
                   { label: Image, name: img, widget: image },
                 ],
+            }
+      - file: "src/pages/portfolio.md"
+        label: "Portfolio"
+        name: "portfolio"
+        fields:
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "portfolio-page",
+            }
+          - {
+              label: Snippets,
+              name: snippets,
+              widget: list,
+              fields: [{ label: Body, name: body, widget: markdown }],
             }
 
   - name: "config"

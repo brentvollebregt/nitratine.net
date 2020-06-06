@@ -1,0 +1,25 @@
+.portfolio {
+  .snippet {
+    h2 {
+      text-align: center;
+    }
+  }
+
+  .dual-column {
+    display: block;
+  }
+
+  .single-column {
+    display: none;
+  }
+
+  @media (max-width: 767.98px) {
+    .dual-column {
+      display: none;
+    }
+
+    .single-column {
+      display: block;
+    }
+  }
+}

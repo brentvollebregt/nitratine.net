@@ -7,7 +7,7 @@ interface IBase {
 }
 
 const Base: React.FC<IBase> = ({ children }) => (
-  <div className="row mb-4">
+  <div className="row">
     <div className="col-blog-content blog-main">{children}</div>
     <SideBar />
   </div>
