@@ -1,5 +1,6 @@
 module.exports = {
   siteMetadata: {
+    siteUrl: `https://nitratine.net`,
     title: "Nitratine",
     blogFeed: {
       postsPerPage: 10,
@@ -88,6 +89,7 @@ module.exports = {
       }
     },
     "gatsby-plugin-typescript",
+    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-netlify-cms",
       options: {

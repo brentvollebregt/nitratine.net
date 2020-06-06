@@ -13,6 +13,7 @@
     "gatsby-plugin-react-helmet": "^3.2.5",
     "gatsby-plugin-sass": "^2.2.4",
     "gatsby-plugin-sharp": "^2.5.7",
+    "gatsby-plugin-sitemap": "^2.4.4",
     "gatsby-plugin-typescript": "^2.4.3",
     "gatsby-remark-autolink-headers": "^2.3.4",
     "gatsby-remark-copy-linked-files": "^2.2.4",
