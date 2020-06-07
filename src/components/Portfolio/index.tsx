@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useLayoutEffect } from "react";
 import "./Portfolio.scss";
 
 export interface IPortfolio {
@@ -6,6 +6,17 @@ export interface IPortfolio {
 }
 
 const Portfolio: React.FC<IPortfolio> = ({ snippets }) => {
+  const [dualColumns, setDualColumns] = useState(true);
+
+  useLayoutEffect(() => {
+    if (window) {
+      const updateSize = () => setDualColumns(window.innerWidth >= 768);
+      window.addEventListener("resize", updateSize);
+      updateSize();
+      return () => window.removeEventListener("resize", updateSize);
+    }
+  }, []);
+
   const leftSnippets = snippets.filter((_, i) => i % 2 === 0);
   const rightSnippets = snippets.filter((_, i) => i % 2 === 1);
 
@@ -19,36 +30,34 @@ const Portfolio: React.FC<IPortfolio> = ({ snippets }) => {
         </p>
       </div>
 
-      {/* Dual column */}
-      <div className="dual-column col-12">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: 10 }}>
-          <div>
-            {leftSnippets.map((Snippet, i) => (
-              <div key={i} className="snippet">
-                <Snippet />
-                {i !== leftSnippets.length - 1 && <hr className="my-4" />}
-              </div>
-            ))}
+      <div className="col-12">
+        {dualColumns ? (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: 10 }}>
+            <div>
+              {leftSnippets.map((Snippet, i) => (
+                <div key={i} className="snippet">
+                  <Snippet />
+                  {i !== leftSnippets.length - 1 && <hr className="my-4" />}
+                </div>
+              ))}
+            </div>
+            <div>
+              {rightSnippets.map((Snippet, i) => (
+                <div key={i} className="snippet">
+                  <Snippet />
+                  {i !== rightSnippets.length - 1 && <hr className="my-4" />}
+                </div>
+              ))}
+            </div>
           </div>
-          <div>
-            {rightSnippets.map((Snippet, i) => (
-              <div key={i} className="snippet">
-                <Snippet />
-                {i !== rightSnippets.length - 1 && <hr className="my-4" />}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Single column */}
-      <div className="single-column col-12">
-        {snippets.map((Snippet, i) => (
-          <div key={i} className="snippet">
-            <Snippet />
-            {i !== snippets.length - 1 && <hr className="my-4" />}
-          </div>
-        ))}
+        ) : (
+          snippets.map((Snippet, i) => (
+            <div key={i} className="snippet">
+              <Snippet />
+              {i !== snippets.length - 1 && <hr className="my-4" />}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
