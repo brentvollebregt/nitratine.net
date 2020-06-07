@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import ReactMarkdown from "react-markdown";
 import sideBarConfig from "../../../config/sidebar.json";
 import "./SideBar.scss";
+import { Helmet } from "react-helmet";
 
 interface ICategories {
   name: string;
@@ -107,7 +108,9 @@ const SideBar: React.FC = () => {
 
       <div className="card p-3 mb-3 bg-light">
         <h4 className="text-center text-lg-left">PyTutorials on YouTube</h4>
-        <script src="https://apis.google.com/js/platform.js"></script>
+        <Helmet>
+          <script src="https://apis.google.com/js/platform.js"></script>
+        </Helmet>
         <div style={{ textAlign: "center" }}>
           <div
             className="g-ytsubscribe"
