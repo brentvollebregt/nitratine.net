@@ -10,4 +10,5 @@ From https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - use Gatsby links
 - search
 - redirects
-- 404
+- YouTube button in sidebar
+- Recent YouTube videos in sidebar (needs to populate the json file)
