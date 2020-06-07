@@ -71,6 +71,6 @@ snippets:
 
 
       > Associated [post](/blog/post/emotionify/)"
-  - body: This is 3
-  - body: This is 4
+  - body: This is 3.0
+  - body: This is 4.0
 ---
