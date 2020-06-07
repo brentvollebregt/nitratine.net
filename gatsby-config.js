@@ -89,7 +89,45 @@ module.exports = {
       }
     },
     "gatsby-plugin-typescript",
-    "gatsby-plugin-sitemap",
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `{
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allFile(filter: {extension: {eq: "md"}}) {
+            edges {
+              node {
+                modifiedTime
+                relativePath
+              }
+            }
+          }
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+        }`,
+        serialize: ({ site, allFile, allSitePage }) =>
+          allSitePage.nodes.map(node => {
+            const filePresent = allFile.edges.find(
+              item =>
+                `/${item.node.relativePath.replace("index.md", "").replace(".md", "")}` ===
+                node.path
+            );
+            return {
+              url: `${site.siteMetadata.siteUrl}${node.path}`,
+              lastmod: filePresent
+                ? filePresent.node.modifiedTime.split("T")[0]
+                : new Date().toISOString().split("T")[0]
+            };
+          })
+      }
+    },
     {
       resolve: "gatsby-plugin-netlify-cms",
       options: {
