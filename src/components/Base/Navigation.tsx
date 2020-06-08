@@ -39,13 +39,14 @@ const Navigation = () => {
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
       <Container>
         <Navbar.Brand>
-          <img
-            src="/assets/logo.png"
-            height="30"
-            className="d-inline-block align-top"
-            alt="Nitratine Logo"
-            style={{ cursor: "pointer" }}
-          />
+          <Link to="/">
+            <img
+              src="/assets/logo.png"
+              height="30"
+              className="d-inline-block align-top"
+              alt="Nitratine Logo"
+            />
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
