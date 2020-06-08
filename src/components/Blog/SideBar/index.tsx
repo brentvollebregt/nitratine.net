@@ -1,9 +1,10 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import ReactMarkdown from "react-markdown";
+import { Helmet } from "react-helmet";
+import unescape from "lodash/unescape";
 import sideBarConfig from "../../../config/sidebar.json";
 import "./SideBar.scss";
-import { Helmet } from "react-helmet";
 
 interface ICategories {
   name: string;
@@ -16,6 +17,7 @@ interface ICategoryPrefix {
 }
 
 interface IRecentVideos {
+  title: string;
   thumbnailSrc: string;
   href: string;
 }
@@ -27,7 +29,7 @@ interface IFeaturedSites {
 }
 
 const SideBar: React.FC = () => {
-  const { allMarkdownRemark } = useStaticQuery(graphql`
+  const { allMarkdownRemark, recentYouTubeVideo } = useStaticQuery(graphql`
     query SidebarQuery {
       allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "blog-post" } } }) {
         edges {
@@ -35,6 +37,16 @@ const SideBar: React.FC = () => {
             frontmatter {
               category
             }
+          }
+        }
+      }
+      recentYouTubeVideo {
+        items {
+          snippet {
+            title
+          }
+          id {
+            videoId
           }
         }
       }
@@ -64,7 +76,11 @@ const SideBar: React.FC = () => {
     }, [] as ICategories[])
     .sort();
   const categoryPrefixes: ICategoryPrefix[] = sideBarConfig["categoryPrefixes"];
-  const recentVideos: IRecentVideos[] = sideBarConfig["recentVideos"];
+  const recentVideos: IRecentVideos[] = recentYouTubeVideo.items.map(v => ({
+    title: unescape(v.snippet.title),
+    thumbnailSrc: `https://img.youtube.com/vi/${v["id"]["videoId"]}/mqdefault.jpg`,
+    href: `https://www.youtube.com/watch?v=${v["id"]["videoId"]}`
+  }));
   const featuredSites: IFeaturedSites[] = sideBarConfig["featuredSites"];
 
   const getCategoryPrefix = (category: string) =>
@@ -123,11 +139,12 @@ const SideBar: React.FC = () => {
 
       <div className="card p-3 mb-3 bg-light">
         <h4 className="text-center text-lg-left">Recent Videos</h4>
-        <div id="recent-yt-videos" className="yt_video_container">
-          {recentVideos.map(({ thumbnailSrc, href }) => (
+        <div className="yt-recent-video-container">
+          {recentVideos.map(({ thumbnailSrc, href, title }) => (
             <img
               key={thumbnailSrc}
               src={thumbnailSrc}
+              title={title}
               onClick={() => window.open(href, "_blank")}
             />
           ))}

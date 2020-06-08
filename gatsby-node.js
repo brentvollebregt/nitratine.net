@@ -1,6 +1,28 @@
 const path = require("path");
+const axios = require("axios").default;
 const { createFilePath } = require("gatsby-source-filesystem");
 const { fmImagesToRelative } = require("gatsby-remark-relative-images");
+require("dotenv").config({ path: `.env` });
+
+exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createContentDigest }) => {
+  const youTubeDataApiKey = process.env.YOUTUBE_DATA_API_KEY;
+  const channelId = "UCesEknt3SRX9R9W_f93Tb7g"; // TODO Pull out into sidebar settings
+  const maxResults = 6;
+  const { data } = await axios.get(
+    `https://www.googleapis.com/youtube/v3/search?key=${youTubeDataApiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=${maxResults}&type=video`
+  );
+
+  createNode({
+    ...data,
+    parent: null,
+    children: [],
+    id: createNodeId(`recent-youtube-videos`),
+    internal: {
+      type: `RecentYouTubeVideo`,
+      contentDigest: createContentDigest(data)
+    }
+  });
+};
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
@@ -122,30 +144,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     });
   });
-
-  // // Tag pages:
-  // let tags = [];
-  // // Iterate through each post, putting all found tags into `tags`
-  // posts.forEach(edge => {
-  //   if (_.get(edge, `node.frontmatter.tags`)) {
-  //     tags = tags.concat(edge.node.frontmatter.tags);
-  //   }
-  // });
-  // // Eliminate duplicate tags
-  // tags = _.uniq(tags);
-
-  // // Make tag pages
-  // tags.forEach(tag => {
-  //   const tagPath = `/tags/${_.kebabCase(tag)}/`;
-
-  //   createPage({
-  //     path: tagPath,
-  //     component: path.resolve(`src/templates/tags.js`),
-  //     context: {
-  //       tag
-  //     }
-  //   });
-  // });
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

@@ -29,4 +29,28 @@
       }
     }
   }
+
+  /* Sidebar Video Thumbnails */
+
+  .yt-recent-video-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2px;
+
+    > img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      & {
+        grid-template-columns: 1fr;
+
+        > img:nth-child(n + 4) {
+          display: none;
+        }
+      }
+    }
+  }
 }
