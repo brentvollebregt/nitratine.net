@@ -6,8 +6,8 @@ require("dotenv").config({ path: `.env` });
 
 exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createContentDigest }) => {
   const youTubeDataApiKey = process.env.YOUTUBE_DATA_API_KEY;
-  if (youTubeDataApiKey === "") {
-    throw Error("YOUTUBE_DATA_API_KEY has not been set");
+  if (!youTubeDataApiKey) {
+    throw Error(`YOUTUBE_DATA_API_KEY has not been set. Found "${youTubeDataApiKey}".`);
   }
 
   const channelId = "UCesEknt3SRX9R9W_f93Tb7g"; // TODO Pull out into sidebar settings
