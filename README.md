@@ -10,4 +10,3 @@ From https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - use Gatsby links
 - search
 - redirects
-- Recent YouTube videos in sidebar (needs to populate the json file)

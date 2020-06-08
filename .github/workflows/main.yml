@@ -23,6 +23,7 @@ jobs:
         run: npm run build
         env:
           CI: true
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
