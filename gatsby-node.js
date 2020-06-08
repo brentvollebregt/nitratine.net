@@ -4,16 +4,17 @@ const { createFilePath } = require("gatsby-source-filesystem");
 const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 require("dotenv").config({ path: `.env` });
 
+const siteBarConfig = require("./src/config/sidebar.json");
+
 exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createContentDigest }) => {
   const youTubeDataApiKey = process.env.YOUTUBE_DATA_API_KEY;
   if (!youTubeDataApiKey) {
     throw Error(`YOUTUBE_DATA_API_KEY has not been set. Found "${youTubeDataApiKey}".`);
   }
 
-  const channelId = "UCesEknt3SRX9R9W_f93Tb7g"; // TODO Pull out into sidebar settings
-  const maxResults = 6;
+  const { channelId, recentViewAmount } = siteBarConfig.youtube;
   const { data } = await axios.get(
-    `https://www.googleapis.com/youtube/v3/search?key=${youTubeDataApiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=${maxResults}&type=video`
+    `https://www.googleapis.com/youtube/v3/search?key=${youTubeDataApiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=${recentViewAmount}&type=video`
   );
 
   createNode({

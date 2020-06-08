@@ -133,6 +133,26 @@ collections:
                   { label: Link, name: href, widget: string },
                 ],
             }
+          - {
+              label: YouTube,
+              name: youtube,
+              widget: object,
+              fields:
+                [
+                  {
+                    label: "Channel Id (Requires Restart)",
+                    name: "channelId",
+                    widget: "string",
+                    default: "",
+                  },
+                  {
+                    label: "Recent Video Amount (Requires Restart)",
+                    name: "recentViewAmount",
+                    widget: "number",
+                    default: 6,
+                  },
+                ],
+            }
       - file: "src/config/navigation.json"
         label: "Navigation"
         name: "navigation"
