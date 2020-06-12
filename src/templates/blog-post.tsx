@@ -17,6 +17,7 @@ const BlogPost = ({ data }) => {
   const hidden: boolean = data.post.frontmatter.hidden;
   const githubRepository: string | null = data.post.frontmatter.githubRepository;
   const description: string = data.post.frontmatter.description;
+  const disableToc: boolean = data.post.frontmatter.disableToc;
 
   const body = () => <div dangerouslySetInnerHTML={{ __html: data.post.html }} />;
   const tableOfContents = () => (
@@ -55,7 +56,7 @@ const BlogPost = ({ data }) => {
           githubRepository={githubRepository}
           description={description}
           body={body}
-          tableOfContents={tableOfContents}
+          tableOfContents={disableToc ? null : tableOfContents}
           pagination={pagination}
           showComments={true}
         />
@@ -80,6 +81,7 @@ export const pageQuery = graphql`
         hidden
         githubRepository
         description
+        disableToc
       }
     }
     next: markdownRemark(id: { eq: $nextPostId }) {

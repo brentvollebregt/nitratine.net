@@ -7,7 +7,7 @@ import "./Post.scss";
 export interface IPost extends IHeader {
   pagination: IPagination;
   body: React.FC;
-  tableOfContents: React.FC;
+  tableOfContents: React.FC | null;
   showComments: boolean;
 }
 
@@ -40,10 +40,14 @@ const Post: React.FC<IPost> = ({
       />
 
       <div className="mt-3">
-        <div className="toc">
-          <TableOfContents />
-        </div>
-        <hr className="my-3" />
+        {TableOfContents !== null && (
+          <>
+            <div className="toc">
+              <TableOfContents />
+            </div>
+            <hr className="my-3" />
+          </>
+        )}
         <Body />
       </div>
 
