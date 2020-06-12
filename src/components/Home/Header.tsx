@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import "./Header.scss";
 
 export interface IHeader {
   image: string;
@@ -12,9 +13,9 @@ export interface IHeader {
 }
 
 const Header: React.FC<IHeader> = ({ image, leadText, buttons }) => (
-  <section className="jumbotron jumbotron-fluid text-center" style={{ background: "transparent" }}>
+  <section className="jumbotron jumbotron-fluid text-center header">
     <h1 className="sr-only">Nitratine</h1>
-    <img src={image} className="img-fluid mb-2" style={{ maxHeight: 150 }} />
+    <img src={image} className="img-fluid mb-2" />
     <p className="lead text-muted">{leadText}</p>
     <p>
       {buttons.map(({ text, link, type }) => (

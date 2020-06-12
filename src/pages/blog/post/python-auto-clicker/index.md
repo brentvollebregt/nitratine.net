@@ -4,7 +4,6 @@ title: "Python Auto Clicker"
 date: 2018-02-09T00:00:00.000+13:00
 category: YouTube
 tags: [python, mouse, pynput]
-featured: false
 hidden: false
 githubRepository: null
 image: feature.jpg

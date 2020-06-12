@@ -24,16 +24,31 @@ collections:
     slug: "index"
     path: "{{title}}/{{slug}}"
     fields:
-      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post" }
+      - {
+          label: "Template Key",
+          name: "templateKey",
+          widget: "hidden",
+          default: "blog-post",
+        }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Category", name: "category", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Featured Post", name: "featured", widget: "boolean" }
-      - { label: "Hidden", name: "hidden", widget: boolean }
-      - { label: "GitHub Repository", name: "githubRepository", widget: string, required: false }
+      - { label: "Hidden", name: "hidden", widget: boolean, default: false }
+      - {
+          label: "GitHub Repository",
+          name: "githubRepository",
+          widget: string,
+          default: null,
+          required: false,
+        }
       - { label: "Featured Image", name: "image", widget: image }
-      - { label: "Description", name: "description", widget: "text" }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          default: "",
+        }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "pages"
@@ -43,7 +58,12 @@ collections:
         label: "Home"
         name: "home"
         fields:
-          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "home-page" }
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "home-page",
+            }
           - { label: Image, name: image, widget: image }
           - { label: Lead Text, name: leadText, widget: string }
           - {
@@ -69,11 +89,59 @@ collections:
                   },
                 ],
             }
-      - file: "src/pages/about.md"
+          - {
+              label: "Featured Posts",
+              name: featuredPosts,
+              widget: list,
+              fields:
+                [
+                  {
+                    label: "Type",
+                    name: "type",
+                    widget: "select",
+                    default: "post",
+                    options:
+                      [
+                        { label: "Post", value: "post" },
+                        { label: "Post Image", value: "postImage" },
+                        { label: "Raw", value: "raw" },
+                      ],
+                    required: true,
+                  },
+                  {
+                    label: "Post",
+                    name: "post",
+                    widget: "string",
+                    default: null,
+                    required: false,
+                  },
+                  {
+                    label: "Raw HTML",
+                    name: "rawHtml",
+                    widget: "code",
+                    default_language: html,
+                    output_code_only: true,
+                    required: false,
+                  },
+                  {
+                    label: "Raw Link Override (Only used with Raw)",
+                    name: "rawLink",
+                    widget: "string",
+                    default: null,
+                    required: false,
+                  },
+                ],
+            }
+      - file: "src/pages/about/index.md"
         label: "About"
         name: "about"
         fields:
-          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page" }
+          - {
+              label: "Template Key",
+              name: "templateKey",
+              widget: "hidden",
+              default: "about-page",
+            }
           - { label: "Body", name: "body", widget: "markdown" }
           - { label: "Email", name: "email", widget: "string" }
           - {
@@ -86,7 +154,7 @@ collections:
                   { label: Image, name: img, widget: image },
                 ],
             }
-      - file: "src/pages/portfolio.md"
+      - file: "src/pages/portfolio/index.md"
         label: "Portfolio"
         name: "portfolio"
         fields:
@@ -110,7 +178,12 @@ collections:
         label: "SideBar"
         name: "sidebar"
         fields:
-          - { label: "Config Key", name: "configKey", widget: "hidden", default: "sidebar" }
+          - {
+              label: "Config Key",
+              name: "configKey",
+              widget: "hidden",
+              default: "sidebar",
+            }
           - { label: "About", name: "about", widget: "markdown" }
           - {
               label: Category Prefixes,
@@ -157,7 +230,12 @@ collections:
         label: "Navigation"
         name: "navigation"
         fields:
-          - { label: "Config Key", name: "configKey", widget: "hidden", default: "navigation" }
+          - {
+              label: "Config Key",
+              name: "configKey",
+              widget: "hidden",
+              default: "navigation",
+            }
           - {
               label: Links,
               name: links,

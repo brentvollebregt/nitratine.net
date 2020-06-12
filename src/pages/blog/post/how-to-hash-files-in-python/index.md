@@ -7,7 +7,6 @@ tags:
   - python
   - hashing
   - cyber-security
-featured: false
 hidden: false
 githubRepository: brentvollebregt/auto-py-to-exe
 image: feature.png # Same as: /pages/blog/post/how-to-hash-files-in-python/feature.png

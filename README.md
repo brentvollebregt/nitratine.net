@@ -17,10 +17,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- Featured section in home (use drop-down for type?)
 - search
 - redirects
 - Migrating posts
+- Mocking old style sheet for code
 - Google AdSense
   - Approval for a test site
 - /data/ page
