@@ -11,7 +11,7 @@ hidden: false
 ---
 
 <div align="center" style="padding: 20px 20px 40px 20px">
-    <img src="/posts/monopoly-money/banner.png" alt="Monopoly Money Banner" style="margin-bottom: 10px;">
+    <img src="./banner.png" alt="Monopoly Money Banner" style="margin-bottom: 10px;">
     <p class="text-center">Manage your finances in a game of Monopoly from the browser.</p>
     <a href="https://monopoly-money.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit monopoly-money.nitratine.net →</button></a>
 </div>
@@ -36,15 +36,25 @@ When everyone is in the game, the banker can then close the game to stop others 
 
 ## Screenshots
 
-[![Funds page with game id](screenshot-1.png)](screenshot-1.png)
-
 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 6px;">
-    <!-- <a href="/posts/monopoly-money/screenshot-1.png"><img src="/posts/monopoly-money/screenshot-1.png" alt="Funds page with game id" /></a> -->
-    <a href="/posts/monopoly-money/screenshot-2.png"><img src="/posts/monopoly-money/screenshot-2.png" alt="Transfering funds" /></a>
-    <a href="/posts/monopoly-money/screenshot-3.png"><img src="/posts/monopoly-money/screenshot-3.png" alt="Game history" /></a>
-    <a href="/posts/monopoly-money/screenshot-4.png"><img src="/posts/monopoly-money/screenshot-4.png" alt="Bankers actions page" /></a>
-    <a href="/posts/monopoly-money/screenshot-5.png"><img src="/posts/monopoly-money/screenshot-5.png" alt="Settings page" /></a>
-    <a href="/posts/monopoly-money/screenshot-6.png"><img src="/posts/monopoly-money/screenshot-6.png" alt="Funds page without game id" /></a>
+  <div>
+    <img src="./screenshot-1.png" alt="Funds page with game id" />
+  </div>
+  <div>
+    <img src="./screenshot-2.png" alt="Transfering funds" />
+  </div>
+  <div>
+    <img src="./screenshot-3.png" alt="Game history" />
+  </div>
+  <div>
+    <img src="./screenshot-4.png" alt="Bankers actions page" />
+  </div>
+  <div>
+    <img src="./screenshot-5.png" alt="Settings page" />
+  </div>
+  <div>
+    <img src="./screenshot-6.png" alt="Funds page without game id" />
+  </div>
 </div>
 
 ## Features
