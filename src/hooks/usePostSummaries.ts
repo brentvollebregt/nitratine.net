@@ -9,7 +9,7 @@ export interface PostSummary {
   hidden: boolean;
   githubRepository: string | null;
   description: string;
-  image: string;
+  image: string | undefined;
 }
 
 const usePostSummaries = (): PostSummary[] => {
@@ -51,7 +51,7 @@ const usePostSummaries = (): PostSummary[] => {
     hidden: node.frontmatter.hidden,
     githubRepository: node.frontmatter.githubRepository,
     description: node.frontmatter.description,
-    image: node.frontmatter.image.publicURL
+    image: node.frontmatter.image?.publicURL
   }));
 
   return postSummaries;

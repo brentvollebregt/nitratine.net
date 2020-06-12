@@ -1,37 +1,34 @@
 ---
 templateKey: blog-post
 title: "Python Auto Clicker"
-date: 2018-02-09T00:00:00.000+13:00
+date: 2018-02-09T12:00:00.000Z
 category: YouTube
 tags: [python, mouse, pynput]
-hidden: false
-githubRepository: null
 image: feature.jpg
 description: "This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys."
+hidden: false
 ---
+
+[TOC]
 
 {% with video_id="eamTeszpeZ4" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## What is this?
-
 This project uses the cross-platform module pynput to control the mouse and monitor the keyboard at the same time to create a simple auto clicker.
 
 ## PIP
-
 If you haven't used or setup pip before, look at my tutorial on [how to setup python's pip](/blog/post/how-to-setup-pythons-pip/) to setup pip.
 
 ## Installing Pynput
+We will be using the pynput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
-We will be using the pynput module to listen to mouse events. To install this module execute `pip install pynput` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
+![Installing pynput](../how-to-get-mouse-clicks-with-python/pynput1.png)
 
-![Installing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput1.png)
+To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
 
-To double-check that it was installed successfully, open up IDLE and execute the command `import pynput`; no errors should occur.
-
-![Testing pynput](/posts/how-to-get-mouse-clicks-with-python/pynput2.png).
+![Testing pynput](../how-to-get-mouse-clicks-with-python/pynput2.png).
 
 ## Writing the Code
-
 First, we need to import time and threading. Then import Button and Controller from pynput.mouse so we can control the mouse and import Listener and KeyCode from pynput.keyboard so we can watch for keyboard events to start and stop the auto clicker.
 
 ```python
@@ -133,7 +130,6 @@ To use this script set the variables at the top to what you want.
 Then run the script and use the start/stop key when wanted. Press the set exit key to exit.
 
 ## Final Code
-
 ```python
 import time
 import threading
@@ -196,15 +192,12 @@ with Listener(on_press=on_press) as listener:
 ## Common Issues and Questions
 
 ### ModuleNotFoundError/ImportError: No module named 'pynput'
-
 Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
 ### I got a SyntaxError
-
 Syntax errors are caused by you and there is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally, people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).
 
 ### 'python' is not recognized as an internal or external command
-
 Python hasn't been installed or it hasn't been installed properly. Go to [/blog/post/how-to-setup-pythons-pip/](/blog/post/how-to-setup-pythons-pip/) and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.
 
-_Edited 11/08/18: Added Python 2 support_
+*Edited 11/08/18: Added Python 2 support*
