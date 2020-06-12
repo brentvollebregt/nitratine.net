@@ -4,7 +4,6 @@ import { PortfolioPageTemplate } from "../../templates/portfolio-page";
 
 const PortfolioPagePreview = ({ entry }) => {
   const data = entry.get("data").toJS();
-  console.log("data", data);
   return (
     <PortfolioPageTemplate
       snippets={data.snippets.map(s => () => <ReactMarkdown source={s.body} />)}

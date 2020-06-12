@@ -49,9 +49,6 @@ interface IFeaturedPost {
 }
 
 const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSummary }) => {
-  console.log("featuredPost", featuredPost);
-  console.log("associatedPostSummary", associatedPostSummary);
-
   switch (featuredPost.type) {
     case "post":
     case "postImage": {

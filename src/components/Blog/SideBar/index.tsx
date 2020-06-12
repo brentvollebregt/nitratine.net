@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { navigate } from "@reach/router";
 import { useStaticQuery, graphql } from "gatsby";
 import ReactMarkdown from "react-markdown";
 import { Helmet } from "react-helmet";
@@ -53,6 +54,14 @@ const SideBar: React.FC = () => {
     }
   `);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const onSearch = () => {
+    if (searchQuery !== "") {
+      navigate(`/search/?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   const categoryOccurrences: string[] = allMarkdownRemark.edges.map(
     x => x.node.frontmatter.category
   );
@@ -95,14 +104,20 @@ const SideBar: React.FC = () => {
 
       <div className="input-group mb-3">
         <input
-          id="search"
           type="text"
           className="form-control"
           placeholder="Search"
           aria-label="Search"
+          value={searchQuery}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchQuery(e.currentTarget.value)
+          }
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+            event.key === "Enter" && onSearch()
+          }
         />
         <div className="input-group-append">
-          <button id="search-submit" className="btn btn-outline-primary" type="button">
+          <button className="btn btn-outline-primary" type="button" onClick={onSearch}>
             Search
           </button>
         </div>

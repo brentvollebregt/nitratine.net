@@ -17,7 +17,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- search
 - redirects
 - Migrating posts
 - Mocking old style sheet for code

@@ -3,7 +3,14 @@ import { HomePageTemplate } from "../../templates/home-page";
 
 const IndexPagePreview = ({ entry }) => {
   const data = entry.get("data").toJS();
-  return <HomePageTemplate image={data.image} leadText={data.leadText} buttons={data.buttons} />;
+  return (
+    <HomePageTemplate
+      image={data.image}
+      leadText={data.leadText}
+      buttons={data.buttons}
+      featuredPosts={[]}
+    />
+  );
 };
 
 export default IndexPagePreview;
