@@ -6,10 +6,9 @@ category: Snippets
 tags: [python]
 image: feature.png
 description: "This snippet shows you how to can simply XOR two Python byte strings using a function to produce another byte string."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 Previously doing a CTF challenge I found myself needing to XOR two byte strings in Python to reveal a key from the original text and 'ciphered' data (in this case by XOR).
 

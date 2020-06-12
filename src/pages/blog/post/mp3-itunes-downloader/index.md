@@ -7,6 +7,7 @@ tags: [python, itunes, download, youtube-dl]
 image: gui1.png
 description: "A Python script that allows a user to download a particular song from an iTunes-listed album. It uses YouTube as an audio source and iTunes to tag the mp3 file."
 githubRepository: brentvollebregt/mp3-iTunes
+disableToc: true
 hidden: false
 ---
 

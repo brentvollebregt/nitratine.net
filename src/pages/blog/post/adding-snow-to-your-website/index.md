@@ -6,10 +6,9 @@ category: Tutorials
 tags: [html, css, website]
 image: feature.png
 description: "This is a quick and basic tutorial on how to add snow to your website. Files are provided and an example of this can be shown on the whole site. This will work on any website that has access to the raw HTML."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Adding the div
 First you will need to add a div tag straight under the body tag. It can technically be placed anywhere, this is just recommended for location reasons. Give this div an id of "snow"

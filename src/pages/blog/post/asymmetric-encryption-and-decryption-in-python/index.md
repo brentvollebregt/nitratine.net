@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, encryption, cyber-security]
 image: feature.png
 description: "In this post, I demonstrate the usage of the cryptography module in Python by using using the asymmetric key method RSA to encrypt and decrypt messages."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 Using the [cryptography](https://cryptography.io/en/latest/) module in Python, this post will look into methods of generating keys, storing keys and using the asymmetric encryption method [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) to encrypt and decrypt messages and files. We will be using [cryptography.hazmat.primitives.asymmetric.rsa](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/) to generate keys.
 

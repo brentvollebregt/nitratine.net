@@ -7,6 +7,7 @@ tags: [python, images]
 image: interface.jpg
 description: "I had been requested to help someone with filtering a lot of images taken with a camera. This would need to occur regularly so I created an interface that would help them easily select what photos they wanted."
 githubRepository: brentvollebregt/media-picker
+disableToc: true
 hidden: false
 ---
 

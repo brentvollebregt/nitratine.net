@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, bot]
 image: feature.png
 description: "This bot retweets tweets in python. It looks for competitions which state you need to retweet and retweets them."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## What and Why?
 A while ago I had seen someone show all their winnings from using a twitter bot to retweet tweets. Today is a bit more advanced and now people ask to like, follow and sometimes tag. This bot does not tag others but it does retweet, like and follow people mentioned in the tweet.

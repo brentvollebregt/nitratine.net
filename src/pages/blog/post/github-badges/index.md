@@ -6,10 +6,9 @@ category: Tutorials
 tags: [website]
 image: static.png
 description: "A small demonstration of using GitHub badges from shields.io and how to manipulate them. Basic badges are demonstrated that would be most used by people."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 After recently making my project [hit-counter]({{ url_for('blog_post', path='hit-counter') }}) public, I was about to make a part to create your own custom badges to the project until I discovered [shields.io](https://shields.io/).
 

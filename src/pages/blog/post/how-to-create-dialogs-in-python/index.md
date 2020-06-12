@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, gui, dialog]
 image: question-dialogs.png
 description: "In this post, I demonstrate dialogs that are provided in the Python standard library by showing you how to use them and what they look like."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Why Are These Dialogs Useful?
 The dialogs in this post work on Windows, Linux and Mac and look exactly like the default dialogs the OS provides for other applications. Since they look the same as the 'default' dialogs, users are used to the look and feel, so they already know how to use them.

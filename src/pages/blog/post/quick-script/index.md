@@ -7,6 +7,7 @@ tags: [python, gui]
 image: gui1.png
 description: "A small GUI that displays home-made scripts to be executed. The scripts will appear in a scrolling window and on selection they will run and the window will then close (can be configured). Sample scripts included."
 githubRepository: brentvollebregt/quick-script
+disableToc: true
 hidden: false
 ---
 

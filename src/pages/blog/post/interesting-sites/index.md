@@ -6,10 +6,9 @@ category: General
 tags: [website]
 image: Rome1.jpg
 description: "A list of the most interesting and engaging sites I have discovered which I recommend you to visit. I found them while on the hunt for colours and designs for projects."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## [ROME](http://www.ro.me/)
 This site first brings you to a loading page; just hit enter and let the resources load. For those that have a data cap, be aware that this site uses a lot of data.

@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python]
 image: feature.png
 description: "This post demonstrates how to change a file modification time in Python. No third party modules are required and it will work on Windows, Mac and Linux."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## File Modification Times
 File modification times show when a file was last edited. This can sometimes be confused with creation time but these are very different. Creation time is normally held by the operating system and states when a file was created. This means if you download a file from the internet, the creation time will change and be the time it was downloaded. Thus the creation time isn't very helpful.

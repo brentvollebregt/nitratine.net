@@ -7,10 +7,9 @@ tags: [spotify, react, typescript, javascript, express]
 image: feature.png
 description: "Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the current playing song on Spotify by simply signing into Spotify."
 githubRepository: brentvollebregt/spotify-lyrics-viewer
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 <div align="center" style="padding: 20px 20px 40px 20px">
     <img src="/posts/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png" alt="Spotify Lyrics Viewer Banner" style="margin-bottom: 10px;">

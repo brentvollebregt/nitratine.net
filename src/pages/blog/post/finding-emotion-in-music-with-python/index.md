@@ -6,10 +6,9 @@ category: Investigations
 tags: [python, spotify, machine-learning]
 image: mining-results.png
 description: "This investigation looks at detecting emotion in music. Using data from Spotify I attempted to predict mood in music using Python. The script looks at valence and energy to determine where it lies on an emotional plane."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 Earlier this year, I and seven other students were given a project to visualise emotion in music. We decided to use Unity for visualisation and machine learning in Python to detect emotion. After days of planning and testing, I had a plan for the emotion detection half.
 

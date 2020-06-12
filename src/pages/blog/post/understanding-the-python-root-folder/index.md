@@ -6,10 +6,9 @@ category: General
 tags: [python]
 image: feature.png
 description: "For people new to Python, locating Python files for development can be confusing; these can be python.exe, the scripts folder or the location of where modules are installed to. In this post, I discuss what folders host what and how to track common things down."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Locating Your Installation
 When first installing Python, depending on what you select in the installation, there are a couple of places Python could be installed (you could also select your own directory). Luckily this can be easily found by executing the following in Python:

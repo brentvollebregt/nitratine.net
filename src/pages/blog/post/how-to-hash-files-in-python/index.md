@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, hashing, cyber-security]
 image: feature.png
 description: "Hashing files allows us to generate a string/byte sequence that can help identify a file. This can then be used by comparing the hashes of two or more files to see if these files are the same as well as other applications."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 > Note: This post assumes you already know what a hash is, if you don't, read up on hashes before reading this post. Sites like [this](https://cs.stackexchange.com/a/55472) or [this](https://stackoverflow.com/a/506035) can help you out. 
 

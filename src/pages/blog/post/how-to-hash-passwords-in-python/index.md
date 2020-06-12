@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, hashing, cyber-security]
 image: feature.png
 description: "In this tutorial, I cover the usage of PBKDF2_HMAC to encrypt passwords with a salt using Python."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Why You Need To Hash Passwords
 Whenever verifying a user or something similar with a password, you must **never** store the password in [plaintext](https://en.wikipedia.org/wiki/Plaintext). If an attacker finds a database of plaintext passwords, they can easily be used in combination with matching emails to login to the associated site/account and even used to attempt to log into other accounts since a lot of people use the same password.

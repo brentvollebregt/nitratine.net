@@ -6,10 +6,9 @@ category: Tutorials
 tags: [wifi]
 image: feature.png
 description: "This tutorial describes how to identify stored WiFi passwords in Windows using the command prompt. This is very helpful for identifying your forgotten WiFi passwords."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 A while ago I made a tutorial on [Getting WiFi Passwords With Python](/blog/post/get-wifi-passwords-with-python/) which provides a script that automates the following process. For those that don't want to install Python, this is how to identify stored WiFi passwords manually.
 

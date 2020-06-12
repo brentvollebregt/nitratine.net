@@ -6,6 +6,7 @@ category: Tools
 tags: [javascript, tool]
 image: feature.png
 description: "This is a tool to help you quickly look at function return types of a JavaScript date object and change the date to see what happens"
+disableToc: true
 hidden: false
 ---
 

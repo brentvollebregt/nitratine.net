@@ -7,10 +7,9 @@ tags: [python, react, typescript, sqlite, networking]
 image: feature.png
 description: "This tool helps you keep an eye on who is on your network and when. Simply periodically scan your network, assign devices to people and view who is on your network."
 githubRepository: brentvollebregt/whos-on-my-network
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 <div align="center" style="padding: 20px 20px 40px 20px">
     <img src="/posts/whos-on-my-network/whos-on-my-network-logo.png" alt="Who's On My Network Logo" style="margin-bottom: 10px;">

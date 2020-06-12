@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, keyboard, logging, pynput]
 image: demo2.png
 description: "This demonstration shows you how to detect key presses using the pynput module. These can then be logged to a file as no console is displayed. This is very similar to a key logger."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## PIP
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.

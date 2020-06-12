@@ -7,6 +7,7 @@ tags: [react, typescript, javascript, express, lerna]
 image: feature.png
 description: "A Node.js server and React web app that helps you manage your finances in a game of Monopoly from the browser."
 githubRepository: brentvollebregt/monopoly-money
+disableToc: true
 hidden: false
 ---
 

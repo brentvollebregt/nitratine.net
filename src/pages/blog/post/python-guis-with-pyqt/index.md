@@ -6,10 +6,9 @@ category: YouTube
 tags: [python, gui, pyqt]
 image: image-label-properties.png
 description: "This tutorial covers the basics of how to create GUI's in Python using PyQt5. I will demonstrate how to find the designer and basic usage, converting .ui to .py, running the output file and connecting events to methods."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 {% with video_id="ksW59gYEl6Q" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 

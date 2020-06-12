@@ -7,6 +7,7 @@ tags: [python, clipboard, gui]
 image: main-gui-with-settings-shown.png
 description: "A simple clipboard manager so you will never find yourself copying the same thing twice. Images, text and files are supported and unlimited amounts of saved clipboards can be created. Switch clipboard contents using a simple GUI."
 githubRepository: brentvollebregt/multi-clipboard
+disableToc: true
 hidden: false
 ---
 

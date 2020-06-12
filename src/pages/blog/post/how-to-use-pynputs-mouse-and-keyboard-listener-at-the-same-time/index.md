@@ -6,10 +6,9 @@ category: Tutorials
 tags: [pynput, python, mouse, keyboard]
 image: feature.png
 description: "In this tutorial I show you how to fix naming collisions from Python imports and provide an example of using pynput's mouse and keyboard listeners together."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Background
 

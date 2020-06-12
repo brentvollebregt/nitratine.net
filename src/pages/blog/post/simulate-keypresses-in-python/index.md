@@ -6,10 +6,9 @@ category: YouTube
 tags: [python, keyboard, pynput]
 image: feature.jpg
 description: "This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 {% with video_id="DTnz8wA6wpw" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 

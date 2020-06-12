@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, pyqt5, gui]
 image: feature.png
 description: "In this tutorial, I explain how to import .ui files created using PyQt5's designer tool in Python and how to connect widgets from the GUI to methods in Python."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Introduction
 In my tutorial on [Python GUI's with PyQt](/blog/post/python-guis-with-pyqt/), I had many people bring up the fact that when modifying the GUI, as soon as pyuic5 is executed again to rebuild the Python file, all original changes will be lost.

@@ -6,10 +6,9 @@ category: Tools
 tags: [website]
 image: feature.png
 description: "Downloading and setting up a tool to perform a basic action can be a lot of effort compared to using something online. This is a list of tools I actively use for everyday development."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Audio
 

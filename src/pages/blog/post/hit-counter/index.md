@@ -7,6 +7,7 @@ tags: [python, flask]
 image: feature.png
 description: "Easily Count Hits on a Website by Requesting an SVG Displaying Hit Count. Works on any site."
 githubRepository: brentvollebregt/hit-counter
+disableToc: true
 hidden: false
 ---
 

@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, encryption, cyber-security]
 image: feature.png
 description: "PyCryptodome is a fork of PyCrypto that brings enhancements on top of the now unmaintained PyCrypto library. This tutorial demonstrates using the library by encrypting strings and files using AES."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## What is PyCryptodome?
 PyCryptodome is a self-contained Python package of low-level cryptographic primitives that supports Python 2.6 and 2.7, Python 3.4 and newer, and PyPy.

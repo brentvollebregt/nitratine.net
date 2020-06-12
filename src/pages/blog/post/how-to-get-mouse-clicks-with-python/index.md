@@ -6,10 +6,9 @@ category: YouTube
 tags: [python, mouse, logging, pynput]
 image: demo2.png
 description: "This demonstration shows you how to track mouse clicks, movements and even scrolls using the pynput module. These can then be logged to a file as no console is displayed. This is very similar to a mouse logger."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 {% with video_id="kJshtCfqCsY" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 

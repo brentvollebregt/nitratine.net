@@ -24,17 +24,13 @@ collections:
     slug: "index"
     path: "{{title}}/{{slug}}"
     fields:
-      - {
-          label: "Template Key",
-          name: "templateKey",
-          widget: "hidden",
-          default: "blog-post",
-        }
+      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Category", name: "category", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list" }
       - { label: "Hidden", name: "hidden", widget: boolean, default: false }
+      - { label: "Disable Table Of Contents", name: "disableToc", widget: boolean, default: false }
       - {
           label: "GitHub Repository",
           name: "githubRepository",
@@ -43,12 +39,7 @@ collections:
           required: false,
         }
       - { label: "Featured Image", name: "image", widget: image }
-      - {
-          label: "Description",
-          name: "description",
-          widget: "text",
-          default: "",
-        }
+      - { label: "Description", name: "description", widget: "text", default: "" }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "pages"
@@ -58,12 +49,7 @@ collections:
         label: "Home"
         name: "home"
         fields:
-          - {
-              label: "Template Key",
-              name: "templateKey",
-              widget: "hidden",
-              default: "home-page",
-            }
+          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "home-page" }
           - { label: Image, name: image, widget: image }
           - { label: Lead Text, name: leadText, widget: string }
           - {
@@ -108,13 +94,7 @@ collections:
                       ],
                     required: true,
                   },
-                  {
-                    label: "Post",
-                    name: "post",
-                    widget: "string",
-                    default: null,
-                    required: false,
-                  },
+                  { label: "Post", name: "post", widget: "string", default: null, required: false },
                   {
                     label: "Raw HTML",
                     name: "rawHtml",
@@ -136,12 +116,7 @@ collections:
         label: "About"
         name: "about"
         fields:
-          - {
-              label: "Template Key",
-              name: "templateKey",
-              widget: "hidden",
-              default: "about-page",
-            }
+          - { label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page" }
           - { label: "Body", name: "body", widget: "markdown" }
           - { label: "Email", name: "email", widget: "string" }
           - {
@@ -178,12 +153,7 @@ collections:
         label: "SideBar"
         name: "sidebar"
         fields:
-          - {
-              label: "Config Key",
-              name: "configKey",
-              widget: "hidden",
-              default: "sidebar",
-            }
+          - { label: "Config Key", name: "configKey", widget: "hidden", default: "sidebar" }
           - { label: "About", name: "about", widget: "markdown" }
           - {
               label: Category Prefixes,
@@ -230,12 +200,7 @@ collections:
         label: "Navigation"
         name: "navigation"
         fields:
-          - {
-              label: "Config Key",
-              name: "configKey",
-              widget: "hidden",
-              default: "navigation",
-            }
+          - { label: "Config Key", name: "configKey", widget: "hidden", default: "navigation" }
           - {
               label: Links,
               name: links,

@@ -6,10 +6,9 @@ category: General
 tags: [javascript, bookmarklet]
 image: feature.png
 description: 'A few days ago the site New Zealand Herald started to introduce premium content on their site. Using the JavaScript code in a bookmark found in this post is a very easy way to get around the monthly fee for "premium content".'
+disableToc: false
 hidden: true
 ---
-
-[TOC]
 
 ## What is This?
 

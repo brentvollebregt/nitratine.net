@@ -6,10 +6,9 @@ category: Tutorials
 tags: [twitter, javascript, jquery, tweepy]
 image: followers.png
 description: "This article covers how I used jQuery on twitter.com to delete all my tweets and remove all my likes and accounts I follow."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 I have seen many people report about how bulk twitter deleters can 'break' an account; this has also occurred to me. At the end of this, I also provide a method to help with deleting broken tweets that you cannot delete/un-retweet.
 

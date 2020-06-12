@@ -7,6 +7,7 @@ tags: [python, flask, website]
 image: nitratine1.jpg
 description: "The Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months."
 githubRepository: brentvollebregt/nitratine-old
+disableToc: true
 hidden: false
 ---
 

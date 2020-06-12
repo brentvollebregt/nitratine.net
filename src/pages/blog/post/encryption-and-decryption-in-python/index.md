@@ -6,10 +6,9 @@ category: YouTube
 tags: [python, encryption, cyber-security]
 image: feature.png
 description: "In this post, I discuss how to encrypt and decrypt messages in Python using symmetric encryption. I will demonstrate how to create keys, save keys and how to encrypt messages and text."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 {% with video_id="H8t4DJ3Tdrg" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 

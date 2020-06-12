@@ -6,10 +6,9 @@ category: General
 tags: [backgrounds]
 image: lhc-blocks.jpg
 description: "Surprisingly I get a lot of people asking where I got my backgrounds from in my YouTube videos. I've finally decided to just put them all in once place if anyone is interested."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 I have also added backgrounds I have made at the top of this and add attributions to where I got other backgrounds from.
 

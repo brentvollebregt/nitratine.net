@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python]
 image: feature.png
 description: "This is tutorial on how to fix the classic error, 'python' is not recognized as an internal or external command, operable program or batch file, when trying to call Python from a terminal"
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Why You Are Getting This Error
 When executing `python` or `pip` from the terminal (or whatever application you are using), if your environment isn't set up correctly, you will be given an error saying `'python' is not recognized as an internal or external command, operable program or batch file.` (or `pip` when executing `pip`).

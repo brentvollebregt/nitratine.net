@@ -6,10 +6,9 @@ category: General
 tags: [python, pyinstaller]
 image: feature.png
 description: "After helping many of people fix issues with auto-py-to-exe and PyInstaller, this post contains what I think you should understand and ways to fix issues you are having with auto-py-to-exe."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Introduction
 A while ago I wrote an article on common issues when using [auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe). In this post, I aim to replace that post and explain more in greater depth.

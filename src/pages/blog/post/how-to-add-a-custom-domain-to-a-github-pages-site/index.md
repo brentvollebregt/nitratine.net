@@ -6,10 +6,9 @@ category: Tutorials
 tags: [website, domain]
 image: existing-resource-records.png
 description: "In this tutorial, I explain how to configure your domain for GitHub Pages using a domain from Namesilo. You will first want to create a CNAME file for your GitHub pages site."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 Yesterday night I purchased the domain [nitratine.net](http://nitratine.net/) from [Namesilo](https://www.namesilo.com/). There is a lot of help out there to set this up but unfortunately, there are no direct instructions for Namesilo specifically.
 

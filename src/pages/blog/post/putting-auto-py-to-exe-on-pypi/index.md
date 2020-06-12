@@ -6,10 +6,9 @@ category: General
 tags: [python, pypi]
 image: feature.jpg
 description: "I have finally decided to put auto-py-to-exe on the Python Package Index. Auto-py-to-exe can now be installed using pip by executing 'pip' install auto-py-to-exe."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 [auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe) can now be installed using pip by executing the following in the terminal:
 

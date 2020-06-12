@@ -6,10 +6,9 @@ category: Tutorials
 tags: [google, chrome-extension]
 image: message.png
 description: "When first installing Google Publisher Toolbar, you may be asked, \"Please copy this code, switch to your application and paste it there\". In this post, I look into a method on how to fix this and allow you to use the extension."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## The Problem
 When installing the latest version of the Chrome extension *Google Publisher Toolbar* and then trying to connect/enable Google AdSense or Google Analytics, you may be given a prompt to "**Please copy this code, switch to your application and paste it there:**" followed by a code that you can copy like in the image below.

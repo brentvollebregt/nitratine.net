@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python, requests]
 image: feature.png
 description: "This is a basic Python requests tutorial to help you get started with sending HTTP requests in Python. This will cover all the basics that you will need and want to know when making HTTP requests in Python."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Introduction
 The [`requests`](https://github.com/requests/requests) Python package is an HTTP library created by [Kenneth Reitz](https://github.com/kennethreitz). It is a very well known package in the Python community for making HTTP requests easy to create and call. This tutorial will cover the basics that you will need to know and will want to know when making HTTP requests in Python.

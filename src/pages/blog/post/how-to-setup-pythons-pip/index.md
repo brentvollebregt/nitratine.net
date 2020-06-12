@@ -6,10 +6,9 @@ category: YouTube
 tags: [python]
 image: demo5.png
 description: "This tutorial demonstrates how to set up Python's PIP. PIP is a package manager for pip that allows you to download third-party modules easily. I explain how to find your scripts folder and how to find pip."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 {% with video_id="cm6WDGAzDPM" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 

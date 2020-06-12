@@ -7,6 +7,7 @@ tags: [python, pyinstaller, eel, gui]
 image: feature.png
 description: "This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller. The whole idea seems automatic as it cleans up after itself."
 githubRepository: brentvollebregt/auto-py-to-exe
+disableToc: true
 hidden: false
 ---
 

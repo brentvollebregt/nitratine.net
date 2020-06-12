@@ -6,10 +6,9 @@ category: YouTube
 tags: [python, gui, chrome, javascript]
 image: feature.png
 description: "Eel is a little Python library for making simple Electron-like HTML/JS GUI apps. This used for creating GUI's in a Chrome app window with HTML, CSS and JS. In summary, it hosts a local webserver, then provides features to communicate between JavaScript and Python."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 When thinking of what to design [auto-py-to-exe]({{ url_for('blog_post', path='auto-py-to-exe') }}) with, I came across [Eel](https://github.com/ChrisKnott/Eel) for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. Hosting a local webserver and using Chromes app mode was exactly what I needed to make this project look great. Also this library lets you annotate functions in Python so that they can be called from Javascript, and vice versa.
 

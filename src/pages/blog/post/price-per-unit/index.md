@@ -7,6 +7,7 @@ tags: [android, java, money]
 image: FeatureGraphic.jpg
 description: "This app compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money."
 githubRepository: brentvollebregt/price-per-unit
+disableToc: true
 hidden: false
 ---
 

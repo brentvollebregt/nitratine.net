@@ -7,6 +7,7 @@ tags: [javascript, chrome-extension]
 image: feature.png
 description: "Check if you are a participant of a conversation in Gmail. Helps you stop sending emails with the wrong address."
 githubRepository: brentvollebregt/uow-moodle-rwa-ignorer
+disableToc: true
 hidden: false
 ---
 

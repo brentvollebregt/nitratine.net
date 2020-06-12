@@ -7,6 +7,7 @@ tags: [python, spotify, download, youtube-dl]
 image: feature.jpg
 description: "A Python script to download a Spotify playlist to MP3 using YouTube as an audio source. The MP3s are tagged and given album art using Spotify"
 githubRepository: brentvollebregt/spotify-playlist-downloader
+disableToc: true
 hidden: false
 ---
 

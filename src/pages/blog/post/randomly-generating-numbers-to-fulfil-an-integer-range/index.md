@@ -6,10 +6,9 @@ category: Investigations
 tags: [python]
 image: graph2.png
 description: "This experiment looks at how many randoms numbers will need to be generated to fulfil an integer range. I use python to generate random numbers and simulate thousands of tests. This was conducted to find the range of 16,777,216 for an app I had developed."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Introduction
 I was recently discussing 'stupid' apps with a flatmate and how they do so well on app stores. We were thinking of really stupid apps and had come up with the idea of just changing the colour when a user tapped on the screen. Obviously, there would be more to the app but it seemed very achievable and something fun to make. [My idea was to generate the colours as hexadecimal values and display them to the user along with the colour]({{ url_for('blog_post', path='colour') }}). I then thought about making the aim of the app to get all the colours; a user would randomly generate colours until they have gotten them all. With there being 16,777,216 different colours that can be represented using hexadecimal I noticed very quickly that this is very unachievable for a user, but how unachievable really was it?

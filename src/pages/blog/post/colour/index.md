@@ -6,6 +6,7 @@ category: Apps
 tags: [android, java]
 image: feature.png
 description: "This app is based off a goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen. This figure is the number of colours a screen can display today and it's your challenge to find them all."
+disableToc: true
 hidden: false
 ---
 

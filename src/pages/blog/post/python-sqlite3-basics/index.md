@@ -6,10 +6,9 @@ category: YouTube
 tags: [python, sql]
 image: feature.png
 description: "This post covers some basics of SQLite3. SQLite3 allows us to access a database using SQL that doesn't require a separate server. This means the database is stored in a single file and we directly connect to the file rather than through some third-party applications server."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 {% with video_id="SQj17D1Q_6s" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 

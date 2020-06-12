@@ -6,10 +6,9 @@ category: Tutorials
 tags: [python]
 image: feature.png
 description: "Having multiple distributions of Python installed and not managing them correctly can lead to confusion. In this post, I discuss how to identify this potential mess and methods to fix it."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## The Issue / Potential Confusion
 Quite often, I get comments from people telling me that a module doesn't work, that they have installed the library/module:

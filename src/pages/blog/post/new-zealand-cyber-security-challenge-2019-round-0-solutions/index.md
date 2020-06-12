@@ -6,10 +6,9 @@ category: General
 tags: [ctf, nzcsc]
 image: feature.png
 description: "These are my solutions to the challenges I solved in the New Zealand Cyber Security Challenge 2019 Round 0."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## What is the [New Zealand Cyber Security Challenge](https://nzcsc.org.nz/)?
 Each year the University of Waikato holds a "cybersecurity" competition which involves CTF for rounds 1 and 2, policy creation/identification for round 3 and attack/defend servers for the top 5 teams. Side Challenges are also held which varies with the theme per year.

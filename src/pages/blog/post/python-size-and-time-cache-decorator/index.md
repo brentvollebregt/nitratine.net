@@ -6,10 +6,9 @@ category: General
 tags: [python, decorator]
 image: feature.png
 description: "A Python decorator that allows developers to cache function return values and include expirations on remembered values."
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 ## Introduction
 Python's standard library comes with a memoization function in the `functools` module named [`@functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache). This can be very useful for pure functions *(functions that always will return the same output given an input)* as it can be used to speed up an application by remembering a return value. This is because next time a function is called with the same arguments, the value can be simply returned and computation will not have to occur again.

@@ -7,6 +7,7 @@ tags: [javascript, chrome-extension]
 image: target.png
 description: "A chrome extension to solve the Waikato Universities resource work around in Moodle."
 githubRepository: brentvollebregt/uow-moodle-rwa-ignorer
+disableToc: true
 hidden: false
 ---
 

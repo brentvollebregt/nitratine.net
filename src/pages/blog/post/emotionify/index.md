@@ -7,10 +7,9 @@ tags: [react, javascript, typescript, spotify]
 image: feature.png
 description: "Emotionify is a web app that allows users to log in to Spotify, select a playlist and then sort them using Spotify's pre-calculated audio feature values."
 githubRepository: brentvollebregt/emotionify
+disableToc: false
 hidden: false
 ---
-
-[TOC]
 
 <div align="center" style="padding: 20px 20px 40px 20px">
     <img src="/posts/emotionify/emotionify-banner.png" alt="Emotionify Banner">
