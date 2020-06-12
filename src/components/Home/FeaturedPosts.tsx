@@ -1,6 +1,7 @@
 import React from "react";
 import { formatDate } from "../utils";
 import "./FeaturedPosts.scss";
+import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
 
 interface PostFeaturedPostType {
   type: "post";
@@ -21,23 +22,12 @@ interface RawFeaturedPostType {
 
 type FeaturedPostType = PostFeaturedPostType | PostImageFeaturedPostType | RawFeaturedPostType;
 
-export interface FeaturedPostSummary {
-  slug: string;
-  title: string;
-  description: string;
-  date: Date;
-  category: string;
-  image: string;
-}
-
 export interface IFeaturedPosts {
   featuredPosts: FeaturedPostType[];
-  postSummaries: FeaturedPostSummary[];
 }
 
-const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts, postSummaries }) => {
-  console.log("featuredPosts", featuredPosts);
-  console.log("postSummaries", postSummaries);
+const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts }) => {
+  const postSummaries = usePostSummaries();
 
   return (
     <div className="featured-posts">
@@ -55,7 +45,7 @@ const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts, postSummaries 
 
 interface IFeaturedPost {
   featuredPost: FeaturedPostType;
-  associatedPostSummary: FeaturedPostSummary | undefined;
+  associatedPostSummary: PostSummary | undefined;
 }
 
 const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSummary }) => {
