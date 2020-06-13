@@ -31,7 +31,7 @@ auto-py-to-exe
 
 ## [Emotionify](https://emotionify.nitratine.net/)
 
-![Emotionify Logo](/assets/featured-site-emotionify.png)
+![Emotionify Logo](../blog/post/emotionify/emotionify-banner.png)
 
 Emotionify is a web app that allows users to login to Spotify,
 select a playlist and then sort them using Spotify's pre-calculated audio
@@ -46,7 +46,7 @@ acks/get-audio-features/) based on distance from the origin.
 Users also have the ability to change how and what songs are sorted
 by.
 
-TODO: IMAGE
+![Example Visualisation Sort of a Personal Playlist](../blog/post/emotionify/emotionify-sort-comparison.png)
 
 > Associated [post](/blog/post/emotionify/)
 
@@ -55,7 +55,7 @@ TODO: IMAGE
 
 ## [Monopoly Money](https://monopoly-money.nitratine.net/)
 
-![Monopoly Money Logo](/assets/featured-site-monopoly-money.png)
+![Monopoly Money Logo](../blog/post/monopoly-money/banner.png)
 
 Monopoly Money is a web app that helps you keep track of your
 finances in a game of Monopoly.
@@ -64,7 +64,11 @@ Instead of using the cash that the game commonly comes with, you can
 play Monopoly like you're playing the credit card edition, but with your
 phone - a much more faster way to exchange money.
 
-TODO: IMAGES
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 6px;">
+    <div><img src="../blog/post/monopoly-money/screenshot-1.png" alt="Funds page with game id"></div>
+    <div><img src="../blog/post/monopoly-money/screenshot-3.png" alt="Game history"></div>
+    <div><img src="../blog/post/monopoly-money/screenshot-4.png" alt="Bankers actions page"></div>
+</div>
 
 > Associated
 > [post](https://nitratine.net/blog/post/monopoly-money/)
@@ -74,7 +78,7 @@ TODO: IMAGES
 
 ## [PyTutorials YouTube Channel](https://www.youtube.com/PyTutorials)
 
-TODO: IMAGE
+![PyTutorials Channel Header](PyTutorials-channel-header.jpg)
 
 When I have time and ideas, I like to make programming tutorials.
 Currently most of my tutorials are Python related but I also have a few
@@ -99,7 +103,7 @@ themselves and get great feedback.
 
 ## [Spotify Lyrics Viewer](https://spotify-lyrics-viewer.nitratine.net/)
 
-![Spotify Lyrics Viewer Logo](/assets/featured-site-spotify-lyrics-viewer.png)
+![Spotify Lyrics Viewer Logo](../blog/post/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png)
 
 Spotify Lyrics Viewer is a tool that allows you to view the lyrics
 of the current playing song on Spotify by simply signing into Spotify.
@@ -107,7 +111,7 @@ of the current playing song on Spotify by simply signing into Spotify.
 The tool provides a basic interface showing details about the
 current playing song and lyrics sourced from Genius.
 
-TODO: IMAGE
+![Spotify Lyrics Viewer showing lyrics](../blog/post/spotify-lyrics-viewer/sample.png)
 
 > Associated
 > [post](https://nitratine.net/blog/post/spotify-lyrics-viewer/)
@@ -117,7 +121,7 @@ TODO: IMAGE
 
 ## [Who's On My Network](https://github.com/brentvollebregt/whos-on-my-network)
 
-TODO: IMAGE
+![Who's On My Network Logo](../blog/post/whos-on-my-network/whos-on-my-network-logo.png)
 
 This tool helps you keep and eye on who is on your network and when.
 It can periodically scan your network and you can then assign devices to
@@ -126,7 +130,7 @@ people and view who is on your network.
 The tool provides a React interface to view scans that have been
 made and identify unusual and unexpected activity.
 
-TODO: IMAGE
+![Who's On My Network Overview Demo](../blog/post/whos-on-my-network/overview-screenshot.png)
 
 > Associated [post](https://nitratine.net/blog/post/whos-on-my-network/)
 
@@ -135,7 +139,7 @@ TODO: IMAGE
 
 ## [Price Per Unit](https://github.com/brentvollebregt/price-per-unit)
 
-TODO: IMAGE
+![Price Per Unit Feature](../blog/post/price-per-unit/FeatureGraphic.jpg)
 
 This project is an Android app that compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money. Simply give a name (optional), enter in the cost, amount and size of each item and the unit per dollar will be calculated.
 
@@ -146,23 +150,17 @@ This project is an Android app that compares prices for similar items and will c
 
 ## [nitratine.net](https://nitratine.net/)
 
-TODO: IMAGE
-
-TODO: CHANGE BELOW
+![nitratine.net Logo](/assets/logo.png)
 
 Nitratine is a website where I share projects developed by me and
-tutorials on topics that I'm interested in. Currently this is the third
+tutorials on topics that I'm interested in. Currently this is the fourth
 version of the site and is hosted statically using GitHub Pages and built
-with a custom Python build script.
+using Gatsby.
 
-When developing and writing posts, the website can be hosted locally
-using Flask which then changes to be viewed without having to re-build the
-site on each modification. Posts are written in markdown which are
-converted to HTML using Flask-FlatPages.
+The site also uses Netlify's CMS to make creating posts much easier but still
+allows for raw JSX pages to be created to host more complex pages.
 
-Due to the static nature of the site, I use Frozen-Flask to freeze
-the site into a static version that can easily be hosted on GitHub pages.
-A deploy script then commits, tags and pushes all changes on a separate
-branch.
+A GitHub Actions workflow is used to build the site on each push to master which
+then deploys the most recent version of the site to GitHub pages.
 
 </div>
