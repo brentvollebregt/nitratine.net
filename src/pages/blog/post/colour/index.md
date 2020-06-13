@@ -11,8 +11,8 @@ hidden: false
 youtubeVideoId: x56o7b9Uor8
 ---
 
-<a href="https://play.google.com/store/apps/details?id=com.pythonanywhere.brentvollebregt.colour">
-	<img src="./google-play.png" alt="Get it on Google Play" style="height: 60px;"/>
+<a href="https://play.google.com/store/apps/details?id=com.pythonanywhere.brentvollebregt.colour" style="display: block; max-width: 200px; margin: auto;">
+    <img src="./google-play.png" alt="Get it on Google Play" style="height: 60px;"/>
 </a>
 
 ## The Idea

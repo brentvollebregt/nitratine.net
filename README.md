@@ -17,16 +17,11 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- Migrating posts
 - redirects
 - Mocking old style sheet for code
 - Google AdSense
   - Approval for a test site
 - /data/ page
-
-### Post Bugs:
-
-- `colour`: Image too large on page
 
 ### Later
 
