@@ -3,12 +3,14 @@ import Header, { IHeader } from "./Header";
 import Pagination, { IPagination } from "./Pagination";
 import Comments from "./Comments";
 import "./Post.scss";
+import EmbedYouTubeVideo from "./EmbedYouTubeVideo";
 
 export interface IPost extends IHeader {
   pagination: IPagination;
   body: React.FC;
   tableOfContents: React.FC | null;
   showComments: boolean;
+  youtubeVideoId: string | null;
 }
 
 const Post: React.FC<IPost> = ({
@@ -22,7 +24,8 @@ const Post: React.FC<IPost> = ({
   pagination,
   body,
   tableOfContents,
-  showComments
+  showComments,
+  youtubeVideoId
 }) => {
   const Body = body;
   const TableOfContents = tableOfContents;
@@ -48,6 +51,9 @@ const Post: React.FC<IPost> = ({
             <hr className="my-3" />
           </>
         )}
+
+        {youtubeVideoId && <EmbedYouTubeVideo videoId={youtubeVideoId} />}
+
         <Body />
       </div>
 

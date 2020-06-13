@@ -8,9 +8,8 @@ image: feature.jpg
 description: "This demonstrates how to make a script to detect combinations of keypresses or even single keys pressed in Python. The script will use pynput to detect keypresses and will work on windows, mac and linux."
 disableToc: false
 hidden: false
+youtubeVideoId: n_dfv5DLCGI
 ---
-
-{% with video_id="n_dfv5DLCGI" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## PIP
 

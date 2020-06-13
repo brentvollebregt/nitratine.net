@@ -26,7 +26,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Post Search
 
-- `{% include 'blog-post-embedYouTube.html' %}`
+- Look at the console - fix warnings
 
 ### Post Bugs:
 

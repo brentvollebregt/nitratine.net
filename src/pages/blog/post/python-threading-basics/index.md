@@ -8,16 +8,17 @@ image: feature.png
 description: "This post covers the basics of Python's threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs."
 disableToc: false
 hidden: false
+youtubeVideoId: 5JSloPGocSY
 ---
 
-{% with video_id="5JSloPGocSY" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
-
 ## What is Threading?
+
 The threading module comes pre-installed with python so there are no downloads or installs for this tutorial. Threading allows us to call a method or class that has extended the `threading.Thread` class to run alongside the main thread (the linear flow that generally happens).
 
 One good use of threading is to create multiple instances of things that take time outside your program. A great example of this is sending requests to a server. If you want to send many, instead of waiting for them to finish one-by-one before you send the next request, you can create many threads to request different URLs and they will then all be waiting at the same time.
 
 ## Threading a Method
+
 A basic example of threading can be seen below:
 
 ```python
@@ -47,6 +48,7 @@ Hello World
 Note that there are no brackets after worker when defining the target. This is because we need to pass the method, not what the method returns (even if it returns nothing).
 
 ### Passing Arguments
+
 To pass arguments to a method when creating the thread, we can pass a tuple to args. For example:
 
 ```python
@@ -76,6 +78,7 @@ I am thread: 3
 The reason args is set to `(i,)` and not `(i)` is because if we left out the comma, the type would no longer be a tuple and would cause an error.
 
 ## Threading a Class
+
 Threading a class can be quite useful as you can have many methods particular to a thread and it's easier to keep your data in one place specific to a thread. An example of threading a class is:
 
 ```python
@@ -109,6 +112,7 @@ See how all the strings are together; this shows that they were all printed at v
 Note that if you do not need an initialisation method, you can remove it completely including the super() call.
 
 ### Passing Arguments
+
 To pass arguments, you just use the class as you would normally. For example:
 
 ```python
@@ -140,9 +144,11 @@ In this example, I had added a parameter to the class in the initialisation meth
 Just like last time they concatenated into one string followed by new line characters. When passing variables you need to keep the super() call as you are now using the initialisation method unless you pass it in with a different method before calling run.
 
 ## Managing Your Threads
+
 Python has a lot of useful methods, variables and parameter to manage your threads. These are some of the basic ones.
 
 ### Naming
+
 Setting names for threads can be quite useful for identifying them. To do this, when creating a thread call `.setName()` and pass a string. For example:
 
 ```python
@@ -174,6 +180,7 @@ print (thread_list[0].getName())
 ```
 
 ### Joining Threads
+
 Joining a thread allow us to wait until it is terminated before we carry on. For example:
 
 ```python
@@ -217,8 +224,9 @@ print ("Thread has finished")
 ```
 
 ### Daemon Threads
+
 A daemon thread is a thread that will not keep running if the rest of the script has stopped and there are no more non-daemon threads left. We can tell the main thread is non-daemon as it is not abruptly stopped when it's the only thread running.
- 
+
 This means setting a threads daemon value to `True` will mean that it will not keep running after the main thread has finished (or other non-daemon threads); we can set `daemon` to `False` to make sure the thread keeps running even when the main thread finishes. The daemon value must be set before `.start()` is called on the thread. To set if a thread is daemon, you can pass `daemon=True` (or `False`) in the same place I put args before:
 
 ```python
@@ -236,6 +244,7 @@ thread.start()
 To check if a thread is daemon, you can check `.daemon` on the thread; this is a bool.
 
 ### Getting All Threads
+
 If you want to get all the threads that are currently alive, you can call `threading.enumerate()`. This will return all alive threads including the main thread in a list. If you want to get all the names of the current alive threads, use:
 
 ```python
@@ -244,9 +253,11 @@ for thread in threading.enumerate():
 ```
 
 ### Is a Thread Alive?
+
 If you want to check if a particular thread is still alive, you can call `.is_alive()` on the thread. This will return true if the thread is still running.
 
 ## Why it Won't Make Your Script Run Faster
+
 In most cases, threading your pre-existing code will not make it run any faster. Python threads are designed to run multiple tasks at the same time, however, this is only on one CPU core.
 
 A normal python script is run on a single core so when you create threads it will not speed up as it is basically doing the same thing just at different times. This issue/feature (if you want to look at it in a positive way) is due to the [Global Interpreter Lock](https://stackoverflow.com/questions/1294382/what-is-a-global-interpreter-lock-gil) which in short means that "multiple threads can't effectively make use of multiple cores" which is the reason for no speed increase. [Here](https://www.youtube.com/watch?v=ph374fJqFPE) is a great talk on the GIL with [some great slides](http://www.dabeaz.com/python/GIL.pdf).
@@ -254,7 +265,8 @@ A normal python script is run on a single core so when you create threads it wil
 If you do want to have multiple tasks running on multiple cores, look at the [multiprocessing module](https://docs.python.org/3.4/library/multiprocessing.html).
 
 ## Extra Resources
+
 Since this is only a basic look over threading so someone that hasn't used it can understand it better, I have left out things like events, signalling and locks. To read more about threads, you could visit these pages:
 
- - [pymotw.com/3/threading/](https://pymotw.com/3/threading/)
- - [Python 3 Threading Documentation](https://docs.python.org/3/library/threading.html)
+- [pymotw.com/3/threading/](https://pymotw.com/3/threading/)
+- [Python 3 Threading Documentation](https://docs.python.org/3/library/threading.html)

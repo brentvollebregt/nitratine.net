@@ -8,9 +8,8 @@ image: feature.jpg
 description: "This is a Python keylogger which will work on Windows, Mac and Linux. This script uses the pynput module. This python keylogger will store typed keys in a file in order of when they were typed."
 disableToc: false
 hidden: false
+youtubeVideoId: x8GbWt56TlY
 ---
-
-{% with video_id="x8GbWt56TlY" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## PIP
 

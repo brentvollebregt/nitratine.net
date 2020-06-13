@@ -8,9 +8,8 @@ image: email-example-3.png
 description: "This script sends an email using python. By logging in to a Gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached."
 disableToc: false
 hidden: false
+youtubeVideoId: YPiHBtddefI
 ---
-
-{% with video_id="YPiHBtddefI" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## Why Bother?
 

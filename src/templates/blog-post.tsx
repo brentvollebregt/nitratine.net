@@ -15,9 +15,12 @@ const BlogPost = ({ data }) => {
   const category: string = data.post.frontmatter.category;
   const tags: string[] = data.post.frontmatter.tags;
   const hidden: boolean = data.post.frontmatter.hidden;
-  const githubRepository: string | null = data.post.frontmatter.githubRepository;
+  const githubRepository: string | null =
+    data.post.frontmatter.githubRepository === "" ? null : data.post.frontmatter.githubRepository;
   const description: string = data.post.frontmatter.description;
   const disableToc: boolean = data.post.frontmatter.disableToc;
+  const youtubeVideoId: string | null =
+    data.post.frontmatter.youtubeVideoId === "" ? null : data.post.frontmatter.youtubeVideoId;
 
   const body = () => <div dangerouslySetInnerHTML={{ __html: data.post.html }} />;
   const tableOfContents = () => (
@@ -59,6 +62,7 @@ const BlogPost = ({ data }) => {
           tableOfContents={disableToc ? null : tableOfContents}
           pagination={pagination}
           showComments={true}
+          youtubeVideoId={youtubeVideoId}
         />
       </BlogBase>
     </Base>
@@ -82,6 +86,7 @@ export const pageQuery = graphql`
         githubRepository
         description
         disableToc
+        youtubeVideoId
       }
     }
     next: markdownRemark(id: { eq: $nextPostId }) {

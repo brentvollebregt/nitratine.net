@@ -8,9 +8,8 @@ image: demo6.png
 description: "A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package."
 disableToc: false
 hidden: false
+youtubeVideoId: lOIJIk_maO4
 ---
-
-{% with video_id="lOIJIk_maO4" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## PIP
 
@@ -72,7 +71,11 @@ You can combine these flags to make things like onefile executables with no cons
 
 In March 2018 I created an application that allows you to create executables easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.
 
-{% with video_id="OZSZHmWSOeM" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+<div class="embedded_yt my-3">
+    <div>
+        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/OZSZHmWSOeM"></iframe>
+    </div>
+</div>
 
 ![Empty interface](https://i.imgur.com/dd0LC2n.png)
 
