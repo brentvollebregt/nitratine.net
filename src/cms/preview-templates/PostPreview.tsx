@@ -1,25 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
-import Prism from "prismjs";
-// Would be nice to use: import loadLanguages from "prismjs/components/index"; loadLanguages();
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-python";
-import "prismjs/components/prism-markup";
-import "prismjs/components/prism-css";
+import useSyntaxHighlighter from "../../hooks/useSyntaxHighlighter";
 import { BlogPostTemplate } from "../../templates/blog-post";
 import { IPagination } from "../../components/Blog/Post/Pagination";
-import "../../components/Blog/prism-theme.css";
 
 const PostPreview = ({ entry }) => {
   const data = entry.get("data").toJS();
 
-  const root = useRef(null);
-
-  useEffect(() => {
-    if (root.current !== null) {
-      Prism.highlightAllUnder(root.current);
-    }
-  }, [data]);
+  const highlightRoot = useSyntaxHighlighter();
 
   const pagination: IPagination = {
     previous: {
@@ -33,7 +21,7 @@ const PostPreview = ({ entry }) => {
   };
 
   return (
-    <div ref={root}>
+    <div ref={highlightRoot}>
       <BlogPostTemplate
         title={data.title || ""}
         date={data.date}
@@ -46,6 +34,7 @@ const PostPreview = ({ entry }) => {
         body={() => <ReactMarkdown source={data.body || ""} />}
         tableOfContents={() => <div className="text-center">Table Of Contents Placeholder</div>}
         showComments={false}
+        youtubeVideoId={data.youtubeVideoId}
       />
     </div>
   );

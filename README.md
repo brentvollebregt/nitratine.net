@@ -17,7 +17,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- Featured posts
 - Portfolio images
 - Headers
 - redirects

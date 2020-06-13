@@ -1,4 +1,5 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useRef, useEffect } from "react";
+import useSyntaxHighlighter from "../../hooks/useSyntaxHighlighter";
 import "./Portfolio.scss";
 
 export interface IPortfolio {
@@ -7,6 +8,7 @@ export interface IPortfolio {
 
 const Portfolio: React.FC<IPortfolio> = ({ snippets }) => {
   const [dualColumns, setDualColumns] = useState(true);
+  const highlightRoot = useSyntaxHighlighter();
 
   useLayoutEffect(() => {
     if (window) {
@@ -30,9 +32,9 @@ const Portfolio: React.FC<IPortfolio> = ({ snippets }) => {
         </p>
       </div>
 
-      <div className="col-12">
+      <div className="col-12" ref={highlightRoot}>
         {dualColumns ? (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: 10 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: 30 }}>
             <div>
               {leftSnippets.map((Snippet, i) => (
                 <div key={i} className="snippet">
