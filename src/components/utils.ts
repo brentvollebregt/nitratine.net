@@ -1,5 +1,5 @@
 export const formatDate = (date: Date) =>
-  `${date.getDay()} ${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
+  `${date.getDate()} ${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
 
 export const truncateString = (string: string, maxLength: number) => {
   if (string.length <= maxLength) {

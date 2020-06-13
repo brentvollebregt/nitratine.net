@@ -24,16 +24,13 @@ This post contains JavaScript code (that runs on browsers) to help you easily re
 
 This is the most recent version of the JavaScript bookmarklet. If you want to see the code, previous versions or a description of why this works, these will be found below.
 
-<a class="btn btn-primary" href="javascript:copyCode()" role="button">Copy the Unblock Code</a>
+```
+javascript:window.prtn = { f: btoa(window.env.HASH + window.location.href) };isMobile.any = () => true;$('head').append(    '<style>' +        '#main { height: auto !important; } ' +'#article-content { height: auto !important; overflow: auto !important; } ' +        '#article-content > * { display: block !important; color: #000 !important; opacity: 1 !important; } ' +        '.article-offer { display: none !important; } ' +        '.ad-container, .pb-f-article-related-articles { display: none !important; } ' +    '</style>');function mode(arr) {    return arr.sort((a,b) =>          arr.filter(v => v===a).length        - arr.filter(v => v===b).length    ).pop();}let article_content = $('#article-content');let classes = [];article_content.children().each((index, e) => {    e.classList.forEach(i => classes.push(i));});let possible_premium_class = mode(classes);$('.' + possible_premium_class).css('display', '').removeClass(possible_premium_class);article_content    .removeClass('premium-content')    .addClass('full-content');
+```
 
-<div class="alert alert-success" role="alert" id="copyCodeSuccess" style="display: none">
-  JavaSript code has been copied!
-</div>
-<script type="text/javascript" src="/posts/unblock-new-zealand-herald-premium-articles/copy-to-clipboard.js"></script>
+Copy the compressed code above, create a new bookmark (name it what you want) and paste the code copied into the bookmark address.
 
-The button above copies the bookmarklet to your clipboard. Click this and then create a new bookmark (name it what you want) and paste the code copied into the bookmark address.
-
-> On some devices you may find it easier to create a bookmark first with anything and then edit it to insert the code. Make sure the code copied starts with `javascript:` (it will if you copied it using the button).
+> On some devices you may find it easier to create a bookmark first with anything and then edit it to insert the code. Make sure the code copied starts with `javascript:`.
 
 ### How to Use the Bookmarklet
 

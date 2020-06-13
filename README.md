@@ -17,12 +17,21 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- redirects
 - Migrating posts
+- redirects
 - Mocking old style sheet for code
 - Google AdSense
   - Approval for a test site
 - /data/ page
+
+### Post Search
+
+- `}}`
+- `{% include 'blog-post-embedYouTube.html' %}`
+
+### Post Bugs:
+
+- `colour`: Image too large on page
 
 ### Later
 

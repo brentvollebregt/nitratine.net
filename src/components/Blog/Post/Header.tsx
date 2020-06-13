@@ -41,7 +41,7 @@ const Header: React.FC<IHeader> = ({
           </a>
         ))}
 
-        {hidden && <span className="badge badge-danger">Hidden</span>}
+        {hidden && <span className="badge badge-danger mr-1">Hidden</span>}
 
         <img
           src="https://hitcounter.pythonanywhere.com/count/tag.svg"
