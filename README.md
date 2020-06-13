@@ -17,6 +17,9 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
+- Featured posts
+- Portfolio images
+- Headers
 - redirects
 - Mocking old style sheet for code
 - Google AdSense

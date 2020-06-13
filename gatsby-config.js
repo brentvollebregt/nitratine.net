@@ -24,13 +24,6 @@ module.exports = {
         name: "pages"
       }
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/src/img`,
-        name: "images"
-      }
-    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
@@ -41,6 +34,7 @@ module.exports = {
           maxDepth: 3
         },
         plugins: [
+          "gatsby-remark-images-anywhere", // Only supports one element/img per node/element. To get around this, wrap images that a beside each other in div tags
           {
             resolve: "gatsby-remark-autolink-headers",
             options: {
@@ -53,7 +47,6 @@ module.exports = {
               name: "uploads"
             }
           },
-          "gatsby-remark-images-anywhere", // Only supports one element/img per node/element. To get around this, wrap images that a beside each other in div tags
           {
             resolve: "gatsby-remark-images",
             options: {

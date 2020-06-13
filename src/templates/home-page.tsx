@@ -43,7 +43,6 @@ export const pageQuery = graphql`
           type
           post
           rawHtml
-          rawLink
         }
       }
     }

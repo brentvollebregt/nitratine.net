@@ -17,10 +17,19 @@ interface RawFeaturedPostType {
   type: "raw";
   post: string | null;
   rawHtml: string;
-  rawLink: string;
 }
 
-type FeaturedPostType = PostFeaturedPostType | PostImageFeaturedPostType | RawFeaturedPostType;
+interface RawBodyFeaturedPostType {
+  type: "rawBody";
+  post: string | null;
+  rawHtml: string;
+}
+
+type FeaturedPostType =
+  | PostFeaturedPostType
+  | PostImageFeaturedPostType
+  | RawFeaturedPostType
+  | RawBodyFeaturedPostType;
 
 export interface IFeaturedPosts {
   featuredPosts: FeaturedPostType[];
@@ -32,13 +41,20 @@ const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts }) => {
   return (
     <div className="featured-posts">
       <div className="card-columns">
-        {featuredPosts.map(p => (
-          <FeaturedPost
-            key={`${p.post}-${p.type}-${(p as RawFeaturedPostType).rawLink}`}
-            featuredPost={p}
-            associatedPostSummary={postSummaries.find(s => s.slug === `/blog/post/${p.post}/`)}
-          />
-        ))}
+        {featuredPosts.map(p => {
+          const associatedPostSummary = postSummaries.find(s => s.slug === `/blog/post/${p.post}/`);
+          if (associatedPostSummary === undefined) {
+            throw new Error(`Unable to find post with slug ${p.post}`);
+          }
+
+          return (
+            <FeaturedPost
+              key={`${p.post}-${p.type}`}
+              featuredPost={p}
+              associatedPostSummary={associatedPostSummary}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -46,7 +62,7 @@ const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts }) => {
 
 interface IFeaturedPost {
   featuredPost: FeaturedPostType;
-  associatedPostSummary: PostSummary | undefined;
+  associatedPostSummary: PostSummary;
 }
 
 const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSummary }) => {
@@ -54,33 +70,31 @@ const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSum
     case "post":
     case "postImage": {
       return (
-        <a href={associatedPostSummary?.slug}>
+        <a href={associatedPostSummary.slug}>
           <div className="card card-hover-effect">
-            <img className="card-img-top" src={associatedPostSummary?.image} alt="Post Thumbnail" />
+            <img className="card-img-top" src={associatedPostSummary.image} alt="Post Thumbnail" />
             {featuredPost.type === "post" && (
               <div className="card-body">
-                <h5 className="card-title">{associatedPostSummary?.title}</h5>
-                <p className="card-text">{associatedPostSummary?.description}</p>
-                <small className="text-muted">
-                  {associatedPostSummary !== undefined
-                    ? formatDate(associatedPostSummary.date)
-                    : ""}
-                </small>
-                <span className="ml-2 badge badge-primary">{associatedPostSummary?.category}</span>
+                <h5 className="card-title">{associatedPostSummary.title}</h5>
+                <p className="card-text">{associatedPostSummary.description}</p>
+                <small className="text-muted">{formatDate(associatedPostSummary.date)}</small>
+                <span className="ml-2 badge badge-primary">{associatedPostSummary.category}</span>
               </div>
             )}
           </div>
         </a>
       );
     }
-    case "raw": {
-      const link = featuredPost.rawLink ?? associatedPostSummary?.slug;
+    case "raw":
+    case "rawBody": {
       return (
-        <a href={link}>
-          <div
-            className="card card-hover-effect"
-            dangerouslySetInnerHTML={{ __html: featuredPost.rawHtml }}
-          />
+        <a href={associatedPostSummary.slug}>
+          <div className="card card-hover-effect">
+            {featuredPost.type === "rawBody" && (
+              <img className="card-img-top" src={associatedPostSummary.image} alt="Thumbnail" />
+            )}
+            <div dangerouslySetInnerHTML={{ __html: featuredPost.rawHtml }} />
+          </div>
         </a>
       );
     }

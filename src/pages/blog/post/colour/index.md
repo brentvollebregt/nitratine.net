@@ -27,7 +27,7 @@ On the chance that you get two of one colour, you can merge it with another dupl
 
 ## Screenshots
 
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 3px;">
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 3px;" class="mb-3">
     <div><img src="./tap-screen.png" alt="Main screen"/></div>
     <div><img src="./colour-viewer.png" alt="Colour finder"/></div>
     <div><img src="./colour-mixer.png" alt="Colour mixer"/></div>
