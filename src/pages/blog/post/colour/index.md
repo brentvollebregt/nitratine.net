@@ -19,7 +19,7 @@ hidden: false
 ## The Idea
 
 One night I was having a chat with a friend on how stupid apps always seem to make it to the top. We started to think of stupid apps and thus this app was born. Based on the simple idea of just tapping the screen to randomly generate colours I managed to turn an idea into an app in a couple of months in between my study.
-This idea also made me wonder how long would it take to complete an app of this nature for users? The investigation can be found [here]({{ url_for('blog_post', path='randomly-generating-numbers-to-fulfil-an-integer-range') }}).
+This idea also made me wonder how long would it take to complete an app of this nature for users? The investigation can be found [here](/blog/post/randomly-generating-numbers-to-fulfil-an-integer-range/).
 
 ## The Goal
 
@@ -46,7 +46,7 @@ On the chance that you get two of one colour, you can merge it with another dupl
 
 ## Bug Reporting and Feedback
 
-Think you've found a bug or just want to give back some feedback? Send me an [email](mailto://{{ site_config.email }}?subject=Colour%20Bug%20Report) and I'll look into it!
+Think you've found a bug or just want to give back some feedback? Send me an [email](mailto:////brent@nitratine.net?subject=Colour%20Bug%20Report) and I'll look into it!
 For bug reports please include:
 
 - Your name

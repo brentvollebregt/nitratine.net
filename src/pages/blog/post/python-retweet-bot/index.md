@@ -11,15 +11,18 @@ hidden: false
 ---
 
 ## What and Why?
+
 A while ago I had seen someone show all their winnings from using a twitter bot to retweet tweets. Today is a bit more advanced and now people ask to like, follow and sometimes tag. This bot does not tag others but it does retweet, like and follow people mentioned in the tweet.
 
 ## Setup
-First, make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
+
+First, make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip](/blog/post/how-to-setup-pythons-pip/).
 
 If you haven't, create a new [twitter](https://twitter.com/) account. If you want to use an existing one, be aware that this will spam the shit out of your account.
 
 ## Installing Tweepy
-So now that you have set up pip, you can use it to install [tweepy](http://www.tweepy.org/) easily. Open up cmd and execute the command ```pip list tweepy```. Make sure the output doesn't have any errors and that it states that it was installed successfully.
+
+So now that you have set up pip, you can use it to install [tweepy](http://www.tweepy.org/) easily. Open up cmd and execute the command `pip list tweepy`. Make sure the output doesn't have any errors and that it states that it was installed successfully.
 
 Open up IDLE and execute the following line. If no errors appear, it was installed correctly.
 
@@ -28,6 +31,7 @@ import tweepy
 ```
 
 ## Getting the API Keys
+
 Now we need to create a twitter app. This may put some people off but don't stop here, it's very little effort.
 
 Go to [https://apps.twitter.com/](https://apps.twitter.com/) and click "Create New App"
@@ -39,6 +43,7 @@ Fill in the form that is now provided and click "Create your Twitter application
 ![Create New App Form](create-app2.png)
 
 Now go to the "Keys and Access Tokens" tab and find the following keys as shown in the image below:
+
 - Consumer Key (API Key)
 - Consumer Secret (API Secret)
 - Access Token
@@ -166,11 +171,13 @@ print ("New Tweets: " + str(new_tweets))
 ```
 
 ## Running the Script
-To use this script, put queries you want to search for in the 'queries' list towards the top. Set tweets_per_query  to how many tweets per query you want to loop at; remember too many interactions with the API and you may get restricted access due to usage limits. Also going back too far with large queries could potentially be an issue.
+
+To use this script, put queries you want to search for in the 'queries' list towards the top. Set tweets_per_query to how many tweets per query you want to loop at; remember too many interactions with the API and you may get restricted access due to usage limits. Also going back too far with large queries could potentially be an issue.
 
 Now simply run the script by hitting F5 in IDLE or double-clicking on the script. Wait and you should see what the script is up to until it's done.
 
 ## Final Script
+
 ```python
 import tweepy
 
@@ -230,6 +237,7 @@ print ("New Tweets: " + str(new_tweets))
 ```
 
 ## Final Notes
+
 Unfortunately, I didn't add a "tag your friend" command because I didn't want to annoy anyone and didn't bother making another account. This could be a bit hard to implement because sometimes this is an arbitrary number requested.
 
 I am not responsible for any harm that may come from this.

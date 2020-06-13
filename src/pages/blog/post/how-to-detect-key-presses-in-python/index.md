@@ -11,18 +11,21 @@ hidden: false
 ---
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.
+
+If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip](/blog/post/how-to-setup-pythons-pip/) to setup pip.
 
 ## Installing Pynput
-We will be using the pynput module to listen to keyboard events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
+
+We will be using the pynput module to listen to keyboard events. To install this module execute `pip install pynput` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
 ![Installing pynput](../how-to-get-mouse-clicks-with-python/pynput1.png)
 
-To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
+To double-check that it was installed successfully, open up IDLE and execute the command `import pynput`; no errors should occur.
 
 ![Testing pynput](../how-to-get-mouse-clicks-with-python/pynput2.png)
 
 ## Building the Script
+
 Create a new python file and save it with a .py file extension. You will first want to import Listener from pynput.keyboard.
 
 ```python
@@ -118,6 +121,7 @@ Save and close IDLE. Open the file named key_log.txt next to your python script;
 > The actual location of this file will be in the current working directory of where you run the script from
 
 ## The Listener Thread
+
 Just as a quick note, the Listener class is a thread which means as soon as it has joined to the main thread no code will be executed after the `.join()` until the Listener is stopped.
 
 As stated [here in the pynput docs on readthedocs.io](https://pynput.readthedocs.io/en/latest/keyboard.html#monitoring-the-keyboard), we can call `pynput.keyboard.Listener.stop` anywhere in the script to stop the thread or return False from a callback to stop the listener. As shown in my video, we can also just call `listener.stop()` in one of the definitions due to the fact that that the listener is now in scope and is an instance os Listener.
@@ -142,6 +146,7 @@ with Listener(on_press=on_press, on_release=on_release) as listener:  # Create a
 ```
 
 ## Making Things a Bit More Readable
+
 Everything being on a new line with both key presses and releases can be very helpful for identifying sequences but can be a bit hard to read. Here is a modified script that can put everything on one line and enters when enter is pressed.
 
 ```python
@@ -183,5 +188,5 @@ Here is a sample of some of the output:
 ## Common Issues and Questions
 
 ### ModuleNotFoundError/ImportError: No module named 'pynput'
-Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
+Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.

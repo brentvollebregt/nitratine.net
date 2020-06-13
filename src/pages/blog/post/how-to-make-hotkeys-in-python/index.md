@@ -13,18 +13,21 @@ hidden: false
 {% with video_id="n_dfv5DLCGI" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.
+
+If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip](/blog/post/how-to-setup-pythons-pip/) to setup pip.
 
 ## Installing Pynput
-We will be using the pynput module to listen to mouse events. To install this module execute ```pip install pynput``` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
+
+We will be using the pynput module to listen to mouse events. To install this module execute `pip install pynput` in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.
 
 ![Installing pynput](../how-to-get-mouse-clicks-with-python/pynput1.png)
 
-To double-check that it was installed successfully, open up IDLE and execute the command ```import pynput```; no errors should occur.
+To double-check that it was installed successfully, open up IDLE and execute the command `import pynput`; no errors should occur.
 
 ![Testing pynput](../how-to-get-mouse-clicks-with-python/pynput2.png)
 
 ## Creating the Script
+
 First import keyboard from pynput and create a variable called current and set it to a set object to track what keys are pressed currently.
 
 ```python
@@ -74,7 +77,7 @@ def on_press(key):
             execute()
 ```
 
-> In the current state, this script can provide multiple events for one combination detected. To prevent this, append ```and not key in current``` to the end of the initial if statement (before the colon).
+> In the current state, this script can provide multiple events for one combination detected. To prevent this, append `and not key in current` to the end of the initial if statement (before the colon).
 
 Finally we need to modify the on_release method and check that when a key is released, if it is in any of the combinations. If it is we need to removed it from the 'current' set.
 
@@ -91,6 +94,7 @@ If you want to call another script, do it in execute() by doing something like a
 This script has been modified from the example given by Moses Palmer on [issue 20 of pynput](https://github.com/moses-palmer/pynput/issues/20)
 
 ## Adding Hotkeys
+
 To add more hotkeys or different hotkeys you will need to add another set of keys to the COMBINATIONS list. To do this use curly braces and make sure to separate the keys by commas. Also to make sure to split each set by a comma or you will be given an error when running the script.
 
 To use keys like shift and control, you need to provide the key. Keys can be found in the [documentation](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key). In this we can see that if we want to use shift, we need to use keyboard.Key.shift. Another example is the scroll lock: keyboard.Key.scroll_lock. To use characters on the keyboard like 'a', 'b', 'c' ect... you will need to use the method keyboard.KeyCode() passing the character as the char parameter. Examples follow below.
@@ -109,6 +113,7 @@ COMBINATIONS = [
 You can have as many keys as you like in one combination and accidentally adding two of the same combination will not cause any errors.
 
 ## Final Script
+
 ```python
 from pynput import keyboard
 
@@ -139,9 +144,10 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
 ```
 
 ## Issues With Character Casing (Revision 1)
+
 In the example above I have defined two combinations, one for `shift+a` and `shift+A`; this handles the two cases when you press A before shift and shift before A. However this mixing of case can also cause issues when tracking the currently pressed keys.
 
-A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the A key can give two different keys depending on if you are holding shift or not (a or A); but pynput can actually see that the A key itself is pressed. To track what physical key is pressed, we can use the `vk`. 
+A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the A key can give two different keys depending on if you are holding shift or not (a or A); but pynput can actually see that the A key itself is pressed. To track what physical key is pressed, we can use the `vk`.
 
 > `vk` is short for "virtual key" and is a code associated with each key. For example: a = 65, b = 66, enter = 13, shift = 130
 
@@ -201,7 +207,7 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()  # Join the listener thread to the current thread so we don't exit before it stops
 ```
 
-At the top of this script you will see that the `COMBINATIONS` value looks a bit different. This is because `keyboard.KeyCode(char='a')` does not populate the `vk` attribute, so we need to find the `vk` code ourselves. 
+At the top of this script you will see that the `COMBINATIONS` value looks a bit different. This is because `keyboard.KeyCode(char='a')` does not populate the `vk` attribute, so we need to find the `vk` code ourselves.
 
 Doing this can easily be done using a simple script. If you run the following and press a key, it will print out the `vk` code for the pressed key which you can then use in the script above.
 
@@ -221,7 +227,7 @@ If you pressed shift, you would have also noticed that the `vk` for `keyboard.Ke
 Here are some other `vk` codes, you can find missing ones by running the script above and pressing keys:
 
 | Key        | vk code |
-|------------|---------|
+| ---------- | ------- |
 | a          | 65      |
 | b          | 66      |
 | y          | 89      |
@@ -236,6 +242,7 @@ Here are some other `vk` codes, you can find missing ones by running the script 
 > An interesting thing to note from this table is that you can tell the difference between 1 in the top row being pressed and 1 on the num pad being pressed.
 
 ## An Improved Script
+
 A lot of people had been asking for a solution that can handle different functions for different combinations. [Christopher Walters](https://www.youtube.com/channel/UCzGG-Z4QAgkt2uYMH6VTpQQ) commented on the original video with a snippet that allowed users to declare a function per combination.
 
 I modified the original script and after revisions made to the original script, here is a script that can handle multiple combinations that execute their own function:
@@ -307,10 +314,13 @@ To create new combinations, duplicate a line in the `combination_to_function` di
 ## Common Issues and Questions
 
 ### How can I add different hotkeys for different functions?
+
 I have not developed this myself yet so it will be something you need to think about. The best way to do this would be to have two lists, one of combinations and one of definitions for each combination. Test each of the combinations on a keypress and if all the keys are pressed, execute the definition in the same index in the definition list.
 
 ### ModuleNotFoundError/ImportError: No module named 'pynput'
+
 Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
 ### I got a SyntaxError
+
 Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs [here](https://docs.python.org/2/tutorial/errors.html#syntax-errors).

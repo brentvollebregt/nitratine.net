@@ -15,6 +15,7 @@ hidden: false
 Using the [cryptography](https://cryptography.io/en/latest/) module in Python, we will use an implementation of AES called [Fernet](https://cryptography.io/en/latest/fernet/) to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.
 
 ## Installing cryptography
+
 Since Python does not come with anything that can encrypt files, we will need to use a third-party module.
 
 [PyCrypto](https://github.com/dlitz/pycrypto) is quite popular but since it does not offer built wheels, if you don't have Microsoft Visual C++ Build Tools installed, you will be told to install it. Instead of installing extra tools just to build this, I will be using the cryptography module. To install this, execute:
@@ -32,13 +33,15 @@ import cryptography
 If no errors appeared it has been installed correctly.
 
 ## What is Symmetric Encryption?
+
 [Symmetric encryption](https://en.wikipedia.org/wiki/Symmetric-key_algorithm) is when a key is used to encrypt and decrypt a message, so whoever encrypted it can decrypt it. The only way to decrypt the message is to know what was used to encrypt it; kind of like a password.
 
 To use symmetric encryption, we will use the [Fernet class](https://cryptography.io/en/latest/fernet/) which is an implementation of [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
-> Looking for a tutorial on asymmetric encryption? [I wrote one of those for Python too]({{ url_for('blog_post', path='asymmetric-encryption-and-decryption-in-python') }}).
+> Looking for a tutorial on asymmetric encryption? [I wrote one of those for Python too](/blog/post/asymmetric-encryption-and-decryption-in-python/).
 
 ## Getting a Key
+
 There are two main ways to get a key, we can either generate a new one or use one that has previously been generated. These keys need to be in a particular format so make sure to get this right.
 
 To generate a new random key, we can simply use
@@ -48,11 +51,12 @@ from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 ```
 
-The variable *key* will now have the value of a URL safe base64 encoded key. When using these keys to encrypt, make sure to keep them safe, if you lose them you will not be able to decrypt your message.
+The variable _key_ will now have the value of a URL safe base64 encoded key. When using these keys to encrypt, make sure to keep them safe, if you lose them you will not be able to decrypt your message.
 
 This key will have a type of bytes, so if you want a string you can call `key.decode()` to convert from UTF-8 to Pythons string type.
 
 ### Storing Keys
+
 One way of keeping your keys safe is to keep them in a file. To do this we can simply create/overwrite a file and put the key in it.
 
 ```python
@@ -64,6 +68,7 @@ file.close()
 > Make sure to keep these files safe and don't give them to anyone that you don't trust. Anyone with these keys can decrypt all past messages encrypted with this key.
 
 ### Reading Keys
+
 If you have previously saved your key using the method I showed, you can read the key back out using the following code.
 
 ```python
@@ -72,9 +77,10 @@ key = file.read() # The key will be type bytes
 file.close()
 ```
 
-The key will now be read into the variable *key* and will be type bytes.
+The key will now be read into the variable _key_ and will be type bytes.
 
 ### Generating a Key From A Password
+
 If you want to base your key of a string that the user can input or some other form of input, you can create a key using this input.
 
 ```python
@@ -97,11 +103,12 @@ kdf = PBKDF2HMAC(
 key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf once
 ```
 
-The variable *key* will now have the value of a url safe base64 encoded key.
+The variable _key_ will now have the value of a url safe base64 encoded key.
 
 > It is recommended to use a different salt than the one shown here. You can generate a new salt using os.urandom(16). Make sure to use the same salt every time you convert a password to a key otherwise it will not produce the same result.
 
 ## Encrypting
+
 To encrypt a message, you will need a key (as previously discussed) and your message as type bytes (you can convert strings to bytes using `.encode()`).
 
 ```python
@@ -112,9 +119,10 @@ f = Fernet(key)
 encrypted = f.encrypt(message)
 ```
 
-The variable *encrypted* will now have the value of the message encrypted as type bytes. This is also  a URL safe base64 encoded key.
+The variable _encrypted_ will now have the value of the message encrypted as type bytes. This is also a URL safe base64 encoded key.
 
 ## Decrypting
+
 To decrypt a message, you will need the same key and the encrypted message (still in bytes).
 
 ```python
@@ -125,9 +133,10 @@ f = Fernet(key)
 decrypted = f.decrypt(encrypted)
 ```
 
-The variable *decrypted* will now have the value of the original message (which was of type bytes).
+The variable _decrypted_ will now have the value of the original message (which was of type bytes).
 
 ## Demonstration
+
 To show this in action, here is a properly constructed example.
 
 ```python
@@ -145,6 +154,7 @@ True
 This example shows a key being generated, you will want to make sure you have already sorted your key out and put it in a file for later use.
 
 ## Encrypting and Decrypting Files
+
 We can also encrypt files using this method since files can be read as bytes. Simply open the file, read the bytes, encrypt the data and write them out to a new file. To encrypt:
 
 ```python
