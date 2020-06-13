@@ -24,10 +24,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
   - Approval for a test site
 - /data/ page
 
-### Post Search
-
-- Look at the console - fix warnings
-
 ### Post Bugs:
 
 - `colour`: Image too large on page

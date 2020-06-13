@@ -34,6 +34,7 @@ const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts }) => {
       <div className="card-columns">
         {featuredPosts.map(p => (
           <FeaturedPost
+            key={`${p.post}-${p.type}-${(p as RawFeaturedPostType).rawLink}`}
             featuredPost={p}
             associatedPostSummary={postSummaries.find(s => s.slug === `/blog/post/${p.post}/`)}
           />
