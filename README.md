@@ -26,6 +26,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
   - Approval for a test site
 - /data/ page
 
+### Check if post is in-tack
+
+- python-guis-with-pyqt: .py files
+
 ### Later
 
 - Add switch to disable ads on particular pages
