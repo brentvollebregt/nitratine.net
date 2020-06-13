@@ -134,12 +134,7 @@ collections:
               widget: "hidden",
               default: "portfolio-page",
             }
-          - {
-              label: Snippets,
-              name: snippets,
-              widget: list,
-              fields: [{ label: Body, name: body, widget: markdown }],
-            }
+          - { label: Body, name: body, widget: markdown }
 
   - name: "config"
     label: "Config"
