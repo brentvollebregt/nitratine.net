@@ -140,7 +140,7 @@ const SideBar: React.FC = () => {
       <div className="card p-3 mb-3 bg-light">
         <h4 className="text-center text-lg-left">PyTutorials on YouTube</h4>
         <Helmet>
-          <script src="https://apis.google.com/js/platform.js"></script>
+          <script async src="https://apis.google.com/js/platform.js"></script>
         </Helmet>
         <div style={{ textAlign: "center" }}>
           <div
