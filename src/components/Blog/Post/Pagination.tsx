@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { truncateString } from "../../utils";
 
 interface PaginationSummary {
@@ -15,15 +16,15 @@ const Pagination: React.FC<IPagination> = ({ previous, next }) => {
   return (
     <nav className="text-center">
       {previous !== undefined && (
-        <a className="btn btn-outline-primary" href={previous.href}>
+        <Button variant="outline-primary" href={previous.href} className="mx-1 mt-1">
           &larr; {truncateString(previous.title, 30)}
-        </a>
+        </Button>
       )}
 
       {next !== undefined && (
-        <a className="btn btn-outline-primary ml-1" href={next.href}>
+        <Button variant="outline-primary" href={next.href} className="mx-1 mt-1">
           {truncateString(next.title, 30)} &rarr;
-        </a>
+        </Button>
       )}
     </nav>
   );
