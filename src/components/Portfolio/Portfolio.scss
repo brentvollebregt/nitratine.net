@@ -34,6 +34,8 @@
         &:nth-child(even) {
           width: 100%;
           order: 1;
+          margin-left: 0;
+          margin-right: 0;
         }
       }
     }
