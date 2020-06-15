@@ -1,10 +1,9 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 import useSyntaxHighlighter from "../../hooks/useSyntaxHighlighter";
 import { BlogPostTemplate } from "../../templates/blog-post";
 import { IPagination } from "../../components/Blog/Post/Pagination";
 
-const PostPreview = ({ entry }) => {
+const PostPreview = ({ entry, widgetFor }) => {
   const data = entry.get("data").toJS();
 
   const highlightRoot = useSyntaxHighlighter();
@@ -31,7 +30,7 @@ const PostPreview = ({ entry }) => {
         hidden={data.hidden || false}
         githubRepository={data.githubRepository || null}
         pagination={pagination}
-        body={() => <ReactMarkdown source={data.body || ""} />}
+        body={() => widgetFor("body")}
         tableOfContents={() => <div className="text-center">Table Of Contents Placeholder</div>}
         showComments={false}
         youtubeVideoId={data.youtubeVideoId}

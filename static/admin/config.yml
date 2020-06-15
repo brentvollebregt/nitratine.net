@@ -40,7 +40,13 @@ collections:
         }
       - { label: "Featured Image", name: "image", widget: image }
       - { label: "Description", name: "description", widget: "text", default: "" }
-      - { label: "YouTube Video", name: "youtubeVideoId", widget: "string", default: null }
+      - {
+          label: "YouTube Video",
+          name: "youtubeVideoId",
+          widget: "string",
+          default: null,
+          required: false,
+        }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "pages"
@@ -127,6 +133,7 @@ collections:
       - file: "src/pages/portfolio/index.md"
         label: "Portfolio"
         name: "portfolio"
+        media_folder: ""
         fields:
           - {
               label: "Template Key",

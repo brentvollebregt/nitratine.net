@@ -1,22 +1,32 @@
 ---
 templateKey: blog-post
-title: "Who's On My Network"
+title: Who's On My Network
 date: 2020-04-04T12:00:00.000Z
 category: Projects
-tags: [python, react, typescript, sqlite, networking]
-image: feature.png
-description: "This tool helps you keep an eye on who is on your network and when. Simply periodically scan your network, assign devices to people and view who is on your network."
-githubRepository: brentvollebregt/whos-on-my-network
-disableToc: false
+tags:
+  - python
+  - react
+  - typescript
+  - sqlite
+  - networking
 hidden: false
+disableToc: false
+githubRepository: brentvollebregt/whos-on-my-network
+image: feature.png
+description: This tool helps you keep an eye on who is on your network and when.
+  Simply periodically scan your network, assign devices to people and view who
+  is on your network.
 ---
 
-<div align="center" style="padding: 20px 20px 40px 20px">
-    <img src="./whos-on-my-network-logo.png" alt="Who's On My Network Logo" style="margin-bottom: 10px;">
-    <p class="text-center">Keep an eye on who is on your network and when.</p>
-    <a href="https://github.com/brentvollebregt/whos-on-my-network/releases">
-        <button class="btn btn-outline-secondary" type="button">Download the latest release →</button>
-    </a>
+<div align="center" style="padding: 20px 20px 40px 20px" class="text-center">
+
+![test](./whos-on-my-network-logo.png)
+
+Keep an eye on who is on your network and when.
+
+<a href="https://github.com/brentvollebregt/whos-on-my-network/releases">
+    <button class="btn btn-outline-secondary" type="button">Download the latest release →</button>
+</a>
 </div>
 
 Who's On My Network is a tool built-in Python with a React interface that allows you to scan your network to observe who's on it currently and look at past scans to see who was on it previously.
