@@ -14,7 +14,7 @@ interface ICategories {
 
 interface ICategoryPrefix {
   category: string;
-  prefix: number;
+  prefix: string;
 }
 
 interface IRecentVideos {

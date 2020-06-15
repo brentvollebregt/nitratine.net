@@ -31,7 +31,7 @@ const Post: React.FC<IPost> = ({
   const TableOfContents = tableOfContents;
 
   return (
-    <>
+    <div className="blog-post">
       <Header
         title={title}
         date={date}
@@ -54,7 +54,9 @@ const Post: React.FC<IPost> = ({
 
         {youtubeVideoId && <EmbedYouTubeVideo videoId={youtubeVideoId} />}
 
-        <Body />
+        <div className="body">
+          <Body />
+        </div>
       </div>
 
       <div className="mt-5">
@@ -65,7 +67,7 @@ const Post: React.FC<IPost> = ({
           <Comments />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

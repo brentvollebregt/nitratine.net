@@ -1,3 +1,13 @@
-.toc p {
-  margin: 0;
+.blog-post {
+  .toc p {
+    margin: 0;
+  }
+
+  div.body {
+    img {
+      max-width: 100%;
+      display: block;
+      margin: auto;
+    }
+  }
 }

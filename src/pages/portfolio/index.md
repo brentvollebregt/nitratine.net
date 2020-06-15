@@ -24,7 +24,7 @@ And then to run the project, simply call:
 auto-py-to-exe
 ```
 
-> Associated [post](https://nitratine.net/blog/post/auto-py-to-exe/)
+> Associated [post](/blog/post/auto-py-to-exe/)
 
 </div>
 <div class="snippet">
@@ -70,8 +70,7 @@ phone - a much more faster way to exchange money.
     <div><img src="../blog/post/monopoly-money/screenshot-4.png" alt="Bankers actions page"></div>
 </div>
 
-> Associated
-> [post](https://nitratine.net/blog/post/monopoly-money/)
+> Associated [post](/blog/post/monopoly-money/)
 
 </div>
 <div class="snippet">
@@ -114,7 +113,7 @@ current playing song and lyrics sourced from Genius.
 ![Spotify Lyrics Viewer showing lyrics](../blog/post/spotify-lyrics-viewer/sample.png)
 
 > Associated
-> [post](https://nitratine.net/blog/post/spotify-lyrics-viewer/)
+> [post](blog/post/spotify-lyrics-viewer/)
 
 </div>
 <div class="snippet">
@@ -132,7 +131,7 @@ made and identify unusual and unexpected activity.
 
 ![Who's On My Network Overview Demo](../blog/post/whos-on-my-network/overview-screenshot.png)
 
-> Associated [post](https://nitratine.net/blog/post/whos-on-my-network/)
+> Associated [post](/blog/post/whos-on-my-network/)
 
 </div>
 <div class="snippet">
@@ -143,7 +142,7 @@ made and identify unusual and unexpected activity.
 
 This project is an Android app that compares prices for similar items and will calculate the price per unit for each item. These values can then be compared to find the best value for money. Simply give a name (optional), enter in the cost, amount and size of each item and the unit per dollar will be calculated.
 
-> Associated [post](https://nitratine.net/blog/post/price-per-unit/)
+> Associated [post](/blog/post/price-per-unit/)
 
 </div>
 <div class="snippet">
