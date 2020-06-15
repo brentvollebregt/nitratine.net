@@ -152,12 +152,9 @@ This project is an Android app that compares prices for similar items and will c
 ![nitratine.net Logo](/assets/logo.png)
 
 Nitratine is a website where I share projects developed by me and
-tutorials on topics that I'm interested in. Currently this is the fourth
-version of the site and is hosted statically using GitHub Pages and built
-using Gatsby.
+tutorials on topics that I'm interested in. Currently this is the fourth version of the site; it's built using Gatsby and hosted statically using GitHub Pages.
 
-The site also uses Netlify's CMS to make creating posts much easier but still
-allows for raw JSX pages to be created to host more complex pages.
+The site also uses Netlify's CMS to make creating posts much easier but still allows for raw JSX pages to be created to host more complex pages.
 
 A GitHub Actions workflow is used to build the site on each push to master which
 then deploys the most recent version of the site to GitHub pages.

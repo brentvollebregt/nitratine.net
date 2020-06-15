@@ -2,17 +2,17 @@
 
 Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
-## TODO
+## Broken
+
+- YouTube sub button not showing (only in test)
 
 ### Small
 
-- Clean up about
 - use Gatsby links
 - put actual react-bootstrap components in
 
 ### Large
 
-- Use https://remark.js.org/ instead of react-markdown (it will be more consistent)
 - Use remark custom components to remove the need for the YouTube video in the frontmatter?
 - Headers + icons
 - redirects
@@ -23,9 +23,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Check if post is in-tack / alter
 
-- python-guis-with-pyqt: .py files
 - Convert JavaScript date time post to jsx
 
-### Later
+### Add
 
+- Group tags/categories/years at top of category pages as links to headers (with numbers) e.g. taga (2) tagb (5) tagc (8)
+- Blog footer? Need to link category pages somehow
 - Add switch to disable ads on particular pages
