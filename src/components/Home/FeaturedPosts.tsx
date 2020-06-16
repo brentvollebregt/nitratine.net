@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import { Card, Badge } from "react-bootstrap";
 import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
 import { formatDate } from "../utils";
 import "./FeaturedPosts.scss";
@@ -73,28 +74,30 @@ const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSum
     case "post":
     case "postImage": {
       return (
-        <div className="card card-hover-effect">
-          <img className="card-img-top" src={associatedPostSummary.image} alt="Post Thumbnail" />
+        <Card className="card-hover-effect">
+          <Card.Img variant="top" src={associatedPostSummary.image} alt="Post Thumbnail" />
           {featuredPost.type === "post" && (
-            <div className="card-body">
-              <h5 className="card-title">{associatedPostSummary.title}</h5>
-              <p className="card-text">{associatedPostSummary.description}</p>
+            <Card.Body>
+              <Card.Title>{associatedPostSummary.title}</Card.Title>
+              <Card.Text>{associatedPostSummary.description}</Card.Text>
               <small className="text-muted">{formatDate(associatedPostSummary.date)}</small>
-              <span className="ml-2 badge badge-primary">{associatedPostSummary.category}</span>
-            </div>
+              <Badge variant="primary" className="ml-2">
+                {associatedPostSummary.category}
+              </Badge>
+            </Card.Body>
           )}
-        </div>
+        </Card>
       );
     }
     case "raw":
     case "rawBody": {
       return (
-        <div className="card card-hover-effect">
+        <Card className="card-hover-effect">
           {featuredPost.type === "rawBody" && (
-            <img className="card-img-top" src={associatedPostSummary.image} alt="Thumbnail" />
+            <Card.Img variant="top" src={associatedPostSummary.image} alt="Thumbnail" />
           )}
           <div dangerouslySetInnerHTML={{ __html: featuredPost.rawHtml }} />
-        </div>
+        </Card>
       );
     }
   }

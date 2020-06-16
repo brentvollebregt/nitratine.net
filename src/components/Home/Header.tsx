@@ -1,8 +1,8 @@
 import React from "react";
-import { Button } from "react-bootstrap";
-import "./Header.scss";
 import { Link } from "gatsby";
+import { Button, Jumbotron } from "react-bootstrap";
 import { isExternalPath } from "../utils";
+import "./Header.scss";
 
 export interface IHeader {
   image: string;
@@ -15,7 +15,7 @@ export interface IHeader {
 }
 
 const Header: React.FC<IHeader> = ({ image, leadText, buttons }) => (
-  <section className="jumbotron jumbotron-fluid text-center header">
+  <Jumbotron fluid className="text-center header">
     <h1 className="sr-only">Nitratine</h1>
     <img src={image} className="img-fluid mb-2" />
     <p className="lead text-muted">{leadText}</p>
@@ -33,7 +33,7 @@ const Header: React.FC<IHeader> = ({ image, leadText, buttons }) => (
         </Button>
       ))}
     </p>
-  </section>
+  </Jumbotron>
 );
 
 export default Header;
