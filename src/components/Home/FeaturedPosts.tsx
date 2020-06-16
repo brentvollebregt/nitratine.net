@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "gatsby";
+import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
 import { formatDate } from "../utils";
 import "./FeaturedPosts.scss";
-import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
 
 interface PostFeaturedPostType {
   type: "post";
@@ -48,11 +49,13 @@ const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts }) => {
           }
 
           return (
-            <FeaturedPost
-              key={`${p.post}-${p.type}`}
-              featuredPost={p}
-              associatedPostSummary={associatedPostSummary}
-            />
+            <Link to={associatedPostSummary.slug}>
+              <FeaturedPost
+                key={`${p.post}-${p.type}`}
+                featuredPost={p}
+                associatedPostSummary={associatedPostSummary}
+              />
+            </Link>
           );
         })}
       </div>
@@ -70,32 +73,28 @@ const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSum
     case "post":
     case "postImage": {
       return (
-        <a href={associatedPostSummary.slug}>
-          <div className="card card-hover-effect">
-            <img className="card-img-top" src={associatedPostSummary.image} alt="Post Thumbnail" />
-            {featuredPost.type === "post" && (
-              <div className="card-body">
-                <h5 className="card-title">{associatedPostSummary.title}</h5>
-                <p className="card-text">{associatedPostSummary.description}</p>
-                <small className="text-muted">{formatDate(associatedPostSummary.date)}</small>
-                <span className="ml-2 badge badge-primary">{associatedPostSummary.category}</span>
-              </div>
-            )}
-          </div>
-        </a>
+        <div className="card card-hover-effect">
+          <img className="card-img-top" src={associatedPostSummary.image} alt="Post Thumbnail" />
+          {featuredPost.type === "post" && (
+            <div className="card-body">
+              <h5 className="card-title">{associatedPostSummary.title}</h5>
+              <p className="card-text">{associatedPostSummary.description}</p>
+              <small className="text-muted">{formatDate(associatedPostSummary.date)}</small>
+              <span className="ml-2 badge badge-primary">{associatedPostSummary.category}</span>
+            </div>
+          )}
+        </div>
       );
     }
     case "raw":
     case "rawBody": {
       return (
-        <a href={associatedPostSummary.slug}>
-          <div className="card card-hover-effect">
-            {featuredPost.type === "rawBody" && (
-              <img className="card-img-top" src={associatedPostSummary.image} alt="Thumbnail" />
-            )}
-            <div dangerouslySetInnerHTML={{ __html: featuredPost.rawHtml }} />
-          </div>
-        </a>
+        <div className="card card-hover-effect">
+          {featuredPost.type === "rawBody" && (
+            <img className="card-img-top" src={associatedPostSummary.image} alt="Thumbnail" />
+          )}
+          <div dangerouslySetInnerHTML={{ __html: featuredPost.rawHtml }} />
+        </div>
       );
     }
   }

@@ -7,3 +7,6 @@ export const truncateString = (string: string, maxLength: number) => {
   }
   return `${string.substring(0, maxLength)}...`;
 };
+
+export const isExternalPath = (path: string) =>
+  path.startsWith("http://") || path.startsWith("https://");

@@ -2,30 +2,8 @@ import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "gatsby";
 import { Location } from "@reach/router";
+import { isExternalPath } from "../utils";
 import navigationConfig from "../../config/navigation.json";
-
-// const navbarLinks = [
-//   {
-//     path: "/",
-//     title: "Home"
-//   },
-//   {
-//     path: "/blog/",
-//     title: "Blog"
-//   },
-//   {
-//     path: "https://www.youtube.com/c/PyTutorials",
-//     title: "YouTube"
-//   },
-//   {
-//     path: "https://github.com/brentvollebregt",
-//     title: "GitHub"
-//   },
-//   {
-//     path: "/about/",
-//     title: "About"
-//   }
-// ];
 
 interface NavBarLinks {
   title: string;
@@ -57,9 +35,7 @@ const Navigation = () => {
                   <Nav.Link
                     key={path}
                     href={path}
-                    as={
-                      path.startsWith("http://") || path.startsWith("https://") ? undefined : Link
-                    }
+                    as={isExternalPath(path) ? undefined : Link}
                     to={path} // to is for Link
                     active={locationProps.location.pathname === path}
                   >

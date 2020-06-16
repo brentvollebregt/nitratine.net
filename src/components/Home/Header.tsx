@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import "./Header.scss";
+import { Link } from "gatsby";
+import { isExternalPath } from "../utils";
 
 export interface IHeader {
   image: string;
@@ -19,7 +21,14 @@ const Header: React.FC<IHeader> = ({ image, leadText, buttons }) => (
     <p className="lead text-muted">{leadText}</p>
     <p>
       {buttons.map(({ text, link, type }) => (
-        <Button href={link} variant={type as any} className="my-2 mx-1" key={text}>
+        <Button
+          key={text}
+          href={link}
+          as={isExternalPath(link) ? undefined : Link}
+          to={link} // to is for Link
+          variant={type as any}
+          className="my-2 mx-1"
+        >
           {text}
         </Button>
       ))}
