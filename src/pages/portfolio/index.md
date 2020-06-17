@@ -12,6 +12,14 @@ This project allows someone to easily set up a server that uses chromes app mode
 
 ![Auto-Py-To-Exe Empty Interface](../blog/post/auto-py-to-exe/feature.png)
 
+<div style="text-align: center">
+  <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version"></a>
+  <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions"></a>
+  <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License"></a>
+  <a href="http://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="http://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
+  <a href="http://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" alt="Downloads Per Month"></a>
+</div>
+
 This project can be installed from PyPI by executing:
 
 ```cmd
@@ -154,7 +162,8 @@ This project is an Android app that compares prices for similar items and will c
 Nitratine is a website where I share projects developed by me and
 tutorials on topics that I'm interested in. Currently this is the fourth version of the site; it's built using Gatsby and hosted statically using GitHub Pages.
 
-The site also uses Netlify's CMS to make creating posts much easier but still allows for raw JSX pages to be created to host more complex pages.
+The site also uses Netlify's CMS to make creating posts much easier but still
+allows for raw JSX pages to be created to host more complex pages.
 
 A GitHub Actions workflow is used to build the site on each push to master which
 then deploys the most recent version of the site to GitHub pages.
