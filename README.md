@@ -4,7 +4,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ## Broken
 
-- YouTube sub button not showing (only in test)
+- Portfolio images are blury
 
 ### Small
 
