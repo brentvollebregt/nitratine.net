@@ -4,7 +4,26 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ## Broken
 
-- Portfolio images are blury
+- About has large space at the bottom
+- Some files are not linked in posts (e.g. snow post)
+- Some images aren't clickable
+
+### Verify No TOC:
+
+- am-i-a-participant
+- auto-py-to-exe
+- colour
+- hit-counter
+- javascript-date-methods-return-values
+- media-picker
+- monopoly-money
+- mp3-itunes-downloader
+- multi-clipboard
+- price-per-unit
+- quick-script
+- spotify-playlist-downloader
+- the-nitratine-project
+- uow-moodle-rwa-ignorer
 
 ### Small
 

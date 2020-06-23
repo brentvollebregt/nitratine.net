@@ -27,16 +27,16 @@ const Header: React.FC<IHeader> = ({
       <h1 className="blog-post-title">{title}</h1>
 
       <div className="mb-2">
-        <a href={`/blog/archive/${date.getFullYear()}`} className="text-muted">
+        <a href={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
           {formatDate(date)}
         </a>
 
-        <a href={`/blog/categories/${category}`} className="badge badge-primary ml-2 mr-1">
+        <a href={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
           {category}
         </a>
 
         {tags.map(tag => (
-          <a href={`/blog/tags/${tag}`} className="badge badge-warning mr-1" key={tag}>
+          <a href={`/blog/tags/#${tag}`} className="badge badge-warning mr-1" key={tag}>
             {tag}
           </a>
         ))}

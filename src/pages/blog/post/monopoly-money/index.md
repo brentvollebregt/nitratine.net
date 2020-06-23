@@ -38,24 +38,19 @@ When everyone is in the game, the banker can then close the game to stop others 
 ## Screenshots
 
 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 6px;">
-  <div>
-    <img src="./screenshot-1.png" alt="Funds page with game id" />
-  </div>
-  <div>
-    <img src="./screenshot-2.png" alt="Transfering funds" />
-  </div>
-  <div>
-    <img src="./screenshot-3.png" alt="Game history" />
-  </div>
-  <div>
-    <img src="./screenshot-4.png" alt="Bankers actions page" />
-  </div>
-  <div>
-    <img src="./screenshot-5.png" alt="Settings page" />
-  </div>
-  <div>
-    <img src="./screenshot-6.png" alt="Funds page without game id" />
-  </div>
+
+![Funds page with game id](./screenshot-1.png)
+
+![Transfering funds](./screenshot-2.png)
+
+![Game history](./screenshot-3.png)
+
+![Bankers actions page](./screenshot-4.png)
+
+![Settings page](./screenshot-5.png)
+
+![Funds page without game id](./screenshot-6.png)
+
 </div>
 
 ## Features

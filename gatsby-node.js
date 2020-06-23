@@ -101,7 +101,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const previousPostId = edge.previous === null ? null : edge.previous.id;
     createPage({
       path: edge.node.fields.slug,
-      tags: edge.node.frontmatter.tags,
       component: path.resolve(`src/templates/${String(edge.node.frontmatter.templateKey)}.tsx`),
       context: {
         id,
