@@ -7,26 +7,13 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - About has large space at the bottom
 - Some files are not linked in posts (e.g. snow post)
 - Some images aren't clickable
+- Inline code goes out of p tags on mobile (e.g. how-to-get-stored-wifi-passwords-in-windows)
 
-### Verify No TOC:
-
-- am-i-a-participant
-- auto-py-to-exe
-- colour
-- hit-counter
-- javascript-date-methods-return-values
-- media-picker
-- monopoly-money
-- mp3-itunes-downloader
-- multi-clipboard
-- price-per-unit
-- quick-script
-- spotify-playlist-downloader
-- the-nitratine-project
-- uow-moodle-rwa-ignorer
+- To JS: javascript-date-methods-return-values
 
 ### Small
 
+- Try commented-out style in `src\components\Blog\Post\Post.scss`
 - use Gatsby links
 - put actual react-bootstrap components in
 

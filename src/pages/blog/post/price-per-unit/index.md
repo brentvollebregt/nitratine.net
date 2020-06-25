@@ -31,11 +31,16 @@ This app is ideal to find the best price in supermarkets but will work just in w
 
 ## Screenshots
 
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 3px;" class="mb-3">
-	<div><img src="./Gallery1.jpg" alt="Gallery Item 1"></div>
-	<div><img src="./Gallery2.jpg" alt="Gallery Item 2"></div>
-	<div><img src="./Gallery3.jpg" alt="Gallery Item 3"></div>
-	<div><img src="./Gallery4.jpg" alt="Gallery Item 4"></div>
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 3px;">
+
+![Gallery Item 1](./Gallery1.jpg)
+
+![Gallery Item 2](./Gallery2.jpg)
+
+![Gallery Item 3](./Gallery3.jpg)
+
+![Gallery Item 4](./Gallery4.jpg)
+
 </div>
 
 ## Features
