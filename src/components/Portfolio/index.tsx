@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useSyntaxHighlighter from "../../hooks/useSyntaxHighlighter";
 import "./Portfolio.scss";
 
@@ -8,6 +8,33 @@ export interface IPortfolio {
 
 const Portfolio: React.FC<IPortfolio> = ({ snippets }) => {
   const highlightRoot = useSyntaxHighlighter();
+
+  // Due the required usage of CSS order, the size of the div wrapping the snippets is the same height as if no order were applied.
+  // To get around that situation, this calculates how high the columns should be based off the snippets height per-column.
+  // The tallest column's height is then what the wrapper is set to (+50, I don't know why but it works.)
+  useEffect(() => {
+    if (window) {
+      const updateSize = () => {
+        if (highlightRoot.current !== null) {
+          const snippetNodes = highlightRoot.current.querySelectorAll(".snippet");
+          const columnHeights = Array.from(snippetNodes).reduce((acc, curr) => {
+            const order = (curr as any).computedStyleMap()?.get("order") ?? 1;
+            const height = curr.getBoundingClientRect().height;
+            return {
+              ...acc,
+              [order.value]: (acc[order.value] ?? 0) + height
+            };
+          }, {} as { [key: string]: number });
+
+          const snippetContainer = highlightRoot.current.querySelector("div")!;
+          snippetContainer.style.height = `${Math.max(...Object.values(columnHeights), 0) + 50}px`;
+        }
+      };
+      window.addEventListener("resize", updateSize);
+      updateSize();
+      return () => window.removeEventListener("resize", updateSize);
+    }
+  }, []);
 
   const Snippets = snippets;
 
