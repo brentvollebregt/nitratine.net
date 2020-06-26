@@ -118,6 +118,14 @@ module.exports = {
       }
     },
     {
+      // Automatically shows the nprogress indicator when a page is delayed in loading
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#cf1664`,
+        showSpinner: false
+      }
+    },
+    {
       // Netlify CMS
       resolve: "gatsby-plugin-netlify-cms",
       options: {

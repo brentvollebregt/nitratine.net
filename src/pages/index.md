@@ -72,5 +72,5 @@ featuredPosts:
   - type: post
     post: how-to-hash-passwords-in-python
   - type: post
-    post: simulate-keypresses-in-python
+    post: how-to-make-hotkeys-in-python
 ---

@@ -18,6 +18,11 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
+- Use image sharp to blur in images:
+  - Header logo
+  - Home featured post images (and top logo)
+  - Blog feed images
+  - About experience with images
 - Use remark custom components to remove the need for the YouTube video in the frontmatter?
 - Headers + icons
 - redirects
@@ -25,6 +30,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - Google AdSense
   - Approval for a test site
 - /data/ page
+- Make something to identify 404s
 
 ### Check if post is in-tack / alter
 

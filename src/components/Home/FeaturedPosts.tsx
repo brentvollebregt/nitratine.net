@@ -50,7 +50,7 @@ const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts }) => {
           }
 
           return (
-            <Link to={associatedPostSummary.slug}>
+            <Link to={associatedPostSummary.slug} key={associatedPostSummary.slug}>
               <FeaturedPost
                 key={`${p.post}-${p.type}`}
                 featuredPost={p}
