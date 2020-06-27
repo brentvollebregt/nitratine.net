@@ -52,7 +52,7 @@ module.exports = {
             }
           },
           {
-            // Resizing images in markdown
+            // Resizing images in markdown + blur up
             resolve: "gatsby-remark-images",
             options: {
               maxWidth: 2048,
@@ -63,7 +63,8 @@ module.exports = {
             // Copies local files linked to/from Markdown (.md|.markdown) files to the root directory
             resolve: "gatsby-remark-copy-linked-files",
             options: {
-              destinationDir: "static"
+              destinationDir: "static",
+              ignoreFileExtensions: []
             }
           },
           {
