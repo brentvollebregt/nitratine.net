@@ -5,13 +5,11 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 ## Broken
 
 - Some images aren't clickable
-- Inline code goes out of p tags on mobile (e.g. how-to-get-stored-wifi-passwords-in-windows)
 
 - To JS: javascript-date-methods-return-values
 
 ### Small
 
-- Try commented-out style in `src\components\Blog\Post\Post.scss`
 - use Gatsby links
 - put actual react-bootstrap components in
 
