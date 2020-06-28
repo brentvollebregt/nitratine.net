@@ -4,7 +4,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ## Broken
 
-- To JS: javascript-date-methods-return-values (investigate a method to create tsx posts and still show up on other pages - although these are not posts so don't need to be in the feed)
 - Some images aren't clickable
 
 ### Small
@@ -26,10 +25,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
   - Approval for a test site
 - /data/ page
 - Make something to identify 404s
-
-### Check if post is in-tack / alter
-
-- Convert JavaScript date time post to jsx
 
 ### Add
 

@@ -6,6 +6,7 @@ import BlogBase from "../components/Blog/Base";
 import Post, { IPost } from "../components/Blog/Post";
 import { IPagination } from "../components/Blog/Post/Pagination";
 import EmbedYouTubeVideo from "./markdown-components/EmbedYouTubeVideo";
+import JavascriptDateMethodsReturnValues from "./markdown-components/post-specific/javascript-date-methods-return-values";
 
 export const BlogPostTemplate: React.FC<IPost> = props => {
   return <Post {...props} />;
@@ -24,7 +25,10 @@ const BlogPost = ({ data }) => {
 
   const renderAst = new rehypeReact({
     createElement: React.createElement,
-    components: { "youtube-video": EmbedYouTubeVideo }
+    components: {
+      "youtube-video": EmbedYouTubeVideo,
+      "post-specific-javascript-date-methods-return-values": JavascriptDateMethodsReturnValues
+    }
   }).Compiler;
 
   const body = () => <div>{renderAst(data.post.htmlAst)}</div>;
