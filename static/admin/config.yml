@@ -79,30 +79,53 @@ collections:
               label: "Featured Posts",
               name: featuredPosts,
               widget: list,
-              fields:
+              types:
                 [
                   {
-                    label: "Type",
-                    name: "type",
-                    widget: "select",
-                    default: "post",
-                    options:
-                      [
-                        { label: "Post", value: "post" },
-                        { label: "Post Image", value: "postImage" },
-                        { label: "Raw", value: "raw" },
-                        { label: "Raw Body", value: "rawBody" },
-                      ],
-                    required: true,
+                    label: "Post",
+                    name: "post",
+                    widget: object,
+                    fields: [{ label: "Post", name: "post", widget: "string" }],
                   },
-                  { label: "Post", name: "post", widget: "string" },
                   {
-                    label: "Raw HTML",
-                    name: "rawHtml",
-                    widget: "code",
-                    default_language: html,
-                    output_code_only: true,
-                    required: false,
+                    label: "Post Image",
+                    name: "postImage",
+                    widget: object,
+                    fields: [{ label: "Post", name: "post", widget: "string" }],
+                  },
+                  {
+                    label: "Raw",
+                    name: "raw",
+                    widget: object,
+                    fields:
+                      [
+                        { label: "Post", name: "post", widget: "string" },
+                        {
+                          label: "Raw HTML",
+                          name: "rawHtml",
+                          widget: "code",
+                          default_language: html,
+                          output_code_only: true,
+                          required: true,
+                        },
+                      ],
+                  },
+                  {
+                    label: "Raw Body (post image)",
+                    name: "rawBody",
+                    widget: object,
+                    fields:
+                      [
+                        { label: "Post", name: "post", widget: "string" },
+                        {
+                          label: "Raw HTML",
+                          name: "rawHtml",
+                          widget: "code",
+                          default_language: html,
+                          output_code_only: true,
+                          required: true,
+                        },
+                      ],
                   },
                 ],
             }
