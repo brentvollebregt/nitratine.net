@@ -11,20 +11,22 @@ export interface IPreviewCompatibleImageSource {
 export interface IPreviewCompatibleImage extends IPreviewCompatibleImageSource {
   alt?: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const PreviewCompatibleImage: React.FC<IPreviewCompatibleImage> = ({
   childImageSharp,
   blob,
   alt,
-  className
+  className,
+  style
 }) => {
   if (childImageSharp !== undefined) {
-    return <Img fluid={childImageSharp.fluid} alt={alt} className={className} />;
+    return <Img fluid={childImageSharp.fluid} alt={alt} className={className} style={style} />;
   }
 
   if (blob !== undefined) {
-    return <img src={blob} alt={alt} className={className} />;
+    return <img src={blob} alt={alt} className={className} style={style} />;
   }
 
   console.warn({
