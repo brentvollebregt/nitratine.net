@@ -15,7 +15,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 - Use image sharp to blur in images:
   - Header logo
-  - Home featured post images (and top logo)
+  - Home featured post images
   - Blog feed images
   - About experience with images
 - Headers + icons
@@ -24,10 +24,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - Google AdSense
   - Approval for a test site
 - /data/ page
-- Make something to identify 404s
 
 ### Add
 
+- Make something to identify 404s
 - Group tags/categories/years at top of category pages as links to headers (with numbers) e.g. taga (2) tagb (5) tagc (8)
 - Blog footer? Need to link category pages somehow
 - Add switch to disable ads on particular pages

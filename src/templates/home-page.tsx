@@ -11,7 +11,7 @@ const HomePage = ({ data }) => {
   return (
     <Base>
       <HomePageTemplate
-        image={frontmatter.image.childImageSharp.fluid.src}
+        image={frontmatter.image}
         leadText={frontmatter.leadText}
         buttons={frontmatter.buttons}
         featuredPosts={frontmatter.featuredPosts}
