@@ -8,8 +8,9 @@ image: feature.jpg
 description: "This tutorial covers the basics of how to create GUI's in Python using PyQt5. I will demonstrate how to find the designer and basic usage, converting .ui to .py, running the output file and connecting events to methods."
 disableToc: false
 hidden: false
-youtubeVideoId: ksW59gYEl6Q
 ---
+
+<youtube-video id="ksW59gYEl6Q"></youtube-video>
 
 ## Setting up the Environment
 

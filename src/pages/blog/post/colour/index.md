@@ -8,8 +8,9 @@ image: feature.png
 description: "This app is based off a goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen. This figure is the number of colours a screen can display today and it's your challenge to find them all."
 disableToc: true
 hidden: false
-youtubeVideoId: x56o7b9Uor8
 ---
+
+<youtube-video id="x56o7b9Uor8"></youtube-video>
 
 <a href="https://play.google.com/store/apps/details?id=com.pythonanywhere.brentvollebregt.colour" style="display: block; max-width: 200px; margin: auto;">
     <img src="./google-play.png" alt="Get it on Google Play" style="height: 60px;"/>

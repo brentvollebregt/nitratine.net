@@ -8,8 +8,9 @@ image: demo6.png
 description: "A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package."
 disableToc: false
 hidden: false
-youtubeVideoId: lOIJIk_maO4
 ---
+
+<youtube-video id="lOIJIk_maO4"></youtube-video>
 
 ## PIP
 

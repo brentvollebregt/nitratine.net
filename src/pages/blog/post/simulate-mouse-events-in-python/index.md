@@ -8,8 +8,9 @@ image: feature.jpg
 description: "This demonstrates how to control the mouse with Python. Using pynput we are able to simulate mouse events into any window. This will show you how to press buttons, scroll and move the mouse."
 disableToc: false
 hidden: false
-youtubeVideoId: 2BXr9U6ZL8Y
 ---
+
+<youtube-video id="2BXr9U6ZL8Y"></youtube-video>
 
 ## PIP
 

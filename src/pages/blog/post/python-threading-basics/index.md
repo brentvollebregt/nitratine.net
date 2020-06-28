@@ -8,8 +8,9 @@ image: feature.png
 description: "This post covers the basics of Python's threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs."
 disableToc: false
 hidden: false
-youtubeVideoId: 5JSloPGocSY
 ---
+
+<youtube-video id="5JSloPGocSY"></youtube-video>
 
 ## What is Threading?
 

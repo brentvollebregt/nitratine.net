@@ -33,7 +33,6 @@ const PostPreview = ({ entry, widgetFor }) => {
         body={() => widgetFor("body")}
         tableOfContents={() => <div className="text-center">Table Of Contents Placeholder</div>}
         showComments={false}
-        youtubeVideoId={data.youtubeVideoId}
       />
     </div>
   );

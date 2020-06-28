@@ -8,8 +8,9 @@ image: feature.jpg
 description: "This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys."
 disableToc: false
 hidden: false
-youtubeVideoId: eamTeszpeZ4
 ---
+
+<youtube-video id="eamTeszpeZ4"></youtube-video>
 
 ## What is this?
 

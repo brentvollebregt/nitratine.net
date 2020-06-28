@@ -8,8 +8,9 @@ image: feature.png
 description: "This post covers some basics of SQLite3. SQLite3 allows us to access a database using SQL that doesn't require a separate server. This means the database is stored in a single file and we directly connect to the file rather than through some third-party applications server."
 disableToc: false
 hidden: false
-youtubeVideoId: SQj17D1Q_6s
 ---
+
+<youtube-video id="SQj17D1Q_6s"></youtube-video>
 
 > Please note this is not a SQL tutorial, I explain where to use SQL, not how.
 

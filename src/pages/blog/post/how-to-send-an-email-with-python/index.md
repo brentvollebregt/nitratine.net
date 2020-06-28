@@ -8,8 +8,9 @@ image: feature.jpg
 description: "This script sends an email using python. By logging in to a Gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached."
 disableToc: false
 hidden: false
-youtubeVideoId: YPiHBtddefI
 ---
+
+<youtube-video id="YPiHBtddefI"></youtube-video>
 
 ## Why Bother?
 

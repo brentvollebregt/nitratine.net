@@ -8,8 +8,9 @@ image: feature.jpg
 description: "In this post, I discuss how to encrypt and decrypt messages in Python using symmetric encryption. I will demonstrate how to create keys, save keys and how to encrypt messages and text."
 disableToc: false
 hidden: false
-youtubeVideoId: H8t4DJ3Tdrg
 ---
+
+<youtube-video id="H8t4DJ3Tdrg"></youtube-video>
 
 Using the [cryptography](https://cryptography.io/en/latest/) module in Python, we will use an implementation of AES called [Fernet](https://cryptography.io/en/latest/fernet/) to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.
 

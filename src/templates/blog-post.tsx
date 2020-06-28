@@ -1,9 +1,11 @@
 import React from "react";
+import rehypeReact from "rehype-react";
 import { graphql } from "gatsby";
 import Base from "../components/Base";
 import BlogBase from "../components/Blog/Base";
 import Post, { IPost } from "../components/Blog/Post";
 import { IPagination } from "../components/Blog/Post/Pagination";
+import EmbedYouTubeVideo from "./markdown-components/EmbedYouTubeVideo";
 
 export const BlogPostTemplate: React.FC<IPost> = props => {
   return <Post {...props} />;
@@ -19,10 +21,13 @@ const BlogPost = ({ data }) => {
     data.post.frontmatter.githubRepository === "" ? null : data.post.frontmatter.githubRepository;
   const description: string = data.post.frontmatter.description;
   const disableToc: boolean = data.post.frontmatter.disableToc;
-  const youtubeVideoId: string | null =
-    data.post.frontmatter.youtubeVideoId === "" ? null : data.post.frontmatter.youtubeVideoId;
 
-  const body = () => <div dangerouslySetInnerHTML={{ __html: data.post.html }} />;
+  const renderAst = new rehypeReact({
+    createElement: React.createElement,
+    components: { "youtube-video": EmbedYouTubeVideo }
+  }).Compiler;
+
+  const body = () => <div>{renderAst(data.post.htmlAst)}</div>;
   const tableOfContents = () => (
     <div dangerouslySetInnerHTML={{ __html: data.post.tableOfContents }} />
   );
@@ -62,7 +67,6 @@ const BlogPost = ({ data }) => {
           tableOfContents={disableToc ? null : tableOfContents}
           pagination={pagination}
           showComments={true}
-          youtubeVideoId={youtubeVideoId}
         />
       </BlogBase>
     </Base>
@@ -75,6 +79,7 @@ export const pageQuery = graphql`
   query BlogPostByID($id: String!, $nextPostId: String, $previousPostId: String) {
     post: markdownRemark(id: { eq: $id }) {
       id
+      htmlAst
       html
       tableOfContents
       frontmatter {
@@ -86,7 +91,6 @@ export const pageQuery = graphql`
         githubRepository
         description
         disableToc
-        youtubeVideoId
       }
     }
     next: markdownRemark(id: { eq: $nextPostId }) {

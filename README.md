@@ -4,9 +4,8 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ## Broken
 
+- To JS: javascript-date-methods-return-values (investigate a method to create tsx posts and still show up on other pages - although these are not posts so don't need to be in the feed)
 - Some images aren't clickable
-
-- To JS: javascript-date-methods-return-values
 
 ### Small
 
@@ -20,7 +19,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
   - Home featured post images (and top logo)
   - Blog feed images
   - About experience with images
-- Use remark custom components to remove the need for the YouTube video in the frontmatter?
 - Headers + icons
 - redirects
 - Mocking old style sheet for code
