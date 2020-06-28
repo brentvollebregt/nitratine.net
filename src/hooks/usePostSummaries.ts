@@ -1,4 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby";
+import { IPreviewCompatibleImageSource } from "../components/Helpers/PreviewCompatibleImage";
 
 export interface PostSummary {
   slug: string;
@@ -9,7 +10,7 @@ export interface PostSummary {
   hidden: boolean;
   githubRepository: string | null;
   description: string;
-  image: string | undefined;
+  image: IPreviewCompatibleImageSource | undefined;
 }
 
 const usePostSummaries = (): PostSummary[] => {
@@ -33,7 +34,11 @@ const usePostSummaries = (): PostSummary[] => {
               githubRepository
               description
               image {
-                publicURL
+                childImageSharp {
+                  fluid(maxWidth: 2048, quality: 100) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
               }
             }
           }
@@ -51,7 +56,7 @@ const usePostSummaries = (): PostSummary[] => {
     hidden: node.frontmatter.hidden,
     githubRepository: node.frontmatter.githubRepository,
     description: node.frontmatter.description,
-    image: node.frontmatter.image?.publicURL
+    image: node.frontmatter.image
   }));
 
   return postSummaries;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import { Card, Badge } from "react-bootstrap";
+import PreviewCompatibleImage from "../Helpers/PreviewCompatibleImage";
 import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
 import { formatDate } from "../utils";
 import "./FeaturedPosts.scss";
@@ -75,7 +76,13 @@ const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSum
     case "postImage": {
       return (
         <Card className="card-hover-effect">
-          <Card.Img variant="top" src={associatedPostSummary.image} alt="Post Thumbnail" />
+          {associatedPostSummary.image !== undefined && (
+            <PreviewCompatibleImage
+              childImageSharp={associatedPostSummary.image.childImageSharp}
+              alt="Post Thumbnail"
+              className="card-img-top"
+            />
+          )}
           {featuredPost.type === "post" && (
             <Card.Body>
               <Card.Title>{associatedPostSummary.title}</Card.Title>
@@ -93,8 +100,12 @@ const FeaturedPost: React.FC<IFeaturedPost> = ({ featuredPost, associatedPostSum
     case "rawBody": {
       return (
         <Card className="card-hover-effect">
-          {featuredPost.type === "rawBody" && (
-            <Card.Img variant="top" src={associatedPostSummary.image} alt="Thumbnail" />
+          {featuredPost.type === "rawBody" && associatedPostSummary.image !== undefined && (
+            <PreviewCompatibleImage
+              childImageSharp={associatedPostSummary.image.childImageSharp}
+              alt="Post Thumbnail"
+              className="card-img-top"
+            />
           )}
           <div dangerouslySetInnerHTML={{ __html: featuredPost.rawHtml }} />
         </Card>

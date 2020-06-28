@@ -4,7 +4,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ## Broken
 
-- Some images aren't clickable
+- Some images aren't linked to original
 
 ### Small
 
@@ -14,10 +14,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 ### Large
 
 - Use image sharp to blur in images:
-  - Header logo
-  - Home featured post images
   - Blog feed images
   - About experience with images
+  - Sidebar recent videos
+  - Sidebar featured sites
 - Headers + icons
 - redirects
 - Mocking old style sheet for code
