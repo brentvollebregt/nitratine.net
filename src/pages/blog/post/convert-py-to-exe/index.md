@@ -72,11 +72,7 @@ You can combine these flags to make things like onefile executables with no cons
 
 In March 2018 I created an application that allows you to create executables easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.
 
-<div class="embedded_yt my-3">
-    <div>
-        <iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/OZSZHmWSOeM"></iframe>
-    </div>
-</div>
+<youtube-video id="OZSZHmWSOeM"></youtube-video>
 
 ![Empty interface](https://i.imgur.com/dd0LC2n.png)
 
