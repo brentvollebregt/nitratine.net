@@ -14,7 +14,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 ### Large
 
 - Use image sharp to blur in images:
-  - Blog feed images
   - About experience with images
   - Sidebar recent videos
   - Sidebar featured sites

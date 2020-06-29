@@ -1,4 +1,5 @@
 import React from "react";
+import Img, { FluidObject } from "gatsby-image";
 import { formatDate } from "../../utils";
 import "./PostTile.scss";
 
@@ -9,7 +10,11 @@ export interface IPostTile {
   category: string[];
   tags: string[];
   description: string;
-  thumbnailSrc: string;
+  image: {
+    childImageSharp: {
+      fluid: FluidObject;
+    };
+  };
 }
 
 const PostTile: React.FC<IPostTile> = ({
@@ -19,12 +24,20 @@ const PostTile: React.FC<IPostTile> = ({
   category,
   tags,
   description,
-  thumbnailSrc
+  image
 }) => {
+  console.log("image.childImageSharp", image.childImageSharp);
   return (
     <div className="card mb-4 blog-card">
       <div className="thumbnail-wrapper">
-        <img className="thumbnail" alt="Thumbnail" src={thumbnailSrc} />
+        <Img
+          fluid={image.childImageSharp.fluid}
+          alt={`${title} Thumbnail`}
+          imgStyle={{
+            objectFit: "cover"
+          }}
+          style={{ height: "100%" }}
+        />
       </div>
       <div className="p-3">
         <h3 className="mb-0">

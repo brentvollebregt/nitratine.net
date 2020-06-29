@@ -13,14 +13,14 @@ export const BlogFeedPageTemplate: React.FC<IFeed> = props => {
 const BlogPost = ({ data, pageContext }) => {
   const rawPosts = data.allMarkdownRemark.edges;
 
-  const posts: IPostTile[] = rawPosts.map(p => ({
-    title: p.node.frontmatter.title,
-    href: p.node.fields.slug,
-    date: new Date(p.node.frontmatter.date),
-    category: p.node.frontmatter.category,
-    tags: p.node.frontmatter.tags,
-    description: p.node.frontmatter.description,
-    thumbnailSrc: p.node.frontmatter.image.publicURL
+  const posts: IPostTile[] = rawPosts.map(({ node }) => ({
+    title: node.frontmatter.title,
+    href: node.fields.slug,
+    date: new Date(node.frontmatter.date),
+    category: node.frontmatter.category,
+    tags: node.frontmatter.tags,
+    description: node.frontmatter.description,
+    image: node.frontmatter.image
   }));
 
   const pagination: IPagination = {
@@ -60,7 +60,11 @@ export const pageQuery = graphql`
             tags
             description
             image {
-              publicURL
+              childImageSharp {
+                fluid(maxWidth: 2048, quality: 100) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
         }
