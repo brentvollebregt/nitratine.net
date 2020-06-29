@@ -41,29 +41,29 @@ const About: React.FC<IAbout> = ({ body, experience, email }) => {
           ))}
         </div>
 
-        {/* <h2 id="donations">Donations</h2>
-        <p>If you would like to donate for any project I maintain, this is the place to do so.</p> */}
-        {/* <form
-        action="https://www.paypal.com/cgi-bin/webscr"
-        method="post"
-        target="_top"
-        className="mb-3"
-      >
-        <input type="hidden" name="cmd" value="_s-xclick" />
-        <input type="hidden" name="hosted_button_id" value="CG8P7ELK4RG26" />
-        <input
-          type="image"
-          src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-          name="submit"
-          alt="PayPal - The safer, easier way to pay online!"
-        />
-        <img
-          alt=""
-          src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
-          width="1"
-          height="1"
-        />
-      </form> */}
+        <h2 id="donations">Donations</h2>
+        <p>If you would like to donate for any project I maintain, this is the place to do so.</p>
+        <form
+          action="https://www.paypal.com/cgi-bin/webscr"
+          method="post"
+          target="_top"
+          className="mb-3"
+        >
+          <input type="hidden" name="cmd" value="_s-xclick" />
+          <input type="hidden" name="hosted_button_id" value="CG8P7ELK4RG26" />
+          <input
+            type="image"
+            src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+            name="submit"
+            alt="PayPal - The safer, easier way to pay online!"
+          />
+          <img
+            alt=""
+            src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+            width="1"
+            height="1"
+          />
+        </form>
 
         <h2 id="contact">Contact</h2>
         <p>

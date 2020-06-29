@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import { useStaticQuery, graphql } from "gatsby";
 import ReactMarkdown from "react-markdown";
-import { Helmet } from "react-helmet";
 import unescape from "lodash/unescape";
 import sideBarConfig from "../../../config/sidebar.json";
 import "./SideBar.scss";
