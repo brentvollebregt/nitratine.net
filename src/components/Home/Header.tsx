@@ -20,12 +20,13 @@ export interface IHeader {
 const Header: React.FC<IHeader> = ({ image, leadText, buttons }) => (
   <Jumbotron fluid className="text-center header">
     <h1 className="sr-only">Nitratine</h1>
-    <PreviewCompatibleImage
-      childImageSharp={image.childImageSharp}
-      blob={image.blob}
-      alt="Nitratine Logo"
-      className="img-fluid mb-2"
-    />
+    <div className="feature-image-wrapper mb-2">
+      <PreviewCompatibleImage
+        childImageSharp={image.childImageSharp}
+        blob={image.blob}
+        alt="Nitratine Logo"
+      />
+    </div>
     <p className="lead text-muted">{leadText}</p>
     <p>
       {buttons.map(({ text, link, type }) => (

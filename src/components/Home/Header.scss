@@ -1,11 +1,13 @@
 .header {
   background: transparent;
 
-  img {
-    max-height: 150px;
-    width: auto !important;
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%);
+  .feature-image-wrapper {
+    width: 720px;
+    max-width: 100%;
+    margin: 0 auto;
+
+    img {
+      max-height: 150px;
+    }
   }
 }
