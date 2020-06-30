@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "gatsby";
 import { formatDate } from "../utils";
 
 interface ICategories {
@@ -31,17 +32,17 @@ const Categories: React.FC<ICategories> = ({ categoryType, postsByCategory }) =>
           .sort((p1, p2) => p2.date.valueOf() - p1.date.valueOf())
           .map(p => (
             <div key={p.slug}>
-              <a href={`/blog/archive/#${p.date.getFullYear()}`} className="mr-2 text-muted">
+              <Link to={`/blog/archive/#${p.date.getFullYear()}`} className="mr-2 text-muted">
                 {formatDate(p.date)}
-              </a>
-              <a href={p.slug}>{p.title}</a>
-              <a href={`/blog/categories/#${p.category}`} className="badge badge-primary ml-2">
+              </Link>
+              <Link to={p.slug}>{p.title}</Link>
+              <Link to={`/blog/categories/#${p.category}`} className="badge badge-primary ml-2">
                 {p.category}
-              </a>
+              </Link>
               {p.tags.map(t => (
-                <a key={t} href={`/blog/tags/#${t}`} className="badge badge-warning ml-1">
+                <Link key={t} to={`/blog/tags/#${t}`} className="badge badge-warning ml-1">
                   {t}
-                </a>
+                </Link>
               ))}
             </div>
           ))}

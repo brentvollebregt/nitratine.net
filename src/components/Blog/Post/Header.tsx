@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "gatsby";
 import { formatDate } from "../../utils";
 import GitHubLogoImage from "../../../img/github-icon.svg";
 import "./Header.scss";
@@ -27,18 +28,18 @@ const Header: React.FC<IHeader> = ({
       <h1 className="blog-post-title">{title}</h1>
 
       <div className="mb-2">
-        <a href={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
+        <Link to={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
           {formatDate(date)}
-        </a>
+        </Link>
 
-        <a href={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
+        <Link to={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
           {category}
-        </a>
+        </Link>
 
         {tags.map(tag => (
-          <a href={`/blog/tags/#${tag}`} className="badge badge-warning mr-1" key={tag}>
+          <Link to={`/blog/tags/#${tag}`} className="badge badge-warning mr-1" key={tag}>
             {tag}
-          </a>
+          </Link>
         ))}
 
         {hidden && <span className="badge badge-danger mr-1">Hidden</span>}

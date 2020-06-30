@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "gatsby";
 import { useSiteMetadata } from "../../../hooks/useSiteMetadata";
 
 const getViewablePages = (
@@ -40,9 +41,9 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
       <ul className="pagination justify-content-center">
         <li className={`page-item ${isPreviousPage ? "" : "disabled"}`}>
           {isPreviousPage ? (
-            <a className="page-link" href={getPageRoute(current - 1)}>
+            <Link className="page-link" to={getPageRoute(current - 1)}>
               Previous
-            </a>
+            </Link>
           ) : (
             <a className="page-link" tabIndex={-1}>
               Previous
@@ -53,24 +54,24 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
         {viewablePages.map(page =>
           page === current ? (
             <li key={page} className="page-item active">
-              <a className="page-link" href="">
+              <a className="page-link">
                 {page} <span className="sr-only">(current)</span>
               </a>
             </li>
           ) : (
             <li key={page} className="page-item">
-              <a className="page-link" href={getPageRoute(page)}>
+              <Link className="page-link" to={getPageRoute(page)}>
                 {page}
-              </a>
+              </Link>
             </li>
           )
         )}
 
         <li className={`page-item ${isNextPage ? "" : "disabled"}`}>
           {isNextPage ? (
-            <a className="page-link" href={getPageRoute(current + 1)}>
+            <Link className="page-link" to={getPageRoute(current + 1)}>
               Next
-            </a>
+            </Link>
           ) : (
             <a className="page-link" tabIndex={-1}>
               Next

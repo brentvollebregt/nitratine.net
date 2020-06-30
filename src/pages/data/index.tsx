@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import Base from "../../components/Base";
 
 const Data = ({ data }: { data: Query }) => {
@@ -45,7 +45,7 @@ const Data = ({ data }: { data: Query }) => {
               {postsSortedByDate.map(({ node }) => (
                 <tr>
                   <td>
-                    <a href={node.fields.slug}>{node.frontmatter.title}</a>
+                    <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
                   </td>
                   <td>
                     <img

@@ -8,7 +8,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Small
 
-- use Gatsby links
 - put actual react-bootstrap components in
 
 ### Large
@@ -16,9 +15,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - Headers + icons
 - redirects
 - Mocking old style sheet for code
+- Post comments
 - Google AdSense
+  - Enable and test
   - Approval for a test site
-- /data/ page
 
 ### Add
 

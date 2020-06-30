@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useStaticQuery, graphql, Link } from "gatsby";
 import { navigate } from "@reach/router";
-import { useStaticQuery, graphql } from "gatsby";
 import ReactMarkdown from "react-markdown";
 import unescape from "lodash/unescape";
 import sideBarConfig from "../../../config/sidebar.json";
@@ -136,10 +136,10 @@ const SideBar: React.FC = () => {
             .sort(({ name: n1 }, { name: n2 }) => n1.localeCompare(n2))
             .map(({ name, postCount }) => (
               <li key={name}>
-                <a href={`/blog/categories/#${name}`}>
+                <Link to={`/blog/categories/#${name}`}>
                   {getCategoryPrefix(name)} {name}
                   <span className="badge badge-primary ml-3">{postCount}</span>
-                </a>
+                </Link>
               </li>
             ))}
         </ol>

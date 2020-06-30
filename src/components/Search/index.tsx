@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "gatsby";
 import { useLocation } from "@reach/router";
 import matchSorter from "match-sorter";
 import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
@@ -46,19 +47,19 @@ const Match: React.FC<{ post: PostSummary }> = ({ post }) => {
   return (
     <div>
       <h3 className="mb-0">
-        <a href={post.slug}>{post.title}</a>
+        <Link to={post.slug}>{post.title}</Link>
       </h3>
       <p className="text-muted mb-0">
-        <a className="text-muted" href={`/blog/archive/#${post.date.getFullYear()}`}>
+        <Link className="text-muted" to={`/blog/archive/#${post.date.getFullYear()}`}>
           {formatDate(post.date)}
-        </a>
-        <a className="badge badge-primary ml-2" href="/blog/categories/#YouTube">
+        </Link>
+        <Link className="badge badge-primary ml-2" to="/blog/categories/#YouTube">
           {post.category}
-        </a>
+        </Link>
         {post.tags.map(t => (
-          <a className="badge badge-warning ml-1" href={`/blog/tags/#${t}`}>
+          <Link className="badge badge-warning ml-1" to={`/blog/tags/#${t}`}>
             {t}
-          </a>
+          </Link>
         ))}
       </p>
       <p>
