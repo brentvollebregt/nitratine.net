@@ -26,7 +26,6 @@ const PostTile: React.FC<IPostTile> = ({
   description,
   image
 }) => {
-  console.log("image.childImageSharp", image.childImageSharp);
   return (
     <div className="card mb-4 blog-card">
       <div className="thumbnail-wrapper">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { navigate } from "@reach/router";
 import { useStaticQuery, graphql } from "gatsby";
 import ReactMarkdown from "react-markdown";
@@ -52,6 +52,13 @@ const SideBar: React.FC = () => {
       }
     }
   `);
+
+  // If the GAPI has loaded, call it to create the subscribe button
+  useEffect(() => {
+    if ((window as any).gapi) {
+      (window as any).gapi.ytsubscribe.go();
+    }
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -140,17 +147,13 @@ const SideBar: React.FC = () => {
 
       <div className="card p-3 mb-3 bg-light">
         <h4 className="text-center text-lg-left">PyTutorials on YouTube</h4>
-
-        <div style={{ textAlign: "center" }}>
-          <iframe
-            frameBorder="0"
-            scrolling="no"
-            style={{
-              width: 174,
-              height: 48
-            }}
-            src="https://www.youtube.com/subscribe_embed?usegapi=1&channel=PrivateSplat&layout=full&count=default"
-          ></iframe>
+        <div className="text-center">
+          <div
+            className="g-ytsubscribe"
+            data-channel="PrivateSplat"
+            data-layout="full"
+            data-count="default"
+          />
         </div>
       </div>
 

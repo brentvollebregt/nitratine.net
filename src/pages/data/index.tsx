@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { graphql } from "gatsby";
 import Base from "../../components/Base";
 
@@ -9,6 +9,13 @@ const Data = ({ data }: { data: Query }) => {
   const githubRepositoriesSortedByStars = data.githubRepositories.repositories.sort(
     (a, b) => b.stargazers_count - a.stargazers_count
   );
+
+  // If the GAPI has loaded, call it to create the subscribe button
+  useEffect(() => {
+    if ((window as any).gapi) {
+      (window as any).gapi.ytsubscribe.go();
+    }
+  }, []);
 
   return (
     <Base>
@@ -104,9 +111,12 @@ const Data = ({ data }: { data: Query }) => {
                   <a href="https://www.youtube.com/PyTutorials">YouTube Subscribers</a>
                 </td>
                 <td>
-                  {/* TODO */}
-                  {/* <script src="https://apis.google.com/js/platform.js" gapi_processed="true"></script>
-                                    <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="default" data-count="default"></div> */}
+                  <div
+                    className="g-ytsubscribe"
+                    data-channel="PrivateSplat"
+                    data-layout="default"
+                    data-count="default"
+                  ></div>
                 </td>
               </tr>
               <tr>
