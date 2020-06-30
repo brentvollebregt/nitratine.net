@@ -224,3 +224,10 @@ collections:
                   { label: Link, name: path, widget: string },
                 ],
             }
+      - file: "src/config/adsense.json"
+        label: "AdSense"
+        name: "adsense"
+        fields:
+          - { label: "Config Key", name: "configKey", widget: "hidden", default: "adsense" }
+          - { label: Enabled, name: enabled, widget: boolean, default: false }
+          - { label: Publisher Id, name: publisherId, widget: string }

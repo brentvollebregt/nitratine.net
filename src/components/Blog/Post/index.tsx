@@ -2,6 +2,7 @@ import React from "react";
 import Header, { IHeader } from "./Header";
 import Pagination, { IPagination } from "./Pagination";
 import Comments from "./Comments";
+import useAdSenseAutoAds from "./useAdSenseAutoAds";
 import "./Post.scss";
 
 export interface IPost extends IHeader {
@@ -24,6 +25,8 @@ const Post: React.FC<IPost> = ({
   tableOfContents,
   showComments
 }) => {
+  useAdSenseAutoAds();
+
   const Body = body;
   const TableOfContents = tableOfContents;
 
