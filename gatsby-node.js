@@ -7,24 +7,47 @@ require("dotenv").config({ path: `.env` });
 const siteBarConfig = require("./src/config/sidebar.json");
 
 exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createContentDigest }) => {
+  // Get recent YouTube videos
   const youTubeDataApiKey = process.env.YOUTUBE_DATA_API_KEY;
   if (!youTubeDataApiKey) {
     throw Error(`YOUTUBE_DATA_API_KEY has not been set. Found "${youTubeDataApiKey}".`);
   }
 
   const { channelId, recentViewAmount } = siteBarConfig.youtube;
-  const { data } = await axios.get(
+  const { data: youtubeData } = await axios.get(
     `https://www.googleapis.com/youtube/v3/search?key=${youTubeDataApiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=${recentViewAmount}&type=video`
   );
 
   createNode({
-    ...data,
+    ...youtubeData,
     parent: null,
     children: [],
     id: createNodeId(`recent-youtube-videos`),
     internal: {
       type: `RecentYouTubeVideo`,
-      contentDigest: createContentDigest(data)
+      contentDigest: createContentDigest(youtubeData)
+    }
+  });
+
+  // Get GitHub repos
+  const githubUsername = "brentvollebregt";
+  if (!githubUsername) {
+    throw Error(`GitHub username has not been set. Found "${githubUsername}".`);
+  }
+
+  const { data: githubData } = await axios.get(
+    `https://api.github.com/users/${githubUsername}/repos`
+  );
+  const githubDataInObject = { repositories: githubData };
+
+  createNode({
+    ...githubDataInObject,
+    parent: null,
+    children: [],
+    id: createNodeId(`github-repositories`),
+    internal: {
+      type: `GithubRepositories`,
+      contentDigest: createContentDigest(githubDataInObject)
     }
   });
 };
