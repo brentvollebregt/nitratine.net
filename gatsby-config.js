@@ -130,6 +130,19 @@ module.exports = {
       }
     },
     {
+      // Favicon, manifest and other common header stuff
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Nitratine`,
+        short_name: `Nitratine`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#343a40`,
+        display: `standalone`,
+        icon: `static/assets/favicon.png`
+      }
+    },
+    {
       // Netlify CMS
       resolve: "gatsby-plugin-netlify-cms",
       options: {

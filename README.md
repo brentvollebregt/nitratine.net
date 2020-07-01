@@ -12,14 +12,13 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- icons
 - redirects
 - Mocking old style sheet for code
 - Post comments
-- Google AdSense
-  - Enable and test
-  - Approval for a test site
+- Google Analytics
+- Google AdSense (enable and test - need approval for the test site to test on test.nitratine.net)
 - Remove robots
+- Remove source maps
 
 ### Add
 

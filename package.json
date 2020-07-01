@@ -10,6 +10,7 @@
     "dotenv": "^8.2.0",
     "gatsby": "^2.20.35",
     "gatsby-image": "^2.3.5",
+    "gatsby-plugin-manifest": "^2.4.14",
     "gatsby-plugin-netlify-cms": "^4.2.5",
     "gatsby-plugin-nprogress": "^2.3.6",
     "gatsby-plugin-purgecss": "^5.0.0",
