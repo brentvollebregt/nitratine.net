@@ -13,7 +13,6 @@ const Feed: React.FC<IFeed> = ({ posts, pagination }) => (
     <SEO
       title="Blog Feed"
       description="New posts and links with resources to my YouTube videos will appear here."
-      relativePath={pagination.getPageRoute(pagination.current)}
     />
 
     <div>

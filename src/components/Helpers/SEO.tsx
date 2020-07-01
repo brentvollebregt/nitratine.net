@@ -1,26 +1,29 @@
 import React from "react";
+import { useLocation } from "@reach/router";
 import { Helmet } from "react-helmet";
 import staticConfig from "../../config/static.json";
 
 interface ISEO {
   title: string;
   description: string;
-  relativePath: string;
   relativeImagePath?: string;
   isPost?: boolean;
   noIndex?: boolean;
 }
 
-// TODO relativePath must always end with /
-
 const SEO: React.FC<ISEO> = ({
   title,
   description,
-  relativePath,
   relativeImagePath = staticConfig.siteImage as string,
   isPost = false,
   noIndex = false
 }) => {
+  const location = useLocation();
+
+  const relativePath = location.pathname.endsWith("/")
+    ? location.pathname
+    : location.pathname + "/";
+
   return (
     <Helmet>
       {noIndex && <meta name="robots" content="noindex" />}

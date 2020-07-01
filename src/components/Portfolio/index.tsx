@@ -44,7 +44,6 @@ const Portfolio: React.FC<IPortfolio> = ({ snippets }) => {
       <SEO
         title="Portfolio"
         description="This is a small collection of my favourite projects I developed with a small description and links to pages relating to the project."
-        relativePath="/portfolio/"
       />
       <div className="portfolio">
         <div className="col-xs-12 col-lg-8 d-block mx-auto">

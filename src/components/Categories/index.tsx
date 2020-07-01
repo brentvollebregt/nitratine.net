@@ -25,7 +25,6 @@ const Categories: React.FC<ICategories> = ({ categoryType, postsByCategory, rela
     <SEO
       title={`Posts By ${categoryType}`}
       description={`Posts on Nitratine sorted by ${categoryType.toLowerCase()}`}
-      relativePath={relativePath}
     />
 
     <h1 className="mb-4">Posts By {categoryType}</h1>

@@ -11,7 +11,6 @@ export interface IPost extends IHeader {
   body: React.FC;
   tableOfContents: React.FC | null;
   showComments: boolean;
-  relativePath: string;
   relativeImagePath: string;
 }
 
@@ -27,7 +26,6 @@ const Post: React.FC<IPost> = ({
   body,
   tableOfContents,
   showComments,
-  relativePath,
   relativeImagePath
 }) => {
   useAdSenseAutoAds();
@@ -40,7 +38,6 @@ const Post: React.FC<IPost> = ({
       <SEO
         title={title}
         description={description}
-        relativePath={relativePath}
         relativeImagePath={relativeImagePath}
         isPost={true}
         noIndex={hidden}

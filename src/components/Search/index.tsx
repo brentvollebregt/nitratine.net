@@ -20,7 +20,7 @@ const Search: React.FC = () => {
 
   return (
     <>
-      <SEO title="Search" description="Local Nitratine.net Search" relativePath="/search/" />
+      <SEO title="Search" description="Local Nitratine.net Search" />
 
       <div>
         <h1 className="text-center">Local Nitratine.net Search</h1>

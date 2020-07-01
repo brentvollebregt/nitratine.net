@@ -10,7 +10,6 @@ const Home: React.FC<IHome> = ({ image, leadText, buttons, featuredPosts }) => (
     <SEO
       title=""
       description="A place where I share projects developed by me and tutorials on topics that I'm interested in. I own the PyTutorials YouTube channel and am the creator of auto-py-to-exe."
-      relativePath="/"
     />
 
     <Header image={image} leadText={leadText} buttons={buttons} />
