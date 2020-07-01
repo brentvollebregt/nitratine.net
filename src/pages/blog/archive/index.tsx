@@ -32,7 +32,11 @@ const ArchivePage = ({ data }: { data: Query }) => {
   return (
     <Base>
       <BlogBase>
-        <Categories categoryType="Year" postsByCategory={postsGroupedByYear} />
+        <Categories
+          categoryType="Year"
+          postsByCategory={postsGroupedByYear}
+          relativePath="/blog/archive/"
+        />
       </BlogBase>
     </Base>
   );

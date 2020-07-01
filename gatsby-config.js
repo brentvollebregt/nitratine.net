@@ -1,10 +1,13 @@
+const staticConfig = require("./src/config/static.json");
+
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://nitratine.net`,
-    title: "Nitratine",
+    siteUrl: staticConfig.siteUrl,
+    title: staticConfig.title,
     blogFeed: {
-      postsPerPage: 10,
-      pagesEitherSideOfCurrentInPagination: 2
+      postsPerPage: staticConfig.blogFeed.postsPerPage,
+      pagesEitherSideOfCurrentInPagination:
+        staticConfig.blogFeed.pagesEitherSideOfCurrentInPagination
     }
   },
   plugins: [

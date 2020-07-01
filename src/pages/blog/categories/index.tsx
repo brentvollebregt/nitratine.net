@@ -22,7 +22,11 @@ const CategoriesPage = ({ data }) => {
   return (
     <Base>
       <BlogBase>
-        <Categories categoryType="Category" postsByCategory={postsGroupedByCategory} />
+        <Categories
+          categoryType="Category"
+          postsByCategory={postsGroupedByCategory}
+          relativePath="/blog/categories/"
+        />
       </BlogBase>
     </Base>
   );

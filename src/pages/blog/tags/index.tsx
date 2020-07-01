@@ -22,7 +22,11 @@ const TagsPage = ({ data }) => {
   return (
     <Base>
       <BlogBase>
-        <Categories categoryType="Tag" postsByCategory={postsGroupedByTags} />
+        <Categories
+          categoryType="Tag"
+          postsByCategory={postsGroupedByTags}
+          relativePath="/blog/tags/"
+        />
       </BlogBase>
     </Base>
   );

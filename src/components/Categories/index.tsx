@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "gatsby";
 import { formatDate } from "../utils";
+import SEO from "../Helpers/SEO";
 
 interface ICategories {
   categoryType: string;
   postsByCategory: IPostsByCategory[];
+  relativePath: string;
 }
 
 export interface IPostsByCategory {
@@ -18,8 +20,14 @@ export interface IPostsByCategory {
   }[];
 }
 
-const Categories: React.FC<ICategories> = ({ categoryType, postsByCategory }) => (
+const Categories: React.FC<ICategories> = ({ categoryType, postsByCategory, relativePath }) => (
   <>
+    <SEO
+      title={`Posts By ${categoryType}`}
+      description={`Posts on Nitratine sorted by ${categoryType.toLowerCase()}`}
+      relativePath={relativePath}
+    />
+
     <h1 className="mb-4">Posts By {categoryType}</h1>
 
     {postsByCategory.map(c => (

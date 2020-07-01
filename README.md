@@ -19,6 +19,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - Google AdSense
   - Enable and test
   - Approval for a test site
+- Remove robots
 
 ### Add
 

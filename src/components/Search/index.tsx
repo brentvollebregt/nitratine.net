@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "gatsby";
 import { useLocation } from "@reach/router";
 import matchSorter from "match-sorter";
+import SEO from "../Helpers/SEO";
 import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
 import { formatDate } from "../utils";
 
@@ -18,28 +19,32 @@ const Search: React.FC = () => {
   });
 
   return (
-    <div>
-      <h1 className="text-center">Local Nitratine.net Search</h1>
+    <>
+      <SEO title="Search" description="Local Nitratine.net Search" relativePath="/search/" />
 
-      <div className="input-group my-4">
-        <input
-          type="text"
-          className="form-control text-center"
-          placeholder="Search"
-          aria-label="Search"
-          value={query}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value)}
-        />
-      </div>
+      <div>
+        <h1 className="text-center">Local Nitratine.net Search</h1>
 
-      {query !== "" && (
-        <div id="results">
-          {matches.map(p => (
-            <Match key={p.slug} post={p} />
-          ))}
+        <div className="input-group my-4">
+          <input
+            type="text"
+            className="form-control text-center"
+            placeholder="Search"
+            aria-label="Search"
+            value={query}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value)}
+          />
         </div>
-      )}
-    </div>
+
+        {query !== "" && (
+          <div id="results">
+            {matches.map(p => (
+              <Match key={p.slug} post={p} />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

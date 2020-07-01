@@ -22,7 +22,10 @@ const BlogPost = ({ data }) => {
     data.post.frontmatter.githubRepository === "" ? null : data.post.frontmatter.githubRepository;
   const description: string = data.post.frontmatter.description;
   const disableToc: boolean = data.post.frontmatter.disableToc;
+  const relativePath: string = data.post.fields.slug;
+  const relativeImagePath: string = data.post.frontmatter.image.publicURL;
 
+  // @ts-ignore
   const renderAst = new rehypeReact({
     createElement: React.createElement,
     components: {
@@ -71,6 +74,8 @@ const BlogPost = ({ data }) => {
           tableOfContents={disableToc ? null : tableOfContents}
           pagination={pagination}
           showComments={true}
+          relativePath={relativePath}
+          relativeImagePath={relativeImagePath}
         />
       </BlogBase>
     </Base>
@@ -86,6 +91,9 @@ export const pageQuery = graphql`
       htmlAst
       html
       tableOfContents
+      fields {
+        slug
+      }
       frontmatter {
         title
         date
@@ -95,6 +103,9 @@ export const pageQuery = graphql`
         githubRepository
         description
         disableToc
+        image {
+          publicURL
+        }
       }
     }
     next: markdownRemark(id: { eq: $nextPostId }) {

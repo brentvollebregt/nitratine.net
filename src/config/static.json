@@ -1,0 +1,14 @@
+{
+  "configKey": "static",
+  "title": "Nitratine",
+  "baseUrl": "https://nitratine.net",
+  "siteImage": "/logo.png",
+  "blogFeed": {
+    "postsPerPage": 10,
+    "pagesEitherSideOfCurrentInPagination": 2
+  },
+  "social": {
+    "github": "brentvollebregt",
+    "twitter": "PyTutorials"
+  }
+}
