@@ -43,6 +43,7 @@ const Post: React.FC<IPost> = ({
         relativePath={relativePath}
         relativeImagePath={relativeImagePath}
         isPost={true}
+        noIndex={hidden}
       />
 
       <div className="blog-post">

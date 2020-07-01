@@ -1,7 +1,7 @@
 {
   "configKey": "static",
   "title": "Nitratine",
-  "baseUrl": "https://nitratine.net",
+  "siteUrl": "https://nitratine.net",
   "siteImage": "/logo.png",
   "blogFeed": {
     "postsPerPage": 10,

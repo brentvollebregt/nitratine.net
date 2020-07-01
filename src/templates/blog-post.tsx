@@ -23,7 +23,7 @@ const BlogPost = ({ data }) => {
   const description: string = data.post.frontmatter.description;
   const disableToc: boolean = data.post.frontmatter.disableToc;
   const relativePath: string = data.post.fields.slug;
-  const relativeImagePath: string = data.post.frontmatter.image.publicURL;
+  const relativeImagePath: string = data.post.frontmatter.image?.publicURL;
 
   // @ts-ignore
   const renderAst = new rehypeReact({

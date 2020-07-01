@@ -238,7 +238,7 @@ collections:
         fields:
           - { label: "Config Key", name: "configKey", widget: "hidden", default: "static" }
           - { label: Title, name: title, widget: string }
-          - { label: "Base URL", name: baseUrl, widget: string }
+          - { label: "Base URL", name: siteUrl, widget: string }
           - { label: "Site Image", name: siteImage, widget: image }
           - {
               label: "Blog Feed",
