@@ -26,7 +26,8 @@ const SEO: React.FC<ISEO> = ({
 
   return (
     <Helmet>
-      {noIndex && <meta name="robots" content="noindex" />}
+      {/* Have to provide an alternate otherwise the tag sticks */}
+      {noIndex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="all" />}
 
       <title>
         {title !== "" ? `${title} - ` : ""}
@@ -37,7 +38,7 @@ const SEO: React.FC<ISEO> = ({
       <meta name="image" content={`${staticConfig.baseUrl}${relativeImagePath}`} />
 
       <meta property="og:url" content={`${staticConfig.baseUrl}${relativePath}`} />
-      {isPost ? <meta property="og:type" content="article" /> : null}
+      <meta property="og:type" content={isPost ? "article" : "website"} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={`${staticConfig.baseUrl}${relativeImagePath}`} />

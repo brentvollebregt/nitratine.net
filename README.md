@@ -12,7 +12,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- Headers + icons
+- icons
 - redirects
 - Mocking old style sheet for code
 - Post comments
