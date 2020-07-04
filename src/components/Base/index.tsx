@@ -3,11 +3,11 @@ import { Helmet } from "react-helmet";
 import Navigation from "./Navigation";
 import "./Base.scss";
 
-const Base = ({ children }) => {
+const Base: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return (
     <>
       <Helmet>
-        {/* Temporary */}
+        {/* TODO Temporary */}
         <meta name="robots" content="noindex" />
       </Helmet>
 

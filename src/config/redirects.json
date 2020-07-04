@@ -1,0 +1,10 @@
+{
+  "configKey": "adsense",
+  "redirects": [
+    { "from": "/tag/", "to": "/blog/tags/" },
+    { "from": "/category/", "to": "/blog/categories/" },
+    { "from": "/archive/", "to": "/blog/archive/" },
+    { "from": "/donations/", "to": "/about/" },
+    { "from": "/blog/post/", "to": "/blog/" }
+  ]
+}

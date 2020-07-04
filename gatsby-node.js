@@ -1,9 +1,12 @@
 const path = require("path");
+const { writeFile, ensureDir, pathExists } = require("fs-extra");
 const axios = require("axios").default;
 const { createFilePath } = require("gatsby-source-filesystem");
 const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 require("dotenv").config({ path: `.env` });
 
+const staticConfig = require("./src/config/static.json");
+const redirectsConfig = require("./src/config/redirects.json");
 const siteBarConfig = require("./src/config/sidebar.json");
 
 exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createContentDigest }) => {
@@ -53,7 +56,7 @@ exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createCont
 };
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
 
   // Get all posts to create post-related pages
   const { errors: postErrors, data: postData } = await graphql(`
@@ -171,6 +174,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     });
   });
+
+  // Create redirects
+  redirectsConfig.redirects.forEach(({ from, to }) => {
+    createRedirect({
+      fromPath: from,
+      isPermanent: true,
+      redirectInBrowser: true,
+      toPath: to
+    });
+  });
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -184,5 +197,49 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value
     });
+  }
+};
+
+exports.onPostBuild = async ({ store }) => {
+  const { redirects, program, config } = store.getState();
+
+  let pathPrefix = program.prefixPaths ? config.pathPrefix : "";
+  const folder = path.join(program.directory, "public");
+
+  if (redirects.length !== undefined) {
+    for (const redirect of redirects) {
+      const { fromPath, toPath } = redirect;
+
+      const FILE_PATH = path.join(folder, fromPath.replace(pathPrefix, ""), "index.html");
+
+      const fileExists = await pathExists(FILE_PATH);
+      if (!fileExists) {
+        try {
+          await ensureDir(path.dirname(FILE_PATH));
+        } catch (err) {
+          // ignore if the directory already exists;
+        }
+
+        const redirectToAbsolutePath = staticConfig.siteUrl + toPath;
+        const redirectHtmlLines = [
+          "<!DOCTYPE HTML>",
+          '<html lang="en-US">',
+          "\t<head>",
+          "\t\t<title>Page Redirection</title>",
+          '\t\t<meta charset="UTF-8">',
+          `\t\t<meta http-equiv="refresh" content="0; url=${redirectToAbsolutePath}">`,
+          '\t\t<script type="text/javascript">',
+          `\t\t\twindow.location.href = "${redirectToAbsolutePath}"`,
+          "\t\t</script>",
+          "\t</head>",
+          "\t<body>",
+          `\t\tThis page has been moved. If you are not redirected automatically, follow this <a href='${redirectToAbsolutePath}'>link</a>.`,
+          "\t</body>",
+          "</html>"
+        ];
+        const redirectHtml = redirectHtmlLines.join("\n");
+        await writeFile(FILE_PATH, redirectHtml);
+      }
+    }
   }
 };

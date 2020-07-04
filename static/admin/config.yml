@@ -264,3 +264,18 @@ collections:
                   { label: Twitter, name: twitter, widget: string },
                 ],
             }
+      - file: "src/config/redirects.json"
+        label: "Redirects"
+        name: "redirects"
+        fields:
+          - { label: "Config Key", name: "configKey", widget: "hidden", default: "redirects" }
+          - {
+              label: Redirects,
+              name: redirects,
+              widget: list,
+              fields:
+                [
+                  { label: From, name: from, widget: string },
+                  { label: To, name: to, widget: string },
+                ],
+            }

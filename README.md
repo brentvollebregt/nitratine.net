@@ -12,10 +12,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- redirects
-- Mocking old style sheet for code
-- Post comments
-- Google Analytics
+- redirects (make a custom step using `onPostBuild` e.g. `https://github.com/nsresulta/gatsby-plugin-meta-redirect/blob/master/gatsby-node.js`)
+- Mocking old style sheet for code (`k88hudson.github.io/syntax-highlighting-theme-generator/www/`)
+- Post comments (`gatsby-plugin-disqus`)
+- Google Analytics (`gatsby-plugin-google-analytics`)
 - Google AdSense (enable and test - need approval for the test site to test on test.nitratine.net)
 - Remove robots
 - Remove source maps

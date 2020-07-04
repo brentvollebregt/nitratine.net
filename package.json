@@ -8,6 +8,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "dotenv": "^8.2.0",
+    "fs-extra": "^9.0.1",
     "gatsby": "^2.20.35",
     "gatsby-image": "^2.3.5",
     "gatsby-plugin-manifest": "^2.4.14",
