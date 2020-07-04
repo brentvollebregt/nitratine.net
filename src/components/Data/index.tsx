@@ -29,7 +29,7 @@ const Data: React.FC<IData> = ({}) => {
         description="This is a summary of the hits on each page on this site and summary figures for my GitHub repositories."
       />
 
-      <div className="row justify-content-center mb-5">
+      <div className="row justify-content-center">
         <div className="col-xs-12 col-lg-8">
           <h1>Data</h1>
           <p>

@@ -37,7 +37,7 @@ const About: React.FC<IAbout> = ({ body, experience, email }) => {
         description="My name is Brent and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work."
       />
 
-      <div className="about row justify-content-center mb-5">
+      <div className="about row justify-content-center">
         <div className="col-xs-12 col-lg-8">
           <Body />
 

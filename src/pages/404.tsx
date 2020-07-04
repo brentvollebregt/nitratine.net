@@ -5,7 +5,7 @@ import Base from "../components/Base";
 
 const NotFoundPage = () => (
   <Base>
-    <div className="row justify-content-center mb-5">
+    <div className="row justify-content-center">
       <div className="col-xs-12 col-lg-8 text-center">
         <h1 style={{ fontSize: "8rem", color: "#ce1664" }}>404</h1>
         <p>The page you are looking for was moved, removed, renamed or may have never existed.</p>
