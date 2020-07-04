@@ -1,10 +1,90 @@
 {
   "configKey": "adsense",
   "redirects": [
-    { "from": "/tag/", "to": "/blog/tags/" },
-    { "from": "/category/", "to": "/blog/categories/" },
-    { "from": "/archive/", "to": "/blog/archive/" },
-    { "from": "/donations/", "to": "/about/" },
-    { "from": "/blog/post/", "to": "/blog/" }
+    { "from": "tag", "to": "blog/tags" },
+    { "from": "category", "to": "blog/categories" },
+    { "from": "archive", "to": "blog/archive" },
+    { "from": "donations", "to": "about" },
+    { "from": "blog/post", "to": "blog" },
+    { "from": "colour", "to": "blog/post/colour" },
+    {
+      "from": "finding-emotion-in-music-with-python",
+      "to": "blog/post/finding-emotion-in-music-with-python"
+    },
+    { "from": "interesting-sites", "to": "blog/post/interesting-sites" },
+    {
+      "from": "randomly-generating-numbers-to-fulfil-an-integer-range",
+      "to": "blog/post/randomly-generating-numbers-to-fulfil-an-integer-range"
+    },
+    { "from": "convert-py-to-exe", "to": "blog/post/convert-py-to-exe" },
+    { "from": "get-wifi-passwords-with-python", "to": "blog/post/get-wifi-passwords-with-python" },
+    { "from": "how-to-setup-pythons-pip", "to": "blog/post/how-to-setup-pythons-pip" },
+    {
+      "from": "how-to-get-mouse-clicks-with-python",
+      "to": "blog/post/how-to-get-mouse-clicks-with-python"
+    },
+    { "from": "python-keylogger", "to": "blog/post/python-keylogger" },
+    { "from": "simulate-keypresses-in-python", "to": "blog/post/simulate-keypresses-in-python" },
+    { "from": "quick-script", "to": "blog/post/quick-script" },
+    { "from": "lucy-in-the-sky-with-emotion", "to": "blog/post/lucy-in-the-sky-with-emotion" },
+    { "from": "monopoly-money", "to": "blog/post/monopoly-money" },
+    { "from": "mp3-itunes-downloader", "to": "blog/post/mp3-itunes-downloader" },
+    { "from": "spotify-playlist-downloader", "to": "blog/post/spotify-playlist-downloader" },
+    { "from": "adding-snow-to-your-website", "to": "blog/post/adding-snow-to-your-website" },
+    {
+      "from": "change-file-modification-time-in-python",
+      "to": "blog/post/change-file-modification-time-in-python"
+    },
+    { "from": "the-nitratine-project", "to": "blog/post/the-nitratine-project" },
+    { "from": "how-to-make-hotkeys-in-python", "to": "blog/post/how-to-make-hotkeys-in-python" },
+    {
+      "from": "simulate-mouse-events-in-python",
+      "to": "blog/post/simulate-mouse-events-in-python"
+    },
+    {
+      "from": "how-to-send-an-email-with-python",
+      "to": "blog/post/how-to-send-an-email-with-python"
+    },
+    { "from": "python-retweet-bot", "to": "blog/post/python-retweet-bot" },
+    { "from": "python-auto-clicker", "to": "blog/post/python-auto-clicker" },
+    { "from": "auto-py-to-exe", "to": "blog/post/auto-py-to-exe" },
+    { "from": "hit-counter", "to": "blog/post/hit-counter" },
+    { "from": "github-badges", "to": "blog/post/github-badges" },
+    { "from": "my-desktop-backgrounds", "to": "blog/post/my-desktop-backgrounds" },
+    {
+      "from": "how-to-add-a-custom-domain-to-a-github-pages-site",
+      "to": "blog/post/how-to-add-a-custom-domain-to-a-github-pages-site"
+    },
+    { "from": "python-threading-basics", "to": "blog/post/python-threading-basics" },
+    { "from": "python-gui-using-chrome", "to": "blog/post/python-gui-using-chrome" },
+    { "from": "python-sqlite3-basics", "to": "blog/post/python-sqlite3-basics" },
+    { "from": "price-per-unit", "to": "blog/post/price-per-unit" },
+    { "from": "putting-auto-py-to-exe-on-pypi", "to": "blog/post/putting-auto-py-to-exe-on-pypi" },
+    { "from": "media-picker", "to": "blog/post/media-picker" },
+    { "from": "python-guis-with-pyqt", "to": "blog/post/python-guis-with-pyqt" },
+    {
+      "from": "how-to-clean-a-twitter-account-with-jquery",
+      "to": "blog/post/how-to-clean-a-twitter-account-with-jquery"
+    },
+    { "from": "multi-clipboard", "to": "blog/post/multi-clipboard" },
+    { "from": "uow-moodle-rwa-ignorer", "to": "blog/post/uow-moodle-rwa-ignorer" },
+    { "from": "am-i-a-participant", "to": "blog/post/am-i-a-participant" },
+    {
+      "from": "asymmetric-encryption-and-decryption-in-python",
+      "to": "blog/post/asymmetric-encryption-and-decryption-in-python"
+    },
+    {
+      "from": "common-issues-when-using-auto-py-to-exe",
+      "to": "blog/post/common-issues-when-using-auto-py-to-exe"
+    },
+    {
+      "from": "encryption-and-decryption-in-python",
+      "to": "blog/post/encryption-and-decryption-in-python"
+    },
+    {
+      "from": "blog/post/common-issues-when-using-auto-py-to-exe",
+      "to": "blog/post/issues-when-using-auto-py-to-exe"
+    },
+    { "from": "blog/post/who-is-on-my-network", "to": "blog/post/whos-on-my-network" }
   ]
 }
