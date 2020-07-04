@@ -52,10 +52,10 @@
                         <tbody>
                             {% for repo in repos %}
                                 <tr>
-                                    <td><a href="https://github.com/{{ repo[0] }}">{{ repo[0] }}</a></td>
-                                    <td><img src="https://img.shields.io/github/stars/{{ repo[0] }}.svg?style=social" alt="Stars for {{ repo[0] }}"></td>
-                                    <td><img src="https://img.shields.io/github/forks/{{ repo[0] }}.svg?style=social" alt="Forks for {{ repo[0] }}"></td>
-                                    <td><img src="https://img.shields.io/github/watchers/{{ repo[0] }}.svg?style=social" alt="Watchers for {{ repo[0] }}"></td>
+                                    <td><a href="https://github.com/{{ repo.full_name }}">{{ repo.full_name }}</a></td>
+                                    <td><img src="https://img.shields.io/github/stars/{{ repo.full_name }}.svg?style=social" alt="Stars for {{ repo.full_name }}"></td>
+                                    <td><img src="https://img.shields.io/github/forks/{{ repo.full_name }}.svg?style=social" alt="Forks for {{ repo.full_name }}"></td>
+                                    <td><img src="https://img.shields.io/github/watchers/{{ repo.full_name }}.svg?style=social" alt="Watchers for {{ repo.full_name }}"></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
