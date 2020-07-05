@@ -25,6 +25,13 @@
   }
 }
 
+@media (max-width: 992px) {
+  // Add margin to the top of the sidebar when under content
+  .col-blog-sidebar {
+    margin-top: 1rem;
+  }
+}
+
 // GitHub Styled Tables
 
 table {

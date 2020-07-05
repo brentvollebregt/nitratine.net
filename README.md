@@ -15,6 +15,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Launch
 
+- CMS backend
 - Remove robots
 - Remove source maps
 - `https://test.nitratine.net` => `https://nitratine.net`
