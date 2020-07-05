@@ -11,11 +11,13 @@ hidden: false
 ---
 
 ## Why Are These Dialogs Useful?
+
 The dialogs in this post work on Windows, Linux and Mac and look exactly like the default dialogs the OS provides for other applications. Since they look the same as the 'default' dialogs, users are used to the look and feel, so they already know how to use them.
 
 As these dialogs come with Python, they are easy to access and have had their time of debugging so are quite robust and predictable.
 
 ## Dialog Types and Their Returns
+
 Each dialog does something different, takes different input to be created and returns particular values. Understanding what each call returns in different situations is necessary to be able to use these dialogs correctly.
 
 > Some of these dialogs make sounds as you would typically find with dialogs displaying an error
@@ -38,6 +40,7 @@ You do not have to create a parent of your own and in that case, leave `parent=p
 > It is important to note that all these dialog calls below are blocking. This means execution will not continue until the user has made a selection or this code is put into another thread.
 
 ### Message Dialogs
+
 Message dialogs are a simple way to display a message with a title. There are three types of dialogs that simply provide an "OK" button; information, warning and error. Each of these dialogs display a title, message and icon that corresponds to the type of dialog.
 
 ```python
@@ -53,7 +56,7 @@ error = messagebox.showerror('Error Title', 'A simple message with an error icon
 Looking at the values of each `info`, `warn` and `error` after executing the lines, you will notice that they all have been assigned value "ok". If the user clicks the OK button or even closes the window using the cross, these dialogs will always return "ok".
 
 | Method                 | OK Clicked | Dialog Closed (X) |
-|------------------------|------------|-------------------|
+| ---------------------- | ---------- | ----------------- |
 | messagebox.showinfo    | "ok"       | "ok"              |
 | messagebox.showwarning | "ok"       | "ok"              |
 | messagebox.showerror   | "ok"       | "ok"              |
@@ -61,6 +64,7 @@ Looking at the values of each `info`, `warn` and `error` after executing the lin
 ![Message Dialogs](message-dialogs.png)
 
 ### Question Dialogs
+
 Question dialogs allow you to ask a user a particular question with a title and have them reply in one of two ways (or three in one case).
 
 ```python
@@ -75,15 +79,16 @@ yesnocancel = messagebox.askyesnocancel('Question Title', 'Are you sure you want
 ```
 
 | Method                    | OK   | Retry | Yes  | No    | Cancel | Dialog Closed (X) |
-|---------------------------|------|-------|------|-------|--------|-------------------|
+| ------------------------- | ---- | ----- | ---- | ----- | ------ | ----------------- |
 | messagebox.askokcancel    | True |       |      |       | False  | False             |
 | messagebox.askretrycancel |      | True  |      |       | False  | False             |
-| messagebox.askyesno       |      |       | True | False |        | *Not Possible*    |
+| messagebox.askyesno       |      |       | True | False |        | _Not Possible_    |
 | messagebox.askyesnocancel |      |       | True | False | None   | None              |
 
 ![Question Dialogs](question-dialogs.png)
 
 ### Input Dialogs
+
 Input dialogs ask for a particular type of value; in this case that is either of type string, integer or float. Unfortunately like all the other dialogs, the icon from the parent will not be used due to how these dialogs are constructed. If you plan on consistently taking input from a user I recommend creating your own input dialog.
 
 ```python
@@ -97,14 +102,15 @@ float_value = simpledialog.askfloat('Dialog Title', 'What is your salary?', minv
 ```
 
 | Method                  | OK              | Cancel | Dialog Closed (X) |
-|-------------------------|-----------------|--------|-------------------|
-| simpledialog.askstring  | *Input String*  | None   | None              |
-| simpledialog.askinteger | *Input Integer* | None   | None              |
-| simpledialog.askfloat   | *Input Float*   | None   | None              |
+| ----------------------- | --------------- | ------ | ----------------- |
+| simpledialog.askstring  | _Input String_  | None   | None              |
+| simpledialog.askinteger | _Input Integer_ | None   | None              |
+| simpledialog.askfloat   | _Input Float_   | None   | None              |
 
 ![Input Dialogs](input-dialogs.png)
 
 ### File / Folder Dialogs
+
 File and folder dialogs allow you to ask the user select a folder, single file, multiple files or chose a location to save a file as.
 
 ```python
@@ -125,11 +131,13 @@ save_as = filedialog.asksaveasfilename(title='Save as', parent=parent)
 ```
 
 | Method                       | OK                   | Cancel | Dialog Closed (X) |
-|------------------------------|----------------------|--------|-------------------|
-| filedialog.askdirectory      | *Directory Path*     | ''     | ''                |
-| filedialog.askopenfilename   | *File Path*          | ''     | ''                |
-| filedialog.askopenfilenames  | *List of File Paths* | ''     | ''                |
-| filedialog.asksaveasfilename | *File Path*          | ''     | ''                |
+| ---------------------------- | -------------------- | ------ | ----------------- |
+| filedialog.askdirectory      | _Directory Path_     | ''     | ''                |
+| filedialog.askopenfilename   | _File Path_          | ''     | ''                |
+| filedialog.askopenfilenames  | _List of File Paths_ | ''     | ''                |
+| filedialog.asksaveasfilename | _File Path_          | ''     | ''                |
+
+> `''` is an empty string
 
 When using any of these file dialog calls, you can also supply a string to the parameter `initialdir` which will put the user in a particular directory when the dialog first opens; for example:
 
@@ -143,11 +151,12 @@ When asking for a file to open or save as, you can specify what type of files th
 ```python
 file_types = [('Python files', '*.py;*.pyw'), ('All files', '*')] # Initially can select any .py or .pyw files but can change the selection to anything (*)
 file_name = filedialog.askopenfilename(title='Select a file', filetypes=file_types, parent=parent)
-``` 
+```
 
 ![File Dialogs](file-dialogs.png)
 
 ### Color Picker Dialog
+
 Color pickers are used to ask a user to select a color. These aren't seen in may places but when a color needs to be selected, this is a great option as it contains everything needed.
 
 ```python
@@ -159,12 +168,13 @@ color = colorchooser.askcolor(initialcolor=(255, 255, 255), parent=parent) # Ret
 ```
 
 | Method                  | OK                                                    | Cancel       | Dialog Closed (X) |
-|-------------------------|-------------------------------------------------------|--------------|-------------------|
-| filedialog.askdirectory | ((*Red Int*, *Green Int*, *Blue Int*), '*Hex Value*') | (None, None) | (None, None)      |
+| ----------------------- | ----------------------------------------------------- | ------------ | ----------------- |
+| filedialog.askdirectory | ((_Red Int_, _Green Int_, _Blue Int_), '_Hex Value_') | (None, None) | (None, None)      |
 
 As an example of the output, if I select cyan, I will get `((0.0, 255.99609375, 255.99609375), '#00ffff')`. The numbers are large as they are floats but this means 0 red, 256 green and 256 blue. We can also see that the second value in the tuple is the hex value for cyan.
 
 ![Color Dialog](color-dialog.png)
 
-## Credit 
+## Credit
+
 While using a lot of dialogs in my own projects I have always looked around other sites, but recently I found a page called [How to Think Like a Computer Scientist: Interactive Edition](https://interactivepython.org/runestone/static/CS152f17/GUIandEventDrivenProgramming/02_standard_dialog_boxes.html) which is a great beginner level tutorial for Python which covers many things. This site made me aware of some dialogs I didn't even realise existed so I give credit to the creator.
