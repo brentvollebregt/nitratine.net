@@ -5,7 +5,7 @@ import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-markup";
 import "prismjs/components/prism-css";
-import "../components/Blog/prism-theme.css";
+import "../components/Blog/prism-theme.scss";
 
 const useSyntaxHighlighter = () => {
   const root = useRef<HTMLDivElement | null>(null);

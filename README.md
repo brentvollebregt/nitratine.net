@@ -2,10 +2,6 @@
 
 Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
-### Small
-
-- put actual react-bootstrap components in
-
 ### Large
 
 - Mocking old style sheet for code (`k88hudson.github.io/syntax-highlighting-theme-generator/www/`)
@@ -23,7 +19,8 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 ### Not Required (after launch)
 
 - BUG: Some images aren't linked to original
+- SMALL: Put actual react-bootstrap components in
 - Make something to identify 404s
 - Group tags/categories/years at top of category pages as links to headers (with numbers) e.g. taga (2) tagb (5) tagc (8)
 - Blog footer? Need to link category pages somehow
-- Add switch to disable ads on particular pages
+- SMALL: Add switch to disable ads on particular pages

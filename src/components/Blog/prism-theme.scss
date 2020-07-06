@@ -1,0 +1,200 @@
+/* From http://k88hudson.github.io/syntax-highlighting-theme-generator/www/ (less => scss) */
+
+$fontSize: 14px;
+$textShadow: none;
+$fontFamily: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+$lineHeight: 1.5;
+$tabSize: 4;
+$padding: 5px 10px;
+$borderRadius: 4px;
+
+$blockBackground: #3f3f3f;
+$baseColor: #dcdccc;
+
+$commentColor: #7f9f7f;
+$punctuationColor: #41706f;
+$propertyColor: #8cd0d3;
+$selectorColor: #cc9393;
+$operatorColor: #f0efd0;
+$operatorBg: transparent;
+$variableColor: #e90;
+$functionColor: #efef8f;
+$keywordColor: #dfaf8f;
+$selectedColor: #b3d4fc;
+$builtinColor: #8fbede;
+
+$inlineCodeColor: #db4c69;
+$inlineCodeBackground: #f9f2f4;
+
+$highlightBackground: #f7ebc6;
+$highlightAccent: #f7d87c;
+
+/*********************************************************
+ * General
+ */
+
+.gatsby-highlight {
+  margin-bottom: 1rem;
+}
+
+pre[class*="language-"],
+code[class*="language-"] {
+  color: $baseColor;
+  font-size: $fontSize;
+  text-shadow: $textShadow;
+  font-family: $fontFamily;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: $lineHeight;
+
+  white-space: pre;
+
+  -moz-tab-size: $tabSize;
+  -o-tab-size: $tabSize;
+  tab-size: $tabSize;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  &::selection,
+  &::mozselection {
+    text-shadow: none;
+    background: $selectedColor;
+  }
+
+  @media print {
+    text-shadow: none;
+  }
+}
+
+// Blocks
+pre[class*="language-"] {
+  padding: $padding;
+  margin: 0;
+  overflow: auto;
+  border-radius: $borderRadius;
+
+  background: $blockBackground;
+}
+
+// Inline code
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  color: $inlineCodeColor;
+  background: $inlineCodeBackground;
+}
+
+/*********************************************************
+ * Tokens
+ */
+
+.namespace {
+  opacity: 0.7;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: $commentColor;
+}
+
+.token.punctuation {
+  color: $punctuationColor;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: $propertyColor;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.inserted {
+  color: $selectorColor;
+}
+
+.token.builtin {
+  color: $builtinColor;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: $operatorColor;
+  background: $operatorBg;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: $keywordColor;
+}
+
+.token.function {
+  color: $functionColor;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: $variableColor;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/*********************************************************
+ * Line highlighting
+ */
+
+pre[data-line] {
+  position: relative;
+}
+
+pre[class*="language-"] > code[class*="language-"] {
+  position: relative;
+  z-index: 1;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: $padding;
+
+  background: $highlightBackground;
+  box-shadow: inset 5px 0 0 $highlightAccent;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  line-height: inherit;
+  white-space: pre;
+}
