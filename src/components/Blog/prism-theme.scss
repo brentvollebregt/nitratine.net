@@ -1,41 +1,23 @@
-/* From http://k88hudson.github.io/syntax-highlighting-theme-generator/www/ (less => scss) */
+// src: https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vsc-dark-plus.css
+// Potential: http://templarian.com/assets/prismjs/prism.css / http://templarian.com/2018/08/08/prismjs-visual-studio-code-dark-theme/ (optimized for JSX, JS, TS, HTML and not great for others - use :not selectors on the language?)
 
-$fontSize: 14px;
+$fontSize: 13px;
 $textShadow: none;
 $fontFamily: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 $lineHeight: 1.5;
 $tabSize: 4;
-$padding: 5px 10px;
+$padding: 8px 11px;
 $borderRadius: 4px;
 
-$blockBackground: #3f3f3f;
-$baseColor: #dcdccc;
-
-$commentColor: #7f9f7f;
-$punctuationColor: #41706f;
-$propertyColor: #8cd0d3;
-$selectorColor: #cc9393;
-$operatorColor: #f0efd0;
-$operatorBg: transparent;
-$variableColor: #e90;
-$functionColor: #efef8f;
-$keywordColor: #dfaf8f;
-$selectedColor: #b3d4fc;
-$builtinColor: #8fbede;
+$blockBackground: #1e1e1e;
+$baseColor: #d4d4d4;
 
 $inlineCodeColor: #db4c69;
 $inlineCodeBackground: #f9f2f4;
 
-$highlightBackground: #f7ebc6;
-$highlightAccent: #f7d87c;
-
 /*********************************************************
- * General
- */
-
-.gatsby-highlight {
-  margin-bottom: 1rem;
-}
+* Background / Base
+*/
 
 pre[class*="language-"],
 code[class*="language-"] {
@@ -49,50 +31,47 @@ code[class*="language-"] {
   word-spacing: normal;
   word-break: normal;
   line-height: $lineHeight;
-
-  white-space: pre;
-
   -moz-tab-size: $tabSize;
   -o-tab-size: $tabSize;
   tab-size: $tabSize;
-
   -webkit-hyphens: none;
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+}
 
-  &::selection,
-  &::mozselection {
-    text-shadow: none;
-    background: $selectedColor;
-  }
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection {
+  text-shadow: none;
+  background: #b3d4fc;
+}
 
-  @media print {
+@media print {
+  pre[class*="language-"],
+  code[class*="language-"] {
     text-shadow: none;
   }
 }
 
-// Blocks
 pre[class*="language-"] {
   padding: $padding;
   margin: 0;
   overflow: auto;
   border-radius: $borderRadius;
-
   background: $blockBackground;
 }
 
-// Inline code
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
   color: $inlineCodeColor;
   background: $inlineCodeBackground;
+  white-space: break-spaces;
 }
 
 /*********************************************************
- * Tokens
- */
+* Tokens
+*/
 
 .namespace {
   opacity: 0.7;
@@ -102,11 +81,11 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: $commentColor;
+  color: #6a9955;
 }
 
 .token.punctuation {
-  color: $punctuationColor;
+  color: #d4d4d4;
 }
 
 .token.property,
@@ -116,7 +95,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: $propertyColor;
+  color: #b5cea8;
 }
 
 .token.selector,
@@ -124,11 +103,12 @@ pre[class*="language-"] {
 .token.string,
 .token.char,
 .token.inserted {
-  color: $selectorColor;
+  color: #ce9178;
 }
 
 .token.builtin {
-  color: $builtinColor;
+  // Custom colour for builtins
+  color: #569cd6;
 }
 
 .token.operator,
@@ -136,41 +116,112 @@ pre[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: $operatorColor;
-  background: $operatorBg;
+  color: #d4d4d4;
+  background: #1e1e1e;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: $keywordColor;
+  color: #c586c0;
 }
 
 .token.function {
-  color: $functionColor;
+  color: #dcdcaa;
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: $variableColor;
+  color: #d16969;
 }
 
 .token.important,
 .token.bold {
   font-weight: bold;
 }
+
 .token.italic {
   font-style: italic;
 }
 
+.token.constant {
+  color: #9cdcfe;
+}
+
+.token.class-name {
+  color: #4ec9b0;
+}
+
+.token.parameter {
+  color: #9cdcfe;
+}
+
+.token.interpolation {
+  color: #9cdcfe;
+}
+
+.token.punctuation.interpolation-punctuation {
+  color: #569cd6;
+}
+
+.token.boolean {
+  color: #569cd6;
+}
+
+.token.property {
+  color: #9cdcfe;
+}
+
+.token.selector {
+  color: #d7ba7d;
+}
+
+.token.tag {
+  color: #569cd6;
+}
+
+.token.attr-name {
+  color: #9cdcfe;
+}
+
+.token.attr-value {
+  color: #ce9178;
+}
+
 .token.entity {
-  cursor: help;
+  color: #4ec9b0;
+  cursor: unset;
+}
+
+.token.namespace {
+  color: #4ec9b0;
+}
+/*********************************************************
+* Language Specific
+*/
+pre[class*="language-javascript"],
+code[class*="language-javascript"] {
+  color: #4ec9b0;
+}
+
+pre[class*="language-css"],
+code[class*="language-css"] {
+  color: #ce9178;
+}
+
+pre[class*="language-html"],
+code[class*="language-html"] {
+  color: #d4d4d4;
+}
+
+.language-html .token.punctuation {
+  color: #808080;
 }
 
 /*********************************************************
- * Line highlighting
- */
+* Line highlighting
+*/
 
 pre[data-line] {
   position: relative;
@@ -186,15 +237,11 @@ pre[class*="language-"] > code[class*="language-"] {
   left: 0;
   right: 0;
   padding: inherit 0;
-  margin-top: $padding;
-
-  background: $highlightBackground;
-  box-shadow: inset 5px 0 0 $highlightAccent;
-
+  margin-top: 1em;
+  background: #f7ebc6;
+  box-shadow: inset 5px 0 0 #f7d87c;
   z-index: 0;
-
   pointer-events: none;
-
   line-height: inherit;
   white-space: pre;
 }

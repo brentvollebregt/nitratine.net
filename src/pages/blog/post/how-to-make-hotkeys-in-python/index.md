@@ -307,7 +307,7 @@ with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
-When executing this script and pressing Shift + A (in any order), this will execute `function_1` and print "Executed function_1". When pressing Shift + B (in any order), `function_2` will be executed. Also when pressing Left Alt + G (in any order), `function_2` will be executed.
+When executing this script and pressing Shift + A (in any order), this will execute `function_1` and print "Executed function\_1". When pressing Shift + B (in any order), `function_2` will be executed. Also when pressing Left Alt + G (in any order), `function_2` will be executed.
 
 To create new combinations, duplicate a line in the `combination_to_function` dictionary and replace the keys inside of `frozenset` and the value (function - not the return value of the function).
 
