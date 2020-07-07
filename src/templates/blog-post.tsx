@@ -23,6 +23,7 @@ const BlogPost = ({ data }) => {
   const description: string = data.post.frontmatter.description;
   const disableToc: boolean = data.post.frontmatter.disableToc;
   const relativeImagePath: string = data.post.frontmatter.image?.publicURL;
+  const slug: string = data.post.fields.slug;
 
   // @ts-ignore
   const renderAst = new rehypeReact({
@@ -74,6 +75,7 @@ const BlogPost = ({ data }) => {
           pagination={pagination}
           showComments={true}
           relativeImagePath={relativeImagePath}
+          slug={slug}
         />
       </BlogBase>
     </Base>
@@ -101,6 +103,9 @@ export const pageQuery = graphql`
         image {
           publicURL
         }
+      }
+      fields {
+        slug
       }
     }
     next: markdownRemark(id: { eq: $nextPostId }) {

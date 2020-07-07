@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "@reach/router";
 import { Helmet } from "react-helmet";
+import { makeUriEndWithSlash } from "../utils";
 import staticConfig from "../../config/static.json";
 
 interface ISEO {
@@ -20,9 +21,7 @@ const SEO: React.FC<ISEO> = ({
 }) => {
   const location = useLocation();
 
-  const relativePath = location.pathname.endsWith("/")
-    ? location.pathname
-    : location.pathname + "/";
+  const relativePath = makeUriEndWithSlash(location.pathname);
 
   return (
     <Helmet>

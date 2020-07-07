@@ -10,3 +10,5 @@ export const truncateString = (string: string, maxLength: number) => {
 
 export const isExternalPath = (path: string) =>
   path.startsWith("http://") || path.startsWith("https://");
+
+export const makeUriEndWithSlash = (uri: string) => (uri.endsWith("/") ? uri : uri + "/");

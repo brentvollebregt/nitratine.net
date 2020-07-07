@@ -1,6 +1,7 @@
 import { useStaticQuery, graphql } from "gatsby";
 
 interface IUseSiteMetadata {
+  siteUrl: string;
   title: string;
   blogFeed: {
     postsPerPage: number;
@@ -14,6 +15,7 @@ export const useSiteMetadata = (): IUseSiteMetadata => {
       query SiteMetaData {
         site {
           siteMetadata {
+            siteUrl
             title
             blogFeed {
               postsPerPage

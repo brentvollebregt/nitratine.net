@@ -1,30 +1,29 @@
 import React from "react";
+import { useLocation } from "@reach/router";
+import { Disqus } from "gatsby-plugin-disqus";
+import { makeUriEndWithSlash } from "../../utils";
+import staticConfig from "../../../config/static.json";
 
-interface IComments {}
+interface IComments {
+  title: string;
+  slug?: string;
+}
 
-const Comments: React.FC<IComments> = ({}) => {
-  // TODO gatsby-plugin-disqus
-  return (
-    <div className="text-center">TODO Disqus Comments</div>
-    /* 
-        {% if site_config.disqus_shortname %}
-        <div id="disqus_thread"></div>
-        <script>
-            var disqus_config = function() {
-                this.page.url = '{{ site_config.url + request.path }}'; // Your page's canonical URL variable
-                this.page.identifier = '{{ site_config.url + request.path }}'; // Your page's unique identifier variable
-            };
-            (function() {
-                var d = document,
-                    s = d.createElement('script');
-                s.src = '//{{site_config.disqus_shortname}}.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-        {% endif %} 
-      */
+const Comments: React.FC<IComments> = ({ title, slug }) => {
+  const location = useLocation();
+
+  const relativePath = makeUriEndWithSlash(location.pathname);
+
+  return !slug ? (
+    <div className="text-center">Slug has not been provided so comments are disabled.</div>
+  ) : (
+    <Disqus
+      config={{
+        title,
+        url: `${staticConfig.siteUrl}${relativePath}`,
+        identifier: `${staticConfig.siteUrl}${relativePath}`
+      }}
+    />
   );
 };
 

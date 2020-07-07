@@ -80,6 +80,12 @@ module.exports = {
         ]
       }
     },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `nitratine`
+      }
+    },
     "gatsby-plugin-typescript",
     {
       // Sitemap

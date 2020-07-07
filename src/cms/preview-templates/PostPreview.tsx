@@ -34,6 +34,7 @@ const PostPreview = ({ entry, widgetFor }) => {
         tableOfContents={() => <div className="text-center">Table Of Contents Placeholder</div>}
         showComments={false}
         relativeImagePath=""
+        seoEnabled={false}
       />
     </div>
   );
