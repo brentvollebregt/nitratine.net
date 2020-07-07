@@ -1,5 +1,5 @@
 {
-  "configKey": "adsense",
+  "configKey": "redirects",
   "redirects": [
     { "from": "tag", "to": "blog/tags" },
     { "from": "category", "to": "blog/categories" },

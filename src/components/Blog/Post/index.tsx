@@ -13,7 +13,6 @@ export interface IPost extends IHeader {
   showComments: boolean;
   relativeImagePath: string;
   slug?: string;
-  seoEnabled?: boolean;
 }
 
 const Post: React.FC<IPost> = ({
@@ -29,8 +28,7 @@ const Post: React.FC<IPost> = ({
   tableOfContents,
   showComments,
   relativeImagePath,
-  slug,
-  seoEnabled = true
+  slug
 }) => {
   useAdSenseAutoAds();
 
@@ -39,15 +37,13 @@ const Post: React.FC<IPost> = ({
 
   return (
     <>
-      {seoEnabled && (
-        <SEO
-          title={title}
-          description={description}
-          relativeImagePath={relativeImagePath}
-          isPost={true}
-          noIndex={hidden}
-        />
-      )}
+      <SEO
+        title={title}
+        description={description}
+        relativeImagePath={relativeImagePath}
+        isPost={true}
+        noIndex={hidden}
+      />
 
       <div className="blog-post">
         <Header
