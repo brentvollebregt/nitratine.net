@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "gatsby";
 import Img, { FluidObject } from "gatsby-image";
+import Link from "../../Helpers/Link";
 import { formatDate } from "../../utils";
 import "./PostTile.scss";
 
@@ -41,25 +41,25 @@ const PostTile: React.FC<IPostTile> = ({
       </div>
       <div className="p-3">
         <h3 className="mb-0">
-          <Link className="text-dark" to={href}>
+          <Link className="text-dark" href={href}>
             {title}
           </Link>
         </h3>
         <div className="mb-1">
-          <Link to={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
+          <Link href={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
             {formatDate(date)}
           </Link>
-          <Link to={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
+          <Link href={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
             {category}
           </Link>
           {tags.map(tag => (
-            <Link key={tag} to={`/blog/tags/#${tag}`} className="badge badge-warning mr-1">
+            <Link key={tag} href={`/blog/tags/#${tag}`} className="badge badge-warning mr-1">
               {tag}
             </Link>
           ))}
         </div>
         <p className="card-text">{description}</p>
-        <Link to={href} role="button" className="btn btn-outline-primary btn-block">
+        <Link href={href} role="button" className="btn btn-outline-primary btn-block">
           Read More →
         </Link>
       </div>

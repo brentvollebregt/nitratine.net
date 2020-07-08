@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 import { navigate } from "@reach/router";
 import ReactMarkdown from "react-markdown";
 import unescape from "lodash/unescape";
+import Link from "../../Helpers/Link";
 import useSidebarConfig from "../../../hooks/useSidebarConfig";
 import "./SideBar.scss";
 
@@ -124,7 +125,7 @@ const SideBar: React.FC = () => {
             .sort(({ name: n1 }, { name: n2 }) => n1.localeCompare(n2))
             .map(({ name, postCount }) => (
               <li key={name}>
-                <Link to={`/blog/categories/#${name}`}>
+                <Link href={`/blog/categories/#${name}`}>
                   {getCategoryPrefix(name)} {name}
                   <span className="badge badge-primary ml-3">{postCount}</span>
                 </Link>
@@ -163,9 +164,9 @@ const SideBar: React.FC = () => {
         <h4 className="text-center text-lg-left">Featured Sites</h4>
         <div className="featured-sites">
           {featuredSites.map(({ title, imageSrc, href }) => (
-            <a key={title} title={title} href={href}>
+            <Link key={title} title={title} href={href}>
               <img src={imageSrc} className="mw-100" />
-            </a>
+            </Link>
           ))}
         </div>
       </div>

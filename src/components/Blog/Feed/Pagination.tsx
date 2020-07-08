@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import Link from "../../Helpers/Link";
 import useStaticConfig from "../../../hooks/useStaticConfig";
 
 const getViewablePages = (
@@ -41,7 +41,7 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
       <ul className="pagination justify-content-center m-0">
         <li className={`page-item ${isPreviousPage ? "" : "disabled"}`}>
           {isPreviousPage ? (
-            <Link className="page-link" to={getPageRoute(current - 1)}>
+            <Link className="page-link" href={getPageRoute(current - 1)}>
               Previous
             </Link>
           ) : (
@@ -60,7 +60,7 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
             </li>
           ) : (
             <li key={page} className="page-item">
-              <Link className="page-link" to={getPageRoute(page)}>
+              <Link className="page-link" href={getPageRoute(page)}>
                 {page}
               </Link>
             </li>
@@ -69,7 +69,7 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
 
         <li className={`page-item ${isNextPage ? "" : "disabled"}`}>
           {isNextPage ? (
-            <Link className="page-link" to={getPageRoute(current + 1)}>
+            <Link className="page-link" href={getPageRoute(current + 1)}>
               Next
             </Link>
           ) : (

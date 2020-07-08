@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "gatsby";
 import { Card, Badge } from "react-bootstrap";
+import Link from "../Helpers/Link";
 import PreviewCompatibleImage from "../Helpers/PreviewCompatibleImage";
 import usePostSummaries, { PostSummary } from "../../hooks/usePostSummaries";
 import { formatDate } from "../utils";
@@ -51,7 +51,7 @@ const FeaturedPosts: React.FC<IFeaturedPosts> = ({ featuredPosts }) => {
           }
 
           return (
-            <Link to={associatedPostSummary.slug} key={associatedPostSummary.slug}>
+            <Link href={associatedPostSummary.slug} key={associatedPostSummary.slug}>
               <FeaturedPost
                 key={`${p.post}-${p.type}`}
                 featuredPost={p}

@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "gatsby";
 import { Button, Jumbotron } from "react-bootstrap";
+import Link from "../Helpers/Link";
 import PreviewCompatibleImage, {
   IPreviewCompatibleImageSource
 } from "../Helpers/PreviewCompatibleImage";
-import { isExternalPath } from "../utils";
 import "./Header.scss";
 
 export interface IHeader {
@@ -30,14 +29,7 @@ const Header: React.FC<IHeader> = ({ image, leadText, buttons }) => (
     <p className="lead text-muted">{leadText}</p>
     <p>
       {buttons.map(({ text, link, type }) => (
-        <Button
-          key={text}
-          href={link}
-          as={isExternalPath(link) ? undefined : Link}
-          to={link} // to is for Link
-          variant={type as any}
-          className="my-2 mx-1"
-        >
+        <Button key={text} href={link} as={Link} variant={type as any} className="my-2 mx-1">
           {text}
         </Button>
       ))}

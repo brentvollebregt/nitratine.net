@@ -1,8 +1,7 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "gatsby";
 import { Location } from "@reach/router";
-import { isExternalPath } from "../utils";
+import Link from "../Helpers/Link";
 import useNavigationConfig from "../../hooks/useNavigationConfig";
 
 interface NavBarLinks {
@@ -17,7 +16,7 @@ const Navigation: React.FC = () => {
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">
       <Container>
         <Navbar.Brand>
-          <Link to="/">
+          <Link href="/">
             <img
               src="/assets/logo.png"
               height="30"
@@ -35,8 +34,7 @@ const Navigation: React.FC = () => {
                   <Nav.Link
                     key={path}
                     href={path}
-                    as={isExternalPath(path) ? undefined : Link}
-                    to={path} // to is for Link
+                    as={Link}
                     active={locationProps.location.pathname === path}
                   >
                     {title}

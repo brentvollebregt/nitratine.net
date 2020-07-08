@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "gatsby";
+import Link from "../components/Helpers/Link";
 import Base from "../components/Base";
 
 const NotFoundPage = () => (
@@ -11,17 +11,17 @@ const NotFoundPage = () => (
         <p>The page you are looking for was moved, removed, renamed or may have never existed.</p>
 
         <div className="my-2">
-          <Button as={Link} to="/">
+          <Button as={Link} href="/">
             Site Home
           </Button>
-          <Button as={Link} to="/blog/" className="ml-1">
+          <Button as={Link} href="/blog/" className="ml-1">
             Blog Feed
           </Button>
         </div>
 
         <small className="text-muted">
           If you think this was an issue or were sent here by a link, feel free to{" "}
-          <Link to="/about/#contact">contact me</Link> and I will look into the URL.
+          <Link href="/about/#contact">contact me</Link> and I will look into the URL.
         </small>
       </div>
     </div>

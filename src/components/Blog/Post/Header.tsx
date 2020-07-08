@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import Link from "../../Helpers/Link";
 import { formatDate } from "../../utils";
 import GitHubLogoImage from "../../../img/github-icon.svg";
 import "./Header.scss";
@@ -28,16 +28,16 @@ const Header: React.FC<IHeader> = ({
       <h1 className="blog-post-title">{title}</h1>
 
       <div className="mb-2">
-        <Link to={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
+        <Link href={`/blog/archive/#${date.getFullYear()}`} className="text-muted">
           {formatDate(date)}
         </Link>
 
-        <Link to={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
+        <Link href={`/blog/categories/#${category}`} className="badge badge-primary ml-2 mr-1">
           {category}
         </Link>
 
         {tags.map(tag => (
-          <Link to={`/blog/tags/#${tag}`} className="badge badge-warning mr-1" key={tag}>
+          <Link href={`/blog/tags/#${tag}`} className="badge badge-warning mr-1" key={tag}>
             {tag}
           </Link>
         ))}
@@ -58,10 +58,13 @@ const Header: React.FC<IHeader> = ({
       {githubRepository !== null && (
         <>
           <div className="github-summary py-3 d-block text-center">
-            <a className="repo-name stretched-link" href={`https://github.com/${githubRepository}`}>
+            <Link
+              className="repo-name stretched-link"
+              href={`https://github.com/${githubRepository}`}
+            >
               <img src={(GitHubLogoImage as unknown) as string} alt="GitHub Icon" />
               <span className="ml-2">{githubRepository}</span>
-            </a>
+            </Link>
 
             <div className="repo-stats">
               <img

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "gatsby";
+import Link from "../Helpers/Link";
 import SEO from "../Helpers/SEO";
 import usePostSummaries from "../../hooks/usePostSummaries";
 import useGitHubRepositories from "../../hooks/useGitHubRepositories";
@@ -40,9 +40,9 @@ const Data: React.FC<IData> = ({}) => {
           <h2>Post View Counts</h2>
           <p>
             These counts are counted using{" "}
-            <a href="https://hitcounter.pythonanywhere.com">hitcounter.pythonanywhere.com</a>. They
-            are not 100% accurate but will be a reasonable idea of the actual views (better than
-            Google Analytics being blocked by ad-blockers)
+            <Link href="https://hitcounter.pythonanywhere.com">hitcounter.pythonanywhere.com</Link>.
+            They are not 100% accurate but will be a reasonable idea of the actual views (better
+            than Google Analytics being blocked by ad-blockers)
           </p>
           <table>
             <thead>
@@ -55,7 +55,7 @@ const Data: React.FC<IData> = ({}) => {
               {postsSortedByDate.map(({ slug, title }) => (
                 <tr>
                   <td>
-                    <Link to={slug}>{title}</Link>
+                    <Link href={slug}>{title}</Link>
                   </td>
                   <td>
                     <img
@@ -82,7 +82,7 @@ const Data: React.FC<IData> = ({}) => {
               {githubRepositoriesSortedByStars.map(({ full_name }) => (
                 <tr>
                   <td>
-                    <a href={`https://github.com/${full_name}`}>{full_name}</a>
+                    <Link href={`https://github.com/${full_name}`}>{full_name}</Link>
                   </td>
                   <td>
                     <img
@@ -118,7 +118,7 @@ const Data: React.FC<IData> = ({}) => {
             <tbody>
               <tr>
                 <td>
-                  <a href="https://www.youtube.com/PyTutorials">YouTube Subscribers</a>
+                  <Link href="https://www.youtube.com/PyTutorials">YouTube Subscribers</Link>
                 </td>
                 <td>
                   <div
@@ -131,7 +131,7 @@ const Data: React.FC<IData> = ({}) => {
               </tr>
               <tr>
                 <td>
-                  <a href="https://github.com/brentvollebregt">GitHub Followers</a>
+                  <Link href="https://github.com/brentvollebregt">GitHub Followers</Link>
                 </td>
                 <td>
                   <img
@@ -142,7 +142,7 @@ const Data: React.FC<IData> = ({}) => {
               </tr>
               <tr>
                 <td>
-                  <a href="https://twitter.com/PyTutorials">Twitter Followers</a>
+                  <Link href="https://twitter.com/PyTutorials">Twitter Followers</Link>
                 </td>
                 <td>
                   <img
