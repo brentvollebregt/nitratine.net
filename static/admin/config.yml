@@ -189,26 +189,6 @@ collections:
                   { label: Link, name: href, widget: string },
                 ],
             }
-          - {
-              label: YouTube,
-              name: youtube,
-              widget: object,
-              fields:
-                [
-                  {
-                    label: "Channel Id (Requires Restart)",
-                    name: "channelId",
-                    widget: "string",
-                    default: "",
-                  },
-                  {
-                    label: "Recent Video Amount (Requires Restart)",
-                    name: "recentViewAmount",
-                    widget: "number",
-                    default: 6,
-                  },
-                ],
-            }
       - file: "src/config/navigation.json"
         label: "Navigation"
         name: "navigation"
@@ -224,14 +204,6 @@ collections:
                   { label: Link, name: path, widget: string },
                 ],
             }
-      - file: "src/config/adsense.json"
-        label: "AdSense"
-        name: "adsense"
-        fields:
-          - { label: "Config Key", name: "configKey", widget: "hidden", default: "adsense" }
-          - { label: Enabled, name: enabled, widget: boolean, default: false }
-          - { label: Publisher Id, name: publisherId, widget: string }
-
       - file: "src/config/static.json"
         label: "Static"
         name: "static"
@@ -262,6 +234,31 @@ collections:
                 [
                   { label: GitHub, name: github, widget: string },
                   { label: Twitter, name: twitter, widget: string },
+                ],
+            }
+          - {
+              label: Adsense,
+              name: adsense,
+              widget: object,
+              fields:
+                [
+                  { label: Enabled, name: enabled, widget: boolean, default: false },
+                  { label: Publisher Id, name: publisherId, widget: string },
+                ],
+            }
+          - {
+              label: YouTube,
+              name: youtube,
+              widget: object,
+              fields:
+                [
+                  { label: "Channel Id", name: "channelId", widget: "string", default: "" },
+                  {
+                    label: "Recent Video Amount",
+                    name: "recentViewAmount",
+                    widget: "number",
+                    default: 6,
+                  },
                 ],
             }
       - file: "src/config/redirects.json"

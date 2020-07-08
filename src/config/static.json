@@ -10,5 +10,13 @@
   "social": {
     "github": "brentvollebregt",
     "twitter": "PyTutorials"
+  },
+  "adsense": {
+    "enabled": false,
+    "publisherId": "pub-6407227183932047"
+  },
+  "youtube": {
+    "channelId": "UCesEknt3SRX9R9W_f93Tb7g",
+    "recentViewAmount": 6
   }
 }

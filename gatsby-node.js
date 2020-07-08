@@ -7,7 +7,6 @@ require("dotenv").config({ path: `.env` });
 
 const staticConfig = require("./src/config/static.json");
 const redirectsConfig = require("./src/config/redirects.json");
-const siteBarConfig = require("./src/config/sidebar.json");
 
 exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createContentDigest }) => {
   // Get recent YouTube videos
@@ -16,7 +15,7 @@ exports.sourceNodes = async ({ actions: { createNode }, createNodeId, createCont
     throw Error(`YOUTUBE_DATA_API_KEY has not been set. Found "${youTubeDataApiKey}".`);
   }
 
-  const { channelId, recentViewAmount } = siteBarConfig.youtube;
+  const { channelId, recentViewAmount } = staticConfig.youtube;
   const { data: youtubeData } = await axios.get(
     `https://www.googleapis.com/youtube/v3/search?key=${youTubeDataApiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=${recentViewAmount}&type=video`
   );

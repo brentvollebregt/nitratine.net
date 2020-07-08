@@ -3,15 +3,15 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "gatsby";
 import { Location } from "@reach/router";
 import { isExternalPath } from "../utils";
-import navigationConfig from "../../config/navigation.json";
+import useNavigationConfig from "../../hooks/useNavigationConfig";
 
 interface NavBarLinks {
   title: string;
   path: string;
 }
 
-const Navigation = () => {
-  const navbarLinks: NavBarLinks[] = navigationConfig.links;
+const Navigation: React.FC = () => {
+  const { links: navbarLinks } = useNavigationConfig();
 
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky="top">

@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "@reach/router";
 import { Disqus } from "gatsby-plugin-disqus";
 import { makeUriEndWithSlash } from "../../utils";
-import staticConfig from "../../../config/static.json";
+import useStaticConfig from "../../../hooks/useStaticConfig";
 
 interface IComments {
   title: string;
@@ -11,6 +11,7 @@ interface IComments {
 
 const Comments: React.FC<IComments> = ({ title, slug }) => {
   const location = useLocation();
+  const { siteUrl } = useStaticConfig();
 
   const relativePath = makeUriEndWithSlash(location.pathname);
 
@@ -20,8 +21,8 @@ const Comments: React.FC<IComments> = ({ title, slug }) => {
     <Disqus
       config={{
         title,
-        url: `${staticConfig.siteUrl}${relativePath}`,
-        identifier: `${staticConfig.siteUrl}${relativePath}`
+        url: `${siteUrl}${relativePath}`,
+        identifier: `${siteUrl}${relativePath}`
       }}
     />
   );

@@ -3,17 +3,12 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import { navigate } from "@reach/router";
 import ReactMarkdown from "react-markdown";
 import unescape from "lodash/unescape";
-import sideBarConfig from "../../../config/sidebar.json";
+import useSidebarConfig from "../../../hooks/useSidebarConfig";
 import "./SideBar.scss";
 
 interface ICategories {
   name: string;
   postCount: number;
-}
-
-interface ICategoryPrefix {
-  category: string;
-  prefix: string;
 }
 
 interface IRecentVideos {
@@ -22,13 +17,10 @@ interface IRecentVideos {
   href: string;
 }
 
-interface IFeaturedSites {
-  title: string;
-  imageSrc: string;
-  href: string;
-}
-
 const SideBar: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const { about, categoryPrefixes, featuredSites } = useSidebarConfig();
+
   const { allMarkdownRemark, recentYouTubeVideo } = useStaticQuery(graphql`
     query SidebarQuery {
       allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "blog-post" } } }) {
@@ -60,8 +52,6 @@ const SideBar: React.FC = () => {
     }
   }, []);
 
-  const [searchQuery, setSearchQuery] = useState("");
-
   const onSearch = () => {
     if (searchQuery !== "") {
       navigate(`/search/?q=${encodeURIComponent(searchQuery)}`);
@@ -72,7 +62,6 @@ const SideBar: React.FC = () => {
     x => x.node.frontmatter.category
   );
 
-  const about: string = sideBarConfig["about"];
   const categories: ICategories[] = categoryOccurrences
     .reduce((acc, category) => {
       const existing = acc.find(c => c.name === category);
@@ -90,13 +79,12 @@ const SideBar: React.FC = () => {
       ];
     }, [] as ICategories[])
     .sort();
-  const categoryPrefixes: ICategoryPrefix[] = sideBarConfig["categoryPrefixes"];
+
   const recentVideos: IRecentVideos[] = recentYouTubeVideo.items.map(v => ({
     title: unescape(v.snippet.title),
     thumbnailSrc: `https://img.youtube.com/vi/${v["id"]["videoId"]}/mqdefault.jpg`,
     href: `https://www.youtube.com/watch?v=${v["id"]["videoId"]}`
   }));
-  const featuredSites: IFeaturedSites[] = sideBarConfig["featuredSites"];
 
   const getCategoryPrefix = (category: string) =>
     categoryPrefixes.find(c => c.category === category)?.prefix ?? "";

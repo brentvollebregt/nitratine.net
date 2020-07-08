@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import { useSiteMetadata } from "../../../hooks/useSiteMetadata";
+import useStaticConfig from "../../../hooks/useStaticConfig";
 
 const getViewablePages = (
   current: number,
@@ -25,7 +25,7 @@ export interface IPagination {
 }
 
 const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute }) => {
-  const siteMetadata = useSiteMetadata();
+  const { blogFeed: blogFeedConfig } = useStaticConfig();
 
   const isPreviousPage = current !== 1;
   const isNextPage = current < pageCount;
@@ -33,7 +33,7 @@ const Pagination: React.FC<IPagination> = ({ current, pageCount, getPageRoute })
   const viewablePages = getViewablePages(
     current,
     pageCount,
-    siteMetadata.blogFeed.pagesEitherSideOfCurrentInPagination
+    blogFeedConfig.pagesEitherSideOfCurrentInPagination
   );
 
   return (

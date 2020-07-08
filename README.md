@@ -24,4 +24,3 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - Blog footer? Need to link category pages somehow
 - SMALL: Add switch to disable ads on particular pages
 - MAYBE: Create a language on top of python that allows for some extra tokens?
-- `useSiteMetadata` is the same as the JSON; maybe make hooks for all of these to get better typings?
