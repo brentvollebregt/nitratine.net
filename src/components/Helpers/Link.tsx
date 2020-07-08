@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as GatsbyLink } from "gatsby";
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 import { isExternalPath } from "../utils";
 
 interface ILink {
@@ -19,9 +20,9 @@ const Link: React.FC<React.PropsWithChildren<ILink>> = ({
   const extras = { className, role, title };
 
   return isExternalPath(href) ? (
-    <a href={href} {...extras}>
+    <OutboundLink href={href} {...extras}>
       {children}
-    </a>
+    </OutboundLink>
   ) : (
     <GatsbyLink to={href} {...extras}>
       {children}

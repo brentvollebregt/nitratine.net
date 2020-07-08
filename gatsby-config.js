@@ -12,6 +12,14 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-react-helmet",
+    {
+      // Google Analytics
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: staticConfig.googleAnalyticsId,
+        head: true
+      }
+    },
     "gatsby-plugin-sass",
     {
       // Static assets

@@ -261,6 +261,7 @@ collections:
                   },
                 ],
             }
+          - { label: Google Analytics Id, name: googleAnalyticsId, widget: string }
       - file: "src/config/redirects.json"
         label: "Redirects"
         name: "redirects"

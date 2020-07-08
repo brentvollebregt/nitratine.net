@@ -4,15 +4,13 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Large
 
-- Google Analytics (`gatsby-plugin-google-analytics`)
 - Google AdSense (enable and test - need approval for the test site to test on test.nitratine.net)
 
 ### Launch
 
 - CMS backend
 - Remove robots
-- Remove source maps
-- `https://test.nitratine.net` => `https://nitratine.net`
+- `UA-117153268-6` => `UA-117153268-2`
 
 ### Not Required (after launch)
 

@@ -21,6 +21,7 @@ interface StaticConfig {
     channelId: string;
     recentViewAmount: number;
   };
+  googleAnalyticsId: string;
 }
 
 const useStaticConfig = () => {
