@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "../Helpers/Link";
 import SEO from "../Helpers/SEO";
 import "./About.scss";
 
@@ -40,6 +41,18 @@ const About: React.FC<IAbout> = ({ body, experience, email }) => {
       <div className="about row justify-content-center">
         <div className="col-xs-12 col-lg-8">
           <Body />
+
+          <p>
+            A small <Link href="/portfolio/">portfolio of my work is linked here</Link> which
+            contains a small collection of my favourite projects I've developed with a small
+            description and links to pages relating to the project.
+          </p>
+          <blockquote>
+            <p>
+              Basic site statistics and values relating to the things I do can be found at{" "}
+              <Link href="/data/">/data/</Link>.
+            </p>
+          </blockquote>
 
           <h2>Tech I Have Had Experience With</h2>
           <div className="tech-icon-container mb-3">
