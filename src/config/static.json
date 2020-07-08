@@ -1,23 +1,24 @@
 {
-  "configKey": "static",
-  "title": "Nitratine",
-  "siteUrl": "https://nitratine.net",
-  "siteImage": "/logo.png",
   "blogFeed": {
     "postsPerPage": 10,
     "pagesEitherSideOfCurrentInPagination": 2
-  },
-  "social": {
-    "github": "brentvollebregt",
-    "twitter": "PyTutorials"
-  },
-  "adsense": {
-    "enabled": false,
-    "publisherId": "pub-6407227183932047"
   },
   "youtube": {
     "channelId": "UCesEknt3SRX9R9W_f93Tb7g",
     "recentViewAmount": 6
   },
-  "googleAnalyticsId": "UA-117153268-6"
+  "useInternalLinking": "always",
+  "siteUrl": "https://nitratine.net",
+  "googleAnalyticsId": "UA-117153268-6",
+  "adsense": {
+    "enabled": false,
+    "publisherId": "pub-6407227183932047"
+  },
+  "social": {
+    "github": "brentvollebregt",
+    "twitter": "PyTutorials"
+  },
+  "siteImage": "/logo.png",
+  "title": "Nitratine",
+  "configKey": "static"
 }

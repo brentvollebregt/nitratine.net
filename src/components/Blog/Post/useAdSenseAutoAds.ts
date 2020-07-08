@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import useStaticConfig from "../../../hooks/useStaticConfig";
 
+// TODO REMOVE AFTER FINDING ANOTHER METHOD
+
 const tagId = "adsense-script";
 
 const useAdSenseAutoAds = () => {

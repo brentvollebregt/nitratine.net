@@ -30,7 +30,7 @@ const Post: React.FC<IPost> = ({
   relativeImagePath,
   slug
 }) => {
-  useAdSenseAutoAds();
+  // useAdSenseAutoAds();
 
   const Body = body;
   const TableOfContents = tableOfContents;

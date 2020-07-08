@@ -1,5 +1,7 @@
 import staticConfig from "../config/static.json";
 
+export type UseInternalLinkingOptions = "always" | "non-post-associations" | "never";
+
 interface StaticConfig {
   configKey: "static";
   title: string;
@@ -22,6 +24,7 @@ interface StaticConfig {
     recentViewAmount: number;
   };
   googleAnalyticsId: string;
+  useInternalLinking: UseInternalLinkingOptions;
 }
 
 const useStaticConfig = () => {

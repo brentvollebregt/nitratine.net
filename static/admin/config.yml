@@ -262,6 +262,21 @@ collections:
                 ],
             }
           - { label: Google Analytics Id, name: googleAnalyticsId, widget: string }
+          - { label: Use Internal Linking, name: useInternalLinking, widget: boolean }
+          - {
+              label: Use Internal Linking,
+              name: useInternalLinking,
+              widget: select,
+              required: true,
+              multiple: false,
+              default: ["always"],
+              options:
+                [
+                  { label: "Always", value: "always" },
+                  { label: "Non Post Associations", value: "non-post-associations" },
+                  { label: "Never", value: "never" },
+                ],
+            }
       - file: "src/config/redirects.json"
         label: "Redirects"
         name: "redirects"

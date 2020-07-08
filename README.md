@@ -2,15 +2,12 @@
 
 Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
-### Large
-
-- Google AdSense (enable and test - need approval for the test site to test on test.nitratine.net)
-
 ### Launch
 
 - CMS backend
 - Remove robots
 - `UA-117153268-6` => `UA-117153268-2`
+- Enabled AdSense and `static.useInternalLinking`=`non-post-associations`
 
 ### Not Required (after launch)
 
@@ -22,3 +19,4 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - Blog footer? Need to link category pages somehow
 - SMALL: Add switch to disable ads on particular pages
 - MAYBE: Create a language on top of python that allows for some extra tokens?
+- DEBT: Figure out what to do with the `useAdSenseAutoAds` situation
