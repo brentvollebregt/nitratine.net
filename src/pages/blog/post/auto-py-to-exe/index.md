@@ -124,10 +124,10 @@ If you're having issues with the packaged executable or using this tool in gener
 ## Screenshots
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px;">
-    <a href="./empty-interface.png"><img src="./empty-interface.png" alt="Empty interface" /></a>
-    <a href="./filled-out.png"><img src="./filled-out.png" alt="Filled out" /></a>
-    <a href="./converting.png"><img src="./converting.png" alt="Converting" /></a>
-    <a href="./completed.png"><img src="./completed.png" alt="Completed" /></a>
+    <div><img src="./empty-interface.png" alt="Empty interface" /></div>
+    <div><img src="./filled-out.png" alt="Filled out" /></div>
+    <div><img src="./converting.png" alt="Converting" /></div>
+    <div><img src="./completed.png" alt="Completed" /></div>
 </div>
 
 ## Response

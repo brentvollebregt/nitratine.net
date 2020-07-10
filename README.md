@@ -2,6 +2,10 @@
 
 Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
+## TODO
+
+- Add `gatsby-plugin-feed`
+
 ### Launch
 
 - CMS backend
