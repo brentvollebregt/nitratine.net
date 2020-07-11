@@ -17,15 +17,15 @@ This application displays a simple interface that allows you to convert py to ex
 
 <div style="text-align: center">
 	<img src="./feature.png" alt="Empty interface"/>
-	<p>The script is built using <a class="link" href="https://github.com/ChrisKnott/Eel">Eel</a> and uses <a href="http://www.pyinstaller.org/">PyInstaller</a> to convert the script.</p>
+	<p>The script is built using <a class="link" href="https://github.com/ChrisKnott/Eel">Eel</a> and uses <a href="https://www.pyinstaller.org/">PyInstaller</a> to convert the script.</p>
 </div>
 
 <div style="text-align: center">
     <a href="https://pypi.org/project/auto-py-to-exe/"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version"></a>
     <a href="https://pypi.org/project/auto-py-to-exe/"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions"></a>
     <a href="https://pypi.org/project/auto-py-to-exe/"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License"></a>
-    <a href="http://pepy.tech/project/auto-py-to-exe"><img class="mt-1" style="display: inline;" src="http://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
-    <a href="http://pepy.tech/project/auto-py-to-exe"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" alt="Downloads Per Month"></a>
+    <a href="https://pepy.tech/project/auto-py-to-exe"><img class="mt-1" style="display: inline;" src="https://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
+    <a href="https://pepy.tech/project/auto-py-to-exe"><img class="mt-1" style="display: inline;" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" alt="Downloads Per Month"></a>
     <a href="https://pyinstaller.readthedocs.io/en/stable/requirements.html"><img class="mt-1" src="https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey" alt="Supported Platforms"></a>
 </div>
 

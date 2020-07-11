@@ -32,7 +32,7 @@ auto-py-to-exe my_script.py
     <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version"></a>
     <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions"></a>
     <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License"></a>
-    <a href="http://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="http://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
+    <a href="https://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="https://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
 </div>
 
 ## General Talk About the Process
@@ -42,18 +42,21 @@ I decided to create a [new repository](https://github.com/brentvollebregt/auto-p
 It took me a few hours to find out how to structure my package and have everything set up properly from the readme to the entry-points.
 
 I use a lot of resources for finer details and looked at a lot of setup.py files but these resources would have been the most helpful:
+
 - [Packaging Python Projects](https://packaging.python.org/tutorials/packaging-projects/)
 - [Publishing your First PyPI Package by/for the Absolute Beginner](https://jonemo.github.io/neubertify/2017/09/13/publishing-your-first-pypi-package/)
 - [GitHub/kennethreitz/setup.py](https://github.com/kennethreitz/setup.py)
 
 ### Issues With Entry-points
-One issue I sat on for a bit was an error message saying *EntryPoint must be in 'name=module:attrs [extras]' format*. I had provided *auto-py-to-exe=auto-py-to-exe.\_\_main\_\_:run* which followed the pattern provided.
+
+One issue I sat on for a bit was an error message saying _EntryPoint must be in 'name=module:attrs [extras]' format_. I had provided _auto-py-to-exe=auto-py-to-exe.\_\_main\_\_:run_ which followed the pattern provided.
 
 I had completely forgotten though that when importing packages normally in Python, hyphens cause a lot of issues. To fix this I initially changed all traces of 'auto-py-to-exe' to 'auto_py_to_exe'. I later found out that I could still keep the package name 'auto-py-to-exe' by setting name='auto-py-to-exe' and setting everything else (including the folder name) to 'auto_py_to_exe'; a small price to pay for the name.
 
 So to take from this: hyphens < underscore in package names.
 
 ### Issues With README
+
 The next issue was with PyPI's Warehouse itself (afterwards). I wanted to render my README in PyPI but it wasn't doing it for some reason. I had later found that when looking at the [setup.py for Eel](https://github.com/ChrisKnott/Eel/blob/master/setup.py) I had thought it was a great idea to take the long_description value being set to `open('README.md', encoding='utf-8').readlines()[1]`. I thought very little about this and in the end, actually decided to test it and found that it was only taking the first line from my README; copy and pasting is dangerous.
 
 Next was the fact that you needed a version of setup tools that was waaaay higher than what I had; a simple fix of course using `pip install setuptools --upgrade`.

@@ -10,7 +10,8 @@ disableToc: false
 hidden: false
 ---
 
-## [ROME](http://www.ro.me/)
+## [ROME](https://www.ro.me/)
+
 This site first brings you to a loading page; just hit enter and let the resources load. For those that have a data cap, be aware that this site uses a lot of data.
 
 This site demonstrates the design of good music and timing with human interaction. Unbelievably this has been made from JavaScript. Buildings, landscapes, animals, trees and so much more all created with Javascript.
@@ -20,6 +21,7 @@ This site demonstrates the design of good music and timing with human interactio
 ![Rome desert](Rome3.jpg)
 
 ## Through The Dark
+
 This site is also larger than a typical site but it's definitely worth it. Once again it's been created using JavaScript and displays remarkable music and imagery with a touch of interaction.
 
 ![Through the dark header](throughthedark1.png)
@@ -57,6 +59,7 @@ This project was shown by a friend in my COMP241 class which then lead to the id
 > This site has now been taken down. Here is [the old home page](https://helloenjoy.com/lights) (still up).
 
 ## [NONI NONI](https://noni.cmiscm.com/)
+
 This site gets you to draw something and then will find the closest match to the shapes it has. It will then assemble spherical particles to that shape. You can keep drawing and it will find shapes closest to your drawing. Once again this is a great example of what JavaScript can do in a browser. The colours and animations are excellent.
 
 ![NONI NONI draw a picture](noninoni3.jpg)

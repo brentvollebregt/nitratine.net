@@ -166,7 +166,7 @@ print ("ID: {}".format( particualr_id_and_url['id'] ))
 
 ## Viewing a Database Without Commands
 
-A great way to check what is in your database is to go to a site like [SQLite Viewer](http://inloop.github.io/sqlite-viewer/) where you can view an SQLite file online. Simply drop the file in the site and you will be able to look at the contents locally in a very easy matter.
+A great way to check what is in your database is to go to a site like [SQLite Viewer](https://inloop.github.io/sqlite-viewer/) where you can view an SQLite file online. Simply drop the file in the site and you will be able to look at the contents locally in a very easy matter.
 
 On this site, you can also temporarily makes changes to the database which allows you to test commands before running them on data else-where.
 
