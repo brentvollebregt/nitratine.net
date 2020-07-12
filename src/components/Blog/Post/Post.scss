@@ -1,5 +1,6 @@
 .blog-post {
-  .toc p {
+  li p {
+    // Handles .toc and .body
     margin: 0;
   }
 
