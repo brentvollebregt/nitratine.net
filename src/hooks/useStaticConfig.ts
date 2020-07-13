@@ -5,6 +5,7 @@ export type UseInternalLinkingOptions = "always" | "non-post-associations" | "ne
 interface StaticConfig {
   configKey: "static";
   title: string;
+  description: string;
   siteUrl: string;
   siteImage: string;
   blogFeed: {

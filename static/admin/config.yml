@@ -51,7 +51,6 @@ collections:
         fields:
           - { label: "Template Key", name: "templateKey", widget: "hidden", default: "home-page" }
           - { label: Image, name: image, widget: image }
-          - { label: Lead Text, name: leadText, widget: string }
           - {
               label: Buttons,
               name: buttons,
@@ -210,6 +209,7 @@ collections:
         fields:
           - { label: "Config Key", name: "configKey", widget: "hidden", default: "static" }
           - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: string }
           - { label: "Base URL", name: siteUrl, widget: string }
           - { label: "Site Image", name: siteImage, widget: image }
           - {

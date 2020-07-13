@@ -20,5 +20,6 @@
   },
   "siteImage": "/logo.png",
   "title": "Nitratine",
+  "description": "A place where I share projects developed by me and tutorials on topics that I'm interested in.",
   "configKey": "static"
 }

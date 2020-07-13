@@ -12,7 +12,6 @@ const HomePage = ({ data }) => {
     <Base>
       <HomePageTemplate
         image={frontmatter.image}
-        leadText={frontmatter.leadText}
         buttons={frontmatter.buttons}
         featuredPosts={frontmatter.featuredPosts}
       />
@@ -33,7 +32,6 @@ export const pageQuery = graphql`
             }
           }
         }
-        leadText
         buttons {
           text
           link

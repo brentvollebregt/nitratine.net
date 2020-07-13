@@ -8,7 +8,6 @@ const IndexPagePreview = ({ entry, getAsset }) => {
     <LocationProvider>
       <HomePageTemplate
         image={{ blob: getAsset(entry.getIn(["data", "image"])).url }}
-        leadText={data.leadText}
         buttons={data.buttons}
         featuredPosts={[]}
       />

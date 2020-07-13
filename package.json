@@ -12,6 +12,7 @@
     "gatsby": "^2.20.35",
     "gatsby-image": "^2.3.5",
     "gatsby-plugin-disqus": "^1.2.0",
+    "gatsby-plugin-feed": "^2.5.11",
     "gatsby-plugin-google-analytics": "^2.3.10",
     "gatsby-plugin-manifest": "^2.4.14",
     "gatsby-plugin-netlify-cms": "^4.2.5",
@@ -57,7 +58,7 @@
     "serve": "gatsby serve",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "netlify-cms-proxy-server": "netlify-cms-proxy-server"
+    "cms-proxy": "netlify-cms-proxy-server"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.155",

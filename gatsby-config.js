@@ -4,6 +4,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: staticConfig.siteUrl,
     title: staticConfig.title,
+    description: staticConfig.description,
     blogFeed: {
       postsPerPage: staticConfig.blogFeed.postsPerPage,
       pagesEitherSideOfCurrentInPagination:
@@ -154,6 +155,78 @@ module.exports = {
         theme_color: `#343a40`,
         display: `standalone`,
         icon: `static/assets/favicon.png`
+      }
+    },
+    {
+      // RSS Feed
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: ` 
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            output: "/rss.xml",
+            title: "Nitratine",
+            match: "^/blog/", // TODO Maybe remove
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map(edge => {
+                const { title, date, description, tags, image } = edge.node.frontmatter;
+                const { slug } = edge.node.fields;
+                const { html } = edge.node;
+                return Object.assign({}, edge.node.frontmatter, {
+                  title: title,
+                  date: date,
+                  description: description,
+                  categories: tags,
+                  url: site.siteMetadata.siteUrl + slug,
+                  guid: site.siteMetadata.siteUrl + slug,
+                  custom_elements: [{ "content:encoded": html }],
+                  enclosure: { url: image.childImageSharp.fixed.src }
+                });
+              });
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  filter: { frontmatter: { templateKey: { eq: "blog-post" }, hidden: { eq: false } } }
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                ) {
+                  edges {
+                    node {
+                      html
+                      fields {
+                        slug
+                      }
+                      frontmatter {
+                        title
+                        date
+                        description
+                        tags
+                        image {
+                          childImageSharp {
+                            fixed {
+                              src
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `
+          }
+        ]
       }
     },
     {
