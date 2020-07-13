@@ -3,7 +3,6 @@ import Header, { IHeader } from "./Header";
 import Comments from "./Comments";
 import Pagination, { IPagination } from "./Pagination";
 import SEO from "../../Helpers/SEO";
-import useAdSenseAutoAds from "./useAdSenseAutoAds";
 import "./Post.scss";
 
 export interface IPost extends IHeader {
@@ -30,8 +29,6 @@ const Post: React.FC<IPost> = ({
   relativeImagePath,
   slug
 }) => {
-  // useAdSenseAutoAds();
-
   const Body = body;
   const TableOfContents = tableOfContents;
 
