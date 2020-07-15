@@ -1,13 +1,6 @@
 backend:
-  name: proxy
-  proxy_url: http://localhost:8081/api/v1
-  branch: master # optional, defaults to master
-  commit_messages:
-    create: "Create {{collection}} '{{slug}}'"
-    update: "Update {{collection}} '{{slug}}'"
-    delete: "Delete {{collection}} '{{slug}}'"
-    uploadMedia: "[skip ci] Upload '{{path}}'"
-    deleteMedia: "[skip ci] Delete '{{path}}'"
+  name: github
+  repo: brentvollebregt/nitratine.net-gatsby-rewrite
 
 site_url: "https://nitratine.net"
 display_url: "https://nitratine.net"
@@ -262,7 +255,6 @@ collections:
                 ],
             }
           - { label: Google Analytics Id, name: googleAnalyticsId, widget: string }
-          - { label: Use Internal Linking, name: useInternalLinking, widget: boolean }
           - {
               label: Use Internal Linking,
               name: useInternalLinking,

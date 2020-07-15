@@ -4,7 +4,6 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Launch
 
-- CMS backend
 - Remove robots
 - `UA-117153268-6` => `UA-117153268-2`
 - Enabled AdSense and `static.useInternalLinking`=`non-post-associations`
