@@ -10,6 +10,7 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Not Required (after launch)
 
+- SMALL: Link RSS somewhere?
 - MEDIUM: Query typings throughout
 - BUG: Some images aren't linked to original
 - SMALL: Put actual react-bootstrap components in
@@ -18,4 +19,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 - Blog footer? Need to link category pages somehow
 - SMALL: Add switch to disable ads on particular pages
 - MAYBE: Create a language on top of python that allows for some extra tokens?
-- DEBT: Figure out what to do with the `useAdSenseAutoAds` situation
+
+### Eventually...
+
+Setup CMS OAuth without netlify:
+
+- https://github.com/vencax/netlify-cms-github-oauth-provider
+- https://tylergaw.com/articles/netlify-cms-custom-oath-provider/

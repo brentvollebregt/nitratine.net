@@ -1,6 +1,13 @@
 backend:
-  name: github
-  repo: brentvollebregt/nitratine.net-gatsby-rewrite
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
+  branch: master # optional, defaults to master
+  commit_messages:
+    create: "[cms] Create {{collection}} '{{slug}}'"
+    update: "[cms] Update {{collection}} '{{slug}}'"
+    delete: "[cms] Delete {{collection}} '{{slug}}'"
+    uploadMedia: "[cms] [skip ci] Upload '{{path}}'"
+    deleteMedia: "[cms] [skip ci] Delete '{{path}}'"
 
 site_url: "https://nitratine.net"
 display_url: "https://nitratine.net"
