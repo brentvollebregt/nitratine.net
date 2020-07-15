@@ -93,8 +93,8 @@ different ones.
 
 Some of my videos have quite a bit of attention, for example:
 
-- [Convert PY to EXE](https://youtu.be/lOIJIk_maO4): 600K+ views
-- [Python GUI's with PyQt5](https://youtu.be/ksW59gYEl6Q): 200k+
+- [Convert PY to EXE](https://youtu.be/lOIJIk_maO4): 700K+ views
+- [Python GUI's with PyQt5](https://youtu.be/ksW59gYEl6Q): 250k+
   views
 - [Python Keylogger](https://youtu.be/x8GbWt56TlY): 150k+ views
 - [Record Your Computer Screen With
