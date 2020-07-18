@@ -177,7 +177,7 @@ module.exports = {
           {
             output: "/rss.xml",
             title: "Nitratine",
-            match: "^/blog/", // TODO Maybe remove
+            match: "^/blog/",
             serialize: ({ query: { site, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map(edge => {
                 const { title, date, description, tags, image } = edge.node.frontmatter;
