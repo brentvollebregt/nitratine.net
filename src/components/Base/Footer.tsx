@@ -6,6 +6,8 @@ import githubImage from "../../img/github-icon.svg";
 import youtubeImage from "../../img/youtube-icon.svg";
 
 const Footer: React.FC = () => {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="footer bg-dark py-4 px-1">
       <Container>
@@ -63,7 +65,7 @@ const Footer: React.FC = () => {
         </div>
 
         <p className="text-center m-0">
-          <small>© 2020 Brent Vollebregt</small>
+          <small>© {year} Brent Vollebregt</small>
         </p>
       </Container>
     </footer>

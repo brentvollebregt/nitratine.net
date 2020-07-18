@@ -48,7 +48,7 @@ a {
   .top-group {
     display: inline-grid;
     grid-template-columns: auto auto auto;
-    grid-gap: 6rem;
+    grid-gap: 8rem;
 
     @media (max-width: 768px) and (min-width: 577px) {
       grid-gap: 5rem;
