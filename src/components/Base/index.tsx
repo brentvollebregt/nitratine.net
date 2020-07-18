@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Navigation from "./Navigation";
+import Footer from "./Footer";
 import "./Base.scss";
 
 const Base: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
@@ -15,6 +16,7 @@ const Base: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
       <main role="main" className="container my-4">
         {children}
       </main>
+      <Footer />
     </>
   );
 };

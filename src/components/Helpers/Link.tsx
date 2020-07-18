@@ -10,6 +10,7 @@ interface ILink {
   className?: string;
   role?: string;
   title?: string;
+  forceExternal?: boolean;
 }
 
 const Link: React.FC<React.PropsWithChildren<ILink>> = ({
@@ -17,13 +18,14 @@ const Link: React.FC<React.PropsWithChildren<ILink>> = ({
   href,
   className,
   role,
-  title
+  title,
+  forceExternal = false
 }) => {
   const { pathname } = useLocation();
   const { useInternalLinking } = useStaticConfig();
   const extras = { className, role, title };
 
-  if (isExternalPath(href)) {
+  if (isExternalPath(href) || forceExternal) {
     return (
       <OutboundLink href={href} {...extras}>
         {children}

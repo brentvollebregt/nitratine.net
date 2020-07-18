@@ -41,3 +41,50 @@ a {
     font-size: 1rem;
   }
 }
+
+.footer {
+  color: white;
+
+  .top-group {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 6rem;
+
+    @media (max-width: 768px) and (min-width: 577px) {
+      grid-gap: 5rem;
+    }
+    @media (max-width: 576px) {
+      grid-gap: 1rem;
+    }
+  }
+
+  .link-group {
+    .header {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      margin: 0;
+      display: block;
+
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      &.with-icon {
+        display: flex;
+        align-items: center;
+
+        img {
+          max-height: 18px;
+          max-width: 18px;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}

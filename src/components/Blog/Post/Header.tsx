@@ -62,7 +62,7 @@ const Header: React.FC<IHeader> = ({
               className="repo-name stretched-link"
               href={`https://github.com/${githubRepository}`}
             >
-              <img src={(GitHubLogoImage as unknown) as string} alt="GitHub Icon" />
+              <img src={GitHubLogoImage} alt="GitHub Icon" />
               <span className="ml-2">{githubRepository}</span>
             </Link>
 
