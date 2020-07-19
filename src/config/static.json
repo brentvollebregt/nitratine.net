@@ -7,7 +7,7 @@
     "channelId": "UCesEknt3SRX9R9W_f93Tb7g",
     "recentViewAmount": 6
   },
-  "useInternalLinking": "always",
+  "useInternalLinking": "non-post-associations",
   "siteUrl": "https://nitratine.net",
   "googleAnalyticsId": "UA-117153268-6",
   "adsense": {
