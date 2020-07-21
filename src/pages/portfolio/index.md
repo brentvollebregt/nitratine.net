@@ -16,8 +16,8 @@ This project allows someone to easily set up a server that uses chromes app mode
   <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version"></a>
   <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions"></a>
   <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License"></a>
-  <a href="http://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="http://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
-  <a href="http://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" alt="Downloads Per Month"></a>
+  <a href="https://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="https://pepy.tech/badge/auto-py-to-exe" alt="Downloads"></a>
+  <a href="https://pepy.tech/project/auto-py-to-exe"><img style="display: inline;" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" alt="Downloads Per Month"></a>
 </div>
 
 This project can be installed from PyPI by executing:
