@@ -4,6 +4,7 @@ import Link from "../Helpers/Link";
 import rssImage from "../../img/rss-icon.svg";
 import githubImage from "../../img/github-icon.svg";
 import youtubeImage from "../../img/youtube-icon.svg";
+import "./Footer.scss"
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
