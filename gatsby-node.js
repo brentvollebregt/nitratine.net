@@ -81,6 +81,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             frontmatter {
               tags
               templateKey
+              hidden
             }
           }
           next {
@@ -105,7 +106,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const posts = postData.posts.edges;
 
   // Create blog-feed-page pages
-  const numPages = Math.ceil(posts.length / postsPerPage);
+  const postsThatCanBeShownInFeed = posts.filter(edge => edge.node.frontmatter.hidden !== true);
+  const numPages = Math.ceil(postsThatCanBeShownInFeed.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/blog` : `/blog/page/${i + 1}`,

@@ -53,7 +53,9 @@ interface CategoryFromQuery {
 
 export const categoryPageQuery = graphql`
   {
-    allMarkdownRemark(filter: { frontmatter: { templateKey: { eq: "blog-post" } } }) {
+    allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "blog-post" }, hidden: { eq: false } } }
+    ) {
       group(field: frontmatter___category) {
         fieldValue
         edges {
