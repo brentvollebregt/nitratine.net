@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Change File Modification Time In Python"
-date: 2018-01-06T12:00:00.000Z
+date: 2018-01-06T00:00:00.000+12:00
 category: Tutorials
 tags: [python]
 image: feature.png
@@ -11,6 +11,7 @@ hidden: false
 ---
 
 ## File Modification Times
+
 File modification times show when a file was last edited. This can sometimes be confused with creation time but these are very different. Creation time is normally held by the operating system and states when a file was created. This means if you download a file from the internet, the creation time will change and be the time it was downloaded. Thus the creation time isn't very helpful.
 
 File modification time is different however as it is stored in the file. Even though the operating system still manages these, they can still be easily changed as opposed to creation time.
@@ -20,6 +21,7 @@ The modification date can be found by right-clicking on a file and selecting pro
 ![Properties showing times of a file](properties.png)
 
 ## Setting File Modification Times
+
 First, you will want to import os, time and datetime.
 
 ```python
@@ -58,6 +60,7 @@ os.utime(fileLocation, (modTime, modTime))
 Now if you go back and check the modification date it should be changed.
 
 ## Final Code
+
 ```python
 import os
 import time
@@ -78,5 +81,7 @@ os.utime(fileLocation, (modTime, modTime))
 ```
 
 ## FAQ
+
 ### But how do I change creation time?
+
 The solution is platform-specific but for Windows you can look at [this](https://stackoverflow.com/questions/4996405/how-do-i-change-the-file-creation-date-of-a-windows-file-from-python).

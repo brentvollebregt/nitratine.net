@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "The Nitratine Project"
-date: 2018-01-10T12:00:00.000Z
+date: 2018-01-10T00:00:00.000+12:00
 category: Projects
 tags: [python, flask, website]
 image: nitratine1.jpg

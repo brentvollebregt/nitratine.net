@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How to Manage Multiple Python Distributions"
-date: 2020-05-20T12:00:00.000Z
+date: 2020-05-20T00:00:00.000+12:00
 category: Tutorials
 tags: [python]
 image: feature.png

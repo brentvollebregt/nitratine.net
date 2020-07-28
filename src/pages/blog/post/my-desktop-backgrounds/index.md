@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "My Desktop Backgrounds"
-date: 2018-04-25T12:00:00.000Z
+date: 2018-04-25T00:00:00.000+12:00
 category: General
 tags: [backgrounds]
 image: lhc-blocks.jpg

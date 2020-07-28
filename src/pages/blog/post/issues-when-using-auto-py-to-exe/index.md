@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: Issues When Using auto-py-to-exe
-date: 2018-11-17T12:00:00.000Z
+date: 2018-11-17T00:00:00.000+12:00
 category: General
 tags:
   - python

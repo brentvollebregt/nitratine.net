@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python Retweet Bot"
-date: 2018-01-26T12:00:00.000Z
+date: 2018-01-26T00:00:00.000+12:00
 category: Tutorials
 tags: [python, bot]
 image: feature.png

@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Fix: 'python' is not recognized as an internal or external command"
-date: 2019-05-15T12:00:00.000Z
+date: 2019-05-15T00:00:00.000+12:00
 category: Tutorials
 tags: [python]
 image: feature.png
@@ -11,6 +11,7 @@ hidden: false
 ---
 
 ## Why You Are Getting This Error
+
 When executing `python` or `pip` from the terminal (or whatever application you are using), if your environment isn't set up correctly, you will be given an error saying `'python' is not recognized as an internal or external command, operable program or batch file.` (or `pip` when executing `pip`).
 
 When you execute the command `python` in the terminal, the terminal will look through all the paths on the systems PATH environment variable to look for an executable `python.exe`. Since there are no paths/folders on the PATH environment variable that contains `python.exe`, this error is shown because it does not know what executable to execute.
@@ -18,6 +19,7 @@ When you execute the command `python` in the terminal, the terminal will look th
 > Please note, these solutions will only work on Windows as it describes how to add paths to the systems PATH environment variable
 
 ## A Temporary Fix
+
 One way to temporary fix this is to specify the full path of the executable you are trying to execute. To find the location of `python.exe`, open Python/IDLE and execute:
 
 ```python
@@ -25,16 +27,17 @@ import sys
 print(sys.base_exec_prefix + '\\python.exe')
 ```
 
-Copy this value that was printed and paste it in the terminal, then execute it. You will now find that this does exactly what you would expect `python` to do; that is because it's doing the same thing - executing the python executable. 
+Copy this value that was printed and paste it in the terminal, then execute it. You will now find that this does exactly what you would expect `python` to do; that is because it's doing the same thing - executing the python executable.
 
 > I say this is temporary because it is a lot more effort to use the full path
 
 ## A Permanent Fix
-A more permanent fix would be to add the directory shown above to the systems PATH environment variable so the terminal can find it automatically; this will allow you to simply execute `python` every time. 
+
+A more permanent fix would be to add the directory shown above to the systems PATH environment variable so the terminal can find it automatically; this will allow you to simply execute `python` every time.
 
 In my post on [How To Setup Python's PIP](/blog/post/how-to-setup-pythons-pip/) I show you how to add the Script path to the PATH variable so `pip` can be found by the terminal. Replacing the path in the tutorial with the path found above will allow us to fix our `python` issue.
 
-Instead of doing all of that manually, I wrote a script that will check if the root Python path (found above) or the Scripts path is not on the *users* PATH variable. Using the *users* PATH variable allows us to set everything up without requiring admin privileges. Simply executing this, reading the output and answering the one question it asks you (if action is required) will fix both paths for you.
+Instead of doing all of that manually, I wrote a script that will check if the root Python path (found above) or the Scripts path is not on the _users_ PATH variable. Using the _users_ PATH variable allows us to set everything up without requiring admin privileges. Simply executing this, reading the output and answering the one question it asks you (if action is required) will fix both paths for you.
 
 ```python
 import sys

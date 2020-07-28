@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Spotify Lyrics Viewer"
-date: 2019-11-07T12:00:00.000Z
+date: 2019-11-07T00:00:00.000+12:00
 category: Projects
 tags: [spotify, react, typescript, javascript, express]
 image: feature.png

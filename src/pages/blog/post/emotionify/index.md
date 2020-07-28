@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Emotionify"
-date: 2019-07-09T12:00:00.000Z
+date: 2019-07-09T00:00:00.000+12:00
 category: Projects
 tags: [react, javascript, typescript, spotify]
 image: feature.png

@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Price Per Unit"
-date: 2018-06-28T12:00:00.000Z
+date: 2018-06-28T00:00:00.000+12:00
 category: Apps
 tags: [android, java, money]
 image: FeatureGraphic.jpg

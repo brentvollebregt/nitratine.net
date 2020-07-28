@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Convert .py to .exe"
-date: 2017-12-11T12:00:00.000Z
+date: 2017-12-11T00:00:00.000+12:00
 category: YouTube
 tags: [python, pyinstaller]
 image: demo6.png

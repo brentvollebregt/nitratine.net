@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python Size and Time Cache Decorator"
-date: 2018-12-15T12:00:00.000Z
+date: 2018-12-15T00:00:00.000+12:00
 category: General
 tags: [python, decorator]
 image: feature.png
@@ -11,11 +11,13 @@ hidden: false
 ---
 
 ## Introduction
-Python's standard library comes with a memoization function in the `functools` module named [`@functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache). This can be very useful for pure functions *(functions that always will return the same output given an input)* as it can be used to speed up an application by remembering a return value. This is because next time a function is called with the same arguments, the value can be simply returned and computation will not have to occur again.
+
+Python's standard library comes with a memoization function in the `functools` module named [`@functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache). This can be very useful for pure functions _(functions that always will return the same output given an input)_ as it can be used to speed up an application by remembering a return value. This is because next time a function is called with the same arguments, the value can be simply returned and computation will not have to occur again.
 
 Sometimes though, you might want to remember the return value of a non-pure function for a specific amount of time. The function below is a decorator that allows you to remember return value but also have an expiry on them.
 
 ## Decorator
+
 ```python
 def cache(size_limit=0, ttl=0, quick_key_access=False):
     def decorator(func):
@@ -75,6 +77,7 @@ def cache(size_limit=0, ttl=0, quick_key_access=False):
 ```
 
 ## Usage
+
 To use this method, add it to your project/script. Then decorate your functions that you want to cache, for example:
 
 ```python
@@ -100,4 +103,5 @@ def my_sum(a, b, c, d=1, e=5):
 ```
 
 ## Summary
+
 If you want a simple memoization function, I still recommend using the built-in [`@functools.lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache) decorator but if you are looking for memoization decorator with a time factor added in, then this is something that you're looking for.

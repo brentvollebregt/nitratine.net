@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How to Clean a Twitter Account with jQuery"
-date: 2018-08-12T12:00:00.000Z
+date: 2018-08-12T00:00:00.000+12:00
 category: Tutorials
 tags: [twitter, javascript, jquery, tweepy]
 image: followers.png

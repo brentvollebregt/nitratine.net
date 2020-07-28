@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Spotify Playlist Downloader"
-date: 2017-12-21T12:00:00.000Z
+date: 2017-12-21T00:00:00.000+12:00
 category: Projects
 tags: [python, spotify, download, youtube-dl]
 image: feature.jpg
@@ -34,7 +34,7 @@ This is a console application, simply paste the URI and press enter.
 4. Go to [https://developer.spotify.com/my-applications](https://developer.spotify.com/my-applications) and create an app to get a client_id and client_secret key pair
 5. Put these keys in settings.json
 6. Go to [https://ffmpeg.zeranoe.com/builds/](https://ffmpeg.zeranoe.com/builds/) and download ffmpeg.
-7. Extract the files from the zip and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of spotify_album_downloader.py _(you can also put these in a location that is referenced by the PATH variable if you wish)_
+7. Extract the files from the zip and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of spotify*album_downloader.py *(you can also put these in a location that is referenced by the PATH variable if you wish)\_
 
 ## Usage
 

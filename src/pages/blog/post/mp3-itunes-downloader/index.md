@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "MP3-iTunes Downloader"
-date: 2017-12-21T12:00:00.000Z
+date: 2017-12-21T00:00:00.000+12:00
 category: Projects
 tags: [python, itunes, download, youtube-dl]
 image: gui1.png
@@ -30,7 +30,7 @@ This project allows you to select a song from an album found on the web version 
 2. cd into the directory: `cd mp3-iTunes`
 3. Install the requirements: `pip install -r requirements.txt`
 4. Go to [https://ffmpeg.zeranoe.com/builds/](https://ffmpeg.zeranoe.com/builds/) and download ffmpeg.
-5. Extract the files and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of music_downloader_with_YT_iTunes.py _(you can also put these in a location that is referenced by the PATH variable if you wish)_
+5. Extract the files and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of music*downloader_with_YT_iTunes.py *(you can also put these in a location that is referenced by the PATH variable if you wish)\_
 
 ## Usage
 

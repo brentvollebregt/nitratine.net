@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Finding Emotion In Music With Python"
-date: 2017-12-05T12:00:00.000Z
+date: 2017-12-05T00:00:00.000+12:00
 category: Investigations
 tags: [python, spotify, machine-learning]
 image: mining-results.png

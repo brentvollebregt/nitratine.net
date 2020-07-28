@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Colour"
-date: 2017-11-18T12:00:00.000Z
+date: 2017-11-18T00:00:00.000+12:00
 category: Apps
 tags: [android, java]
 image: feature.png

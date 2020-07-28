@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How to Use pynput's Mouse and Keyboard Listener at the Same Time"
-date: 2020-05-18T12:00:00.000Z
+date: 2020-05-18T00:00:00.000+12:00
 category: Tutorials
 tags: [pynput, python, mouse, keyboard]
 image: feature.png
@@ -12,7 +12,7 @@ hidden: false
 
 ## Background
 
-In my posts like ["How To Get Mouse Clicks With Python"](/blog/post/how-to-get-mouse-clicks-with-python/) and ["How to Detect Key Presses In Python"](/blog/post/how-to-detect-key-presses-in-python/), I discuss how to use pynput to listen to mouse and keyboard events. 
+In my posts like ["How To Get Mouse Clicks With Python"](/blog/post/how-to-get-mouse-clicks-with-python/) and ["How to Detect Key Presses In Python"](/blog/post/how-to-detect-key-presses-in-python/), I discuss how to use pynput to listen to mouse and keyboard events.
 
 When trying to use the two listeners at the same time, I see a lot of people copy and paste the two import statements like the following:
 
@@ -21,19 +21,21 @@ from pynput.mouse import Listener
 from pynput.keyboard import Listener
 ```
 
-Looking at the code above, ask yourself, how do I create the mouse listener? If you follow the  example from [my tutorial](/blog/post/how-to-get-mouse-clicks-with-python/), you would use the following:
- 
+Looking at the code above, ask yourself, how do I create the mouse listener? If you follow the example from [my tutorial](/blog/post/how-to-get-mouse-clicks-with-python/), you would use the following:
+
 ```python
 with Listener(on_move=on_move, ...) as listener:
     listener.join()
 ```
- 
+
 However, when you run this, you will find that `Listener` is now `pynput.keyboard.Listener`, not `pynput.mouse.Listener`. This has occurred because the second import statement has overwritten `Listener`.
 
 ## Solution
+
 Solutions to this are very simple and are not specific to pynput as this is just an import mistake. You can use these solutions for other related import naming collisions.
 
 ### Solution 1 - The "`as`" Keyword
+
 The first solution I recommend is to use the Python `as` keyword. This keyword allows you to rename an imported object when importing. In the situation this post focuses on, you would do:
 
 ```python
@@ -56,7 +58,7 @@ So now when you want to use the two listeners, you would do:
 # Listen to mouse events
 with MouseListener(...) as mouse_listener:
     mouse_listener.join()
-    
+
 # Listen to keyboard events
 with KeyboardListener(...) as keyboard_listener:
     keyboard_listener.join()
@@ -64,8 +66,8 @@ with KeyboardListener(...) as keyboard_listener:
 
 > If you are to use the exact code above, remember these listener objects are threads, so when you call `.join()`, they will block.
 
-
 ### Solution 2 - Only Import the Base
+
 Another solution which is a little more verbose in the usages is to just import the base library. To do this for our example, we would simply import `pynput`:
 
 ```python
@@ -78,7 +80,7 @@ Then to use it like we have done above:
 # Listen to mouse events
 with pynput.mouse.Listener(...) as mouse_listener:
     mouse_listener.join()
-    
+
 # Listen to keyboard events
 with pynput.keyboard.Listener(...) as keyboard_listener:
     keyboard_listener.join()

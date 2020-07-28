@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Putting auto-py-to-exe on PyPI"
-date: 2018-07-09T12:00:00.000Z
+date: 2018-07-09T00:00:00.000+12:00
 category: General
 tags: [python, pypi]
 image: feature.jpg

@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python SQLite3 Basics"
-date: 2018-05-06T12:00:00.000Z
+date: 2018-05-06T00:00:00.000+12:00
 category: YouTube
 tags: [python, sql]
 image: feature.png

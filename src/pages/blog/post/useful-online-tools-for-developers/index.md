@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Useful Online Tools For Developers"
-date: 2019-09-08T12:00:00.000Z
+date: 2019-09-08T00:00:00.000+12:00
 category: Tools
 tags: [website]
 image: feature.png

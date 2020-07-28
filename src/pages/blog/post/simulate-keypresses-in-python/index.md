@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Simulate Keypresses In Python"
-date: 2017-12-16T12:00:00.000Z
+date: 2017-12-16T00:00:00.000+12:00
 category: YouTube
 tags: [python, keyboard, pynput]
 image: feature.jpg

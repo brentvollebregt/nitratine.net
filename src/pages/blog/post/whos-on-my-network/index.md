@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: Who's On My Network
-date: 2020-04-04T12:00:00.000Z
+date: 2020-04-04T00:00:00.000+12:00
 category: Projects
 tags:
   - python

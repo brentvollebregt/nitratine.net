@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How to Send an Email With Python"
-date: 2018-01-23T12:00:00.000Z
+date: 2018-01-23T00:00:00.000+12:00
 category: YouTube
 tags: [python, email]
 image: feature.jpg

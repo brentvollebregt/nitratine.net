@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Get WiFi Passwords With Python"
-date: 2017-12-13T12:00:00.000Z
+date: 2017-12-13T00:00:00.000+12:00
 category: YouTube
 tags: [python, wifi]
 image: feature.jpg

@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python Requests Tutorial"
-date: 2019-04-04T12:00:00.000Z
+date: 2019-04-04T00:00:00.000+12:00
 category: Tutorials
 tags: [python, requests]
 image: feature.png

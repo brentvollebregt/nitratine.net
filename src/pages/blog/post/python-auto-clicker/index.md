@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python Auto Clicker"
-date: 2018-02-09T12:00:00.000Z
+date: 2018-02-09T00:00:00.000+12:00
 category: YouTube
 tags: [python, mouse, pynput]
 image: feature.jpg

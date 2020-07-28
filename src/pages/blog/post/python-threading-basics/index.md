@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python Threading Basics"
-date: 2018-05-03T12:00:00.000Z
+date: 2018-05-03T00:00:00.000+12:00
 category: YouTube
 tags: [python, threading]
 image: feature.png

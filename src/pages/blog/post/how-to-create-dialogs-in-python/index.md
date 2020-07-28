@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How to Create Dialogs in Python"
-date: 2019-05-26T12:00:00.000Z
+date: 2019-05-26T00:00:00.000+12:00
 category: Tutorials
 tags: [python, gui, dialog]
 image: question-dialogs.png

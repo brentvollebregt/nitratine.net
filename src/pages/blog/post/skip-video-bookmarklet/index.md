@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Skip Video Bookmarklet"
-date: 2018-12-03T12:00:00.000Z
+date: 2018-12-03T00:00:00.000+12:00
 category: General
 tags: [javascript]
 feature:

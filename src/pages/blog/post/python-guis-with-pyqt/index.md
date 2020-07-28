@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python GUI's with PyQt"
-date: 2018-07-17T12:00:00.000Z
+date: 2018-07-17T00:00:00.000+12:00
 category: YouTube
 tags: [python, gui, pyqt]
 image: feature.jpg

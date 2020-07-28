@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How To Setup Python's PIP"
-date: 2017-12-13T12:00:00.000Z
+date: 2017-12-13T00:00:00.000+12:00
 category: YouTube
 tags: [python]
 image: demo5.png

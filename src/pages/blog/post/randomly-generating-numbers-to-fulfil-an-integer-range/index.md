@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Randomly Generating Numbers to Fulfil an Integer Range"
-date: 2017-12-07T12:00:00.000Z
+date: 2017-12-07T00:00:00.000+12:00
 category: Investigations
 tags: [python]
 image: graph2.png

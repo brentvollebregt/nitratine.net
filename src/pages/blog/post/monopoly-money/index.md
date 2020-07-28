@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Monopoly Money"
-date: 2020-04-18T12:00:00.000Z
+date: 2020-04-18T00:00:00.000+12:00
 category: Projects
 tags: [react, typescript, javascript, express, lerna]
 image: feature.png

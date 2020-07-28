@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How To Add a Custom Domain To a GitHub Pages Site"
-date: 2018-04-29T12:00:00.000Z
+date: 2018-04-29T00:00:00.000+12:00
 category: Tutorials
 tags: [website, domain]
 image: existing-resource-records.png

@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Unblock New Zealand Herald Premium Articles"
-date: 2019-05-04T12:00:00.000Z
+date: 2019-05-04T00:00:00.000+12:00
 category: General
 tags: [javascript, bookmarklet]
 image: feature.png

@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "How to Detect Key Presses In Python"
-date: 2020-04-07T12:00:00.000Z
+date: 2020-04-07T00:00:00.000+12:00
 category: Tutorials
 tags: [python, keyboard, logging, pynput]
 image: demo2.png

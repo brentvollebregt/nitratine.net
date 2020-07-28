@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Remove Columns in a CSV File With Python"
-date: 2019-06-10T12:00:00.000Z
+date: 2019-06-10T00:00:00.000+12:00
 category: Tools
 tags: [python, csv]
 image: feature.png
@@ -11,6 +11,7 @@ hidden: false
 ---
 
 ## What is This?
+
 This script takes an input CSV file and outputs a copy of the CSV file with particular columns removed. Provide `cols_to_remove` with a list containing the indexes of **columns** in the CSV file that you want to be removed (starting from index 0 - so the first column would be 0).
 
 I have used indexes because they are easier to use programmatically and if I did use header titles, one character or space would have put it off. This method scales very well and can remove columns where MS Excel can't open a large file.
@@ -40,5 +41,6 @@ with open(input_file, "r") as source:
 ```
 
 ## Other Useful and Related CSV Tools
- - [CSV Splitter](https://gist.github.com/jrivero/1085501/a2401c345e8abb46f3623e08afbe36e59923f94e): Splits a CSV file into multiple files with a row limit per file
- - [CSV to Sqlite](https://github.com/zblesk/csv-to-sqlite): A command-line tool that copies data from CSV files into a SQLite database.
+
+- [CSV Splitter](https://gist.github.com/jrivero/1085501/a2401c345e8abb46f3623e08afbe36e59923f94e): Splits a CSV file into multiple files with a row limit per file
+- [CSV to Sqlite](https://github.com/zblesk/csv-to-sqlite): A command-line tool that copies data from CSV files into a SQLite database.

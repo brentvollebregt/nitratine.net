@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python Keylogger"
-date: 2017-12-15T12:00:00.000Z
+date: 2017-12-15T00:00:00.000+12:00
 category: YouTube
 tags: [python, keyboard, logging, pynput]
 image: feature.jpg

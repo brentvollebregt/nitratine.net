@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Python Encryption and Decryption with PyCryptodome"
-date: 2019-05-14T12:00:00.000Z
+date: 2019-05-14T00:00:00.000+12:00
 category: Tutorials
 tags: [python, encryption, cyber-security]
 image: feature.png
@@ -11,20 +11,22 @@ hidden: false
 ---
 
 ## What is PyCryptodome?
+
 PyCryptodome is a self-contained Python package of low-level cryptographic primitives that supports Python 2.6 and 2.7, Python 3.4 and newer, and PyPy.
 
-PyCryptodome is a fork of PyCrypto that has been enhanced to add more implementations and fixes to the original PyCrypto library. Where possible, most of the algorithms in this library are implemented in pure Python; only  pieces that are extremely critical to performance (e.g. block ciphers) are implemented as C extensions.
+PyCryptodome is a fork of PyCrypto that has been enhanced to add more implementations and fixes to the original PyCrypto library. Where possible, most of the algorithms in this library are implemented in pure Python; only pieces that are extremely critical to performance (e.g. block ciphers) are implemented as C extensions.
 
 The PyCryptodome library offers implementations for things like:
 
- - AES
- - Stream ciphers like Salsa20
- - Cryptographic hashes like SHA-2
- - Message Authentication Codes like HMAC
- - RSA asymmetric key generation
- - [and much more!](https://www.pycryptodome.org/en/latest/src/features.html)
+- AES
+- Stream ciphers like Salsa20
+- Cryptographic hashes like SHA-2
+- Message Authentication Codes like HMAC
+- RSA asymmetric key generation
+- [and much more!](https://www.pycryptodome.org/en/latest/src/features.html)
 
 ### What Happened To [PyCrypto](https://www.dlitz.net/software/pycrypto/)?
+
 Even though unstated on any official site by the owner (which is unfortunate), PyCrypto is currently unmaintained. The last commit that was made to the official [GitHub repository](https://github.com/dlitz/pycrypto) was on [Jun 21, 2014](https://github.com/dlitz/pycrypto/commit/7acba5f3a6ff10f1424c309d0d34d2b713233019).
 
 Since PyCrypto has been unmaintained for a few years, there have been a few security vulnerabilities found which are listed on [www.cvedetails.com](https://www.cvedetails.com/vulnerability-list/vendor_id-11993/product_id-22441/Dlitz-Pycrypto.html). This is quite a worry as PyCrypto examples are still prominent in Python security search results. Since there are no warnings in the project or on the repository, the best we can do is to tell people.
@@ -32,6 +34,7 @@ Since PyCrypto has been unmaintained for a few years, there have been a few secu
 As PyCryptodome is a modified fork of PyCrypto, it can be used in some situations as a drop-in-replacement for PyCrypto; you can read more about that [in the docs](https://www.pycryptodome.org/en/latest/src/vs_pycrypto.html).
 
 ## Installing PyCryptodome
+
 The easiest way to install this library is to use pip. Open up the terminal/cmd and execute:
 
 ```console
@@ -47,21 +50,22 @@ import pycryptodome
 If no errors appeared it has been installed correctly.
 
 ## What is AES?
+
 In this tutorial, I'll be using the implementation of [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) (AES) to encrypt strings and files. If you do not know what AES is, I highly recommend you understand what it is and how it works before you continue with the examples. Not understanding the different modes of AES and how it is designed could lead to insecure encryptions.
 
-AES has a block size of 128 bits and this implementation of AES supports 3 sizes of keys, 16, 24 or 32 bytes long respectively for *AES-128*, *AES-192* or *AES-256*. Many modes are [supported by this implementation of AES](https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html), including:
+AES has a block size of 128 bits and this implementation of AES supports 3 sizes of keys, 16, 24 or 32 bytes long respectively for _AES-128_, _AES-192_ or _AES-256_. Many modes are [supported by this implementation of AES](https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html), including:
 
 - CBC: Cipher-Block Chaining
 - CFB: Cipher FeedBack
 - OFB: Output FeedBack
 - CTR: Counter
 - EAX: EAX
-        
+
 > I have not included Electronic Code Book (ECB) due to the fact that [it is not semantically secure](https://crypto.stackexchange.com/a/20946). I do not recommend using this mode.
- 
 
 ## Generating A Key
-Keys that are used in AES must be 128, 192, or 256 bits in size (respectively for *AES-128*, *AES-192* or *AES-256*). PyCryptodome supplies a function at `Crypto.Random.get_random_bytes` that returns a random byte string of a length we decide. To use this, import the function and pass a length to the function:
+
+Keys that are used in AES must be 128, 192, or 256 bits in size (respectively for _AES-128_, _AES-192_ or _AES-256_). PyCryptodome supplies a function at `Crypto.Random.get_random_bytes` that returns a random byte string of a length we decide. To use this, import the function and pass a length to the function:
 
 ```python
 from Crypto.Random import get_random_bytes
@@ -74,6 +78,7 @@ When running this snippet, a new key that is of type bytes will be generated on 
 > Remember, the key we will use to decrypt will have to be the same key we encrypted with. So don't lose the key otherwise you lose the file contents!
 
 ### Storing a Key
+
 Key generation may seem useless as you need to store it, but that is definitely not the case. Since this function creates truly random data, we could simply generate a key and then write it to a file on a USB (or some other secure place). When we encrypt/decrypt files, we then read this file from the USB and get the key out. Here is an example of this:
 
 ```python
@@ -100,11 +105,12 @@ assert key == key_from_file, 'Keys do not match' # Will throw an AssertionError 
 Even though generating keys like this is definitely one of the better options, some people would rather use passwords provided from users. This is quite understandable as it makes it easier for users to use the application
 
 ### Generating A Key From A "Password"
+
 The idea here is to generate a byte sequence of appropriate length from a string provided from the user. To do this we can use `Crypto.Protocol.KDF.PBKDF2` ([API reference](https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#Crypto.Protocol.KDF.PBKDF2)). PBKDF2 allows us to generate a key of any length by simply passing a password and salt.
 
 > PBKDF2 is used because PBKDF1 can only generate keys up to 160 bits long.
 
-A [salt](https://en.wikipedia.org/wiki/Salt_(cryptography)) is *random data that is used as an additional input to a one-way function that "hashes" data*. How you store this is up to you, in short terms, it is combined with the password provided by the user so that the result cannot be looked up in a [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table). Even though not 100% recommended, I feel it can be more beneficial to simply generate a salt and hard-code it into your application. To generate a salt, we can use the same method that we used to generate a key:
+A [salt](<https://en.wikipedia.org/wiki/Salt_(cryptography)>) is _random data that is used as an additional input to a one-way function that "hashes" data_. How you store this is up to you, in short terms, it is combined with the password provided by the user so that the result cannot be looked up in a [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table). Even though not 100% recommended, I feel it can be more beneficial to simply generate a salt and hard-code it into your application. To generate a salt, we can use the same method that we used to generate a key:
 
 ```python
 from Crypto.Random import get_random_bytes
@@ -135,15 +141,17 @@ Now in `key`, you will have the key that you can use in encryption. You do not h
 > Even though it may be ok to hard code a salt for your own projects, it is recommended to generate a new salt for each object encrypted. When storing data (as you will see later), you can write the salt to the beginning of the file (assuming your storage method is a file) as it is a fixed length. When decrypting the file, read out the salt first, then generate the key with the password and then continue to read the rest of the data out of the file to decrypt.
 
 ## Encrypting
-Now that we have the key, we can encrypt files. These methods encrypt bytes objects, so if you have a string, you can call `.encode()` on it, otherwise for other objects, make sure they are of type bytes. 
+
+Now that we have the key, we can encrypt files. These methods encrypt bytes objects, so if you have a string, you can call `.encode()` on it, otherwise for other objects, make sure they are of type bytes.
 
 > In these examples, I will show a variable named `key` which will be where your key should be (as generated from the instructions above).
 
-You can find examples in the documentation for [legacy ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html) and [modern ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html); I will cover a couple of examples from the documentation to help you understand how to encrypt and save the data required for decryption. 
+You can find examples in the documentation for [legacy ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html) and [modern ciphers](https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html); I will cover a couple of examples from the documentation to help you understand how to encrypt and save the data required for decryption.
 
 Different modes will require you to store different values for decryption like an iv, nonce or tag. If you want to use a mode that I do not cover here, simply find the example in the docs (from the links above for legacy and modern ciphers) and identify what values need to be stored.
 
 ### CBC Example
+
 You can find this example [in the docs](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cbc-mode). CBC requires you to pad your data to make sure the final block is filled with some data; not all modes require this (as I show in the next example).
 
 ```python
@@ -165,7 +173,8 @@ file_out.close()
 ```
 
 ### CFB Example
-You can find this example [in the docs](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cfb-mode). CFB is very similar to CFB but does not require the data to be padded; this means the call `pad(data, AES.block_size)` from the CBC example can be replaced with `data` for CFB. 
+
+You can find this example [in the docs](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cfb-mode). CFB is very similar to CFB but does not require the data to be padded; this means the call `pad(data, AES.block_size)` from the CBC example can be replaced with `data` for CFB.
 
 This CFB mode example is practically identical to the OFB mode (just need to change the mode in `AES.new`) and very close to CTR in the way that a nonce needs to be stored compared to the iv from CFB (the nonce is stored in `cipher.nonce`).
 
@@ -188,6 +197,7 @@ file_out.close()
 ```
 
 ### EAX Example
+
 You can find this example [in the docs](https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes). Just like all the examples here and in the docs for AES, the steps are all the same, just different data needs to be stored for this mode being a nonce, tag and the ciphered data.
 
 ```python
@@ -208,7 +218,8 @@ file_out.close()
 ```
 
 ### How To Use All The Outputs From These Encryptions?
-Many of these modes will output more than one value; this could be in the form of an iv, nonce or something else. To pack all this data in a file, put the data that has  static lengths (always the same) at the top of the file, then ciphered content after this. Now when you read out the file, you can read x amount of bytes using `.read(x)` to get the known-length values (can be multiple) and then call `.read(-1)` to get the rest of the data.
+
+Many of these modes will output more than one value; this could be in the form of an iv, nonce or something else. To pack all this data in a file, put the data that has static lengths (always the same) at the top of the file, then ciphered content after this. Now when you read out the file, you can read x amount of bytes using `.read(x)` to get the known-length values (can be multiple) and then call `.read(-1)` to get the rest of the data.
 
 In the examples above, this is how I saved all the data required to a file, but you do not have to save the data this way. When only using the data internally or in something like a database, it can be easier to just keep them separate in their own variable or column.
 
@@ -241,11 +252,13 @@ with open('encrypted_file.json') as infile:
 ciphertext = input_json['ciphertext']
 iv = input_json['iv']
 ```
- 
+
 ## Decrypting
+
 Now that you have your data, stored it somewhere, you will want to read it and decrypt it. Based on the encryption examples above, these are the examples to decrypt. If you did not store the data in a file, you can populate the required fields using whatever method you used to store them.
 
 ### CBC Example
+
 When the file for the CBC encryption example was written, the iv was first written and then the ciphered data. Since we know the length of the iv (16 bytes), first read that from the start of the file and the read the rest of the file to get the ciphered data.
 
 ```python
@@ -266,6 +279,7 @@ original_data = unpad(cipher.decrypt(ciphered_data), AES.block_size) # Decrypt a
 ```
 
 ### CFB Example
+
 In the CFB encryption example the iv and ciphered data was saved to the output file.
 
 ```python
@@ -284,6 +298,7 @@ original_data = cipher.decrypt(ciphered_data) # No need to un-pad
 ```
 
 ### EAX Example
+
 In the EAX encryption example the nonce, tag and ciphered data was saved to the output file. We know the length of the nonce and tag values so we can read these out first and then the data after.
 
 ```python
@@ -304,11 +319,13 @@ original_data = cipher.decrypt_and_verify(ciphered_data, tag) # Decrypt and veri
 ```
 
 ## Examples
-In these examples, I will use the CFB mode to show that the input data can be encrypted and then decrypted to give the original input data. 
+
+In these examples, I will use the CFB mode to show that the input data can be encrypted and then decrypted to give the original input data.
 
 In each example I will generate a new key that will be used in the session; as described before, you will need to generate a key yourself and save it for encryption and decryption since encryption and decryption most likely won't be done in the same session (you can't rely on `get_random_bytes` to get your key back).
 
 ### String Example Proof
+
 In this proof, I will demonstrate how to encrypt and decrypt a string.
 
 ```python
@@ -350,6 +367,7 @@ assert data_to_encrypt == decrypted_data, 'Original data does not match the resu
 ```
 
 ### File Example Proof
+
 In this proofm I will demonstrate how to encrypt and decrypt a file. This example will be a bit different from the examples above as I will be reading and writing to and from files using a buffer. This allows me to encrypt much larger files without the whole file having to be loaded into memory.
 
 ```python
@@ -401,7 +419,7 @@ while len(buffer) > 0:
     decrypted_bytes = cipher_encrypt.decrypt(buffer)
     output_file.write(decrypted_bytes)
     buffer = input_file.read(buffer_size)
-    
+
 # Close the input and output files
 input_file.close()
 output_file.close()
@@ -418,7 +436,7 @@ def get_file_hash(file_path):
             file_hash.update(fb)
             fb = f.read(block_size)
     return file_hash.hexdigest()
-    
+
 assert get_file_hash(file_to_encrypt) == get_file_hash(file_to_encrypt + '.decrypted'), 'Files are not identical'
 ```
 
