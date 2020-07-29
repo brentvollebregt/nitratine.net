@@ -7,7 +7,7 @@ description: "In this tutorial, I explain how to configure your domain for GitHu
 
 [TOC]
 
-Yesterday night I purchased the domain [nitratine.net](http://nitratine.net/) from [Namesilo](https://www.namesilo.com/). There is a lot of help out there to set this up but unfortunately, there are no direct instructions for Namesilo specifically.
+Yesterday night I purchased the domain [nitratine.net](https://nitratine.net/) from [Namesilo](https://www.namesilo.com/). There is a lot of help out there to set this up but unfortunately, there are no direct instructions for Namesilo specifically.
 
 In this tutorial, I will explain how to configure your domain for GitHub Pages using a domain from Namesilo.
 

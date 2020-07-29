@@ -20,7 +20,7 @@ This project allows you to select a song from an album found on the web version 
 1. Clone this repository: `git clone https://github.com/brentvollebregt/mp3-iTunes.git`
 2. cd into the directory: `cd mp3-iTunes`
 3. Install the requirements: `pip install -r requirements.txt`
-2. Go to [http://ffmpeg.zeranoe.com/builds/](http://ffmpeg.zeranoe.com/builds/) and download ffmpeg.
+2. Go to [https://ffmpeg.zeranoe.com/builds/](https://ffmpeg.zeranoe.com/builds/) and download ffmpeg.
 3. Extract the files and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of music_downloader_with_YT_iTunes.py *(you can also put these in a location that is referenced by the PATH variable if you wish)*
 
 ## Usage

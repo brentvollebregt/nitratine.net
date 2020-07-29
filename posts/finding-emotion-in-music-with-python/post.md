@@ -131,6 +131,6 @@ print ('Calence:', features[0]['valence'])
 This example should return: Energy: 0.749, Valence: 0.261
 
 ## Conclusion
-Using this data, I had created a [Support Vector Machine with scikit-learn](http://scikit-learn.org/stable/modules/svm.html) which then allowed us to provide a valence and energy value and be given a tag either as HAPPY or SAD back. Different playlists could have been provided to this project to make a different area of moods on the plane to give more variation in the moods returned.
+Using this data, I had created a [Support Vector Machine with scikit-learn](https://scikit-learn.org/stable/modules/svm.html) which then allowed us to provide a valence and energy value and be given a tag either as HAPPY or SAD back. Different playlists could have been provided to this project to make a different area of moods on the plane to give more variation in the moods returned.
 
-In my opinion, this method worked quite well and was successful for our final project as it was able to detect emotion with high confidence. The method to compare valence and energy was later changed to [scikit-learn's K Nearest Neighbours classifier](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) on request of another student (their time delay).
+In my opinion, this method worked quite well and was successful for our final project as it was able to detect emotion with high confidence. The method to compare valence and energy was later changed to [scikit-learn's K Nearest Neighbours classifier](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) on request of another student (their time delay).

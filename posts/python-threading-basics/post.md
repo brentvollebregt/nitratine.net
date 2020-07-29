@@ -246,7 +246,7 @@ If you want to check if a particular thread is still alive, you can call `.is_al
 ## Why it Won't Make Your Script Run Faster
 In most cases, threading your pre-existing code will not make it run any faster. Python threads are designed to run multiple tasks at the same time, however, this is only on one CPU core.
 
-A normal python script is run on a single core so when you create threads it will not speed up as it is basically doing the same thing just at different times. This issue/feature (if you want to look at it in a positive way) is due to the [Global Interpreter Lock](https://stackoverflow.com/questions/1294382/what-is-a-global-interpreter-lock-gil) which in short means that "multiple threads can't effectively make use of multiple cores" which is the reason for no speed increase. [Here](https://www.youtube.com/watch?v=ph374fJqFPE) is a great talk on the GIL with [some great slides](http://www.dabeaz.com/python/GIL.pdf).
+A normal python script is run on a single core so when you create threads it will not speed up as it is basically doing the same thing just at different times. This issue/feature (if you want to look at it in a positive way) is due to the [Global Interpreter Lock](https://stackoverflow.com/questions/1294382/what-is-a-global-interpreter-lock-gil) which in short means that "multiple threads can't effectively make use of multiple cores" which is the reason for no speed increase. [Here](https://www.youtube.com/watch?v=ph374fJqFPE) is a great talk on the GIL with [some great slides](https://www.dabeaz.com/python/GIL.pdf).
 
 If you do want to have multiple tasks running on multiple cores, look at the [multiprocessing module](https://docs.python.org/3.4/library/multiprocessing.html).
 

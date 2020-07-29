@@ -245,7 +245,7 @@ server.send_message(msg)
 
 ## Sources
 - [WikiBooks](https://en.wikibooks.org/wiki/Python_Programming/Email)
-- [naelshiab.com](http://naelshiab.com/tutorial-send-email-python/)
+- [naelshiab.com](https://naelshiab.com/tutorial-send-email-python/)
 - [Python docs email examples](https://docs.python.org/3.4/library/email-examples.html)
 
 *Most recently modified on 15-7-18 ( added video )*

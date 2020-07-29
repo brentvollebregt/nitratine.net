@@ -38,7 +38,7 @@ If you want all the files to be packed into one .exe you will need to add the 'F
 > If you want to use onefile mode with external files, it will pay to read [this](https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile/13790741)
 
 ## Adding an Icon
-To add an icon to the final .exe (normal or onefile) add the 'i' flag and then the location of the .ico file (do not rename a .png/.jpg/.bmp to a .ico - I have had dumb people in the comments do this). You can find some nice icons [here](http://goo.gl/EfpGD0).
+To add an icon to the final .exe (normal or onefile) add the 'i' flag and then the location of the .ico file (do not rename a .png/.jpg/.bmp to a .ico - I have had dumb people in the comments do this). You can find some nice icons [here](https://goo.gl/EfpGD0).
 
 Thus the new statement will be ```pyinstaller -i {icon location} {python file}```, remember to not forget about extensions.
 

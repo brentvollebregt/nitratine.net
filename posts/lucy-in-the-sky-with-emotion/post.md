@@ -32,8 +32,8 @@ When the project is first started it will create a sklearn.neighbors.KNeighborsC
 1. First clone the repository at [https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion](https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion)
 2. Install Python (tested with 3.5.2)
 3. If using Windows, run install_dependencies.bat. If not using windows, run the pip commands in the bat file. This will install most of the modules.
-4. Install scipy by first downloading it at [http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy) and then running ```pip install [file]```
-5. Install numpy+mkl by first downloading it at [http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy](http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy) and then running ```pip install [file]```
+4. Install scipy by first downloading it at [https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy](https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy) and then running ```pip install [file]```
+5. Install numpy+mkl by first downloading it at [https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy](https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy) and then running ```pip install [file]```
 6. Build the visualiser using Unity
 7. Edit the paths in main.py to link to the visualiser
     - Lines 123 and 125 to the locations of the desired output (123 for song files and 125 for the CSV file)

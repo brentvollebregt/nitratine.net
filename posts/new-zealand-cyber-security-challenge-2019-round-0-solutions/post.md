@@ -96,7 +96,7 @@ Trying the regex out a bit more, I found we could execute `cat .../flag` which t
 > flag:8adb200631cc
 
 ### Challenge 4
-Challenge 4 simply had the flag in the images EXIF data. I used [fotoforensics.com](http://fotoforensics.com/) to look at the exit data of the image.
+Challenge 4 simply had the flag in the images EXIF data. I used [fotoforensics.com](https://fotoforensics.com/) to look at the exit data of the image.
 
 > flag:85ad6ba312d9
 
