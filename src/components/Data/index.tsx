@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Link from "../Helpers/Link";
 import SEO from "../Helpers/SEO";
+import YouTubeSubscribeButton from "../Helpers/YouTubeSubscribeButton";
 import usePostSummaries from "../../hooks/usePostSummaries";
 import useGitHubRepositories from "../../hooks/useGitHubRepositories";
 
@@ -121,12 +122,7 @@ const Data: React.FC<IData> = ({}) => {
                   <Link href="https://www.youtube.com/PyTutorials">YouTube Subscribers</Link>
                 </td>
                 <td>
-                  <div
-                    className="g-ytsubscribe"
-                    data-channel="PrivateSplat"
-                    data-layout="default"
-                    data-count="default"
-                  ></div>
+                  <YouTubeSubscribeButton layout="default" />
                 </td>
               </tr>
               <tr>

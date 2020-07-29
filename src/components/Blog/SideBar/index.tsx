@@ -4,6 +4,7 @@ import { navigate } from "@reach/router";
 import ReactMarkdown from "react-markdown";
 import unescape from "lodash/unescape";
 import Link from "../../Helpers/Link";
+import YouTubeSubscribeButton from "../../Helpers/YouTubeSubscribeButton";
 import useSidebarConfig from "../../../hooks/useSidebarConfig";
 import "./SideBar.scss";
 
@@ -137,12 +138,7 @@ const SideBar: React.FC = () => {
       <div className="card p-3 mb-3 bg-light">
         <h4 className="text-center text-lg-left">PyTutorials on YouTube</h4>
         <div className="text-center">
-          <div
-            className="g-ytsubscribe"
-            data-channel="PrivateSplat"
-            data-layout="full"
-            data-count="default"
-          />
+          <YouTubeSubscribeButton layout="full" />
         </div>
       </div>
 
