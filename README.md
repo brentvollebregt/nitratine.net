@@ -10,12 +10,10 @@ Based off https://github.com/netlify-templates/gatsby-starter-netlify-cms
 
 ### Not Required (after launch)
 
-- SMALL: Link RSS somewhere?
+- Group tags/categories/years at top of category pages as links to headers (with numbers) e.g. taga (2) tagb (5) tagc (8)
 - MEDIUM: Query typings throughout
 - BUG: Some images aren't linked to original
 - SMALL: Put actual react-bootstrap components in
-- Make something to identify 404s
-- Group tags/categories/years at top of category pages as links to headers (with numbers) e.g. taga (2) tagb (5) tagc (8)
 - SMALL: Add switch to disable ads on particular pages
 - MAYBE: Create a language on top of python that allows for some extra tokens?
 - MAYBE: Config for footer?
