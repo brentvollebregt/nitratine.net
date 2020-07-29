@@ -143,6 +143,28 @@ This typically occurs when you have supplied `--icon` / `-i` with a file that is
 ### How do I Convert All My Python Files?
 Add the entry point in the script location. PyInstaller searches for imports to get the rest of the Python files required to run, so as long as you use the `import` keyword, your files will be added.
 
+For example, if you have a layout like:
+
+```text
+📂root
+ ┣ 📂my_package
+ ┃ ┣ 📜__init__.py
+ ┃ ┣ 📜__main__.py
+ ┃ ┗ 📜utils.py
+ ┗ 📜start.py
+```
+
+Then package `start.py` - PyInstaller will find the rest as long as you are using the `import` keyword.
+
+If you don't have something like `start.py` and use your application like a module (`python -m [module_name]`) then create a file like `start.py` which imports the package and runs it as you would expect. For example, this is what I do with `auto-py-to-exe`:
+
+```python
+from my_package import __main__
+
+__main__.__name__ = '__main__' # Make it look like `my_package.__main__` is the main script
+__main__.run()  # Call your main function if required
+```
+
 ### The Terminal Just Opens and Closes But There Are No Errors
 If you double click to run your Python script, what happens? Does it open and close also? That means this tool has done its job correctly and the script is finishing just like it should.
 
