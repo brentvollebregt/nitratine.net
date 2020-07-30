@@ -3,9 +3,9 @@ import staticConfig from "./src/config/static.json";
 
 export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
   const headComponents = getHeadComponents();
-  headComponents.push(
-    <script key="platform.js" async src="https://apis.google.com/js/platform.js"></script>
-  );
+  // headComponents.push(
+  //   <script key="platform.js" async src="https://apis.google.com/js/platform.js"></script>
+  // );
   if (staticConfig.adsense.enabled) {
     headComponents.push(
       <script

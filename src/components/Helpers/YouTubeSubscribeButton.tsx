@@ -1,15 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface IYouTubeSubscribeButton {
   layout: "default" | "full";
 }
 
 const YouTubeSubscribeButton: React.FC<IYouTubeSubscribeButton> = ({ layout }) => {
-  // If the GAPI has loaded, call it to create the subscribe button
+  const tag = useRef<HTMLScriptElement>(null);
+
   useEffect(() => {
-    if ((window as any).gapi) {
-      (window as any).gapi.ytsubscribe.go();
+    if (document) {
+      // Setup tag in head
+      const scriptTag = document.createElement("script");
+      scriptTag.src = "https://apis.google.com/js/platform.js";
+      scriptTag.async = true;
+      scriptTag.defer = true;
+      document.body.insertBefore(scriptTag, document.body.firstChild);
+
+      tag.current = scriptTag;
     }
+
+    // Remove tag from head on unmount
+    () => {
+      if (document && tag.current !== null) {
+        tag.current.remove();
+      }
+    };
   }, []);
 
   return (
