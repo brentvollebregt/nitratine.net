@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Github Badges"
-date: 2018-04-25T00:00:00.000+12:00
+date: 2018-04-25T00:00:00.002+12:00
 category: Tutorials
 tags: [website]
 image: static.png

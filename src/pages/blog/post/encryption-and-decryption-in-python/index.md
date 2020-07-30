@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "Encryption and Decryption in Python"
-date: 2018-09-16T00:00:00.000+12:00
+date: 2018-09-16T00:00:00.001+12:00
 category: YouTube
 tags: [python, encryption, cyber-security]
 image: feature.jpg

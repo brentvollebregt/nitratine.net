@@ -122,10 +122,25 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   });
 
   // Create blog pages
-  posts.forEach(edge => {
+  posts.forEach((edge, index) => {
     const id = edge.node.id;
-    const nextPostId = edge.next === null ? null : edge.next.id;
-    const previousPostId = edge.previous === null ? null : edge.previous.id;
+
+    // Make sure the previous and next posts are not hidden
+    let previousPostId = null;
+    for (let i = index - 1; i > 0; i--) {
+      if (posts[i].node.frontmatter.hidden === false) {
+        previousPostId = posts[i].node.id;
+        break;
+      }
+    }
+    let nextPostId = null;
+    for (let i = index + 1; i < posts.length; i++) {
+      if (posts[i].node.frontmatter.hidden === false) {
+        nextPostId = posts[i].node.id;
+        break;
+      }
+    }
+
     createPage({
       path: edge.node.fields.slug,
       component: path.resolve(`src/templates/${String(edge.node.frontmatter.templateKey)}.tsx`),

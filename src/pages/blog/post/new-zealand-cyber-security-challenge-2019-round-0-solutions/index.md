@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: "New Zealand Cyber Security Challenge 2019 Round 0 Solutions"
-date: 2019-06-10T00:00:00.000+12:00
+date: 2019-06-10T00:00:00.001+12:00
 category: General
 tags: [ctf, nzcsc]
 image: feature.png
