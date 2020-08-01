@@ -1,8 +1,11 @@
 import os
 import time
 
-import markdown
 from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
+import markdown
+from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions.extra import ExtraExtension
+from markdown.extensions.toc import TocExtension
 
 from .config import config, POST_SOURCE, POST_FILENAME, POST_EXTENSION, ASSETS_LOCATION
 from .external.github import github_user_repos
@@ -12,7 +15,14 @@ from .flask_flatpages_extension import FlatPagesExtended
 
 def my_renderer(text):
     pre_rendered_body = render_template_string(text)
-    return markdown.markdown(pre_rendered_body, extensions=['codehilite', 'extra', 'toc'])
+    return markdown.markdown(
+        pre_rendered_body,
+        extensions=[
+            CodeHiliteExtension(),
+            ExtraExtension(),
+            TocExtension()
+        ]
+    )
 
 
 app = Flask(__name__)
