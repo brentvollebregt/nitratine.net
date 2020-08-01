@@ -2,9 +2,9 @@
 
 ![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbrentvollebregt%2Fnitratine.net%2Fbadge&style=flat)
 
-This repo is the source for nitratine.net. The files in the `gh-pages` branch are hosted using GitHub pages. `site.py` can be used to locally host and build the site into the `build` folder.
+This repo is the source for [nitratine.net](https://nitratine.net/). The files in the `gh-pages` branch are hosted using GitHub pages. The Python module `nitratine` can be used to locally host and build the site into the `build` folder.
 
-`site.py` takes arguments to do different functions:
+`python -m nitratine` takes arguments to do different functions:
  - No arguments: Locally host the site on port 8000. 
  - `-b` / `--build`: Build the site into the `build` folder.
  - `-s` / `--serve-build`: Server the build site in the `build` folder on port 8000.
