@@ -1,7 +1,21 @@
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
-load_dotenv(verbose=True)
+
+__module_directory_path = Path(__file__).resolve().parent
+
+load_dotenv(dotenv_path=(__module_directory_path / '../.env').resolve(), verbose=True)
+
+FREEZE_DESTINATION = (__module_directory_path / '../build').resolve()  # Output location for the build/freeze
+ASSETS_LOCATION = (__module_directory_path / 'assets').resolve()  # Location of static files # TODO Move to static and get rid of this potentially
+POST_SOURCE = (__module_directory_path / '../posts').resolve()  # Source directory for posts
+POST_FILENAME = 'post'  # Name of files in post folder to be used as post source (no extension)
+POST_EXTENSION = '.md'  # The extension for the POST_FILENAME files
+
+PAGINATION_PAGE_MAX = 10  # Max amount of posts per page
+PAGINATION_EITHER_SIDE = 2  # Number of tiles beside current page in pagination navigation e.g. 2 = P P C N N
 
 
 class SiteConfig:

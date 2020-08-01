@@ -24,7 +24,7 @@ jobs:
           pip install -r ./requirements.txt
 
       - name: Build
-        run: python site.py --build
+        run: python -m nitratine --build
         env:
           BUILD_VERSION: production
           YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
