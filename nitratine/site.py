@@ -56,10 +56,8 @@ def index():
 @app.route('/about/')
 def about():
     """ The about page """
-    build_version = os.getenv('BUILD_VERSION', 'Unspecified')
-    if build_version == 'production':  # Add date to production builds
-        build_version += f" ({time.strftime('%d/%m/%Y %H:%M:%S')})"
-    return render_template('about.html', build=build_version)
+    build_time = time.strftime('%d/%m/%Y %H:%M:%S')
+    return render_template('about.html', build_time=build_time)
 
 
 @app.route('/portfolio/')
