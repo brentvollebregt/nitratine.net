@@ -124,6 +124,23 @@ decrypted = f.decrypt(encrypted)
 
 The variable *decrypted* will now have the value of the original message (which was of type bytes).
 
+### Incorrect Keys
+If a different key to the one used to encrypt is provided when decrypting, a `cryptography.fernet.InvalidToken` will be raised. 
+
+Catching this error will allow you to tell if the incorrect key was provided; for example:
+
+```python
+from cryptography.fernet import Fernet, InvalidToken
+encrypted = b"...encrypted bytes..."
+
+f = Fernet(incorrect_key)
+try:
+    decrypted = f.decrypt(encrypted)
+    print("Valid Key - Successfully decrypted")
+except InvalidToken as e:
+    print("Invalid Key - Unsuccessfully decrypted")
+```
+
 ## Demonstration
 To show this in action, here is a properly constructed example.
 
@@ -165,7 +182,7 @@ with open(output_file, 'wb') as f:
 And then to decrypt a file:
 
 ```python
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
 key = b'' # Use one of the methods to get a key (it must be the same as used in encrypting)
 input_file = 'test.encrypted'
 output_file = 'test.txt'
@@ -174,12 +191,15 @@ with open(input_file, 'rb') as f:
     data = f.read()
 
 fernet = Fernet(key)
-encrypted = fernet.decrypt(data)
-
-with open(output_file, 'wb') as f:
-    f.write(encrypted)
-
-# You can delete input_file if you want
+try:
+    decrypted = fernet.decrypt(data)
+    
+    with open(output_file, 'wb') as f:
+        f.write(decrypted)
+        
+    # You can delete input_file if you want
+except InvalidToken as e:
+    print("Invalid Key - Unsuccessfully decrypted")
 ```
 
 > As stated in [Fernet docs](https://cryptography.io/en/latest/fernet/#limitations), beware of large files; Fernet is ideal for encrypting data that easily fits in memory. You may need to think of methods to split larger files up to use this encryption method on large files.
