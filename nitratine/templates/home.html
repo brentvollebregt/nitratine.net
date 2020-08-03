@@ -2,13 +2,13 @@
 
 {% block head %}
         <title>Nitratine</title>
-        <link rel="stylesheet" href="/assets/css/home.css">
+        <link rel="stylesheet" href="/static/css/home.css">
 
         <meta name="description" content="A place where I share projects developed by me and tutorials on topics that I'm interested in. I own the PyTutorials YouTube channel and am the creator of auto-py-to-exe.">
         <meta name="author" content="{{ site_config.default_author }}">
         <meta property="og:title" content="Nitratine">
         <meta property="og:description" content="A place where I share projects developed by me and tutorials on topics that I'm interested in. I own the PyTutorials YouTube channel and am the creator of auto-py-to-exe.">
-        <meta property="og:image" content="{{ site_config.url }}/assets/img/logo.png">
+        <meta property="og:image" content="{{ site_config.url }}/static/img/logo.png">
         <meta property="og:url" content="{{ site_config.url + request.path }}">
         <meta name="twitter:card" content="summary">
 {% endblock head %}
@@ -16,7 +16,7 @@
 {% block content %}
             <section class="jumbotron jumbotron-fluid text-center header">
                 <h1 class="sr-only">Nitratine</h1>
-                <img src="/assets/img/logo.png" class="img-fluid mb-2">
+                <img src="/static/img/logo.png" class="img-fluid mb-2">
                 <p class="lead text-muted">A place where I share projects developed by me and tutorials on topics that I'm interested in.</p>
                 <p>
                     <a href="/blog/" class="btn btn-primary my-2">Visit Blog</a>

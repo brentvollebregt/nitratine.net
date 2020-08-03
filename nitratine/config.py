@@ -98,17 +98,17 @@ config_data = {
             {
                 'title': 'Emotionify',
                 'url': 'https://emotionify.nitratine.net/',
-                'image_url': '/assets/img/featured-sites/emotionify.png',
+                'image_url': '/static/img/featured-sites/emotionify.png',
             },
             {
                 'title': 'Spotify Lyrics Viewer',
                 'url': 'https://spotify-lyrics-viewer.nitratine.net/',
-                'image_url': '/assets/img/featured-sites/spotify-lyrics-viewer.png',
+                'image_url': '/static/img/featured-sites/spotify-lyrics-viewer.png',
             },
             {
                 'title': 'Hit Counter',
                 'url': 'https://hitcounter.pythonanywhere.com/',
-                'image_url': '/assets/img/featured-sites/hit-counter.png',
+                'image_url': '/static/img/featured-sites/hit-counter.png',
             },
             {
                 'title': 'Monopoly Money',

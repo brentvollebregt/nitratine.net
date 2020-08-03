@@ -209,13 +209,7 @@ def ads_txt():
     return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(config.site.google_adsense_publisher_id)
 
 
-@app.route('/assets/<path:path>')  # TODO Make this use Flasks 'static' directory
-def assets(path):
-    """ Calls for files in the asset location """
-    return send_from_directory(ASSETS_LOCATION, path)
-
-
-@app.route('/posts/<path:path>')  # TODO Can we make this /post/ and make everything in the markdown files relative?
+@app.route('/posts/<path:path>')  # TODO Can we make this /post/ and make everything in the markdown files relative - rename folder to post?
 def post_assets(path):
     """ Calls for post assets. Technically this could return the post .md file but this has been disabled. """
     if path.endswith(f'/{POST_FILENAME}{POST_EXTENSION}'):

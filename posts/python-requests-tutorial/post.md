@@ -62,7 +62,7 @@ Just like downloading a web page, you can also download other files like images 
 import requests
 
 file_destination = 'nitratine-logo.png'
-url = "https://nitratine.net/assets/img/logo.png"
+url = "https://nitratine.net/static/img/logo.png"
 response = requests.get(url)
 if response.status_code == 200:
     with open(file_destination, 'wb') as f: # Make sure to use wb are we are writing bytes

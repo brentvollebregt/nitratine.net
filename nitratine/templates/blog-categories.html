@@ -2,13 +2,13 @@
 
 {% block head %}
         <title>Posts By {{ title }}</title>
-        <link rel="stylesheet" href="/assets/css/blog.css">
+        <link rel="stylesheet" href="/static/css/blog.css">
 
         <meta name="description" content="Posts on Nitratine sorted by {{ sort_type }}">
         <meta name="author" content="{{ site_config.default_author }}">
         <meta property="og:title" content="Posts By {{ title }}">
         <meta property="og:description" content="Posts on Nitratine sorted by {{ sort_type }}">
-        <meta property="og:image" content="{{ site_config.url }}/assets/img/logo.png">
+        <meta property="og:image" content="{{ site_config.url }}/static/img/logo.png">
         <meta property="og:url" content="{{ site_config.url + request.path }}">
         <meta name="twitter:card" content="summary">
 {% endblock head %}

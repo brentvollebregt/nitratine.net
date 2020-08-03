@@ -2,8 +2,8 @@
 
 {% block head %}
         <title>{{ page.title }} - Nitratine</title>
-        <link rel="stylesheet" href="/assets/css/blog.css">
-        <link rel="stylesheet" href="/assets/css/pygments.css">
+        <link rel="stylesheet" href="/static/css/blog.css">
+        <link rel="stylesheet" href="/static/css/pygments.css">
 
         <meta name="description" content="{{ page.description }}">
         <meta name="author" content="{{ page.author or site_config.default_author }}">
@@ -47,7 +47,7 @@
                     {% if github_repo is not none %}
                     <div class="github-summary py-3 d-block text-center">
                         <a class="repo-name stretched-link" href="{{ github_repo.html_url }}">
-                            <img src="/assets/img/github-icon.png" alt="GitHub Icon" />
+                            <img src="/static/img/github-icon.png" alt="GitHub Icon" />
                             <span class="ml-2">{{ github_repo.full_name }}</span>
                         </a>
 
