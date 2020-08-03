@@ -5,3 +5,4 @@ Pygments
 Markdown
 requests
 python-dotenv
+Flask-Minify

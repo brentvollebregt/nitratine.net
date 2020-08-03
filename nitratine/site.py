@@ -2,6 +2,7 @@ import os
 import time
 
 from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
+from flask_minify import minify
 import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
@@ -30,6 +31,7 @@ app.config['FLATPAGES_AUTO_RELOAD'] = True
 app.config['FLATPAGES_EXTENSION'] = POST_EXTENSION
 app.config['FLATPAGES_ROOT'] = POST_SOURCE
 app.config['FLATPAGES_HTML_RENDERER'] = my_renderer
+minify(app=app, caching_limit=0)
 posts = FlatPagesExtended(app, POST_FILENAME)
 
 
