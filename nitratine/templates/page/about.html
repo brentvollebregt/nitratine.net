@@ -1,69 +1,71 @@
 {% extends "base.html" %}
 
+
 {% block head %}
-        <title>About - Nitratine</title>
+<title>About - Nitratine</title>
 
-        <meta name="description" content="My name is Brent and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.">
-        <meta name="author" content="{{ site_config.default_author }}">
-        <meta property="og:title" content="About - Nitratine">
-        <meta property="og:description" content="My name is Brent and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.">
-        <meta property="og:image" content="{{ site_config.url }}/static/img/logo.png">
-        <meta property="og:url" content="{{ site_config.url + request.path }}">
-        <meta name="twitter:card" content="summary">
+<meta name="description" content="My name is Brent and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.">
+<meta name="author" content="{{ site_config.default_author }}">
+<meta property="og:title" content="About - Nitratine">
+<meta property="og:description" content="My name is Brent and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.">
+<meta property="og:image" content="{{ site_config.url }}/static/img/logo.png">
+<meta property="og:url" content="{{ site_config.url + request.path }}">
+<meta name="twitter:card" content="summary">
 
-        <!-- Latest build: {{ build_time }} -->
+<!-- Latest build: {{ build_time }} -->
 {% endblock head %}
 
+
 {% block content %}
-            <div class="row justify-content-center mb-5">
-                <div class="col-xs-12 col-lg-8">
-                    <h1>About Me</h1>
-                    <p>My name is <a href="https://github.com/brentvollebregt">Brent</a> and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.</p>
-                    <p>I own the <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> channel on YouTube which is where I provide video tutorials on intermediate Python topics.</p>
-                    <p><a href="/">Nitratine</a> is a place for me to share projects developed by me and tutorials on topics that I'm interested in. Currently, this is the third version of the site and is hosted statically using GitHub Pages and built with a custom Python build script taking use of <a href="https://github.com/Frozen-Flask/Frozen-Flask">Frozen-Flask</a>.</p>
-                    <p>A small <a href="/portfolio/">portfolio of my work is linked here</a> that contains a collection of my favourite projects I developed with a small description and links to pages relating to the project.</p>
-                    <p class="text-muted">Basic site statistics and values relating to the things I do can be found at <a href="/data/">/data/</a>.</p>
+<div class="row justify-content-center mb-5">
+    <div class="col-xs-12 col-lg-8">
+        <h1>About Me</h1>
+        <p>My name is <a href="https://github.com/brentvollebregt">Brent</a> and I'm a full-time software developer from New Zealand. My preferred language is Python but I also do a lot of development in frontend in my free time and use an assortment of other tech at work.</p>
+        <p>I own the <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> channel on YouTube which is where I provide video tutorials on intermediate Python topics.</p>
+        <p><a href="/">Nitratine</a> is a place for me to share projects developed by me and tutorials on topics that I'm interested in. Currently, this is the third version of the site and is hosted statically using GitHub Pages and built with a custom Python build script taking use of <a href="https://github.com/Frozen-Flask/Frozen-Flask">Frozen-Flask</a>.</p>
+        <p>A small <a href="/portfolio/">portfolio of my work is linked here</a> that contains a collection of my favourite projects I developed with a small description and links to pages relating to the project.</p>
+        <p class="text-muted">Basic site statistics and values relating to the things I do can be found at <a href="/data/">/data/</a>.</p>
 
-                    <h2>Tech I Have Had Experience With</h2>
-                    <div class="tech-icon-container mb-3">
-                        <!-- Python --> <img src="/static/img/icons/python.svg" title="Python" alt="Python">
-                        <!-- JavaScript --> <img src="/static/img/icons/javascript.svg" title="JavaScript" alt="JavaScript">
-                        <!-- React --> <img src="/static/img/icons/react.svg" title="React" alt="React">
-                        <!-- TypeScript --> <img src="/static/img/icons/typescript.svg" title="TypeScript" alt="TypeScript">
-                        <!-- Java --> <img src="/static/img/icons/java.svg" title="Java" alt="Java">
-                        <!-- Clojure --> <img src="/static/img/icons/clojure.svg" title="Clojure" alt="Clojure">
-                        <!-- HTML --> <img src="/static/img/icons/html.svg" title="HTML" alt="HTML">
-                        <!-- CSS --> <img src="/static/img/icons/css.svg" title="CSS" alt="CSS">
-                        <!-- SQLite --> <img src="/static/img/icons/sqlite.svg" title="SQLite" alt="SQLite">
-                        <!-- Android --> <img src="/static/img/icons/android.svg" title="Android SDK" alt="Android SDK">
-                        <!-- Flask --> <img src="/static/img/icons/flask.svg" title="Flask" alt="Flask">
-                        <!-- Git --> <img src="/static/img/icons/git.svg" title="Git" alt="Git">
-                        <!-- JetBrains --> <img src="/static/img/icons/jetbrains.svg" title="JetBrains" alt="JetBrains">
-                        <!-- Linux --> <img src="/static/img/icons/linux.svg" title="Linux" alt="Linux">
-                        <!-- PhotoShop --> <img src="/static/img/icons/photoshop.svg" title="Adobe PhotoShop" alt="Adobe PhotoShop">
-                        <!-- C# --> <img src="/static/img/icons/csharp.svg" title="C#" alt="C#">
-                        <!-- Haskell --> <img src="/static/img/icons/haskell.svg" title="Haskell" alt="Haskell">
-                    </div>
+        <h2>Tech I Have Had Experience With</h2>
+        <div class="tech-icon-container mb-3">
+            <!-- Python --> <img src="/static/img/icons/python.svg" title="Python" alt="Python">
+            <!-- JavaScript --> <img src="/static/img/icons/javascript.svg" title="JavaScript" alt="JavaScript">
+            <!-- React --> <img src="/static/img/icons/react.svg" title="React" alt="React">
+            <!-- TypeScript --> <img src="/static/img/icons/typescript.svg" title="TypeScript" alt="TypeScript">
+            <!-- Java --> <img src="/static/img/icons/java.svg" title="Java" alt="Java">
+            <!-- Clojure --> <img src="/static/img/icons/clojure.svg" title="Clojure" alt="Clojure">
+            <!-- HTML --> <img src="/static/img/icons/html.svg" title="HTML" alt="HTML">
+            <!-- CSS --> <img src="/static/img/icons/css.svg" title="CSS" alt="CSS">
+            <!-- SQLite --> <img src="/static/img/icons/sqlite.svg" title="SQLite" alt="SQLite">
+            <!-- Android --> <img src="/static/img/icons/android.svg" title="Android SDK" alt="Android SDK">
+            <!-- Flask --> <img src="/static/img/icons/flask.svg" title="Flask" alt="Flask">
+            <!-- Git --> <img src="/static/img/icons/git.svg" title="Git" alt="Git">
+            <!-- JetBrains --> <img src="/static/img/icons/jetbrains.svg" title="JetBrains" alt="JetBrains">
+            <!-- Linux --> <img src="/static/img/icons/linux.svg" title="Linux" alt="Linux">
+            <!-- PhotoShop --> <img src="/static/img/icons/photoshop.svg" title="Adobe PhotoShop" alt="Adobe PhotoShop">
+            <!-- C# --> <img src="/static/img/icons/csharp.svg" title="C#" alt="C#">
+            <!-- Haskell --> <img src="/static/img/icons/haskell.svg" title="Haskell" alt="Haskell">
+        </div>
 
-                    <h2 id="donations">Donations</h2>
-                    <p>If you would like to donate for any project I maintain, this is the place to do so.</p>
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="mb-3">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                        <input type="hidden" name="hosted_button_id" value="CG8P7ELK4RG26">
-                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                        <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                    </form>
+        <h2 id="donations">Donations</h2>
+        <p>If you would like to donate for any project I maintain, this is the place to do so.</p>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="mb-3">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="CG8P7ELK4RG26">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
 
-                    <h2 id="contact">Contact</h2>
-                    <p>If you have any questions about a YouTube video, please leave the question in the comments and for questions about a blog post, leave the question in the comments on the blog post. Emails regarding this nature will be referred back to the corresponding platform.</p>
-                    <p>If you would like to contact me for another reason, send an email to <a id="email" href="javascript:displayEmail();">[Display Email Address]</a>.</p>
-                    <script>
-                        function displayEmail() {
-                            alert("Please leave questions about videos on YouTube and blog posts in the comments at the bottom of the post.");
-                            document.getElementById('email').innerText = "{{ site_config.email }}";
-                            document.getElementById('email').href = "mailto:{{ site_config.email }}";
-                        }
-                    </script>
-                </div>
-            </div>
+        <h2 id="contact">Contact</h2>
+        <p>If you have any questions about a YouTube video, please leave the question in the comments and for questions about a blog post, leave the question in the comments on the blog post. Emails regarding this nature will be referred back to the corresponding platform.</p>
+        <p>If you would like to contact me for another reason, send an email to <a id="email" href="javascript:displayEmail();">[Display Email Address]</a>.</p>
+        <script>
+            function displayEmail() {
+                alert("Please leave questions about videos on YouTube and blog posts in the comments at the bottom of the post.");
+                document.getElementById('email').innerText = "{{ site_config.email }}";
+                document.getElementById('email').href = "mailto:{{ site_config.email }}";
+            }
+        </script>
+    </div>
+</div>
 {% endblock content %}

@@ -1,100 +1,102 @@
 {% extends "base.html" %}
 
+
 {% block head %}
-        <title>{{ page.title }} - Nitratine</title>
-        <link rel="stylesheet" href="/static/css/blog.css">
-        <link rel="stylesheet" href="/static/css/pygments.css">
+<title>{{ page.title }} - Nitratine</title>
+<link rel="stylesheet" href="/static/css/blog.css">
+<link rel="stylesheet" href="/static/css/pygments.css">
 
-        <meta name="description" content="{{ page.description }}">
-        <meta name="author" content="{{ page.author or site_config.default_author }}">
-        <meta property="og:title" content="{{ page.title }}">
-        <meta property="og:description" content="{{ page.description }}">
-        <meta property="og:image" content="/posts/{{ page.path }}/{{ page.feature }}">
-        <meta property="og:url" content="{{ site_config.url + request.path }}">
-        <meta name="twitter:card" content="summary">
+<meta name="description" content="{{ page.description }}">
+<meta name="author" content="{{ page.author or site_config.default_author }}">
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:image" content="/posts/{{ page.path }}/{{ page.feature }}">
+<meta property="og:url" content="{{ site_config.url + request.path }}">
+<meta name="twitter:card" content="summary">
 
-        {%- if page.disable_ads -%}
-            <!-- Ads are disabled for this page -->
-        {%- else -%}
-            {%- if site_config.google_adsense_publisher_id -%}
-            <script data-ad-client="ca-{{ site_config.google_adsense_publisher_id }}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            {%- endif -%}
-        {%- endif -%}
+{%- if page.disable_ads -%}
+    <!-- Ads are disabled for this page -->
+{%- else -%}
+    {%- if site_config.google_adsense_publisher_id -%}
+    <script data-ad-client="ca-{{ site_config.google_adsense_publisher_id }}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    {%- endif -%}
+{%- endif -%}
 {% endblock head %}
 
+
 {% block content %}
-            <div class="row">
-                <div class="col-blog-content blog-main">
+<div class="row">
+    <div class="col-blog-content blog-main">
 
-                    <h1 class="blog-post-title">{{ page.title }}</h1>
-                    <div class="mb-3">
-                        <a href="/blog/archive/#{{ page.date.year }}" class="text-muted">{{ ymd_format(page.date) }}</a>
-                        {%- if page.author -%}
-                        <span> by <a {% if page.author_link %}href="{{ page.author_link | safe }}"{% endif %} class="text-muted">{{ page.author }}</a></span>
-                        {% endif %}
-                        <a href="/blog/categories/#{{ page.category }}" class="badge badge-primary ml-2">{{ page.category }}</a>
-                        {% for tag in page.tags %}
-                        <a href="/blog/tags/#{{ tag }}" class="badge badge-warning">{{ tag }}</a>
-                        {% endfor %}
-                        {%- if page.hidden -%}
-                        <span class="badge badge-danger">Hidden</span>
-                        {% endif %}
-                        <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
-                    </div>
-                    <p class="lead">{{ page.description }}</p>
-                    <hr class="mt-3 mb-0">
+        <h1 class="blog-post-title">{{ page.title }}</h1>
+        <div class="mb-3">
+            <a href="/blog/archive/#{{ page.date.year }}" class="text-muted">{{ ymd_format(page.date) }}</a>
+            {%- if page.author -%}
+            <span> by <a {% if page.author_link %}href="{{ page.author_link | safe }}"{% endif %} class="text-muted">{{ page.author }}</a></span>
+            {% endif %}
+            <a href="/blog/categories/#{{ page.category }}" class="badge badge-primary ml-2">{{ page.category }}</a>
+            {% for tag in page.tags %}
+            <a href="/blog/tags/#{{ tag }}" class="badge badge-warning">{{ tag }}</a>
+            {% endfor %}
+            {%- if page.hidden -%}
+            <span class="badge badge-danger">Hidden</span>
+            {% endif %}
+            <img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+        </div>
+        <p class="lead">{{ page.description }}</p>
+        <hr class="mt-3 mb-0">
 
-                    {% if github_repo is not none %}
-                    <div class="github-summary py-3 d-block text-center">
-                        <a class="repo-name stretched-link" href="{{ github_repo.html_url }}">
-                            <img src="/static/img/github-icon.png" alt="GitHub Icon" />
-                            <span class="ml-2">{{ github_repo.full_name }}</span>
-                        </a>
+        {% if github_repo is not none %}
+        <div class="github-summary py-3 d-block text-center">
+            <a class="repo-name stretched-link" href="{{ github_repo.html_url }}">
+                <img src="/static/img/github-icon.png" alt="GitHub Icon" />
+                <span class="ml-2">{{ github_repo.full_name }}</span>
+            </a>
 
-                        <div class="repo-stats">
-                            <img alt="GitHub stars" src="https://img.shields.io/github/stars/{{ github_repo.full_name }}?style=social">
-                            <img alt="GitHub forks" src="https://img.shields.io/github/forks/{{ github_repo.full_name }}?style=social">
-                            <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/{{ github_repo.full_name }}">
-                        </div>
-                    </div>
-
-                    <hr class="my-0">
-                    {% endif %}
-
-                    <div class="post-content mt-3">
-                        {{ page.html|safe }}
-                    </div>
-
-                    <nav class="blog-pagination text-center mb-5 mt-4">
-                        {% if prev_and_next['prev'] is not none %}
-                            <a class="btn btn-outline-primary mt-1" href="{{ url_for('blog_post', path=prev_and_next['prev'].path) }}">&larr; {{ prev_and_next['prev'].title | truncate(30,true,'...') }}</a>
-                        {% endif %}
-                        {% if prev_and_next['next'] is not none %}
-                            <a class="btn btn-outline-primary mt-1" href="{{ url_for('blog_post', path=prev_and_next['next'].path) }}">{{ prev_and_next['next'].title | truncate(30,true,'...') }} &rarr;</a>
-                        {% endif %}
-                    </nav>
-
-                    {% if site_config.disqus_shortname %}
-                    <div id="disqus_thread"></div>
-                    <script>
-                        var disqus_config = function() {
-                            this.page.url = '{{ site_config.url + request.path }}'; // Your page's canonical URL variable
-                            this.page.identifier = '{{ site_config.url + request.path }}'; // Your page's unique identifier variable
-                        };
-                        (function() {
-                            var d = document,
-                                s = d.createElement('script');
-                            s.src = '//{{site_config.disqus_shortname}}.disqus.com/embed.js';
-                            s.setAttribute('data-timestamp', +new Date());
-                            (d.head || d.body).appendChild(s);
-                        })();
-                    </script>
-                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-                    {% endif %}
-
-                </div>
-
-                {% include 'blog-sidebar.html' %}
-
+            <div class="repo-stats">
+                <img alt="GitHub stars" src="https://img.shields.io/github/stars/{{ github_repo.full_name }}?style=social">
+                <img alt="GitHub forks" src="https://img.shields.io/github/forks/{{ github_repo.full_name }}?style=social">
+                <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/{{ github_repo.full_name }}">
             </div>
+        </div>
+
+        <hr class="my-0">
+        {% endif %}
+
+        <div class="post-content mt-3">
+            {{ page.html|safe }}
+        </div>
+
+        <nav class="blog-pagination text-center mb-5 mt-4">
+            {% if prev_and_next['prev'] is not none %}
+                <a class="btn btn-outline-primary mt-1" href="{{ url_for('blog_post', path=prev_and_next['prev'].path) }}">&larr; {{ prev_and_next['prev'].title | truncate(30,true,'...') }}</a>
+            {% endif %}
+            {% if prev_and_next['next'] is not none %}
+                <a class="btn btn-outline-primary mt-1" href="{{ url_for('blog_post', path=prev_and_next['next'].path) }}">{{ prev_and_next['next'].title | truncate(30,true,'...') }} &rarr;</a>
+            {% endif %}
+        </nav>
+
+        {% if site_config.disqus_shortname %}
+        <div id="disqus_thread"></div>
+        <script>
+            var disqus_config = function() {
+                this.page.url = '{{ site_config.url + request.path }}'; // Your page's canonical URL variable
+                this.page.identifier = '{{ site_config.url + request.path }}'; // Your page's unique identifier variable
+            };
+            (function() {
+                var d = document,
+                    s = d.createElement('script');
+                s.src = '//{{site_config.disqus_shortname}}.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        {% endif %}
+
+    </div>
+
+    {% include 'blog-sidebar.html' %}
+
+</div>
 {% endblock content %}

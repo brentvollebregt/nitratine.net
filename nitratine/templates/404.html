@@ -1,28 +1,30 @@
 {% extends "base.html" %}
 
-{% block head %}
-        <title>404 - Nitratine</title>
-        <meta name="robots" content="noindex">
 
-        <meta name="description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
-        <meta name="author" content="{{ site_config.default_author }}">
-        <meta property="og:title" content="About - Nitratine">
-        <meta property="og:description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
-        <meta property="og:image" content="{{ site_config.url }}/static/img/logo.png">
-        <meta property="og:url" content="{{ site_config.url + request.path }}">
-        <meta name="twitter:card" content="summary">
+{% block head %}
+<title>404 - Nitratine</title>
+<meta name="robots" content="noindex">
+
+<meta name="description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
+<meta name="author" content="{{ site_config.default_author }}">
+<meta property="og:title" content="About - Nitratine">
+<meta property="og:description" content="My name is Brent Vollebregt and I am a student at the University of Waikato. My primarily used language is Python which I learned myself in secondary school.">
+<meta property="og:image" content="{{ site_config.url }}/static/img/logo.png">
+<meta property="og:url" content="{{ site_config.url + request.path }}">
+<meta name="twitter:card" content="summary">
 {% endblock head %}
 
+
 {% block content %}
-            <div class="row justify-content-center mb-5">
-                <div class="col-xs-12 col-lg-8 text-center">
-                    <h1 style="font-size: 8rem; color: #ce1664;">404</h1>
-                    <p>The page you are looking for was moved, removed, renamed or may never have existed</p>
-                    <p>
-                        <a href="/" class="btn btn-primary my-2">Site Home</a>
-                        <a href="/blog/" class="btn btn-primary my-2">Blog Feed</a>
-                    </p>
-                    <small class="text-muted">If you think this was an issue or were sent here by a link, feel free to <a href="/about/#contact">contact me</a> and I will look into the URL</small>
-                </div>
-            </div>
+<div class="row justify-content-center mb-5">
+    <div class="col-xs-12 col-lg-8 text-center">
+        <h1 style="font-size: 8rem; color: #ce1664;">404</h1>
+        <p>The page you are looking for was moved, removed, renamed or may never have existed</p>
+        <p>
+            <a href="/" class="btn btn-primary my-2">Site Home</a>
+            <a href="/blog/" class="btn btn-primary my-2">Blog Feed</a>
+        </p>
+        <small class="text-muted">If you think this was an issue or were sent here by a link, feel free to <a href="/about/#contact">contact me</a> and I will look into the URL</small>
+    </div>
+</div>
 {% endblock content %}
