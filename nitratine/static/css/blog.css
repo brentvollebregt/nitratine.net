@@ -120,17 +120,6 @@
     margin: auto;
 }
 
-.codehilite {
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
-.codehilite > pre {
-    padding: 5px 10px;
-    margin: 0;
-    border-radius: 4px;
-}
-
 .post-content > .toc > ul > li > ul > li *:not(a) {
     display: none; /* Hide any points that are more than two headings deep in the table of contents */
 }
