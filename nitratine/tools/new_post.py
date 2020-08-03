@@ -3,7 +3,7 @@ import string
 import time
 from urllib.parse import quote_plus
 
-from ..config import POST_SOURCE, POST_FILENAME
+from ..config import POST_SOURCE, POST_FILENAME, POST_EXTENSION
 from ..site import posts
 
 
@@ -38,7 +38,7 @@ def new_post():
         os.makedirs(post_directory)
 
     # Write post file
-    file_path = os.path.join(post_directory, f'{POST_FILENAME}.md')
+    file_path = os.path.join(post_directory, f'{POST_FILENAME}{POST_EXTENSION}')
     f = open(file_path, 'w')
     f.write('title: "{0}"\n'.format(title))
     f.write('date: {0}\n'.format(time.strftime('%Y-%m-%d')))

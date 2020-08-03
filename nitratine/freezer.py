@@ -3,7 +3,7 @@ from pathlib import Path
 
 from flask_frozen import Freezer
 
-from .config import FREEZE_DESTINATION, POST_SOURCE, POST_FILENAME, ASSETS_LOCATION
+from .config import FREEZE_DESTINATION, POST_SOURCE, POST_FILENAME, POST_EXTENSION, ASSETS_LOCATION
 from .site import app, posts
 
 
@@ -39,7 +39,7 @@ def post_assets():
     for root, dirs, files in os.walk(location, topdown=False):
         root_path = Path(root)
         for name in files:
-            if name == f'{POST_FILENAME}.md':  # TODO md is a constant
+            if name == f'{POST_FILENAME}{POST_EXTENSION}':
                 continue  # No need to freeze this file
             path_in_location = root_path.relative_to(location) / name
             print(f'Post Asset: {path_in_location}')

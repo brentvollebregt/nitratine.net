@@ -184,7 +184,7 @@ def sitemap():
     """ The XML sitemap """
     pages = []
     for post in posts.get_posts():
-        file_location = os.path.join(POST_SOURCE, post.path, f'{POST_FILENAME}.md')
+        file_location = os.path.join(POST_SOURCE, post.path, f'{POST_FILENAME}{POST_EXTENSION}')
         pages.append({
             'loc': url_for('blog_post', path=post.path),
             'lastmod': time.strftime('%Y-%m-%d', time.localtime(os.path.getmtime(file_location)))
@@ -218,7 +218,7 @@ def assets(path):
 @app.route('/posts/<path:path>')  # TODO Can we make this /post/ and make everything in the markdown files relative?
 def post_assets(path):
     """ Calls for post assets. Technically this could return the post .md file but this has been disabled. """
-    if path.endswith(f'/{POST_FILENAME}.md'):
+    if path.endswith(f'/{POST_FILENAME}{POST_EXTENSION}'):
         abort(403)  # This file is not meant to be accessible from this route
     return send_from_directory(POST_SOURCE, path)
 

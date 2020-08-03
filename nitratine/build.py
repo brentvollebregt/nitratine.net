@@ -11,7 +11,7 @@ def build():
     freezer.freeze()
 
     # Create redirects (because Frozen-Flask doesn't have an option)
-    for r in config.redirects:  # TODO Can we make these freezer generators?
+    for r in config.redirects:
         file_path = os.path.join(FREEZE_DESTINATION, r)
         file = os.path.join(file_path, 'index.html')
         # Check where we are writing
@@ -24,7 +24,7 @@ def build():
         with app.app_context():
             f.write(redirects(path=r))
         f.close()
-        print(f'Redirect: /{r}')
+        print(f'Redirect: /{r} -> /{config.redirects[r]}')
 
     # Add CNAME
     f = open(os.path.join(FREEZE_DESTINATION, 'CNAME'), 'w')

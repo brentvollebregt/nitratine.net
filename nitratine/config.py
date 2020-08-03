@@ -163,7 +163,7 @@ config_data = {
         'uow-moodle-rwa-ignorer': 'blog/post/uow-moodle-rwa-ignorer',
         'am-i-a-participant': 'blog/post/am-i-a-participant',
         'asymmetric-encryption-and-decryption-in-python': 'blog/post/asymmetric-encryption-and-decryption-in-python',
-        'common-issues-when-using-auto-py-to-exe': 'blog/post/common-issues-when-using-auto-py-to-exe',
+        'common-issues-when-using-auto-py-to-exe': 'blog/post/issues-when-using-auto-py-to-exe',
         'encryption-and-decryption-in-python': 'blog/post/encryption-and-decryption-in-python',
         'blog/post/common-issues-when-using-auto-py-to-exe': 'blog/post/issues-when-using-auto-py-to-exe',
         'blog/post/who-is-on-my-network': 'blog/post/whos-on-my-network'
