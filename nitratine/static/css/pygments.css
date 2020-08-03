@@ -8,6 +8,7 @@
     padding: 8px 11px;
     margin: 0;
     border-radius: 4px;
+    color: white !important; /* To counteract bootstrap black on black */
 }
 
 /* http://jwarby.github.io/jekyll-pygments-themes/languages/python.html (MONOKAI) */
