@@ -7,7 +7,7 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
 from markdown.extensions.toc import TocExtension
 
-from .config import config, POST_SOURCE, POST_FILENAME, POST_EXTENSION, ASSETS_LOCATION
+from .config import config, POST_SOURCE, POST_FILENAME, POST_EXTENSION
 from .external.github import github_user_repos
 from .external.youtube import recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended

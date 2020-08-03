@@ -3,7 +3,7 @@ from pathlib import Path
 
 from flask_frozen import Freezer
 
-from .config import FREEZE_DESTINATION, POST_SOURCE, POST_FILENAME, POST_EXTENSION, ASSETS_LOCATION
+from .config import FREEZE_DESTINATION, POST_SOURCE, POST_FILENAME, POST_EXTENSION
 from .site import app, posts
 
 
@@ -18,18 +18,6 @@ def blog_post():
     for post in all_posts:
         print(f'Post: {post.path}')
         yield {'path': post.path}
-
-
-@freezer.register_generator
-def assets():
-    """ Freezer function to identify all assets """
-    location = ASSETS_LOCATION
-    for root, dirs, files in os.walk(location, topdown=False):
-        root_path = Path(root)
-        for name in files:
-            path_in_location = root_path.relative_to(location) / name
-            print(f'Asset: {path_in_location}')
-            yield {'path': str(path_in_location).replace('\\', '/')}
 
 
 @freezer.register_generator
