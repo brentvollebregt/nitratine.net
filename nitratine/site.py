@@ -48,7 +48,7 @@ def index():
             tile['link'] = url_for('blog_post', path=tile['post'])
 
     return render_template(
-        'home.html',
+        'page/home.html',
         tiles=config.home_tiles
     )
 
@@ -57,13 +57,13 @@ def index():
 def about():
     """ The about page """
     build_time = time.strftime('%d/%m/%Y %H:%M:%S')
-    return render_template('about.html', build_time=build_time)
+    return render_template('page/about.html', build_time=build_time)
 
 
 @app.route('/portfolio/')
 def portfolio():
     """ The portfolio page """
-    return render_template('portfolio.html')
+    return render_template('page/portfolio.html')
 
 
 @app.route('/data/')
@@ -73,7 +73,7 @@ def data():
     available_posts = [[p.path, p['title']] for p in public_posts]
 
     return render_template(
-        'data.html',
+        'page/data.html',
         repos=github_user_repos,
         posts=available_posts
     )
@@ -83,7 +83,7 @@ def data():
 def search():
     """ The search page """
     return render_template(
-        'search.html',
+        'page/search.html',
         site_content=[{'meta': post.meta, 'path': post.path} for post in posts.get_posts()]
     )
 

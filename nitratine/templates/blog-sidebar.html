@@ -41,7 +41,7 @@
                         <h4 class="text-center text-lg-left">Recent Videos</h4>
                         <div id="recent-yt-videos" class="yt_video_container">
                             {% for video in recent_videos %}
-                                <img src="{{ video.thumb_src }}" onclick="window.open('{{ video.href }}', '_blank')">
+                                <img src="{{ video.thumb_src }}" alt="Recent video thumbnail" onclick="window.open('{{ video.href }}', '_blank')">
                             {% endfor %}
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="featured-sites">
                             {% for site in site_config.featured_sites %}
                                 <a title="{{ site.title }}" href="{{ site.url }}">
-                                    <img src="{{ site.image_url }}" />
+                                    <img src="{{ site.image_url }}" alt="{{ site.title }}" />
                                 </a>
                             {% endfor %}
                         </div>
