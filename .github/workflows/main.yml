@@ -33,3 +33,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+
+      - name: Get build stats
+        run: python -m nitratine --build-stats

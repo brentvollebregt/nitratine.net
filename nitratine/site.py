@@ -38,7 +38,7 @@ posts = FlatPagesExtended(app, POST_FILENAME)
 @app.route('/')
 def index():
     """ The home page """
-    for tile in config.home_tiles:  # TODO Mutability fix
+    for tile in config.home_tiles:
         if tile['type'] == 'post':
             page = posts.get(tile['post'] + f'/{POST_FILENAME}')
             tile['link'] = url_for('blog_post', path=tile['post'])
