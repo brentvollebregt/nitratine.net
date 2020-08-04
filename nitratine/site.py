@@ -205,6 +205,12 @@ def sitemap():
     )
 
 
+@app.route('/rss.xml')
+def rss():
+    """ The RSS Feed """
+    return 'TODO'
+
+
 @app.route('/ads.txt')
 def ads_txt():
     """ An easy way to generate ads.txt """
