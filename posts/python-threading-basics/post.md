@@ -7,7 +7,7 @@ description: "This post covers the basics of Python's threading module. Threadin
 
 [TOC]
 
-{% with video_id="5JSloPGocSY" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:5JSloPGocSY
 
 ## What is Threading?
 The threading module comes pre-installed with python so there are no downloads or installs for this tutorial. Threading allows us to call a method or class that has extended the `threading.Thread` class to run alongside the main thread (the linear flow that generally happens).

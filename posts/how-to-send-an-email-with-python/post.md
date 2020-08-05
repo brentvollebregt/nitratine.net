@@ -7,7 +7,7 @@ description: "This script sends an email using python. By logging in to a Gmail 
 
 [TOC]
 
-{% with video_id="YPiHBtddefI" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:YPiHBtddefI
 
 ## Why Bother?
 These scripts are used to send emails from a Gmail account (can be configured for other email servers). This will allow you to send emails when your script finishes executing, has come to an error or just needs to send some data to you.

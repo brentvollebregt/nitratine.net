@@ -7,7 +7,7 @@ description: "This demonstrates how to press keys with Python. Using pynput we a
 
 [TOC]
 
-{% with video_id="DTnz8wA6wpw" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:DTnz8wA6wpw
 
 ## PIP
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.

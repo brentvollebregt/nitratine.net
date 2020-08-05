@@ -48,7 +48,6 @@ def new_post():
     f.write('description: ""\n')
     f.write('\n[TOC]\n')
     f.write('\n## Content\n')
-    f.write("{% with video_id=\"XXXXXXXXXXX\" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}")
     f.close()
     print('\nCreated {0}'.format(file_path))
 

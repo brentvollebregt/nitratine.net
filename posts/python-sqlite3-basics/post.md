@@ -7,7 +7,7 @@ description: "This post covers some basics of SQLite3. SQLite3 allows us to acce
 
 [TOC]
 
-{% with video_id="SQj17D1Q_6s" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:SQj17D1Q_6s
 
 > Please note this is not a SQL tutorial, I explain where to use SQL, not how.
 

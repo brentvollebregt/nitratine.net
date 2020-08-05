@@ -5,7 +5,7 @@ tags: [android, java]
 feature: feature.png
 description: "This app is based off a goal of obtaining all 16,777,216 colours by randomly generating colours when taping the screen. This figure is the number of colours a screen can display today and it's your challenge to find them all."
 
-{% with video_id="x56o7b9Uor8" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:x56o7b9Uor8
 
 <a href="https://play.google.com/store/apps/details?id=com.pythonanywhere.brentvollebregt.colour">
 	<img src="/posts/colour/google-play.png" alt="Get it on Google Play" style="height: 60px;"/>

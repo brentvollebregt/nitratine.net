@@ -7,7 +7,7 @@ description: "A demonstration of how to package a python script into an executab
 
 [TOC]
 
-{% with video_id="lOIJIk_maO4" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:lOIJIk_maO4
 
 ## PIP
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.
@@ -59,7 +59,7 @@ You can combine these flags to make things like onefile executables with no cons
 ## Auto PY to EXE
 In March 2018 I created an application that allows you to create executables easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.
 
-{% with video_id="OZSZHmWSOeM" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:OZSZHmWSOeM
 
 ![Empty interface](https://i.imgur.com/dd0LC2n.png)
 

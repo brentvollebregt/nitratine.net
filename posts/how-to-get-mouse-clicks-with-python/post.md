@@ -7,7 +7,7 @@ description: "This demonstration shows you how to track mouse clicks, movements 
 
 [TOC]
 
-{% with video_id="kJshtCfqCsY" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:kJshtCfqCsY
 
 ## PIP
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.

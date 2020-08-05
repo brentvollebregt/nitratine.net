@@ -7,7 +7,7 @@ description: "This demonstrates how to make a script to detect combinations of k
 
 [TOC]
 
-{% with video_id="n_dfv5DLCGI" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:n_dfv5DLCGI
 
 ## PIP
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.

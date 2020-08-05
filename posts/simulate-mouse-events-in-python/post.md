@@ -7,7 +7,7 @@ description: "This demonstrates how to control the mouse with Python. Using pynp
 
 [TOC]
 
-{% with video_id="2BXr9U6ZL8Y" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:2BXr9U6ZL8Y
 
 ## PIP
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.

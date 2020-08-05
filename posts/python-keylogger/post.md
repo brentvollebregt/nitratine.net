@@ -7,7 +7,7 @@ description: "This is a Python keylogger which will work on Windows, Mac and Lin
 
 [TOC]
 
-{% with video_id="x8GbWt56TlY" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:x8GbWt56TlY
 
 ## PIP
 If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip. This is needed to install pynput to get keys typed.

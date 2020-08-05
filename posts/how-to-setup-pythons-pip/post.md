@@ -7,7 +7,7 @@ description: "This tutorial demonstrates how to set up Python's PIP. PIP is a pa
 
 [TOC]
 
-{% with video_id="cm6WDGAzDPM" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:cm6WDGAzDPM
 
 ## Setting Up
 If you haven't used pip before on your computer, go to cmd and type 'pip'. If not errors appear you can move to the next step. If pip is not recognised, you need to set it up. Regarding you have python installed (you would not believe some of the comments on this video), open windows explorer (file search) and right-click on computer in the side menu.

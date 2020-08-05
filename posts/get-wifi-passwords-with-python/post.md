@@ -7,7 +7,7 @@ description: "This script searches windows for wifi passwords with python alread
 
 [TOC]
 
-{% with video_id="j7ysqGXFJKU" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:j7ysqGXFJKU
 
 ## Quick Background Idea
 If you type ```netsh wlan show profiles``` in cmd, you will be shown the profiles for wifi connections your computer has stored.

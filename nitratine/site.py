@@ -12,6 +12,7 @@ from .config import config, POST_SOURCE, POST_FILENAME, POST_EXTENSION
 from .external.github import github_user_repos
 from .external.youtube import recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
+from .markdown_extensions import YouTubeVideoExtension
 
 
 def my_renderer(text):
@@ -21,7 +22,8 @@ def my_renderer(text):
         extensions=[
             CodeHiliteExtension(),
             ExtraExtension(),
-            TocExtension()
+            TocExtension(),
+            YouTubeVideoExtension()
         ]
     )
 

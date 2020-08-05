@@ -7,7 +7,7 @@ description: "This tutorial covers the basics of how to create GUI's in Python u
 
 [TOC]
 
-{% with video_id="ksW59gYEl6Q" %}{% include 'blog-post-embedYouTube.html' %}{% endwith %}
+youtube:ksW59gYEl6Q
 
 ## Setting up the Environment
 For this tutorial, you will need a version of Python equal to or above 3.5. I do however recommend to get a more recent version than 3.5 as I had issues with 3.5.2; a simple upgrade to 3.6.6 fixed this. If you don't know where to get Python, [look here](https://www.python.org/downloads/).
