@@ -22,6 +22,17 @@
     <div class="col-blog-content blog-main mb-5">
         <h1 class="mb-4">Posts By {{ title }}</h1>
 
+        <div class="my-4">
+            {% for category in categories %}
+            <a href="#{{ category }}" class="mr-2 d-inline-block">
+                <small>
+                    {{ category }}
+                    <span class="badge badge-dark">{{ categories[category] | length }}</span>
+                </small>
+            </a>
+            {% endfor %}
+        </div>
+
         {% for category in categories %}
 
         <h2 id="{{ category }}" class="mb-2 mt-3 category-title">{{ category }}</h2>
