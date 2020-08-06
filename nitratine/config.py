@@ -55,10 +55,8 @@ class Config:
             assert 'type' in tile  # All must have a type
             if tile['type'] == 'post-image':
                 assert 'post' in tile
-                assert 'image_url' in tile
             elif tile['type'] == 'post':
                 assert 'post' in tile
-                assert 'reason' in tile
             elif tile['type'] == 'raw':
                 assert 'link' in tile
                 assert 'content' in tile
@@ -186,12 +184,10 @@ config_data = {
         {
             'type': 'post-image',
             'post': 'encryption-and-decryption-in-python',
-            'image_url': 'https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg'
         },
         {
             'type': 'post',
-            'post': 'issues-when-using-auto-py-to-exe',
-            'reason': 'Popular'
+            'post': 'issues-when-using-auto-py-to-exe'
         },
         {
             'type': 'raw',
@@ -205,33 +201,27 @@ config_data = {
         },
         {
             'type': 'post',
-            'post': 'python-encryption-and-decryption-with-pycryptodome',
-            'reason': 'New'
+            'post': 'python-encryption-and-decryption-with-pycryptodome'
         },
         {
             'type': 'post-image',
             'post': 'python-guis-with-pyqt',
-            'image_url': 'https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg'
         },
         {
             'type': 'post-image',
             'post': 'how-to-send-an-email-with-python',
-            'image_url': 'https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg'
         },
         {
             'type': 'post',
-            'post': 'python-requests-tutorial',
-            'reason': 'New'
+            'post': 'python-requests-tutorial'
         },
         {
             'type': 'post',
-            'post': 'encryption-and-decryption-in-python',
-            'reason': 'Popular'
+            'post': 'encryption-and-decryption-in-python'
         },
         {
             'type': 'post-image',
             'post': 'auto-py-to-exe',
-            'image_url': 'https://img.youtube.com/vi/OZSZHmWSOeM/mqdefault.jpg'
         },
         {
             'type': 'raw',
@@ -245,13 +235,11 @@ config_data = {
         },
         {
             'type': 'post',
-            'post': 'how-to-hash-passwords-in-python',
-            'reason': 'New'
+            'post': 'how-to-hash-passwords-in-python'
         },
         {
             'type': 'post',
-            'post': 'simulate-keypresses-in-python',
-            'reason': 'Popular'
+            'post': 'simulate-keypresses-in-python'
         }
     ]
 }

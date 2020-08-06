@@ -18,7 +18,7 @@
 {% block content %}
 <section class="jumbotron jumbotron-fluid text-center header">
     <h1 class="sr-only">Nitratine</h1>
-    <img src="/static/img/logo.png" class="img-fluid mb-2">
+    <img src="/static/img/logo.png" class="img-fluid mb-2" alt="Nitratine Logo">
     <p class="lead text-muted">A place where I share projects developed by me and tutorials on topics that I'm interested in.</p>
     <p>
         <a href="/blog/" class="btn btn-primary my-2">Visit Blog</a>
@@ -38,7 +38,7 @@
                         <h5 class="card-title">{{ tile.title }}</h5>
                         <p class="card-text">{{ tile.text }}</p>
                         <small class="text-muted">{{ tile.date }}</small>
-                        <span class="ml-2 badge badge-primary">{{ tile.reason }}</span>
+                        <span class="ml-2 badge badge-primary">{{ tile.category }}</span>
                     </div>
                 </div>
             </a>

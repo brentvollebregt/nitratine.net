@@ -51,7 +51,10 @@ def index():
             tile['text'] = page.meta.get('description', 'INVALID')
             tile['date'] = ymd_format(page.meta.get('date', 'INVALID'))
             tile['image_url'] = url_for('post_assets', path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}')
+            tile['category'] = page.meta.get('category', 'INVALID')
         elif tile['type'] == 'post-image':
+            page = posts.get(tile['post'] + f'/{POST_FILENAME}')
+            tile['image_url'] = url_for('post_assets', path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}')
             tile['link'] = url_for('blog_post', path=tile['post'])
 
     return render_template(
