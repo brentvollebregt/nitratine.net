@@ -33,8 +33,11 @@ app.config['FLATPAGES_AUTO_RELOAD'] = True
 app.config['FLATPAGES_EXTENSION'] = POST_EXTENSION
 app.config['FLATPAGES_ROOT'] = POST_SOURCE
 app.config['FLATPAGES_HTML_RENDERER'] = my_renderer
-minify(app=app, caching_limit=0, bypass=[r'fuzzysort.js'])
 posts = FlatPagesExtended(app, POST_FILENAME)
+
+
+def setup_minification():
+    minify(app=app, caching_limit=0, bypass=[r'fuzzysort.js'])
 
 
 @app.route('/')

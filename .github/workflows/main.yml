@@ -24,7 +24,7 @@ jobs:
           pip install -r ./requirements.txt
 
       - name: Build
-        run: python -m nitratine --build
+        run: python -m nitratine --build --minify
         env:
           YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
 

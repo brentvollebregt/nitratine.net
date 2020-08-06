@@ -2,7 +2,7 @@ import argparse
 import os
 import socket
 
-from .site import app
+from .site import app, setup_minification
 from .build import build
 from .tools.new_post import new_post
 from .tools.serve_build import serve_build
@@ -20,7 +20,11 @@ if __name__ == '__main__':
     parser.add_argument('-n', '--new-post', action="store_true", default=False, help='Create a new post')
     parser.add_argument('-s', '--serve-build', action="store_true", default=False, help='Serve the built site')
     parser.add_argument('--build-stats', action="store_true", default=False, help='Get stats for the latest build')
+    parser.add_argument('--minify', action="store_true", default=False, help='Enable minification')
     args = parser.parse_args()
+
+    if args.minify:
+        setup_minification()
 
     if args.build:
         build()
