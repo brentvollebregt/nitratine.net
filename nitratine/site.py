@@ -1,6 +1,8 @@
+import datetime
 import os
 import time
 
+from feedgen.feed import FeedGenerator
 from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
 from flask_minify import minify
 import markdown
@@ -37,7 +39,7 @@ posts = FlatPagesExtended(app, POST_FILENAME)
 
 
 def setup_minification():
-    minify(app=app, caching_limit=0, bypass=[r'fuzzysort.js'])
+    minify(app=app, caching_limit=0, bypass=[r'fuzzysort.js', r'^rss$'])
 
 
 @app.route('/')
@@ -212,10 +214,35 @@ def sitemap():
     )
 
 
-@app.route('/rss.xml')
+@app.route('/rss.xml')  # TODO Use configuration values in here for consistency
 def rss():
     """ The RSS Feed """
-    return 'TODO'
+    fg = FeedGenerator()
+    fg.id('nitratine.net')
+    fg.title('Nitratine')
+    fg.author({'name': 'Brent Vollebregt', 'email': 'brent@nitratine.net'})
+    fg.link(href='https://nitratine.net', rel='alternate')
+    fg.logo('https://nitratine.net/static/img/favicon.ico')
+    fg.subtitle('A place where I share projects developed by me and tutorials on topics that I\'m interested in.')
+    fg.language('en')
+
+    u_tm = datetime.datetime.utcfromtimestamp(0)
+    l_tm = datetime.datetime.fromtimestamp(0)
+    l_tz = datetime.timezone(l_tm - u_tm)
+
+    for post in posts.get_posts():
+        path = f'https://nitratine.net{url_for("blog_post", path=post.path)}'
+        fe = fg.add_entry()
+        fe.id(path)
+        fe.title(post.meta.get('title'))
+        fe.link(href=path)
+        fe.category({'term': post.meta.get('category'), 'label': post.meta.get('category')})
+        fe.published(datetime.datetime.combine(post.meta.get('date'), datetime.time(0, 0, tzinfo=l_tz)))
+        fe.description(post.meta.get('description'))
+        fe.enclosure(f'https://nitratine.net/posts/{post.path}/{post.meta.get("feature")}', length=0, type=f'image/{post.meta.get("feature").split(".")[-1]}')
+        fe.content(post.html, type='text/html')
+
+    return fg.rss_str(pretty=True)
 
 
 @app.route('/ads.txt')

@@ -6,3 +6,4 @@ Markdown
 requests
 python-dotenv
 Flask-Minify
+feedgen
