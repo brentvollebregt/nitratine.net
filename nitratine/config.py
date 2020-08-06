@@ -58,7 +58,7 @@ class Config:
             elif tile['type'] == 'post':
                 assert 'post' in tile
             elif tile['type'] == 'raw':
-                assert 'link' in tile
+                assert 'post' in tile
                 assert 'content' in tile
             else:
                 raise Exception(f"Unexpected home tile type: {tile['type']}")
@@ -168,7 +168,7 @@ config_data = {
     'home-tiles': [
         {
             'type': 'raw',
-            'link': '/blog/post/auto-py-to-exe/',
+            'post': 'auto-py-to-exe',
             'content': """
                 <img class="card-img-top" src="/posts/auto-py-to-exe/feature.png" alt="Thumbnail">
                 <div class="card-body">
@@ -191,7 +191,7 @@ config_data = {
         },
         {
             'type': 'raw',
-            'link': '/blog/post/emotionify/',
+            'post': 'emotionify',
             'content': """
                 <div class=\"text-center\">
                     <img class=\"card-img-top\" src=\"/posts/emotionify/emotionify-banner.png\" alt=\"Emotionify Banner\" style=\"padding: 20px 10px 20px 10px\">
@@ -225,7 +225,7 @@ config_data = {
         },
         {
             'type': 'raw',
-            'link': '/blog/post/spotify-lyrics-viewer/',
+            'post': 'spotify-lyrics-viewer',
             'content': """
                 <div class=\"text-center\">
                     <img class=\"card-img-top\" src=\"/posts/spotify-lyrics-viewer/spotify-lyrics-viewer-banner.png\" alt=\"Spotify Lyrics Viewer\" style=\"padding: 20px 10px 20px 10px\">
