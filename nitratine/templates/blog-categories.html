@@ -25,10 +25,7 @@
         <div class="my-4">
             {% for category in categories %}
             <a href="#{{ category }}" class="mr-2 d-inline-block">
-                <small>
-                    {{ category }}
-                    <span class="badge badge-dark">{{ categories[category] | length }}</span>
-                </small>
+                <small>{{ category }} ({{ categories[category] | length }})</small>
             </a>
             {% endfor %}
         </div>
