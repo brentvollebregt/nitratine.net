@@ -217,11 +217,7 @@ config_data = {
         },
         {
             'type': 'post',
-            'post': 'encryption-and-decryption-in-python'
-        },
-        {
-            'type': 'post-image',
-            'post': 'auto-py-to-exe',
+            'post': 'simulate-keypresses-in-python'
         },
         {
             'type': 'raw',
@@ -239,7 +235,7 @@ config_data = {
         },
         {
             'type': 'post',
-            'post': 'simulate-keypresses-in-python'
+            'post': 'how-to-make-hotkeys-in-python'
         }
     ]
 }
