@@ -7,4 +7,3 @@ requests
 python-dotenv
 Flask-Minify
 feedgen
-Pillow

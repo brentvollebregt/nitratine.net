@@ -12,7 +12,7 @@ from .config import site_config, redirects, featured_posts, POST_SOURCE, POST_FI
 from .external.github import github_user_repos
 from .external.youtube import recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
-from .markdown_extensions import YouTubeVideoExtension, LazySizesImageExtension
+from .markdown_extensions import YouTubeVideoExtension
 from .rss import generate_rss_xml
 
 
@@ -24,8 +24,7 @@ def my_renderer(text):
             CodeHiliteExtension(),
             ExtraExtension(),
             TocExtension(),
-            YouTubeVideoExtension(),
-            LazySizesImageExtension()
+            YouTubeVideoExtension()
         ]
     )
 
