@@ -36,3 +36,5 @@ jobs:
 
       - name: Get build stats
         run: python -m nitratine --build-stats
+        env:
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
