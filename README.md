@@ -4,11 +4,13 @@
 
 This repo is the source for [nitratine.net](https://nitratine.net/). The files in the `gh-pages` branch are hosted using GitHub pages. The Python module `nitratine` can be used to locally host and build the site into the `build` folder.
 
-`python -m nitratine` takes arguments to do different functions:
- - No arguments: Locally host the site on port 8000. 
- - `-b` / `--build`: Build the site into the `build` folder.
- - `-s` / `--serve-build`: Server the build site in the `build` folder on port 8000.
- - `-n` / `--new-post`: Create a new post. Will create the .md file with a small template and create a folder for assets as well as copy in the default feature image.
- 
+Execute `python -m nitratine --help` to identify the functions that this module can perform and their arguments:
+
+- `run`: Run the development site locally
+- `build`: Build site to static files
+- `serve`: Serve the locally built site
+- `new`: Create a new post. Will setup a folder containing a .md file and an empty feature image.
+- `stats`: Get stats for the latest build
+
 ## Deployment
 Automated deployment is done using GitHub actions. The workflow to build and deploy the site can be found in [main.yml](/.github/workflows/main.yml).

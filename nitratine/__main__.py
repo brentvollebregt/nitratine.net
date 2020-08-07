@@ -1,33 +1,62 @@
-import argparse
+import click
 
 from .site import app, setup_minification
-from .build import build
+from .build import build as build_site
 from .tools.new_post import new_post
 from .tools.serve_build import serve_build
 from .tools.build_stats import print_build_stats
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Script to run and build nitratine.net')
-    parser.add_argument('-b', '--build', action="store_true", default=False, help='Build site to static files')
-    parser.add_argument('-n', '--new-post', action="store_true", default=False, help='Create a new post')
-    parser.add_argument('-s', '--serve-build', action="store_true", default=False, help='Serve the built site')
-    parser.add_argument('--build-stats', action="store_true", default=False, help='Get stats for the latest build')
-    parser.add_argument('--minify', action="store_true", default=False, help='Enable minification')
-    parser.add_argument('--host', default='localhost', type=str, help='The host to use when running the local server')
-    parser.add_argument('--port', default=8000, type=int, help='The port to use when running the local server')
-    args = parser.parse_args()
+DEFAULT_HOST = 'localhost'
+DEFAULT_PORT = 8000
 
-    if args.minify:
+
+@click.group()
+def cli():
+    """ Nitratine """
+
+
+@cli.command()
+@click.option('-h', '--host', 'host', default=DEFAULT_HOST, help="Hostname to run server with")
+@click.option('-p', '--port', 'port', type=int, default=DEFAULT_PORT, help="Port to run server on")
+@click.option('--minify', 'minify', is_flag=True, default=False, help="Enable minification")
+def run(host: str, port: int, minify: bool):
+    """ Run the development site locally """
+    if minify:
         setup_minification()
 
-    if args.build:
-        build()
-    elif args.new_post:
-        new_post()
-    elif args.serve_build:
-        serve_build()
-    elif args.build_stats:
-        print_build_stats()
-    else:
-        app.run(port=args.port, host=args.host)
+    print(f'Server starting at http://{host}:{port}')
+    app.run(host=host, port=port)
+
+
+@cli.command()
+@click.option('--minify', 'minify', is_flag=True, default=False, help="Enable minification")
+def build(minify: bool):
+    """ Build site to static files """
+    if minify:
+        setup_minification()
+
+    build_site()
+
+
+@cli.command()
+@click.option('-p', '--port', 'port', type=int, default=DEFAULT_PORT, help="Port to run server on")
+def serve(port: int):
+    """ Serve the locally built site """
+    serve_build(port)
+
+
+@cli.command()
+def new():
+    """ Create a new post """
+    new_post()
+
+
+@cli.command()
+def stats():
+    """ Get stats for the latest build """
+    print_build_stats()
+
+
+if __name__ == '__main__':
+    cli(prog_name='nitratine')
