@@ -1,6 +1,6 @@
 # [nitratine.net](https://nitratine.net/)
 
-![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbrentvollebregt%2Fnitratine.net%2Fbadge&style=flat)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbrentvollebregt%2Fnitratine.net%2Fbadge&style=flat)](https://github.com/brentvollebregt/nitratine.net/actions?query=workflow%3A%22Build+and+Deploy+GitHub+Pages%22)
 
 This repo is the source for [nitratine.net](https://nitratine.net/). The files in the `gh-pages` branch are hosted using GitHub pages. The Python module `nitratine` can be used to locally host and build the site into the `build` folder.
 
