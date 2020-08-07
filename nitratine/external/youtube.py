@@ -3,7 +3,7 @@ from typing import List
 
 import requests
 
-from ..config import config
+from ..config import site_config
 
 
 @dataclass
@@ -35,7 +35,7 @@ def __get_most_recent_youtube_videos(
 
 
 recent_youtube_videos = __get_most_recent_youtube_videos(
-    youtube_data_api_key=config.site.youtube_data_api_key,
-    youtube_channel_id=config.site.youtube_channel_id,
+    youtube_data_api_key=site_config.youtube_data_api_key,
+    youtube_channel_id=site_config.youtube_channel_id,
     max_results=6
 )

@@ -3,7 +3,7 @@ from typing import Optional
 
 import requests
 
-from ..config import config
+from ..config import site_config
 
 
 @dataclass
@@ -80,5 +80,5 @@ def __get_github_user_repos(github_username: str):
 
 
 github_user_repos = __get_github_user_repos(
-    github_username=config.site.github_username
+    github_username=site_config.github_username
 )

@@ -8,7 +8,7 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
 from markdown.extensions.toc import TocExtension
 
-from .config import config, POST_SOURCE, POST_FILENAME, POST_EXTENSION
+from .config import site_config, redirects, featured_posts, POST_SOURCE, POST_FILENAME, POST_EXTENSION
 from .external.github import github_user_repos
 from .external.youtube import recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
@@ -44,22 +44,28 @@ def setup_minification():
 @app.route('/')
 def index():
     """ The home page """
-    for tile in config.home_tiles:
-        page = posts.get(tile['post'] + f'/{POST_FILENAME}')
-        tile['link'] = url_for('blog_post', path=tile['post'])
+    translated_featured_posts = []
+    for tile in featured_posts:
+        translated_featured_post = {'type': tile.type}
+        page = posts.get(tile.post + f'/{POST_FILENAME}')
+        translated_featured_post['link'] = url_for('blog_post', path=tile.post)
 
-        if tile['type'] == 'post':
-            tile['title'] = page.meta.get('title', 'INVALID')
-            tile['text'] = page.meta.get('description', 'INVALID')
-            tile['date'] = ymd_format(page.meta.get('date', 'INVALID'))
-            tile['image_url'] = url_for('post_assets', path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}')
-            tile['category'] = page.meta.get('category', 'INVALID')
-        elif tile['type'] == 'post-image':
-            tile['image_url'] = url_for('post_assets', path=f'{tile["post"]}/{page.meta.get("feature", "INVALID")}')
+        if tile.type == 'post':
+            translated_featured_post['title'] = page.meta.get('title', 'INVALID')
+            translated_featured_post['text'] = page.meta.get('description', 'INVALID')
+            translated_featured_post['date'] = ymd_format(page.meta.get('date', 'INVALID'))
+            translated_featured_post['image_url'] = url_for('post_assets', path=f'{tile.post}/{page.meta.get("feature", "INVALID")}')
+            translated_featured_post['category'] = page.meta.get('category', 'INVALID')
+        elif tile.type == 'post-image':
+            translated_featured_post['image_url'] = url_for('post_assets', path=f'{tile.post}/{page.meta.get("feature", "INVALID")}')
+        elif tile.type == 'raw':
+            translated_featured_post['content'] = tile.content
+
+        translated_featured_posts.append(translated_featured_post)
 
     return render_template(
         'page/home.html',
-        tiles=config.home_tiles
+        tiles=translated_featured_posts
     )
 
 
@@ -222,7 +228,7 @@ def rss():
 @app.route('/ads.txt')
 def ads_txt():
     """ An easy way to generate ads.txt """
-    return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(config.site.google_adsense_publisher_id)
+    return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(site_config.google_adsense_publisher_id)
 
 
 @app.route('/posts/<path:path>')  # TODO Can we make this /post/ and make everything in the markdown files relative - rename folder to post?
@@ -234,11 +240,11 @@ def post_assets(path):
 
 
 @app.route('/<path:path>/')
-def redirects(path):
+def try_redirect(path):
     """ Catches any routes not handled by the previous functions. Used to identify potential redirects. """
-    if path not in config.redirects:
+    if path not in redirects:
         abort(404)
-    redirect_to = f'/{config.redirects[path]}/'
+    redirect_to = f'/{redirects[path]}/'
     return render_template(
         'redirect.html',
         redirect_to=redirect_to
@@ -257,7 +263,7 @@ def page_not_found(e):
 @app.context_processor
 def inject_site():
     """ Provide site_config to Jinja templates """
-    return dict(site_config=config.site)
+    return dict(site_config=site_config)
 
 
 @app.context_processor

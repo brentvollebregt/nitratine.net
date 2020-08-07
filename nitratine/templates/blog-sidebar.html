@@ -21,7 +21,7 @@
             {% for category in category_numbers %}
                 <li>
                 <a href="/blog/categories/#{{ category }}">
-                    {%- if category in site_config.category_icons -%}{{ site_config.category_icons[category]|safe }}{% endif %} {{ category }}
+                    {%- if category in site_config.category_prefixes -%}{{ site_config.category_prefixes[category]|safe }}{% endif %} {{ category }}
                     <span class="badge badge-primary ml-3">{{ category_numbers[category] }}</span>
                 </a>
             </li>

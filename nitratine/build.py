@@ -1,7 +1,7 @@
 import os
 
-from .config import config, FREEZE_DESTINATION
-from .site import app, redirects, page_not_found
+from .config import site_config, redirects, FREEZE_DESTINATION
+from .site import app, try_redirect, page_not_found
 from .freezer import freezer
 
 
@@ -11,7 +11,7 @@ def build():
     freezer.freeze()
 
     # Create redirects (because Frozen-Flask doesn't have an option)
-    for r in config.redirects:
+    for r in redirects:
         file_path = os.path.join(FREEZE_DESTINATION, r)
         file = os.path.join(file_path, 'index.html')
         # Check where we are writing
@@ -22,13 +22,13 @@ def build():
         # Write redirect
         f = open(file, 'w')
         with app.app_context():
-            f.write(redirects(path=r))
+            f.write(try_redirect(path=r))
         f.close()
-        print(f'Redirect: /{r} -> /{config.redirects[r]}')
+        print(f'Redirect: /{r} -> /{redirects[r]}')
 
     # Add CNAME
     f = open(os.path.join(FREEZE_DESTINATION, 'CNAME'), 'w')
-    f.write(config.site.domain)
+    f.write(site_config.domain)
     f.close()
     print('CNAME')
 
