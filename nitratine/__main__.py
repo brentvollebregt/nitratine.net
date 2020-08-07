@@ -1,17 +1,10 @@
 import argparse
-import os
-import socket
 
 from .site import app, setup_minification
 from .build import build
 from .tools.new_post import new_post
 from .tools.serve_build import serve_build
 from .tools.build_stats import print_build_stats
-
-
-def run():
-    os.environ['build'] = 'Development'
-    app.run(port=8000, host=socket.gethostbyname(socket.gethostname()))
 
 
 if __name__ == '__main__':
@@ -21,6 +14,8 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--serve-build', action="store_true", default=False, help='Serve the built site')
     parser.add_argument('--build-stats', action="store_true", default=False, help='Get stats for the latest build')
     parser.add_argument('--minify', action="store_true", default=False, help='Enable minification')
+    parser.add_argument('--host', default='localhost', type=str, help='The host to use when running the local server')
+    parser.add_argument('--port', default=8000, type=int, help='The port to use when running the local server')
     args = parser.parse_args()
 
     if args.minify:
@@ -35,4 +30,4 @@ if __name__ == '__main__':
     elif args.build_stats:
         print_build_stats()
     else:
-        run()
+        app.run(port=args.port, host=args.host)
