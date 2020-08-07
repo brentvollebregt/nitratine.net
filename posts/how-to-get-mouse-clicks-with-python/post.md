@@ -2,7 +2,7 @@ title: "How To Get Mouse Clicks With Python"
 date: 2017-12-14
 category: YouTube
 tags: [python, mouse, logging, pynput]
-feature: demo2.png
+feature: youtube-thumbnail.jpg
 description: "This demonstration shows you how to track mouse clicks, movements and even scrolls using the pynput module. These can then be logged to a file as no console is displayed. This is very similar to a mouse logger."
 
 [TOC]

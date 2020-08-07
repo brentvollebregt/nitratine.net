@@ -2,7 +2,7 @@ title: "Python Threading Basics"
 date: 2018-05-03
 category: YouTube
 tags: [python, threading]
-feature: feature.png
+feature: youtube-thumbnail.jpg
 description: "This post covers the basics of Python's threading module. Threading allows you to run multiple tasks at the same time. This allows you to do one or more tasks while another task runs."
 
 [TOC]

@@ -2,7 +2,7 @@ title: "How to Send an Email With Python"
 date: 2018-01-23
 category: YouTube
 tags: [python, email]
-feature: email-example-3.png
+feature: youtube-thumbnail.jpg
 description: "This script sends an email using python. By logging in to a Gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached."
 
 [TOC]
