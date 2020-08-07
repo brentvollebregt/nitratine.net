@@ -15,6 +15,7 @@ from .external.github import github_user_repos
 from .external.youtube import recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
 from .markdown_extensions import YouTubeVideoExtension
+from .utils import get_nzst_timezone_for_date
 
 
 def my_renderer(text):
@@ -226,10 +227,6 @@ def rss():
     fg.subtitle('A place where I share projects developed by me and tutorials on topics that I\'m interested in.')
     fg.language('en')
 
-    u_tm = datetime.datetime.utcfromtimestamp(0)
-    l_tm = datetime.datetime.fromtimestamp(0)
-    l_tz = datetime.timezone(l_tm - u_tm)
-
     for post in posts.get_posts():
         path = f'https://nitratine.net{url_for("blog_post", path=post.path)}'
         fe = fg.add_entry()
@@ -237,7 +234,10 @@ def rss():
         fe.title(post.meta.get('title'))
         fe.link(href=path)
         fe.category({'term': post.meta.get('category'), 'label': post.meta.get('category')})
-        fe.published(datetime.datetime.combine(post.meta.get('date'), datetime.time(0, 0, tzinfo=l_tz)))
+        fe.published(datetime.datetime.combine(
+            post.meta.get('date'),
+            datetime.time(0, 0, tzinfo=get_nzst_timezone_for_date(post.meta.get('date'))))
+        )
         fe.description(post.meta.get('description'))
         fe.enclosure(f'https://nitratine.net/posts/{post.path}/{post.meta.get("feature")}', length=0, type=f'image/{post.meta.get("feature").split(".")[-1]}')
         fe.content(post.html, type='text/html')
