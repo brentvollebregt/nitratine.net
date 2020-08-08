@@ -1,36 +1,18 @@
-main {
-    margin-top: 5rem; /* Account for nav */
-}
-
-.card-hover-effect {
-    transition: border 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-}
-
-.card-hover-effect:hover {
-    border: 1px solid #007bff;
-    box-shadow: 4px 4px 15px 0 rgba(0,0,0,.2);
-}
-
 .card-columns > a, .blog-main > a {
+    /* Allow links to inherit colour on home cards and blog page's content */
     color: inherit;
 }
 
-.tech-icon-container {
-    text-align: center;
-}
-
-.tech-icon-container > img {
-    width: 60px;
-    margin: 0 5px 5px 5px;
-}
-
 *::selection {
+    /* Text highlighting colour */
     background: #ded28f;
     color: black;
 }
 
-a { word-break: break-word; }
+a {
+    /* Break links to reduce width overflow */
+    word-break: break-word;
+}
 
 /* Footer */
 
@@ -81,4 +63,41 @@ footer .link-group a.with-icon img {
   max-height: 18px;
   max-width: 18px;
   margin-right: 0.5rem;
+}
+
+/* Smaller screens => smaller font sizes (bootstrap override) */
+
+@media (max-width: 767.98px) {
+    body {font-size: 0.9rem}
+    .lead {font-size: 1.15rem}
+    pre {font-size: 0.8rem}
+    h1 {font-size: 2rem}
+    h2 {font-size: 1.8rem}
+    h3 {font-size: 1.6rem}
+    h4 {font-size: 1.4rem}
+    h5 {font-size: 1.2rem}
+    h6 {font-size: 1rem}
+}
+
+/* Home - card hovers */
+
+.card-hover-effect {
+    transition: border 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.card-hover-effect:hover {
+    border: 1px solid #007bff;
+    box-shadow: 4px 4px 15px 0 rgba(0,0,0,.2);
+}
+
+/* About - tech icons section */
+
+.tech-icon-container {
+    text-align: center;
+}
+
+.tech-icon-container > img {
+    width: 60px;
+    margin: 0 5px 5px 5px;
 }

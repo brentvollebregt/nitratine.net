@@ -23,7 +23,7 @@ def my_renderer(text):
         extensions=[
             CodeHiliteExtension(),
             ExtraExtension(),
-            TocExtension(),
+            TocExtension(toc_depth=3),
             YouTubeVideoExtension(),
             HeaderLinkExtension()
         ]

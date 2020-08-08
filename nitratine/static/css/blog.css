@@ -120,10 +120,6 @@
     margin: auto;
 }
 
-.post-content > .toc > ul > li > ul > li *:not(a) {
-    display: none; /* Hide any points that are more than two headings deep in the table of contents */
-}
-
 .post-content > .toc > ul {
     border-bottom: 1px solid rgb(230, 230, 230);
     padding-bottom: 1rem;
@@ -238,4 +234,30 @@ h4 .anchor:focus svg,
 h5 .anchor:focus svg,
 h6 .anchor:focus svg {
     visibility: visible;
+}
+
+/* Blog double column sizing (bootstrap override)  */
+
+.col-blog-content, .col-blog-sidebar {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+@media (min-width: 992px) {
+    .col-blog-content {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 72%;
+        flex: 0 0 72%;
+        max-width: 72%
+    }
+
+    .col-blog-sidebar {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 28%;
+        flex: 0 0 28%;
+        max-width: 28%
+    }
 }
