@@ -276,7 +276,7 @@ def inject_recent_videos():
 def ymd_format(date):
     """ Convert 2018-10-30 to 30 Nov 2018 """
     struct_time = time.strptime(str(date), '%Y-%m-%d')
-    return time.strftime('%d %b %Y', struct_time)
+    return f'{struct_time.tm_mday} {time.strftime("%b", struct_time)} {struct_time.tm_year}'
 
 
 app.jinja_env.globals.update(ymd_format=ymd_format)  # Allow ymd_format to be called in a Jinja template
