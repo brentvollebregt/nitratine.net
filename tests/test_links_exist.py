@@ -10,8 +10,9 @@ from nitratine.__main__ import app
 
 EXTERNAL_URL_BLACKLIST = [
     r'$^',
-    r'^https://www.pexels.com',
-    r'^https://nzcsc.org.nz'
+    r'^https://hitcounter.pythonanywhere.com',  # Loves dying quite often at the moment
+    r'^https://www.pexels.com',  # Keeps giving forbiddens?
+    r'^https://nzcsc.org.nz'  # Doesn't seem to be up anymore
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
