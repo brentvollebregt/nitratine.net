@@ -82,7 +82,7 @@ def bxor(ba1, ba2):
 text = bxor(base64.b64decode(base64_ciphertext), key.encode())
 ```
 
-This gives text = `GET ./e51d35ed.bin`. Making an anchor tag on the page again to go to that relative URL as I did previously, the [file](https://nzcsc.org.nz/competition/2019/r0/2/challenge/e51d35ed.bin) is downloaded.
+This gives text = `GET ./e51d35ed.bin`. Making an anchor tag on the page again to go to that relative URL as I did previously, this downloaded the file.
 
  This file is 50KB in size and was the end of the line for me unfortunately. No magic bytes match this file and [hexedit](https://hexed.it/) couldn't tell me the file type. I tried many things with this file but nothing gave a flag. I did notice though that there were no bytes in the file that had a value above 127; not sure if this hinted anything.
 

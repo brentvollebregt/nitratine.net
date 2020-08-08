@@ -72,9 +72,9 @@ When moving code from an IDE to paper for something like an assessment, black te
 
 - [SQLite Viewer](https://inloop.github.io/sqlite-viewer/)
     - Breaks on blobs but is clean to use
-- [SQLite Viewer (doesn't break on blobs)](https://sqliteviewer.flowsoft7.com/)
+- [SQLite Viewer (doesn't break on blobs)](http://sqliteviewer.flowsoft7.com/)
     - Similar to the one above but doesn't break on blobs (not as nice-looking)
-- [Test small SQL commands (MySQL, Oracle, PostgreSQL, SQLite, MS SQL Server)](https://www.sqlfiddle.com)
+- [Test small SQL commands (MySQL, Oracle, PostgreSQL, SQLite, MS SQL Server)](http://www.sqlfiddle.com)
     - Build a small schema and then execute commands based on the schema creation
     - Restricted to internal request character length 
 
@@ -88,7 +88,7 @@ When moving code from an IDE to paper for something like an assessment, black te
 ## Miscellaneous
 
 - [Basic URL decoder and encoder](https://meyerweb.com/eric/tools/dencoder/)
-- [JSON viewer](https://jsonviewer.stack.hu/)
+- [JSON viewer](http://jsonviewer.stack.hu/)
 - [Regular expression testing](https://regex101.com/)
 - [Convert cURL commands to Python request calls (and other languages)](https://curl.trillworks.com/)
 - [Webhooks that you can set the response on](https://webhook.site/#!/07372fd5-f335-4263-97bd-a8fa974ed148)

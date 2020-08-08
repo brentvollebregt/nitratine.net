@@ -34,7 +34,9 @@ auto-py-to-exe my_script.py
 
 ## General Talk About the Process
 
-I decided to create a [new repository](https://github.com/brentvollebregt/auto-py-to-exe-pypi) for the package that would be [hosted on PyPI](https://pypi.org/project/auto-py-to-exe/) as the video that I provided will still help people understand what is going on. In the old repo I have provided a link to the new one and added in the instructions for installation using pip.
+I decided to create a new repository for the package that would be [hosted on PyPI](https://pypi.org/project/auto-py-to-exe/) as the video that I provided will still help people understand what is going on. In the old repo I have provided a link to the new one and added in the instructions for installation using pip.
+
+> This new repo was later merged into the original repo
 
 It took me a few hours to find out how to structure my package and have everything set up properly from the readme to the entry-points.
 

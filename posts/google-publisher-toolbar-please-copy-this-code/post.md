@@ -7,6 +7,8 @@ description: "When first installing Google Publisher Toolbar, you may be asked, 
 
 [TOC]
 
+> Note: This extension no longer exists
+
 ## The Problem
 When installing the latest version of the Chrome extension *Google Publisher Toolbar* and then trying to connect/enable Google AdSense or Google Analytics, you may be given a prompt to "**Please copy this code, switch to your application and paste it there:**" followed by a code that you can copy like in the image below.
 
@@ -28,7 +30,7 @@ There are a [few options](https://gist.github.com/paulirish/78d6c1406c901be02c2d
 
 ![Loading the Google Publisher Toolbar URL into the CRXViewer](/posts/google-publisher-toolbar-please-copy-this-code/crxviewer.png)
 
-Providing it with the [URL of Google Publisher Toolbar on the Chrome Web Store](https://chrome.google.com/webstore/detail/google-publisher-toolbar/omioeahgfecgfpfldejlnideemfidnkc) and leaving all the other options as default, I then clicked "Open in this viewer" to view the source of the extension.
+Providing it with the URL of Google Publisher Toolbar on the Chrome Web Store _(not available anymore)_ and leaving all the other options as default, I then clicked "Open in this viewer" to view the source of the extension.
 
 ## Looking for what Should be Executed
 When the source first loads, it may appear to have a lot of files, but many of them are translations for different languages. The best way to get a hint of what to look for is to look at the `manifest.json` file. Viewing this file gives details like the name, version, icons and what scripts are run where; this is definitely the place for insight into what I was looking for.

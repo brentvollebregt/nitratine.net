@@ -127,9 +127,9 @@ For example, from `.svg?style=flat-square` to `.svg?style=flat-square&label=Tag&
 
 <img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?label=healthinesses" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
-**`?logo=appveyor` : Insert one of the [named logos](https://github.com/badges/shields/tree/gh-pages/logo)**
+**`?logo=visual-studio-code` : Insert a logo from [simple-icons](https://simpleicons.org/) _(make any spaces '-')_**
 
-<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logo=appveyor" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
+<img src="https://img.shields.io/github/tag/expressjs/express.svg" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">  will become  <img src="https://img.shields.io/github/tag/expressjs/express.svg?logo=visual-studio-code" alt="Current GitHub tag" style="margin-bottom: -5px; display: inline-block;">
 
 **`?logo=data:image/png;base64,…` : Insert custom logo image (≥ 14px high)**
 

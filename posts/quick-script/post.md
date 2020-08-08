@@ -59,5 +59,5 @@ A parameter can be added to the main() method and as long as there is only one p
 - [Put IP on Clipboard](https://github.com/brentvollebregt/quick-script/blob/master/scripts/ip_to_clipboard.py): Will set your local IP to the clipboard.
 - [Restart Windows Explorer](https://github.com/brentvollebregt/quick-script/blob/master/scripts/restart_window_explorer.py): Restarts windows explorer.
 - [UI to PY from Clipboard](https://github.com/brentvollebregt/quick-script/blob/master/scripts/ui_to_py_from_clipboard.py): Gets the current .ui file in the clipboard and will convert it to py using pyuic5 and stores it where the .ui file is located.
-- [Open Clipboard Directory](https://github.com/brentvollebregt/quick-script/blob/master/open_clipboard_directory.py): Open the location in the clipboard in windows explorer.
-
+- [Open Clipboard Directory](https://github.com/brentvollebregt/quick-script/blob/master/scripts/open_clipboard_directory.py): Open the location in the clipboard in windows explorer.
+- [Type Clipboard](https://github.com/brentvollebregt/quick-script/blob/master/scripts/type_clipboard.py): Type clipboard contents at a slow pace.

@@ -69,11 +69,11 @@ When the visualiser has started, you can hold the left control key to display a 
 #### Developers
 - [Rhys Compton](https://github.com/basedrhys)
 - [Dylan Exton](https://github.com/DylanExton)
-- [Ryan Le Quesne](https://github.com/ryancomp241)
+- [Ryan Le Quesne](https://github.com/ryanlequesne)
 - [Seattle Tupuhi](https://github.com/minionsattle)
 - [Brent Vollebregt](https://github.com/brentvollebregt)
 - [Jack Woods](https://github.com/Woodsy1FD)
 
 #### Project Managers
 - [Swikrit Khanal](https://github.com/swikrit)
-- [Sash Sinha](https://github.com/shash678)
+- [Sash Sinha](https://github.com/shash873)

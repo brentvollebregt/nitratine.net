@@ -9,7 +9,7 @@ description: "This investigation looks at detecting emotion in music. Using data
 
 Earlier this year, I and seven other students were given a project to visualise emotion in music. We decided to use Unity for visualisation and machine learning in Python to detect emotion. After days of planning and testing, I had a plan for the emotion detection half.
 
-The project can be found on GitHub [here](https://github.com/shash678/Lucy-In-The-Sky-With-Emotion).
+The project can be found on GitHub [here](https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion).
 While creating this program, I discovered a way that could give hints to what emotion the song is trying to portray using Spotify's API, some data mining and machine learning
 
 ## Planning

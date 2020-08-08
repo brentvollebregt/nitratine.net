@@ -162,6 +162,3 @@ color = colorchooser.askcolor(initialcolor=(255, 255, 255), parent=parent) # Ret
 As an example of the output, if I select cyan, I will get `((0.0, 255.99609375, 255.99609375), '#00ffff')`. The numbers are large as they are floats but this means 0 red, 256 green and 256 blue. We can also see that the second value in the tuple is the hex value for cyan.
 
 ![Color Dialog](/posts/how-to-create-dialogs-in-python/color-dialog.png)
-
-## Credit 
-While using a lot of dialogs in my own projects I have always looked around other sites, but recently I found a page called [How to Think Like a Computer Scientist: Interactive Edition](https://interactivepython.org/runestone/static/CS152f17/GUIandEventDrivenProgramming/02_standard_dialog_boxes.html) which is a great beginner level tutorial for Python which covers many things. This site made me aware of some dialogs I didn't even realise existed so I give credit to the creator.
