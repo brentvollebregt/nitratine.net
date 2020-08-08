@@ -5,6 +5,7 @@ import unittest
 from bs4 import BeautifulSoup
 import requests
 
+from .helpers import get_urls_from_html
 from nitratine.__main__ import app
 
 
@@ -15,20 +16,6 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://nzcsc.org.nz'  # Doesn't seem to be up anymore
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
-
-
-def get_urls_from_html(html: str) -> List[str]:
-    """ Identify all the links from HTML """
-    links = []
-    soup = BeautifulSoup(html, 'html.parser')
-
-    for link in soup.findAll('a'):
-        if link.get('href') is not None:
-            links.append(link.get('href'))
-
-    # TODO Add script sources
-
-    return list(set(links))
 
 
 class TestLinksRespondNon404(unittest.TestCase):

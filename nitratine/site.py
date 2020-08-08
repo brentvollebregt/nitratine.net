@@ -223,7 +223,7 @@ def sitemap():
 @app.route('/rss.xml')
 def rss():
     """ The RSS Feed """
-    return generate_rss_xml(posts)
+    return generate_rss_xml(posts), 200, {'content-type': 'text/xml'}
 
 
 @app.route('/ads.txt')

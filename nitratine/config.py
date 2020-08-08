@@ -100,7 +100,7 @@ featured_posts: List[FeaturedPost] = [
             <img class="card-img-top" src="/posts/auto-py-to-exe/feature.png" alt="Thumbnail">
             <div class="card-body">
                 <div class=\"text-center\">
-                    <h5 class=\"card-title mb-1\">Auto Py to Exe</h5>
+                    <h2 class=\"h4 card-title mb-1\">Auto Py to Exe</h2>
                     <img alt=\"Total downloads for auto-py-to-exe project\" src=\"https://pepy.tech/badge/auto-py-to-exe\">
                     <br>
                     <small class=\"text-muted\">pip install auto-py-to-exe</small>

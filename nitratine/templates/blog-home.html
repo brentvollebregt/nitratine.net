@@ -32,9 +32,9 @@
                 <img class="thumbnail" alt="Thumbnail" src="/posts/{{ post.path }}/{{ post.feature }}">
             </div>
             <div class="p-3">
-                <h3 class="mb-0">
+                <h2 class="h3 mb-0">
                     <a class="text-dark" href="{{ url_for('blog_post', path=post.path) }}">{{ post.title }}</a>
-                </h3>
+                </h2>
                 <div class="mb-1">
                     <a href="/blog/archive/#{{ post.date.year }}" class="text-muted">{{ ymd_format(post.date) }}</a>
                     <a href="/blog/categories/#{{ post.category }}" class="badge badge-primary ml-2">{{ post.category }}</a>
