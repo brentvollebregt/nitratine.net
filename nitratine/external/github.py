@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 import requests
 
@@ -60,7 +60,7 @@ class GitHubRepository:
         )
 
 
-def __get_github_user_repos(github_username: str):
+def __request_for_github_user_repos(github_username: str):
     """ Get details about the repositories associated with a user """
     response = requests.get(f'https://api.github.com/users/{github_username}/repos')
     github_repos_request_data = response.json()
@@ -79,6 +79,16 @@ def __get_github_user_repos(github_username: str):
     return sorted_available_repos
 
 
-github_user_repos = __get_github_user_repos(
-    github_username=site_config.github_username
-)
+__github_user_repos_cache = None
+
+
+def get_github_user_repos() -> List[GitHubRepository]:
+    """ Get the cached github_user_repos or make a request to get them and return them """
+    global __github_user_repos_cache
+
+    if __github_user_repos_cache is None:
+        __github_user_repos_cache = __request_for_github_user_repos(
+            github_username=site_config.github_username
+        )
+
+    return __github_user_repos_cache

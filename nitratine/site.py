@@ -9,8 +9,8 @@ from markdown.extensions.extra import ExtraExtension
 from markdown.extensions.toc import TocExtension
 
 from .config import site_config, redirects, featured_posts, POST_SOURCE, POST_FILENAME, POST_EXTENSION
-from .external.github import github_user_repos
-from .external.youtube import recent_youtube_videos
+from .external.github import get_github_user_repos
+from .external.youtube import get_most_recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
 from .markdown_extensions import YouTubeVideoExtension, HeaderLinkExtension
 from .rss import generate_rss_xml
@@ -91,7 +91,7 @@ def data():
 
     return render_template(
         'page/data.html',
-        repos=github_user_repos,
+        repos=get_github_user_repos(),
         posts=available_posts
     )
 
@@ -179,7 +179,7 @@ def blog_post(path):
     github_repo = None
     if 'github' in post.meta:
         try:
-            github_repo = [r for r in github_user_repos if r.full_name == post.meta.get('github')][0]
+            github_repo = [r for r in get_github_user_repos() if r.full_name == post.meta.get('github')][0]
         except IndexError as e:
             print(f'The repository {post.meta.get("github")} was not found in github_user_repos')
             raise e
@@ -270,7 +270,7 @@ def inject_site():
 @app.context_processor
 def inject_recent_videos():
     """ Provide recent_videos to Jinja templates """
-    return dict(recent_videos=recent_youtube_videos)
+    return dict(recent_videos=get_most_recent_youtube_videos())
 
 
 def ymd_format(date):

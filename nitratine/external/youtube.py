@@ -13,7 +13,7 @@ class YouTubeVideo:
     thumb_src: str
 
 
-def __get_most_recent_youtube_videos(
+def __request_for_most_recent_youtube_videos(
         youtube_data_api_key: str,
         youtube_channel_id: str,
         max_results=6) -> List[YouTubeVideo]:
@@ -34,8 +34,18 @@ def __get_most_recent_youtube_videos(
     return recent_videos
 
 
-recent_youtube_videos = __get_most_recent_youtube_videos(
-    youtube_data_api_key=site_config.youtube_data_api_key,
-    youtube_channel_id=site_config.youtube_channel_id,
-    max_results=6
-)
+__most_recent_youtube_videos_cache = None
+
+
+def get_most_recent_youtube_videos() -> List[YouTubeVideo]:
+    """ Get the cached most_recent_youtube_videos or make a request to get them and return them """
+    global __most_recent_youtube_videos_cache
+
+    if __most_recent_youtube_videos_cache is None:
+        __most_recent_youtube_videos_cache = __request_for_most_recent_youtube_videos(
+            youtube_data_api_key=site_config.youtube_data_api_key,
+            youtube_channel_id=site_config.youtube_channel_id,
+            max_results=6
+        )
+
+    return __most_recent_youtube_videos_cache
