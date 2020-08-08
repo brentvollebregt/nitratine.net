@@ -214,10 +214,7 @@ def sitemap():
     pages.append({'loc': url_for('blog_tags')})
     pages.append({'loc': url_for('blog_archive')})
 
-    return render_template(
-        'sitemap.xml',
-        pages=pages
-    )
+    return render_template('sitemap.xml', pages=pages), 200, {'content-type': 'text/xml'}
 
 
 @app.route('/rss.xml')
@@ -229,7 +226,7 @@ def rss():
 @app.route('/ads.txt')
 def ads_txt():
     """ An easy way to generate ads.txt """
-    return 'google.com, {0}, DIRECT, f08c47fec0942fa0'.format(site_config.google_adsense_publisher_id)
+    return f'google.com, {site_config.google_adsense_publisher_id}, DIRECT, f08c47fec0942fa0', 200, {'content-type': 'text/plain'}
 
 
 @app.route('/posts/<path:path>')  # TODO Can we make this /post/ and make everything in the markdown files relative - rename folder to post?

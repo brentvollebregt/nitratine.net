@@ -62,6 +62,8 @@ class TestSeo(unittest.TestCase):
                         self.assertIn(expected_header, header_numbers, f'A h{max_header} exists but not a h{expected_header} on "{link}"')
                 else:
                     self.fail(f'No headers found on "{link}"')
+            else:
+                response.close()  # Stop warnings of the stream not being closed
 
 
 if __name__ == '__main__':

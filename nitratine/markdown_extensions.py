@@ -12,10 +12,8 @@ class YouTubeVideoPattern(Pattern):
     """
     ANCESTOR_EXCLUDES = ('a',)
 
-    def __init__(self, config, md):
-        MENTION_RE = r'youtube:([^"&?\/\s]{11})'
-        super(YouTubeVideoPattern, self).__init__(MENTION_RE, md)
-        self.config = config
+    def __init__(self, md):
+        super(YouTubeVideoPattern, self).__init__(r'youtube:([^"&?\/\s]{11})', md)
 
     def handleMatch(self, m):
         video_id = m.group(2)
@@ -34,12 +32,8 @@ class YouTubeVideoPattern(Pattern):
 
 
 class YouTubeVideoExtension(Extension):
-    def __init__(self, *args, **kwargs):
-        self.config = {}
-        super(YouTubeVideoExtension, self).__init__(*args, **kwargs)
-
-    def extendMarkdown(self, md, md_globals):
-        md.inlinePatterns['youtube-video'] = YouTubeVideoPattern(self.getConfigs(), md)
+    def extendMarkdown(self, md):
+        md.inlinePatterns.register(YouTubeVideoPattern(md), 'youtube-video', 100)
 
 
 class HeaderLinkProcessor(Treeprocessor):
