@@ -29,7 +29,7 @@
     <div class="col-blog-content blog-main">
 
         <h1 class="blog-post-title">{{ page.title }}</h1>
-        <div class="mb-3">
+        <div class="mb-2">
             <a href="/blog/archive/#{{ page.date.year }}" class="text-muted">{{ ymd_format(page.date) }}</a>
             {%- if page.author -%}
             <span> by <a {% if page.author_link %}href="{{ page.author_link | safe }}"{% endif %} class="text-muted">{{ page.author }}</a></span>

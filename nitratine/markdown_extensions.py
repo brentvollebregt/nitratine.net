@@ -49,15 +49,28 @@ class HeaderLinkProcessor(Treeprocessor):
     def run(self, root):
         for element in root:
             if element.tag in self.SUPPORTED_ELEMENTS:
+                # Get the children from the header tag and remove them
+                original_header_children = list(element)
+                for e in original_header_children:
+                    element.remove(e)
+
                 # Add a wrapper so we can keep using :target::before on the header
                 span_wrapper = SubElement(element, 'span')
                 span_wrapper.set('style', 'position:relative')
-                # Setup the new `a` tag
+
+                # Put an `a` tag in this wrapper and then the original content from the header
                 link_element = SubElement(span_wrapper, 'a')
-                link_element.tail = element.text  # Put text after the a tag
-                element.text = '\n'  # Remove the text from the original header
+                for e in original_header_children:
+                    span_wrapper.append(e)
+
+                # Put the original text in the header after the new `a` tag then remove the text from the header
+                link_element.tail = element.text
+                element.text = '\n'
+
+                # Setup the rest of the `a` tag (the clickable anchor)
                 link_element.set('class', 'anchor')
                 link_element.set('href', f'#{element.get("id")}')
+
                 # Setup the internal SVG
                 svg_element = SubElement(link_element, 'svg')
                 svg_element.set('aria-hidden', 'true')
