@@ -14,3 +14,6 @@ Execute `python -m nitratine --help` to identify the functions that this module 
 
 ## Deployment
 Automated deployment is done using GitHub actions. The workflow to build and deploy the site can be found in [main.yml](/.github/workflows/main.yml).
+
+## Testing
+Tests can be run by executing `python -m unittest discover -s tests` in the root of the project.
