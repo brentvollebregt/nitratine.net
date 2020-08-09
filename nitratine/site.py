@@ -111,7 +111,6 @@ def blog_home():
     page1_posts = posts.paginate_posts(1)
     return render_template(
         'blog-home.html',
-        category_numbers=posts.post_numbers_by_category(),
         pagination_nav=posts.get_pagination_nav_data(1),
         posts=page1_posts
     )
@@ -129,7 +128,6 @@ def blog_pagination(page):
         abort(404)
     return render_template(
         'blog-home.html',
-        category_numbers=posts.post_numbers_by_category(),
         pagination_nav=posts.get_pagination_nav_data(page),
         posts=pagen_posts
     )
@@ -140,7 +138,6 @@ def blog_categories():
     """ Posts grouped by categories """
     return render_template(
         'blog-categories.html',
-        category_numbers=posts.post_numbers_by_category(),
         categories=posts.posts_by_category(),
         title='Categories',
         sort_type='category'
@@ -152,7 +149,6 @@ def blog_tags():
     """ Posts grouped by tags """
     return render_template(
         'blog-categories.html',
-        category_numbers=posts.post_numbers_by_category(),
         categories=posts.posts_by_tag(),
         title='Tags',
         sort_type='tag'
@@ -164,7 +160,6 @@ def blog_archive():
     """ Posts grouped and sorted by date """
     return render_template(
         'blog-categories.html',
-        category_numbers=posts.post_numbers_by_category(),
         categories=posts.posts_by_date(),
         title='Date',
         sort_type='date'
@@ -186,7 +181,6 @@ def blog_post(path):
 
     return render_template(
         'blog-post.html',
-        category_numbers=posts.post_numbers_by_category(),
         prev_and_next=posts.get_previous_and_next_posts(post),
         page=post,
         github_repo=github_repo
@@ -268,6 +262,12 @@ def inject_site():
 def inject_recent_videos():
     """ Provide recent_videos to Jinja templates """
     return dict(recent_videos=get_most_recent_youtube_videos())
+
+
+@app.context_processor
+def inject_category_numbers():
+    """ Provide category_numbers to Jinja templates (for sidebar in blog-base.html) """
+    return dict(category_numbers=posts.post_numbers_by_category())
 
 
 def ymd_format(date):
