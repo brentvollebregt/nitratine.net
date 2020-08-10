@@ -9,3 +9,4 @@ Flask-Minify
 feedgen
 click
 beautifulsoup4
+livereload
