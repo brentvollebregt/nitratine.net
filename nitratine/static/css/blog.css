@@ -120,6 +120,10 @@
     margin: auto;
 }
 
+.post-content > .toc > ul > li > ul > li *:not(a) {
+    display: none; /* Hide any points that are more than two headings deep in the table of contents */
+}
+
 .post-content > .toc > ul {
     border-bottom: 1px solid rgb(230, 230, 230);
     padding-bottom: 1rem;
