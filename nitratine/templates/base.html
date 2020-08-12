@@ -8,6 +8,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-touch-icon.png">
         {%- if site_config.theme_colour -%}<meta name="theme-color" content="{{ site_config.theme_colour }}">{%- endif -%}
         <link rel="canonical" href="{{ site_config.url + request.path }}">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed for nitratine.net" href="/rss.xml">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="/static/css/base.css">
@@ -103,8 +104,8 @@
                                 <img src="/static/img/icons/youtube.svg" alt="YouTube Logo" />
                                 YouTube
                             </a>
-                            <a href="/rss.xml" class="with-icon"
-                            ><img src="/static/img/icons/rss.svg" alt="RSS Logo"/>
+                            <a rel="alternate" type="application/rss+xml" href="/rss.xml" class="with-icon">
+                                <img src="/static/img/icons/rss.svg" alt="RSS Logo"/>
                                 Nitratine RSS Feed
                             </a>
                         </div>
