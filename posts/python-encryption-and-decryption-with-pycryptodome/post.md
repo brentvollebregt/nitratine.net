@@ -44,9 +44,9 @@ import pycryptodome
 If no errors appeared it has been installed correctly.
 
 ## What is AES?
-In this tutorial, I'll be using the implementation of [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) (AES) to encrypt strings and files. If you do not know what AES is, I highly recommend you understand what it is and how it works before you continue with the examples. Not understanding the different modes of AES and how it is designed could lead to insecure encryptions.
+In this tutorial, I'll be using an implementation of [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) (AES) to encrypt strings and files. If you don't know what AES is, I highly recommend you understand what it is and how it works before you continue with the examples. Not understanding the different modes of AES and how it is designed could lead to insecure encryptions.
 
-AES has a block size of 128 bits and this implementation of AES supports 3 sizes of keys, 16, 24 or 32 bytes long respectively for *AES-128*, *AES-192* or *AES-256*. Many modes are [supported by this implementation of AES](https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html), including:
+AES has a block size of 128 bits and this implementation of AES supports 3 sizes of keys, 16, 24 or 32 bytes long for *AES-128*, *AES-192* or *AES-256* respectively. Many modes are [supported by this implementation of AES](https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html), including:
 
 - CBC: Cipher-Block Chaining
 - CFB: Cipher FeedBack
@@ -58,7 +58,7 @@ AES has a block size of 128 bits and this implementation of AES supports 3 sizes
  
 
 ## Generating A Key
-Keys that are used in AES must be 128, 192, or 256 bits in size (respectively for *AES-128*, *AES-192* or *AES-256*). PyCryptodome supplies a function at `Crypto.Random.get_random_bytes` that returns a random byte string of a length we decide. To use this, import the function and pass a length to the function:
+Keys that are used in AES must be 128, 192, or 256 bits in size (for *AES-128*, *AES-192* or *AES-256* respectively). PyCryptodome supplies a function at `Crypto.Random.get_random_bytes` that returns a random byte string of a length we decide. To use this, import the function and pass a length to the function:
 
 ```python
 from Crypto.Random import get_random_bytes
