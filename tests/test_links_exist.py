@@ -11,7 +11,7 @@ from nitratine.__main__ import app
 
 EXTERNAL_URL_BLACKLIST = [
     r'$^',
-    r'^https://hitcounter.pythonanywhere.com',  # Loves dying quite often at the moment
+    r'^https://hitcounternitratine.pythonanywhere.com',  # Loves dying quite often at the moment
     r'^https://www.pexels.com',  # Keeps giving forbiddens?
     r'^https://nzcsc.org.nz'  # Doesn't seem to be up anymore
 ]

@@ -34,7 +34,7 @@
                 {% for post in posts %}
                     <tr>
                         <td><a href="{{ url_for('blog_post', path=post[0]) }}">{{ post[1] }}</a></td>
-                        <td><img src="https://hitcounter.pythonanywhere.com/nocount/tag.svg?url={{ site_config.url }}/blog/post/{{ post[0] }}/" alt="Hits for {{ post[1] }}"></td>
+                        <td><img src="https://hitcounternitratine.pythonanywhere.com/nocount/tag.svg?url={{ site_config.url }}/blog/post/{{ post[0] }}/" alt="Hits for {{ post[1] }}"></td>
                     </tr>
                 {% endfor %}
             </tbody>
