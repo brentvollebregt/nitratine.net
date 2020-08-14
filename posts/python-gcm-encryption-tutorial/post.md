@@ -63,13 +63,13 @@ Keys that are used in AES must be 128, 192, or 256 bits in size (for *AES-128*, 
  
 For this tutorial I'll just go over how to generate a key from a password as it is the most popular method. You are still free to use a randomly generate key as demonstrated in the links above - they will still work with these examples.
  
-When generating a key from a password, we need to take a string provided by the user and create an appropriately sized byte sequence; the method used must produce the same output for the same inputs. To do this we can use `Crypto.Protocol.KDF.PBKDF2` ([API reference](https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#Crypto.Protocol.KDF.PBKDF2)). PBKDF2 allows us to generate a key of any length by simply passing a password and _salt_. 
+When generating a key from a password, we need to take a string provided by the user and create an appropriately sized byte sequence; the method used must produce the same output for the same inputs. To do this we can use `Crypto.Protocol.KDF.scrypt` ([API reference](https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#scrypt)). _scrypt_ allows us to generate a key of any length by simply passing a password and _salt_. 
 
-> PBKDF2 is used because PBKDF1 can only generate keys up to 160 bits long.
+> scrypt has been used instead of PBKDF2 because in addition to being computationally expensive, it is also memory intensive and therefore more secure against the risk of custom ASICs.
 
-PBKDF2 is different to the SHA family (ie. _SHA-256_ and _SHA-512_) because it also takes a salt and a work factor. Providing a salt that will mean that the same hash does not map to the same password every time, thus preventing [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) lookups. A work factor is also specified to make the transformation more computationally difficult which means the key is harder to brute force.
+_scrypt_ is different to the SHA family (ie. _SHA-256_ and _SHA-512_) because it also takes a salt and a work factor. Providing a salt that will mean that the same hash does not map to the same password every time, thus preventing [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) lookups. A work factor is also specified to make the transformation more computationally difficult which means the key is harder to brute force.
 
-> You can read more about the differences between password hashes differ and secure hashes in [this reply on Stack Exchange](https://crypto.stackexchange.com/a/35279).
+> You can read more about the differences between password hashes differ and secure hashes in [this reply on Stack Exchange](https://crypto.stackexchange.com/a/35279) - in this example PBKDF2 is compared to SHA-512 rather than scrypt.
 
 ### Generating a Salt
 
@@ -86,25 +86,29 @@ If you execute `print(salt)` you will see something like the following
 b'\x8a\xfe\x1f\xa7aY}\xa3It=\xc3\xccT\xc8\x94\xc11%w]A\xb7\x87G\xd8\xba\x9e\xf8\xec&\xf0'
 ```
 
-This is a random sequence of bytes that has been generated. For every object (like files) you will encrypt, you should generate a new salt for it to be combined with the password by PBKDF2. This will mean the same password does not create the same key for multiple objects.
+This is a random sequence of bytes that has been generated. For every object (like files) you will encrypt, you should generate a new salt for it to be combined with the password by scrypt. This will mean the same password does not create the same key for multiple objects.
 
 It's safe to store this generated salt with the encrypted output and in this tutorial I'll show you how to store them with the output and then read them back out. 
 
-### Generating the Key Using PBKDF2
+### Generating the Key Using scrypt
 Now that you have generated a salt, we can generate a key using the password being provided. Passing the password provided by the user, the salt that you just generated as well as declaring the output length, we can get the key.
 
 ```python
-from Crypto.Protocol.KDF import PBKDF2
+from Crypto.Protocol.KDF import scrypt
 
 salt = b'...'  # Salt you generated
 password = 'password123'  # Password provided by the user, can use input() to get this
 
-key = PBKDF2(password, salt, dkLen=32)  # Your key that you can encrypt with
+key = scrypt(password, salt, key_len=32, N=2**17, r=8, p=1)  # Your key that you can encrypt with
 ```
 
 Now in `key`, you will have the key that you can use in encryption - you can view it using `print(key)`. You do not have to store this key now as you can see that this can be generated every time regarding the user provides the same password as long as you use the same salt (which we will be storing with the encrypted file/object).
 
-In the example above, `dkLen` has been set to 32; this is the length of the key that we want to be output. 32 has been used because 32 * 8 bits (8 bits = 1 byte) is 256, this means we will be using AES-256 when providing the key generated by this function.
+In the example above, `key_len` has been set to 32; this is the length of the key that we want to be output. 32 has been used because 32 * 8 bits (8 bits = 1 byte) is 256, this means we will be using AES-256 when providing the key generated by this function.
+
+I also passed values for `N`, `r` and `p` which can be found in the [docs for scrypt](https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#scrypt). `N` is the work factor (CPU/Memory cost) which will determine how long it takes to calculate the output - 2^14 will be <100ms whereas 2^20 will be <5s on today's machines. 
+
+> I have left `N` as `2**17` to keep people happy about the timing of encryption - in the case of blind copy and paste. If you're implementing this in a critical system or want to add have scrypt return a slightly more secure derivation, I recommend bumping `N` to `2**20`.
 
 ## Source and Storage Planning
 Before we begin, we need to do a bit of planning of what is being encrypted (the source) and any transformations required, the inputs and outputs for both encryption and decryption and storing values we need to remember with the encrypted file.
@@ -142,7 +146,7 @@ Here is a fully-involved diagram on the process we will need to follow to encryp
 ![Encryption Flow Diagram](/posts/python-gcm-encryption-tutorial/encryption-flow-diagram.png)
 
 1. Generate a new salt.
-2. Use `PBKDF2` to convert the salt and password into a key we can use.
+2. Use `scrypt` to convert the salt and password into a key we can use.
 3. Open a new file and write the salt out.
     - We write the salt to the output file first as we will need it when decrypting later.
     - Putting it in this file allows to keep the correct salt with the encrypted data.
@@ -168,7 +172,7 @@ Here is a fully-involved diagram on the process we will need to follow to decryp
 
 1. Read the salt from the source file.
     - The salt we generated was 32 bytes long, so calling `.read(32)` will get the salt out of the encrypted file.
-2. Use `PBKDF2` to convert the salt and password into a key again.
+2. Use `scrypt` to convert the salt and password into a key again.
 3. Read the nonce from the source file like we did for the salt.
     - AES GCM always generates a nonce that is 16 bytes long, so calling `.read(16)` will get the nonce out of the encrypted file.
 4. Create a new AES decryption instance using the key and the nonce.
@@ -182,7 +186,7 @@ Here is a fully-involved diagram on the process we will need to follow to decryp
 ```python
 from Crypto.Random import get_random_bytes
 from Crypto.Cipher import AES
-from Crypto.Protocol.KDF import PBKDF2
+from Crypto.Protocol.KDF import scrypt
 
 BUFFER_SIZE = 1024 * 1024  # The size in bytes that we read, encrypt and write to at once
 
@@ -197,7 +201,7 @@ file_in = open(input_filename, 'rb')  # rb = read bytes. Required to read non-te
 file_out = open(output_filename, 'wb')  # wb = write bytes. Required to write the encrypted data
 
 salt = get_random_bytes(32)  # Generate salt
-key = PBKDF2(password, salt, dkLen=32)  # Generate a key using the password and salt
+key = scrypt(password, salt, key_len=32, N=2**17, r=8, p=1)  # Generate a key using the password and salt
 file_out.write(salt)  # Write the salt to the top of the output file
 
 cipher = AES.new(key, AES.MODE_GCM)  # Create a cipher object to encrypt data
@@ -228,7 +232,7 @@ The file `output_filename` will now have the encrypted data in it.
 import os
 
 from Crypto.Cipher import AES
-from Crypto.Protocol.KDF import PBKDF2
+from Crypto.Protocol.KDF import scrypt
 
 BUFFER_SIZE = 1024 * 1024  # The size in bytes that we read, encrypt and write to at once
 
@@ -244,7 +248,7 @@ file_out = open(output_filename, 'wb')
 
 # Read salt and generate key
 salt = file_in.read(32)  # The salt we generated was 32 bits long
-key = PBKDF2(password, salt, dkLen=32)  # Generate a key using the password and salt again
+key = scrypt(password, salt, key_len=32, N=2**17, r=8, p=1)  # Generate a key using the password and salt again
 
 # Read nonce and create cipher
 nonce = file_in.read(16)  # The nonce is 16 bytes long
