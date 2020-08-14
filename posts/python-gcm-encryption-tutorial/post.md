@@ -7,14 +7,14 @@ description: "This tutorial covers what AES GCM mode encryption is, the benefits
 
 [TOC]
 
-> This tutorial is a follow on from [Python Encryption and Decryption with PyCryptodome](/blog/post/python-encryption-and-decryption-with-pycryptodome/) which covers a high level view of the usage of the Python PyCryptodome library. If you have already read this, there will be a bit of duplicate reading but I recommend at least skimming just in case you miss something.
+> This tutorial is a follow on from [Python Encryption and Decryption with PyCryptodome](/blog/post/python-encryption-and-decryption-with-pycryptodome/) which covers a high-level view of the usage of the Python PyCryptodome library. If you have already read this, there will be a bit of duplicate reading but I recommend at least skimming just in case you miss something.
 
 ## What is AES and GCM Mode?
 [Advanced Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) (AES) is a fast, secure and very popular block cipher that is commonly used to encrypt electronic data. AES has three different block ciphers: _AES-128_ (128 bit), _AES-192_ (192 bit) and _AES-256_ (256 bit) - each cipher is named after the key length they use for encryption and decryption. Each of these ciphers encrypt and decrypt the data in 128-bit blocks but they use different sizes of cryptographic keys.
 
 AES supports many different "modes". Modes are the internal algorithm used to encrypt data; each mode can potentially have different inputs and outputs but they always have a single input for data to encrypt and a single output for encrypted data along with an input key.
 
-[_GCM_](https://en.wikipedia.org/wiki/Galois/Counter_Mode) is a mode of AES that uses the [CTR (counter) mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)) to encrypt data and uses Galois mode for authentication. Aside from the CTR mode which is used to encrypt the data, Galois mode authentication allows us to check at the end of decryption that the message has not been tampered with. GCM is well known for it's speed and that it's a mode that it's patent-free.
+[_GCM_](https://en.wikipedia.org/wiki/Galois/Counter_Mode) is a mode of AES that uses the [CTR (counter) mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)) to encrypt data and uses Galois mode for authentication. Aside from the CTR mode which is used to encrypt the data, Galois mode authentication allows us to check at the end of decryption that the message has not been tampered with. GCM is well known for its speed and that it's a mode that it's patent-free.
 
 In this tutorial, I'll be using an implementation of AES in [PyCryptodome](https://pycryptodome.readthedocs.io/en/latest/) to encrypt strings and files. Many modes are supported [by this implementation of AES](https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html), including CBC, CFB and GCM which we will be using. I chose PyCryptodome as it is well documented and is similar to an older package _PyCrypto_ that died a while ago.
 
@@ -61,15 +61,15 @@ Keys that are used in AES must be 128, 192, or 256 bits in size (for *AES-128*, 
 - [How to store and read the randomly generated key](/blog/post/python-encryption-and-decryption-with-pycryptodome/#storing-a-key)
 - [How to generate a key from a password](/blog/post/python-encryption-and-decryption-with-pycryptodome/#generating-a-key-from-a-password)
  
-For this tutorial I'll just go over how to generate a key from a password as it is the most popular method. You are still free to use a randomly generate key as demonstrated in the links above - they will still work with these examples.
+For this tutorial, I'll just go over how to generate a key from a password as it is the most popular method. You are still free to use a randomly generated key as demonstrated in the links above - they will still work with these examples.
  
 When generating a key from a password, we need to take a string provided by the user and create an appropriately sized byte sequence; the method used must produce the same output for the same inputs. To do this we can use `Crypto.Protocol.KDF.scrypt` ([API reference](https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#scrypt)). _scrypt_ allows us to generate a key of any length by simply passing a password and _salt_. 
 
-> scrypt has been used instead of PBKDF2 because in addition to being computationally expensive, it is also memory intensive and therefore more secure against the risk of custom ASICs.
+> scrypt has been used instead of PBKDF2 because, in addition to being computationally expensive, it is also memory intensive and therefore more secure against the risk of custom ASICs.
 
-scrypt is different to the SHA family (ie. _SHA-256_ and _SHA-512_) because it also takes a salt and a work factor. Providing a salt that will mean that the same hash does not map to the same password every time, thus preventing [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) lookups. A work factor is also specified to make the transformation more computationally difficult which means the key is harder to brute force.
+scrypt is different from the SHA family (ie. _SHA-256_ and _SHA-512_) because it also takes a salt and a work factor. Providing a salt that will mean that the same hash does not map to the same password every time, thus preventing [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) lookups. A work factor is also specified to make the transformation more computationally difficult which means the key is harder to brute force.
 
-> You can read more about the differences between password hashes differ and secure hashes in [this reply on Stack Exchange](https://crypto.stackexchange.com/a/35279) - in this example PBKDF2 is compared to SHA-512 rather than scrypt.
+> You can read more about the differences between password hashes differ and secure hashes in [this reply on Stack Exchange](https://crypto.stackexchange.com/a/35279) - in this example, PBKDF2 is compared to SHA-512 rather than scrypt.
 
 ### Generating a Salt
 
@@ -88,7 +88,7 @@ b'\x8a\xfe\x1f\xa7aY}\xa3It=\xc3\xccT\xc8\x94\xc11%w]A\xb7\x87G\xd8\xba\x9e\xf8\
 
 This is a random sequence of bytes that has been generated. For every object (like files) you will encrypt, you should generate a new salt for it to be combined with the password by scrypt. This will mean the same password does not create the same key for multiple objects.
 
-It's safe to store this generated salt with the encrypted output and in this tutorial I'll show you how to store them with the output and then read them back out. 
+It's safe to store this generated salt with the encrypted output and in this tutorial, I'll show you how to store them with the output and then read them back out. 
 
 ### Generating the Key Using scrypt
 Now that you have generated a salt, we can generate a key using the password being provided. Passing the password provided by the user, the salt that you just generated as well as declaring the output length, we can get the key.
@@ -149,7 +149,7 @@ Here is a fully-involved diagram on the process we will need to follow to encryp
 2. Use `scrypt` to convert the salt and password into a key we can use.
 3. Open a new file and write the salt out.
     - We write the salt to the output file first as we will need it when decrypting later.
-    - Putting it in this file allows to keep the correct salt with the encrypted data.
+    - Putting it in this file allows us to keep the correct salt with the encrypted data.
     - Putting it at the top of the file means we can easily read it out before decrypting (we know the length as it's always the same).
 4. Create a new AES encryption instance using the key.
 5. Write the nonce out to the file.
@@ -178,7 +178,7 @@ Here is a fully-involved diagram on the process we will need to follow to decryp
 4. Create a new AES decryption instance using the key and the nonce.
 5. Read the encrypted file bit-by-bit and decrypt, then output each part to the output file. Leave the tag still in the file (16 bytes also) 
     - Just like when we read the file slowly to encrypt
-6. Finally read the tag and verify the decryption.
+6. Finally, read the tag and verify the decryption.
 
 
 ## Encryption
