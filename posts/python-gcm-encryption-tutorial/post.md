@@ -67,7 +67,7 @@ When generating a key from a password, we need to take a string provided by the 
 
 > scrypt has been used instead of PBKDF2 because in addition to being computationally expensive, it is also memory intensive and therefore more secure against the risk of custom ASICs.
 
-_scrypt_ is different to the SHA family (ie. _SHA-256_ and _SHA-512_) because it also takes a salt and a work factor. Providing a salt that will mean that the same hash does not map to the same password every time, thus preventing [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) lookups. A work factor is also specified to make the transformation more computationally difficult which means the key is harder to brute force.
+scrypt is different to the SHA family (ie. _SHA-256_ and _SHA-512_) because it also takes a salt and a work factor. Providing a salt that will mean that the same hash does not map to the same password every time, thus preventing [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table) lookups. A work factor is also specified to make the transformation more computationally difficult which means the key is harder to brute force.
 
 > You can read more about the differences between password hashes differ and secure hashes in [this reply on Stack Exchange](https://crypto.stackexchange.com/a/35279) - in this example PBKDF2 is compared to SHA-512 rather than scrypt.
 
