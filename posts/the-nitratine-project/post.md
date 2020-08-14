@@ -4,7 +4,8 @@ category: Projects
 tags: [python, flask, website]
 feature: nitratine1.jpg
 description: "The Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months."
-github: brentvollebregt/nitratine-old
+
+> The original repo for this project has been removed and can now be found on the `v1` branch in [brentvollebregt/nitratine.net](https://github.com/brentvollebregt/nitratine.net/tree/v1).
 
 This version of the Nitratine project was originally a place to host my projects, tutorials and tools. I created a website that fulfilled my wants to host this content over more than two months.
 
@@ -41,15 +42,14 @@ The site has a home page and then five sub-areas; each article is put under one 
     - Github card of your profile
     - Optional: 300x250 ad
 
-
-
 ## Installation and Setup
 1. Install Requirements
     - Python 3
     - Flask (pip install Flask)
-2. Clone or download the git repo at [https://github.com/brentvollebregt/nitratine](https://github.com/brentvollebregt/nitratine-old) and cd into the project
-3. Run server.py
-4. Go to /admin
+2. Clone or download the git repo at [https://github.com/brentvollebregt/nitratine-old](https://github.com/brentvollebregt/nitratine-old) and cd into the project
+3. Checkout the v1 branch: `git checkout v1`
+4. Run server.py
+5. Go to /admin
     - Set variables on this page and change options
     - Set username and password using "Raw JSON" if needed
 
