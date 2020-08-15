@@ -1,11 +1,10 @@
 import re
-from typing import List
 import unittest
 
 from bs4 import BeautifulSoup
 import requests
 
-from .helpers import get_urls_from_html
+from helpers import get_urls_from_html
 from nitratine.__main__ import app
 
 

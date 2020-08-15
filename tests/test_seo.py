@@ -3,7 +3,7 @@ import unittest
 
 from bs4 import BeautifulSoup, SoupStrainer
 
-from .helpers import get_all_local_linked_pages
+from helpers import get_all_local_linked_pages
 from nitratine.__main__ import app
 
 

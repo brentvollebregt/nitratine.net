@@ -46,7 +46,7 @@ The site has a home page and then five sub-areas; each article is put under one 
 1. Install Requirements
     - Python 3
     - Flask (pip install Flask)
-2. Clone or download the git repo at [https://github.com/brentvollebregt/nitratine-old](https://github.com/brentvollebregt/nitratine-old) and cd into the project
+2. Clone or download the git repo at [github.com/brentvollebregt/nitratine.net](https://github.com/brentvollebregt/nitratine.net) and cd into the project
 3. Checkout the v1 branch: `git checkout v1`
 4. Run server.py
 5. Go to /admin
