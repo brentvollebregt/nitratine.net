@@ -146,7 +146,7 @@ eel.python_function()(print_return);
 When calling a JavaScript function from Python, we can get the return value directly using a double pair of brackets; for example:
 
 ```python
-return_value = eel.js_random()()  # This immeadiately returns the value
+return_value = eel.js_random()()  # This immediately returns the value
 print('Got this from Javascript: ', return_value)
 ```
 

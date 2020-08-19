@@ -46,7 +46,7 @@ An example of the JSON response can be found in the [Spotify API documentation](
     
 ```
 
-This meant all we needed to do was get the Spotify id for each song our program took in by looking at the tags the song had. I used [mutagen](https://github.com/quodlibet/mutagen) to strip the tags of the .mp3 files and I then passed this to the search() method in the [Spotipy](https://github.com/plamere/spotipy) library to the the Spotify id.
+This meant all we needed to do was get the Spotify id for each song our program took in by looking at the tags the song had. I used [mutagen](https://github.com/quodlibet/mutagen) to strip the tags of the .mp3 files and I then passed this to the search() method in the [Spotipy](https://github.com/plamere/spotipy) library to get the Spotify id.
 
 ## Gathering Data
 The only piece left was now the data to compare each new song to. I had thought to scrape public Spotify playlist created by people with 'happy' and 'sad' in the titles. With all these songs, I then got their valence and energy and placed them on a plane. This process created the plane below.

@@ -211,7 +211,7 @@ server.login(email, password)
 
 # Loop over each email to send to
 for send_to_email in send_to_emails:
-    # Setup MIMEMultipart for each email address (if we don't do this, the emails will concat on each email sent)
+    # Setup MIMEMultipart for each email address (if we don't do this, the emails will concatenate on each email sent)
     msg = MIMEMultipart()
     msg['From'] = email
     msg['To'] = send_to_email

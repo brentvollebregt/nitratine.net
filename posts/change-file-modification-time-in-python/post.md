@@ -25,7 +25,7 @@ import time
 import datetime
 ```
 
-You will now need to locate the file you want to edit and create a time object to set to the file. To create one, we will first break it down into it's simpler parts.
+You will now need to locate the file you want to edit and create a time object to set to the file. To create one, we will first break it down into its simpler parts.
 
 ```python
 fileLocation = r""

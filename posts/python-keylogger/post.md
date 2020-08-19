@@ -37,7 +37,7 @@ log_dir = ""
 logging.basicConfig(filename=(log_dir + "key_log.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
 ```
 
-Then create a definition for keypresses called on_press which takes key as a parameter. In this definition, we want to log the key using the logging info method. The key will need to be casted to a string before logging it.
+Then create a definition for keypresses called on_press which takes key as a parameter. In this definition, we want to log the key using the logging info method. The key will need to be cast to a string before logging it.
 
 ```python
 def on_press(key):

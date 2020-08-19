@@ -21,7 +21,7 @@ XOR (or "exclusive or") is a binary operator like AND and OR. In Python, bitwise
 
 You can see that the result of the bitwise operation on two bits will be a 1 if they are different and 0 if they are the same. 
 
-When applying this operator to values longer than one bit, each bit is compared with it's corresponding in the other value; for example:
+When applying this operator to values longer than one bit, each bit is compared with its corresponding in the other value; for example:
 
 ![How to XOR Bits Demonstration](/posts/xor-python-byte-strings/example-xor-bits.png)
 
