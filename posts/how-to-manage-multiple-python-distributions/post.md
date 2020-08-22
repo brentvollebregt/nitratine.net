@@ -16,7 +16,7 @@ pip install xyz
 
 And then executed `python file.py` which says something like the following:
 
-```
+```pytb
 Traceback (most recent call last):
   File "file.py", line 1, in <module>
     import xyz
