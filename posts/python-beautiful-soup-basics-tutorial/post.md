@@ -1,5 +1,5 @@
 title: "Python Beautiful Soup Basics Tutorial"
-date: 2020-08-15
+date: 2020-08-22
 category: Tutorials
 tags: [python, html, scraping]
 feature: feature.png
