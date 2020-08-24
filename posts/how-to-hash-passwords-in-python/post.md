@@ -51,7 +51,7 @@ salt = os.urandom(32)
 
 > 32 is the size returned in bytes. You can choose any size but I recommend making it over 16 bytes.
 
-The output from this will be used in `pbkdf2_hmac` and then stored beside the output key (we will use it as a hash) from  `pbkdf2_hmac`. Every password relating to a user/entity must have its own hash, **do not use the same hash for all user's/entities passwords**.
+The output from this will be used in `pbkdf2_hmac` and then stored beside the output key from  `pbkdf2_hmac`. Every password relating to a user/entity must have its own salt; **do not use the same salt for all user's/entities passwords**.
 
 ### Hashing
 Now that the basics of these concepts are out of the way, we can get down to executing some code. The best way to learn is by example and application, so here is an example:
