@@ -9,7 +9,7 @@ description: "In this tutorial, I will demonstrate how to take a screenshot usin
 
 ## What Is PIL?
 
-PIL (Python Imaging Library) is a Python library that adds support for opening, manipulating, and saving many different image file formats. It has a very friendly API with lots of help online including [good documentation](https://pillow.readthedocs.io/en/stable/index.html). 
+PIL (Python Imaging Library / Pillow) is a Python library that adds support for opening, manipulating, and saving many different image file formats. It has a very friendly API with lots of help online including [good documentation](https://pillow.readthedocs.io/en/stable/index.html). 
 
 PIL supports Windows macOS and Linux and supports many versions of Python; see the installation notes to identify which version of PIL you will need for the version of Python you are using. At the time of wiring this, PIL 7 has been released and supports Python 3.8 - 3.5.
 
@@ -17,7 +17,7 @@ PIL supports Windows macOS and Linux and supports many versions of Python; see t
 To install PIL, execute the following in a terminal:
 
 ```terminal
-python -m pip install pip
+python -m pip install Pillow
 ```
 
 > To install an older version of PIL, execute `python -m pip install pip=<version>` eg. `python -m pip install pip=7.2.0`. You can find older versions released in the [release notes](https://pillow.readthedocs.io/en/stable/releasenotes/index.html).
@@ -43,7 +43,7 @@ After we have the `ImageGrab` module, we can call `.grab()` to take a screenshot
 ```python
 from PIL import ImageGrab
 
-screenshot = ImageGrab.grab()
+screenshot = ImageGrab.grab()  # Take the screenshot
 ```
 
 > On Linux, you must be using PIL 7.1.0 or higher for this to work; [see release notes](https://pillow.readthedocs.io/en/stable/releasenotes/7.1.0.html#x11-imagegrab-grab).
@@ -55,7 +55,7 @@ To view the screenshot, we can call `.show()` on the returned [Image object](htt
 from PIL import ImageGrab
 
 screenshot = ImageGrab.grab()
-screenshot.show()
+screenshot.show()  # Show the image using the default image viewer
 ```
 
 Executing this will open the screenshot in your default image viewer. If you have more than one display, you will notice that this screenshot is only of the first display; I will expand on this further [below](#taking-a-screenshot-of-a-different-display).
@@ -114,7 +114,7 @@ Back when we took a screenshot using `ImageGrab.grab()`, it only captured the ma
 ```python
 from PIL import ImageGrab
 
-screenshot = ImageGrab.grab(all_screens=True)
+screenshot = ImageGrab.grab(all_screens=True)  # Take a screenshot that includes all screens
 ```
 
 > Please note that `all_screens` is currently only supported in Windows
