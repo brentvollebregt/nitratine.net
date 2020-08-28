@@ -1,7 +1,7 @@
 import os
 
 from .config import site_config, redirects, FREEZE_DESTINATION
-from .site import app, try_redirect, page_not_found
+from .site import app, page_not_found
 from .freezer import freezer
 
 
@@ -22,7 +22,7 @@ def build():
         # Write redirect
         f = open(file, 'w')
         with app.app_context():
-            f.write(try_redirect(path=r))
+            f.write(page_not_found(None, path=r))
         f.close()
         print(f'Redirect: /{r} -> /{redirects[r]}')
 

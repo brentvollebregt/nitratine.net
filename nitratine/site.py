@@ -1,7 +1,7 @@
 import os
 import time
 
-from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect
+from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect, request
 from flask_minify import minify
 import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
@@ -231,21 +231,15 @@ def post_assets(path):
     return send_from_directory(POST_SOURCE, path)
 
 
-@app.route('/<path:path>/')
-def try_redirect(path):
-    """ Catches any routes not handled by the previous functions. Used to identify potential redirects. """
-    if path not in redirects:
-        abort(404)
-    redirect_to = f'/{redirects[path]}/'
-    return render_template(
-        'redirect.html',
-        redirect_to=redirect_to
-    )
-
-
 @app.errorhandler(404)
-def page_not_found(e):
-    """ The page to display on a 404 """
+def page_not_found(e, path=None):
+    """ Catches any unhandled routes. Used to identify potential redirects otherwise serves a 404 page. """
+    cut_down_path = request.path[1:-1] if path is None else path  # Lose front and back forward slashes: /path/to/here/ => path/to/here
+    if cut_down_path in redirects:
+        return render_template(
+            'redirect.html',
+            redirect_to=f'/{redirects[cut_down_path]}/'
+        )
     return render_template('404.html'), 404
 
 
