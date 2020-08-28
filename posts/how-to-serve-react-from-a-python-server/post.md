@@ -1,5 +1,5 @@
 title: "How To Serve React From A Python Server"
-date: 2020-08-25
+date: 2020-08-29
 category: Tutorials
 tags: [python, react, flask]
 feature: feature.png
