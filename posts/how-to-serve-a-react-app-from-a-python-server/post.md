@@ -1,4 +1,4 @@
-title: "How To Serve React From A Python Server"
+title: "How To Serve A React App From A Python Server"
 date: 2020-08-29
 category: Tutorials
 tags: [python, react, flask]

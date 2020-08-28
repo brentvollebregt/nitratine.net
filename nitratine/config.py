@@ -188,7 +188,8 @@ redirects: Dict[str, str] = {
     'common-issues-when-using-auto-py-to-exe': 'blog/post/issues-when-using-auto-py-to-exe',
     'encryption-and-decryption-in-python': 'blog/post/encryption-and-decryption-in-python',
     'blog/post/common-issues-when-using-auto-py-to-exe': 'blog/post/issues-when-using-auto-py-to-exe',
-    'blog/post/who-is-on-my-network': 'blog/post/whos-on-my-network'
+    'blog/post/who-is-on-my-network': 'blog/post/whos-on-my-network',
+    'blog/post/how-to-serve-react-from-a-python-server': 'blog/post/how-to-serve-a-react-app-from-a-python-server'
 }
 
 
