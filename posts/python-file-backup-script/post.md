@@ -75,7 +75,7 @@ while len(oldest_to_newest_backup_by_name) >= MAX_BACKUP_AMOUNT:  # >= because w
     backup_to_delete.unlink()
 
 # Create zip file (for both file and folder options)
-backup_file_name = f'backup-{datetime.now().strftime("%d%m%Y%H%M%S")}-{object_to_backup_path.name}.zip'
+backup_file_name = f'backup-{datetime.now().strftime("%Y%m%d%H%M%S")}-{object_to_backup_path.name}.zip'
 zip_file = zipfile.ZipFile(str(backup_directory_path / backup_file_name), mode='w')
 if object_to_backup_path.is_file():
     # If the object to write is a file, write the file
