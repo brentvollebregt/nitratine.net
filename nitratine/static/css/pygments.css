@@ -32,7 +32,7 @@
 .codehilite .nf { color: #dcdcaa }
 .codehilite .nn { color: #d4d4d4 }
 .codehilite .nt { color: #569cd6 }
-.codehilite .nx { color: #dcdcaa }
+.codehilite .nx { color: #dcdcaa } /* Inherit? */
 .codehilite .o { color: #d4d4d4 }
 .codehilite .p { color: #d4d4d4 }
 .codehilite .s { color: #ce9178 }
@@ -41,3 +41,17 @@
 .codehilite .sx { color: #d4d4d4 }
 .codehilite .gp { color: #dcdcaa }
 .codehilite .kr { color: #569cd6 }
+.codehilite .ow { color: #c586c0 }
+.codehilite .nd { color: #4ec9b0 }
+.codehilite .si { color: #ce9178 }
+.codehilite .mf { color: #569cd6 }
+.codehilite .ne { color: #4ec9b0 }
+.codehilite .se { color: #dcdcaa }
+.codehilite .sd { color: #6a9955 }
+.codehilite .sa { color: #dcdcaa }
+.codehilite .vm { color: #569cd6 }
+.codehilite .err { color: inherit }
+.codehilite .nv { color: inherit }
+.codehilite .gt { color: inherit }
+.codehilite .m { color: #569cd6 }
+.codehilite .gr { color: #4ec9b0 }
