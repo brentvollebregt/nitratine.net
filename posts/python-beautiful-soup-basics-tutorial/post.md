@@ -503,12 +503,12 @@ To get the text inside the current tag, we can call `tag.text` or `tag.string`:
 ```
 
 #### Getting The Attributes Of The Current Tag
-To get the attributes inside the current tag, we can access them using `tag.atts`. This will return something that looks and functions like a dictionary.
+To get the attributes inside the current tag, we can access them using `tag.attrs`. This will return something that looks and functions like a dictionary.
 
 ```pycon
 >>> element
 <p class="class_a, class_b, class_c" id="some_id" title="My Title"></p>
->>> element.atts
+>>> element.attrs
 {'id': 'some_id', 'class': ['class_a,', 'class_b,', 'class_c'], 'title': 'My Title'}
 ```
 
