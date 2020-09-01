@@ -110,6 +110,7 @@ featured_posts: List[FeaturedPost] = [
     ),
     FeaturedPost(type='post-image', post='encryption-and-decryption-in-python',),
     FeaturedPost(type='post', post='issues-when-using-auto-py-to-exe'),
+    FeaturedPost(type='post-image', post='how-to-send-an-email-with-python'),
     FeaturedPost(
         type='raw',
         post='emotionify',
@@ -121,10 +122,10 @@ featured_posts: List[FeaturedPost] = [
         """
     ),
     FeaturedPost(type='post', post='python-encryption-and-decryption-with-pycryptodome'),
-    FeaturedPost(type='post-image', post='python-guis-with-pyqt',),
-    FeaturedPost(type='post-image', post='how-to-send-an-email-with-python',),
     FeaturedPost(type='post', post='python-requests-tutorial'),
+    FeaturedPost(type='post', post='python-face-recognition-tutorial'),
     FeaturedPost(type='post', post='simulate-keypresses-in-python'),
+    FeaturedPost(type='post-image', post='python-guis-with-pyqt'),
     FeaturedPost(
         type='raw',
         post='spotify-lyrics-viewer',
