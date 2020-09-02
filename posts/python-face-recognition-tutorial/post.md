@@ -1,7 +1,7 @@
 title: "Python Face Recognition Tutorial"
 date: 2020-09-01
 category: Tutorials
-tags: [python, facial-recognition]
+tags: [python, facial-recognition, pil]
 feature: single-person-red-box.png
 description: "In this tutorial, I explain the setup and usage of the Python face_recognition library. This library can be used to detect faces using Python and identify facial features."
 
@@ -458,6 +458,35 @@ img_draw.show()
 ```
 
 ![Single Person With Facial Markings](/posts/python-face-recognition-tutorial/single-person-facial-markings.png)
+
+### Final Code For This Section
+
+```python
+import face_recognition
+from PIL import Image, ImageDraw
+
+# Load the image and detect face landmarks for each face within
+image = face_recognition.load_image_file('single-person.jpg')
+face_landmarks_list = face_recognition.face_landmarks(image)
+
+# Make a PIL image from the loaded image and then get a drawing object
+img = Image.fromarray(image, 'RGB')
+img_draw = ImageDraw.Draw(img)
+
+# Draw all the features for the first face
+face_landmarks = face_landmarks_list[0]  # Get the first object corresponding to the first face
+img_draw.line(face_landmarks['chin'])
+img_draw.line(face_landmarks['left_eyebrow'])
+img_draw.line(face_landmarks['right_eyebrow'])
+img_draw.line(face_landmarks['nose_bridge'])
+img_draw.line(face_landmarks['nose_tip'])
+img_draw.line(face_landmarks['left_eye'])
+img_draw.line(face_landmarks['right_eye'])
+img_draw.line(face_landmarks['top_lip'])
+img_draw.line(face_landmarks['bottom_lip'])
+
+img_with_face_landmarks.show()  # Show the image for the current iteration
+```
 
 ## Matching Detected Faces
 The face_recognition library also provides the function [`face_recognition.compare_faces`](https://face-recognition.readthedocs.io/en/latest/face_recognition.html#face_recognition.api.compare_faces) which can be used to compare detected faces to see if they match.
