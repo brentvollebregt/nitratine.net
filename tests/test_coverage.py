@@ -25,6 +25,8 @@ class TestCoverage(unittest.TestCase):
                     if 'class' in element.attrs:
                         for _class in element.attrs['class']:
                             self.assertIn(_class, defined_classes, f'Class {_class} not defined (from {link})')
+            else:
+                response.close()  # Stop warnings of the stream not being closed
 
 
 if __name__ == '__main__':

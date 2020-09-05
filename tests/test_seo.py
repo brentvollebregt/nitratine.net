@@ -30,6 +30,8 @@ class TestSeo(unittest.TestCase):
                 self.assertNotEqual('', description.get('content'))
                 self.assertNotEqual(None, canonical)
                 self.assertNotEqual('', canonical.get('href'))
+            else:
+                response.close()  # Stop warnings of the stream not being closed
 
     def test_all_images_have_alt_tags(self):
         test_client = app.test_client(self)
@@ -46,6 +48,8 @@ class TestSeo(unittest.TestCase):
 
                     self.assertNotEqual(None, alt, f'Image with src="{src}" on {link} has alt="{alt}"')
                     self.assertNotEqual('', alt, f'Image with src="{src}" on {link} has alt="{alt}"')
+            else:
+                response.close()  # Stop warnings of the stream not being closed
 
     def test_all_pages_have_reasonable_header_structures(self):
         test_client = app.test_client(self)

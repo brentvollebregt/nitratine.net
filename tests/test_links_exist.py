@@ -14,7 +14,8 @@ EXTERNAL_URL_BLACKLIST = [
     r'^http://localhost',
     r'^https://hitcounternitratine.pythonanywhere.com',  # Loves dying quite often at the moment
     r'^https://www.pexels.com',  # Keeps giving forbiddens?
-    r'^https://nzcsc.org.nz'  # Doesn't seem to be up anymore
+    r'^https://nzcsc.org.nz',  # Doesn't seem to be up anymore
+    r'^https://genius.com'  # 403
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
@@ -47,6 +48,8 @@ class TestLinksRespondNon404(unittest.TestCase):
                     u for u in urls_within
                     if (not u.startswith('/')) and u not in external_links_to_check
                 ]
+            else:
+                response.close()  # Stop warnings of the stream not being closed
 
         # Check all external links
         while len(external_links_to_check) != 0:
@@ -61,12 +64,15 @@ class TestLinksRespondNon404(unittest.TestCase):
                 continue
 
             # Request the URL and check it exists
-            response = requests.get(
-                link,
-                verify=False,
-                headers={'User-Agent': USER_AGENT}
-            )
-            self.assertEqual(response.status_code, 200, f'The path "{link}" returned HTTP{response.status_code}')
+            try:
+                response = requests.get(
+                    link,
+                    verify=False,
+                    headers={'User-Agent': USER_AGENT}
+                )
+                self.assertEqual(response.status_code, 200, f'The path "{link}" returned HTTP{response.status_code}')
+            except Exception as e:
+                self.fail(f'The path "{link}" could not be requested')
 
     def test_hash_references(self):
         test_client = app.test_client(self)
@@ -97,6 +103,8 @@ class TestLinksRespondNon404(unittest.TestCase):
                 # Links with hashes can either start with just a hash (for this page) or have a hash in them
                 links_with_hashes_to_check += [link + u for u in urls_within if u.startswith('#')] \
                                 + [u for u in urls_within if u.startswith('/') and '#' in u]  # Start with / for this site
+            else:
+                response.close()  # Stop warnings of the stream not being closed
 
         links_with_hashes_to_check = list(set(links_with_hashes_to_check))  # Distinct list
         while len(links_with_hashes_to_check) != 0:

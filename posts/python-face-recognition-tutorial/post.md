@@ -349,11 +349,11 @@ for face_location in face_locations:
 You will have many images open on your machine in separate windows; here they are all together:
 
 <div style="text-align: center; margin-bottom: 1rem">
-    <img style="display: inline" alt"Group of People Cropped Face 1" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-1.jpg" />
-    <img style="display: inline" alt"Group of People Cropped Face 2" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-2.jpg" />
-    <img style="display: inline" alt"Group of People Cropped Face 3" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-3.jpg" />
-    <img style="display: inline" alt"Group of People Cropped Face 4" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-4.jpg" />
-    <img style="display: inline" alt"Group of People Cropped Face 5" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-5.jpg" />
+    <img style="display: inline" alt="Group of People Cropped Face 1" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-1.jpg" />
+    <img style="display: inline" alt="Group of People Cropped Face 2" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-2.jpg" />
+    <img style="display: inline" alt="Group of People Cropped Face 3" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-3.jpg" />
+    <img style="display: inline" alt="Group of People Cropped Face 4" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-4.jpg" />
+    <img style="display: inline" alt="Group of People Cropped Face 5" src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-5.jpg" />
 </div>
 
 > I have downscaled these images for the tutorial but yours will be cropped at whatever resolution you put in.
@@ -502,9 +502,9 @@ Here are the two images with a known face in each:
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
     <!-- Duncan.Hull CC BY-SA 4.0 src: https://en.wikipedia.org/wiki/Elon_Musk#/media/File:Elon_Musk_Royal_Society.jpg -->
-    <img style="display: inline" alt"Elon Musk 1" src="/posts/python-face-recognition-tutorial/elon-musk-1.jpg" />
+    <img style="display: inline" alt="Elon Musk 1" src="/posts/python-face-recognition-tutorial/elon-musk-1.jpg" />
     <!-- REUTERS/Mike Blake src: https://www.businessinsider.com.au/elon-musk-last-decade-tesla-spacex-relationships-controversies-tweets-2019-11 -->
-    <img style="display: inline" alt"Elon Musk 2" src="/posts/python-face-recognition-tutorial/elon-musk-2.png" />
+    <img style="display: inline" alt="Elon Musk 2" src="/posts/python-face-recognition-tutorial/elon-musk-2.png" />
 </div>
 
 [elon-musk-1.jpg](/posts/python-face-recognition-tutorial/elon-musk-1.jpg)
@@ -514,8 +514,8 @@ And here are the images we will check to see if Elon is in them:
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
     <!-- Alex Gallardo/Associated Press src: https://www.nytimes.com/2019/10/10/science/nasa-spacex-elon-musk.html -->
-    <img style="display: inline" alt"Elon Musk Potential Match 1" src="/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg" />
-    <img style="display: inline" alt"Elon Musk Potential Match 2 (Group Of People)" src="/posts/python-face-recognition-tutorial/group-of-people.jpg" />
+    <img style="display: inline" alt="Elon Musk Potential Match 1" src="/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg" />
+    <img style="display: inline" alt="Elon Musk Potential Match 2 (Group Of People)" src="/posts/python-face-recognition-tutorial/group-of-people.jpg" />
 </div>
 
 [elon-musk-in-group.jpg](/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg)
