@@ -1,5 +1,6 @@
 import os
 import time
+import urllib.parse
 
 from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect, request
 from flask_minify import minify
@@ -270,4 +271,10 @@ def ymd_format(date):
     return f'{struct_time.tm_mday} {time.strftime("%b", struct_time)} {struct_time.tm_year}'
 
 
+def url_encode(string):
+    """ Convert a string to be used in a query string """
+    return urllib.parse.quote_plus(string)
+
+
 app.jinja_env.globals.update(ymd_format=ymd_format)  # Allow ymd_format to be called in a Jinja template
+app.jinja_env.globals.update(url_encode=url_encode)  # Allow ymd_format to be called in a Jinja template

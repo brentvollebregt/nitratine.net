@@ -37,7 +37,7 @@
     {%- if page.hidden -%}
     <span class="badge badge-danger">Hidden</span>
     {% endif %}
-    <img src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg" alt="Hits" class="post-hits">
+    <img src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url={{ url_encode(site_config.url + request.path) }}" alt="Hits" class="post-hits">
 </div>
 <p class="lead">{{ page.description }}</p>
 <hr class="mt-3 mb-0">
