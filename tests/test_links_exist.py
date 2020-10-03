@@ -15,7 +15,8 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://hitcounternitratine.pythonanywhere.com',  # Loves dying quite often at the moment
     r'^https://www.pexels.com',  # Keeps giving forbiddens?
     r'^https://nzcsc.org.nz',  # Doesn't seem to be up anymore
-    r'^https://genius.com'  # 403
+    r'^https://genius.com',  # 403
+    r'^https://www.namesilo.com'  # 403
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
@@ -51,6 +52,8 @@ class TestLinksRespondNon404(unittest.TestCase):
             else:
                 response.close()  # Stop warnings of the stream not being closed
 
+        failed_links_and_http_codes = []
+
         # Check all external links
         while len(external_links_to_check) != 0:
             link = external_links_to_check.pop()
@@ -72,7 +75,13 @@ class TestLinksRespondNon404(unittest.TestCase):
                 )
                 self.assertEqual(response.status_code, 200, f'The path "{link}" returned HTTP{response.status_code}')
             except Exception as e:
-                self.fail(f'The path "{link}" could not be requested')
+                failed_links_and_http_codes.append([link, response.status_code])
+
+        if len(failed_links_and_http_codes) > 0:
+            error_list = ''
+            for link_and_http_code in failed_links_and_http_codes:
+                error_list += f'\n{link_and_http_code[1]} {link_and_http_code[0]}'
+            self.fail(f'Paths were found that could not be requested:' + error_list)
 
     def test_hash_references(self):
         test_client = app.test_client(self)

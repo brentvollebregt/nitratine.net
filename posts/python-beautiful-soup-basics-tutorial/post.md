@@ -49,12 +49,12 @@ file.close()
 The variable `html` will have your data now like the [String literal](#string-literal) example.
 
 ### HTTP Request
-If you want to get a webpage, you can use something like the [`requests` library](https://requests.readthedocs.io/en/master/) to get the page. Say you want to get [http://testing-ground.scraping.pro/table](http://testing-ground.scraping.pro/table), you would do:
+If you want to get a webpage, you can use something like the [`requests` library](https://requests.readthedocs.io/en/master/) to get the page. Say you want to get [http://example.com/](http://example.com/), you would do:
 
 ```python
 import requests
 
-response = requests.get('http://testing-ground.scraping.pro/table')
+response = requests.get('http://example.com/')
 html = response.content.decode()  # The html variable now has the HTML document in it 
 ```
 
@@ -639,7 +639,7 @@ Output:
 ```
 
 ### Example 2 - Read A Single Value On The Page
-- Data source: [testing-ground.scraping.pro/whoami](http://testing-ground.scraping.pro/whoami)
+- Data source: testing-ground.scraping.pro/whoami *(No longer exists)*
 - Target: Read IP address
 
 HTML preview (cut down version):
