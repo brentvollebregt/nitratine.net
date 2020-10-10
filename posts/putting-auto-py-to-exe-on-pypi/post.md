@@ -43,7 +43,7 @@ It took me a few hours to find out how to structure my package and have everythi
 I use a lot of resources for finer details and looked at a lot of setup.py files but these resources would have been the most helpful:
 - [Packaging Python Projects](https://packaging.python.org/tutorials/packaging-projects/)
 - [Publishing your First PyPI Package by/for the Absolute Beginner](https://jonemo.github.io/neubertify/2017/09/13/publishing-your-first-pypi-package/)
-- [GitHub/kennethreitz/setup.py](https://github.com/kennethreitz/setup.py)
+- [GitHub/kennethreitz/setup.py](https://github.com/navdeep-G/setup.py)
 
 ### Issues With Entry-points
 One issue I sat on for a bit was an error message saying *EntryPoint must be in 'name=module:attrs [extras]' format*. I had provided *auto-py-to-exe=auto-py-to-exe.\_\_main\_\_:run* which followed the pattern provided.

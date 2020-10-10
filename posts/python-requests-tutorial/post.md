@@ -8,7 +8,7 @@ description: "This is a basic Python requests tutorial to help you get started w
 [TOC]
 
 ## Introduction
-The [`requests`](https://github.com/requests/requests) Python package is an HTTP library created by [Kenneth Reitz](https://github.com/kennethreitz). It is a very well known package in the Python community for making HTTP requests easy to create and call. This tutorial will cover the basics that you will need to know and will want to know when making HTTP requests in Python.
+The [`requests`](https://github.com/requests/requests) Python package is an HTTP library created by Kenneth Reitz. It's a very well known package in the Python community for making HTTP requests easy to create and call. This tutorial will cover the basics that you will need to know and will want to know when making HTTP requests in Python.
 
 Learning how to send HTTP requests allows you to query websites and API's for data or even a webpage so you can scrape data out with something like [Beatifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/).
 
