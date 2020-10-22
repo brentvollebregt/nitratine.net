@@ -209,6 +209,18 @@ These warnings can be ignored in most cases. I have not currently found a situat
 
 A YouTube user comment on the video related to this project that if you add `C:\Windows\System32\downlevel` to your PATH variable, these DLLS that were previously not being found can now be found. This is because the files missing are commonly found in this folder. Adding this folder to your path to now successfully locate these files can also speed up packaging times.
 
+### The Output Executable is Huge
+Sometimes pyinstaller tries to be smart and will add packages it sees in your environment even if you are not using them in the project being packaged. This can lead to output executables being tens to hundreds of megabytes in size.
+
+To get around this, the easiest way would be to:
+
+1. Create a new/clean virtual environment
+2. Install auto-py-to-exe into it
+3. Install the required modules for your project
+4. Use the auto-py-to-exe in this virtual environment to package your script
+
+Doing this will mean pyinstaller doesn't see the packages you don't need bundled which can lead to smaller packages.
+
 ### "VCRUNTIME140.dll" is either not designed to run on Windows or it contains an error
 Try selecting the `--noupx` button in the advanced tab.
 
