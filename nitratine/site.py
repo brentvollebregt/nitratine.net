@@ -2,7 +2,7 @@ import os
 import time
 import urllib.parse
 
-from flask import Flask, render_template, send_from_directory, abort, render_template_string, url_for, redirect, request
+from flask import Flask, render_template, send_from_directory, abort, url_for, redirect, request
 from flask_minify import minify
 import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
@@ -17,25 +17,20 @@ from .markdown_extensions import YouTubeVideoExtension, HeaderLinkExtension
 from .rss import generate_rss_xml
 
 
-def my_renderer(text):
-    pre_rendered_body = render_template_string(text)
-    return markdown.markdown(
-        pre_rendered_body,
-        extensions=[
-            CodeHiliteExtension(),
-            ExtraExtension(),
-            TocExtension(),
-            YouTubeVideoExtension(),
-            HeaderLinkExtension()
-        ]
-    )
+active_markdown_extensions = [
+    CodeHiliteExtension(),  # Code highlighting
+    ExtraExtension(),
+    TocExtension(),  # Table of contents `[toc]` + header ids
+    YouTubeVideoExtension(),  # `youtube:<video_id>` tag
+    HeaderLinkExtension()  # Adding chain hover icon to go to header hash link
+]
 
 
 app = Flask(__name__)
 app.config['FLATPAGES_AUTO_RELOAD'] = True
 app.config['FLATPAGES_EXTENSION'] = POST_EXTENSION
 app.config['FLATPAGES_ROOT'] = POST_SOURCE
-app.config['FLATPAGES_HTML_RENDERER'] = my_renderer
+app.config['FLATPAGES_HTML_RENDERER'] = lambda md: markdown.markdown(md, extensions=active_markdown_extensions)
 posts = FlatPagesExtended(app, POST_FILENAME)
 
 
