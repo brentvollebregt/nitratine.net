@@ -76,7 +76,6 @@ To add articles to the site you will need to have defined the articles location 
 
 #### view.html sample:
 ```python
-{% raw %}
 {% extends "SKELETON.html" %}
 
 {% block head %}
@@ -96,7 +95,6 @@ To add articles to the site you will need to have defined the articles location 
     <p>{{ description }}</p>
 </div>
 {% endblock %}
-{% endraw %}
 ```
 
 Here we can see that the two blocks are extended from SKELETON.html. The article CSS file is added and relevant data passed to the template has been used including date, views, description and title; these are pulled from data.json.
