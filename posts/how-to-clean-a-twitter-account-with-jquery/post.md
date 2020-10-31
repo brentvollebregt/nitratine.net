@@ -10,7 +10,7 @@ description: "This article covers how I used jQuery on twitter.com to delete all
 I have seen many people report about how bulk twitter deleters can 'break' an account; this has also occurred to me. At the end of this, I also provide a method to help with deleting broken tweets that you cannot delete/un-retweet.
 
 ## Unfollowing Accounts
-I first wanted to remove all the users my [bot]({{ url_for('blog_post', path='python-retweet-bot') }}) followed. Going into the ["Following"](https://twitter.com/following) tab in twitter shows everyone you have followed with blue buttons that go red and change text to "Unfollow" when you hover on them.
+I first wanted to remove all the users my [bot](/blog/post/python-retweet-bot/) followed. Going into the ["Following"](https://twitter.com/following) tab in twitter shows everyone you have followed with blue buttons that go red and change text to "Unfollow" when you hover on them.
 
 ![Unfollow Button](/posts/how-to-clean-a-twitter-account-with-jquery/unfollow-btn.png)
 

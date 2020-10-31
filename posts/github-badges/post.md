@@ -7,7 +7,7 @@ description: "A small demonstration of using GitHub badges from shields.io and h
 
 [TOC]
 
-After recently making my project [hit-counter]({{ url_for('blog_post', path='hit-counter') }}) public, I was about to make a part to create your own custom badges to the project until I discovered [shields.io](https://shields.io/).
+After recently making my project [hit-counter](/blog/post/hit-counter/) public, I was about to make a part to create your own custom badges to the project until I discovered [shields.io](https://shields.io/).
 
 shields.io is a server built using JavaScript to host "Concise, consistent, and legible badges in SVG and raster format" which can be [found on Github](https://github.com/badges/shields). A lot of repositories with README.md files contain badges these days as they provide useful and interesting information.
 

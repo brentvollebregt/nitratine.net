@@ -10,7 +10,7 @@ description: "A demonstration of how to package a python script into an executab
 youtube:lOIJIk_maO4
 
 ## PIP
-If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}) to setup pip.
+If you haven't used or setup pip before, go to my tutorial at [how-to-setup-pythons-pip](/blog/post/how-to-setup-pythons-pip/) to setup pip.
 
 ## PyInstaller
 Now that pip has been set up, execute the command ```pip install pyinstaller``` in cmd. Make sure to check the output for errors as if there are errors it would not have installed successfully. PyInstaller now supports Python 2.7 - 3.7 including Python 3.7.

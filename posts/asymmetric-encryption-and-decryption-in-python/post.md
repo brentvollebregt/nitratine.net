@@ -27,7 +27,7 @@ import cryptography
 If no errors appeared it has been installed correctly.
 
 ## What is Asymmetric Encryption?
-If you read my article on [Encryption and Decryption in Python]({{ url_for('blog_post', path='encryption-and-decryption-in-python') }}), you will see that I only used one key to encrypt and decrypt.
+If you read my article on [Encryption and Decryption in Python](/blog/post/encryption-and-decryption-in-python/), you will see that I only used one key to encrypt and decrypt.
 
 [Asymmetric encryption](https://en.wikipedia.org/wiki/Public-key_cryptography) uses two keys - a private key and a public key. Public keys are given out for anyone to use, you make them public information. Anyone can encrypt data with your public key and then only those with the private key can decrypt the message. This also works the other way around but it is a convention to keep your private key secret.
 

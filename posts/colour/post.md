@@ -13,7 +13,7 @@ youtube:x56o7b9Uor8
 
 ## The Idea
 One night I was having a chat with a friend on how stupid apps always seem to make it to the top. We started to think of stupid apps and thus this app was born. Based on the simple idea of just tapping the screen to randomly generate colours I managed to turn an idea into an app in a couple of months in between my study.
-This idea also made me wonder how long would it take to complete an app of this nature for users? The investigation can be found [here]({{ url_for('blog_post', path='randomly-generating-numbers-to-fulfil-an-integer-range') }}).
+This idea also made me wonder how long would it take to complete an app of this nature for users? The investigation can be found [here](/blog/post/randomly-generating-numbers-to-fulfil-an-integer-range/).
 
 ## The Goal
 So the app has a pretty simple goal; find all the colours. Now it may seem that all you have to do is tap the screen 16,777,216 times to finish but colours are randomly generated. This means if you did get to 16,777,215 colours, you would have a 1 in 16,777,216 of finishing.
@@ -34,15 +34,6 @@ On the chance that you get two of one colour, you can merge it with another dupl
 - Mix Colours: When you find duplicates of colours, mix them to find a new colour
 - Achievements: Get milestone achievements as you play
 - Gestures: Swipe to get to different areas of the app (can be toggled)
-
-## Bug Reporting and Feedback
-Think you've found a bug or just want to give back some feedback? Send me an [email](mailto://{{ site_config.email }}?subject=Colour%20Bug%20Report) and I'll look into it!
-For bug reports please include:
-- Your name
-- Model of your phone
-- Android version
-- A summary of the bug
-- How you found the bug (how to reproduce it)
 
 ## Other Projects Used
 - [github.com/chiralcode/Android-Color-Picker](https://github.com/chiralcode/Android-Color-Picker)

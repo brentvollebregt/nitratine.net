@@ -24,7 +24,7 @@ Next, go to [https://myaccount.google.com/lesssecureapps](https://myaccount.goog
 > If you want/do have 2-Step Verification enabled, read up on how to [sign in using an app password](https://support.google.com/accounts/answer/185833). This allows you to generate a password specifically for this 'application' which allows this script to be compatible with a Google account using 2-Step Verification.
 
 ## Simple Email
-To start, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
+To start, we will use the [smtplib module](https://docs.python.org/3/library/smtplib.html) which comes with python, so no need to install it using [pip](/blog/post/how-to-setup-pythons-pip/).
 
 ```python
 import smtplib

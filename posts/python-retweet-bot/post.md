@@ -11,7 +11,7 @@ description: "This bot retweets tweets in python. It looks for competitions whic
 A while ago I had seen someone show all their winnings from using a twitter bot to retweet tweets. Today is a bit more advanced and now people ask to like, follow and sometimes tag. This bot does not tag others but it does retweet, like and follow people mentioned in the tweet.
 
 ## Setup
-First, make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}).
+First, make sure you have [python](https://www.python.org/downloads/) installed and that you have [setup pip](/blog/post/how-to-setup-pythons-pip/).
 
 If you haven't, create a new [twitter](https://twitter.com/) account. If you want to use an existing one, be aware that this will spam the shit out of your account.
 

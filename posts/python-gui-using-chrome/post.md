@@ -7,14 +7,14 @@ description: "Eel is a little Python library for making simple Electron-like HTM
 
 [TOC]
 
-When thinking of what to design [auto-py-to-exe]({{ url_for('blog_post', path='auto-py-to-exe') }}) with, I came across [Eel](https://github.com/ChrisKnott/Eel) for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. Hosting a local webserver and using Chromes app mode was exactly what I needed to make this project look great. Also this library lets you annotate functions in Python so that they can be called from Javascript, and vice versa.
+When thinking of what to design [auto-py-to-exe](/blog/post/auto-py-to-exe/) with, I came across [Eel](https://github.com/ChrisKnott/Eel) for creating GUI's using HTML, CSS and JavaScript in a Chrome app window. Hosting a local webserver and using Chromes app mode was exactly what I needed to make this project look great. Also this library lets you annotate functions in Python so that they can be called from Javascript, and vice versa.
 
 youtube:2kbeBzEQfXE
 
 > Please note that this content is based off README.md in [Eel's GitHub Repository](https://github.com/ChrisKnott/Eel) with modifications.
 
 ## Setup
-To use Eel you will need to install the library by simply calling `pip install eel` in cmd. Make sure no errors occurred and if you don't have pip head over to [how-to-setup-pythons-pip]({{ url_for('blog_post', path='how-to-setup-pythons-pip') }}). To make sure Eel is installed, open IDLE and execute `import eel`. If no errors appear then it has installed properly.
+To use Eel you will need to install the library by simply calling `pip install eel` in cmd. Make sure no errors occurred and if you don't have pip head over to [how-to-setup-pythons-pip](/blog/post/how-to-setup-pythons-pip/). To make sure Eel is installed, open IDLE and execute `import eel`. If no errors appear then it has installed properly.
 
 Although this example will be displaying the use of chromes app mode, you do not actually need [chrome](https://www.google.com/chrome/). When starting the app, if you do not have chrome you will be asked what to open to display the webpage.
 
@@ -76,7 +76,7 @@ If you are using chrome in app mode (default) you can specify the size of the wi
 eel.start('main.html', size=(650, 612))
 ```
 
-When I have used this in the past, the size doesn't always match up, a good example of this is in my [auto-py-to-exe]({{ url_for('blog_post', path='auto-py-to-exe') }}) project which uses `size=(650, 612)` but renders the window about 636x605. When looking at the inner dimensions of the window using JavaScript; window.innerHeight returns 573 and window.innerWidth returns 634.
+When I have used this in the past, the size doesn't always match up, a good example of this is in my [auto-py-to-exe](/blog/post/auto-py-to-exe/) project which uses `size=(650, 612)` but renders the window about 636x605. When looking at the inner dimensions of the window using JavaScript; window.innerHeight returns 573 and window.innerWidth returns 634.
 
 This shows you might have to play around with these values until you get them where you want but they do work (just not as expected).
 

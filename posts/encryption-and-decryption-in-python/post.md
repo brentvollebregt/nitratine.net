@@ -33,7 +33,7 @@ If no errors appeared it has been installed correctly.
 
 To use symmetric encryption, we will use the [Fernet class](https://cryptography.io/en/latest/fernet.html) which is an implementation of [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
-> Looking for a tutorial on asymmetric encryption? [I wrote one of those for Python too]({{ url_for('blog_post', path='asymmetric-encryption-and-decryption-in-python') }}).
+> Looking for a tutorial on asymmetric encryption? [I wrote one of those for Python too](/blog/post/asymmetric-encryption-and-decryption-in-python/).
 
 ## Getting a Key
 There are two main ways to get a key, we can either generate a new one or use one that has previously been generated. These keys need to be in a particular format so make sure to get this right.
