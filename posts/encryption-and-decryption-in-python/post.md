@@ -9,7 +9,7 @@ description: "In this post, I discuss how to encrypt and decrypt messages in Pyt
 
 youtube:H8t4DJ3Tdrg
 
-Using the [cryptography](https://cryptography.io/en/latest/) module in Python, we will use an implementation of AES called [Fernet](https://cryptography.io/en/latest/fernet/) to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.
+Using the [cryptography](https://cryptography.io/en/latest/) module in Python, we will use an implementation of AES called [Fernet](https://cryptography.io/en/latest/fernet.html) to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.
 
 ## Installing cryptography
 Since Python does not come with anything that can encrypt files, we will need to use a third-party module.
@@ -31,7 +31,7 @@ If no errors appeared it has been installed correctly.
 ## What is Symmetric Encryption?
 [Symmetric encryption](https://en.wikipedia.org/wiki/Symmetric-key_algorithm) is when a key is used to encrypt and decrypt a message, so whoever encrypted it can decrypt it. The only way to decrypt the message is to know what was used to encrypt it; kind of like a password.
 
-To use symmetric encryption, we will use the [Fernet class](https://cryptography.io/en/latest/fernet/) which is an implementation of [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+To use symmetric encryption, we will use the [Fernet class](https://cryptography.io/en/latest/fernet.html) which is an implementation of [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
 > Looking for a tutorial on asymmetric encryption? [I wrote one of those for Python too]({{ url_for('blog_post', path='asymmetric-encryption-and-decryption-in-python') }}).
 
@@ -201,4 +201,4 @@ except InvalidToken as e:
     print("Invalid Key - Unsuccessfully decrypted")
 ```
 
-> As stated in [Fernet docs](https://cryptography.io/en/latest/fernet/#limitations), beware of large files; Fernet is ideal for encrypting data that easily fits in memory. You may need to think of methods to split larger files up to use this encryption method on large files.
+> As stated in [Fernet docs](https://cryptography.io/en/latest/fernet.html#limitations), beware of large files; Fernet is ideal for encrypting data that easily fits in memory. You may need to think of methods to split larger files up to use this encryption method on large files.

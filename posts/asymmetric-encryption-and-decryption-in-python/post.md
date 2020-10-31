@@ -7,7 +7,7 @@ description: "In this post, I demonstrate the usage of the cryptography module i
 
 [TOC]
 
-Using the [cryptography](https://cryptography.io/en/latest/) module in Python, this post will look into methods of generating keys, storing keys and using the asymmetric encryption method [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) to encrypt and decrypt messages and files. We will be using [cryptography.hazmat.primitives.asymmetric.rsa](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/) to generate keys.
+Using the [cryptography](https://cryptography.io/en/latest/) module in Python, this post will look into methods of generating keys, storing keys and using the asymmetric encryption method [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) to encrypt and decrypt messages and files. We will be using [cryptography.hazmat.primitives.asymmetric.rsa](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa.html) to generate keys.
 
 ## Installing cryptography
 Since Python does not come with anything that can encrypt files, we will need to use a third-party module.
@@ -62,7 +62,7 @@ with open('private_key.pem', 'wb') as f:
     f.write(pem)
 ```
 
-> You can password protect the contents of this file using [this top key serialization example](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#key-serialization).
+> You can password protect the contents of this file using [this top key serialization example](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa.html#key-serialization).
 
 To store the public key, we need to use a slightly modified version.
 
@@ -114,7 +114,7 @@ with open("public_key.pem", "rb") as key_file:
 The variable *public_key* will now have the public key.
 
 ## Encrypting
-Due to how asymmetric encryption algorithms like RSA work, encrypting with either one is fine, you just will need to use the other to decrypt. Applying a bit of logic to this can create some useful scenarios like [signing](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#signing) and [verification](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/#verification). For this example, I will assume that you keep both keys safe and don't release them since this example is only for local encryption (can be applied to wider though when keys are exchanged).
+Due to how asymmetric encryption algorithms like RSA work, encrypting with either one is fine, you just will need to use the other to decrypt. Applying a bit of logic to this can create some useful scenarios like [signing](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa.html#signing) and [verification](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa.html#verification). For this example, I will assume that you keep both keys safe and don't release them since this example is only for local encryption (can be applied to wider though when keys are exchanged).
 
 This means you can use either key but I will demonstrate using the public key to encrypt, this will mean anyone with the private key can decrypt the message.
 
