@@ -118,7 +118,7 @@ A small check-list for things that may go wrong:
 - You did not inherit the correct class (found in the XML)
 
 ## Getting Widget Object Pointers
-Once you have the GUI being imported, you now need to create some pointers to objects you want. For this example I am going to use the .ui linked below:
+Once you have the GUI being imported, you now need to identify some pointers for the objects you want to use. For this example I am going to use the .ui linked below:
 
 [Download: basic.ui](/posts/how-to-import-a-pyqt5-ui-file-in-a-python-gui/basic.ui)
 
@@ -146,7 +146,23 @@ Set this to what you want the object to be called and you should see this in the
 ### Using These Names to Find the Widgets
 Now that each widget has a name attribute, we can get pointers of these objects. When I say pointers, I mean a variable that we can use to access this widget and modify it. 
 
-The `Ui.__init__` method is where you will want to get your pointers, right after `uic.loadUi('basic.ui', self)` is called so the objects exist. To find an object, we can use [`findChild`](https://www.riverbankcomputing.com/static/Docs/PyQt4/qobject.html#findChild) on any one of its parent objects while supplying the type of widget we are getting and the name.
+When `uic.loadUi('basic.ui', self)` is called, the names of the widgets will be used to create pointers to the widgets themselves. This means to get our button named "printButton", we can access it using `self.printButton` within the same class that `uic.loadUi('basic.ui', self)` was called in after it has been called (technically we can call that on whatever `self` is).
+
+```python
+class Ui(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Ui, self).__init__()
+        uic.loadUi('basic.ui', self)
+        
+        # Set the print button text to "Text Changed"
+        self.printButton.setText('Text Changed')
+        # This should not throw an error as `uic.loadUi` would have created `self.printButton`
+        
+        self.show()
+```
+
+#### Searching For A Pointer
+In the case that the method above doesn't work for some widgets, you can still search for them. To find an object, we can use [`findChild`](https://www.riverbankcomputing.com/static/Docs/PyQt4/qobject.html#findChild) on any one of its parent objects while supplying the type of widget we are getting and the name.
 
 ```python
 class Ui(QtWidgets.QMainWindow):
@@ -156,6 +172,7 @@ class Ui(QtWidgets.QMainWindow):
         
         # Find the button with the name "printButton"
         self.button = self.findChild(QtWidgets.QPushButton, 'printButton')
+        # We have now created `self.printButton` ourselves (will overwrite whatever was there if something existed already)
         
         self.show()
 ```
@@ -176,7 +193,7 @@ To find the name of this class in the designer, click on a widget and look at th
 
 The method above simply helps you get a pointer to the object. Now that the hardest part is done, you are free to do what you would normally do after you have located all your widgets you want to use.
 
-> Please note, this is not a full tutorial on PyQt5. I am simply demonstrating hwo to import .ui files
+> Please note, this is not a full tutorial on PyQt5. I am simply demonstrating how to import .ui files
 
 ### Connecting Buttons to Methods
 To connect a button to a method, we need to get a pointer (as shown before) and then connect it like we normally would. Here is a full example:

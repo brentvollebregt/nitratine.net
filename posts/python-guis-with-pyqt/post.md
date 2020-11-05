@@ -9,6 +9,15 @@ description: "This tutorial covers the basics of how to create GUI's in Python u
 
 youtube:ksW59gYEl6Q
 
+## Important First Note
+Please understand this process is not the recommended method when using PyQt5 designed / pyuic; this is simply a demonstration of designing a UI using the PyQt5 designer tool, generating Python code and then partially understanding what comes out.
+
+This tutorial is not obsolete however as it can help you get a basic grasp of how to use PyQt5. 
+
+The reason the method demonstrated below is not recommended is due to the fact if you use pyuic again to turn a .ui file into a .py file, it will overwrite all your changes to the file. I have a tutorial at [How to Import a PyQt5 .ui File in a Python GUI](/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/) which better explains how you should import the generated script so your changes will not be overwritten.
+
+If you only intend on using the generated code as an initial layout and not re-generate the code (I do this a lot), you may find this method easier than importing as you can make changes to the layout a lot easier this way.
+
 ## Setting up the Environment
 For this tutorial, you will need a version of Python equal to or above 3.5. I do however recommend to get a more recent version than 3.5 as I had issues with 3.5.2; a simple upgrade to 3.6.6 fixed this. If you don't know where to get Python, [look here](https://www.python.org/downloads/).
 
