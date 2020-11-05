@@ -301,10 +301,105 @@ When executing this script and pressing Shift + A (in any order), this will exec
 
 To create new combinations, duplicate a line in the `combination_to_function` dictionary and replace the keys inside of `frozenset` and the value (function - not the return value of the function).
 
-## Common Issues and Questions
+## pynput's HotKey Class
+In December 2019 [global hotkeys](https://pynput.readthedocs.io/en/latest/keyboard.html#global-hotkeys) were added to pynput. This allowed us to hide all the extra state of combination detection and just provide the keys we want to listen to.
 
-### How can I add different hotkeys for different functions?
-I have not developed this myself yet so it will be something you need to think about. The best way to do this would be to have two lists, one of combinations and one of definitions for each combination. Test each of the combinations on a keypress and if all the keys are pressed, execute the definition in the same index in the definition list.
+The docs recommend using `keyboard.HotKey.parse` to get a list of keys from a string (e.g. `"<ctrl>+<alt>+h"`) when using this function, but I recommend using keys like we defined above. This allows you to more easily identify keys are pynput keys although there aren't huge benefits using either way.
+
+Here is an example of `alt + ctrl + r`:
+
+```python
+from pynput.keyboard import HotKey, Key, KeyCode, Listener
+
+
+# The function called when a hotkey is pressed
+def on_activate():
+    print('Hotkey pressed')
+
+
+# A helper function when delegating on_press/on_release events
+def for_canonical(f):
+    return lambda k: f(l.canonical(k))
+
+
+# The hotkey itself
+hotkey = HotKey(
+    [Key.alt, Key.ctrl, KeyCode(char='r')],  # A list of the keys to look for
+    on_activate  # The function to call when a hotkey is pressed
+)
+
+# The typical pynput listener that is calling functions on hotkey using `for_canonical`
+with Listener(
+    on_press=for_canonical(hotkey.press),
+    on_release=for_canonical(hotkey.release)
+) as l:
+    l.join()
+```
+
+An example of more than one hotkey would be something like:
+
+```python
+from pynput.keyboard import HotKey, Key, KeyCode, Listener
+
+
+def function_1():
+    print('Function 1 activated')
+
+def function_2():
+    print('Function 2 activated')
+
+
+hotkey1 = HotKey(
+    [Key.alt, Key.ctrl, KeyCode(char='r')],
+    function_1
+)
+
+hotkey2 = HotKey(
+    [Key.alt, Key.ctrl, KeyCode(char='t')],
+    function_1
+)
+
+hotkey3 = HotKey(
+    [Key.alt, Key.ctrl, KeyCode(char='y')],
+    function_2
+)
+
+hotkeys = [hotkey1, hotkey2, hotkey3]
+
+
+def signal_press_to_hotkeys(key):
+    for hotkey in hotkeys:
+        hotkey.press(l.canonical(key))
+
+def signal_release_to_hotkeys(key):
+    for hotkey in hotkeys:
+        hotkey.release(l.canonical(key))
+
+with Listener(on_press=signal_press_to_hotkeys, on_release=signal_release_to_hotkeys) as l:
+    l.join()
+```
+
+However using `keyboard.HotKey.parse` would make things a lot easier for that example:
+
+```python
+from pynput import keyboard
+
+def function_1():
+    print('Function 1 activated')
+
+def function_2():
+    print('Function 2 activated')
+
+with keyboard.GlobalHotKeys({
+        '<alt>+<ctrl>+r': function_1,
+        '<alt>+<ctrl>+t': function_1,
+        '<alt>+<ctrl>+y': function_2}) as h:
+    h.join()
+```
+
+> In this example, `keyboard.HotKey.parse` is being used in the background by keyboard.GlobalHotKeys.
+
+## Common Issues and Questions
 
 ### ModuleNotFoundError/ImportError: No module named 'pynput'
 Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.

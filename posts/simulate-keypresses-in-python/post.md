@@ -131,3 +131,96 @@ Syntax errors are caused by you and there is nothing I can offer to fix it apart
 pynput uses a Win32API function called `SendInput`. The SendInput function will insert input events into the same queue as a hardware device but the events are marked with a `LLMHF_INJECTED` flag that can be detected by hooks and [then filtered](https://stackoverflow.com/a/19383403). To avoid this flag you probably have to write a custom driver *(ref: [stackoverflow/Anders](https://stackoverflow.com/a/44931001))*.
 
 It would be ideal for most games to look for these events if they want to reduce 'bot' activity as it stops packages like these being used.
+
+In [github.com/Gautam-J/Self-Driving-Car](https://github.com/Gautam-J/Self-Driving-Car) I had seen that the file [directkeys.py](https://github.com/Gautam-J/Self-Driving-Car/blob/master/directkeys.py) contained the following:
+
+```python
+import ctypes
+import time
+
+SendInput = ctypes.windll.user32.SendInput
+
+W = 0x11
+A = 0x1E
+S = 0x1F
+D = 0x20
+UP = 0xC8
+LEFT = 0xCB
+RIGHT = 0xCD
+DOWN = 0xD0
+ENTER = 0x1C
+ESC = 0x01
+TWO = 0x03
+
+# C struct redefinitions
+PUL = ctypes.POINTER(ctypes.c_ulong)
+
+
+class KeyBdInput(ctypes.Structure):
+    _fields_ = [("wVk", ctypes.c_ushort),
+                ("wScan", ctypes.c_ushort),
+                ("dwFlags", ctypes.c_ulong),
+                ("time", ctypes.c_ulong),
+                ("dwExtraInfo", PUL)]
+
+
+class HardwareInput(ctypes.Structure):
+    _fields_ = [("uMsg", ctypes.c_ulong),
+                ("wParamL", ctypes.c_short),
+                ("wParamH", ctypes.c_ushort)]
+
+
+class MouseInput(ctypes.Structure):
+    _fields_ = [("dx", ctypes.c_long),
+                ("dy", ctypes.c_long),
+                ("mouseData", ctypes.c_ulong),
+                ("dwFlags", ctypes.c_ulong),
+                ("time", ctypes.c_ulong),
+                ("dwExtraInfo", PUL)]
+
+
+class Input_I(ctypes.Union):
+    _fields_ = [("ki", KeyBdInput),
+                ("mi", MouseInput),
+                ("hi", HardwareInput)]
+
+
+class Input(ctypes.Structure):
+    _fields_ = [("type", ctypes.c_ulong),
+                ("ii", Input_I)]
+
+
+# Actuals Functions
+def PressKey(hexKeyCode):
+    extra = ctypes.c_ulong(0)
+    ii_ = Input_I()
+    ii_.ki = KeyBdInput(0, hexKeyCode, 0x0008, 0, ctypes.pointer(extra))
+    x = Input(ctypes.c_ulong(1), ii_)
+    ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+
+
+def ReleaseKey(hexKeyCode):
+    extra = ctypes.c_ulong(0)
+    ii_ = Input_I()
+    ii_.ki = KeyBdInput(0, hexKeyCode, 0x0008 | 0x0002, 0,
+                        ctypes.pointer(extra))
+    x = Input(ctypes.c_ulong(1), ii_)
+    ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+
+
+# directx scan codes
+# http://www.gamespp.com/directx/directInputKeyboardScanCodes.html
+
+if __name__ == '__main__':
+    while (True):
+        PressKey(0x11)
+        time.sleep(1)
+        ReleaseKey(0x11)
+        time.sleep(1)
+```
+
+> The license for this piece of code can be found [here](https://github.com/Gautam-J/Self-Driving-Car/blob/master/LICENSE).
+
+This file demonstrates how we can press keys using DirectX key codes. The link in the file no longer exists but it can [still be found on the wayback machine](http://web-old.archive.org/web/20190801085838/http://www.gamespp.com/directx/directInputKeyboardScanCodes.html). This page provides other codes for keys that can be simulated.
+
+Unfortunately it will only work on Windows (due to the usage of `ctypes.windll`) but some may find that it solves their issues with the `LLMHF_INJECTED` flag.
