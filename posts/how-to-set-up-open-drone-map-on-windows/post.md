@@ -27,7 +27,7 @@ Get-ComputerInfo | select WindowsVersion
 To find the build number of your Windows installation run the following in PowerShell:
  
 ```powershell
-[System.Environment]::OSVersion.Version`
+[System.Environment]::OSVersion.Version
 ```
 
 This should output something like this:
