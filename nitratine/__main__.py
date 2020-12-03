@@ -8,7 +8,7 @@ from .build import build as build_site
 from .tools.new_post import new_post
 from .tools.serve_build import serve_build
 from .tools.build_stats import print_build_stats
-from .config import POST_SOURCE
+from .config import POST_SOURCE, site_config
 
 
 DEFAULT_HOST = 'localhost'
@@ -25,10 +25,14 @@ def cli():
 @click.option('-p', '--port', 'port', type=int, default=DEFAULT_PORT, help="Port to run server on")
 @click.option('--minify', 'minify', is_flag=True, default=False, help="Enable minification")
 @click.option('--watch', 'watch', is_flag=True, default=False, help="Enable live-reload and watch for changes")
-def run(host: str, port: int, minify: bool, watch: bool):
+@click.option('--prod', '--production', 'production', is_flag=True, default=False, help="Don't change the site URL")
+def run(host: str, port: int, minify: bool, watch: bool, production: bool):
     """ Run the development site locally """
     if minify:
         setup_minification()
+
+    if not production:
+        site_config.url = f'http://{host}:{port}'
 
     if watch:
         server = Server(app)
