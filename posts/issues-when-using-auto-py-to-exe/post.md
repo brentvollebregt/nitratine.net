@@ -224,6 +224,18 @@ Doing this will mean pyinstaller doesn't see the packages you don't need bundled
 ### "VCRUNTIME140.dll" is either not designed to run on Windows or it contains an error
 Try selecting the `--noupx` button in the advanced tab.
 
+### LoadLibraryEx / The file cannot be accessed by the system
+I have seen quite a few people get tracebacks containing the following error messages: 
+
+- `win32ctypes.pywin32.pywintypes.error: (1920, 'LoadLibraryEx', 'The file cannot be accessed by the system'`
+- `OSError: [WinError 1920] The file cannot be accessed by the system`
+
+Looking at the traceback for these situations, it is very common that I see a path like `C:\Users\<USER>\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\...` which tells me they're using Python from the Windows Store. As stated in [pyinstaller/pyinstaller#4941](https://github.com/pyinstaller/pyinstaller/issues/4941), we have been told by a maintainer that:
+
+> We don't support using python from the windows store when not using a virtual environment. Please use a virtual environment; that should fix this.
+
+So to fix this issue, download a distribution of Python from [python.org](https://www.python.org/downloads/) or use a virtual environment. This solution is also noted in [brentvollebregt/auto-py-to-exe#141](https://github.com/brentvollebregt/auto-py-to-exe/issues/141).
+
 ## Additional Information and Explanations
 Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions about why and how things occur.
 
