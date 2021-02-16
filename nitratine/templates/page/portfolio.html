@@ -136,7 +136,7 @@
         <img src="/static/img/logo.png" alt="Nitratine Logo" style="width: 100%;" class="mb-2">
         <p>Nitratine is a website where I share projects developed by me and tutorials on topics that I'm interested in. Currently this is the third version of the site and is hosted statically using GitHub Pages and built with a <a href="https://github.com/brentvollebregt/nitratine.net">custom Python build script</a>.</p>
         <p>When developing and writing posts, the website can be hosted locally using Flask which then changes to be viewed without having to re-build the site on each modification. Posts are written in markdown which are converted to HTML using <a href="https://github.com/Flask-FlatPages/Flask-FlatPages">Flask-FlatPages</a>.</p>
-        <p>Due to the static nature of the site, I use <a href="https://github.com/Frozen-Flask/Frozen-Flask">Frozen-Flask</a> to freeze the site into a static version that can easily be hosted on GitHub pages. A deploy script then commits, tags and pushes all changes on a separate branch.</p>
+        <p>Due to the static nature of the site, I use <a href="https://github.com/Frozen-Flask/Frozen-Flask">Frozen-Flask</a> to freeze the site into a static version that can easily be hosted on GitHub pages. A GitHub Action picks up any changes on the master branch, builds the site and deploys it to GitHub pages..</p>
         <div class="text-center">
             <a href="https://nitratine.net/"><button type="button" class="btn btn-outline-primary btn-sm">🌐 Site</button></a>
             <a href="https://github.com/brentvollebregt/nitratine.net"><button type="button" class="btn btn-outline-primary btn-sm">📁 Code</button></a>
