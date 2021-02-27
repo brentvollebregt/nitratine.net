@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import time
 import urllib.parse
@@ -258,6 +259,12 @@ def inject_recent_videos():
 def inject_category_numbers():
     """ Provide category_numbers to Jinja templates (for sidebar in blog-base.html) """
     return dict(category_numbers=posts.post_numbers_by_category())
+
+
+@app.context_processor
+def inject_now():
+    """ Provide the current date """
+    return {'now': datetime.utcnow()}
 
 
 def ymd_format(date):
