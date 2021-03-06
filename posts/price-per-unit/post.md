@@ -13,7 +13,9 @@ github: brentvollebregt/price-per-unit
     <img src="/posts/price-per-unit/FeatureGraphic.jpg" alt="Header Image">
 </div>
 
-<div style="text-align: center"><a href="https://play.google.com/store/apps/details?id=net.nitratine.priceperunit">Download From Google Play</a> | <a href="https://github.com/brentvollebregt/price-per-unit">View the Project on GitHub</a>
+<div align="center">
+    <a href="https://play.google.com/store/apps/details?id=net.nitratine.priceperunit"><img src="/posts/price-per-unit/get-it-on-google-play.png" alt="Get it on Google Play" height="100" style="display: inline"></a>
+    <a href="https://f-droid.org/en/packages/net.nitratine.priceperunit/"><img src="/posts/price-per-unit/get-it-on-f-droid.png" alt="Get it on F-Droid" height="100" style="display: inline"></a>
 </div>
 
 ## Introduction
