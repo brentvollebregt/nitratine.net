@@ -24,7 +24,11 @@ The web app periodically checks if a new song is playing and if so, will request
 
 > The lyrics returned may not be for the current playing song in some situations due to the lyrics not existing on GENIUS or the fact that the current playing songs title has some extra content to it aside from the actual title.
 
-## Screenshot
+## Screenshots
 Below is a screenshot of me logged in and a song playing. The lyrics have been retrieved and displayed.
 
 ![Spotify Lyrics Viewer showing lyrics](/posts/spotify-lyrics-viewer/sample.png)
+
+The application also supports dark mode:
+
+![Spotify Lyrics Viewer showing lyrics](/posts/spotify-lyrics-viewer/sample-dark.png)
