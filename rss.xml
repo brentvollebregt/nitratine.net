@@ -12,7 +12,7 @@
       <link>https://nitratine.net</link>
     </image>
     <language>en</language>
-    <lastBuildDate>Sat, 13 Mar 2021 00:47:14 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Apr 2021 02:13:46 +0000</lastBuildDate>
     <item>
       <title>Colour</title>
       <link>https://nitratine.net/blog/post/colour/</link>
@@ -1575,77 +1575,6 @@ While creating this program, I discovered a way that could give hints to what em
       <pubDate>Mon, 11 Dec 2017 00:00:00 +1300</pubDate>
     </item>
     <item>
-      <title>How To Setup Python's PIP</title>
-      <link>https://nitratine.net/blog/post/how-to-setup-pythons-pip/</link>
-      <description>This tutorial demonstrates how to set up Python's PIP. PIP is a package manager for pip that allows you to download third-party modules easily. I explain how to find your scripts folder and how to find pip.</description>
-      <content:encoded>&lt;div class="toc"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#setting-up"&gt;Setting Up&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#a-shortcut"&gt;A Shortcut&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#usage"&gt;Usage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#common-issues-and-questions"&gt;Common Issues and Questions&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#when-editing-the-path-variable-i-can-only-edit-the-variable"&gt;When editing the PATH variable, I can only edit the variable&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#it-still-isnt-working"&gt;It Still Isn't Working&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;p&gt;
-&lt;div class="embedded_yt my-3"&gt;
-&lt;div&gt;
-&lt;iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/cm6WDGAzDPM"&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/p&gt;
-&lt;h2 id="setting-up"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#setting-up"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Setting Up&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;If you haven't used pip before on your computer, go to cmd and type 'pip'. If not errors appear you can move to the next step. If pip is not recognised, you need to set it up. Regarding you have python installed (you would not believe some of the comments on this video), open windows explorer (file search) and right-click on computer in the side menu.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Properties for this pc" src="/posts/how-to-setup-pythons-pip/demo1.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Now click on "Advanced system settings" in the sidebar in the control panel.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Advanced system settings" src="/posts/how-to-setup-pythons-pip/demo2.png" /&gt;&lt;/p&gt;
-&lt;p&gt;In the new window, make sure you are in the "Advanced" tab (top) and then click the "Environment Variables" button.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Advanced tab and environmental variables button" src="/posts/how-to-setup-pythons-pip/demo3.png" /&gt;&lt;/p&gt;
-&lt;p&gt;In the new window that just appeared, go to the second section - "System variables" and scroll down until you find the "Path" variable. Click on it and then click the edit button below.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Path variable location" src="/posts/how-to-setup-pythons-pip/demo4.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Now in the new window, click new on the right and put the folder location of your python scripts folder in. If you don't know where your python scripts folder is can execute this in a python shell or script.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dirname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;executable&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\Scripts&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img alt="Adding script folder location" src="/posts/how-to-setup-pythons-pip/demo5.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Now type 'pip' in cmd to make sure you have done this correctly. No errors should appear.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If you are using an older version of Windows, you will be presented with a one-line input field. Add a semicolon ';' to the end of the text current in the field and then add the path as you would have in the area before. &lt;code&gt;&amp;lt;current text&amp;gt;;&amp;lt;path&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="a-shortcut"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#a-shortcut"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;A Shortcut&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;A while ago I made a script that automatically sets up the &lt;code&gt;python&lt;/code&gt; and &lt;code&gt;pip&lt;/code&gt; commands on Windows by putting their directories on the users PATH variable automatically.&lt;/p&gt;
-&lt;p&gt;You can find this script in my &lt;a href="/blog/post/fix-python-is-not-recognized-as-an-internal-or-external-command/"&gt;"Fix: 'python' is not recognized as an internal or external command"&lt;/a&gt; post. &lt;/p&gt;
-&lt;h2 id="usage"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#usage"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Usage&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;You can now use commands like &lt;code&gt;pip install pynput&lt;/code&gt; to install a package or "pip list" to look at all packages installed.&lt;/p&gt;
-&lt;p&gt;Some useful commands:
-- &lt;code&gt;pip install [package]&lt;/code&gt;: install a package like pynput or pyinstaller
-- &lt;code&gt;pip uninstall [package]&lt;/code&gt;: removes an installed package
-- &lt;code&gt;pip list&lt;/code&gt;: shows install packages
-- &lt;code&gt;pip show [package]&lt;/code&gt;: shows information about an install package
-- &lt;code&gt;pip install [package] --upgrade&lt;/code&gt;:  Updates a package&lt;/p&gt;
-&lt;p&gt;You can find packages from projects on &lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt; or &lt;a href="https://pypi.python.org/pypi"&gt;PyPI&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id="common-issues-and-questions"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#common-issues-and-questions"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Common Issues and Questions&lt;/span&gt;&lt;/h2&gt;
-&lt;h3 id="when-editing-the-path-variable-i-can-only-edit-the-variable"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#when-editing-the-path-variable-i-can-only-edit-the-variable"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;When editing the PATH variable, I can only edit the variable&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.&lt;/p&gt;
-&lt;h3 id="it-still-isnt-working"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#it-still-isnt-working"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;It Still Isn't Working&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;Regarding you followed the instructions properly, this will work. One other method to call pip is by calling &lt;code&gt;python -m pip&lt;/code&gt;. Using this allows us to call pip when the scripts folder is not in the PATH variable. Note that the directory of python.exe must be in the PATH variable for this to work (which means calling &lt;code&gt;python&lt;/code&gt; in cmd must work first).&lt;/p&gt;</content:encoded>
-      <guid isPermaLink="false">https://nitratine.net/blog/post/how-to-setup-pythons-pip/</guid>
-      <category>YouTube</category>
-      <enclosure url="https://nitratine.net/posts/how-to-setup-pythons-pip/youtube-thumbnail.jpg" length="0" type="image/jpg"/>
-      <pubDate>Wed, 13 Dec 2017 00:00:00 +1300</pubDate>
-    </item>
-    <item>
       <title>Get WiFi Passwords With Python</title>
       <link>https://nitratine.net/blog/post/get-wifi-passwords-with-python/</link>
       <description>This script searches windows for wifi passwords with python already known and displays them alongside the network name. It will not find passwords that your computer doesn't already know. This is useful for the occasions that you forget your WiFi password.</description>
@@ -1755,6 +1684,77 @@ While creating this program, I discovered a way that could give hints to what em
       <guid isPermaLink="false">https://nitratine.net/blog/post/get-wifi-passwords-with-python/</guid>
       <category>YouTube</category>
       <enclosure url="https://nitratine.net/posts/get-wifi-passwords-with-python/feature.jpg" length="0" type="image/jpg"/>
+      <pubDate>Wed, 13 Dec 2017 00:00:00 +1300</pubDate>
+    </item>
+    <item>
+      <title>How To Setup Python's PIP</title>
+      <link>https://nitratine.net/blog/post/how-to-setup-pythons-pip/</link>
+      <description>This tutorial demonstrates how to set up Python's PIP. PIP is a package manager for pip that allows you to download third-party modules easily. I explain how to find your scripts folder and how to find pip.</description>
+      <content:encoded>&lt;div class="toc"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#setting-up"&gt;Setting Up&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#a-shortcut"&gt;A Shortcut&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#usage"&gt;Usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#common-issues-and-questions"&gt;Common Issues and Questions&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#when-editing-the-path-variable-i-can-only-edit-the-variable"&gt;When editing the PATH variable, I can only edit the variable&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#it-still-isnt-working"&gt;It Still Isn't Working&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;
+&lt;div class="embedded_yt my-3"&gt;
+&lt;div&gt;
+&lt;iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/cm6WDGAzDPM"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;h2 id="setting-up"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#setting-up"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Setting Up&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;If you haven't used pip before on your computer, go to cmd and type 'pip'. If not errors appear you can move to the next step. If pip is not recognised, you need to set it up. Regarding you have python installed (you would not believe some of the comments on this video), open windows explorer (file search) and right-click on computer in the side menu.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Properties for this pc" src="/posts/how-to-setup-pythons-pip/demo1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Now click on "Advanced system settings" in the sidebar in the control panel.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Advanced system settings" src="/posts/how-to-setup-pythons-pip/demo2.png" /&gt;&lt;/p&gt;
+&lt;p&gt;In the new window, make sure you are in the "Advanced" tab (top) and then click the "Environment Variables" button.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Advanced tab and environmental variables button" src="/posts/how-to-setup-pythons-pip/demo3.png" /&gt;&lt;/p&gt;
+&lt;p&gt;In the new window that just appeared, go to the second section - "System variables" and scroll down until you find the "Path" variable. Click on it and then click the edit button below.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Path variable location" src="/posts/how-to-setup-pythons-pip/demo4.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Now in the new window, click new on the right and put the folder location of your python scripts folder in. If you don't know where your python scripts folder is can execute this in a python shell or script.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dirname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;executable&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\Scripts&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img alt="Adding script folder location" src="/posts/how-to-setup-pythons-pip/demo5.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Now type 'pip' in cmd to make sure you have done this correctly. No errors should appear.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you are using an older version of Windows, you will be presented with a one-line input field. Add a semicolon ';' to the end of the text current in the field and then add the path as you would have in the area before. &lt;code&gt;&amp;lt;current text&amp;gt;;&amp;lt;path&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="a-shortcut"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#a-shortcut"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;A Shortcut&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;A while ago I made a script that automatically sets up the &lt;code&gt;python&lt;/code&gt; and &lt;code&gt;pip&lt;/code&gt; commands on Windows by putting their directories on the users PATH variable automatically.&lt;/p&gt;
+&lt;p&gt;You can find this script in my &lt;a href="/blog/post/fix-python-is-not-recognized-as-an-internal-or-external-command/"&gt;"Fix: 'python' is not recognized as an internal or external command"&lt;/a&gt; post. &lt;/p&gt;
+&lt;h2 id="usage"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#usage"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Usage&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;You can now use commands like &lt;code&gt;pip install pynput&lt;/code&gt; to install a package or "pip list" to look at all packages installed.&lt;/p&gt;
+&lt;p&gt;Some useful commands:
+- &lt;code&gt;pip install [package]&lt;/code&gt;: install a package like pynput or pyinstaller
+- &lt;code&gt;pip uninstall [package]&lt;/code&gt;: removes an installed package
+- &lt;code&gt;pip list&lt;/code&gt;: shows install packages
+- &lt;code&gt;pip show [package]&lt;/code&gt;: shows information about an install package
+- &lt;code&gt;pip install [package] --upgrade&lt;/code&gt;:  Updates a package&lt;/p&gt;
+&lt;p&gt;You can find packages from projects on &lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt; or &lt;a href="https://pypi.python.org/pypi"&gt;PyPI&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="common-issues-and-questions"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#common-issues-and-questions"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Common Issues and Questions&lt;/span&gt;&lt;/h2&gt;
+&lt;h3 id="when-editing-the-path-variable-i-can-only-edit-the-variable"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#when-editing-the-path-variable-i-can-only-edit-the-variable"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;When editing the PATH variable, I can only edit the variable&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.&lt;/p&gt;
+&lt;h3 id="it-still-isnt-working"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#it-still-isnt-working"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;It Still Isn't Working&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;Regarding you followed the instructions properly, this will work. One other method to call pip is by calling &lt;code&gt;python -m pip&lt;/code&gt;. Using this allows us to call pip when the scripts folder is not in the PATH variable. Note that the directory of python.exe must be in the PATH variable for this to work (which means calling &lt;code&gt;python&lt;/code&gt; in cmd must work first).&lt;/p&gt;</content:encoded>
+      <guid isPermaLink="false">https://nitratine.net/blog/post/how-to-setup-pythons-pip/</guid>
+      <category>YouTube</category>
+      <enclosure url="https://nitratine.net/posts/how-to-setup-pythons-pip/youtube-thumbnail.jpg" length="0" type="image/jpg"/>
       <pubDate>Wed, 13 Dec 2017 00:00:00 +1300</pubDate>
     </item>
     <item>
@@ -2369,6 +2369,46 @@ mouse = MouseController()
       <pubDate>Thu, 21 Dec 2017 00:00:00 +1300</pubDate>
     </item>
     <item>
+      <title>Spotify Playlist Downloader</title>
+      <link>https://nitratine.net/blog/post/spotify-playlist-downloader/</link>
+      <description>A Python script to download a Spotify playlist to MP3 using YouTube as an audio source. The MP3s are tagged and given album art using Spotify</description>
+      <content:encoded>&lt;h2 id="what-is-this"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#what-is-this"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What is this?&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;This project takes a Spotify playlist URI and will download its contents by sourcing audio from YouTube and tags/art from Spotify. YouTube videos for audio are found automatically.&lt;/p&gt;
+&lt;h2 id="demonstration-and-screenshots"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#demonstration-and-screenshots"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Demonstration and Screenshots&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="Console example" src="/posts/spotify-playlist-downloader/gui1.png" /&gt;&lt;/p&gt;
+&lt;p&gt;This is a console application, simply paste the URI and press enter.&lt;/p&gt;
+&lt;h2 id="requirements"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#requirements"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Requirements&lt;/span&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Python (tested with 3.5)&lt;/li&gt;
+&lt;li&gt;ffmpeg (described in installation steps 5 and 6)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="installation"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#installation"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Installation&lt;/span&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Clone this repository. &lt;code&gt;git clone https://github.com/brentvollebregt/spotify-playlist-downloader.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;cd into the project. &lt;code&gt;cd spotify-playlist-downloader&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install the requirements. &lt;code&gt;pip install requirements.txt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Go to &lt;a href="https://developer.spotify.com/my-applications"&gt;https://developer.spotify.com/my-applications&lt;/a&gt; and create an app to get a client_id and client_secret key pair&lt;/li&gt;
+&lt;li&gt;Put these keys in settings.json&lt;/li&gt;
+&lt;li&gt;Go to &lt;a href="https://ffmpeg.org/download.html"&gt;https://ffmpeg.org/download.html&lt;/a&gt; and download ffmpeg.&lt;/li&gt;
+&lt;li&gt;Extract the files from the zip and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of spotify_album_downloader.py &lt;em&gt;(you can also put these in a location that is referenced by the PATH variable if you wish)&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="usage"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#usage"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Usage&lt;/span&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Get the URI of a Spotify playlist by clicking the three dots at the top to show then menu and click share. In this sub-menu, click "Copy Spotify URI"; this will copy the URI to your clipboard.&lt;/li&gt;
+&lt;li&gt;Run spotify_album_downloader.py and insert your Spotify URI, then hit enter.&lt;/li&gt;
+&lt;li&gt;Files will be saved to /output/ in the current working directory.&lt;/li&gt;
+&lt;/ol&gt;</content:encoded>
+      <guid isPermaLink="false">https://nitratine.net/blog/post/spotify-playlist-downloader/</guid>
+      <category>Projects</category>
+      <enclosure url="https://nitratine.net/posts/spotify-playlist-downloader/feature.jpg" length="0" type="image/jpg"/>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +1300</pubDate>
+    </item>
+    <item>
       <title>Lucy In The Sky With Emotion</title>
       <link>https://nitratine.net/blog/post/lucy-in-the-sky-with-emotion/</link>
       <description>This project aimed to visualise emotion in music with software developed by six people from the COMP241 (Software Engineering Development) paper as a group project. The project was successful in the end using Spotify to assist emotion detection.</description>
@@ -2471,46 +2511,6 @@ mouse = MouseController()
       <guid isPermaLink="false">https://nitratine.net/blog/post/lucy-in-the-sky-with-emotion/</guid>
       <category>Projects</category>
       <enclosure url="https://nitratine.net/posts/lucy-in-the-sky-with-emotion/visualiser5.jpg" length="0" type="image/jpg"/>
-      <pubDate>Thu, 21 Dec 2017 00:00:00 +1300</pubDate>
-    </item>
-    <item>
-      <title>Spotify Playlist Downloader</title>
-      <link>https://nitratine.net/blog/post/spotify-playlist-downloader/</link>
-      <description>A Python script to download a Spotify playlist to MP3 using YouTube as an audio source. The MP3s are tagged and given album art using Spotify</description>
-      <content:encoded>&lt;h2 id="what-is-this"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#what-is-this"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What is this?&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;This project takes a Spotify playlist URI and will download its contents by sourcing audio from YouTube and tags/art from Spotify. YouTube videos for audio are found automatically.&lt;/p&gt;
-&lt;h2 id="demonstration-and-screenshots"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#demonstration-and-screenshots"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Demonstration and Screenshots&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="Console example" src="/posts/spotify-playlist-downloader/gui1.png" /&gt;&lt;/p&gt;
-&lt;p&gt;This is a console application, simply paste the URI and press enter.&lt;/p&gt;
-&lt;h2 id="requirements"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#requirements"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Requirements&lt;/span&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Python (tested with 3.5)&lt;/li&gt;
-&lt;li&gt;ffmpeg (described in installation steps 5 and 6)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="installation"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#installation"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Installation&lt;/span&gt;&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Clone this repository. &lt;code&gt;git clone https://github.com/brentvollebregt/spotify-playlist-downloader.git&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;cd into the project. &lt;code&gt;cd spotify-playlist-downloader&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Install the requirements. &lt;code&gt;pip install requirements.txt&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Go to &lt;a href="https://developer.spotify.com/my-applications"&gt;https://developer.spotify.com/my-applications&lt;/a&gt; and create an app to get a client_id and client_secret key pair&lt;/li&gt;
-&lt;li&gt;Put these keys in settings.json&lt;/li&gt;
-&lt;li&gt;Go to &lt;a href="https://ffmpeg.org/download.html"&gt;https://ffmpeg.org/download.html&lt;/a&gt; and download ffmpeg.&lt;/li&gt;
-&lt;li&gt;Extract the files from the zip and copy ffmpeg.exe, ffplay.exe and ffprobe.exe from the /bin folder to the location of spotify_album_downloader.py &lt;em&gt;(you can also put these in a location that is referenced by the PATH variable if you wish)&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="usage"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#usage"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Usage&lt;/span&gt;&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Get the URI of a Spotify playlist by clicking the three dots at the top to show then menu and click share. In this sub-menu, click "Copy Spotify URI"; this will copy the URI to your clipboard.&lt;/li&gt;
-&lt;li&gt;Run spotify_album_downloader.py and insert your Spotify URI, then hit enter.&lt;/li&gt;
-&lt;li&gt;Files will be saved to /output/ in the current working directory.&lt;/li&gt;
-&lt;/ol&gt;</content:encoded>
-      <guid isPermaLink="false">https://nitratine.net/blog/post/spotify-playlist-downloader/</guid>
-      <category>Projects</category>
-      <enclosure url="https://nitratine.net/posts/spotify-playlist-downloader/feature.jpg" length="0" type="image/jpg"/>
       <pubDate>Thu, 21 Dec 2017 00:00:00 +1300</pubDate>
     </item>
     <item>
@@ -3090,7 +3090,7 @@ mouse = MouseController()
     &lt;span class="n"&gt;listener&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Next we need to declare the combinations to look out for. I this example I will use Shift + A. I will need to use two variants, Shift + A and Shift + a so the combination will be detected no matter what order they are pressed. If A is pressed first, 'a' will be given to the listener but if shift is pressed before A then 'A' will be given to the listener. Make a list called COMBINATIONS and add the keys in sets as shown below.&lt;/p&gt;
+&lt;p&gt;Next we need to declare the combinations to look out for. I this example I will use &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;A&lt;/kbd&gt;. I will need to use two variants, Shift + A and Shift + a so the combination will be detected no matter what order they are pressed. If &lt;kbd&gt;A&lt;/kbd&gt; is pressed first, 'a' will be given to the listener but if &lt;kbd&gt;Shift&lt;/kbd&gt; is pressed before &lt;kbd&gt;A&lt;/kbd&gt; then 'A' will be given to the listener. Make a list called COMBINATIONS and add the keys in sets as shown below.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# The key combination to check&lt;/span&gt;
 &lt;span class="n"&gt;COMBINATIONS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
     &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;keyboard&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;keyboard&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;KeyCode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;
@@ -3120,7 +3120,7 @@ mouse = MouseController()
         &lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You can now run the script and when Shift and 'A' are pressed at the same time, the sting will be printed to the console.&lt;/p&gt;
+&lt;p&gt;You can now run the script and when &lt;kbd&gt;Shift&lt;/kbd&gt; and &lt;kbd&gt;A&lt;/kbd&gt; are pressed at the same time, the sting will be printed to the console.&lt;/p&gt;
 &lt;p&gt;If you want to call another script, do it in execute() by doing something like an os.system call on your script or importing it and then calling it.&lt;/p&gt;
 &lt;p&gt;This script has been modified from the example given by Moses Palmer on &lt;a href="https://github.com/moses-palmer/pynput/issues/20"&gt;issue 20 of pynput&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="adding-hotkeys"&gt;
@@ -3170,13 +3170,13 @@ mouse = MouseController()
 
 &lt;h2 id="issues-with-character-casing-revision-1"&gt;
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#issues-with-character-casing-revision-1"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Issues With Character Casing (Revision 1)&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;In the example above I have defined two combinations, one for &lt;code&gt;shift+a&lt;/code&gt; and &lt;code&gt;shift+A&lt;/code&gt;; this handles the two cases when you press A before shift and shift before A. However this mixing of case can also cause issues when tracking the currently pressed keys.&lt;/p&gt;
-&lt;p&gt;A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the A key can give two different keys depending on if you are holding shift or not (a or A); but pynput can actually see that the A key itself is pressed. To track what physical key is pressed, we can use the &lt;code&gt;vk&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;In the example above I have defined two combinations, one for &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;A&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;A&lt;/kbd&gt;; this handles the two cases when you press &lt;kbd&gt;A&lt;/kbd&gt; before &lt;kbd&gt;Shift&lt;/kbd&gt; and &lt;kbd&gt;Shift&lt;/kbd&gt; before &lt;kbd&gt;A&lt;/kbd&gt;. However this mixing of case can also cause issues when tracking the currently pressed keys.&lt;/p&gt;
+&lt;p&gt;A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the &lt;kbd&gt;A&lt;/kbd&gt; key can give two different keys depending on if you are holding &lt;kbd&gt;Shift&lt;/kbd&gt; or not (a or A); but pynput can actually see that the &lt;kbd&gt;A&lt;/kbd&gt; key itself is pressed. To track what physical key is pressed, we can use the &lt;code&gt;vk&lt;/code&gt;. &lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;vk&lt;/code&gt; is short for "virtual key" and is a code associated with each key. For example: a = 65, b = 66, enter = 13, shift = 130&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;To get the vk, we can read the &lt;code&gt;vk&lt;/code&gt; attribute in the &lt;code&gt;KeyCode&lt;/code&gt; object provided by pynput in the &lt;code&gt;on_press&lt;/code&gt; and &lt;code&gt;on_release&lt;/code&gt;. Using the &lt;code&gt;vk&lt;/code&gt; codes to track what keys are pressed will take a bit more effort but can simplify some things.&lt;/p&gt;
-&lt;p&gt;Below is a script I developed to watch for &lt;code&gt;shift+a&lt;/code&gt;. This will now be able to handle &lt;code&gt;shift+a&lt;/code&gt; pressed in many different ways.&lt;/p&gt;
+&lt;p&gt;Below is a script I developed to watch for &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;A&lt;/kbd&gt;. This will now be able to handle &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;A&lt;/kbd&gt; pressed in many different ways.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pynput&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;keyboard&lt;/span&gt;
 
 &lt;span class="c1"&gt;# The key combinations to look for&lt;/span&gt;
@@ -3358,13 +3358,13 @@ mouse = MouseController()
     &lt;span class="n"&gt;listener&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;When executing this script and pressing Shift + A (in any order), this will execute &lt;code&gt;function_1&lt;/code&gt; and print "Executed function_1". When pressing Shift + B (in any order), &lt;code&gt;function_2&lt;/code&gt; will be executed. Also when pressing Left Alt + G (in any order), &lt;code&gt;function_2&lt;/code&gt; will be executed.&lt;/p&gt;
+&lt;p&gt;When executing this script and pressing &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;A&lt;/kbd&gt; (in any order), this will execute &lt;code&gt;function_1&lt;/code&gt; and print "Executed function_1". When pressing &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;B&lt;/kbd&gt; (in any order), &lt;code&gt;function_2&lt;/code&gt; will be executed. Also when pressing Left &lt;kbd&gt;alt&lt;/kbd&gt; + &lt;kbd&gt;G&lt;/kbd&gt; (in any order), &lt;code&gt;function_2&lt;/code&gt; will be executed.&lt;/p&gt;
 &lt;p&gt;To create new combinations, duplicate a line in the &lt;code&gt;combination_to_function&lt;/code&gt; dictionary and replace the keys inside of &lt;code&gt;frozenset&lt;/code&gt; and the value (function - not the return value of the function).&lt;/p&gt;
 &lt;h2 id="pynputs-hotkey-class"&gt;
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#pynputs-hotkey-class"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;pynput's HotKey Class&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;In December 2019 &lt;a href="https://pynput.readthedocs.io/en/latest/keyboard.html#global-hotkeys"&gt;global hotkeys&lt;/a&gt; were added to pynput. This allowed us to hide all the extra state of combination detection and just provide the keys we want to listen to.&lt;/p&gt;
 &lt;p&gt;The docs recommend using &lt;code&gt;keyboard.HotKey.parse&lt;/code&gt; to get a list of keys from a string (e.g. &lt;code&gt;"&amp;lt;ctrl&amp;gt;+&amp;lt;alt&amp;gt;+h"&lt;/code&gt;) when using this function, but I recommend using keys like we defined above. This allows you to more easily identify keys are pynput keys although there aren't huge benefits using either way.&lt;/p&gt;
-&lt;p&gt;Here is an example of &lt;code&gt;alt + ctrl + r&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Here is an example of &lt;kbd&gt;Alt&lt;/kbd&gt; + &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;R&lt;/kbd&gt;:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pynput.keyboard&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HotKey&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;KeyCode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Listener&lt;/span&gt;
 
 
@@ -4266,60 +4266,6 @@ Once again, thank you for the support; I loved making this project.&lt;/p&gt;</c
       <pubDate>Sat, 10 Mar 2018 00:00:00 +1300</pubDate>
     </item>
     <item>
-      <title>My Desktop Backgrounds</title>
-      <link>https://nitratine.net/blog/post/my-desktop-backgrounds/</link>
-      <description>Surprisingly I get a lot of people asking where I got my backgrounds from in my YouTube videos. I've finally decided to just put them all in once place if anyone is interested.</description>
-      <content:encoded>&lt;div class="toc"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#designed-by-me"&gt;Designed By Me&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#mass-jquery"&gt;Mass jQuery&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#not-designed-by-me"&gt;Not Designed by Me&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#hills-material-design-wallpaper"&gt;Hills Material Design Wallpaper&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#material-design-blue"&gt;Material Design Blue&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#fluorescent-face"&gt;Fluorescent Face&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#lhc-blocks"&gt;LHC Blocks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;p&gt;I have also added backgrounds I have made at the top of this and add attributions to where I got other backgrounds from.&lt;/p&gt;
-&lt;h2 id="designed-by-me"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#designed-by-me"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Designed By Me&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;These are backgrounds I have created myself either for a purpose or just for the interest of how it was created.&lt;/p&gt;
-&lt;h3 id="mass-jquery"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#mass-jquery"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Mass jQuery&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="Mass jQuery" src="/posts/my-desktop-backgrounds/mass-jquery.png" /&gt;&lt;/p&gt;
-&lt;p&gt;I created this image to back my YouTube banner. I used JavaScript as it can be compressed unlike Python and I could easily get plenty of it, for example jQuery as I used in this.&lt;/p&gt;
-&lt;p&gt;This was made by making the code for jQuery fill the page and then use a pygments lexer to highlight the code.&lt;/p&gt;
-&lt;p&gt;A smaller version for smaller screens can be found &lt;a href="/posts/my-desktop-backgrounds/mass-jquery-small.png"&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id="not-designed-by-me"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#not-designed-by-me"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Not Designed by Me&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;These are the backgrounds that are featured as my background in my YouTube videos.&lt;/p&gt;
-&lt;h3 id="hills-material-design-wallpaper"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#hills-material-design-wallpaper"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Hills Material Design Wallpaper&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="Hills Material Design Wallpaper" src="/posts/my-desktop-backgrounds/hills-material-design-wallpaper.png" /&gt;&lt;/p&gt;
-&lt;p&gt;This is currently my favourite as it is so clean and has a very happy feel to it. Icons site nicely on it and it is very clear being 1920x1080. I found this in a Google Image search but &lt;a href="http://www.baltana.com/abstract/material-design-hd-desktop-wallpaper-23164.html"&gt;this is the origin&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id="material-design-blue"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#material-design-blue"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Material Design Blue&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="Material Design Blue" src="/posts/my-desktop-backgrounds/material-design-blue.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;You will find I like material design and I used to try and design a lot of my projects to the specifications, this is obviously quite time-consuming so I settle for backgrounds, colours and icons.&lt;/p&gt;
-&lt;p&gt;This was also found by Google Image search but &lt;a href="http://wallpaperswide.com/material_design-wallpapers.html"&gt;originated here&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id="fluorescent-face"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#fluorescent-face"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Fluorescent Face&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="Fluorescent Face" src="/posts/my-desktop-backgrounds/fluorescent-face.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;I really liked the colours in this background. Monitors that render colour well makes this image look amazing. Unfortunately, I don't remember where this image came from and a reverse image search is not providing hints by giving me 30 different results at the same resolution.&lt;/p&gt;
-&lt;h3 id="lhc-blocks"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#lhc-blocks"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;LHC Blocks&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="LHC Blocks" src="/posts/my-desktop-backgrounds/lhc-blocks.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;This image is a representation of some data collected by the LHC. I loved the idea and all the colours of this and the black backing was a bonus. This image was actually an icon for the video &lt;a href="https://www.youtube.com/watch?v=fzNSME3h9rs"&gt;"Heavy Ion collision event display"&lt;/a&gt; on YouTube.&lt;/p&gt;</content:encoded>
-      <guid isPermaLink="false">https://nitratine.net/blog/post/my-desktop-backgrounds/</guid>
-      <category>General</category>
-      <enclosure url="https://nitratine.net/posts/my-desktop-backgrounds/lhc-blocks.jpg" length="0" type="image/jpg"/>
-      <pubDate>Wed, 25 Apr 2018 00:00:00 +1200</pubDate>
-    </item>
-    <item>
       <title>Hit Counter</title>
       <link>https://nitratine.net/blog/post/hit-counter/</link>
       <description>Easily Count Hits on a Website by Requesting an SVG Displaying Hit Count. Works on any site.</description>
@@ -4526,6 +4472,60 @@ Once again, thank you for the support; I loved making this project.&lt;/p&gt;</c
       <guid isPermaLink="false">https://nitratine.net/blog/post/github-badges/</guid>
       <category>Tutorials</category>
       <enclosure url="https://nitratine.net/posts/github-badges/static.png" length="0" type="image/png"/>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +1200</pubDate>
+    </item>
+    <item>
+      <title>My Desktop Backgrounds</title>
+      <link>https://nitratine.net/blog/post/my-desktop-backgrounds/</link>
+      <description>Surprisingly I get a lot of people asking where I got my backgrounds from in my YouTube videos. I've finally decided to just put them all in once place if anyone is interested.</description>
+      <content:encoded>&lt;div class="toc"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#designed-by-me"&gt;Designed By Me&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#mass-jquery"&gt;Mass jQuery&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#not-designed-by-me"&gt;Not Designed by Me&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#hills-material-design-wallpaper"&gt;Hills Material Design Wallpaper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#material-design-blue"&gt;Material Design Blue&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#fluorescent-face"&gt;Fluorescent Face&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#lhc-blocks"&gt;LHC Blocks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;I have also added backgrounds I have made at the top of this and add attributions to where I got other backgrounds from.&lt;/p&gt;
+&lt;h2 id="designed-by-me"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#designed-by-me"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Designed By Me&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;These are backgrounds I have created myself either for a purpose or just for the interest of how it was created.&lt;/p&gt;
+&lt;h3 id="mass-jquery"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#mass-jquery"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Mass jQuery&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Mass jQuery" src="/posts/my-desktop-backgrounds/mass-jquery.png" /&gt;&lt;/p&gt;
+&lt;p&gt;I created this image to back my YouTube banner. I used JavaScript as it can be compressed unlike Python and I could easily get plenty of it, for example jQuery as I used in this.&lt;/p&gt;
+&lt;p&gt;This was made by making the code for jQuery fill the page and then use a pygments lexer to highlight the code.&lt;/p&gt;
+&lt;p&gt;A smaller version for smaller screens can be found &lt;a href="/posts/my-desktop-backgrounds/mass-jquery-small.png"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="not-designed-by-me"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#not-designed-by-me"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Not Designed by Me&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;These are the backgrounds that are featured as my background in my YouTube videos.&lt;/p&gt;
+&lt;h3 id="hills-material-design-wallpaper"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#hills-material-design-wallpaper"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Hills Material Design Wallpaper&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Hills Material Design Wallpaper" src="/posts/my-desktop-backgrounds/hills-material-design-wallpaper.png" /&gt;&lt;/p&gt;
+&lt;p&gt;This is currently my favourite as it is so clean and has a very happy feel to it. Icons site nicely on it and it is very clear being 1920x1080. I found this in a Google Image search but &lt;a href="http://www.baltana.com/abstract/material-design-hd-desktop-wallpaper-23164.html"&gt;this is the origin&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="material-design-blue"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#material-design-blue"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Material Design Blue&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Material Design Blue" src="/posts/my-desktop-backgrounds/material-design-blue.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;You will find I like material design and I used to try and design a lot of my projects to the specifications, this is obviously quite time-consuming so I settle for backgrounds, colours and icons.&lt;/p&gt;
+&lt;p&gt;This was also found by Google Image search but &lt;a href="http://wallpaperswide.com/material_design-wallpapers.html"&gt;originated here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="fluorescent-face"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#fluorescent-face"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Fluorescent Face&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Fluorescent Face" src="/posts/my-desktop-backgrounds/fluorescent-face.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;I really liked the colours in this background. Monitors that render colour well makes this image look amazing. Unfortunately, I don't remember where this image came from and a reverse image search is not providing hints by giving me 30 different results at the same resolution.&lt;/p&gt;
+&lt;h3 id="lhc-blocks"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#lhc-blocks"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;LHC Blocks&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="LHC Blocks" src="/posts/my-desktop-backgrounds/lhc-blocks.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;This image is a representation of some data collected by the LHC. I loved the idea and all the colours of this and the black backing was a bonus. This image was actually an icon for the video &lt;a href="https://www.youtube.com/watch?v=fzNSME3h9rs"&gt;"Heavy Ion collision event display"&lt;/a&gt; on YouTube.&lt;/p&gt;</content:encoded>
+      <guid isPermaLink="false">https://nitratine.net/blog/post/my-desktop-backgrounds/</guid>
+      <category>General</category>
+      <enclosure url="https://nitratine.net/posts/my-desktop-backgrounds/lhc-blocks.jpg" length="0" type="image/jpg"/>
       <pubDate>Wed, 25 Apr 2018 00:00:00 +1200</pubDate>
     </item>
     <item>
@@ -5936,212 +5936,6 @@ The idea of this is to easily switch clipboards with a simple click in a GUI. It
       <pubDate>Sun, 09 Sep 2018 00:00:00 +1200</pubDate>
     </item>
     <item>
-      <title>Encryption and Decryption in Python</title>
-      <link>https://nitratine.net/blog/post/encryption-and-decryption-in-python/</link>
-      <description>In this post, I discuss how to encrypt and decrypt messages in Python using symmetric encryption. I will demonstrate how to create keys, save keys and how to encrypt messages and text.</description>
-      <content:encoded>&lt;div class="toc"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#installing-cryptography"&gt;Installing cryptography&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#what-is-symmetric-encryption"&gt;What is Symmetric Encryption?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#getting-a-key"&gt;Getting a Key&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#storing-keys"&gt;Storing Keys&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#reading-keys"&gt;Reading Keys&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#generating-a-key-from-a-password"&gt;Generating a Key From A Password&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#encrypting"&gt;Encrypting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#decrypting"&gt;Decrypting&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="#incorrect-keys"&gt;Incorrect Keys&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href="#demonstration"&gt;Demonstration&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#encrypting-and-decrypting-files"&gt;Encrypting and Decrypting Files&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;p&gt;
-&lt;div class="embedded_yt my-3"&gt;
-&lt;div&gt;
-&lt;iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/H8t4DJ3Tdrg"&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/p&gt;
-&lt;p&gt;Using the &lt;a href="https://cryptography.io/en/latest/"&gt;cryptography&lt;/a&gt; module in Python, we will use an implementation of AES called &lt;a href="https://cryptography.io/en/latest/fernet.html"&gt;Fernet&lt;/a&gt; to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.&lt;/p&gt;
-&lt;h2 id="installing-cryptography"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#installing-cryptography"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Installing cryptography&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;Since Python does not come with anything that can encrypt files, we will need to use a third-party module.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/dlitz/pycrypto"&gt;PyCrypto&lt;/a&gt; is quite popular but since it does not offer built wheels, if you don't have Microsoft Visual C++ Build Tools installed, you will be told to install it. Instead of installing extra tools just to build this, I will be using the cryptography module. To install this, execute:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;python -m pip install cryptography&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;To make sure it installed correctly, open IDLE and execute:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;cryptography&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If no errors appeared it has been installed correctly.&lt;/p&gt;
-&lt;h2 id="what-is-symmetric-encryption"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#what-is-symmetric-encryption"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What is Symmetric Encryption?&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm"&gt;Symmetric encryption&lt;/a&gt; is when a key is used to encrypt and decrypt a message, so whoever encrypted it can decrypt it. The only way to decrypt the message is to know what was used to encrypt it; kind of like a password.&lt;/p&gt;
-&lt;p&gt;To use symmetric encryption, we will use the &lt;a href="https://cryptography.io/en/latest/fernet.html"&gt;Fernet class&lt;/a&gt; which is an implementation of &lt;a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard"&gt;AES&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Looking for a tutorial on asymmetric encryption? &lt;a href="/blog/post/asymmetric-encryption-and-decryption-in-python/"&gt;I wrote one of those for Python too&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="getting-a-key"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#getting-a-key"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Getting a Key&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;There are two main ways to get a key, we can either generate a new one or use one that has previously been generated. These keys need to be in a particular format so make sure to get this right.&lt;/p&gt;
-&lt;p&gt;To generate a new random key, we can simply use&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
-&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_key&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The variable &lt;em&gt;key&lt;/em&gt; will now have the value of a URL safe base64 encoded key. When using these keys to encrypt, make sure to keep them safe, if you lose them you will not be able to decrypt your message.&lt;/p&gt;
-&lt;p&gt;This key will have a type of bytes, so if you want a string you can call &lt;code&gt;key.decode()&lt;/code&gt; to convert from UTF-8 to Pythons string type.&lt;/p&gt;
-&lt;h3 id="storing-keys"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#storing-keys"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Storing Keys&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;One way of keeping your keys safe is to keep them in a file. To do this we can simply create/overwrite a file and put the key in it.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key.key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Open the file as wb to write bytes&lt;/span&gt;
-&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# The key is type bytes still&lt;/span&gt;
-&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Make sure to keep these files safe and don't give them to anyone that you don't trust. Anyone with these keys can decrypt all past messages encrypted with this key.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id="reading-keys"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#reading-keys"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reading Keys&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;If you have previously saved your key using the method I showed, you can read the key back out using the following code.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key.key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Open the file as wb to read bytes&lt;/span&gt;
-&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# The key will be type bytes&lt;/span&gt;
-&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The key will now be read into the variable &lt;em&gt;key&lt;/em&gt; and will be type bytes.&lt;/p&gt;
-&lt;h3 id="generating-a-key-from-a-password"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#generating-a-key-from-a-password"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Generating a Key From A Password&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;If you want to base your key of a string that the user can input or some other form of input, you can create a key using this input.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;base64&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.hazmat.backends&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;default_backend&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.hazmat.primitives&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;hashes&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.hazmat.primitives.kdf.pbkdf2&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PBKDF2HMAC&lt;/span&gt;
-
-&lt;span class="n"&gt;password_provided&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;password&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# This is input in the form of a string&lt;/span&gt;
-&lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;password_provided&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Convert to type bytes&lt;/span&gt;
-&lt;span class="n"&gt;salt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;salt_&amp;#39;&lt;/span&gt;  &lt;span class="c1"&gt;# CHANGE THIS - recommend using a key from os.urandom(16), must be of type bytes&lt;/span&gt;
-&lt;span class="n"&gt;kdf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PBKDF2HMAC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="n"&gt;algorithm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hashes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SHA256&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
-    &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;salt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;salt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;iterations&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;backend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;default_backend&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base64&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlsafe_b64encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kdf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;derive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# Can only use kdf once&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The variable &lt;em&gt;key&lt;/em&gt; will now have the value of a url safe base64 encoded key.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It is recommended to use a different salt than the one shown here. You can generate a new salt using os.urandom(16). Make sure to use the same salt every time you convert a password to a key otherwise it will not produce the same result.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="encrypting"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#encrypting"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Encrypting&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;To encrypt a message, you will need a key (as previously discussed) and your message as type bytes (you can convert strings to bytes using &lt;code&gt;.encode()&lt;/code&gt;).&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
-&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;my deep dark secret&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Encrypt the bytes. The returning object is of type bytes&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The variable &lt;em&gt;encrypted&lt;/em&gt; will now have the value of the message encrypted as type bytes. This is also  a URL safe base64 encoded key.&lt;/p&gt;
-&lt;h2 id="decrypting"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#decrypting"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Decrypting&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;To decrypt a message, you will need the same key and the encrypted message (still in bytes).&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
-&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;...encrypted bytes...&amp;quot;&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Decrypt the bytes. The returning object is of type bytes&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The variable &lt;em&gt;decrypted&lt;/em&gt; will now have the value of the original message (which was of type bytes).&lt;/p&gt;
-&lt;h3 id="incorrect-keys"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#incorrect-keys"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Incorrect Keys&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;If a different key to the one used to encrypt is provided when decrypting, a &lt;code&gt;cryptography.fernet.InvalidToken&lt;/code&gt; will be raised. &lt;/p&gt;
-&lt;p&gt;Catching this error will allow you to tell if the incorrect key was provided; for example:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt;
-&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;...encrypted bytes...&amp;quot;&lt;/span&gt;
-
-&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;incorrect_key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# An example of providing the incorrect key&lt;/span&gt;
-&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Valid Key - Successfully decrypted&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Catch any InvalidToken exceptions if the correct key was not provided&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Invalid Key - Unsuccessfully decrypted&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id="demonstration"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#demonstration"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Demonstration&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;To show this in action, here is a properly constructed example.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;my deep dark secret&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# .encode() is used to turn the string to bytes&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_key&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Store this key or get if you already have it&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;decrypted&lt;/span&gt;  &lt;span class="c1"&gt;# The original message and decrypted bytes are the same&lt;/span&gt;
-&lt;span class="kc"&gt;True&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This example shows a key being generated, you will want to make sure you have already sorted your key out and put it in a file for later use.&lt;/p&gt;
-&lt;h2 id="encrypting-and-decrypting-files"&gt;
-&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#encrypting-and-decrypting-files"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Encrypting and Decrypting Files&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;We can also encrypt files using this method since files can be read as bytes. Simply open the file, read the bytes, encrypt the data and write them out to a new file. To encrypt:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
-&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;# Use one of the methods to get a key (it must be the same when decrypting)&lt;/span&gt;
-&lt;span class="n"&gt;input_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;output_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.encrypted&amp;#39;&lt;/span&gt;
-
-&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Read the bytes of the input file&lt;/span&gt;
-
-&lt;span class="n"&gt;fernet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Write the encrypted bytes to the output file&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Note: You can delete input_file here if you want&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And then to decrypt a file:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt;
-&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;# Use one of the methods to get a key (it must be the same as used in encrypting)&lt;/span&gt;
-&lt;span class="n"&gt;input_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.encrypted&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;output_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;
-
-&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Read the bytes of the encrypted file&lt;/span&gt;
-
-&lt;span class="n"&gt;fernet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;decrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Write the decrypted bytes to the output file&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# Note: You can delete input_file here if you want&lt;/span&gt;
-&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Invalid Key - Unsuccessfully decrypted&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;As stated in &lt;a href="https://cryptography.io/en/latest/fernet.html#limitations"&gt;Fernet docs&lt;/a&gt;, beware of large files; Fernet is ideal for encrypting data that easily fits in memory. You may need to think of methods to split larger files up to use this encryption method on large files.&lt;/p&gt;
-&lt;/blockquote&gt;</content:encoded>
-      <guid isPermaLink="false">https://nitratine.net/blog/post/encryption-and-decryption-in-python/</guid>
-      <category>YouTube</category>
-      <enclosure url="https://nitratine.net/posts/encryption-and-decryption-in-python/youtube-thumbnail.jpg" length="0" type="image/jpg"/>
-      <pubDate>Sun, 16 Sep 2018 00:00:00 +1200</pubDate>
-    </item>
-    <item>
       <title>Asymmetric Encryption and Decryption in Python</title>
       <link>https://nitratine.net/blog/post/asymmetric-encryption-and-decryption-in-python/</link>
       <description>In this post, I demonstrate the usage of the cryptography module in Python by using using the asymmetric key method RSA to encrypt and decrypt messages.</description>
@@ -6386,6 +6180,212 @@ The idea of this is to easily switch clipboards with a simple click in a GUI. It
       <guid isPermaLink="false">https://nitratine.net/blog/post/asymmetric-encryption-and-decryption-in-python/</guid>
       <category>Tutorials</category>
       <enclosure url="https://nitratine.net/posts/asymmetric-encryption-and-decryption-in-python/feature.png" length="0" type="image/png"/>
+      <pubDate>Sun, 16 Sep 2018 00:00:00 +1200</pubDate>
+    </item>
+    <item>
+      <title>Encryption and Decryption in Python</title>
+      <link>https://nitratine.net/blog/post/encryption-and-decryption-in-python/</link>
+      <description>In this post, I discuss how to encrypt and decrypt messages in Python using symmetric encryption. I will demonstrate how to create keys, save keys and how to encrypt messages and text.</description>
+      <content:encoded>&lt;div class="toc"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#installing-cryptography"&gt;Installing cryptography&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#what-is-symmetric-encryption"&gt;What is Symmetric Encryption?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#getting-a-key"&gt;Getting a Key&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#storing-keys"&gt;Storing Keys&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#reading-keys"&gt;Reading Keys&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#generating-a-key-from-a-password"&gt;Generating a Key From A Password&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#encrypting"&gt;Encrypting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#decrypting"&gt;Decrypting&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#incorrect-keys"&gt;Incorrect Keys&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#demonstration"&gt;Demonstration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#encrypting-and-decrypting-files"&gt;Encrypting and Decrypting Files&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;
+&lt;div class="embedded_yt my-3"&gt;
+&lt;div&gt;
+&lt;iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/H8t4DJ3Tdrg"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;p&gt;Using the &lt;a href="https://cryptography.io/en/latest/"&gt;cryptography&lt;/a&gt; module in Python, we will use an implementation of AES called &lt;a href="https://cryptography.io/en/latest/fernet.html"&gt;Fernet&lt;/a&gt; to encrypt data. I will also show you how to keep keys safe and how to use these methods on files.&lt;/p&gt;
+&lt;h2 id="installing-cryptography"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#installing-cryptography"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Installing cryptography&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;Since Python does not come with anything that can encrypt files, we will need to use a third-party module.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/dlitz/pycrypto"&gt;PyCrypto&lt;/a&gt; is quite popular but since it does not offer built wheels, if you don't have Microsoft Visual C++ Build Tools installed, you will be told to install it. Instead of installing extra tools just to build this, I will be using the cryptography module. To install this, execute:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;python -m pip install cryptography&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To make sure it installed correctly, open IDLE and execute:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;cryptography&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If no errors appeared it has been installed correctly.&lt;/p&gt;
+&lt;h2 id="what-is-symmetric-encryption"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#what-is-symmetric-encryption"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What is Symmetric Encryption?&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm"&gt;Symmetric encryption&lt;/a&gt; is when a key is used to encrypt and decrypt a message, so whoever encrypted it can decrypt it. The only way to decrypt the message is to know what was used to encrypt it; kind of like a password.&lt;/p&gt;
+&lt;p&gt;To use symmetric encryption, we will use the &lt;a href="https://cryptography.io/en/latest/fernet.html"&gt;Fernet class&lt;/a&gt; which is an implementation of &lt;a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard"&gt;AES&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Looking for a tutorial on asymmetric encryption? &lt;a href="/blog/post/asymmetric-encryption-and-decryption-in-python/"&gt;I wrote one of those for Python too&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="getting-a-key"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#getting-a-key"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Getting a Key&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;There are two main ways to get a key, we can either generate a new one or use one that has previously been generated. These keys need to be in a particular format so make sure to get this right.&lt;/p&gt;
+&lt;p&gt;To generate a new random key, we can simply use&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
+&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_key&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The variable &lt;em&gt;key&lt;/em&gt; will now have the value of a URL safe base64 encoded key. When using these keys to encrypt, make sure to keep them safe, if you lose them you will not be able to decrypt your message.&lt;/p&gt;
+&lt;p&gt;This key will have a type of bytes, so if you want a string you can call &lt;code&gt;key.decode()&lt;/code&gt; to convert from UTF-8 to Pythons string type.&lt;/p&gt;
+&lt;h3 id="storing-keys"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#storing-keys"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Storing Keys&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;One way of keeping your keys safe is to keep them in a file. To do this we can simply create/overwrite a file and put the key in it.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key.key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Open the file as wb to write bytes&lt;/span&gt;
+&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# The key is type bytes still&lt;/span&gt;
+&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Make sure to keep these files safe and don't give them to anyone that you don't trust. Anyone with these keys can decrypt all past messages encrypted with this key.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="reading-keys"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#reading-keys"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Reading Keys&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;If you have previously saved your key using the method I showed, you can read the key back out using the following code.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key.key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Open the file as wb to read bytes&lt;/span&gt;
+&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# The key will be type bytes&lt;/span&gt;
+&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The key will now be read into the variable &lt;em&gt;key&lt;/em&gt; and will be type bytes.&lt;/p&gt;
+&lt;h3 id="generating-a-key-from-a-password"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#generating-a-key-from-a-password"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Generating a Key From A Password&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;If you want to base your key of a string that the user can input or some other form of input, you can create a key using this input.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;base64&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.hazmat.backends&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;default_backend&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.hazmat.primitives&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;hashes&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.hazmat.primitives.kdf.pbkdf2&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PBKDF2HMAC&lt;/span&gt;
+
+&lt;span class="n"&gt;password_provided&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;password&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# This is input in the form of a string&lt;/span&gt;
+&lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;password_provided&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Convert to type bytes&lt;/span&gt;
+&lt;span class="n"&gt;salt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;salt_&amp;#39;&lt;/span&gt;  &lt;span class="c1"&gt;# CHANGE THIS - recommend using a key from os.urandom(16), must be of type bytes&lt;/span&gt;
+&lt;span class="n"&gt;kdf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PBKDF2HMAC&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;algorithm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hashes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SHA256&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+    &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;salt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;salt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;iterations&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;backend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;default_backend&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base64&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlsafe_b64encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kdf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;derive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# Can only use kdf once&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The variable &lt;em&gt;key&lt;/em&gt; will now have the value of a url safe base64 encoded key.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is recommended to use a different salt than the one shown here. You can generate a new salt using os.urandom(16). Make sure to use the same salt every time you convert a password to a key otherwise it will not produce the same result.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="encrypting"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#encrypting"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Encrypting&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;To encrypt a message, you will need a key (as previously discussed) and your message as type bytes (you can convert strings to bytes using &lt;code&gt;.encode()&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
+&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;my deep dark secret&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Encrypt the bytes. The returning object is of type bytes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The variable &lt;em&gt;encrypted&lt;/em&gt; will now have the value of the message encrypted as type bytes. This is also  a URL safe base64 encoded key.&lt;/p&gt;
+&lt;h2 id="decrypting"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#decrypting"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Decrypting&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;To decrypt a message, you will need the same key and the encrypted message (still in bytes).&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
+&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;...encrypted bytes...&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Decrypt the bytes. The returning object is of type bytes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The variable &lt;em&gt;decrypted&lt;/em&gt; will now have the value of the original message (which was of type bytes).&lt;/p&gt;
+&lt;h3 id="incorrect-keys"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#incorrect-keys"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Incorrect Keys&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;If a different key to the one used to encrypt is provided when decrypting, a &lt;code&gt;cryptography.fernet.InvalidToken&lt;/code&gt; will be raised. &lt;/p&gt;
+&lt;p&gt;Catching this error will allow you to tell if the incorrect key was provided; for example:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt;
+&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;...encrypted bytes...&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;incorrect_key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# An example of providing the incorrect key&lt;/span&gt;
+&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Valid Key - Successfully decrypted&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Catch any InvalidToken exceptions if the correct key was not provided&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Invalid Key - Unsuccessfully decrypted&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="demonstration"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#demonstration"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Demonstration&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;To show this in action, here is a properly constructed example.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;my deep dark secret&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# .encode() is used to turn the string to bytes&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_key&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Store this key or get if you already have it&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;decrypted&lt;/span&gt;  &lt;span class="c1"&gt;# The original message and decrypted bytes are the same&lt;/span&gt;
+&lt;span class="kc"&gt;True&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This example shows a key being generated, you will want to make sure you have already sorted your key out and put it in a file for later use.&lt;/p&gt;
+&lt;h2 id="encrypting-and-decrypting-files"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#encrypting-and-decrypting-files"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Encrypting and Decrypting Files&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;We can also encrypt files using this method since files can be read as bytes. Simply open the file, read the bytes, encrypt the data and write them out to a new file. To encrypt:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;
+&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;# Use one of the methods to get a key (it must be the same when decrypting)&lt;/span&gt;
+&lt;span class="n"&gt;input_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;output_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.encrypted&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Read the bytes of the input file&lt;/span&gt;
+
+&lt;span class="n"&gt;fernet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;encrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;encrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Write the encrypted bytes to the output file&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Note: You can delete input_file here if you want&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And then to decrypt a file:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;cryptography.fernet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt;
+&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;# Use one of the methods to get a key (it must be the same as used in encrypting)&lt;/span&gt;
+&lt;span class="n"&gt;input_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.encrypted&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;output_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# Read the bytes of the encrypted file&lt;/span&gt;
+
+&lt;span class="n"&gt;fernet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Fernet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;decrypted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fernet&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;decrypted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# Write the decrypted bytes to the output file&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Note: You can delete input_file here if you want&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;InvalidToken&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Invalid Key - Unsuccessfully decrypted&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As stated in &lt;a href="https://cryptography.io/en/latest/fernet.html#limitations"&gt;Fernet docs&lt;/a&gt;, beware of large files; Fernet is ideal for encrypting data that easily fits in memory. You may need to think of methods to split larger files up to use this encryption method on large files.&lt;/p&gt;
+&lt;/blockquote&gt;</content:encoded>
+      <guid isPermaLink="false">https://nitratine.net/blog/post/encryption-and-decryption-in-python/</guid>
+      <category>YouTube</category>
+      <enclosure url="https://nitratine.net/posts/encryption-and-decryption-in-python/youtube-thumbnail.jpg" length="0" type="image/jpg"/>
       <pubDate>Sun, 16 Sep 2018 00:00:00 +1200</pubDate>
     </item>
     <item>
@@ -11456,7 +11456,7 @@ C:\Python37\python.exe
 
 &lt;p&gt;This means the server is now running and if you go to &lt;a href="http://127.0.0.1:5000/"&gt;http://127.0.0.1:5000/&lt;/a&gt; you should see the text "Hello, World!" - this means the server is working and we can continue on to serving a page.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Tip: Press Ctrl+C in the console running the server to stop it.&lt;/p&gt;
+&lt;p&gt;Tip: Press &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt; in the console running the server to stop it.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id="serving-an-html-page"&gt;
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#serving-an-html-page"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Serving An HTML Page&lt;/span&gt;&lt;/h3&gt;
@@ -11489,7 +11489,7 @@ C:\Python37\python.exe
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If you run the server again (like you did before) and go back to &lt;a href="http://127.0.0.1:5000/"&gt;http://127.0.0.1:5000/&lt;/a&gt; after the messages appear, you should see that the HTML in index.html was returned.&lt;/p&gt;
-&lt;p&gt;This is great! Now when someone requests for "/", index.html will be returned. You can press Ctrl+C again to stop the server for the moment.&lt;/p&gt;
+&lt;p&gt;This is great! Now when someone requests for "/", index.html will be returned. You can press &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt; again to stop the server for the moment.&lt;/p&gt;
 &lt;h2 id="moving-react-build-to-the-server"&gt;
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#moving-react-build-to-the-server"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Moving React Build To The Server&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;We now want to set up a script that will copy the output of the React app build to the servers "static" folder so index.html can be served to the client.&lt;/p&gt;
@@ -12607,7 +12607,7 @@ Server:
 &lt;blockquote&gt;
 &lt;p&gt;Make sure you run this in the WebODM folder that was cloned from GitHub&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;To stop WebODM press CTRL+C in the terminal that opened with WebODM logs in it or run:&lt;/p&gt;
+&lt;p&gt;To stop WebODM press &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt; in the terminal that opened with WebODM logs in it or run:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;./webodm.sh stop
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded>
       <guid isPermaLink="false">https://nitratine.net/blog/post/how-to-set-up-open-drone-map-on-windows/</guid>
