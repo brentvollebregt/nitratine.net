@@ -171,6 +171,12 @@ table img {
     background-color: initial
 }
 
+/* kbd tag */
+
+kbd {
+    padding: 1.5px 4px;
+}
+
 /* Sidebar */
 
 .blog-sidebar > div {

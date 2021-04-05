@@ -160,7 +160,7 @@ To start WebODM, run:
 
 > Make sure you run this in the WebODM folder that was cloned from GitHub
 
-To stop WebODM press CTRL+C in the terminal that opened with WebODM logs in it or run:
+To stop WebODM press [[Ctrl]] + [[C]] in the terminal that opened with WebODM logs in it or run:
 
 ```bash
 ./webodm.sh stop

@@ -44,7 +44,7 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
-Next we need to declare the combinations to look out for. I this example I will use Shift + A. I will need to use two variants, Shift + A and Shift + a so the combination will be detected no matter what order they are pressed. If A is pressed first, 'a' will be given to the listener but if shift is pressed before A then 'A' will be given to the listener. Make a list called COMBINATIONS and add the keys in sets as shown below.
+Next we need to declare the combinations to look out for. I this example I will use [[Shift]] + [[A]]. I will need to use two variants, Shift + A and Shift + a so the combination will be detected no matter what order they are pressed. If [[A]] is pressed first, 'a' will be given to the listener but if [[Shift]] is pressed before [[A]] then 'A' will be given to the listener. Make a list called COMBINATIONS and add the keys in sets as shown below.
 
 ```python
 # The key combination to check
@@ -81,7 +81,7 @@ def on_release(key):
         current.remove(key)
 ```
 
-You can now run the script and when Shift and 'A' are pressed at the same time, the sting will be printed to the console.
+You can now run the script and when [[Shift]] and [[A]] are pressed at the same time, the sting will be printed to the console.
 
 If you want to call another script, do it in execute() by doing something like an os.system call on your script or importing it and then calling it.
 
@@ -136,15 +136,15 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
 ```
 
 ## Issues With Character Casing (Revision 1)
-In the example above I have defined two combinations, one for `shift+a` and `shift+A`; this handles the two cases when you press A before shift and shift before A. However this mixing of case can also cause issues when tracking the currently pressed keys.
+In the example above I have defined two combinations, one for [[Shift]] + [[A]] and [[Shift]] + [[A]]; this handles the two cases when you press [[A]] before [[Shift]] and [[Shift]] before [[A]]. However this mixing of case can also cause issues when tracking the currently pressed keys.
 
-A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the A key can give two different keys depending on if you are holding shift or not (a or A); but pynput can actually see that the A key itself is pressed. To track what physical key is pressed, we can use the `vk`. 
+A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the [[A]] key can give two different keys depending on if you are holding [[Shift]] or not (a or A); but pynput can actually see that the [[A]] key itself is pressed. To track what physical key is pressed, we can use the `vk`. 
 
 > `vk` is short for "virtual key" and is a code associated with each key. For example: a = 65, b = 66, enter = 13, shift = 130
 
 To get the vk, we can read the `vk` attribute in the `KeyCode` object provided by pynput in the `on_press` and `on_release`. Using the `vk` codes to track what keys are pressed will take a bit more effort but can simplify some things.
 
-Below is a script I developed to watch for `shift+a`. This will now be able to handle `shift+a` pressed in many different ways.
+Below is a script I developed to watch for [[Shift]] + [[A]]. This will now be able to handle [[Shift]] + [[A]] pressed in many different ways.
 
 ```python
 from pynput import keyboard
@@ -297,7 +297,7 @@ with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 ```
 
-When executing this script and pressing Shift + A (in any order), this will execute `function_1` and print "Executed function_1". When pressing Shift + B (in any order), `function_2` will be executed. Also when pressing Left Alt + G (in any order), `function_2` will be executed.
+When executing this script and pressing [[Shift]] + [[A]] (in any order), this will execute `function_1` and print "Executed function_1". When pressing [[Shift]] + [[B]] (in any order), `function_2` will be executed. Also when pressing Left [[alt]] + [[G]] (in any order), `function_2` will be executed.
 
 To create new combinations, duplicate a line in the `combination_to_function` dictionary and replace the keys inside of `frozenset` and the value (function - not the return value of the function).
 
@@ -306,7 +306,7 @@ In December 2019 [global hotkeys](https://pynput.readthedocs.io/en/latest/keyboa
 
 The docs recommend using `keyboard.HotKey.parse` to get a list of keys from a string (e.g. `"<ctrl>+<alt>+h"`) when using this function, but I recommend using keys like we defined above. This allows you to more easily identify keys are pynput keys although there aren't huge benefits using either way.
 
-Here is an example of `alt + ctrl + r`:
+Here is an example of [[Alt]] + [[Ctrl]] + [[R]]:
 
 ```python
 from pynput.keyboard import HotKey, Key, KeyCode, Listener

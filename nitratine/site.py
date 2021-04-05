@@ -15,6 +15,7 @@ from .external.github import get_github_user_repos
 from .external.youtube import get_most_recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
 from .markdown_extensions import YouTubeVideoExtension, HeaderLinkExtension
+from .markdown_kbd_extension import KbdExtension
 from .rss import generate_rss_xml
 
 
@@ -23,7 +24,8 @@ active_markdown_extensions = [
     ExtraExtension(),
     TocExtension(),  # Table of contents `[toc]` + header ids
     YouTubeVideoExtension(),  # `youtube:<video_id>` tag
-    HeaderLinkExtension()  # Adding chain hover icon to go to header hash link
+    HeaderLinkExtension(),  # Adding chain hover icon to go to header hash link
+    KbdExtension()  # Adding <kbd>
 ]
 
 

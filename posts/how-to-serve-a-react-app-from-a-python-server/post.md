@@ -132,7 +132,7 @@ $ python run.py
 
 This means the server is now running and if you go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) you should see the text "Hello, World!" - this means the server is working and we can continue on to serving a page.
 
-> Tip: Press Ctrl+C in the console running the server to stop it.
+> Tip: Press [[Ctrl]] + [[C]] in the console running the server to stop it.
 
 ### Serving An HTML Page
 Typically when serving an HTML page from a Flask server, you would put the HTML file in a "templates" folder beside the Flask app. In this tutorial however, we will soon be using the index.html file from the React build, so we can just serve it as a static file.
@@ -172,7 +172,7 @@ def home():  # At the same home function as before
 
 If you run the server again (like you did before) and go back to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) after the messages appear, you should see that the HTML in index.html was returned.
 
-This is great! Now when someone requests for "/", index.html will be returned. You can press Ctrl+C again to stop the server for the moment.
+This is great! Now when someone requests for "/", index.html will be returned. You can press [[Ctrl]] + [[C]] again to stop the server for the moment.
 
 ## Moving React Build To The Server
 We now want to set up a script that will copy the output of the React app build to the servers "static" folder so index.html can be served to the client.
