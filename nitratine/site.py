@@ -9,6 +9,7 @@ import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
 from markdown.extensions.toc import TocExtension
+import readtime
 
 from .config import site_config, redirects, featured_posts, POST_SOURCE, POST_FILENAME, POST_EXTENSION
 from .external.github import get_github_user_repos
@@ -280,5 +281,11 @@ def url_encode(string):
     return urllib.parse.quote_plus(string)
 
 
+def get_read_time(post_markdown):
+    """ Get a string representing the time to read the given markdown (expecting a post) """
+    return readtime.of_markdown(post_markdown)
+
+
 app.jinja_env.globals.update(ymd_format=ymd_format)  # Allow ymd_format to be called in a Jinja template
 app.jinja_env.globals.update(url_encode=url_encode)  # Allow ymd_format to be called in a Jinja template
+app.jinja_env.globals.update(get_read_time=get_read_time)  # Allow get_read_time to be called in a Jinja template
