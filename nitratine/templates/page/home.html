@@ -16,51 +16,53 @@
 
 
 {% block content %}
-<section class="jumbotron jumbotron-fluid text-center header">
-    <h1 class="sr-only">Nitratine</h1>
-    <img src="/static/img/logo.png" class="img-fluid mb-2" alt="Nitratine Logo">
-    <p class="lead text-muted">A place where I share projects developed by me and tutorials on topics that I'm interested in.</p>
-    <p>
-        <a href="/blog/" class="btn btn-primary my-2">Visit Blog</a>
-        <a href="https://www.youtube.com/PyTutorials" class="btn btn-secondary my-2">PyTutorials on YouTube</a>
-    </p>
-</section>
+<main>
+    <section class="jumbotron jumbotron-fluid text-center header">
+        <h1 class="sr-only">Nitratine</h1>
+        <img src="/static/img/logo.png" class="img-fluid mb-2" alt="Nitratine Logo">
+        <p class="lead text-muted">A place where I share projects developed by me and tutorials on topics that I'm interested in.</p>
+        <p>
+            <a href="/blog/" class="btn btn-primary my-2">Visit Blog</a>
+            <a href="https://www.youtube.com/PyTutorials" class="btn btn-secondary my-2">PyTutorials on YouTube</a>
+        </p>
+    </section>
 
-<section id="featured-posts" class="card-columns">
+    <section id="featured-posts" class="card-columns">
 
-    {% for tile in tiles %}
+        {% for tile in tiles %}
 
-        {% if tile.type == 'post' %}
-            <a href="{{ tile.link }}">
-                <div class="card card-hover-effect">
-                    <img class="card-img-top" src="{{ tile.image_url }}" alt="Thumbnail">
-                    <div class="card-body">
-                        <h2 class="h4">{{ tile.title }}</h2>
-                        <p class="card-text">{{ tile.text }}</p>
-                        <small class="text-muted">{{ tile.date }}</small>
-                        <span class="ml-2 badge badge-primary">{{ tile.category }}</span>
+            {% if tile.type == 'post' %}
+                <a href="{{ tile.link }}">
+                    <div class="card card-hover-effect">
+                        <img class="card-img-top" src="{{ tile.image_url }}" alt="Thumbnail">
+                        <div class="card-body">
+                            <h2 class="h4">{{ tile.title }}</h2>
+                            <p class="card-text">{{ tile.text }}</p>
+                            <small class="text-muted">{{ tile.date }}</small>
+                            <span class="ml-2 badge badge-primary">{{ tile.category }}</span>
+                        </div>
                     </div>
-                </div>
-            </a>
-        {% endif %}
+                </a>
+            {% endif %}
 
-        {% if tile.type == 'post-image' %}
-            <a href="{{ tile.link }}">
-                <div class="card card-hover-effect">
-                    <img class="card-img" src="{{ tile.image_url }}" alt="Thumbnail">
-                </div>
-            </a>
-        {% endif %}
+            {% if tile.type == 'post-image' %}
+                <a href="{{ tile.link }}">
+                    <div class="card card-hover-effect">
+                        <img class="card-img" src="{{ tile.image_url }}" alt="Thumbnail">
+                    </div>
+                </a>
+            {% endif %}
 
-        {% if tile.type == 'raw' %}
-            <a href="{{ tile.link }}">
-                <div class="card card-hover-effect">
-                    {{ tile.content|safe }}
-                </div>
-            </a>
-        {% endif %}
+            {% if tile.type == 'raw' %}
+                <a href="{{ tile.link }}">
+                    <div class="card card-hover-effect">
+                        {{ tile.content|safe }}
+                    </div>
+                </a>
+            {% endif %}
 
-    {% endfor %}
+        {% endfor %}
 
-</section>
+    </section>
+</main>
 {% endblock content %}
