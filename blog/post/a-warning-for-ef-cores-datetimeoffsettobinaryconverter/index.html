@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="/static/img/favicon.ico">
+        <link rel="icon" type="image/png" href="/static/img/favicon-384x384.png" sizes="384x384">
+        <link rel="apple-touch-icon" sizes="180x180" href="/static/img/apple-touch-icon.png"><meta name="theme-color" content="#343a40"><link rel="canonical" href="https://nitratine.net/blog/post/a-warning-for-ef-cores-datetimeoffsettobinaryconverter/">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed for nitratine.net" href="/rss.xml">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/static/css/base.css"><!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117153268-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+        <script defer src="https://instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+        
+
+<title>A Warning For EF Core&#39;s DateTimeOffsetToBinaryConverter - Nitratine</title>
+<link rel="stylesheet" href="/static/css/pygments.css">
+
+<meta name="description" content="I recently had some troubles sorting and filtering a DateTimeOffsetToBinaryConverter column in a SQLite database using ef-core. This looks into my issue, why it was happening and my solution.">
+<meta name="author" content="Brent Vollebregt">
+<meta property="og:title" content="A Warning For EF Core&#39;s DateTimeOffsetToBinaryConverter">
+<meta property="og:description" content="I recently had some troubles sorting and filtering a DateTimeOffsetToBinaryConverter column in a SQLite database using ef-core. This looks into my issue, why it was happening and my solution.">
+<meta property="og:image" content="/posts/a-warning-for-ef-cores-datetimeoffsettobinaryconverter/feature.png">
+<meta property="og:url" content="https://nitratine.net/blog/post/a-warning-for-ef-cores-datetimeoffsettobinaryconverter/">
+<meta name="twitter:card" content="summary"><script data-ad-client="ca-pub-6407227183932047" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<link rel="stylesheet" href="/static/css/blog.css">
+
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/static/img/logo.png" width="145" height="30" class="d-inline-block align-top" alt="Brand Icon">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/blog/">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/about/">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container my-4">
+
+            
+ <div class="row">
+
+    <main class="col-blog-content blog-main">
+        
+<h1 class="blog-post-title">A Warning For EF Core&#39;s DateTimeOffsetToBinaryConverter</h1>
+<div class="mb-2">
+    <a href="/blog/archive/#2021" class="text-muted">6 Apr 2021</a>
+    <a href="/blog/categories/#General" class="badge badge-primary ml-2">General</a>
+    
+    <a href="/blog/tags/#c#" class="badge badge-warning">c#</a>
+    
+    <a href="/blog/tags/#ef-core" class="badge badge-warning">ef-core</a>
+    
+    <a href="/blog/tags/#sqlite" class="badge badge-warning">sqlite</a>
+    
+    <a href="/blog/tags/#database" class="badge badge-warning">database</a>
+    
+    <img src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fa-warning-for-ef-cores-datetimeoffsettobinaryconverter%2F" alt="Hits" class="post-hits">
+</div>
+<p class="lead">I recently had some troubles sorting and filtering a DateTimeOffsetToBinaryConverter column in a SQLite database using ef-core. This looks into my issue, why it was happening and my solution.</p>
+<hr class="mt-3 mb-0">
+
+
+
+<div class="post-content mt-3">
+    <div class="toc">
+<ul>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#the-usage-of-datetimeoffsettobinaryconverter">The Usage of DateTimeOffsetToBinaryConverter</a></li>
+<li><a href="#the-potential-issue">The Potential Issue</a><ul>
+<li><a href="#same-timezones-sort-well">Same Timezones Sort Well</a></li>
+<li><a href="#same-timezones-filter-well">Same Timezones Filter Well</a></li>
+<li><a href="#different-timezones-dont-sort-well">Different Timezones Don't Sort Well</a></li>
+<li><a href="#different-timezones-dont-filter-well">Different Timezones Don't Filter Well</a></li>
+</ul>
+</li>
+<li><a href="#what-is-happening">What is Happening?</a><ul>
+<li><a href="#differenttimezones_donotsortwell">DifferentTimeZones_DoNotSortWell</a></li>
+<li><a href="#differenttimezones_donotfilterwell">DifferentTimeZones_DoNotFilterWell</a></li>
+</ul>
+</li>
+<li><a href="#why-is-this-happening">Why is This Happening?</a></li>
+<li><a href="#the-fix-i-implemented">The Fix I Implemented</a><ul>
+<li><a href="#migrating-existing-data">Migrating Existing Data</a></li>
+</ul>
+</li>
+<li><a href="#the-trade-off">The Trade-Off</a></li>
+</ul>
+</div>
+<h2 id="summary">
+<span style="position:relative"><a class="anchor" href="#summary"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Summary</span></h2>
+<p>While starting a new .NET 5 project with Entity Framework Code, I tried creating a column of type DateTimeOffset in my SQLite database (expecting it to be translated by ef-core automatically). SQLite does not have support for DateTimeOffset let alone DateTimes and ef-core does not automatically map to something else, so I had to investigate other methods of storage.</p>
+<p>DateTimes automatically map to INTEGER (stores ticks I believe), but I have heard they lose their <code>Kind</code> when coming back out of the database. This could be a good idea but I didn't want to call <code>.DateTime</code> everywhere.</p>
+<p><a href="https://blog.dangl.me/archive/handling-datetimeoffset-in-sqlite-with-entity-framework-core/">This post</a> showed that we can use ef-core's <a href="https://github.com/dotnet/efcore/blob/main/src/EFCore/Storage/ValueConversion/DateTimeOffsetToBinaryConverter.cs">DateTimeOffsetToBinaryConverter</a> converter to map a DateTimeOffset to a long which would then be mapped to an INTEGER (64bit) in SQLite.</p>
+<p>Adding this in was very easy, but after a few months I realised some filters on these fields were a bit weird and sometimes the ordering was off.</p>
+<h2 id="the-usage-of-datetimeoffsettobinaryconverter">
+<span style="position:relative"><a class="anchor" href="#the-usage-of-datetimeoffsettobinaryconverter"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Usage of DateTimeOffsetToBinaryConverter</span></h2>
+<p>This is how I had used DateTimeOffsetToBinaryConverter in my project:</p>
+<p>Context.cs</p>
+<div class="codehilite"><pre><span></span><code><span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Server.Api.Database.Models</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">Server.Api.Database</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Context</span> <span class="p">:</span> <span class="n">DbContext</span>
+    <span class="p">{</span>
+        <span class="c1">// Models ...</span>
+
+        <span class="k">public</span> <span class="nf">Context</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="nf">Context</span><span class="p">(</span><span class="n">DbContextOptions</span><span class="p">&lt;</span><span class="n">Context</span><span class="p">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+        <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnModelCreating</span><span class="p">(</span><span class="n">ModelBuilder</span> <span class="n">modelBuilder</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">modelBuilder</span><span class="p">.</span><span class="n">SetupContext</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">IsSqlite</span><span class="p">());</span> <span class="c1">// Identify if we are using a SQLite database</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>ContextSetup.cs</p>
+<div class="codehilite"><pre><span></span><code><span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore.Storage.ValueConversion</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Server.Api.Database.Models</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">Server.Api.Database</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">ContextSetup</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">SetupContext</span><span class="p">(</span><span class="k">this</span> <span class="n">ModelBuilder</span> <span class="n">modelBuilder</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">isSQLite</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Model building ...</span>
+
+            <span class="c1">// Handle datetimes in SQLite src: https://blog.dangl.me/archive/handling-datetimeoffset-in-sqlite-with-entity-framework-core/</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">isSQLite</span><span class="p">)</span> <span class="c1">// We found this in Context.cs</span>
+            <span class="p">{</span>
+                <span class="c1">// SQLite does not have proper support for DateTimeOffset via Entity Framework Core, see the limitations</span>
+                <span class="c1">// here: https://docs.microsoft.com/en-us/ef/core/providers/sqlite/limitations#query-limitations</span>
+                <span class="c1">// To work around this, when the Sqlite database provider is used, all model properties of type DateTimeOffset</span>
+                <span class="c1">// use the DateTimeOffsetToBinaryConverter</span>
+                <span class="c1">// Based on: https://github.com/aspnet/EntityFrameworkCore/issues/10784#issuecomment-415769754</span>
+                <span class="c1">// This only supports millisecond precision, but should be sufficient for most use cases.</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">entityType</span> <span class="k">in</span> <span class="n">modelBuilder</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="n">GetEntityTypes</span><span class="p">())</span>
+                <span class="p">{</span>
+                    <span class="kt">var</span> <span class="n">properties</span> <span class="p">=</span> <span class="n">entityType</span><span class="p">.</span><span class="n">ClrType</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">().</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">DateTimeOffset</span><span class="p">)</span>
+                                                                                <span class="p">||</span> <span class="n">p</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">DateTimeOffset</span><span class="p">?));</span>
+                    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">property</span> <span class="k">in</span> <span class="n">properties</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="n">modelBuilder</span>
+                            <span class="p">.</span><span class="n">Entity</span><span class="p">(</span><span class="n">entityType</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+                            <span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">property</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+                            <span class="p">.</span><span class="n">HasConversion</span><span class="p">(</span><span class="k">new</span> <span class="n">DateTimeOffsetToBinaryConverter</span><span class="p">());</span> <span class="c1">// The converter!</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="the-potential-issue">
+<span style="position:relative"><a class="anchor" href="#the-potential-issue"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Potential Issue</span></h2>
+<p>This looks cool and all - and it will work too. However, when we get times with different timezones, this seems to start creating a mess.</p>
+<p>I first noticed this when my times were being stored in the database as +1300 (my timezone at the time) and I was filtering with a UTC DateTimeOffset. I had noticed that times in +1300 were being dropped off the end of my filter even though they had the same time as the end date (the query was inclusive).</p>
+<p>I wrote a couple of tests to look at what I was seeing.</p>
+<h3 id="same-timezones-sort-well">
+<span style="position:relative"><a class="anchor" href="#same-timezones-sort-well"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Same Timezones Sort Well</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="na">[TestMethod]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">SameTimeZones_SortWell</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// Create an instance of our converter and get some functions to map from DateTimeOffset to long and back (to simulate database storage)</span>
+    <span class="kt">var</span> <span class="n">converter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DateTimeOffsetToBinaryConverter</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">codeToDatabase</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertToProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">databaseToCode</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertFromProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+
+    <span class="c1">// Our dates in their expected order</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsets</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DateTimeOffset</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">59</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Shuffle the offsets for testing (external function)</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsShuffled</span> <span class="p">=</span> <span class="n">Shuffle</span><span class="p">(</span><span class="n">dateTimeOffsets</span><span class="p">);</span>
+
+    <span class="c1">// Make them to the database representation</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabase</span> <span class="p">=</span> <span class="n">dateTimeOffsetsShuffled</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="c1">// Sort them</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabaseOrdered</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabase</span>
+        <span class="p">.</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="c1">// Convert them back to DateTimeOffset objects</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedBackToCode</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabaseOrdered</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">databaseToCode</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="c1">// Validate the list we now have matches the original input list</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">dateTimeOffsets</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">difference</span> <span class="p">=</span> <span class="n">dateTimeOffsets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">-</span> <span class="n">dateTimeOffsetsMappedBackToCode</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">difference</span><span class="p">.</span><span class="n">TotalMilliseconds</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This passes - as expected.</p>
+<h3 id="same-timezones-filter-well">
+<span style="position:relative"><a class="anchor" href="#same-timezones-filter-well"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Same Timezones Filter Well</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="na">[TestMethod]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">SameTimeZones_FilterWell</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// Same as above</span>
+    <span class="kt">var</span> <span class="n">converter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DateTimeOffsetToBinaryConverter</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">codeToDatabase</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertToProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">databaseToCode</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertFromProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+
+    <span class="c1">// Our input times in order</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsets</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DateTimeOffset</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">59</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// First item in filter</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// Last item in filter</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+    <span class="p">};</span>
+    <span class="c1">// The times we will be filtering on (inclusive)</span>
+    <span class="kt">var</span> <span class="n">startTime</span> <span class="p">=</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="k">new</span> <span class="n">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)));</span>
+    <span class="kt">var</span> <span class="n">endTime</span> <span class="p">=</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="k">new</span> <span class="n">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)));</span>
+    <span class="c1">// What we expect to see</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsFilteredExpectations</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DateTimeOffset</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// First item in filter</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// Last item in filter</span>
+    <span class="p">};</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabase</span> <span class="p">=</span> <span class="n">dateTimeOffsets</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabaseFiltered</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabase</span>
+        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span> <span class="p">&gt;=</span> <span class="n">startTime</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span> <span class="p">&lt;=</span> <span class="n">endTime</span><span class="p">);</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedBackToCode</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabaseFiltered</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">databaseToCode</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">dateTimeOffsetsMappedBackToCode</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">difference</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedBackToCode</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">-</span> <span class="n">dateTimeOffsetsFilteredExpectations</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">difference</span><span class="p">.</span><span class="n">TotalMilliseconds</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This passes - as expected.</p>
+<h3 id="different-timezones-dont-sort-well">
+<span style="position:relative"><a class="anchor" href="#different-timezones-dont-sort-well"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Different Timezones Don't Sort Well</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="na">[TestMethod]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">DifferentTimeZones_DoNotSortWell</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">converter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DateTimeOffsetToBinaryConverter</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">codeToDatabase</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertToProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">databaseToCode</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertFromProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsets</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DateTimeOffset</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">59</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)).</span><span class="n">ToOffset</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)).</span><span class="n">ToOffset</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+    <span class="p">};</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsShuffled</span> <span class="p">=</span> <span class="n">Shuffle</span><span class="p">(</span><span class="n">dateTimeOffsets</span><span class="p">);</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabase</span> <span class="p">=</span> <span class="n">dateTimeOffsetsShuffled</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabaseOrdered</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabase</span>
+        <span class="p">.</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedBackToCode</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabaseOrdered</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">databaseToCode</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">dateTimeOffsets</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">difference</span> <span class="p">=</span> <span class="n">dateTimeOffsets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">-</span> <span class="n">dateTimeOffsetsMappedBackToCode</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">difference</span><span class="p">.</span><span class="n">TotalMilliseconds</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This fails. Same data just with some DateTimeOffset objects converted to different timezones.</p>
+<h3 id="different-timezones-dont-filter-well">
+<span style="position:relative"><a class="anchor" href="#different-timezones-dont-filter-well"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Different Timezones Don't Filter Well</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="na">[TestMethod]</span>
+<span class="k">public</span> <span class="k">void</span> <span class="nf">DifferentTimeZones_DoNotFilterWell</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">converter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DateTimeOffsetToBinaryConverter</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">codeToDatabase</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertToProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+    <span class="kt">var</span> <span class="n">databaseToCode</span> <span class="p">=</span> <span class="n">converter</span><span class="p">.</span><span class="n">ConvertFromProviderExpression</span><span class="p">.</span><span class="n">Compile</span><span class="p">();</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsets</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DateTimeOffset</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">13</span><span class="p">,</span> <span class="m">59</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)).</span><span class="n">ToOffset</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// First item in filter</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)).</span><span class="n">ToOffset</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)).</span><span class="n">ToOffset</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// Last item in filter</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">7</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+    <span class="p">};</span>
+    <span class="kt">var</span> <span class="n">startTime</span> <span class="p">=</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="k">new</span> <span class="n">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)));</span>
+    <span class="kt">var</span> <span class="n">endTime</span> <span class="p">=</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="k">new</span> <span class="n">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)));</span>
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsFilteredExpectations</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DateTimeOffset</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// First item in filter</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)).</span><span class="n">ToOffset</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)).</span><span class="n">ToOffset</span><span class="p">(</span><span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">13</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+        <span class="k">new</span> <span class="nf">DateTimeOffset</span><span class="p">(</span><span class="m">2021</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">14</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span> <span class="c1">// Last item in filter</span>
+    <span class="p">};</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabase</span> <span class="p">=</span> <span class="n">dateTimeOffsets</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">codeToDatabase</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedToDatabaseFiltered</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabase</span>
+        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span> <span class="p">&gt;=</span> <span class="n">startTime</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span> <span class="p">&lt;=</span> <span class="n">endTime</span><span class="p">);</span>
+
+    <span class="kt">var</span> <span class="n">dateTimeOffsetsMappedBackToCode</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedToDatabaseFiltered</span>
+        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">databaseToCode</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">dateTimeOffsetsMappedBackToCode</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">difference</span> <span class="p">=</span> <span class="n">dateTimeOffsetsMappedBackToCode</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">-</span> <span class="n">dateTimeOffsetsFilteredExpectations</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">difference</span><span class="p">.</span><span class="n">TotalMilliseconds</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This fails. Same data just with some DateTimeOffset objects converted to different timezones.</p>
+<h2 id="what-is-happening">
+<span style="position:relative"><a class="anchor" href="#what-is-happening"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is Happening?</span></h2>
+<h3 id="differenttimezones_donotsortwell">
+<span style="position:relative"><a class="anchor" href="#differenttimezones_donotsortwell"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>DifferentTimeZones_DoNotSortWell</span></h3>
+<p>The result from DifferentTimeZones_DoNotSortWell in <code>dateTimeOffsetsMappedBackToCode</code> is:</p>
+<div class="codehilite"><pre><span></span><code>[0] {30/03/2021 11:13:59 AM +00:00} System.DateTimeOffset
+[1] {30/03/2021 11:14:00 AM +00:00} System.DateTimeOffset
+[2] {30/03/2021 11:14:02 AM +00:00} System.DateTimeOffset
+[3] {30/03/2021 11:14:03 AM +00:00} System.DateTimeOffset
+[4] {30/03/2021 11:14:05 AM +00:00} System.DateTimeOffset
+[5] {31/03/2021 12:14:01 AM +13:00} System.DateTimeOffset
+[6] {31/03/2021 12:14:04 AM +13:00} System.DateTimeOffset
+</code></pre></div>
+
+<p>We can see that our +1300 DateTimeOffsets have been sorted to the bottom which is not correct.</p>
+<h3 id="differenttimezones_donotfilterwell">
+<span style="position:relative"><a class="anchor" href="#differenttimezones_donotfilterwell"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>DifferentTimeZones_DoNotFilterWell</span></h3>
+<p>The result from DifferentTimeZones_DoNotFilterWell in <code>dateTimeOffsetsMappedBackToCode</code> is</p>
+<div class="codehilite"><pre><span></span><code>[0] {30/03/2021 11:14:02 AM +00:00} System.DateTimeOffset
+[1] {30/03/2021 11:14:04 AM +00:00} System.DateTimeOffset
+[2] {30/03/2021 11:14:06 AM +00:00} System.DateTimeOffset
+</code></pre></div>
+
+<p>We can see that our +1300 DateTimeOffsets have been completely filtered out which is not correct.</p>
+<p>I had more of a play around with this and it happens for much larger gaps than a few seconds - it can happen between hours.</p>
+<h2 id="why-is-this-happening">
+<span style="position:relative"><a class="anchor" href="#why-is-this-happening"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Why is This Happening?</span></h2>
+<p>If we look at the <a href="https://github.com/dotnet/efcore/blob/main/src/EFCore/Storage/ValueConversion/DateTimeOffsetToBinaryConverter.cs">implementation of DateTimeOffsetToBinaryConverter</a>, we can see it uses</p>
+<div class="codehilite"><pre><span></span><code><span class="n">v</span> <span class="p">=&gt;</span> <span class="p">((</span><span class="n">v</span><span class="p">.</span><span class="n">Ticks</span> <span class="p">/</span> <span class="m">1000</span><span class="p">)</span> <span class="p">&lt;&lt;</span> <span class="m">11</span><span class="p">)</span> <span class="p">|</span> <span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="n">v</span><span class="p">.</span><span class="n">Offset</span><span class="p">.</span><span class="n">TotalMinutes</span> <span class="p">&amp;</span> <span class="m">0</span><span class="n">x7FF</span><span class="p">)</span>
+</code></pre></div>
+
+<p>to map DateTimeOffsets to long and</p>
+<div class="codehilite"><pre><span></span><code><span class="n">v</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">DateTimeOffset</span><span class="p">(</span>
+    <span class="k">new</span> <span class="nf">DateTime</span><span class="p">((</span><span class="n">v</span> <span class="p">&gt;&gt;</span> <span class="m">11</span><span class="p">)</span> <span class="p">*</span> <span class="m">1000</span><span class="p">),</span>
+    <span class="k">new</span> <span class="nf">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)((</span><span class="n">v</span> <span class="p">&lt;&lt;</span> <span class="m">53</span><span class="p">)</span> <span class="p">&gt;&gt;</span> <span class="m">53</span><span class="p">),</span> <span class="m">0</span><span class="p">))</span>
+</code></pre></div>
+
+<p>to map longs back to DateTimeOffset.</p>
+<p>Pretty much the ticks of the DateTimeOffset is being stored in the top (MSB) 53 bits and the offset is being turned into minutes and stored in the bottom (LSB) 11 bits.</p>
+<p>Here are some mappings:</p>
+<div class="codehilite"><pre><span></span><code>new DateTimeOffset(2021, 3, 30, 11, 14, 0, new TimeSpan(0, 0, 0))                                    1305655288627200000
+new DateTimeOffset(2021, 3, 30, 11, 14, 1, new TimeSpan(0, 0, 0))                                    1305655288647680000
+new DateTimeOffset(2021, 3, 30, 11, 14, 1, new TimeSpan(0, 0, 0)).ToOffset(new TimeSpan(13, 0, 0))   1305656247111680780
+</code></pre></div>
+
+<p>So <code>new DateTimeOffset(2021, 3, 30, 11, 14, 1, new TimeSpan(0, 0, 0)) == new DateTimeOffset(2021, 3, 30, 11, 14, 1, new TimeSpan(0, 0, 0)).ToOffset(new TimeSpan(13, 0, 0))</code> is <code>true</code> but we would not expect their values to be the same above as they are storing timezones.</p>
+<p>We would however expect to see the first 53 bits the same, but when looking at the bits in the DateTimeOffsetToBinaryConverter conversion:</p>
+<div class="codehilite"><pre><span></span><code>1305655288647680000 =&gt; 00010010000111101001111010010001001111101111010010000 00000000000
+1305656247111680780 =&gt; 00010010000111101001111101110000011001111101110010000 01100001100
+</code></pre></div>
+
+<p>We can see those first 53 bits are not the same. Whaaaaaat.</p>
+<p>The docs for <a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.ticks?view=net-5.0">DateTimeOffset.Ticks</a> say:</p>
+<blockquote>
+<p>The Ticks property is not affected by the value of the Offset property.</p>
+<p>The value of the Ticks property represents the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight on January 1, 0001 (the value of MinValue).</p>
+</blockquote>
+<p>But why do we have <a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.utcticks?view=net-5.0">DateTimeOffset.UtcTicks</a> then?</p>
+<blockquote>
+<p>The value of the UtcTicks property represents the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight on January 1, 0001 (the value of MinValue).</p>
+</blockquote>
+<p>Looks like DateTimeOffsetToBinaryConverter should be using UtcTicks and reconstructing the DateTimeOffset object with something that supports this.</p>
+<p>Now even if this did work, it would only fix the sorting part of the problem. This is because the filter would still drop anything with a positive timezone as its value would be greater than the converted long value for a given time (assuming the filtering time is in UTC). </p>
+<h2 id="the-fix-i-implemented">
+<span style="position:relative"><a class="anchor" href="#the-fix-i-implemented"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Fix I Implemented</span></h2>
+<p>So what did I do? I ditched the timezone. I don't need it, I just use DateTimeOffset objects to be safer.</p>
+<p>My new converter:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore.Storage.ValueConversion</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">Server.Api.Database</span>
+<span class="p">{</span>
+
+    <span class="c1">/// &lt;summary&gt;</span>
+    <span class="c1">///     Converts &lt;see cref=&quot;DateTimeOffset&quot; /&gt; to and from a long representing UTC DateTime ticks.</span>
+    <span class="c1">/// &lt;/summary&gt;</span>
+    <span class="c1">/// &lt;remarks&gt;</span>
+    <span class="c1">///     Check this out to view it in SQL: https://stackoverflow.com/questions/5855299/how-do-i-display-the-following-in-a-readable-datetime-format</span>
+    <span class="c1">/// &lt;/remarks&gt;</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">DateTimeOffsetToUtcDateTimeTicksConverter</span> <span class="p">:</span> <span class="n">ValueConverter</span><span class="p">&lt;</span><span class="n">DateTimeOffset</span><span class="p">,</span> <span class="kt">long</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">///     Creates a new instance of this converter.</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;param name=&quot;mappingHints&quot;&gt;</span>
+        <span class="c1">///     Hints that can be used by the &lt;see cref=&quot;ITypeMappingSource&quot; /&gt; to create data types with appropriate</span>
+        <span class="c1">///     facets for the converted data.</span>
+        <span class="c1">/// &lt;/param&gt;</span>
+        <span class="k">public</span> <span class="nf">DateTimeOffsetToUtcDateTimeTicksConverter</span><span class="p">(</span><span class="n">ConverterMappingHints</span><span class="p">?</span> <span class="n">mappingHints</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+            <span class="p">:</span> <span class="k">base</span><span class="p">(</span>
+                <span class="n">v</span> <span class="p">=&gt;</span> <span class="n">v</span><span class="p">.</span><span class="n">UtcDateTime</span><span class="p">.</span><span class="n">Ticks</span><span class="p">,</span>
+                <span class="n">v</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">DateTimeOffset</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="k">new</span> <span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)),</span>
+                <span class="n">mappingHints</span><span class="p">)</span>
+        <span class="p">{</span>
+        <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">///     A &lt;see cref=&quot;ValueConverterInfo&quot; /&gt; for the default use of this converter.</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="n">ValueConverterInfo</span> <span class="n">DefaultInfo</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+            <span class="p">=</span> <span class="k">new</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">DateTimeOffset</span><span class="p">),</span> <span class="k">typeof</span><span class="p">(</span><span class="kt">long</span><span class="p">),</span> <span class="n">i</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">DateTimeOffsetToUtcDateTimeTicksConverter</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">MappingHints</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>And to use it in ContextSetup.cs, a simple swap of the converter:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">property</span> <span class="k">in</span> <span class="n">properties</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">modelBuilder</span>
+        <span class="p">.</span><span class="n">Entity</span><span class="p">(</span><span class="n">entityType</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">Property</span><span class="p">(</span><span class="n">property</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">HasConversion</span><span class="p">(</span><span class="k">new</span> <span class="n">DateTimeOffsetToUtcDateTimeTicksConverter</span><span class="p">());</span> <span class="c1">// I only changed this</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Pretty much DateTimeOffsetToUtcDateTimeTicksConverter just converts the DateTimeOffset object to a UTC date and then gets the ticks, this is then stored in the database. To read it back out, I re-create the DateTimeOffset with a +0000 timezone.</p>
+<blockquote>
+<p>Warning: You will lose the original timezone</p>
+</blockquote>
+<h3 id="migrating-existing-data">
+<span style="position:relative"><a class="anchor" href="#migrating-existing-data"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Migrating Existing Data</span></h3>
+<p>Chuck on your sunnies for this one:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.EntityFrameworkCore.Migrations</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+
+<span class="k">namespace</span> <span class="nn">Server.Api.Database.Migrations</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">partial</span> <span class="k">class</span> <span class="nc">MigrateToDateTimeOffsetToUtcDateTimeTicksConverter</span> <span class="p">:</span> <span class="n">Migration</span>
+    <span class="p">{</span>
+        <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Up</span><span class="p">(</span><span class="n">MigrationBuilder</span> <span class="n">migrationBuilder</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="n">DateTimeOffsetProperties</span><span class="p">)</span> <span class="k">in</span> <span class="n">GetAllDateTimeOffsetEntityProperties</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">propertyName</span> <span class="k">in</span> <span class="n">DateTimeOffsetProperties</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="c1">// Reversing the implementation at https://github.com/dotnet/efcore/blob/main/src/EFCore/Storage/ValueConversion/DateTimeOffsetToBinaryConverter.cs and turning these into DateTime.Ticks fields (https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.ticks?view=net-5.0)</span>
+                    <span class="n">migrationBuilder</span><span class="p">.</span><span class="n">Sql</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;UPDATE {Name} SET {propertyName} = (({propertyName} &gt;&gt; 11) * 1000) - ((({propertyName} &lt;&lt; 53) &gt;&gt; 53) * 60 * 10000000)&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Down</span><span class="p">(</span><span class="n">MigrationBuilder</span> <span class="n">migrationBuilder</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="n">DateTimeOffsetProperties</span><span class="p">)</span> <span class="k">in</span> <span class="n">GetAllDateTimeOffsetEntityProperties</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">propertyName</span> <span class="k">in</span> <span class="n">DateTimeOffsetProperties</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="c1">// To put them back we can do the opposite but just ignore the timezone as it is already part of the date. Technically still the same time, just a different time zone which we don&#39;t really care about.</span>
+                    <span class="n">migrationBuilder</span><span class="p">.</span><span class="n">Sql</span><span class="p">(</span><span class="err">$</span><span class="s">&quot;UPDATE {Name} SET {propertyName} = ({propertyName} / 1000) &lt;&lt; 11&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">/// &lt;summary&gt;</span>
+        <span class="c1">/// Identify all the columns in the database that have a DateTimeOffset or DateTimeOffset? type</span>
+        <span class="c1">/// &lt;/summary&gt;</span>
+        <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;(</span><span class="kt">string</span> <span class="n">Name</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">DateTimeOffsetProperties</span><span class="p">)&gt;</span> <span class="n">GetAllDateTimeOffsetEntityProperties</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">entityTypes</span> <span class="p">=</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">GetProperties</span><span class="p">()</span>
+                <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">PropertyType</span><span class="p">.</span><span class="n">IsGenericType</span> <span class="p">&amp;&amp;</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">DbSet</span><span class="p">&lt;&gt;).</span><span class="n">IsAssignableFrom</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">PropertyType</span><span class="p">.</span><span class="n">GetGenericTypeDefinition</span><span class="p">())))</span>
+                <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">(</span>
+                    <span class="n">Name</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span>
+                    <span class="n">DateTimeOffsetProperties</span><span class="p">:</span> <span class="n">x</span><span class="p">.</span><span class="n">PropertyType</span><span class="p">.</span><span class="n">GetGenericArguments</span><span class="p">()[</span><span class="m">0</span><span class="p">]</span>
+                        <span class="p">.</span><span class="n">GetProperties</span><span class="p">()</span>
+                        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">DateTimeOffset</span><span class="p">)</span> <span class="p">||</span> <span class="n">p</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">DateTimeOffset</span><span class="p">?))</span>
+                        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+                        <span class="p">.</span><span class="n">ToList</span><span class="p">()))</span>
+                <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+            <span class="k">return</span> <span class="n">entityTypes</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Boy was that math fun, and it gave me a chance to get a bit dirty with C# reflection again!</p>
+<h2 id="the-trade-off">
+<span style="position:relative"><a class="anchor" href="#the-trade-off"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Trade-Off</span></h2>
+<p>There is a trade-off we are seeing here: either have timezones stored and not be able to filter correctly or don't store timezones and use DateTimeOffset to simply be safer with times.</p>
+<p>I have used DateTimeOffset so when clients send a time in a different timezone, I don't need to worry and the framework will handle it - this will not happen automatically with DateTime objects.</p>
+<p>I understand some people will want to keep the original timezone but it may be a better option to store this in a different column.</p>
+</div>
+
+<nav class="blog-pagination text-center mb-5 mt-4">
+    
+        <a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-set-up-open-drone-map-on-windows/">&larr; How To Set Up Open Drone Ma...</a>
+    
+    
+</nav>
+
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/a-warning-for-ef-cores-datetimeoffsettobinaryconverter/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/a-warning-for-ef-cores-datetimeoffsettobinaryconverter/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+    </main>
+
+    <aside class="col-blog-sidebar blog-sidebar">
+
+        <div class="card p-3 mb-3 bg-light">
+            <span class="h4 text-center text-lg-left">About</span>
+            <p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+        </div>
+
+        <div class="input-group mb-3">
+            <input id="sidebar-search" type="text" class="form-control" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button id="sidebar-search-submit" class="btn btn-outline-primary" type="button">Search</button>
+            </div>
+        </div>
+        <script>let searchUrl = "/search/";</script>
+        <script type="text/javascript" defer src="/static/js/search.js"></script>
+
+        <div class="card p-3 mb-3 bg-light">
+            <span class="h4 text-center text-lg-left">Categories</span>
+            <ol class="list-unstyled mb-0 text-center text-lg-left">
+                
+                    <li>
+                    <a href="/blog/categories/#Apps">&#x1F4F1; Apps
+                        <span class="badge badge-primary ml-3">2</span>
+                    </a>
+                </li>
+                
+                    <li>
+                    <a href="/blog/categories/#General">&#x1F4F0; General
+                        <span class="badge badge-primary ml-3">8</span>
+                    </a>
+                </li>
+                
+                    <li>
+                    <a href="/blog/categories/#Investigations">&#x1F50D; Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+                    </a>
+                </li>
+                
+                    <li>
+                    <a href="/blog/categories/#Projects">&#x1F4BE; Projects
+                        <span class="badge badge-primary ml-3">15</span>
+                    </a>
+                </li>
+                
+                    <li>
+                    <a href="/blog/categories/#Snippets">&#x2702; Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+                    </a>
+                </li>
+                
+                    <li>
+                    <a href="/blog/categories/#Tools">&#x1F6E0; Tools
+                        <span class="badge badge-primary ml-3">4</span>
+                    </a>
+                </li>
+                
+                    <li>
+                    <a href="/blog/categories/#Tutorials">&#x1F4D6; Tutorials
+                        <span class="badge badge-primary ml-3">26</span>
+                    </a>
+                </li>
+                
+                    <li>
+                    <a href="/blog/categories/#YouTube">&#x1F3A5; YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+                    </a>
+                </li>
+                
+            </ol>
+        </div>
+
+        <div class="card p-3 mb-3 bg-light">
+            <span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+            <script src="https://apis.google.com/js/platform.js"></script>
+            <div style="text-align: center">
+                <div class="g-ytsubscribe" data-channel="PrivateSplat" data-layout="full" data-count="default"></div>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-3 bg-light">
+            <span class="h4 text-center text-lg-left">Recent Videos</span>
+            <div id="recent-yt-videos" class="yt_video_container">
+                
+                    <img src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" alt="Recent video thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')">
+                
+                    <img src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" alt="Recent video thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')">
+                
+                    <img src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" alt="Recent video thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')">
+                
+                    <img src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" alt="Recent video thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')">
+                
+                    <img src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" alt="Recent video thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')">
+                
+                    <img src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" alt="Recent video thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')">
+                
+            </div>
+        </div>
+
+        <div class="card p-3 mb-3 bg-light">
+            <span class="h4 text-center text-lg-left">Featured Sites</span>
+            <div class="featured-sites">
+                
+                    <a title="Emotionify" href="https://emotionify.nitratine.net/">
+                        <img src="/static/img/featured-sites/emotionify.png" alt="Emotionify" />
+                    </a>
+                
+                    <a title="Spotify Lyrics Viewer" href="https://spotify-lyrics-viewer.nitratine.net/">
+                        <img src="/static/img/featured-sites/spotify-lyrics-viewer.png" alt="Spotify Lyrics Viewer" />
+                    </a>
+                
+                    <a title="Hit Counter" href="https://hitcounter.pythonanywhere.com/">
+                        <img src="/static/img/featured-sites/hit-counter.png" alt="Hit Counter" />
+                    </a>
+                
+                    <a title="Monopoly Money" href="https://monopoly-money.nitratine.net/">
+                        <img src="/posts/monopoly-money/banner.png" alt="Monopoly Money" />
+                    </a>
+                
+            </div>
+        </div>
+    </aside>
+
+</div>
+
+
+        </div>
+
+        <footer class="bg-dark py-4 px-1">
+            <div class="container">
+                <div class="d-flex justify-content-center">
+                    <div class="top-group">
+                        <div class="link-group">
+                            <p class="header">Navigate</p>
+                            <a aria-current="page" class="" href="/">Home</a>
+                            <a href="/blog/">Blog</a>
+                            <a class="ml-2" href="/blog/categories/">Categories</a>
+                            <a class="ml-2" href="/blog/tags/">Tags</a>
+                            <a class="ml-2" href="/blog/archive/">Archive</a>
+                            <a href="/portfolio/">Portfolio</a>
+                            <a href="/about/">About</a>
+                        </div>
+
+                        <div class="link-group">
+                            <p class="header">Popular Projects</p>
+                            <a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+                            <a href="/blog/post/hit-counter/">hit-counter</a>
+                            <a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+                            <a href="/blog/post/monopoly-money/">monopoly-money</a>
+                        </div>
+
+                        <div class="link-group">
+                            <p class="header">Follow</p>
+                            <a href="https://github.com/brentvollebregt" class="with-icon">
+                                <img src="/static/img/icons/github.svg" alt="GitHub Logo" style="filter: invert(1);" />
+                                GitHub
+                            </a>
+                            <a href="https://www.youtube.com/c/PyTutorials" class="with-icon">
+                                <img src="/static/img/icons/youtube.svg" alt="YouTube Logo" />
+                                YouTube
+                            </a>
+                            <a rel="alternate" type="application/rss+xml" href="/rss.xml" class="with-icon">
+                                <img src="/static/img/icons/rss.svg" alt="RSS Logo"/>
+                                Nitratine RSS Feed
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mx-4">
+                    <hr/>
+                </div>
+
+                <p class="text-center m-0">
+                    <small>© 2021 Brent Vollebregt</small>
+                </p>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+</html>
