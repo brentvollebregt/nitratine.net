@@ -12,7 +12,7 @@
       <link>https://nitratine.net</link>
     </image>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Apr 2021 19:57:01 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Apr 2021 06:58:40 +0000</lastBuildDate>
     <item>
       <title>Colour</title>
       <link>https://nitratine.net/blog/post/colour/</link>
@@ -12645,10 +12645,14 @@ Server:
 &lt;/div&gt;
 &lt;h2 id="summary"&gt;
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#summary"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Summary&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;While starting a new .NET 5 project with Entity Framework Code, I tried creating a column of type DateTimeOffset in my SQLite database (expecting it to be translated by ef-core automatically). SQLite does not have support for DateTimeOffset let alone DateTimes and ef-core does not automatically map to something else, so I had to investigate other methods of storage.&lt;/p&gt;
+&lt;p&gt;While starting a new .NET 5 project with Entity Framework Core, I tried creating a column of type DateTimeOffset in my SQLite database (expecting it to be translated by ef-core automatically). SQLite does not have support for DateTimeOffset let alone DateTimes and ef-core does not automatically map to something else, so I had to investigate other methods of storage.&lt;/p&gt;
 &lt;p&gt;DateTimes automatically map to INTEGER (stores ticks I believe), but I have heard they lose their &lt;code&gt;Kind&lt;/code&gt; when coming back out of the database. This could be a good idea but I didn't want to call &lt;code&gt;.DateTime&lt;/code&gt; everywhere.&lt;/p&gt;
+&lt;p&gt;This was the exception I was getting at run time:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;System.NotSupportedException : SQLite cannot order by expressions of type 'DateTimeOffset'. Convert the values to a supported type or use LINQ to Objects to order the results.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;a href="https://blog.dangl.me/archive/handling-datetimeoffset-in-sqlite-with-entity-framework-core/"&gt;This post&lt;/a&gt; showed that we can use ef-core's &lt;a href="https://github.com/dotnet/efcore/blob/main/src/EFCore/Storage/ValueConversion/DateTimeOffsetToBinaryConverter.cs"&gt;DateTimeOffsetToBinaryConverter&lt;/a&gt; converter to map a DateTimeOffset to a long which would then be mapped to an INTEGER (64bit) in SQLite.&lt;/p&gt;
-&lt;p&gt;Adding this in was very easy, but after a few months I realised some filters on these fields were a bit weird and sometimes the ordering was off.&lt;/p&gt;
+&lt;p&gt;Adding this in was very easy, but after a few months I realised some filters on these fields were a bit weird and sometimes the ordering was off. This post contains my discoveries of issues with filtering and sorting when using DateTimeOffsetToBinaryConverter and a fix.&lt;/p&gt;
 &lt;h2 id="the-usage-of-datetimeoffsettobinaryconverter"&gt;
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#the-usage-of-datetimeoffsettobinaryconverter"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;The Usage of DateTimeOffsetToBinaryConverter&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;This is how I had used DateTimeOffsetToBinaryConverter in my project:&lt;/p&gt;
