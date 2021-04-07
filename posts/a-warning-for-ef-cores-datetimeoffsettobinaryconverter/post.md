@@ -9,13 +9,17 @@ description: "I recently had some troubles sorting and filtering a DateTimeOffse
 
 ## Summary
 
-While starting a new .NET 5 project with Entity Framework Code, I tried creating a column of type DateTimeOffset in my SQLite database (expecting it to be translated by ef-core automatically). SQLite does not have support for DateTimeOffset let alone DateTimes and ef-core does not automatically map to something else, so I had to investigate other methods of storage.
+While starting a new .NET 5 project with Entity Framework Core, I tried creating a column of type DateTimeOffset in my SQLite database (expecting it to be translated by ef-core automatically). SQLite does not have support for DateTimeOffset let alone DateTimes and ef-core does not automatically map to something else, so I had to investigate other methods of storage.
 
 DateTimes automatically map to INTEGER (stores ticks I believe), but I have heard they lose their `Kind` when coming back out of the database. This could be a good idea but I didn't want to call `.DateTime` everywhere.
 
+This was the exception I was getting at run time:
+
+> System.NotSupportedException : SQLite cannot order by expressions of type 'DateTimeOffset'. Convert the values to a supported type or use LINQ to Objects to order the results.
+
 [This post](https://blog.dangl.me/archive/handling-datetimeoffset-in-sqlite-with-entity-framework-core/) showed that we can use ef-core's [DateTimeOffsetToBinaryConverter](https://github.com/dotnet/efcore/blob/main/src/EFCore/Storage/ValueConversion/DateTimeOffsetToBinaryConverter.cs) converter to map a DateTimeOffset to a long which would then be mapped to an INTEGER (64bit) in SQLite.
  
-Adding this in was very easy, but after a few months I realised some filters on these fields were a bit weird and sometimes the ordering was off.
+Adding this in was very easy, but after a few months I realised some filters on these fields were a bit weird and sometimes the ordering was off. This post contains my discoveries of issues with filtering and sorting when using DateTimeOffsetToBinaryConverter and a fix.
  
 
 ## The Usage of DateTimeOffsetToBinaryConverter
