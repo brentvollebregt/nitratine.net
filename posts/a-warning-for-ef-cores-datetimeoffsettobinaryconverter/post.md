@@ -1,7 +1,7 @@
 title: "A Warning For EF Core's DateTimeOffsetToBinaryConverter"
 date: 2021-04-06
 category: General
-tags: [c#, ef-core, sqlite, database]
+tags: [c-sharp, ef-core, sqlite, database]
 feature: feature.png
 description: "I recently had some troubles sorting and filtering a DateTimeOffsetToBinaryConverter column in a SQLite database using ef-core. This looks into my issue, why it was happening and my solution."
 
