@@ -86,7 +86,7 @@
     <a href="/blog/tags/#wifi" class="badge badge-warning">wifi</a>
     
     <span class="ml-2"></span>
-    <span class="text-muted text-nowrap">3 min read</span>
+    <span class="text-muted text-nowrap">4 min read</span>
     <span class="ml-2"></span>
     <img src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fget-wifi-passwords-with-python%2F" alt="Hits" class="post-hits">
 </div>
@@ -104,6 +104,7 @@
 <li><a href="#unicodedecodeerror-ignoring-revision-1">UnicodeDecodeError Ignoring - Revision 1</a></li>
 <li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
 <li><a href="#why-isnt-the-password-showing-for-one-or-more-networks">Why isn't the password showing for one or more network(s)?</a></li>
+<li><a href="#i-am-using-a-language-other-than-english">I Am Using A Language Other Than English</a></li>
 </ul>
 </li>
 </ul>
@@ -199,6 +200,10 @@
 <h3 id="why-isnt-the-password-showing-for-one-or-more-networks">
 <span style="position:relative"><a class="anchor" href="#why-isnt-the-password-showing-for-one-or-more-networks"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Why isn't the password showing for one or more network(s)?</span></h3>
 <p>If a network has a special type of authentication, there is a good chance this will not obtain the password. There will most likely be other methods of finding the password though.</p>
+<h3 id="i-am-using-a-language-other-than-english">
+<span style="position:relative"><a class="anchor" href="#i-am-using-a-language-other-than-english"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>I Am Using A Language Other Than English</span></h3>
+<p>Unfortunately due to the strings used in this script to identify values, this will only work on machines using the English language. This is because strings like "Key Content" could potentially change for other languages.</p>
+<p>To fix this, you will need to identify the strings we are trying to identify in your current language and replace them in the script.</p>
 </div>
 
 <nav class="blog-pagination text-center mb-5 mt-4">

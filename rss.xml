@@ -12,7 +12,7 @@
       <link>https://nitratine.net</link>
     </image>
     <language>en</language>
-    <lastBuildDate>Mon, 12 Apr 2021 09:39:51 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Apr 2021 23:05:57 +0000</lastBuildDate>
     <item>
       <title>Colour</title>
       <link>https://nitratine.net/blog/post/colour/</link>
@@ -1586,6 +1586,7 @@ While creating this program, I discovered a way that could give hints to what em
 &lt;li&gt;&lt;a href="#unicodedecodeerror-ignoring-revision-1"&gt;UnicodeDecodeError Ignoring - Revision 1&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="#common-issues-and-questions"&gt;Common Issues and Questions&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="#why-isnt-the-password-showing-for-one-or-more-networks"&gt;Why isn't the password showing for one or more network(s)?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#i-am-using-a-language-other-than-english"&gt;I Am Using A Language Other Than English&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1680,7 +1681,11 @@ While creating this program, I discovered a way that could give hints to what em
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#common-issues-and-questions"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Common Issues and Questions&lt;/span&gt;&lt;/h2&gt;
 &lt;h3 id="why-isnt-the-password-showing-for-one-or-more-networks"&gt;
 &lt;span style="position:relative"&gt;&lt;a class="anchor" href="#why-isnt-the-password-showing-for-one-or-more-networks"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Why isn't the password showing for one or more network(s)?&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;If a network has a special type of authentication, there is a good chance this will not obtain the password. There will most likely be other methods of finding the password though.&lt;/p&gt;</content:encoded>
+&lt;p&gt;If a network has a special type of authentication, there is a good chance this will not obtain the password. There will most likely be other methods of finding the password though.&lt;/p&gt;
+&lt;h3 id="i-am-using-a-language-other-than-english"&gt;
+&lt;span style="position:relative"&gt;&lt;a class="anchor" href="#i-am-using-a-language-other-than-english"&gt;&lt;svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"&gt;&lt;path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;I Am Using A Language Other Than English&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;Unfortunately due to the strings used in this script to identify values, this will only work on machines using the English language. This is because strings like "Key Content" could potentially change for other languages.&lt;/p&gt;
+&lt;p&gt;To fix this, you will need to identify the strings we are trying to identify in your current language and replace them in the script.&lt;/p&gt;</content:encoded>
       <guid isPermaLink="false">https://nitratine.net/blog/post/get-wifi-passwords-with-python/</guid>
       <category>YouTube</category>
       <enclosure url="https://nitratine.net/posts/get-wifi-passwords-with-python/feature.jpg" length="0" type="image/jpg"/>
