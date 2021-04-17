@@ -113,3 +113,8 @@ Please note that profiles which cause an error will still not provide a password
 
 ### Why isn't the password showing for one or more network(s)?
 If a network has a special type of authentication, there is a good chance this will not obtain the password. There will most likely be other methods of finding the password though.
+
+### I Am Using A Language Other Than English
+Unfortunately due to the strings used in this script to identify values, this will only work on machines using the English language. This is because strings like "Key Content" could potentially change for other languages.
+
+To fix this, you will need to identify the strings we are trying to identify in your current language and replace them in the script.
