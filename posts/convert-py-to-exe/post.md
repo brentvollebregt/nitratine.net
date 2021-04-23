@@ -65,8 +65,8 @@ youtube:OZSZHmWSOeM
 
 ## Common Issues and Questions
 
-### My script runs fine in IDLE but won't run when packaged to exe
-Regarding that the python script runs properly by itself then this would have been caused by an incorrect configuration or third-party modules. The best way to identify the issue is to add `-d all` to the command and then re-package it. This will mean the exe is now in a debugging mode. Open up cmd and then run the exe using cmd e.g. "C:/folder/path/myexe.exe". Any errors will be preserved in the console which you were previously missing.
+### My script runs fine in IDLE but won't run when packaged to exe (failed to execute script)
+Assuming the python script runs properly by itself then this would have been caused by an incorrect configuration or third-party modules. The best way to find what the issue is, is to add `--debug all` to your command and then re-package it. This will mean the exe is now in a debugging mode. Open up cmd and then run the exe using cmd e.g. "C:/folder/path/myexe.exe". Any errors will be preserved in the console which you were previously missing.
 
 ### zipimport.ZipImportError: can't find module 'encodings'
 Please upgrade PyInstaller to 3.4 or above using: `python -m pip install --upgrade PyInstaller`
@@ -77,11 +77,11 @@ Make sure you are holding down shift. If you are using new versions of Windows, 
 ### 'pip' is not recognized as an internal or external command
 Please follow the pip setup again, you have done something wrong. Alternatively, you can try to use `python -m pip {command}`.
 
-### Fatal error in launcher: Unable to create process using...
-Try executing ```python -m pip install pyinstaller``` in cmd.
-
 ### 'pyinstaller' is not recognized as an internal or external command
 Go back to the PyInstaller heading, you have not installed pyinstaller, remember to test it.
+
+### Fatal error in launcher: Unable to create process using...
+Try executing ```python -m pip install pyinstaller``` in cmd.
 
 ### When editing the PATH variable, I can only edit the variable
 Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.
