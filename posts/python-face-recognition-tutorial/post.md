@@ -500,11 +500,14 @@ For this section, we will be getting 2 face encodings for the same person and ch
 
 Here are the two images with a known face in each:
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
-    <!-- Duncan.Hull CC BY-SA 4.0 src: https://en.wikipedia.org/wiki/Elon_Musk#/media/File:Elon_Musk_Royal_Society.jpg -->
-    <img style="display: inline" alt="Elon Musk 1" src="/posts/python-face-recognition-tutorial/elon-musk-1.jpg" />
-    <!-- REUTERS/Mike Blake src: https://www.businessinsider.com.au/elon-musk-last-decade-tesla-spacex-relationships-controversies-tweets-2019-11 -->
-    <img style="display: inline" alt="Elon Musk 2" src="/posts/python-face-recognition-tutorial/elon-musk-2.png" />
+<!-- Duncan.Hull CC BY-SA 4.0 src: https://en.wikipedia.org/wiki/Elon_Musk#/media/File:Elon_Musk_Royal_Society.jpg -->
+<!-- REUTERS/Mike Blake src: https://www.businessinsider.com.au/elon-musk-last-decade-tesla-spacex-relationships-controversies-tweets-2019-11 -->
+<div markdown="1" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
+
+![Elon Musk 1](/posts/python-face-recognition-tutorial/elon-musk-1.jpg)
+
+![Elon Musk2](/posts/python-face-recognition-tutorial/elon-musk-2.png)
+    
 </div>
 
 [elon-musk-1.jpg](/posts/python-face-recognition-tutorial/elon-musk-1.jpg)
@@ -512,10 +515,13 @@ Here are the two images with a known face in each:
 
 And here are the images we will check to see if Elon is in them:
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
-    <!-- Alex Gallardo/Associated Press src: https://www.nytimes.com/2019/10/10/science/nasa-spacex-elon-musk.html -->
-    <img style="display: inline" alt="Elon Musk Potential Match 1" src="/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg" />
-    <img style="display: inline" alt="Elon Musk Potential Match 2 (Group Of People)" src="/posts/python-face-recognition-tutorial/group-of-people.jpg" />
+<!-- Alex Gallardo/Associated Press src: https://www.nytimes.com/2019/10/10/science/nasa-spacex-elon-musk.html -->
+<div markdown="1" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
+
+![Elon Musk Potential Match 1](/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg)
+
+![Elon Musk Potential Match 2 (Group Of People)](/posts/python-face-recognition-tutorial/group-of-people.jpg)
+
 </div>
 
 [elon-musk-in-group.jpg](/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg)

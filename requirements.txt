@@ -11,3 +11,4 @@ click
 beautifulsoup4
 livereload
 readtime==1.1.1
+Pillow
