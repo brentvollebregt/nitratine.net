@@ -106,6 +106,30 @@ keyboard = KeyboardController()
 mouse = MouseController()
 ```
 
+### How can I simulate buttons other than right and left?
+To simulate the other buttons on your mouse, you first need to identify them. An easy way to do this would be to write a quick script to identify the buttons when you press them:
+
+```python
+from pynput.mouse import Listener
+
+def on_click(x, y, button, pressed):
+    if pressed:
+        print('Pressed {0}'.format(button))
+
+with Listener(on_click=on_click) as listener:
+    listener.join()
+```
+
+This script creates a mouse listener and prints out the name of any button you press. To use this, run the script and press the target button on your mouse. You should see some output like this:
+
+```text
+Pressed Button.left
+Pressed Button.x1
+Pressed Button.x2
+```
+
+In this output above, you can see that I pressed the left button on my mouse and then two other buttons on my mouse (my forward and back buttons). Using the buttons you have now identified, you can use them, for example, `mouse.click(Button.x1)`.
+
 ### ModuleNotFoundError/ImportError: No module named 'pynput'
 Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.
 
