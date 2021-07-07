@@ -1,0 +1,50 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Nitratine: Run Locally",
+            "type": "python",
+            "request": "launch",
+            "module": "nitratine",
+            "args": [
+                "run"
+            ]
+        },
+        {
+            "name": "Nitratine: Build",
+            "type": "python",
+            "request": "launch",
+            "module": "nitratine",
+            "args": [
+                "build"
+            ]
+        },
+        {
+            "name": "Nitratine: Serve Local Build",
+            "type": "python",
+            "request": "launch",
+            "module": "nitratine",
+            "args": [
+                "serve"
+            ]
+        },
+        {
+            "name": "Nitratine: Create A New Post",
+            "type": "python",
+            "request": "launch",
+            "module": "nitratine",
+            "args": [
+                "new"
+            ]
+        },
+        {
+            "name": "Nitratine: Get Latest Build Stats",
+            "type": "python",
+            "request": "launch",
+            "module": "nitratine",
+            "args": [
+                "stats"
+            ]
+        }
+    ]
+}
