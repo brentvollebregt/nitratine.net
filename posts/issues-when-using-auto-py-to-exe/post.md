@@ -236,6 +236,10 @@ Looking at the traceback for these situations, it is very common that I see a pa
 
 So to fix this issue, download a distribution of Python from [python.org](https://www.python.org/downloads/) or use a virtual environment. This solution is also noted in [brentvollebregt/auto-py-to-exe#141](https://github.com/brentvollebregt/auto-py-to-exe/issues/141).
 
+Supporting Stack Overflow questions [here](https://stackoverflow.com/a/66686681), [here](https://stackoverflow.com/a/60567359) and [here](https://stackoverflow.com/a/63310595).
+
+If you install Python from python.org to fix this issue, you will need to install auto-py-to-exe in this new distribution. You will then also need to make sure you execute auto-py-to-exe from the newly installed distribution and not the old python from the windows store distribution. Executing `where auto-py-to-exe` can tell you where it will be execute from (the top result).
+
 ## Additional Information and Explanations
 Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions about why and how things occur.
 

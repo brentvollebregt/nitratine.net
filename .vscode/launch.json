@@ -11,6 +11,16 @@
             ]
         },
         {
+            "name": "Nitratine: Run Locally and Watch",
+            "type": "python",
+            "request": "launch",
+            "module": "nitratine",
+            "args": [
+                "run",
+                "--watch"
+            ]
+        },
+        {
             "name": "Nitratine: Build",
             "type": "python",
             "request": "launch",
