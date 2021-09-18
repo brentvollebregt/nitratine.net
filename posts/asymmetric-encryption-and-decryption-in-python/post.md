@@ -12,7 +12,7 @@ Using the [cryptography](https://cryptography.io/en/latest/) module in Python, t
 ## Installing cryptography
 Since Python does not come with anything that can encrypt files, we will need to use a third-party module.
 
-[PyCrypto](https://github.com/dlitz/pycrypto) is quite popular but since it does not offer built wheels, if you don't have Microsoft Visual C++ Build Tools installed, you will be told to install it. Instead of installing extra tools just to build this, I will be using the cryptography module. To install this, execute:
+[PyCrypto](https://github.com/pycrypto/pycrypto) is quite popular but since it does not offer built wheels, if you don't have Microsoft Visual C++ Build Tools installed, you will be told to install it. Instead of installing extra tools just to build this, I will be using the cryptography module. To install this, execute:
 
 ```console
 python -m pip install cryptography

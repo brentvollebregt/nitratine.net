@@ -33,7 +33,7 @@ The library offers implementations for things like:
  - [and much more!](https://www.pycryptodome.org/en/latest/src/features.html)
  
 ### Why You Should Use PyCryptodome Over the Original PyCrypto
-Even though unstated on any official site by the owner (which is unfortunate), PyCrypto is currently unmaintained. The last commit that was made to the official [GitHub repository](https://github.com/dlitz/pycrypto) was on [Jun 21, 2014](https://github.com/dlitz/pycrypto/commit/7acba5f3a6ff10f1424c309d0d34d2b713233019).
+Even though unstated on any official site by the owner (which is unfortunate), PyCrypto is currently unmaintained. The last commit that was made to the official [GitHub repository](https://github.com/pycrypto/pycrypto) was on [Jun 21, 2014](https://github.com/pycrypto/pycrypto/commit/7acba5f3a6ff10f1424c309d0d34d2b713233019).
 
 Since PyCrypto has been unmaintained for a few years, there have been a few security vulnerabilities found which are listed on [www.cvedetails.com](https://www.cvedetails.com/vulnerability-list/vendor_id-11993/product_id-22441/Dlitz-Pycrypto.html). This is quite a worry as PyCrypto examples are still prominent in Python security search results. Since there are no warnings in the project or on the repository, the best we can do is to tell people.
 
