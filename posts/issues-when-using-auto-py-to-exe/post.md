@@ -204,6 +204,10 @@ This is your anti-virus vendors fault. Check out [this](https://github.com/pyins
 - Switch to a different and more accurate anti-virus
 - Notify your antivirus vendor about the false positive
 
+Typically files are quarantined during the build process which is done within a temporary directory by default.
+This directory can be [overridden using the `--build-directory-override [FOLDER_PATH]` argument](https://github.com/brentvollebregt/auto-py-to-exe#arguments).
+From here, if you whitelist your custom build directory and the output directory, you could potentially stop your antivirus from quarantining the files.
+
 ### Lots of Warnings Appear in the Output
 These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after all, they are only warnings. These warnings typically match the format `WARNING: lib not found: api-ms-win-crt-<specific dll> dependency of <file>`.
 
