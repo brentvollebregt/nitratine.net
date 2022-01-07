@@ -126,6 +126,8 @@ To fix this in the UI, open the advanced tab and find the `--hidden-import` inpu
 
 For example, if you are missing `pandas._libs.tslib`, add 'pandas._libs.tslib' into the input by --hidden-import. Additionally, you can add more than one module, for example, `pandas._libs.tslib, win32api`. *(See the question mark by the input for more information)*.
 
+Alternatively, you may have installed auto-py-to-exe in one Python environment (a single installation or venv) and installed your dependent package in a different Python environment. Take a look at ["How to Manage Multiple Python Distributions"](/blog/post/how-to-manage-multiple-python-distributions/) for help on how to identify if you've done this.
+
 #### ERR_CONNECTION_REFUSED
 You need to be connected to the internet. This error appears when you cannot reach the servers.
 
