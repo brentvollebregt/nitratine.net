@@ -13,7 +13,7 @@ A while ago I wrote an article on common issues when using [auto-py-to-exe](http
 Please do not feel offended if I have referred you to this page, it's just the case that many other people have asked the same question you are asking and you haven't been able to find the answers I or others have provided.
 
 ### A Small Disclaimer
-I cannot guarantee this post or any advice I give will fix all your issues with auto-py-to-exe and [PyInstaller](https://www.pyinstaller.org/). This tool allows you to select options and give data to be fed into PyInstaller, that means that a lot of the errors that occur will be raised by PyInstaller, meaning I can't go and change how it works. Typically though, errors brought up in PyInstaller are due to incorrect configuration, thus this post aims to help you fix anything set up incorrectly.
+I cannot guarantee this post or any advice I give will fix all your issues with auto-py-to-exe and [PyInstaller](https://pyinstaller.readthedocs.io/en/stable/index.html). This tool allows you to select options and give data to be fed into PyInstaller, that means that a lot of the errors that occur will be raised by PyInstaller, meaning I can't go and change how it works. Typically though, errors brought up in PyInstaller are due to incorrect configuration, thus this post aims to help you fix anything set up incorrectly.
 
 If you have an issue that isn't mentioned in this post, chuck it in the comments below and I will look into adding it if we can find a solution.
 

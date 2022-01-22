@@ -11,7 +11,7 @@ This application displays a simple interface that allows you to convert py to ex
 
 <div style="text-align: center">
 	<img src="/posts/auto-py-to-exe/feature.png" alt="Empty interface"/>
-	<p>The script is built using <a class="link" href="https://github.com/ChrisKnott/Eel">Eel</a> and uses <a href="https://www.pyinstaller.org/">PyInstaller</a> to convert the script.</p>
+	<p>The script is built using <a class="link" href="https://github.com/ChrisKnott/Eel">Eel</a> and uses <a href="https://pyinstaller.readthedocs.io/en/stable/index.html">PyInstaller</a> to convert the script.</p>
 </div>
 
 <div style="text-align: center">
