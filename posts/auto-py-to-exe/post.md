@@ -9,9 +9,12 @@ github: brentvollebregt/auto-py-to-exe
 ## What is this?
 This application displays a simple interface that allows you to convert py to exe easily. By just selecting the file, if you want it to convert to onefile and if you want a console, you will only need to press convert and wait for the script to do the rest.
 
-<div style="text-align: center">
-	<img src="/posts/auto-py-to-exe/feature.png" alt="Empty interface"/>
-	<p>The script is built using <a class="link" href="https://github.com/ChrisKnott/Eel">Eel</a> and uses <a href="https://pyinstaller.readthedocs.io/en/stable/index.html">PyInstaller</a> to convert the script.</p>
+<div markdown="1" style="text-align: center">
+
+![Empty interface](/posts/auto-py-to-exe/feature.png)
+
+The script is built using [Eel](https://github.com/ChrisKnott/Eel) and uses [PyInstaller](https://pyinstaller.readthedocs.io/en/stable/index.html) to convert the script
+
 </div>
 
 <div style="text-align: center">
@@ -25,10 +28,7 @@ This application displays a simple interface that allows you to convert py to ex
 
 ## Demo
 
-<video style="width:90%;height:auto;margin:auto;display:block;" controls="" class="mb-3">
-    <source src="/posts/auto-py-to-exe/auto-py-to-exe-demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+![auto-py-to-exe Demo](/posts/auto-py-to-exe/auto-py-to-exe-demo.gif)
 
 ## Getting Started
 
@@ -103,11 +103,17 @@ If you're having issues with the packaged executable or using this tool in gener
 
 ## Screenshots
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px;">
-    <a href="/posts/auto-py-to-exe/empty-interface.png"><img src="/posts/auto-py-to-exe/empty-interface.png" alt="Empty interface" /></a>
-    <a href="/posts/auto-py-to-exe/filled-out.png"><img src="/posts/auto-py-to-exe/filled-out.png" alt="Filled out" /></a>
-    <a href="/posts/auto-py-to-exe/converting.png"><img src="/posts/auto-py-to-exe/converting.png" alt="Converting" /></a>
-    <a href="/posts/auto-py-to-exe/completed.png"><img src="/posts/auto-py-to-exe/completed.png" alt="Completed" /></a>
+
+<div markdown="1" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px">
+
+[![Empty interface](/posts/auto-py-to-exe/empty-interface.png)](/posts/auto-py-to-exe/empty-interface.png)
+
+[![Filled out](/posts/auto-py-to-exe/filled-out.png)](/posts/auto-py-to-exe/filled-out.png)
+
+[![Converting](/posts/auto-py-to-exe/converting.png)](/posts/auto-py-to-exe/converting.png)
+
+[![Completed](/posts/auto-py-to-exe/completed.png)](/posts/auto-py-to-exe/completed.png)
+    
 </div>
 
 ## Response
