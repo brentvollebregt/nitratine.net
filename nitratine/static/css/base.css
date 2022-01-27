@@ -59,10 +59,19 @@ footer .link-group a.with-icon {
   align-items: center;
 }
 
-footer .link-group a.with-icon img {
+footer .link-group a.with-icon img, footer .link-group a.with-icon .icon {
   max-height: 18px;
   max-width: 18px;
   margin-right: 0.5rem;
+}
+
+.link-group.expandable {
+  display: flex;
+  flex-direction: column;
+}
+
+.link-group .expand {
+  flex-grow: 1;
 }
 
 /* Smaller screens => smaller font sizes (bootstrap override) */
