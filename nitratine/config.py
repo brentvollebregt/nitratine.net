@@ -77,11 +77,11 @@ class __DefaultSiteConfig:
                 url='https://spotify-lyrics-viewer.nitratine.net/',
                 image_url='/static/img/featured-sites/spotify-lyrics-viewer.png',
             ),
-            FeaturedSite(
-                title='Hit Counter',
-                url='https://hitcounter.pythonanywhere.com/',
-                image_url='/static/img/featured-sites/hit-counter.png',
-            ),
+            # FeaturedSite(
+            #     title='Hit Counter',
+            #     url='https://hitcounter.pythonanywhere.com/',
+            #     image_url='/static/img/featured-sites/hit-counter.png',
+            # ),
             FeaturedSite(
                 title='Monopoly Money',
                 url='https://monopoly-money.nitratine.net/',

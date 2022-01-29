@@ -8,7 +8,7 @@ description: "This script allows you to backup a file or folder as a zip file in
 [TOC]
 
 ## Background
-Yesterday I may have dropped a few too many rows from a demo-prod database as I was frantically trying to fix crazy response times from the [demo instance](https://hitcounter.pythonanywhere.com/) of [hit-counter](https://github.com/brentvollebregt/hit-counter). After figuring out the crazy response times were due to the amount of traffic coming in, and sorting it out, I thought it would be a good idea to clean the database of URLs that had less than 3 counts against it in hope to improve performance on the home page (a good 2/3 of the database).
+Yesterday I may have dropped a few too many rows from a demo-prod database as I was frantically trying to fix crazy response times from the demo instance of [hit-counter](https://github.com/brentvollebregt/hit-counter). After figuring out the crazy response times were due to the amount of traffic coming in, and sorting it out, I thought it would be a good idea to clean the database of URLs that had less than 3 counts against it in hope to improve performance on the home page (a good 2/3 of the database).
 
 I downloaded the database, performed some operations and uploaded it to the server for it to immediately start being used (overwriting over the older version). I'm still not quite sure what went wrong; I probably deleted the SQLite WAL file or my SQLite client played me - but whatever it was, I had lost a significant amount of data at some point because when I viewed the stats on the home page after reloading the server, it looked very wrong.
 

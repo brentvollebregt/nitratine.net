@@ -9,6 +9,7 @@ import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
 from markdown.extensions.toc import TocExtension
+from pymdownx.tilde import DeleteSubExtension
 import readtime
 
 from .config import site_config, redirects, featured_posts, POST_SOURCE, POST_FILENAME, POST_EXTENSION
@@ -24,12 +25,13 @@ from .rss import generate_rss_xml
 
 active_markdown_extensions = [
     CodeHiliteExtension(),  # Code highlighting
-    ExtraExtension(),
+    ExtraExtension(),  # Tables, md in html ect
     TocExtension(),  # Table of contents `[toc]` + header ids
     YouTubeVideoExtension(),  # `youtube:<video_id>` tag
     HeaderLinkExtension(),  # Adding chain hover icon to go to header hash link
     KbdExtension(),  # Adding <kbd>
-    LazySizesImageExtension()
+    LazySizesImageExtension(),  # Delayed image loading and blur-up
+    DeleteSubExtension(),  # `~` and `~~` for subscript and delete
 ]
 
 
