@@ -113,6 +113,16 @@ This occurs because you are trying to modify files in a directory you do not hav
 
 One reason this could occur is that you have opened cmd and am in System32. Make sure you do not accidentally modify files in this directory so make sure you are in a directory where you want to write files to when running `auto-py-to-exe`.
 
+#### FileNotFoundError: [Errno 2] No such file or directory
+This error is saying that a file you referenced does not exist. This can mean one of two things:
+
+- You have not included the file (you may have not realised you needed to as it is part of a library)
+- You have included the file but are not referencing it correctly
+
+For situations where you have not included the file, you need to use the "Additional Files" section in the UI to add the required file or folder. You can identify the required file by looking at the error and then also work out the destination based on where it was being looked for.
+
+For files that have been included but this error is still showing, package to one-directory instead of one-file to make sure things are working. Check out "[The one-file Resource Wrapper](#the-one-file-resource-wrapper)" for a function that will help identify the root your application is currently running in.
+
 #### RecursionError
 This error is now prevented by the application by default by setting the recursion limit to 5000. If you want to disable this, there is an option in the *Settings* tab to.
 
