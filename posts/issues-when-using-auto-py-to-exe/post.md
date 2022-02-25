@@ -121,6 +121,11 @@ This error is saying that a file you referenced does not exist. This can mean on
 
 For situations where you have not included the file, you need to use the "Additional Files" section in the UI to add the required file or folder. You can identify the required file by looking at the error and then also work out the destination based on where it was being looked for.
 
+When adding a file or folder in auto-py-to-exe, there are two boxes to fill out: the source location and the destination.
+
+- The source location is where the file currently is on your disk. Using "Add Files" or "Add Folder" will auto-populate this field for you.
+- The destination is where the file/folder will be put inside the final executable/folder. For example, if you have a file called icon.png and your code expects it to be in the folder "assets/images/" relative to your script, then you should put in "assets/images/". 
+
 For files that have been included but this error is still showing, package to one-directory instead of one-file to make sure things are working. Check out "[The one-file Resource Wrapper](#the-one-file-resource-wrapper)" for a function that will help identify the root your application is currently running in.
 
 #### RecursionError
