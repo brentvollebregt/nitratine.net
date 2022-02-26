@@ -49,12 +49,12 @@ file.close()
 The variable `html` will have your data now like the [String literal](#string-literal) example.
 
 ### HTTP Request
-If you want to get a webpage, you can use something like the [`requests` library](https://requests.readthedocs.io/en/master/) to get the page. Say you want to get [http://example.com/](http://example.com/), you would do:
+If you want to get a webpage, you can use something like the [`requests` library](https://requests.readthedocs.io/en/master/) to get the page. Say you want to get [https://example.com/](https://example.com/), you would do:
 
 ```python
 import requests
 
-response = requests.get('http://example.com/')
+response = requests.get('https://example.com/')
 html = response.content.decode()  # The html variable now has the HTML document in it 
 ```
 
@@ -301,7 +301,7 @@ For example, if we have:
 
 ```html
 <div>
-    <iframe src="http://example.com/" title="Example"></iframe>
+    <iframe src="https://example.com/" title="Example"></iframe>
     <iframe src="http://nitratine.net/" title="Nitratine"></iframe>
 </div>
 ```

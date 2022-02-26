@@ -24,6 +24,9 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 class TestLinksRespondNon404(unittest.TestCase):
     def test_all_links_respond_non_404(self):
+        """
+        Get all hrefs from the page and check that they return successful codes
+        """
         test_client = app.test_client(self)
         local_links_visited = []
         local_links_to_visit = ['/']
@@ -69,14 +72,16 @@ class TestLinksRespondNon404(unittest.TestCase):
 
             # Request the URL and check it exists
             try:
+                status_code = 0
                 response = requests.get(
                     link,
-                    verify=False,
+                    verify=False if link.startswith('http://') else True,  # Don't check SSL on HTTP links
                     headers={'User-Agent': USER_AGENT}
                 )
-                self.assertEqual(response.status_code, 200, f'The path "{link}" returned HTTP{response.status_code}')
+                status_code = response.status_code
+                self.assertEqual(status_code, 200, f'The path "{link}" returned HTTP{status_code}')
             except Exception as e:
-                failed_links_and_http_codes.append([link, response.status_code])
+                failed_links_and_http_codes.append([link, status_code])
 
         if len(failed_links_and_http_codes) > 0:
             error_list = ''
@@ -85,6 +90,9 @@ class TestLinksRespondNon404(unittest.TestCase):
             self.fail(f'Paths were found that could not be requested:' + error_list)
 
     def test_hash_references(self):
+        """
+        Validate that all local hash references are valid - the id exists on the page
+        """
         test_client = app.test_client(self)
         pages = {}  # Store each page requested locally as a BeautifulSoup object
         links_visited = []
