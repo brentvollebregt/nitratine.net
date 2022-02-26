@@ -53,6 +53,7 @@ class LazySizesImageProcessor(Treeprocessor):
         # Turn the image into a bytes object
         bytes_io = io.BytesIO()
         image.save(bytes_io, format='PNG')
+        image.close()
 
         return ResizedImage(bytes_io.getvalue(), original_size, new_size)
 
