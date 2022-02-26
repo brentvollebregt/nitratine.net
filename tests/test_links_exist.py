@@ -82,6 +82,7 @@ class TestLinksRespondNon404(unittest.TestCase):
                 status_code = response.status_code
                 self.assertEqual(status_code, 200, f'The path "{link}" returned HTTP{status_code}')
             except Exception as e:
+                print(f'Failed to get {link}: {e}')
                 failed_links_and_http_codes.append([link, status_code])
 
         if len(failed_links_and_http_codes) > 0:
