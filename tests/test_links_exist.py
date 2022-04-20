@@ -20,6 +20,10 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://www.buymeacoffee.com'  # 403
     r'^https://www.digitalcitizen.life'  # 403
 ]
+EXTERNAL_URL_SKIP_SSL = [  # These URLs give us SSL errors despite having SSL certs: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1129)
+    r'^https://www.dabeaz.com',
+    r'^https://www.tablesgenerator.com'
+]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
 
@@ -71,12 +75,15 @@ class TestLinksRespondNon404(unittest.TestCase):
             if any([re.match(r, link) is not None for r in EXTERNAL_URL_BLACKLIST]):
                 continue
 
+            in_skip_ssl_list = any([re.match(pattern, link) is not None for pattern in EXTERNAL_URL_SKIP_SSL])
+            skip_ssl = in_skip_ssl_list or not link.startswith('https://')  # Don't check SSL on HTTP links
+
             # Request the URL and check it exists
             try:
                 status_code = 0
                 response = requests.get(
                     link,
-                    verify=False if link.startswith('http://') else True,  # Don't check SSL on HTTP links
+                    verify=skip_ssl,
                     headers={'User-Agent': USER_AGENT}
                 )
                 status_code = response.status_code
