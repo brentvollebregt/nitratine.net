@@ -1,5 +1,7 @@
 import re
 import unittest
+from urllib3.exceptions import InsecureRequestWarning
+import warnings
 
 from bs4 import BeautifulSoup
 import requests
@@ -17,12 +19,10 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://nzcsc.org.nz',  # Doesn't seem to be up anymore
     r'^https://genius.com',  # 403
     r'^https://www.namesilo.com',  # 403
-    r'^https://www.buymeacoffee.com'  # 403
-    r'^https://www.digitalcitizen.life'  # 403
-]
-EXTERNAL_URL_SKIP_SSL = [  # These URLs give us SSL errors despite having SSL certs: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1129)
-    r'^https://www.dabeaz.com',
-    r'^https://www.tablesgenerator.com'
+    r'^https://www.buymeacoffee.com',  # 403
+    r'^https://www.digitalcitizen.life',  # 403
+    r'^https://www.dabeaz.com',  # SSL error
+    r'^https://www.tablesgenerator.com'  # SSL error
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
@@ -63,6 +63,8 @@ class TestLinksRespondNon404(unittest.TestCase):
 
         failed_links_and_http_codes = []
 
+        warnings.simplefilter("ignore", category=InsecureRequestWarning)
+
         # Check all external links
         while len(external_links_to_check) != 0:
             link = external_links_to_check.pop()
@@ -75,15 +77,12 @@ class TestLinksRespondNon404(unittest.TestCase):
             if any([re.match(r, link) is not None for r in EXTERNAL_URL_BLACKLIST]):
                 continue
 
-            in_skip_ssl_list = any([re.match(pattern, link) is not None for pattern in EXTERNAL_URL_SKIP_SSL])
-            skip_ssl = in_skip_ssl_list or not link.startswith('https://')  # Don't check SSL on HTTP links
-
             # Request the URL and check it exists
             try:
-                status_code = 0
+                status_code = -1
                 response = requests.get(
                     link,
-                    verify=skip_ssl,
+                    verify=False if link.startswith('http://') else True,  # Don't check SSL on HTTP links,
                     headers={'User-Agent': USER_AGENT}
                 )
                 status_code = response.status_code
@@ -97,6 +96,8 @@ class TestLinksRespondNon404(unittest.TestCase):
             for link_and_http_code in failed_links_and_http_codes:
                 error_list += f'\n{link_and_http_code[1]} {link_and_http_code[0]}'
             self.fail(f'Paths were found that could not be requested:' + error_list)
+
+        warnings.resetwarnings()
 
     def test_hash_references(self):
         """
