@@ -51,7 +51,8 @@ class __DefaultSiteConfig:
         self.github_username = 'brentvollebregt'
         self.default_author = 'Brent Vollebregt'
         self.disqus_shortname = 'nitratine'
-        self.google_analytics_id = 'UA-117153268-2'
+        self.google_analytics_id = 'G-EB27CZP773'
+        self.google_analytics_id_old = 'UA-117153268-2'  # Universal Analytics Id that should be removed around 1 July 2023
         self.google_adsense_publisher_id = 'pub-6407227183932047'
         self.youtube_channel_name = 'PrivateSplat'
         self.youtube_channel_id = 'UCesEknt3SRX9R9W_f93Tb7g'
