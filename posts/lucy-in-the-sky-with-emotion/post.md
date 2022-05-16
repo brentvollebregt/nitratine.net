@@ -76,4 +76,4 @@ When the visualiser has started, you can hold the left control key to display a 
 
 #### Project Managers
 - [Swikrit Khanal](https://github.com/swikrit)
-- [Sash Sinha](https://github.com/shash873)
+- [Sash Sinha](https://github.com/sashsinha)

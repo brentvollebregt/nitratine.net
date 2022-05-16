@@ -22,8 +22,7 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://www.buymeacoffee.com',  # 403
     r'^https://www.digitalcitizen.life',  # 403
     r'^https://www.dabeaz.com',  # SSL error
-    r'^https://www.tablesgenerator.com',  # SSL error
-    r'^https://github.com/shash873'  # 404 - User no longer exists
+    r'^https://www.tablesgenerator.com'  # SSL error
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
