@@ -8,7 +8,7 @@ from nitratine.__main__ import app
 
 
 IMAGE_ALT_EXCLUSIONS = [
-    ['/about/', 'https://www.paypalobjects.com/en_US/i/scr/pixel.gif']
+    ['/about/']
 ]
 
 
