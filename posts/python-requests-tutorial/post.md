@@ -176,4 +176,4 @@ Please know that these are only the basics of the requests library and there is 
 If you want to read up more on this library, Google is full of answers but the docs at [requests.readthedocs.io](https://requests.readthedocs.io/en/master/user/quickstart/) is great for reference material.
 
 ## I Don't Have s Server, How Can I Test These?
-[hookbin.com](https://hookbin.com/) is an amazing place to test requests. Simply create a new endpoint on the site (big pink button) and copy the URL at the top of the rendered page. Now whenever you make a request to that URL, refresh the page and you will be able to see the content of the request you made.
+[webhook.site](https://webhook.site/) is an amazing place to test requests. Simply going to the page will create a new webhook for you to use - copy the unique URL at the top of the page (not the URL address bar). Now whenever you make a request to that URL, you will be able to see the content of the request you made.
