@@ -54,11 +54,23 @@ description: "This is a tool where you can select a file on your PC and it will 
             path: nodesPath
         };
 
+        // If this node is a directory, search for subdirectories and files
         if (node.kind === "directory") {
             for await (const [_, handle] of dirHandle) {
                 node.children.push(await getFilesAndDirNodeForHandle(handle, nodesPath));
             }
         }
+
+        // Order the child nodes after discovery
+        node.children.sort((a, b) => {
+            if (a.kind === "directory" && b.kind === "file") {
+                return -1;
+            }
+            if (a.kind === "file" && b.kind === "directory") {
+                return 1;
+            }
+            return a.name.localeCompare(b.name);
+        });
 
         return node;
     };
