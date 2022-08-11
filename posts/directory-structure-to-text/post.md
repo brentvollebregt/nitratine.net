@@ -171,3 +171,31 @@ description: "This is a tool where you can select a file on your PC and it will 
         outputElement.innerText = preMessage;
     });
 </script>
+
+## Example Filters
+
+These are some example filters for specific project types
+
+### Python
+
+Ignore `.git`, `.venv`, `__pycache__`, `.idea`
+
+```
+/\.git/|/\.venv/|/__pycache__/|/\.idea/
+```
+
+### C\#
+
+Ignore `.git`, `.vs`, `/bin*`, `/obj*`
+
+```
+/\.git/|/\.vs/|/bin/|/obj/
+```
+
+### Node/JavaScript
+
+Ignore `.git`, `node_modules`, `build`
+
+```
+/\.git/|/node_modules/|/build/
+```
