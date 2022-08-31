@@ -162,7 +162,7 @@ file_out.close()
 ```
 
 ### CFB Example
-You can find this example [in the docs](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cfb-mode). CFB is very similar to CFB but does not require the data to be padded; this means the call `pad(data, AES.block_size)` from the CBC example can be replaced with `data` for CFB. 
+You can find this example [in the docs](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cfb-mode). CFB is very similar to CBC but does not require the data to be padded; this means the call `pad(data, AES.block_size)` from the CBC example can be replaced with `data` for CFB. 
 
 This CFB mode example is practically identical to the OFB mode (just need to change the mode in `AES.new`) and very close to CTR in the way that a nonce needs to be stored compared to the iv from CFB (the nonce is stored in `cipher.nonce`).
 
