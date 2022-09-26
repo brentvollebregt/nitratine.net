@@ -93,10 +93,10 @@ def print_build_stats():
                 'count': 1
             }
     file_type_groupings_ordered_by_size = {k: v for k, v in sorted(file_type_groupings.items(), key=lambda item: item[1]['size'], reverse=True)}
-    print(f'{"Extension":^14}|{"Size":^11}|{"%":^7}|{"Count":^7}|')
-    print(f'{("-"*14):^14}|{("-"*11):^11}|{("-"*7):^7}|{("-"*7):^7}|')
+    print(f'|{"Extension":^14}|{"Size":^11}|{"%":^7}|{"Count":^7}|')
+    print(f'|{("-"*14):^14}|{("-"*11):^11}|{("-"*7):^7}|{("-"*7):^7}|')
     for file_type in file_type_groupings_ordered_by_size:
         size = file_type_groupings[file_type]['size']
         percentage = (size / total_size) * 100
         count = file_type_groupings[file_type]['count']
-        print(f'{file_type:^14}|{__bytes_to_human_readable(size):^11}|{round(percentage, 2):^7}|{count:^7}|')
+        print(f'|{file_type:^14}|{__bytes_to_human_readable(size):^11}|{round(percentage, 2):^7}|{count:^7}|')
