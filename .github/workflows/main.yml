@@ -36,6 +36,9 @@ jobs:
           publish_dir: ./build
 
       - name: Get build stats
-        run: python -m nitratine stats
+        run: |
+          echo "Deployed master to prod" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          python -m nitratine stats >> $GITHUB_STEP_SUMMARY
         env:
           YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
