@@ -9,7 +9,7 @@ description: "In this tutorial, we go over how to use SqlPackage to clone or exp
 
 ## What is SqlPackage and Why Use it?
 
-SqlPackage.exe is a command-line utility provided by Microsoft that automates some database development tasks like exporting, importing and running scripts.
+[SqlPackage](https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage?view=sql-server-ver16) is a command-line utility provided by Microsoft that automates some database development tasks like exporting, importing and running scripts.
 
 In this tutorial, we're using SqlPackage instead of SQL Management Studio (SSMS) as SSMS is much larger than what we need and if you're reading this tutorial to get a job done quick, you probably don't want to install a large application.
 
