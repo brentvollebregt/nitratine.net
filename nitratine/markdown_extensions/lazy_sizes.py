@@ -47,7 +47,7 @@ class LazySizesImageProcessor(Treeprocessor):
         ratio = new_width / original_size[0]
 
         # Calculate new size and resize the image
-        new_size = (math.floor(original_size[0] * ratio), math.floor(original_size[1] * ratio))
+        new_size = (round(original_size[0] * ratio), round(original_size[1] * ratio))
         image.thumbnail(new_size, Image.ANTIALIAS)
 
         # Turn the image into a bytes object
