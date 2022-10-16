@@ -28,6 +28,7 @@ class LazySizesImageProcessor(Treeprocessor):
                 file = POST_SOURCE / src[len('/posts/'):]
                 image = Image.open(str(file))
                 image_width = image.size[0]
+                image_height = image.size[1]
                 image.close()
                 # Get the resized image and convert it to b64
                 resized_image = self.get_resized_image(file, 15)
@@ -36,7 +37,9 @@ class LazySizesImageProcessor(Treeprocessor):
                 element.set('class', 'lazyload blur-up')
                 element.set('data-src', element.get('src'))
                 element.set('src', f"data:image/png;base64, {image_bs4.decode()}")
-                element.set('style', f"width: {image_width}px;")
+                element.set('width', str(image_width))
+                element.set('height', str(image_height))
+                element.set('style', f'aspect-ratio: {image_width}/{image_height}; height: auto;')
 
     @staticmethod
     def get_resized_image(path: Path, new_width: int) -> ResizedImage:

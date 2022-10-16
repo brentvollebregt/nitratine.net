@@ -116,6 +116,7 @@
 
 .post-content img {
     max-width: 100%;
+    height: auto;
     display: block;
     margin: auto;
 }
@@ -283,6 +284,4 @@ h6 .anchor:focus svg {
 .blur-up.lazyloaded {
     -webkit-filter: blur(0);
     filter: blur(0);
-    width: initial !important;
-    height: initial !important;
 }
