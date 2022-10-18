@@ -18,7 +18,8 @@
             "args": [
                 "run",
                 "--watch"
-            ]
+            ],
+            "justMyCode": false
         },
         {
             "name": "Nitratine: Build",

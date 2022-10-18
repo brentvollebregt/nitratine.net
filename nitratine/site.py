@@ -18,8 +18,8 @@ from .external.youtube import get_most_recent_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
 from .markdown_extensions.youtube_video import YouTubeVideoExtension
 from .markdown_extensions.header_link import HeaderLinkExtension
-from .markdown_extensions.lazy_sizes import LazySizesImageExtension
 from .markdown_extensions.kbd import KbdExtension
+from .processors.lazy_sizes import apply_lazy_load_to_supported_images
 from .rss import generate_rss_xml
 
 
@@ -30,7 +30,6 @@ active_markdown_extensions = [
     YouTubeVideoExtension(),  # `youtube:<video_id>` tag
     HeaderLinkExtension(),  # Adding chain hover icon to go to header hash link
     KbdExtension(),  # Adding <kbd>
-    LazySizesImageExtension(),  # Delayed image loading and blur-up
     DeleteSubExtension(),  # `~` and `~~` for subscript and delete
 ]
 
@@ -172,6 +171,7 @@ def blog_archive():
 
 
 @app.route('/blog/post/<path:path>/')
+@apply_lazy_load_to_supported_images
 def blog_post(path):
     """ A post. Renders the .md file. """
     post = posts.get_or_404(f'{path}/{POST_FILENAME}')
