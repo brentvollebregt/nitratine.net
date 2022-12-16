@@ -261,6 +261,27 @@ Supporting Stack Overflow questions [here](https://stackoverflow.com/a/66686681)
 
 If you install Python from python.org to fix this issue, you will need to install auto-py-to-exe in this new distribution. You will then also need to make sure you execute auto-py-to-exe from the newly installed distribution and not the old python from the windows store distribution. Executing `where auto-py-to-exe` can tell you where it will be execute from (the top result).
 
+### The exe Runs But Does Some Unexpected Things
+
+A lot of people say their python script runs fine in IDLE, PyCharm, Conda or something similar but after packaging, the executable functions differently.
+
+Examples of executables functioning differently include but are not limited to:
+
+- A console window appearing
+- Console windows appearing and closing
+
+This difference is most likely because the script is now running in a different environment or started in a different way.
+
+If you double-click your exe to run it, you can test how your script will run before packaging by doing the following:
+
+1. Set the default application for .py files on your machine to the python.exe binary you are using to run your .py file
+2. Double-click on your .py script to run it
+3. Witness how your application runs
+
+> If you are packaging to a single .exe file (onefile), set pythonw.exe as the default application for .py files rather than python.exe.
+
+If your script doesn't run as expected when following this, it shows there is something wrong with the implementation of your script.
+
 ## Additional Information and Explanations
 Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions about why and how things occur.
 
