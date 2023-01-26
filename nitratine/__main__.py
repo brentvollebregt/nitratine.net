@@ -41,7 +41,7 @@ def run(host: str, port: int, minify: bool, watch: bool, production: bool):
         server.serve(host=host, port=port)
     else:
         print(f'Server starting at http://{host}:{port}')
-        app.run(host=host, port=port)
+        app.run(host=host, port=port, debug=True)
 
 
 @cli.command()
