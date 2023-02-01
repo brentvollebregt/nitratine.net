@@ -14,6 +14,23 @@ a {
     word-break: break-word;
 }
 
+/* Header */
+
+#featured-site-icons {
+  display: flex;
+  gap: 12px;
+}
+
+#featured-site-icons a img {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease-in-out;
+}
+
+#featured-site-icons img:hover {
+  filter: grayscale(10%);
+}
+
+
 /* Footer */
 
 footer {
