@@ -155,7 +155,15 @@ Make sure the file you are referencing actually exists, this error says that the
 #### struct.error: unpack requires a buffer of 16 bytes
 This typically occurs when you have supplied `--icon` / `-i` with a file that is not a `.ico` file. Please note that simply changing the extension of a file to .ico does not make it a .ico file; you will need to use a converter of some sort to convert your file (e.g. png, jpg) into a .ico.
 
-## General Questions Constantly Asked
+#### RuntimeError: input(): lost sys.stdin
+This occurs when you package as a window based application and try to use `print` in your application. Since the application no longer has a console to print out to, it will throw this error. If you run a window based application from a terminal, it will have a console to print to - so `print` will work. However, if you double-click the exe from the file explorer, it will not have a console to print to.
+
+To fix this, you can either:
+
+- Package your script as a console based application 
+- Replace your print statements with something that logs to a file (or somewhere else that isn't the console)
+
+## FAQ
 
 ### How do I Convert All My Python Files?
 Add the entry point in the script location. PyInstaller searches for imports to get the rest of the Python files required to run, so as long as you use the `import` keyword, your files will be added.
