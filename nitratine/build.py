@@ -26,12 +26,6 @@ def build():
         f.close()
         print(f'Redirect: /{r} -> /{redirects[r]}')
 
-    # Add CNAME
-    f = open(os.path.join(FREEZE_DESTINATION, 'CNAME'), 'w')
-    f.write(site_config.domain)
-    f.close()
-    print('CNAME')
-
     # Add 404 page
     f = open(os.path.join(FREEZE_DESTINATION, '404.html'), 'w')
     with app.test_request_context():
