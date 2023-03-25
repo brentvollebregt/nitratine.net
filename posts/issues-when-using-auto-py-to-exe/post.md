@@ -102,18 +102,15 @@ When everything is done and there are no more bugs in the modes you want, you ca
 
 > Not every project can be converted to one-file. This is due to files being used by the application being lost every time the application starts/stops. To understand this more go down to ["Demonstration of Files References After Packaging"](#demonstration-of-files-references-after-packaging).
 
-### How to Fix Specific Issues
-These are some of the issues I have come across or others have asked me about and ways to fix them.
-
-#### Fatal Error: failed to execute <script.py>
+### Fatal Error: failed to execute <script.py>
 This means something has gone wrong as it's giving you a visual warning about it; this is not an error, it's a warning; the real error has been printed to stdout/stderr. If you open the executable using the terminal or something else that will preserve the console output, you will most likely see a Python error telling you what went wrong. Fixing this and repackaging is the solution to this issue.
 
-#### PermissionError: [Errno 13] Permission denied: ...
+### PermissionError: [Errno 13] Permission denied: ...
 This occurs because you are trying to modify files in a directory you do not have access to. A way to fix this is to run the script with admin privileges by opening cmd as admin and then running `auto-py-to-exe` one you have cd'ed to the directory you want the output to be in.
 
 One reason this could occur is that you have opened cmd and am in System32. Make sure you do not accidentally modify files in this directory so make sure you are in a directory where you want to write files to when running `auto-py-to-exe`.
 
-#### FileNotFoundError: [Errno 2] No such file or directory
+### FileNotFoundError: [Errno 2] No such file or directory
 This error is saying that a file you referenced does not exist. This can mean one of two things:
 
 - You have not included the file (you may have not realised you needed to as it is part of a library)
@@ -128,13 +125,13 @@ When adding a file or folder in auto-py-to-exe, there are two boxes to fill out:
 
 For files that have been included but this error is still showing, package to one-directory instead of one-file to make sure things are working. Check out "[The one-file Resource Wrapper](#the-one-file-resource-wrapper)" for a function that will help identify the root your application is currently running in.
 
-#### RecursionError
+### RecursionError
 This error is now prevented by the application by default by setting the recursion limit to 5000. If you want to disable this, there is an option in the *Settings* tab to.
 
-#### AttributeError: module 'enum' has no attribute 'IntFlag'
+### AttributeError: module 'enum' has no attribute 'IntFlag'
 Try executing `python -m pip uninstall enum34` to stop enum conflicts. This is also a fix for the similar issue "Fatal Python error: Py_Initialize: unable to load the file system codec".
 
-#### ModuleNotFoundError: No module named x / ImportError: No module named x
+### ModuleNotFoundError: No module named x / ImportError: No module named x
 This means a particular module ('x' in this case) was not added to the package. I have seen this occur with packages in the pandas library and win32api; as long as you can identify the package (e.g. 'x'), then it is very easy to fix.
 
 To fix this in the UI, open the advanced tab and find the `--hidden-import` input. Simply paste the module name into this input and then repackage. If the original error is still appearing, you have done this incorrectly.
@@ -143,19 +140,19 @@ For example, if you are missing `pandas._libs.tslib`, add 'pandas._libs.tslib' i
 
 Alternatively, you may have installed auto-py-to-exe in one Python environment (a single installation or venv) and installed your dependent package in a different Python environment. Take a look at ["How to Manage Multiple Python Distributions"](/blog/post/how-to-manage-multiple-python-distributions/) for help on how to identify if you've done this.
 
-#### ERR_CONNECTION_REFUSED
+### ERR_CONNECTION_REFUSED
 You need to be connected to the internet. This error appears when you cannot reach the servers.
 
-#### Command "python setup.py egg_info" failed with error code 1
+### Command "python setup.py egg_info" failed with error code 1
 Update setuptools using `pip install --upgrade setuptools`.
 
-#### FileNotFoundError
+### FileNotFoundError
 Make sure the file you are referencing actually exists, this error says that the file you are referencing doesn't exist. If you are using one-file mode, make sure you have followed the necessary steps.
 
-#### struct.error: unpack requires a buffer of 16 bytes
+### struct.error: unpack requires a buffer of 16 bytes
 This typically occurs when you have supplied `--icon` / `-i` with a file that is not a `.ico` file. Please note that simply changing the extension of a file to .ico does not make it a .ico file; you will need to use a converter of some sort to convert your file (e.g. png, jpg) into a .ico.
 
-#### RuntimeError: input(): lost sys.stdin
+### RuntimeError: input(): lost sys.stdin
 This occurs when you package as a window based application and try to use `print` in your application. Since the application no longer has a console to print out to, it will throw this error. If you run a window based application from a terminal, it will have a console to print to - so `print` will work. However, if you double-click the exe from the file explorer, it will not have a console to print to.
 
 To fix this, you can either:
