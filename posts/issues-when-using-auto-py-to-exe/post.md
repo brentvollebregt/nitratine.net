@@ -297,6 +297,12 @@ If you double-click your exe to run it, you can test how your script will run be
 
 If your script doesn't run as expected when following this, it shows there is something wrong with the implementation of your script.
 
+### Is Python Needed When Running the Output Executable?
+
+No, the whole point of bundling into an executable is so that your script can be run on a different computer without Python installed.
+
+> The Python interpreter is packaged in the output executable.
+
 ## Additional Information and Explanations
 Some things that are clear to people that use Python a lot are not always clear to new people. Here are some discussions about why and how things occur.
 
