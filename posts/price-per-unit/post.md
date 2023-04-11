@@ -40,7 +40,7 @@ This app is ideal to find the best price in supermarkets but will work just in w
 - Summary of calculated unit/$
 - Can view all items converted to one single unit
 - Remember data after the app is closed
-- Change rounding dp
+- Change rounding decimal places
 - No permissions!
 - No Ads!
 - Collects no data!

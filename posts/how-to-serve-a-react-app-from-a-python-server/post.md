@@ -286,7 +286,7 @@ This script needs to be placed beside package.json:
   ┗ 📜 ... server files
 ```
 
-We now want to setup package.json to run this script after an npm build. Create a new `"postbuild"` script key and set it's value value to `"node postbuild.js"`. Here is an example excerpt based off the default package.json generated before: 
+We now want to setup package.json to run this script after an npm build. Create a new `"postbuild"` script key and set its value to `"node postbuild.js"`. Here is an example excerpt based off the default package.json generated before: 
 
 ```json
 "scripts": {

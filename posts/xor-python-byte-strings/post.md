@@ -10,7 +10,7 @@ description: "This snippet shows you how to can simply XOR two Python byte strin
 Previously doing a CTF challenge I found myself needing to XOR two byte strings in Python to reveal a key from the original text and 'ciphered' data (in this case by XOR).
 
 ## A Quick Introduction to XOR?
-XOR (or "exclusive or") is a binary operator like AND and OR. In Python, bitwise XOR is represented as `^` like `&` is to AND and `|` is to OR. Here is a "truth table" using 1's and 0's:
+XOR (or "exclusive or") is a binary operator like "AND" and "OR". In Python, bitwise XOR is represented as `^` like `&` is to AND and `|` is to OR. Here is a "truth table" using 1's and 0's:
 
 | a | b | a ^ b |
 |---|---|-------|

@@ -679,5 +679,5 @@ for unknwon_face_encoding in unknwon_face_encodings:
 ## Additional PIL Help
 This tutorial doesn't focus on PIL but one function you may find useful is [`img.save()`](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.save); this saves a file. An example of its usages is `img.save('my_image.png')` to save a PIL image to my_image.png.
 
-You can find more on PIL in it's [docs](https://pillow.readthedocs.io/en/stable/reference/) and there is plenty of other help online as it is a very old library.
+You can find more on PIL in its [docs](https://pillow.readthedocs.io/en/stable/reference/) and there is plenty of other help online as it is a very old library.
 

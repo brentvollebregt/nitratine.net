@@ -102,7 +102,7 @@ function unretweet() {
 }
 ```
 
-Like previous, you can load th page using the scroll methods and then run this method by calling ```unretweet()```.
+Like previously, you can load the page using the scroll methods and then run this method by calling ```unretweet()```.
 
 ## Trying to Access Tweets Over Twitters API
 For those that haven't used bulk tweet-deleters before, the above methods probably worked; for me it didn't because I had used a bulk tweet-deleter. The final plan I had was to delete retweets them using the API.
