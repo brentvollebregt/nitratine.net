@@ -90,5 +90,5 @@ When moving code from an IDE to paper for something like an assessment, black te
 - [Basic URL decoder and encoder](https://meyerweb.com/eric/tools/dencoder/)
 - [JSON viewer](http://jsonviewer.stack.hu/)
 - [Regular expression testing](https://regex101.com/)
-- [Convert cURL commands to Python request calls (and other languages)](https://curl.trillworks.com/)
+- [Convert cURL commands to Python request calls (and other languages)](https://curlconverter.com/)
 - [Webhooks that you can set the response on](https://webhook.site/#!/07372fd5-f335-4263-97bd-a8fa974ed148)
