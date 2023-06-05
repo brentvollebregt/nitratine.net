@@ -27,7 +27,7 @@ def build():
         print(f'Redirect: /{r} -> /{redirects[r]}')
 
     # Add 404 page
-    f = open(os.path.join(FREEZE_DESTINATION, '404.html'), 'w')
+    f = open(os.path.join(FREEZE_DESTINATION, '404.html'), 'w', encoding='utf-8')
     with app.test_request_context():
         f.write(page_not_found(None)[0])
     f.close()
