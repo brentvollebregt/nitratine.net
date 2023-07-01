@@ -124,6 +124,32 @@
     padding-bottom: 1rem;
 }
 
+.blog-navigation-in-post {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+@media (max-width: 575.98px) { 
+    /* Up to sm */
+    .blog-navigation-in-post {
+        flex-direction: column;
+    }
+ }
+
+.blog-navigation-in-post .btn {
+    display: flex;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.blog-navigation-in-post .btn .btn-content {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 blockquote { /* Blockquotes */
     border-left: .25em solid #dfe2e5;
     color: #6a737d;
