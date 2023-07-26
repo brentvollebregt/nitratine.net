@@ -91,7 +91,7 @@ And here is my value missing in the later job:
 
 ## The Solution
 
-While looking for a solution, I found [this GitHub issue](https://github.com/actions/runner/issues/1498) which gave me the idea of encrypting secrets being passed between runners/jobs.
+While looking for a solution, I found [this GitHub issue](https://github.com/actions/runner/issues/1498) which gave me the idea of encrypted secrets being passed between runners/jobs.
 
 Pretty much the idea is to symmetrically encrypt the secret/masked value using PGP in the source runner and decrypt it in the designation runner. This means you can still mask the value from the logs but the actual value being passed around is not the masked value.
 
