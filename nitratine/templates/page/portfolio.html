@@ -6,10 +6,10 @@
 <link rel="stylesheet" href="/static/css/blog.css">
 <link rel="stylesheet" href="/static/css/pygments.css">
 
-<meta name="description" content="This is a small collection of my favourite projects I developed with a small description and links to pages relating to the project.">
+<meta name="description" content="This is a small collection of my favourite projects I've built with links to pages relating to the project.">
 <meta name="author" content="{{ site_config.default_author }}">
 <meta property="og:title" content="Portfolio - Nitratine">
-<meta property="og:description" content="This is a small collection of my favourite projects I developed with a small description and links to pages relating to the project.">
+<meta property="og:description" content="This is a small collection of my favourite projects I've built with links to pages relating to the project.">
 <meta property="og:image" content="{{ site_config.url }}/static/img/logo.png">
 <meta property="og:url" content="{{ site_config.url + request.path }}">
 <meta name="twitter:card" content="summary">
@@ -18,9 +18,9 @@
 
 {% block content %}
 <main class="row justify-content-center">
-    <div class="col-xs-12 col-lg-8">
+    <div class="col-xs-12 col-lg-7">
         <h1 class="text-center">Portfolio</h1>
-        <p class="lead text-center">This is a small collection of my favourite projects I developed with a small description and links to pages relating to the project.</p>
+        <p class="lead text-center">This is a small collection of my favourite projects I've built with links to pages relating to the project.</p>
     </div>
     <div class="col-sm-12 col-md-6 col-centered">
 
@@ -28,7 +28,7 @@
         <p>This project was my attempt at making the task of packaging Python scripts to Windows executables to run on computers without Python installed easier for new-comers.</p>
         <p>This project allows someone to easily set up a server that uses chromes app mode as an interface and then calls PyInstaller with the parameters provided by the user.</p>
         <img src="/posts/auto-py-to-exe/empty-interface.png" alt="Auto-Py-To-Exe Empty Interface" style="display: block; width: 100%; max-width: 350px; margin: auto;" class="mb-2">
-        <div style="text-align: center">
+        <div class="text-center mb-3">
             <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" alt="PyPI Version"></a>
             <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" alt="PyPI Supported Versions"></a>
             <a href="https://pypi.org/project/auto-py-to-exe/"><img style="display: inline;" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" alt="License"></a>
@@ -96,9 +96,9 @@
         <p class="mb-0">The complete application consists of:</p>
         <ul>
             <li>A React + TypeScript frontend <small>(+ <a href="https://leafletjs.com/">leaflet</a>, <a href="https://d3js.org/">d3</a>, <a href="https://v4.mui.com/">material-ui</a>, <a href="https://github.com/RicoSuter/NSwag">nswag</a>)</small></li>
-            <li>A .NET Core backend <small>(+ EF Core, Azure Functions, ASP.NET Core)</small></li>
+            <li>A .NET Core backend <small>(+ EF Core, ASP.NET Core)</small></li>
             <li>A React + TypeScript administration portal <small>(+ <a href="https://mui.com/">mui</a>, <a href="https://vitejs.dev/">vite</a>, <a href="https://airbnb.io/visx/">visx</a>)</small></li>
-            <li>Automated infrastructure deployments using <a href="https://compositionalit.github.io/farmer/">Farmer</a> and GitHub Actions to multiple Azure resources</li>
+            <li>Automated infrastructure deployments using terraform through GitHub Actions workflows into Azure</li>
         </ul>
         <div class="text-center">
             <a href="https://paddock-grazing-planner.nitratine.net/"><button type="button" class="btn btn-outline-primary btn-sm">🌐 Public Web Application</button></a>
