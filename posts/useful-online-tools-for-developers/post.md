@@ -27,8 +27,6 @@ description: "Downloading and setting up a tool to perform a basic action can be
 
 ## Files and Binaries
 
-- [Disassembly in the cloud](https://onlinedisassembler.com/static/home/index.html)
-    - I use this to get string values out of binaries in CTF challenges
 - [File hex viewer / editor](https://hexed.it/)
     - File search
     - Format identification

@@ -114,7 +114,7 @@ This challenge supplies you a .ova file you can import to virtual box. When impo
 
 When I was first attempting this, I had written a shell script using vi on the VM (lord help me) to get all the strings out of `validate` and run them through the program. Obviously this didn't work because they learnt their lesson from last year.
 
-I decided to extract the ova file using 7-Zip on a windows machine and then unzipped `VM-disk001.vmdk` within. Looking in \home\tc I could then easily access the `validate` file. I then went to [onlinedisassembler.com](https://onlinedisassembler.com/static/home/index.html) for a dirty way to look at what this binary contained.
+I decided to extract the ova file using 7-Zip on a windows machine and then unzipped `VM-disk001.vmdk` within. Looking in \home\tc I could then easily access the `validate` file. I then went to onlinedisassembler<span>.</span>com (no longer available) for a dirty way to look at what this binary contained.
 
 Looking at the strings within the binary on a more familiar interface, I noticed hours later that one of the "flags" (many to put you off - which I had tested them all previously) were reversed; this was the flag.
 
