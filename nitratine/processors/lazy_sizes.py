@@ -66,7 +66,7 @@ def __get_resized_image(path: Path, new_width: int) -> __ResizedImage:
 
     # Calculate new size and resize the image
     new_size = (round(original_size[0] * ratio), round(original_size[1] * ratio))
-    image.thumbnail(new_size, Image.ANTIALIAS)
+    image.thumbnail(new_size, Image.LANCZOS)
 
     # Turn the image into a bytes object
     bytes_io = io.BytesIO()
