@@ -1,6 +1,6 @@
 import os
 
-from .config import site_config, redirects, FREEZE_DESTINATION
+from .config import redirects, FREEZE_DESTINATION
 from .site import app, page_not_found
 from .freezer import freezer
 

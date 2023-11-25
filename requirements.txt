@@ -15,3 +15,4 @@ Pillow==10.0.1
 pymdown-extensions==10.0
 
 werkzeug==2.3.7  # werkzeug 3.0.0 removes .charset, which breaks Frozen-Flask: https://github.com/Frozen-Flask/Frozen-Flask/issues/129
+tornado<6.3.0  # https://github.com/lepture/python-livereload/issues/270

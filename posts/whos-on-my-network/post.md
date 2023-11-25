@@ -11,7 +11,6 @@ github: brentvollebregt/whos-on-my-network
 <div align="center" style="padding: 20px 20px 40px 20px">
     <img src="/posts/whos-on-my-network/whos-on-my-network-logo.png" alt="Who's On My Network Logo" style="margin-bottom: 10px;">
     <p class="text-center">Keep an eye on who is on your network and when.</p>
-    <a href="https://github.com/brentvollebregt/whos-on-my-network/releases"><button class="btn btn-outline-secondary" type="button">Download the latest release →</button></a>
 </div>
 
 Who's On My Network is a tool built-in Python with a React interface that allows you to scan your network to observe who's on it currently and look at past scans to see who was on it previously.
@@ -27,22 +26,19 @@ The Python module is capable of scanning once or scanning repetitively. This is 
 
 All scans can then be identified in the interface where a user can create profiles for each person they know is on the network and assign discovered devices to people. This helps identify devices you do not know about and unusual connections.
 
-
-
-
 ## Getting the Tool Yourself
-On every official version change, a [GitHub release](https://github.com/brentvollebregt/whos-on-my-network/releases) is made which contains two files:
 
-- `whos_on_my_network.zip`: The whos_on_my_network module with the web app pre-built.
-- `whos_on_my_network_binary.zip`: A Windows executable of whos_on_my_network (does not support plugins)
+Details in the [projects README](https://github.com/brentvollebregt/whos-on-my-network#readme) outline how to download and setup the tool.
 
-> The pre-built Windows executable does not use a plugin and will default to the built-in method. To make a build containing a particular plugin yourself, execute `bash package.sh {plugin-name}`; this will produce whos_on_my_network.exe which will use the declared plugin.
+The tool offers help for:
+
+- Docker compose (build hosted on GitHub)
+- Docker compose with a local build
+- Bare metal
 
 
 ## Using The Tool
 The tool is built around a Python module that can be run using `python -m whos_on_my_network <arguments>` or simply executing `python run.py <arguments>`.
-
-If you are using the pre-build binary found in whos_on_my_network.zip, execute `whos_on_my_network.exe <arguments>` in a terminal. 
 
 > See [README.md in the git repository](https://github.com/brentvollebregt/whos-on-my-network#%EF%B8%8F-usage) for details about arguments.
 
@@ -91,9 +87,6 @@ Another page is also supplied that allows you to run a single scan from the brow
 ## How This Tool Works
 By default, this tool uses [scapy](https://scapy.net/) to send ARP packets to all addresses in the provided network range (default is 192.168.1.0/24) to identify what devices are on the network. When a host responds, its MAC address, IP address and hostname are obtained and an entry is added to the SQLite database matched to the current scan.
 
-Plugins are supported by this application to allow custom methods of scanning a network. An example has been provided for WiFi networks that use a [ASUS RT-AC58 router](https://github.com/brentvollebregt/whos-on-my-network/blob/master/whos_on_my_network/plugins/asus-rt-ac58u.py). This plugin demonstrates how you can instead look at the active devices connected to your router rather than scanning the network.
+Custom scanners are supported by this application to allow custom methods of identifying devices on a network. An example has been provided for WiFi networks that use a [ASUS RT-AC58 router](https://github.com/brentvollebregt/whos-on-my-network/blob/master/whos_on_my_network/scanners/asus_rt_ac58u.py). This scanner demonstrates how you can instead look at the active devices connected to your router rather than scanning the network.
 
 All data collected by the application is stored locally in an SQLite database.
-
-## What Happened to the Original Version?
-The original version is preserved in the git history under the [tag v1.0.0](https://github.com/brentvollebregt/whos-on-my-network/tree/v1.0.0).
