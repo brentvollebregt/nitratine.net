@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Nitratine: Run Locally",
+            "name": "Nitratine: Run Locally (Flask Debug)",
             "type": "python",
             "request": "launch",
             "module": "nitratine",
@@ -11,7 +11,7 @@
             ]
         },
         {
-            "name": "Nitratine: Run Locally and Watch",
+            "name": "Nitratine: Run Locally and Watch (No Flask Debug)",
             "type": "python",
             "request": "launch",
             "module": "nitratine",
