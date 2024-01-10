@@ -192,6 +192,21 @@ def blog_post(path):
     )
 
 
+# Externally Linked Routes
+
+
+@app.route('/privacy-policies/color/')
+def privacy_policy_color():
+    """ Privacy policy for com.pythonanywhere.brentvollebregt.colour """
+    return render_template('page/privacy-policies/color.html')
+
+
+@app.route('/privacy-policies/price-per-unit/')
+def privacy_policy_price_per_unit():
+    """ Privacy policy for net.nitratine.priceperunit """
+    return render_template('page/privacy-policies/price-per-unit.html')
+
+
 # Site Management Routes
 
 
