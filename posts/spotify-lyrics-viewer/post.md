@@ -18,17 +18,16 @@ The Spotify Lyrics Viewer is a tool that allows you to view the lyrics of the cu
 
 ## How it Works
 
-To do this, it first logs you into Spotify so it can see the current song playing. The title and artist are then used to try and find the lyrics on [GENIUS](https://genius.com/) and whatever lyrics matched the best are displayed.
+To do this, it first logs you into Spotify so it can see the current song playing. The title and artist are then used to try and find the lyrics on [lrclib.net](https://lrclib.net/) and whatever lyrics matched the best are displayed.
 
 The web app periodically checks if a new song is playing and if so, will request for the new lyrics.
 
-> The lyrics returned may not be for the current playing song in some situations due to the lyrics not existing on GENIUS or the fact that the current playing songs title has some extra content to it aside from the actual title.
-
 ## Screenshots
+
 Below is a screenshot of me logged in and a song playing. The lyrics have been retrieved and displayed.
 
-![Spotify Lyrics Viewer showing lyrics](/posts/spotify-lyrics-viewer/sample.png)
+![Spotify Lyrics Viewer showing lyrics](/posts/spotify-lyrics-viewer/sample.jpg)
 
 The application also supports dark mode:
 
-![Spotify Lyrics Viewer showing lyrics](/posts/spotify-lyrics-viewer/sample-dark.png)
+![Spotify Lyrics Viewer showing lyrics](/posts/spotify-lyrics-viewer/sample-dark.jpg)
