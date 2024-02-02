@@ -94,7 +94,7 @@ The process of packaging a Python project to an executable is simple in most cas
 If you have any issues with running your script, it may be due to incorrect configuration. This means you will now have to go through a debugging process to find what is occurring.
 
 ## Debugging
-As basic as it sounds, the first step of debugging is to make sure your script works as a .py file before you package it. Instead of running your .py file using IDLE (which automatically imports `sys`), run your script using the terminal like this: `python my_script.py`. Any errors that occur here will definitely show up in the output exe.
+As basic as it sounds, the first step of debugging is to make sure your script works as a .py file before you package it. This is very important. Instead of running your .py file using IDLE (which automatically imports `sys`), run your script using the terminal like this: `python my_script.py`. Any errors that occur here will definitely show up in the output exe. If you are wanting to use the "Window Based" option, run your script using `pythonw.exe` - this executable can be found beside `python.exe`.
 
 To debug the exe, make sure you have set up the fields in auto-py-to-exe like you had previously - all your extra files and other settings. Now go to the "Advanced" section and under the title "How to generate" put "`all`" in the box beside --debug. This will print out messages to the console to help you debug.
 
@@ -115,9 +115,9 @@ This means something has gone wrong as it's giving you a visual warning about it
 Typically when developing in IDLE, `sys` is automatically imported. This means calls like `exit()` will work in IDLE without having to import `sys` explicitly. However, when packaging, `sys` is not automatically imported so you will have to import it yourself. This is a simple fix and can be done by adding `import sys` to the top of your script.
 
 ### PermissionError: [Errno 13] Permission denied: ...
-This occurs because you are trying to modify files in a directory you do not have access to. A way to fix this is to run the script with admin privileges by opening cmd as admin and then running `auto-py-to-exe` one you have cd'ed to the directory you want the output to be in.
+This occurs because you are trying to modify files in a directory you do not have access to. A way to fix this is to run the script with admin privileges by opening cmd as admin and then running `auto-py-to-exe` once you have cd'ed to the directory you want the output to be in.
 
-One reason this could occur is that you have opened cmd and am in System32. Make sure you do not accidentally modify files in this directory so make sure you are in a directory where you want to write files to when running `auto-py-to-exe`.
+One reason this could occur is that you have opened cmd and am in System32. Make sure you do not accidentally modify files in System32. Make sure you are in a directory where you want to write files to when running `auto-py-to-exe`.
 
 ### FileNotFoundError: [Errno 2] No such file or directory
 This error is saying that a file you referenced does not exist. This can mean one of two things:
@@ -168,6 +168,23 @@ To fix this, you can either:
 
 - Package your script as a console based application 
 - Replace your print statements with something that logs to a file (or somewhere else that isn't the console)
+
+### When running my script with pythonw.exe, it doesn't work
+
+If you are wanting to use the "Window Based" option - your script must work with pythonw.exe first (`pythonw.exe` and `python.exe` and different executables to run Python code). If you are having issues running your script with pythonw.exe, you can try these things.
+
+**1. Run the script with python.exe**
+
+This will identify any errors with the script that are not stdout related
+
+**2. Setup stdout to write to a file**
+
+Since a big part of using `pythonw.exe` is to remove the console, there is no stdout set up; so `print()` will not work by default. If you script or a library your script imports tries to use `print()`, it will throw an exception. You can setup stdout to point to a file by adding the following to the top of your script:
+
+```python
+import sys
+sys.stdout = open("mylog.txt", "w")
+```
 
 ## FAQ
 
