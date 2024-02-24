@@ -25,7 +25,11 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://www.tablesgenerator.com',  # SSL error
     r'^https://www.pdfescape.com',  # SSL error
     r'^https://www.lfd.uci.edu',  # SSL error
-    r'^https://www.reddit.com'  # 403
+    r'^https://www.reddit.com',  # 403
+    r'^https://stackoverflow.com',  # 403
+    r'^https://cs.stackexchange.com',  # 403
+    r'^https://raspberrypi.stackexchange.com',  # 403
+    r'^https://crypto.stackexchange.com'  # 403
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
