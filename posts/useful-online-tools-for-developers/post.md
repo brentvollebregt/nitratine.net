@@ -61,7 +61,7 @@ description: "Downloading and setting up a tool to perform a basic action can be
 ## Syntax Highlighters (for snippets)
 When moving code from an IDE to paper for something like an assessment, black text on a white background can be harder to read compared to highlighted words. Highlighting terms and calls can make understanding a snippet a lot easier.
 
-- [Basic highlighter](https://highlight.hohli.com/index.php)
+- [Basic highlighter](https://highlight.hohli.com)
     - No style selection
 - [More advanced highlighter](https://pinetools.com/syntax-highlighter)
     - Style selection
