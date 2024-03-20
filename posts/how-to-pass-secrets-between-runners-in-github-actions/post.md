@@ -93,7 +93,7 @@ And here is my value missing in the later job:
 
 While looking for a solution, I found [this GitHub issue](https://github.com/actions/runner/issues/1498) which gave me the idea of encrypted secrets being passed between runners/jobs.
 
-Pretty much the idea is to symmetrically encrypt the secret/masked value using PGP in the source runner and decrypt it in the designation runner. This means you can still mask the value from the logs but the actual value being passed around is not the masked value.
+Pretty much the idea is to symmetrically encrypt the secret/masked value using PGP in the source runner and decrypt it in the destination runner. This means you can still mask the value from the logs but the actual value being passed around is not the masked value.
 
 Before you can symmetrically encrypt/decrypt a value with PGP, you need a passphrase. We can't generate this on the go as passing it to the next job would mean it either shows in the logs, or can't be sent over as it is masked! An easy way around this is to create a secret in GitHub Actions for the repo that is to be used only for this task - something like "`PGP_SECRET_SIGNING_PASSPHRASE`".
 
