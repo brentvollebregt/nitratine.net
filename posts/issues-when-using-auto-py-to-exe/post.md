@@ -268,6 +268,10 @@ From here, if you whitelist your custom build directory and the output directory
 
 > If you believe auto-py-to-exe or PyInstaller is a virus, you are more than welcome to read the source code and compile it yourself. The source code for both projects are on GitHub.
 
+Some things that could help you reduce a false-positive:
+
+- There have been reports of builds/outputs not getting flagged when using PyInstaller 5.x.x over 6.x.x - [here is why](https://github.com/pyinstaller/pyinstaller/issues/7967#issuecomment-1741759482).
+
 ### Lots of Warnings Appear in the Output
 These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after all, they are only warnings. These warnings typically match the format `WARNING: lib not found: api-ms-win-crt-<specific dll> dependency of <file>`.
 
