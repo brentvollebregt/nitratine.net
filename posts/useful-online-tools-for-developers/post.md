@@ -54,7 +54,7 @@ description: "Downloading and setting up a tool to perform a basic action can be
 
 ## References
 
-- [HTML character entities](https://www.htmlquick.com/reference/character-entity-reference.html)
+- [HTML character entities](https://html.spec.whatwg.org/multipage/named-characters.html)
 - [Vim basics](https://github.com/yuanqing/vim-basics/blob/master/README.md)
     - I use this to remember how to get out
 
