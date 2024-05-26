@@ -3,7 +3,7 @@ Flask-FlatPages==0.7.3
 Frozen-Flask==0.18
 Pygments==2.15.0
 Markdown==3.3.6
-requests==2.31.0
+requests==2.32.0
 python-dotenv==0.19.2
 Flask-Minify==0.35
 feedgen==0.9.0
