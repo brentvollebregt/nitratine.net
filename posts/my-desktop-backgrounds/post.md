@@ -34,7 +34,8 @@ This is currently my favourite as it is so clean and has a very happy feel to it
 
 You will find I like material design and I used to try and design a lot of my projects to the specifications, this is obviously quite time-consuming so I settle for backgrounds, colours and icons.
 
-This was also found by Google Image search but [originated here](http://wallpaperswide.com/material_design-wallpapers.html)
+The site that I originally got this from is no longer available.
+<!-- This was also found by Google Image search but [originated here](http://wallpaperswide.com/material_design-wallpapers.html) -->
 
 ### Fluorescent Face
 ![Fluorescent Face](/posts/my-desktop-backgrounds/fluorescent-face.jpg)

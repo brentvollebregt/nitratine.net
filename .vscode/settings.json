@@ -10,6 +10,9 @@
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": true,
     "cSpell.words": [
+        "colour",
+        "colours",
+        "favourite",
         "HSTS",
         "recognise"
     ]
