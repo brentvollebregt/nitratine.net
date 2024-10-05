@@ -31,7 +31,8 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://raspberrypi.stackexchange.com',  # 403
     r'^https://crypto.stackexchange.com',  # 403
     r'^https://www.opendronemap.org',  # 403
-    r'^https://simpleicons.org'  # 403
+    r'^https://simpleicons.org',  # 403
+    r'^https://sourceforge.net'  # 403
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
