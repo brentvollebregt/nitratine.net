@@ -6,8 +6,10 @@ feature: feature.png
 description: "This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller. The whole idea seems automatic as it cleans up after itself."
 github: brentvollebregt/auto-py-to-exe
 
+[TOC]
+
 ## What is this?
-This application displays a simple interface that allows you to convert py to exe easily. By just selecting the file, if you want it to convert to onefile and if you want a console, you will only need to press convert and wait for the script to do the rest.
+This application displays a simple interface that allows you to convert .py to .exe easily. By just selecting the file, if you want it to convert to onefile and if you want a console, you will only need to press convert and wait for the script to do the rest.
 
 <div markdown="1" style="text-align: center">
 
@@ -33,73 +35,74 @@ The script is built using [Eel](https://github.com/ChrisKnott/Eel) and uses [PyI
 ## Getting Started
 
 ### Prerequisites
- - Python : 3.6-3.10
 
-*To have the interface displayed in the images, you will need chrome. If chrome is not installed or --no-chrome is supplied, the default browser will be used.*
+- Python: 3.6-3.12
 
-### Installation and Usage
-#### Installing Via [PyPI](https://pypi.org/project/auto-py-to-exe/)
+_To have the interface displayed in the images, you will need Chrome. If Chrome is not installed or `--no-chrome` is passed, the default browser will be used._
+
+
+### Installing via [PyPI](https://pypi.org/project/auto-py-to-exe/)
+
 You can install this project using PyPI:
+
 ```
 $ pip install auto-py-to-exe
 ```
+
 Then to run it, execute the following in the terminal:
+
 ```
 $ auto-py-to-exe
 ```
 
-### Installing Via [GitHub](https://github.com/brentvollebregt/auto-py-to-exe)
+> If you have more than one version of Python installed, you can use `python -m auto_py_to_exe` instead of `auto-py-to-exe`.
+
+### Installing via [GitHub](https://github.com/brentvollebregt/auto-py-to-exe)
+
 ```
 $ git clone https://github.com/brentvollebregt/auto-py-to-exe.git
 $ cd auto-py-to-exe
 $ python setup.py install
 ```
+
 Then to run it, execute the following in the terminal:
+
 ```
 $ auto-py-to-exe
 ```
 
-#### Running Locally Via [Github](https://github.com/brentvollebregt/auto-py-to-exe) (no install)
-You can run this project locally by following these steps:
-1. Clone/download the [repo](https://github.com/brentvollebregt/auto-py-to-exe)
-2. Open cmd/terminal and cd into the project
-3. Execute ```python -m pip install -r requirements.txt```
-
-Now to run the application, execute ```python -m auto_py_to_exe```. A Chrome window in app mode will open with the project running inside.
-
-> Make sure you are in the directory below auto_py_to_exe (you will be after step 3) when calling `python -m auto_py_to_exe` or you will need to reference the folder auto_py_to_exe absolutely/relatively to where you currently are.
-
 ## Using the Application
+
 1. Select your script location (paste in or use a file explorer)
-    - Outline will become blue when file exists
+   - The outline will become blue if the file exists
 2. Select other options and add things like an icon or other files
 3. Click the big blue button at the bottom to convert
 4. Find your converted files in /output when completed
 
-*Easy.*
+_Easy._
 
-### Arguments
-Usage: `auto-py-to-exe [-nc] [-c [CONFIG]] [filename]`
+## Examples
 
-| Argument                       | Type       | Description                                                                                         |
-|--------------------------------|------------|-----------------------------------------------------------------------------------------------------|
-| filename                       | positional | Pre-fill the "Script Location" field in the UI.                                                     |
-| -nc, --no-chrome               | optional   | Open the UI using the default browser (which may be Chrome). Will not try to find Chrome            |
-| -c [CONFIG], --config [CONFIG] | optional   | Provide a configuration file (json) to pre-fill the UI. These can be generated in the settings tab. |
-| -o [PATH], --output-dir [PATH] | optional   | Set the default output directory. This can still be changed in the ui.                              |
+The [examples/](https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/) directory offers some examples of how to write your scripts and package them with auto-py-to-exe.
 
-> If you are running this package locally, you will need to call ```python -m auto_py_to_exe``` instead of ```auto-py-to-exe```
-
-### JSON Configuration
-Instead of inserting the same data into the UI over and over again, you can export the current state by going to the "Configuration" section within the settings tab and exporting the config to a JSON file. This can then be imported into the UI again to re-populate all fields.
-
-This JSON config export action does not save the output directory automatically as moving hosts could mean different directory structures. If you want to have the output directory in the JSON config, add the directory under `nonPyinstallerOptions.outputDirectory` in the JSON file (will need to create a new key).
+- [Basic (console application)](https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/1-basic/readme.md)
+- [No Console (as typically desired for GUI-based applications)](https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/2-no-console/readme.md)
+- [Images and other non-.py files (static files to be included)](https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/3-images-and-other-non-py-files/readme.md)
+- [Persistent data (like databases)](https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/4-persistent-data/readme.md)
 
 ## Video
+
 If you need something visual to help you get started, [I made a video for the original release of this project](https://youtu.be/OZSZHmWSOeM); some things may be different but the same concepts still apply.
 
+## Contributing
+
+Check out [CONTRIBUTING.md](https://github.com/brentvollebregt/auto-py-to-exe/blob/master/CONTRIBUTING.md) to see guidelines on how to contribute. This outlines what to do if you have a new feature, a change, translation update or have found an issue with auto-py-to-exe.
+
 ## Issues Using the Tool
-If you're having issues with the packaged executable or using this tool in general, I recommend you read [my blog post on common issues when using auto-py-to-exe](https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/). This post covers things you should know about packaging Python scripts and fixes for things that commonly go wrong.
+
+If you're having issues with the packaged executable or using this tool in general, I recommend you read [my blog post on common issues when using auto-py-to-exe](https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/?utm_source=auto_py_to_exe&utm_medium=readme_link&utm_campaign=auto_py_to_exe_help). This post covers things you should know about packaging Python scripts and fixes for things that commonly go wrong.
+
+If you believe you've found an issue with this tool, please follow the ["Reporting an Issue" section in CONTRIBUTING.md](https://github.com/brentvollebregt/auto-py-to-exe/blob/master/CONTRIBUTING.md#reporting-an-issue).
 
 ## Screenshots
 

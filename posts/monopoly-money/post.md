@@ -51,7 +51,8 @@ When everyone is in the game, the banker can then close the game to stop others 
   - Give money to players from the bank (and take money)
   - Give free parking to players
   - Update player names
-  - Delete players
+  - Remove players
+  - Toggle whether free parking can be used or not
   - Stop new people from joining the game
   - End the game completely
 - History is recorded of each game event that can be viewed by all players
