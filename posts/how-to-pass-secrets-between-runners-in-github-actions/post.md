@@ -182,3 +182,7 @@ jobs:
 
       # Uses ${{ steps.get_deploy_key.outputs.deployment_key }} later...
 ```
+
+### GitHub Action Helper
+
+A couple years on, I had noticed that [github.com/cloudposse/github-action-secret-outputs](https://github.com/cloudposse/github-action-secret-outputs) mentioned this post. This is a GitHub Action step that abstracts the encryption and decryption method I have described above.
