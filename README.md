@@ -18,8 +18,7 @@ This repo is the source for [nitratine.net](https://nitratine.net/). The files i
 ┃ ┣ 📁 tools                 Tools that can be called from the modules CLI
 ┃ ┗ 📜 __main__.py           Module entrypoint to build and develop site
 ┣ 📁 posts                   Posts (markdown based)
-┣ 📁 tests                   Tests associated with the module that runs the site locally
-┗ 📜 .env.example            An example of the environment variables required
+┗ 📁 tests                   Tests associated with the module that runs the site locally
 ```
 
 > This diagram contains a subset of all folders and files
@@ -29,9 +28,6 @@ This repo is the source for [nitratine.net](https://nitratine.net/). The files i
 1. Create a virtual env: `python -m venv .venv`
 2. Activate the Python venv: `.venv/Scripts/activate.bat`
 3. Install Python dependencies: `python -m pip install -r requirements.txt`
-4. Create a .env file: `cp .env.example .env`
-5. Populate .env:
-    - `YOUTUBE_DATA_API_KEY`: https://developers.google.com/youtube/v3/getting-started#before-you-start (get a simple token)
 
 ## Usage
 

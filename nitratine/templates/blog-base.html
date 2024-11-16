@@ -64,10 +64,10 @@
         </div>
 
         <div class="card p-3 mb-3 bg-light">
-            <span class="h4 text-center text-lg-left">Recent Videos</span>
+            <span class="h4 text-center text-lg-left">Latest Videos</span>
             <div id="recent-yt-videos" class="yt_video_container">
-                {% for video in recent_videos %}
-                    <img src="{{ video.thumb_src }}" alt="Recent video thumbnail" onclick="window.open('{{ video.href }}', '_blank')">
+                {% for video in latest_videos %}
+                    <img src="{{ video.thumb_src }}" alt="{{ video.title }} thumbnail" title="{{ video.title }}" onclick="window.open('{{ video.href }}', '_blank')">
                 {% endfor %}
             </div>
         </div>

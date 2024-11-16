@@ -14,7 +14,7 @@ import readtime
 
 from .config import site_config, redirects, featured_posts, POST_SOURCE, POST_FILENAME, POST_EXTENSION
 from .external.github import get_github_user_repos
-from .external.youtube import get_most_recent_youtube_videos
+from .external.youtube import get_latest_youtube_videos
 from .flask_flatpages_extension import FlatPagesExtended
 from .markdown_extensions.youtube_video import YouTubeVideoExtension
 from .markdown_extensions.header_link import HeaderLinkExtension
@@ -273,9 +273,9 @@ def inject_site():
 
 
 @app.context_processor
-def inject_recent_videos():
-    """ Provide recent_videos to Jinja templates """
-    return dict(recent_videos=get_most_recent_youtube_videos())
+def inject_latest_videos():
+    """ Provide latest_videos to Jinja templates """
+    return dict(latest_videos=get_latest_youtube_videos())
 
 
 @app.context_processor

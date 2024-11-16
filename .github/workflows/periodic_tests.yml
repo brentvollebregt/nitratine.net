@@ -27,5 +27,3 @@ jobs:
 
       - name: Run tests
         run: python -m unittest discover -s tests
-        env:
-          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}

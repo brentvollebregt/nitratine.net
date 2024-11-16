@@ -23,8 +23,6 @@ jobs:
 
       - name: Build
         run: python -m nitratine build
-        env:
-          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
@@ -39,5 +37,3 @@ jobs:
           echo "Deployed master to prod" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           python -m nitratine stats >> $GITHUB_STEP_SUMMARY
-        env:
-          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
