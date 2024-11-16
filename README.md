@@ -16,10 +16,10 @@ This repo is the source for [nitratine.net](https://nitratine.net/). The files i
 ┃ ┣ 📁 static                CSS, JavaScript and image files
 ┃ ┣ 📁 templates             Jinja templates for pages
 ┃ ┣ 📁 tools                 Tools that can be called from the modules CLI
-┃ ┣ 📜 __main__.py           Module entrypoint to build and develop site
+┃ ┗ 📜 __main__.py           Module entrypoint to build and develop site
 ┣ 📁 posts                   Posts (markdown based)
 ┣ 📁 tests                   Tests associated with the module that runs the site locally
-┣ 📜 .env.example            An example of the environment variables required
+┗ 📜 .env.example            An example of the environment variables required
 ```
 
 > This diagram contains a subset of all folders and files
