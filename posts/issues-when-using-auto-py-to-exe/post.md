@@ -284,12 +284,14 @@ Sometimes pyinstaller tries to be smart and will add packages it sees in your en
 
 To get around this, the easiest way would be to:
 
-1. Create a new/clean virtual environment
+1. Create a new/clean virtual environment (like using Python's built-in venv)
 2. Install auto-py-to-exe into it
 3. Install the required modules for your project
 4. Use the auto-py-to-exe in this virtual environment to package your script
 
 Doing this will mean pyinstaller doesn't see the packages you don't need bundled which can lead to smaller packages.
+
+The smallest default executable output I have seen is 11.1MB - this was for a simple hello world (Windows 64bit). Getting under this is unrealistic as the whole Python runner and standard library needs to be bundled in the exe.
 
 ### "VCRUNTIME140.dll" is either not designed to run on Windows or it contains an error
 Try selecting the `--noupx` button in the advanced tab.
