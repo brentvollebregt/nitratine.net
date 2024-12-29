@@ -51,7 +51,7 @@ This project was shown by a friend in my COMP241 class which then lead to the id
 ![Lights example 1](/posts/interesting-sites/lights1.jpg)
 ![Lights example 2](/posts/interesting-sites/lights2.jpg)
 
-> This site has now been taken down. Here is [the old home page](https://helloenjoy.com/lights) (still up).
+> This site has now been taken down. Here is [the old home page](https://web.archive.org/web/20240826034431/https://helloenjoy.com/lights).
 
 ## [NONI NONI](https://noni.cmiscm.com/)
 This site gets you to draw something and then will find the closest match to the shapes it has. It will then assemble spherical particles to that shape. You can keep drawing and it will find shapes closest to your drawing. Once again this is a great example of what JavaScript can do in a browser. The colours and animations are excellent.
