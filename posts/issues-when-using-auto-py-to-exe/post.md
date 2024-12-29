@@ -420,3 +420,17 @@ def resource_path(relative_path):
 When referencing files using *relative references*, instead of using `open('folder/my-file.jpg')`, you will want to use `open(resource_path('folder/my-file.jpg'))`. This appends the relative path you provided to the current / extracted location to make an absolute file reference which is safe to use.
 
 The reason you need to use this extra bit of code is because a one-file exe will unpack all of it's contents to a new folder in the operating systems temporary directory. This means the current working directory initially set in the application will not be where the files have been unpacked to unlike one-directory. This is why using relative references will work in one-directory but not in one-file - you need to adjust for the fact that the root of the project is now somewhere different.
+
+## Tool Specific
+
+### Why Is There No Exe Available to Run Auto-Py-To-Exe?
+
+As mentioned in this [GitHub issue](https://github.com/brentvollebregt/auto-py-to-exe/issues/267), 
+
+> Since the exe would be using it's own internal version of Python, you would have to add the `site-packages` folder manually to tell PyInstaller where to look for modules. Even if this was done, you would need to be sure the two versions of Python were the same (the internal one and the one installed globally on the host).
+
+Providing an .exe would:
+
+- Lock you to one version of Python
+- Make it harder to add your dependencies
+- Be less transparent (a lot of people accuse this tool of creating viruses when outputs get flagged)
