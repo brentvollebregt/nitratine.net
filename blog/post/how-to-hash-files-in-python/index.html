@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-hash-files-in-python/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How to Hash Files in Python - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="Hashing files allows us to generate a string/byte sequence that can help identify a file. This can then be used by comparing the hashes of two or more files to see if these files are the same as well as other applications." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How to Hash Files in Python" property="og:title"/>
+<meta content="Hashing files allows us to generate a string/byte sequence that can help identify a file. This can then be used by comparing the hashes of two or more files to see if these files are the same as well as other applications." property="og:description"/>
+<meta content="/posts/how-to-hash-files-in-python/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-hash-files-in-python/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How to Hash Files in Python</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2019">7 May 2019</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#hashing">hashing</a>
+<a class="badge badge-warning" href="/blog/tags/#cyber-security">cyber-security</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">4 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-hash-files-in-python%2F"/>
+</div>
+<p class="lead">Hashing files allows us to generate a string/byte sequence that can help identify a file. This can then be used by comparing the hashes of two or more files to see if these files are the same as well as other applications.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-does-it-mean-to-hash-a-file">What Does it Mean to Hash a File?</a><ul>
+<li><a href="#what-can-i-do-with-a-file-hash">What Can I Do With A File Hash?</a><ul>
+<li><a href="#what-can-i-not-do-with-a-file-hash">What Can I Not Do With A File Hash?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#supported-hashing-algorithms-in-python">Supported Hashing Algorithms in Python</a><ul>
+<li><a href="#hashlibalgorithms_guaranteed-vs-hashlibalgorithms_available">hashlib.algorithms_guaranteed vs hashlib.algorithms_available</a></li>
+</ul>
+</li>
+<li><a href="#hashing-a-file">Hashing a File</a><ul>
+<li><a href="#why-do-i-need-to-worry-about-the-buffer-size">Why do I Need to Worry About the Buffer Size?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<blockquote>
+<p>Note: This post assumes you already know what a hash is, if you don't, read up on hashes before reading this post. Sites like <a href="https://cs.stackexchange.com/a/55472">this</a> or <a href="https://stackoverflow.com/a/506035">this</a> can help you out. </p>
+</blockquote>
+<h2 id="what-does-it-mean-to-hash-a-file">
+<span style="position:relative"><a class="anchor" href="#what-does-it-mean-to-hash-a-file"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What Does it Mean to Hash a File?</span></h2>
+<p>Hashing a file is when a file of arbitrary size is read and used in a function to compute a fixed-length value from it. This fixed-length value can help us get a sort of 'id' of a file which can then help us do particular tasks (examples follow).</p>
+<p>Strong hashes with large amounts of bytes can help distinguish between many different files, but we do always need to remember the <a href="https://en.wikipedia.org/wiki/Birthday_problem">birthday problem</a>. For example, the birthday problem reminds us that if we have a 160bit hash, there can only be 2^160 different hashes, meaning that as soon as we generate 2^160 + 1 hashes of different files, it is guaranteed that we find a duplicate hash. This duplicate hash means we get the same hash for different files which can cause issues in some applications.</p>
+<h3 id="what-can-i-do-with-a-file-hash">
+<span style="position:relative"><a class="anchor" href="#what-can-i-do-with-a-file-hash"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What Can I Do With A File Hash?</span></h3>
+<p>File hashes are quite useful as they can represent (not substitute) a file, meaning that you do not have to store the whole file when trying to identify a file. When hashing files (or anything in general), you will get the same result hash result every time you hash a particular file. This makes hashing files useful for things like:</p>
+<ul>
+<li><strong>Comparing files</strong>: Instead of comparing whole files, take hashes and compare hashes together. This is particularly efficient when comparing more than one file to another file.</li>
+<li><strong>Easily identifying files without storing the whole file</strong>: If you are looking for a file, simply get the hash of your current file and hash other files as you look at them while looking for a match. This technique is used by some anti-virus software.</li>
+<li><strong>Stopping filename clashes</strong>: Rename files where many files are located in one directory to their hash. This will mean two different files will not have the same name and will save on space when two files have the same name as they will overwrite (does not work if you need two of the same file).</li>
+<li><strong>Object keys</strong>: Just like in the point "Stopping filename clashes", using hashes as object keys can help identify what objects match to which file.</li>
+<li><strong>Detecting changes in a file</strong>: If you had a file hash before it was modified, you can re-hash the file and compare it against the original hash to see if it has been modified.</li>
+</ul>
+<h4 id="what-can-i-not-do-with-a-file-hash">
+<span style="position:relative"><a class="anchor" href="#what-can-i-not-do-with-a-file-hash"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What Can I Not Do With A File Hash?</span></h4>
+<p>Even though you can compute a hash using a file, this does not mean you cannot get the original file back using this hash. Hashing is a one-way function (lossy) and is not an encryption scheme.</p>
+<h2 id="supported-hashing-algorithms-in-python">
+<span style="position:relative"><a class="anchor" href="#supported-hashing-algorithms-in-python"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Supported Hashing Algorithms in Python</span></h2>
+<p>The <a href="https://docs.python.org/3/library/hashlib.html"><code>hashlib</code> Python module</a> <em>"implements a common interface to many different secure hash and message digest algorithms"</em>. To look at the hashing algorithms Python offers, execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">algorithms_guaranteed</span><span class="p">)</span>
+</code></pre></div>
+<p>This will print a set of strings that are hash algorithms guaranteed to be supported by this module on all platforms. To use these, select a hashing algorithm from the set and then use it as shown below (this example uses sha256):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span> <span class="c1"># Construct a hash object using our selected hashing algorithm</span>
+<span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">'My content'</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span> <span class="c1"># Update the hash using a bytes object</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span> <span class="c1"># Print the hash value as a hex string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">digest</span><span class="p">())</span> <span class="c1"># Print the hash value as a bytes object</span>
+</code></pre></div>
+<h3 id="hashlibalgorithms_guaranteed-vs-hashlibalgorithms_available">
+<span style="position:relative"><a class="anchor" href="#hashlibalgorithms_guaranteed-vs-hashlibalgorithms_available"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>hashlib.algorithms_guaranteed vs hashlib.algorithms_available</span></h3>
+<p>To get all the algorithms available in your interpreter, you can execute <code>hashlib.algorithms_available</code>. Unlike the output from <code>hashlib.algorithms_guaranteed</code>, these hashes aren't guaranteed to exist in interpreters on other machines. You can <a href="https://docs.python.org/3/library/hashlib.html#hashlib.algorithms_guaranteed">visit the docs</a> to get more information on this.</p>
+<h2 id="hashing-a-file">
+<span style="position:relative"><a class="anchor" href="#hashing-a-file"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Hashing a File</span></h2>
+<p>To hash a file, read it in bit-by-bit and update the current hashing functions instance. When all bytes have been given to the hashing function in order, we can then get the hex digest.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="s2">".\myfile.txt"</span> <span class="c1"># Location of the file (can be set a different way)</span>
+<span class="n">BLOCK_SIZE</span> <span class="o">=</span> <span class="mi">65536</span> <span class="c1"># The size of each read from the file</span>
+
+<span class="n">file_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span> <span class="c1"># Create the hash object, can use something other than `.sha256()` if you wish</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="c1"># Open the file to read it's bytes</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BLOCK_SIZE</span><span class="p">)</span> <span class="c1"># Read from the file. Take in the amount declared above</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">fb</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># While there is still data being read from the file</span>
+        <span class="n">file_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">fb</span><span class="p">)</span> <span class="c1"># Update the hash</span>
+        <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BLOCK_SIZE</span><span class="p">)</span> <span class="c1"># Read the next block from the file</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">file_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span> <span class="c1"># Get the hexadecimal digest of the hash</span>
+</code></pre></div>
+<p>This snippet will print the hash value of the file specified in the <code>file</code> generated using the SHA256 algorithm. The call <code>.hexdigest()</code> returns a string object containing only hexadecimal digits; you can use <code>.digest()</code> as shown before to get the bytes representation of the hash.</p>
+<h3 id="why-do-i-need-to-worry-about-the-buffer-size">
+<span style="position:relative"><a class="anchor" href="#why-do-i-need-to-worry-about-the-buffer-size"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Why do I Need to Worry About the Buffer Size?</span></h3>
+<p>You would have noticed in the script above, the variable <code>BLOCK_SIZE</code> is set to <code>65536</code>. This is the number of bytes that is read into memory in a single read operation. This is used so larger files are not completely loaded into memory before computing the hash. </p>
+<p>For example, if we did not do this and were hashing a video file that was 2Gb large, the whole 2Gb file would be loaded into memory (or at least tried to) and then hashed. This approach reads the file block-by-block so we don't load the whole file into memory.</p>
+<p>The buffer I have used is 64Kb but you can use any value you wish. Making this larger reads files faster, but in turn, loads more of the file into memory at once.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/google-publisher-toolbar-please-copy-this-code/" title="Google Publisher Toolbar: Please copy this code">
+<span>←</span>
+<span class="btn-content">Google Publisher Toolbar: Please copy this code</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/javascript-date-methods-return-values/" title="JavaScript Date Methods Return Values">
+<span class="btn-content">JavaScript Date Methods Return Values</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-hash-files-in-python/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-hash-files-in-python/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

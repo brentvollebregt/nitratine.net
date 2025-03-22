@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/python-encryption-and-decryption-with-pycryptodome/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Python Encryption and Decryption with PyCryptodome - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="PyCryptodome is a fork of PyCrypto that brings enhancements on top of the now unmaintained PyCrypto library. This tutorial demonstrates using the library by encrypting strings and files using AES." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Python Encryption and Decryption with PyCryptodome" property="og:title"/>
+<meta content="PyCryptodome is a fork of PyCrypto that brings enhancements on top of the now unmaintained PyCrypto library. This tutorial demonstrates using the library by encrypting strings and files using AES." property="og:description"/>
+<meta content="/posts/python-encryption-and-decryption-with-pycryptodome/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/python-encryption-and-decryption-with-pycryptodome/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Python Encryption and Decryption with PyCryptodome</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2019">14 May 2019</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#encryption">encryption</a>
+<a class="badge badge-warning" href="/blog/tags/#cyber-security">cyber-security</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">13 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fpython-encryption-and-decryption-with-pycryptodome%2F"/>
+</div>
+<p class="lead">PyCryptodome is a fork of PyCrypto that brings enhancements on top of the now unmaintained PyCrypto library. This tutorial demonstrates using the library by encrypting strings and files using AES.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-pycryptodome">What is PyCryptodome?</a><ul>
+<li><a href="#what-happened-to-pycrypto">What Happened To PyCrypto?</a></li>
+</ul>
+</li>
+<li><a href="#installing-pycryptodome">Installing PyCryptodome</a></li>
+<li><a href="#what-is-aes">What is AES?</a></li>
+<li><a href="#generating-a-key">Generating A Key</a><ul>
+<li><a href="#storing-a-key">Storing a Key</a></li>
+<li><a href="#generating-a-key-from-a-password">Generating A Key From A "Password"</a></li>
+</ul>
+</li>
+<li><a href="#encrypting">Encrypting</a><ul>
+<li><a href="#cbc-example">CBC Example</a></li>
+<li><a href="#cfb-example">CFB Example</a></li>
+<li><a href="#eax-example">EAX Example</a></li>
+<li><a href="#how-to-use-all-the-outputs-from-these-encryptions">How To Use All The Outputs From These Encryptions?</a></li>
+</ul>
+</li>
+<li><a href="#decrypting">Decrypting</a><ul>
+<li><a href="#cbc-example_1">CBC Example</a></li>
+<li><a href="#cfb-example_1">CFB Example</a></li>
+<li><a href="#eax-example_1">EAX Example</a></li>
+</ul>
+</li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#string-example-proof">String Example Proof</a></li>
+<li><a href="#file-example-proof">File Example Proof</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="what-is-pycryptodome">
+<span style="position:relative"><a class="anchor" href="#what-is-pycryptodome"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is PyCryptodome?</span></h2>
+<p>PyCryptodome is a self-contained Python package of low-level cryptographic primitives that supports Python 2.6 and 2.7, Python 3.4 and newer, and PyPy.</p>
+<p>PyCryptodome is a fork of PyCrypto that has been enhanced to add more implementations and fixes to the original PyCrypto library. Where possible, most of the algorithms in this library are implemented in pure Python; only  pieces that are extremely critical to performance (e.g. block ciphers) are implemented as C extensions.</p>
+<p>The PyCryptodome library offers implementations for things like:</p>
+<ul>
+<li>AES</li>
+<li>Stream ciphers like Salsa20</li>
+<li>Cryptographic hashes like SHA-2</li>
+<li>Message Authentication Codes like HMAC</li>
+<li>RSA asymmetric key generation</li>
+<li><a href="https://www.pycryptodome.org/en/latest/src/features.html">and much more!</a></li>
+</ul>
+<h3 id="what-happened-to-pycrypto">
+<span style="position:relative"><a class="anchor" href="#what-happened-to-pycrypto"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What Happened To <a href="https://www.dlitz.net/software/pycrypto/">PyCrypto</a>?</span></h3>
+<p>Even though unstated on any official site by the owner (which is unfortunate), PyCrypto is currently unmaintained. The last commit that was made to the official <a href="https://github.com/pycrypto/pycrypto">GitHub repository</a> was on <a href="https://github.com/pycrypto/pycrypto/commit/7acba5f3a6ff10f1424c309d0d34d2b713233019">Jun 21, 2014</a>.</p>
+<p>Since PyCrypto has been unmaintained for a few years, there have been a few security vulnerabilities found which are listed on <a href="https://www.cvedetails.com/vulnerability-list/vendor_id-11993/product_id-22441/Dlitz-Pycrypto.html">www.cvedetails.com</a>. This is quite a worry as PyCrypto examples are still prominent in Python security search results. Since there are no warnings in the project or on the repository, the best we can do is to tell people.</p>
+<p>As PyCryptodome is a modified fork of PyCrypto, it can be used in some situations as a drop-in-replacement for PyCrypto; you can read more about that <a href="https://www.pycryptodome.org/en/latest/src/vs_pycrypto.html">in the docs</a>.</p>
+<h2 id="installing-pycryptodome">
+<span style="position:relative"><a class="anchor" href="#installing-pycryptodome"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing PyCryptodome</span></h2>
+<p>The easiest way to install this library is to use pip. Open up the terminal/cmd and execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">python -m pip install pycryptodome</span>
+</code></pre></div>
+<p>To make sure it installed correctly, open IDLE and execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pycryptodome</span>
+</code></pre></div>
+<p>If no errors appeared it has been installed correctly.</p>
+<h2 id="what-is-aes">
+<span style="position:relative"><a class="anchor" href="#what-is-aes"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is AES?</span></h2>
+<p>In this tutorial, I'll be using an implementation of <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">Advanced Encryption Standard</a> (AES) to encrypt strings and files. If you don't know what AES is, I highly recommend you understand what it is and how it works before you continue with the examples. Not understanding the different modes of AES and how it is designed could lead to insecure encryptions.</p>
+<p>AES has a block size of 128 bits and this implementation of AES supports 3 sizes of keys, 16, 24 or 32 bytes long for <em>AES-128</em>, <em>AES-192</em> or <em>AES-256</em> respectively. Many modes are <a href="https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html">supported by this implementation of AES</a>, including:</p>
+<ul>
+<li>CBC: Cipher-Block Chaining</li>
+<li>CFB: Cipher FeedBack</li>
+<li>OFB: Output FeedBack</li>
+<li>CTR: Counter</li>
+<li>EAX: EAX</li>
+</ul>
+<blockquote>
+<p>I have not included Electronic Code Book (ECB) due to the fact that <a href="https://crypto.stackexchange.com/a/20946">it is not semantically secure</a>. I do not recommend using this mode.</p>
+</blockquote>
+<h2 id="generating-a-key">
+<span style="position:relative"><a class="anchor" href="#generating-a-key"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Generating A Key</span></h2>
+<p>Keys that are used in AES must be 128, 192, or 256 bits in size (for <em>AES-128</em>, <em>AES-192</em> or <em>AES-256</em> respectively). PyCryptodome supplies a function at <code>Crypto.Random.get_random_bytes</code> that returns a random byte string of a length we decide. To use this, import the function and pass a length to the function:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Random</span> <span class="kn">import</span> <span class="n">get_random_bytes</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="c1"># 32 bytes * 8 = 256 bits (1 byte = 8 bits)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+<p>When running this snippet, a new key that is of type bytes will be generated on each run. When using this method for creating a key, it will need to be stored somewhere to be used again.</p>
+<blockquote>
+<p>Remember, the key we will use to decrypt will have to be the same key we encrypted with. So don't lose the key otherwise you lose the file contents!</p>
+</blockquote>
+<h3 id="storing-a-key">
+<span style="position:relative"><a class="anchor" href="#storing-a-key"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Storing a Key</span></h3>
+<p>Key generation may seem useless as you need to store it, but that is definitely not the case. Since this function creates truly random data, we could simply generate a key and then write it to a file on a USB (or some other secure place). When we encrypt/decrypt files, we then read this file from the USB and get the key out. Here is an example of this:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Random</span> <span class="kn">import</span> <span class="n">get_random_bytes</span>
+<span class="n">key_location</span> <span class="o">=</span> <span class="s2">"F:</span><span class="se">\\</span><span class="s2">my_key.bin"</span> <span class="c1"># A safe place to store a key. Can be on a USB or even locally on the machine (not recommended unless it has been further encrypted)</span>
+
+<span class="c1"># Generate the key</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+
+<span class="c1"># Save the key to a file</span>
+<span class="n">file_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">key_location</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="c1"># wb = write bytes</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Later on ... (assume we no longer have the key)</span>
+<span class="n">file_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">key_location</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="c1"># Read bytes</span>
+<span class="n">key_from_file</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># This key should be the same</span>
+<span class="n">file_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Since this is a demonstration, we can verify that the keys are the same (just for proof - you don't need to do this)</span>
+<span class="k">assert</span> <span class="n">key</span> <span class="o">==</span> <span class="n">key_from_file</span><span class="p">,</span> <span class="s1">'Keys do not match'</span> <span class="c1"># Will throw an AssertionError if they do not match</span>
+</code></pre></div>
+<p>Even though generating keys like this is definitely one of the better options, some people would rather use passwords provided from users. This is quite understandable as it makes it easier for users to use the application</p>
+<h3 id="generating-a-key-from-a-password">
+<span style="position:relative"><a class="anchor" href="#generating-a-key-from-a-password"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Generating A Key From A "Password"</span></h3>
+<p>The idea here is to generate a byte sequence of appropriate length from a string provided from the user. To do this we can use <code>Crypto.Protocol.KDF.PBKDF2</code> (<a href="https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#Crypto.Protocol.KDF.PBKDF2">API reference</a>). PBKDF2 allows us to generate a key of any length by simply passing a password and salt.</p>
+<blockquote>
+<p>PBKDF2 is used because PBKDF1 can only generate keys up to 160 bits long.</p>
+</blockquote>
+<p>A <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)">salt</a> is <em>random data that is used as an additional input to a one-way function that "hashes" data</em>. How you store this is up to you, in short terms, it is combined with the password provided by the user so that the result cannot be looked up in a <a href="https://en.wikipedia.org/wiki/Rainbow_table">rainbow table</a>. Even though not 100% recommended, I feel it can be more beneficial to simply generate a salt and hard-code it into your application. To generate a salt, we can use the same method that we used to generate a key:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Random</span> <span class="kn">import</span> <span class="n">get_random_bytes</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span> <span class="c1"># Print the salt to be copied to your script</span>
+</code></pre></div>
+<p>Using the output from this snippet, you can now create a variable in your script and assign it to the value that was output. For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ... imports</span>
+<span class="n">salt</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'</span><span class="se">\x8a\xfe\x1f\xa7</span><span class="s1">aY}</span><span class="se">\xa3</span><span class="s1">It=</span><span class="se">\xc3\xcc</span><span class="s1">T</span><span class="se">\xc8\x94\xc1</span><span class="s1">1%w]A</span><span class="se">\xb7\x87</span><span class="s1">G</span><span class="se">\xd8\xba\x9e\xf8\xec</span><span class="s1">&amp;</span><span class="se">\xf0</span><span class="s1">'</span>
+<span class="c1"># ... rest of your code</span>
+</code></pre></div>
+<p>Now that the hard part is over, we can generate keys using user input. Passing the string provided by the user (password) and the salt that you just hard-coded in your script as well as declaring the output length, we can get the key.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Protocol.KDF</span> <span class="kn">import</span> <span class="n">PBKDF2</span>
+
+<span class="n">salt</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'...'</span> <span class="c1"># Salt you generated</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s1">'password123'</span> <span class="c1"># Password provided by the user, can use input() to get this</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">PBKDF2</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="p">,</span> <span class="n">dkLen</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span> <span class="c1"># Your key that you can encrypt with</span>
+</code></pre></div>
+<p>Now in <code>key</code>, you will have the key that you can use in encryption. You do not have to store this key now as you can see that this can be generated every time regarding the user provides the same password.</p>
+<blockquote>
+<p>Even though it may be ok to hard code a salt for your own projects, it is recommended to generate a new salt for each object encrypted. When storing data (as you will see later), you can write the salt to the beginning of the file (assuming your storage method is a file) as it is a fixed length. When decrypting the file, read out the salt first, then generate the key with the password and then continue to read the rest of the data out of the file to decrypt.</p>
+</blockquote>
+<h2 id="encrypting">
+<span style="position:relative"><a class="anchor" href="#encrypting"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Encrypting</span></h2>
+<p>Now that we have the key, we can encrypt files. These methods encrypt bytes objects, so if you have a string, you can call <code>.encode()</code> on it, otherwise for other objects, make sure they are of type bytes. </p>
+<blockquote>
+<p>In these examples, I will show a variable named <code>key</code> which will be where your key should be (as generated from the instructions above).</p>
+</blockquote>
+<p>You can find examples in the documentation for <a href="https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html">legacy ciphers</a> and <a href="https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html">modern ciphers</a>; I will cover a couple of examples from the documentation to help you understand how to encrypt and save the data required for decryption. </p>
+<p>Different modes will require you to store different values for decryption like an iv, nonce or tag. If you want to use a mode that I do not cover here, simply find the example in the docs (from the links above for legacy and modern ciphers) and identify what values need to be stored.</p>
+<h3 id="cbc-example">
+<span style="position:relative"><a class="anchor" href="#cbc-example"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>CBC Example</span></h3>
+<p>You can find this example <a href="https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cbc-mode">in the docs</a>. CBC requires you to pad your data to make sure the final block is filled with some data; not all modes require this (as I show in the next example).</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+
+<span class="n">output_file</span> <span class="o">=</span> <span class="s1">'encrypted.bin'</span> <span class="c1"># Output file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'Your data....'</span> <span class="c1"># Must be a bytes object</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'YOUR KEY'</span> <span class="c1"># The key you generated</span>
+
+<span class="c1"># Create cipher object and encrypt the data</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">)</span> <span class="c1"># Create a AES cipher object with the key using the mode CBC</span>
+<span class="n">ciphered_data</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">))</span> <span class="c1"># Pad the input data and then encrypt</span>
+
+<span class="n">file_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="c1"># Open file to write bytes</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">iv</span><span class="p">)</span> <span class="c1"># Write the iv to the output file (will be required for decryption)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ciphered_data</span><span class="p">)</span> <span class="c1"># Write the varying length ciphertext to the file (this is the encrypted data)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="cfb-example">
+<span style="position:relative"><a class="anchor" href="#cfb-example"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>CFB Example</span></h3>
+<p>You can find this example <a href="https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#cfb-mode">in the docs</a>. CFB is very similar to CBC but does not require the data to be padded; this means the call <code>pad(data, AES.block_size)</code> from the CBC example can be replaced with <code>data</code> for CFB. </p>
+<p>This CFB mode example is practically identical to the OFB mode (just need to change the mode in <code>AES.new</code>) and very close to CTR in the way that a nonce needs to be stored compared to the iv from CFB (the nonce is stored in <code>cipher.nonce</code>).</p>
+<blockquote>
+<p>CFB, OFB and CTR to not require padding because they are stream ciphers, not block ciphers</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+
+<span class="n">output_file</span> <span class="o">=</span> <span class="s1">'encrypted.bin'</span>
+<span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'Your data....'</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'YOUR KEY'</span>
+
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">)</span> <span class="c1"># CFB mode</span>
+<span class="n">ciphered_data</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Only need to encrypt the data, no padding required for this mode</span>
+
+<span class="n">file_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">iv</span><span class="p">)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ciphered_data</span><span class="p">)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="eax-example">
+<span style="position:relative"><a class="anchor" href="#eax-example"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>EAX Example</span></h3>
+<p>You can find this example <a href="https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes">in the docs</a>. Just like all the examples here and in the docs for AES, the steps are all the same, just different data needs to be stored for this mode being a nonce, tag and the ciphered data.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+
+<span class="n">output_file</span> <span class="o">=</span> <span class="s1">'encrypted.bin'</span>
+<span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'Your data....'</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'YOUR KEY'</span>
+
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_EAX</span><span class="p">)</span> <span class="c1"># EAX mode</span>
+<span class="n">ciphered_data</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt_and_digest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Encrypt and digest to get the ciphered data and tag</span>
+
+<span class="n">file_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">nonce</span><span class="p">)</span> <span class="c1"># Write the nonce to the output file (will be required for decryption - fixed size)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span> <span class="c1"># Write the tag out after (will be required for decryption - fixed size)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ciphered_data</span><span class="p">)</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="how-to-use-all-the-outputs-from-these-encryptions">
+<span style="position:relative"><a class="anchor" href="#how-to-use-all-the-outputs-from-these-encryptions"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>How To Use All The Outputs From These Encryptions?</span></h3>
+<p>Many of these modes will output more than one value; this could be in the form of an iv, nonce or something else. To pack all this data in a file, put the data that has  static lengths (always the same) at the top of the file, then ciphered content after this. Now when you read out the file, you can read x amount of bytes using <code>.read(x)</code> to get the known-length values (can be multiple) and then call <code>.read(-1)</code> to get the rest of the data.</p>
+<p>In the examples above, this is how I saved all the data required to a file, but you do not have to save the data this way. When only using the data internally or in something like a database, it can be easier to just keep them separate in their own variable or column.</p>
+<p>Another way to do this would be to convert all the iv, nonce, tag and ciphered text output values to base64. You can now create a Python dictionary object using the names of these variables as keys and base64 values as the values and save this as a JSON file. This makes it very easy to write and read but will make larger files that take longer to read/write. For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64encode</span><span class="p">,</span> <span class="n">b64decode</span>
+
+<span class="c1"># These are placeholders for the values that we need to store to be read out later to decrypt. You may require other values than these like the tag or nonce</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'...'</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'...'</span>
+
+<span class="c1"># Create the Python dictionary with the required data</span>
+<span class="n">output_json</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'ciphertext'</span><span class="p">:</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">),</span>
+    <span class="s1">'iv'</span><span class="p">:</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">iv</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Save this dictionary to a JSON file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'encrypted_file.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">output_json</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+
+
+<span class="c1"># Now to get all the data for decryption:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'encrypted_file.json'</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+    <span class="n">input_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+
+<span class="c1"># Get all the fields from the dictionary read from the JSON file</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="n">input_json</span><span class="p">[</span><span class="s1">'ciphertext'</span><span class="p">]</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="n">input_json</span><span class="p">[</span><span class="s1">'iv'</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="decrypting">
+<span style="position:relative"><a class="anchor" href="#decrypting"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Decrypting</span></h2>
+<p>Now that you have your data, stored it somewhere, you will want to read it and decrypt it. Based on the encryption examples above, these are the examples to decrypt. If you did not store the data in a file, you can populate the required fields using whatever method you used to store them.</p>
+<h3 id="cbc-example_1">
+<span style="position:relative"><a class="anchor" href="#cbc-example_1"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>CBC Example</span></h3>
+<p>When the file for the CBC encryption example was written, the iv was first written and then the ciphered data. Since we know the length of the iv (16 bytes), first read that from the start of the file and the read the rest of the file to get the ciphered data.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">unpad</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s1">'encrypted.bin'</span> <span class="c1"># Input file</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'YOUR KEY'</span> <span class="c1"># The key used for encryption (do not store/read this from the file)</span>
+
+<span class="c1"># Read the data from the file</span>
+<span class="n">file_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="c1"># Open the file to read bytes</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="c1"># Read the iv out - this is 16 bytes long</span>
+<span class="n">ciphered_data</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># Read the rest of the data</span>
+<span class="n">file_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="o">=</span><span class="n">iv</span><span class="p">)</span>  <span class="c1"># Setup cipher</span>
+<span class="n">original_data</span> <span class="o">=</span> <span class="n">unpad</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphered_data</span><span class="p">),</span> <span class="n">AES</span><span class="o">.</span><span class="n">block_size</span><span class="p">)</span> <span class="c1"># Decrypt and then up-pad the result</span>
+</code></pre></div>
+<h3 id="cfb-example_1">
+<span style="position:relative"><a class="anchor" href="#cfb-example_1"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>CFB Example</span></h3>
+<p>In the CFB encryption example the iv and ciphered data was saved to the output file.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s1">'encrypted.bin'</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'YOUR KEY'</span>
+
+<span class="n">file_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ciphered_data</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">file_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv</span><span class="o">=</span><span class="n">iv</span><span class="p">)</span>
+<span class="n">original_data</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphered_data</span><span class="p">)</span> <span class="c1"># No need to un-pad</span>
+</code></pre></div>
+<h3 id="eax-example_1">
+<span style="position:relative"><a class="anchor" href="#eax-example_1"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>EAX Example</span></h3>
+<p>In the EAX encryption example the nonce, tag and ciphered data was saved to the output file. We know the length of the nonce and tag values so we can read these out first and then the data after.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s1">'encrypted.bin'</span> <span class="c1"># Input file (encrypted)</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'YOUR KEY'</span> <span class="c1"># The key you generated (same as what you encrypted with)</span>
+
+<span class="n">file_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
+<span class="n">nonce</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="c1"># Read the nonce out - this is 16 bytes long</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="c1"># Read the tag out - this is 16 bytes long</span>
+<span class="n">ciphered_data</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># Read the rest of the data out</span>
+<span class="n">file_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Decrypt and verify</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_EAX</span><span class="p">,</span> <span class="n">nonce</span><span class="p">)</span>
+<span class="n">original_data</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt_and_verify</span><span class="p">(</span><span class="n">ciphered_data</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="c1"># Decrypt and verify with the tag</span>
+</code></pre></div>
+<h2 id="examples">
+<span style="position:relative"><a class="anchor" href="#examples"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Examples</span></h2>
+<p>In these examples, I will use the CFB mode to show that the input data can be encrypted and then decrypted to give the original input data. </p>
+<p>In each example I will generate a new key that will be used in the session; as described before, you will need to generate a key yourself and save it for encryption and decryption since encryption and decryption most likely won't be done in the same session (you can't rely on <code>get_random_bytes</code> to get your key back).</p>
+<h3 id="string-example-proof">
+<span style="position:relative"><a class="anchor" href="#string-example-proof"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>String Example Proof</span></h3>
+<p>In this proof, I will demonstrate how to encrypt and decrypt a string.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Random</span> <span class="kn">import</span> <span class="n">get_random_bytes</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="c1"># Use a stored / generated key</span>
+<span class="n">data_to_encrypt</span> <span class="o">=</span> <span class="s1">'This is plain text!'</span> <span class="c1"># This is your data</span>
+
+<span class="c1"># === Encrypt ===</span>
+
+<span class="c1"># First make your data a bytes object. To convert a string to a bytes object, we can call .encode() on it</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data_to_encrypt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
+
+<span class="c1"># Create the cipher object and encrypt the data</span>
+<span class="n">cipher_encrypt</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">)</span>
+<span class="n">ciphered_bytes</span> <span class="o">=</span> <span class="n">cipher_encrypt</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># This is now our data</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="n">cipher_encrypt</span><span class="o">.</span><span class="n">iv</span>
+<span class="n">ciphered_data</span> <span class="o">=</span> <span class="n">ciphered_bytes</span>
+
+<span class="c1"># From here we now assume that we do not know data_to_encrypt or data (we will use it for proof afterwards</span>
+<span class="c1"># We do know the iv, data and the key you have stored / generate</span>
+
+<span class="c1"># === Decrypt ===</span>
+
+<span class="c1"># Create the cipher object and decrypt the data</span>
+<span class="n">cipher_decrypt</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv</span><span class="o">=</span><span class="n">iv</span><span class="p">)</span>
+<span class="n">deciphered_bytes</span> <span class="o">=</span> <span class="n">cipher_decrypt</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphered_data</span><span class="p">)</span>
+
+<span class="c1"># Convert the bytes object back to the string</span>
+<span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">deciphered_bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
+
+<span class="c1"># === Proving the data matches ===</span>
+
+<span class="c1"># Now we prove that the original data is the same as the data we just ciphered out (running these should throw no errors)</span>
+<span class="k">assert</span> <span class="n">data_to_encrypt</span> <span class="o">==</span> <span class="n">decrypted_data</span><span class="p">,</span> <span class="s1">'Original data does not match the result'</span>
+</code></pre></div>
+<h3 id="file-example-proof">
+<span style="position:relative"><a class="anchor" href="#file-example-proof"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>File Example Proof</span></h3>
+<p>In this proofm I will demonstrate how to encrypt and decrypt a file. This example will be a bit different from the examples above as I will be reading and writing to and from files using a buffer. This allows me to encrypt much larger files without the whole file having to be loaded into memory.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Random</span> <span class="kn">import</span> <span class="n">get_random_bytes</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="c1"># Use a stored / generated key</span>
+<span class="n">file_to_encrypt</span> <span class="o">=</span> <span class="s1">'my_file.txt'</span>
+<span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">65536</span> <span class="c1"># 64kb</span>
+
+<span class="c1"># === Encrypt ===</span>
+
+<span class="c1"># Open the input and output files</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_to_encrypt</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_to_encrypt</span> <span class="o">+</span> <span class="s1">'.encrypted'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span>
+
+<span class="c1"># Create the cipher object and encrypt the data</span>
+<span class="n">cipher_encrypt</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">)</span>
+
+<span class="c1"># Initially write the iv to the output file</span>
+<span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cipher_encrypt</span><span class="o">.</span><span class="n">iv</span><span class="p">)</span>
+
+<span class="c1"># Keep reading the file into the buffer, encrypting then writing to the new file</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer_size</span><span class="p">)</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">ciphered_bytes</span> <span class="o">=</span> <span class="n">cipher_encrypt</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+    <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ciphered_bytes</span><span class="p">)</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer_size</span><span class="p">)</span>
+
+<span class="c1"># Close the input and output files</span>
+<span class="n">input_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># === Decrypt ===</span>
+
+<span class="c1"># Open the input and output files</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_to_encrypt</span> <span class="o">+</span> <span class="s1">'.encrypted'</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
+<span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_to_encrypt</span> <span class="o">+</span> <span class="s1">'.decrypted'</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span>
+
+<span class="c1"># Read in the iv</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Create the cipher object and encrypt the data</span>
+<span class="n">cipher_encrypt</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CFB</span><span class="p">,</span> <span class="n">iv</span><span class="o">=</span><span class="n">iv</span><span class="p">)</span>
+
+<span class="c1"># Keep reading the file into the buffer, decrypting then writing to the new file</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer_size</span><span class="p">)</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">decrypted_bytes</span> <span class="o">=</span> <span class="n">cipher_encrypt</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+    <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">decrypted_bytes</span><span class="p">)</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="n">input_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">buffer_size</span><span class="p">)</span>
+
+<span class="c1"># Close the input and output files</span>
+<span class="n">input_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># === Proving the data matches (hash the files and compare the hashes) ===</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="k">def</span> <span class="nf">get_file_hash</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="n">block_size</span> <span class="o">=</span> <span class="mi">65536</span>
+    <span class="n">file_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">fb</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">file_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">fb</span><span class="p">)</span>
+            <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">file_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+<span class="k">assert</span> <span class="n">get_file_hash</span><span class="p">(</span><span class="n">file_to_encrypt</span><span class="p">)</span> <span class="o">==</span> <span class="n">get_file_hash</span><span class="p">(</span><span class="n">file_to_encrypt</span> <span class="o">+</span> <span class="s1">'.decrypted'</span><span class="p">),</span> <span class="s1">'Files are not identical'</span>
+</code></pre></div>
+<blockquote>
+<p>If you look at the size of the .encrypted file, you would notice it is 16 bytes larger than the file that was encrypted. This is because the iv is at the start of the file for you to read back out.</p>
+<p>If are interested in hashing files in Python, check out my tutorial on <a href="/blog/post/how-to-hash-files-in-python/">How to Hash Files in Python</a>.</p>
+</blockquote>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/javascript-date-methods-return-values/" title="JavaScript Date Methods Return Values">
+<span>←</span>
+<span class="btn-content">JavaScript Date Methods Return Values</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/fix-python-is-not-recognized-as-an-internal-or-external-command/" title="Fix: 'python' is not recognized as an internal or external command">
+<span class="btn-content">Fix: 'python' is not recognized as an internal or external command</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/python-encryption-and-decryption-with-pycryptodome/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/python-encryption-and-decryption-with-pycryptodome/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

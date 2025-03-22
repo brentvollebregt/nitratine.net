@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/unblock-new-zealand-herald-premium-articles/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Unblock New Zealand Herald Premium Articles - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content='A few days ago the site New Zealand Herald started to introduce premium content on their site. Using the JavaScript code in a bookmark found in this post is a very easy way to get around the monthly fee for "premium content".' name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Unblock New Zealand Herald Premium Articles" property="og:title"/>
+<meta content='A few days ago the site New Zealand Herald started to introduce premium content on their site. Using the JavaScript code in a bookmark found in this post is a very easy way to get around the monthly fee for "premium content".' property="og:description"/>
+<meta content="/posts/unblock-new-zealand-herald-premium-articles/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/unblock-new-zealand-herald-premium-articles/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Unblock New Zealand Herald Premium Articles</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2019">4 May 2019</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#General">General</a>
+<a class="badge badge-warning" href="/blog/tags/#javascript">javascript</a>
+<a class="badge badge-warning" href="/blog/tags/#bookmarklet">bookmarklet</a>
+<span class="badge badge-danger">Hidden</span>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">6 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Funblock-new-zealand-herald-premium-articles%2F"/>
+</div>
+<p class="lead">A few days ago the site New Zealand Herald started to introduce premium content on their site. Using the JavaScript code in a bookmark found in this post is a very easy way to get around the monthly fee for "premium content".</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-this">What is This?</a></li>
+<li><a href="#latest-revision">Latest Revision</a><ul>
+<li><a href="#how-to-use-the-bookmarklet">How to Use the Bookmarklet</a></li>
+</ul>
+</li>
+<li><a href="#revisions">Revisions</a><ul>
+<li><a href="#original-script">Original Script</a></li>
+<li><a href="#revision-1">Revision 1</a></li>
+<li><a href="#revision-2-7-5-19">Revision 2 (7-5-19)</a></li>
+<li><a href="#revision-3-6-11-19">Revision 3 (6-11-19)</a></li>
+<li><a href="#revision-4-18-12-19">Revision 4 (18-12-19)</a></li>
+</ul>
+</li>
+<li><a href="#why-did-i-write-this">Why Did I Write This?</a><ul>
+<li><a href="#and-that-shocking-artwork">And That Shocking Artwork?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="what-is-this">
+<span style="position:relative"><a class="anchor" href="#what-is-this"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is This?</span></h2>
+<p>A few days ago the site <em>New Zealand Herald</em> started to introduce premium content on their site. This premium content contains articles that require you to pay a monthly fee to read. When looking at the source of the pages received, it's clear to see that full articles are still being sent to clients whether they are premium content or not.</p>
+<p>I fully understand why they would do this; people now buy fewer papers so this is kind of like paying for the paper every week, just with this subscription you get a lot more. Unfortunately, the "paywall" that they have set up currently is a horrible attempt. I feel like they may be in a trial stage for the paywall's implementation which makes it very easy to get around.</p>
+<p>This post contains JavaScript code (that runs on browsers) to help you easily remove the "mask" that hides premium article content.</p>
+<blockquote>
+<p>When going to any article on NZ Herald, you get sent the full article. CSS is then applied to specific elements with the <code>.paywall</code> class to hide the content. This script un-hides that content so you can see the full article.</p>
+</blockquote>
+<h2 id="latest-revision">
+<span style="position:relative"><a class="anchor" href="#latest-revision"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Latest Revision</span></h2>
+<p>This is the most recent version of the JavaScript bookmarklet. If you want to see the code, previous versions or a description of why this works, these will be found below.</p>
+<p><a class="btn btn-primary" href="javascript:copyCode()" role="button">Copy the Unblock Code</a></p>
+<div class="alert alert-success" id="copyCodeSuccess" role="alert" style="display: none">
+  JavaSript code has been copied!
+</div>
+<script src="/posts/unblock-new-zealand-herald-premium-articles/copy-to-clipboard.js" type="text/javascript"></script>
+<p>The button above copies the bookmarklet to your clipboard. Click this and then create a new bookmark (name it what you want) and paste the code copied into the bookmark address.</p>
+<blockquote>
+<p>On some devices you may find it easier to create a bookmark first with anything and then edit it to insert the code. Make sure the code copied starts with <code>javascript:</code> (it will if you copied it using the button).</p>
+</blockquote>
+<h3 id="how-to-use-the-bookmarklet">
+<span style="position:relative"><a class="anchor" href="#how-to-use-the-bookmarklet"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>How to Use the Bookmarklet</span></h3>
+<p>When you're on an NZ Herald premium content page, simply open up your bookmarks and click on the bookmark you created. This will execute the code in the background and un-hide the post content.</p>
+<blockquote>
+<p>Websites Change: Please note that NZ Herald can change their site at any time, which means this could stop working at any time. If it has stopped working, feel free to comment below and I will look at what has changed.</p>
+</blockquote>
+<h2 id="revisions">
+<span style="position:relative"><a class="anchor" href="#revisions"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Revisions</span></h2>
+<p>This is a list of all the revisions of the script. If more information is discovered or the NZ Herald paywall system changes, a new revision will be made. You can copy the script from here if you wish, just make sure to add <code>javascript:</code> at the beginning when making it into a bookmark otherwise it will not execute.</p>
+<h3 id="original-script">
+<span style="position:relative"><a class="anchor" href="#original-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Original Script</span></h3>
+<p>The original script does three main things:
+ - Display any hidden content that is hidden by the <code>.paywall</code> class
+ - Hides the fade out of content before the subscription offer and the ellipsis' throughout some articles. 
+ - Removes the subscription offer from the page</p>
+<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">'#article-content.premium-content .paywall'</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'display'</span><span class="p">,</span><span class="w"> </span><span class="s1">'block'</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">insertAdjacentHTML</span><span class="p">(</span><span class="s1">'beforeEnd'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;style&gt;#article-content.premium-content:before, #article-content.premium-content .ellipsis:after {content: none !important}&lt;/style&gt;'</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">'.article-offer'</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'display'</span><span class="p">,</span><span class="w"> </span><span class="s1">'none'</span><span class="p">);</span>
+<span class="p">})();</span>
+</code></pre></div>
+<h3 id="revision-1">
+<span style="position:relative"><a class="anchor" href="#revision-1"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Revision 1</span></h3>
+<p>Looking in Reddit, I found a <a href="https://www.reddit.com/r/newzealand/comments/bj9fdu/nz_herald_premium_content_for_free/">post</a> that had done the same task I had set out to do. Taking what I found here, I improved the original script and made it easier to read the source.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">'head'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span>
+<span class="w">        </span><span class="s1">'&lt;style&gt;'</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="s1">'#main { height: auto !important }'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<span class="w">            </span><span class="s1">'#article-content.premium-content:before, #article-content.premium-content .ellipsis:after, .article-offer { display: none !important }'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="c1">// Paywall fix</span>
+<span class="w">            </span><span class="c1">// '.pb-f-article-related-articles, .pb-f-global-recommend, .pb-f-global-blank-html { display: none !important }' + // General advertisement removal (I don't include it in the button but you can remove the recommended articles if you wish)</span>
+<span class="w">        </span><span class="s1">'&lt;/style&gt;'</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">(</span><span class="s1">'.paywall'</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">'paywall'</span><span class="p">);</span><span class="w"> </span>
+<span class="p">})();</span>
+</code></pre></div>
+<h3 id="revision-2-7-5-19">
+<span style="position:relative"><a class="anchor" href="#revision-2-7-5-19"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Revision 2 (7-5-19)</span></h3>
+<p>This one was a bit bigger because they are now making the CSS class that used to be <code>paywall</code> now a little bit more random. This can easily be solved by looking at all the classes in the content of the article and picking out the mode (not 100% accurate but does the job).</p>
+<p>There is still a backup for any direct children of <code>#article-content</code> if this fails. Scrolling is turned back on, the offer is removed and some ads are removed.</p>
+<div class="codehilite"><pre><span></span><code><span class="cm">/* Throw some CSS in the head */</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'head'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">'&lt;style&gt;'</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="s1">'#main { height: auto !important; }'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Allow for scrolling */</span>
+<span class="w">        </span><span class="s1">'#article-content &gt; * { display: block !important; color: #000 !important; opacity: 1 !important; }'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Show content (backup for class guess later) */</span>
+<span class="w">        </span><span class="s1">'.article-offer { display: none !important; }'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Remove 'offer' */</span>
+<span class="w">        </span><span class="s1">'.ad-container, .pb-f-article-related-articles { display: none !important; }'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Remove advertisements */</span>
+<span class="w">    </span><span class="s1">'&lt;/style&gt;'</span>
+<span class="p">);</span>
+
+<span class="cm">/* A simple array mode function */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">mode</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">          </span><span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">v</span><span class="o">===</span><span class="nx">a</span><span class="p">).</span><span class="nx">length</span>
+<span class="w">        </span><span class="o">-</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">v</span><span class="o">===</span><span class="nx">b</span><span class="p">).</span><span class="nx">length</span>
+<span class="w">    </span><span class="p">).</span><span class="nx">pop</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">article_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="s1">'#article-content'</span><span class="p">);</span>
+
+<span class="cm">/* Get all the classes */</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="nx">article_content</span><span class="p">.</span><span class="nx">children</span><span class="p">().</span><span class="nx">each</span><span class="p">((</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">classes</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="cm">/* Try to find the mode of these classes and remove it (most likely the premium class) */</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">possible_premium_class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mode</span><span class="p">(</span><span class="nx">classes</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">possible_premium_class</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">possible_premium_class</span><span class="p">);</span>
+
+<span class="cm">/* Remove the premium-content class. Removes fade out, ellipsis' */</span>
+<span class="nx">article_content</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">'premium-content'</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'full-content'</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="revision-3-6-11-19">
+<span style="position:relative"><a class="anchor" href="#revision-3-6-11-19"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Revision 3 (6-11-19)</span></h3>
+<p>It seems some sort of timer function has been implemented that checks for changes are redirects a user to a purchase page. Aside from this, <code>display: none</code> was also added inline to article elements which are no removed.</p>
+<div class="codehilite"><pre><span></span><code><span class="cm">/* Disable some tamper check? */</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">pwdf</span><span class="p">.</span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">};</span>
+
+<span class="cm">/* Throw some CSS in the head */</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'head'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">'&lt;style&gt;'</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="s1">'#main { height: auto !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Allow for scrolling */</span>
+<span class="w">        </span><span class="s1">'#article-content { height: auto !important; overflow: auto !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Show content in full height */</span>
+<span class="w">        </span><span class="s1">'#article-content &gt; * { display: block !important; color: #000 !important; opacity: 1 !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Show content (backup for class guess later) */</span>
+<span class="w">        </span><span class="s1">'.article-offer { display: none !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Remove 'offer' */</span>
+<span class="w">        </span><span class="s1">'.ad-container, .pb-f-article-related-articles { display: none !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Remove advertisements */</span>
+<span class="w">    </span><span class="s1">'&lt;/style&gt;'</span>
+<span class="p">);</span>
+
+<span class="cm">/* A simple array mode function */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">mode</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">          </span><span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">v</span><span class="o">===</span><span class="nx">a</span><span class="p">).</span><span class="nx">length</span>
+<span class="w">        </span><span class="o">-</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">v</span><span class="o">===</span><span class="nx">b</span><span class="p">).</span><span class="nx">length</span>
+<span class="w">    </span><span class="p">).</span><span class="nx">pop</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">article_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="s1">'#article-content'</span><span class="p">);</span>
+
+<span class="cm">/* Get all the classes */</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="nx">article_content</span><span class="p">.</span><span class="nx">children</span><span class="p">().</span><span class="nx">each</span><span class="p">((</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">classes</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="cm">/* Try to find the mode of these classes and remove it (most likely the premium class) */</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">possible_premium_class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mode</span><span class="p">(</span><span class="nx">classes</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">possible_premium_class</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'display'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">possible_premium_class</span><span class="p">);</span>
+
+<span class="cm">/* Remove the premium-content class. Removes fade out, ellipsis' */</span>
+<span class="nx">article_content</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">'premium-content'</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'full-content'</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="revision-4-18-12-19">
+<span style="position:relative"><a class="anchor" href="#revision-4-18-12-19"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Revision 4 (18-12-19)</span></h3>
+<p>It seems <code>window.pwdf</code> is no longer used, I found a couple of solutions; going to use them both to potentially delay a new revision.</p>
+<div class="codehilite"><pre><span></span><code><span class="cm">/* Disable some tamper check? */</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">prtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">f</span><span class="o">:</span><span class="w"> </span><span class="nx">btoa</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">HASH</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">isMobile</span><span class="p">.</span><span class="nx">any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="cm">/* Throw some CSS in the head */</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'head'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">'&lt;style&gt;'</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="s1">'#main { height: auto !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Allow for scrolling */</span>
+<span class="w">        </span><span class="s1">'#article-content { height: auto !important; overflow: auto !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Show content in full height */</span>
+<span class="w">        </span><span class="s1">'#article-content &gt; * { display: block !important; color: #000 !important; opacity: 1 !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Show content (backup for class guess later) */</span>
+<span class="w">        </span><span class="s1">'.article-offer { display: none !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Remove 'offer' */</span>
+<span class="w">        </span><span class="s1">'.ad-container, .pb-f-article-related-articles { display: none !important; } '</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="cm">/* Remove advertisements */</span>
+<span class="w">    </span><span class="s1">'&lt;/style&gt;'</span>
+<span class="p">);</span>
+
+<span class="cm">/* A simple array mode function */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">mode</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">          </span><span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">v</span><span class="o">===</span><span class="nx">a</span><span class="p">).</span><span class="nx">length</span>
+<span class="w">        </span><span class="o">-</span><span class="w"> </span><span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">v</span><span class="o">===</span><span class="nx">b</span><span class="p">).</span><span class="nx">length</span>
+<span class="w">    </span><span class="p">).</span><span class="nx">pop</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="nx">article_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="s1">'#article-content'</span><span class="p">);</span>
+
+<span class="cm">/* Get all the classes */</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="nx">article_content</span><span class="p">.</span><span class="nx">children</span><span class="p">().</span><span class="nx">each</span><span class="p">((</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">classes</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="cm">/* Try to find the mode of these classes and remove it (most likely the premium class) */</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">possible_premium_class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mode</span><span class="p">(</span><span class="nx">classes</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">possible_premium_class</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'display'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">possible_premium_class</span><span class="p">);</span>
+
+<span class="cm">/* Remove the premium-content class. Removes fade out, ellipsis' */</span>
+<span class="nx">article_content</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">'premium-content'</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'full-content'</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="why-did-i-write-this">
+<span style="position:relative"><a class="anchor" href="#why-did-i-write-this"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Why Did I Write This?</span></h2>
+<p>People asked me to and I put it here for easy access. I don't even read the news.</p>
+<h3 id="and-that-shocking-artwork">
+<span style="position:relative"><a class="anchor" href="#and-that-shocking-artwork"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>And That Shocking Artwork?</span></h3>
+<p>I am so sorry. Yes, I used MS Paint.</p>
+<p><img alt="Unblock New Zealand Herald Premium Articles Feature Image" class="lazyload blur-up" data-src="/posts/unblock-new-zealand-herald-premium-articles/feature.png" height="713" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAALCAYAAACgR9dcAAABnElEQVR4nJ2SzW7TQAAGZ+1d25uQP6xEiRTUlpYDcOAFEA+PeuXQC6iH0qqKQhKlThzbseP1ejlUQggkDoz06ZPmPMI55/hPZJs+UDUlkR9ytDWRinBVRuNLwtZSCoFuDLkK8VxFuviMtYb+5B1SJEtSpdCiwgQSVbUIU7NvLeOqZu8qIh1TZgm1K2gev5C3NboFkd1dO0LNwQR46wVmOkMmO6LRAB2Piaojd5XhwvfI+zF961gZw1S0yK7SWE9z8+0r948LPn0c8/3HFrvJmXRXxKMXNJst11lJIBXab9DdHtPLORLhg6l4So+8vZizXi3p9odoz7A9nAiVz/z1Jf30wL6o0BImowG0AmkBG4Z8eH9GkaTMzi65v70hbQOKsoDxCP1yRCeA2dUbyJ8wqgNViajXt263eyCMXzFoDJnnI22NRJDqHvGpJpEK75hiOgOGtWFZbjgfniOV6jDoTZEnQwmcWkOvgY2ESZaT1Ckq6BCZGlvskbZhGPRAaYRzztFa8Hxw7nme91zBL9+C8P6KRPxZmAPEb/8vfgJK18w0QZuNGAAAAABJRU5ErkJggg==" style="; aspect-ratio: 994/713; height: auto;" width="994"/></p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/google-publisher-toolbar-please-copy-this-code/" title="Google Publisher Toolbar: Please copy this code">
+<span>←</span>
+<span class="btn-content">Google Publisher Toolbar: Please copy this code</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-hash-files-in-python/" title="How to Hash Files in Python">
+<span class="btn-content">How to Hash Files in Python</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/unblock-new-zealand-herald-premium-articles/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/unblock-new-zealand-herald-premium-articles/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
