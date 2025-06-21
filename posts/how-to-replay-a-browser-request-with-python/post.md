@@ -24,7 +24,7 @@ When you have found the request you want to replay, right-click on it (on the le
 
 ## Replaying the Request
 
-To replay this request, we first need to convert the cURL command to Python code. After this, we can then use the [requests](https://docs.python-requests.org/en/master/) library to execute the request.
+To replay this request, we first need to convert the cURL command to Python code. After this, we can then use the [requests](https://requests.readthedocs.io/en/latest/) library to execute the request.
 
 ### Converting the cURL command to Python
 
