@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/python-retweet-bot/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Python Retweet Bot - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This bot retweets tweets in python. It looks for competitions which state you need to retweet and retweets them." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Python Retweet Bot" property="og:title"/>
+<meta content="This bot retweets tweets in python. It looks for competitions which state you need to retweet and retweets them." property="og:description"/>
+<meta content="/posts/python-retweet-bot/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/python-retweet-bot/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Python Retweet Bot</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">26 Jan 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#bot">bot</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">6 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fpython-retweet-bot%2F"/>
+</div>
+<p class="lead">This bot retweets tweets in python. It looks for competitions which state you need to retweet and retweets them.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-and-why">What and Why?</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#installing-tweepy">Installing Tweepy</a></li>
+<li><a href="#getting-the-api-keys">Getting the API Keys</a></li>
+<li><a href="#creating-the-script">Creating the Script</a></li>
+<li><a href="#running-the-script">Running the Script</a></li>
+<li><a href="#final-script">Final Script</a></li>
+<li><a href="#final-notes">Final Notes</a></li>
+</ul>
+</div>
+<h2 id="what-and-why">
+<span style="position:relative"><a class="anchor" href="#what-and-why"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What and Why?</span></h2>
+<p>A while ago I had seen someone show all their winnings from using a twitter bot to retweet tweets. Today is a bit more advanced and now people ask to like, follow and sometimes tag. This bot does not tag others but it does retweet, like and follow people mentioned in the tweet.</p>
+<h2 id="setup">
+<span style="position:relative"><a class="anchor" href="#setup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setup</span></h2>
+<p>First, make sure you have <a href="https://www.python.org/downloads/">python</a> installed and that you have <a href="/blog/post/how-to-setup-pythons-pip/">setup pip</a>.</p>
+<p>If you haven't, create a new <a href="https://twitter.com/">twitter</a> account. If you want to use an existing one, be aware that this will spam the shit out of your account.</p>
+<h2 id="installing-tweepy">
+<span style="position:relative"><a class="anchor" href="#installing-tweepy"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Tweepy</span></h2>
+<p>So now that you have set up pip, you can use it to install <a href="https://www.tweepy.org/">tweepy</a> easily. Open up cmd and execute the command <code>pip list tweepy</code>. Make sure the output doesn't have any errors and that it states that it was installed successfully.</p>
+<p>Open up IDLE and execute the following line. If no errors appear, it was installed correctly.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tweepy</span>
+</code></pre></div>
+<h2 id="getting-the-api-keys">
+<span style="position:relative"><a class="anchor" href="#getting-the-api-keys"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting the API Keys</span></h2>
+<p>Now we need to create a twitter app. This may put some people off but don't stop here, it's very little effort.</p>
+<p>Go to <a href="https://apps.twitter.com/">https://apps.twitter.com/</a> and click "Create New App"</p>
+<p><img alt="Create New App" class="lazyload blur-up" data-src="/posts/python-retweet-bot/create-app.png" height="351" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAFCAYAAAB1j90SAAAAi0lEQVR4nH2PuwrCUBQE5xxvvAEVJSKIv6CNv+332FhaCiYS0RBfWYukESHT7BYLw9rucNbIPzSCJASMHtwwjMerJmxjhfsAM2HBmcymIMCMtnRhoPJKVRS4IMRsQVHeyO8162XKPE16jGOaBEwQ9s+U9+lIecnZrLLWIXXGX2wY8Sy2XZL6bv3Rzb8hli7bjCOibAAAAABJRU5ErkJggg==" style="; aspect-ratio: 963/351; height: auto;" width="963"/></p>
+<p>Fill in the form that is now provided and click "Create your Twitter application"</p>
+<p><img alt="Create New App Form" class="lazyload blur-up" data-src="/posts/python-retweet-bot/create-app2.png" height="825" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAALCAYAAACgR9dcAAAA0klEQVR4nIWQwY6DMAxE3zgGlh448P+/xw9UWiRAifewTdotRetL5GSeZxwtyxIAnhLf64okpmlinmf+K93v9yilkFJiHMf2EBF/hO+9JLyCKSX2fT+JapnZqXdJlFJwdyICSed40gkGcAhS8gck4Bz300AAl4ycM6WUFllSg8yMiGh9Pd0dzzkTEQzD8ICf7maGpGvnumsp5TcmQSA6U7u7ANFxHPEa92ny2a3qAHxdV7ZtA4Lh64Z5R0TQu13ifd/XDxNd1yGJ2zg2Q7vY87V+AON8ZI4z0wDyAAAAAElFTkSuQmCC" style="; aspect-ratio: 1091/825; height: auto;" width="1091"/></p>
+<p>Now go to the "Keys and Access Tokens" tab and find the following keys as shown in the image below:
+- Consumer Key (API Key)
+- Consumer Secret (API Secret)
+- Access Token
+- Access Token Secret</p>
+<p><img alt="App tokens" class="lazyload blur-up" data-src="/posts/python-retweet-bot/tokens.png" height="775" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAYAAAC9QufkAAABTElEQVR4nG2Ry27bQAxFD8mZkdwsKtS7ZmEjBfr/v1MU8aZdFkVgWxX0GLKLWEac+AJcDDDkIe+V58MhlqWy2bRM44iI4AH7/Z5kyj0dj0dKKcg4L+EeCIGqIECoQQRZ5doQ7waICOnl7x8EAXe6rkNSQuqC5EwF5E29l5zPp1dy37P8+Mk8DEgEm90OffhEhKNqtI9fweymObkHOWd0u6V+D9K0ILng4debRQTkIzuZGW3bQgRz11Halnzn4z3JNE0REYgIZoaqQrzaExFEBIggl7oh933P6XTCzCil0DQNtVbcnVIKpRTW4aWUW/I8zxEXUl0WEGF9qyqmSqzRpPSRXGtFVfncdTeRxGX19Qx3vw69GpZzJufMv1+/Gc5nctNQUkJVSdsvhBmyxvTm7pTMCMDcmZ8P1GEgzJhFUOBhv6P59gQXGuN4NfE/nEaXJKOt14QAAAAASUVORK5CYII=" style="; aspect-ratio: 983/775; height: auto;" width="983"/></p>
+<p>Save these somewhere for the next part of creating the bot.</p>
+<h2 id="creating-the-script">
+<span style="position:relative"><a class="anchor" href="#creating-the-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Creating the Script</span></h2>
+<p>Now that everything is set up and we have the keys we need, we can make the script. Open IDLE, create a new script and save it as a .py.</p>
+<p>First, we will want to import the tweepy module.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tweepy</span>
+</code></pre></div>
+<p>Now we will want to enter the keys we got from the newly created twitter app. Save them in four separate variables as shown below. Make sure to use your own keys.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">consumer_key</span> <span class="o">=</span> <span class="s1">'4z*********************oF'</span>
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s1">'6P**********************************************3T'</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="s1">'79**********************************************nA'</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s1">'PS*****************************************dO'</span>
+</code></pre></div>
+<p>Now we need to set up the twitter API by using OAuthHandler and API classes.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+</code></pre></div>
+<p>Next, we will set two simple variables. One will hold different search queries and the other will be max tweets per query. These will be used later. You can freely modify these later after you understand what they do (noted in "Running the Script").</p>
+<div class="codehilite"><pre><span></span><code><span class="n">queries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"rt to win"</span><span class="p">,</span> <span class="s2">"retweet to win"</span><span class="p">]</span>
+<span class="n">tweets_per_query</span>  <span class="o">=</span> <span class="mi">50</span>
+</code></pre></div>
+<p>Now set a variable to count the number of tweets re-tweeted to use at the end and create a loop looping through the queries declared previously.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">new_tweets</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+</code></pre></div>
+<p>In this for loop, print what query we are querying and then create another for loop that loops through tweets that are returned from the API search using the query in the current loop.</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span> <span class="p">(</span><span class="s2">"Starting new query: "</span> <span class="o">+</span> <span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">tweet_mode</span><span class="o">=</span><span class="s2">"extended"</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">tweets_per_query</span> <span class="p">):</span>
+</code></pre></div>
+<p>Now inside this loop, we will focus on each individual tweet which is now in the 'tweet' variable.</p>
+<p>Get the user's screen name that tweeted the tweet, id and then create and print the URL. This is mainly for output purposes but will be used later.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">user</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">screen_name</span>
+<span class="nb">id</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">id</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">'https://twitter.com/'</span> <span class="o">+</span> <span class="n">user</span> <span class="o">+</span>  <span class="s1">'/status/'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>
+<p>Since we used the extended tweet_mode in the search query, we will be given all the text in the tweet rather than the normal 140 returned by the API.</p>
+<p>This text will be sitting in tweet.retweeted_status.full_text if the tweet we are looking at is a re-tweeted tweet or in tweet.full_text if this is the original tweet. Convert the text to lowercase to make it easier to deal with later.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">retweeted_status</span><span class="o">.</span><span class="n">full_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">full_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</code></pre></div>
+<p>Now we want to look at the text content of the tweet to decided what we need to do.</p>
+<p>If the tweet contains the terms "retweet" or "rt", we need to retweet the tweet. To do this we need to use the .retweet() method and then add 1 to new_tweets. An error will occur if we have already tweeted the tweet so we must account for that.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="s2">"retweet"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">or</span> <span class="s2">"rt"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tweet</span><span class="o">.</span><span class="n">retweeted</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tweet</span><span class="o">.</span><span class="n">retweet</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\t</span><span class="s2">Retweeted"</span><span class="p">)</span>
+            <span class="n">new_tweets</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">TweepError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">Already Retweeted'</span><span class="p">)</span>
+</code></pre></div>
+<p>If the tweet contains the terms "like" or "fav" we need to favorite the tweet. Twitter has now called this "liking" a tweet but in the API it is still called favorite. So still in the tweet for loop:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="s2">"like"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">or</span> <span class="s2">"fav"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tweet</span><span class="o">.</span><span class="n">favorite</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span> <span class="o">+</span> <span class="s2">"Liked"</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">Already Liked'</span><span class="p">)</span>
+</code></pre></div>
+<p>If the tweet contains the term "follow" in it, we need to follow someone. Thankfully the API provides us with who is mentioned in the tweet so little work is done to extract people. Remember that some of these tweets will be re-tweeted tweets so we need to ignore the person that re-tweeted and get the original 'tweeter'. The following code should do the trick, using api.create_friendship to follow people.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="s2">"follow"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">to_follow</span> <span class="o">=</span> <span class="p">[</span><span class="n">tweet</span><span class="o">.</span><span class="n">retweeted_status</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">screen_name</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">'screen_name'</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tweet</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="s1">'user_mentions'</span><span class="p">]]</span>
+        <span class="c1"># Don't follow origin user (person who retweeted)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">to_follow</span> <span class="o">=</span> <span class="p">[</span><span class="n">user</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">'screen_name'</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tweet</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="s1">'user_mentions'</span><span class="p">]]</span>
+
+        <span class="k">for</span> <span class="n">screen_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">to_follow</span><span class="p">)):</span>
+            <span class="n">api</span><span class="o">.</span><span class="n">create_friendship</span><span class="p">(</span><span class="n">screen_name</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span> <span class="o">+</span> <span class="s2">"Followed: "</span> <span class="o">+</span> <span class="n">screen_name</span><span class="p">)</span>
+</code></pre></div>
+<p>Lastly print a friendly message at the end saying how many tweets we re-tweeted to show that the script is finished. This is outside all loops.</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span> <span class="p">(</span><span class="s2">"New Tweets: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">new_tweets</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="running-the-script">
+<span style="position:relative"><a class="anchor" href="#running-the-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Running the Script</span></h2>
+<p>To use this script, put queries you want to search for in the 'queries' list towards the top. Set tweets_per_query  to how many tweets per query you want to loop at; remember too many interactions with the API and you may get restricted access due to usage limits. Also going back too far with large queries could potentially be an issue.</p>
+<p>Now simply run the script by hitting F5 in IDLE or double-clicking on the script. Wait and you should see what the script is up to until it's done.</p>
+<h2 id="final-script">
+<span style="position:relative"><a class="anchor" href="#final-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Script</span></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tweepy</span>
+
+<span class="n">consumer_key</span> <span class="o">=</span> <span class="s1">'4z*********************oF'</span>
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s1">'6P**********************************************3T'</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="s1">'79**********************************************nA'</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s1">'PS*****************************************dO'</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+
+<span class="n">queries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"rt to win"</span><span class="p">,</span> <span class="s2">"retweet to win"</span><span class="p">]</span>
+<span class="n">tweets_per_query</span>  <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">new_tweets</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">"Starting new query: "</span> <span class="o">+</span> <span class="n">query</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">tweet_mode</span><span class="o">=</span><span class="s2">"extended"</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">tweets_per_query</span> <span class="p">):</span>
+
+        <span class="n">user</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">screen_name</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">'https://twitter.com/'</span> <span class="o">+</span> <span class="n">user</span> <span class="o">+</span>  <span class="s1">'/status/'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">retweeted_status</span><span class="o">.</span><span class="n">full_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">full_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s2">"retweet"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">or</span> <span class="s2">"rt"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tweet</span><span class="o">.</span><span class="n">retweeted</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">tweet</span><span class="o">.</span><span class="n">retweet</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\t</span><span class="s2">Retweeted"</span><span class="p">)</span>
+                    <span class="n">new_tweets</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">TweepError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">Already Retweeted'</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">"like"</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">or</span> <span class="s2">"fav"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">tweet</span><span class="o">.</span><span class="n">favorite</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span> <span class="o">+</span> <span class="s2">"Liked"</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">Already Liked'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"follow"</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">to_follow</span> <span class="o">=</span> <span class="p">[</span><span class="n">tweet</span><span class="o">.</span><span class="n">retweeted_status</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">screen_name</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">'screen_name'</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tweet</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="s1">'user_mentions'</span><span class="p">]]</span>
+               <span class="c1"># Don't follow origin user (person who retweeted)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">to_follow</span> <span class="o">=</span> <span class="p">[</span><span class="n">user</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">'screen_name'</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tweet</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="s1">'user_mentions'</span><span class="p">]]</span>
+
+            <span class="k">for</span> <span class="n">screen_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">to_follow</span><span class="p">)):</span>
+                <span class="n">api</span><span class="o">.</span><span class="n">create_friendship</span><span class="p">(</span><span class="n">screen_name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span> <span class="o">+</span> <span class="s2">"Followed: "</span> <span class="o">+</span> <span class="n">screen_name</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">"New Tweets: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">new_tweets</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="final-notes">
+<span style="position:relative"><a class="anchor" href="#final-notes"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Notes</span></h2>
+<p>Unfortunately, I didn't add a "tag your friend" command because I didn't want to annoy anyone and didn't bother making another account. This could be a bit hard to implement because sometimes this is an arbitrary number requested.</p>
+<p>I am not responsible for any harm that may come from this.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-send-an-email-with-python/" title="How to Send an Email With Python">
+<span>←</span>
+<span class="btn-content">How to Send an Email With Python</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-auto-clicker/" title="Python Auto Clicker">
+<span class="btn-content">Python Auto Clicker</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/python-retweet-bot/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/python-retweet-bot/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
