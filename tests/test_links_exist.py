@@ -34,7 +34,8 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://simpleicons.org',  # 403
     r'^https://sourceforge.net',  # 403
     r'^https://unsplash.com',  # 403
-    r'^https://github.com'  # 429
+    r'^https://github.com',  # 429
+    r'^https://www.cvedetails.com'  # 403
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
 
