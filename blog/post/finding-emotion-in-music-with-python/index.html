@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/finding-emotion-in-music-with-python/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Finding Emotion In Music With Python - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This investigation looks at detecting emotion in music. Using data from Spotify I attempted to predict mood in music using Python. The script looks at valence and energy to determine where it lies on an emotional plane." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Finding Emotion In Music With Python" property="og:title"/>
+<meta content="This investigation looks at detecting emotion in music. Using data from Spotify I attempted to predict mood in music using Python. The script looks at valence and energy to determine where it lies on an emotional plane." property="og:description"/>
+<meta content="/posts/finding-emotion-in-music-with-python/mining-results.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/finding-emotion-in-music-with-python/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Finding Emotion In Music With Python</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2017">5 Dec 2017</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Investigations">Investigations</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#spotify">spotify</a>
+<a class="badge badge-warning" href="/blog/tags/#machine-learning">machine-learning</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">5 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Ffinding-emotion-in-music-with-python%2F"/>
+</div>
+<p class="lead">This investigation looks at detecting emotion in music. Using data from Spotify I attempted to predict mood in music using Python. The script looks at valence and energy to determine where it lies on an emotional plane.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#planning">Planning</a></li>
+<li><a href="#gathering-data">Gathering Data</a></li>
+<li><a href="#python-code">Python Code</a><ul>
+<li><a href="#getting-tags-of-mp3s">Getting Tags of MP3s</a></li>
+<li><a href="#tags-to-spotify-id">Tags to Spotify ID</a></li>
+<li><a href="#getting-audio-data">Getting Audio Data</a></li>
+</ul>
+</li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</div>
+<p>Earlier this year, I and seven other students were given a project to visualise emotion in music. We decided to use Unity for visualisation and machine learning in Python to detect emotion. After days of planning and testing, I had a plan for the emotion detection half.</p>
+<p>The project can be found on GitHub <a href="https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion">here</a>.
+While creating this program, I discovered a way that could give hints to what emotion the song is trying to portray using Spotify's API, some data mining and machine learning</p>
+<h2 id="planning">
+<span style="position:relative"><a class="anchor" href="#planning"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Planning</span></h2>
+<p>I had discovered Spotify's API and found that you could get audio features of a particular song including features line loudness, tempo, duration and most importantly energy and valence.</p>
+<p>In previous research, I had found a <a href="https://www.youtube.com/watch?v=eK0M_6LXtKo">YouTube video that looked at emotion detection in music in realtime</a>. Looking in other papers and similar creations like it, I had discovered that there were two things to make this plane; valence and energy. These two properties can be found under different names but in general, they stood for the musical positiveness given off by the song and the speed and intensity of the song.</p>
+<p>Luckily Spotify had already calculated these values and due to it being such a big platform, I could rely on the data; unlike a lot of other sites I tested with. By simply querying "https://api.spotify.com/v1/audio-features/{id}" and passing an authorization token, I was given back data in JSON format.</p>
+<p>An example of the JSON response can be found in the <a href="https://developer.spotify.com/web-api/get-audio-features/">Spotify API documentation</a>.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">"danceability"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.735</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"energy"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.578</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"loudness"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-11.840</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"mode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"speechiness"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.0461</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"acousticness"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.514</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"instrumentalness"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.0902</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"liveness"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.159</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"valence"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.624</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"tempo"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">98.002</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"audio_features"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"06AKEBrKUckW0KREUWRnvT"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"uri"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"spotify:track:06AKEBrKUckW0KREUWRnvT"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"track_href"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.spotify.com/v1/tracks/06AKEBrKUckW0KREUWRnvT"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"analysis_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.spotify.com/v1/audio-analysis/06AKEBrKUckW0KREUWRnvT"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"duration_ms"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">255349</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"time_signature"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This meant all we needed to do was get the Spotify id for each song our program took in by looking at the tags the song had. I used <a href="https://github.com/quodlibet/mutagen">mutagen</a> to strip the tags of the .mp3 files and I then passed this to the search() method in the <a href="https://github.com/plamere/spotipy">Spotipy</a> library to get the Spotify id.</p>
+<h2 id="gathering-data">
+<span style="position:relative"><a class="anchor" href="#gathering-data"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Gathering Data</span></h2>
+<p>The only piece left was now the data to compare each new song to. I had thought to scrape public Spotify playlist created by people with 'happy' and 'sad' in the titles. With all these songs, I then got their valence and energy and placed them on a plane. This process created the plane below.</p>
+<p><img alt="Valence and Energy Patterns Showing Mood of Music" class="lazyload blur-up" data-src="/posts/finding-emotion-in-music-with-python/mining-results.png" height="399" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAJCAYAAADtj3ZXAAABcklEQVR4nD2LS2/TQBgA59u1Hb/dEEqBViCBuHDmxn/h/8I5B1BTxEMqpDQJTUq99q7341DESHMajcQYdRgc282GLC+YQiCKQWyKFSGKEP0IIliB4D0PFwvSNEG896oaUT8SvGfse8b1Z/R2w8xdobcbGO+wBAgjGkaKt+/IXrwhAUFV+HLlcb++M3xbEtefyMcduVvTWYcYi3E7kqPHSL8FdwNAEifPfrCsLi45X65ITYYNL3n1ZMaj+JMpD9hhj6QpJkuQfgf1MaqQ9P0dIRZ8WDm+XtfMmxlNYWkJ9M0ZWv1hUSrVyQkmetQ7tDhifziQtG3HxflvPl6OjHSIGzlozvNsxuncMNZPqc4aDkOg7SqyogCUBCFRwFqDCwIaSdqaprS0XcWD0wXHFdRtRhEFjAURwGCNQeI06Y+t4/3yGhVDmSfMm5TXz0qGydCVBiOAGEABQeSf0zSpCIgY7lEA4hTZ728oqxpr7X1R/T8C/AUAvLCSGv95UQAAAABJRU5ErkJggg==" style="; aspect-ratio: 690/399; height: auto;" width="690"/></p>
+<p>On initial investigation it appears that this plan had worked; and it did. Quite clearly we can see happy songs having high valence and energy where sadder songs have lower values of these properties. There is a bit of cross over which is fine but there are quite a few songs that are in the 'wrong' area. I investigated a few of the outliers and had found quite a majority of these songs were not really meant for the playlist I found them in.</p>
+<p>I understood that using user-generated data could be unreliable but it was much more reliable than a computer doing it as people can detect emotion better than computers. Since I had used playlist generated by people we could rely on the data to quite an extent.</p>
+<h2 id="python-code">
+<span style="position:relative"><a class="anchor" href="#python-code"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Python Code</span></h2>
+<p>Here are some quick examples of how I did the things mentioned in this article.</p>
+<h3 id="getting-tags-of-mp3s">
+<span style="position:relative"><a class="anchor" href="#getting-tags-of-mp3s"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Tags of MP3s</span></h3>
+<p>This code gets ID3 tags from MP3 files. To get mutagen, execute the command 'pip install mutagen' in a terminal/cmd.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mutagen.id3</span> <span class="kn">import</span> <span class="n">ID3</span>
+<span class="kn">from</span> <span class="nn">mutagen.mp3</span> <span class="kn">import</span> <span class="n">MP3</span>
+
+<span class="n">song_location</span> <span class="o">=</span> <span class="s1">'song.mp3'</span>
+<span class="n">audio</span> <span class="o">=</span> <span class="n">ID3</span><span class="p">(</span><span class="n">song_location</span><span class="p">)</span>
+<span class="n">title</span> <span class="o">=</span> <span class="n">audio</span><span class="p">[</span><span class="s1">'TIT2'</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">artist</span> <span class="o">=</span> <span class="n">audio</span><span class="p">[</span><span class="s1">'TPE1'</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">album</span> <span class="o">=</span> <span class="n">audio</span><span class="p">[</span><span class="s1">'TALB'</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="tags-to-spotify-id">
+<span style="position:relative"><a class="anchor" href="#tags-to-spotify-id"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Tags to Spotify ID</span></h3>
+<p>This code will search Spotify for the title and artist and return the closest Spotify ID. Note this will not always be 100% correct but Spotify has a large library of songs.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">spotipy</span>
+<span class="kn">from</span> <span class="nn">spotipy.oauth2</span> <span class="kn">import</span> <span class="n">SpotifyClientCredentials</span>
+
+<span class="c1"># Make your own Spotify app at https://beta.developer.spotify.com/dashboard/applications</span>
+<span class="n">client_id</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">client_secret</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s1">'Clocks'</span>
+<span class="n">artist</span> <span class="o">=</span> <span class="s1">'Coldplay'</span>
+
+<span class="n">client_credentials_manager</span> <span class="o">=</span> <span class="n">SpotifyClientCredentials</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="o">=</span><span class="n">client_secret</span><span class="p">)</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">spotipy</span><span class="o">.</span><span class="n">Spotify</span><span class="p">(</span><span class="n">client_credentials_manager</span><span class="o">=</span><span class="n">client_credentials_manager</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">trace</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">search_querry</span> <span class="o">=</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="n">artist</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">search_querry</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">'tracks'</span><span class="p">][</span><span class="s1">'items'</span><span class="p">]:</span>
+    <span class="c1"># Find a songh that matches title and artist</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">'artists'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">==</span> <span class="n">artist</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">==</span> <span class="n">title</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">'uri'</span><span class="p">])</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Just take the first song returned by the search (might be named differently)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">'tracks'</span><span class="p">][</span><span class="s1">'items'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'uri'</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="c1"># No results for artist and title</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">"Cannot Find URI"</span><span class="p">)</span>
+</code></pre></div>
+<p>This example will return "spotify:track:0BCPKOYdS2jbQ8iyB56Zns" regarding you have provided a client_id and client_secret. This URI/ID relates to Clocks by Coldplay in Spotify's database.</p>
+<h3 id="getting-audio-data">
+<span style="position:relative"><a class="anchor" href="#getting-audio-data"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Audio Data</span></h3>
+<p>In the project I gathered audio data in blocks of 50; this example will only demonstrate one URI at a time. To get data of many songs at once pass a list of URI's to sp.audio_features().</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">spotipy</span>
+<span class="kn">from</span> <span class="nn">spotipy.oauth2</span> <span class="kn">import</span> <span class="n">SpotifyClientCredentials</span>
+
+<span class="c1"># Make your own Spotify app at https://beta.developer.spotify.com/dashboard/applications</span>
+<span class="n">client_id</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">client_secret</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="s1">'spotify:track:0BCPKOYdS2jbQ8iyB56Zns'</span>
+
+<span class="n">client_credentials_manager</span> <span class="o">=</span> <span class="n">SpotifyClientCredentials</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="o">=</span><span class="n">client_secret</span><span class="p">)</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">spotipy</span><span class="o">.</span><span class="n">Spotify</span><span class="p">(</span><span class="n">client_credentials_manager</span><span class="o">=</span><span class="n">client_credentials_manager</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">trace</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">audio_features</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">'Energy:'</span><span class="p">,</span> <span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'energy'</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">'Calence:'</span><span class="p">,</span> <span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'valence'</span><span class="p">])</span>
+</code></pre></div>
+<p>This example should return: Energy: 0.749, Valence: 0.261</p>
+<h2 id="conclusion">
+<span style="position:relative"><a class="anchor" href="#conclusion"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Conclusion</span></h2>
+<p>Using this data, I had created a <a href="https://scikit-learn.org/stable/modules/svm.html">Support Vector Machine with scikit-learn</a> which then allowed us to provide a valence and energy value and be given a tag either as HAPPY or SAD back. Different playlists could have been provided to this project to make a different area of moods on the plane to give more variation in the moods returned.</p>
+<p>In my opinion, this method worked quite well and was successful for our final project as it was able to detect emotion with high confidence. The method to compare valence and energy was later changed to <a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">scikit-learn's K Nearest Neighbours classifier</a> on request of another student (their time delay).</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/colour/" title="Colour">
+<span>←</span>
+<span class="btn-content">Colour</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/interesting-sites/" title="Interesting Sites">
+<span class="btn-content">Interesting Sites</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/finding-emotion-in-music-with-python/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/finding-emotion-in-music-with-python/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/python-auto-clicker/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Python Auto Clicker - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Python Auto Clicker" property="og:title"/>
+<meta content="This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys." property="og:description"/>
+<meta content="/posts/python-auto-clicker/feature.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/python-auto-clicker/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Python Auto Clicker</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">9 Feb 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#YouTube">YouTube</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#mouse">mouse</a>
+<a class="badge badge-warning" href="/blog/tags/#pynput">pynput</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">5 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fpython-auto-clicker%2F"/>
+</div>
+<p class="lead">This is a script that allows you to click your mouse repeatedly with a small delay. It works on Windows, Mac and Linux and can be controlled with user-defined keys.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-this">What is this?</a></li>
+<li><a href="#pip">PIP</a></li>
+<li><a href="#installing-pynput">Installing Pynput</a></li>
+<li><a href="#writing-the-code">Writing the Code</a></li>
+<li><a href="#using-the-script">Using the Script</a></li>
+<li><a href="#final-code">Final Code</a></li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError: No module named 'pynput'</a></li>
+<li><a href="#i-got-a-syntaxerror">I got a SyntaxError</a></li>
+<li><a href="#python-is-not-recognized-as-an-internal-or-external-command">'python' is not recognized as an internal or external command</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/eamTeszpeZ4"></iframe>
+</div>
+</div>
+</p>
+<h2 id="what-is-this">
+<span style="position:relative"><a class="anchor" href="#what-is-this"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is this?</span></h2>
+<p>This project uses the cross-platform module pynput to control the mouse and monitor the keyboard at the same time to create a simple auto clicker.</p>
+<h2 id="pip">
+<span style="position:relative"><a class="anchor" href="#pip"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>PIP</span></h2>
+<p>If you haven't used or setup pip before, look at my tutorial on <a href="/blog/post/how-to-setup-pythons-pip/">how to setup python's pip</a> to setup pip.</p>
+<h2 id="installing-pynput">
+<span style="position:relative"><a class="anchor" href="#installing-pynput"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Pynput</span></h2>
+<p>We will be using the pynput module to listen to mouse events. To install this module execute <code>pip install pynput</code> in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.</p>
+<p><img alt="Installing pynput" class="lazyload blur-up" data-src="/posts/how-to-get-mouse-clicks-with-python/pynput1.png" height="163" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAACCAYAAABsfz2XAAAATUlEQVR4nAXBwQmAQAxFwZe4IqIHz4I1CNp/YWuS/c7YeV3K3vkiyAgqk6zCACEADGNUcT8vvvvMJuOYZpqMGEI4wxwxMXDUGiwrmckPwcAi4B3TeH4AAAAASUVORK5CYII=" style="; aspect-ratio: 989/163; height: auto;" width="989"/></p>
+<p>To double-check that it was installed successfully, open up IDLE and execute the command <code>import pynput</code>; no errors should occur.</p>
+<p><img alt="Testing pynput" class="lazyload blur-up" data-src="/posts/how-to-get-mouse-clicks-with-python/pynput2.png" height="150" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAADCAYAAABMFFUxAAAAdklEQVR4nD3LOw6DMBQF0Xn28w8L9r8vFkIaNzHmpohENdJIx87z1LEfRHdyTkgAotYKgJkh6e1aC0l8rgsvOdO3xr0WOSXmfeOeCBawYH/0/FHKiVIKwYwxBt5rYd8y4/uw9Y6ZEWNkzkkIAQBJSMLd39da4wc2kzFKSqutqAAAAABJRU5ErkJggg==" style="; aspect-ratio: 760/150; height: auto;" width="760">.</img></p>
+<h2 id="writing-the-code">
+<span style="position:relative"><a class="anchor" href="#writing-the-code"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Writing the Code</span></h2>
+<p>First, we need to import time and threading. Then import Button and Controller from pynput.mouse so we can control the mouse and import Listener and KeyCode from pynput.keyboard so we can watch for keyboard events to start and stop the auto clicker.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">pynput.mouse</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Listener</span><span class="p">,</span> <span class="n">KeyCode</span>
+</code></pre></div>
+<p>Next create four variables as shown below. 'delay' will be the delay between each button click. 'button' will be the button to click, this can be either 'Button.left', 'Button.right' or even 'Button.middle'. 'start_stop_key' is the key you want to use to start and stop the auto clicker. I have set it to the key 's' to make it nice and simple, you can use any key here. Finally, the 'exit_key' is the key to close the program set it like before, but make sure it is a different key.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">delay</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">button</span> <span class="o">=</span> <span class="n">Button</span><span class="o">.</span><span class="n">left</span>
+<span class="n">start_stop_key</span> <span class="o">=</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'s'</span><span class="p">)</span>
+<span class="n">exit_key</span> <span class="o">=</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'e'</span><span class="p">)</span>
+</code></pre></div>
+<p>Now create a class that extends threading.Thread that will allow us to control the mouse clicks. Pass they delay and button to this and have two flags that determine whether it is running or if the whole program is stopping.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ClickMouse</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">button</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ClickMouse</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">delay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="n">button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">program_running</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+<p>Next, add the methods shown below to control the thread externally.</p>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">start_clicking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">stop_clicking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_clicking</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">program_running</span> <span class="o">=</span> <span class="kc">False</span>
+</code></pre></div>
+<p>Now we need to create the method that is run when the thread starts. We need to keep looping while the program_running is true and then create another loop inside that checks if the running is set to true. If we are inside both loops, click the set button and then sleep for the set delay.</p>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">program_running</span><span class="p">:</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+                <span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</code></pre></div>
+<p>Now we want to create an instance of the mouse controller, create a ClickMouse thread and start it to get into the loop in the run method.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">mouse</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">()</span>
+<span class="n">click_thread</span> <span class="o">=</span> <span class="n">ClickMouse</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">button</span><span class="p">)</span>
+<span class="n">click_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</code></pre></div>
+<p>Now create a method called on_press that takes a key as an argument and setup the keyboard listener.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">with</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<p>Now modify the on_press method. If the key pressed is the same as the start_stop_key, stop clicking if the running flag is set to true in the thread otherwise start it. If the key pressed is the exit key, call the exit method in the thread and stop the listener. The new method will look like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">start_stop_key</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">click_thread</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="n">click_thread</span><span class="o">.</span><span class="n">stop_clicking</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">click_thread</span><span class="o">.</span><span class="n">start_clicking</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">exit_key</span><span class="p">:</span>
+        <span class="n">click_thread</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        <span class="n">listener</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div>
+<p>This script can be saved as a .pyw to run in the background. It can easily be still closed using the set exit key even when no dialog is shown.</p>
+<h2 id="using-the-script">
+<span style="position:relative"><a class="anchor" href="#using-the-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Using the Script</span></h2>
+<p>To use this script set the variables at the top to what you want.</p>
+<ul>
+<li><code>delay</code>: They delay between each mouse click (in seconds)</li>
+<li><code>button</code>: The mouse button to click; <code>Button.left</code> | <code>Button.middle</code> | <code>Button.right</code></li>
+<li><code>start_stop_key</code>: They key to start and stop clicking. Make sure this is either from the Key class or set using a KeyCode as shown.</li>
+<li><code>exit_key</code>: The key to stop the program. Make sure this is either from the Key class or set using a KeyCode as shown.</li>
+</ul>
+<p>Then run the script and use the start/stop key when wanted. Press the set exit key to exit.</p>
+<h2 id="final-code">
+<span style="position:relative"><a class="anchor" href="#final-code"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Code</span></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">pynput.mouse</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Listener</span><span class="p">,</span> <span class="n">KeyCode</span>
+
+
+<span class="n">delay</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">button</span> <span class="o">=</span> <span class="n">Button</span><span class="o">.</span><span class="n">left</span>
+<span class="n">start_stop_key</span> <span class="o">=</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'s'</span><span class="p">)</span>
+<span class="n">exit_key</span> <span class="o">=</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'e'</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ClickMouse</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">,</span> <span class="n">button</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ClickMouse</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">delay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="n">button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">program_running</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">start_clicking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">stop_clicking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_clicking</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">program_running</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">program_running</span><span class="p">:</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+                <span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+
+<span class="n">mouse</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">()</span>
+<span class="n">click_thread</span> <span class="o">=</span> <span class="n">ClickMouse</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">button</span><span class="p">)</span>
+<span class="n">click_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">start_stop_key</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">click_thread</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="n">click_thread</span><span class="o">.</span><span class="n">stop_clicking</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">click_thread</span><span class="o">.</span><span class="n">start_clicking</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">exit_key</span><span class="p">:</span>
+        <span class="n">click_thread</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        <span class="n">listener</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+
+<span class="k">with</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="common-issues-and-questions">
+<span style="position:relative"><a class="anchor" href="#common-issues-and-questions"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Common Issues and Questions</span></h2>
+<h3 id="modulenotfounderrorimporterror-no-module-named-pynput">
+<span style="position:relative"><a class="anchor" href="#modulenotfounderrorimporterror-no-module-named-pynput"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>ModuleNotFoundError/ImportError: No module named 'pynput'</span></h3>
+<p>Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.</p>
+<h3 id="i-got-a-syntaxerror">
+<span style="position:relative"><a class="anchor" href="#i-got-a-syntaxerror"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>I got a SyntaxError</span></h3>
+<p>Syntax errors are caused by you and there is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally, people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs <a href="https://docs.python.org/2/tutorial/errors.html#syntax-errors">here</a>.</p>
+<h3 id="python-is-not-recognized-as-an-internal-or-external-command">
+<span style="position:relative"><a class="anchor" href="#python-is-not-recognized-as-an-internal-or-external-command"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>'python' is not recognized as an internal or external command</span></h3>
+<p>Python hasn't been installed or it hasn't been installed properly. Go to <a href="/blog/post/how-to-setup-pythons-pip/">/blog/post/how-to-setup-pythons-pip/</a> and follow the tutorial. Just before you enter the scripts folder into the path variable, remove the "\scripts\" part at the end. You will also want to add another path with "\scripts\" to have pip.</p>
+<p><em>Edited 11/08/18: Added Python 2 support</em></p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-retweet-bot/" title="Python Retweet Bot">
+<span>←</span>
+<span class="btn-content">Python Retweet Bot</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/auto-py-to-exe/" title="Auto Py To Exe">
+<span class="btn-content">Auto Py To Exe</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/python-auto-clicker/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/python-auto-clicker/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
