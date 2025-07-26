@@ -15,24 +15,17 @@ EXTERNAL_URL_BLACKLIST = [
     r'^http://127.0.0.1',
     r'^http://localhost',
     r'^https://hitcounternitratine.pythonanywhere.com',  # Loves dying quite often at the moment
-    r'^https://www.pexels.com',  # Keeps giving forbiddens?
+    r'^https://www.pexels.com',  # 403
     r'^https://nzcsc.org.nz',  # Doesn't seem to be up anymore
-    r'^https://genius.com',  # 403
     r'^https://www.namesilo.com',  # 403
     r'^https://www.buymeacoffee.com',  # 403
-    r'^https://www.digitalcitizen.life',  # 403
     r'^https://www.dabeaz.com',  # SSL error
     r'^https://www.tablesgenerator.com',  # SSL error
-    r'^https://www.pdfescape.com',  # SSL error
-    r'^https://www.lfd.uci.edu',  # SSL error
     r'^https://www.reddit.com',  # 403
     r'^https://stackoverflow.com',  # 403
-    r'^https://cs.stackexchange.com',  # 403
     r'^https://raspberrypi.stackexchange.com',  # 403
-    r'^https://crypto.stackexchange.com',  # 403
     r'^https://www.opendronemap.org',  # 403
     r'^https://simpleicons.org',  # 403
-    r'^https://sourceforge.net',  # 403
     r'^https://unsplash.com',  # 403
     r'^https://github.com',  # 429
     r'^https://www.cvedetails.com',  # 403
