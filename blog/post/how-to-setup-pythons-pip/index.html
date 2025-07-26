@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-setup-pythons-pip/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How To Setup Python's PIP - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This tutorial demonstrates how to set up Python's PIP. PIP is a package manager for pip that allows you to download third-party modules easily. I explain how to find your scripts folder and how to find pip." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How To Setup Python's PIP" property="og:title"/>
+<meta content="This tutorial demonstrates how to set up Python's PIP. PIP is a package manager for pip that allows you to download third-party modules easily. I explain how to find your scripts folder and how to find pip." property="og:description"/>
+<meta content="/posts/how-to-setup-pythons-pip/youtube-thumbnail.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-setup-pythons-pip/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How To Setup Python's PIP</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2017">13 Dec 2017</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#YouTube">YouTube</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">3 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-setup-pythons-pip%2F"/>
+</div>
+<p class="lead">This tutorial demonstrates how to set up Python's PIP. PIP is a package manager for pip that allows you to download third-party modules easily. I explain how to find your scripts folder and how to find pip.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#setting-up">Setting Up</a></li>
+<li><a href="#a-shortcut">A Shortcut</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#when-editing-the-path-variable-i-can-only-edit-the-variable">When editing the PATH variable, I can only edit the variable</a></li>
+<li><a href="#it-still-isnt-working">It Still Isn't Working</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/cm6WDGAzDPM"></iframe>
+</div>
+</div>
+</p>
+<h2 id="setting-up">
+<span style="position:relative"><a class="anchor" href="#setting-up"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting Up</span></h2>
+<p>If you haven't used pip before on your computer, go to cmd and type 'pip'. If not errors appear you can move to the next step. If pip is not recognised, you need to set it up. Regarding you have python installed (you would not believe some of the comments on this video), open windows explorer (file search) and right-click on computer in the side menu.</p>
+<p><img alt="Properties for this pc" class="lazyload blur-up" data-src="/posts/how-to-setup-pythons-pip/demo1.png" height="704" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAABBUlEQVR4nGXNMU7DQBBG4X9mdr1rYxxITUNNSwUFSBQchzPQc5PUCHECHwA4AJGQSIpEiiAm3t0ZCgQNX/2kRze3d9fnpxUVcT4VY6gwETEAAERQVe/9/cOjOzs5vrq8WK9XTRPXAwWkaVeL9wQQYEDOxTt5fnpxzglDm+gd4ejAZ2U1o1zMkhkRccpZOADKKSkTVxU+dlsWN+bhM2XnZBy3P+sYAjOLiFPkzdeOxlGKpZTa2IEIsLqeELGZqSozmxlHHzx0sVwZuWEYcikp5VLUDPqrlKKqbrLf7jW1FybTrjvEPyICIITgZrPZ5nU+bdtFVc2X72/bwYuY2V+qqjHGvu+/AYZei2+ZXtB5AAAAAElFTkSuQmCC" style="; aspect-ratio: 1244/704; height: auto;" width="1244"/></p>
+<p>Now click on "Advanced system settings" in the sidebar in the control panel.</p>
+<p><img alt="Advanced system settings" class="lazyload blur-up" data-src="/posts/how-to-setup-pythons-pip/demo2.png" height="602" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAWCAYAAAAfD8YZAAACo0lEQVR4nIWUy24kRRBFT2RlVfXDrupuY2aDhJAQCyQWsEaj+To+gTWfwooFPzGsMON3v6orH5HBomxGzFjylXKVeTNuxr0Z8suvv9kP333DmVMuvlhTC2Q8IoKqknNGRBARnlFKwTkHv//xp6mZqaqZmd2NZrmYxRBsHEczM8s5WwjRYowWQjQzsxiT+cYSzoxsRo6BeFJOKuQwUsxQzVgp/ykwDGHOaRzxvm6ISdluD9S1Z25GXc04W68BiNk4nhRXCwhoVh6PhbY5w119uGIYDjS1p6hSNzVN7bFSMDNyHAnDjnjaE4Y9i7Zi3joqV/BDipyyIlKRoiItLJwAU4OaxlOR0KhU3pPCgfOuB8C721u4+geo8Rjx3qEXPeIEudjgfU0za9nvj6CF7XZPCAkzw3fv/yJ/+xMxN4gYArz/+0R3vOXy3Y+Urme5WNJ1PWYGgKpiBn7981u++v5r9Nk7ADOMN8h5xxhGHh+3bDYbRATvPd77SbZeXiJvvsQBjs8xny84Ho5cf7hmuVzSrXq8OMwKXlICMygF3Cf0p1QJU8XNxebjFoJHhP+tF+CqinA4cHN9Q1VVhBhZr1f4F09/AtUpXSkl+lVP5xwivE42M9q2xbkKsyk43ntK0dfJYRwZTicqVyECw3Hg8eGB+WL5Onk2nzMMAzFEUkpcXF6y3qwpRV905/M3F2UMgX61YjZrAXCuer2yqtLUDb6vWSwXpJSekiYfyc+T4imB07cQKKqEEDCD25tbXOWYtTOKlUm2WSHn9HTJk90ydbpuGtq2JadEKQURx/L8jNWqx3tfEaOy2x1ZLg3Vgogwmzf4ampJVVX4up68DoH9bj+Rt7sd+/2OECIpBUqZdDenaSgA3N/dsX3c0vU9XdeRc+Lh4Z5/AYDbgC+w9bkxAAAAAElFTkSuQmCC" style="; aspect-ratio: 404/602; height: auto;" width="404"/></p>
+<p>In the new window, make sure you are in the "Advanced" tab (top) and then click the "Environment Variables" button.</p>
+<p><img alt="Advanced tab and environmental variables button" class="lazyload blur-up" data-src="/posts/how-to-setup-pythons-pip/demo3.png" height="484" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAARCAYAAAACCvahAAACPUlEQVR4nH2STXNbVQyGHx3p+l7HsW/qkjid0jaeaZctv5j+JGC6gE6ZsmMGKEmcmDjnfhyJhYNLN9VaevXqeSXfv30b64s1pRQkJZbLR0RKMBacQESIUogIACICd+f9+1+wV69e8ub1G3LO1JMaqydMfv2IW4UOA8NqRTxeIu6klCilMJvNMDMMhK7r6PsedydfXzG9umJ0h76nWMLLiLijSRnGgdX5Off391jTTJk2DTl3mBlnqxXy9CmlH3CCqqqIUgBwd0pxkginp99g/bi/J+dM09TknCEC98AqIw8DEYGqYprQBE094exshWk4i7Zl0bYHGF+UCESQx+Dn335HgBfPpjAOWFKllELOHc20QVW/mPXYEzd1Hs2PIIJahWIVJiLcbDb89ekT8/mcum5QTYCgqsznxwDUlnj57elB9O87x9yd9qTlaDZ7gBKkJEQEKSVE5ADr+vqKANq23btxd1QNVeNrJQK3t7d4BPPj4/2wVcbl5SWbzQ2VGSThpD3BbM9CJAFBSsp6vT6IbbdbzIszm80AoaqMiKA85DqOw2f7qaBdAqCqKgAMoGkamqb5qm2Ajx8+EAHPL16QTDF5gFNKIaX0uTOCEIHNDZc//MjOlCYl+uJs//iTWJ3tge2ByIEsgPwnpIqpYmbgjqZEpcoogulDHOHO/3+r73u22y2TuiZ995q665hOj+i6zK4Uenfsp3fv6PuBnDOS9psF4e7uH5bLxzx5ck7OmbvdjsViwW63o5TC0XTKvzfOH55V2UPsAAAAAElFTkSuQmCC" style="; aspect-ratio: 427/484; height: auto;" width="427"/></p>
+<p>In the new window that just appeared, go to the second section - "System variables" and scroll down until you find the "Path" variable. Click on it and then click the edit button below.</p>
+<p><img alt="Path variable location" class="lazyload blur-up" data-src="/posts/how-to-setup-pythons-pip/demo4.png" height="596" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAByElEQVR4nGWSy24UQQxFj13u7pqeyUwiIRQU/gL+/wsIexDLIESYREk0z652mcU8Aoo3rlrcct3jK7dfbuP6wzVRg/liTkqJiCAiOJWInPvpvNlssJuPN9RakSSUUkCE6o6qnsWnh05dRKhRserOdrujn07x0UnJcXe6riMizpP+rWEY2G62mKYEwMvzM2bGpV3S5UzOmSCIGm/E7k51xwBUlYuLC1SFSZ4QEex3e0SEtmvfiPu+p+k6LCKY9D2LxRwQIioPywfcHVFBRWnahnEcgYOFtm1AFLm/vw8zw0dHkyIiZ+LuI09Pz+Q8oZThDLGUkem0R37e3cXhMiXnzOjOWApN2yIiqOo/4I7+A1brFdbkDlVYXM5omgzAevVCsoTKYVLbTf7zPHph+fiA3H3/Eb+WWzDDzJjkTNskRAQzIw4kzsJaA6lOkyu2+/3I128bRjvulcDqQO5aRPXwbRFAEAK1lnns+fzp/QFYGwVVRY5rG73ST3t8HFnvdnTrDb78g2pCr67YLRbsB8dUFekWeK2vWW5gVQKvwp6GfTSsi5FSwoagbgt922ClFGqtr7k9Mj3FcmLKejbj5Z1iTWKmI+x3DAJ/AWsp6MStPgb7AAAAAElFTkSuQmCC" style="; aspect-ratio: 627/596; height: auto;" width="627"/></p>
+<p>Now in the new window, click new on the right and put the folder location of your python scripts folder in. If you don't know where your python scripts folder is can execute this in a python shell or script.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'\Scripts</span><span class="se">\\</span><span class="s1">'</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="Adding script folder location" class="lazyload blur-up" data-src="/posts/how-to-setup-pythons-pip/demo5.png" height="516" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAB6ElEQVR4nF2RvW7UUBBGz8xcX3sdxc4KUtDxBDwLD0xNkZ4gKoIEkSBoiTb7Y+/eO0PhgARTTnP0nSN3n+8itxkRwd0ZhoGUEv9fRBAiaAReCu9vbkht12JmhAeiwmF/IIAIhwARQQBrW2yzYfr6jTQMXP/ckGopzNNMLZUgKKWgovQXPU3ToKrUWlAR3Ix9OaPHA8cIkqWEexC6kFWFtu0YxgEzA6DrOkSER1UgMEto15JUlYgAAvdARDmdTjz8eCDCKaXS9xeMVwPiTp1nQgt+OqHhgQiAQATujrujpkRAzpnr65f0fc/+sGccR67WV6TUkIJYTC52MFVWqxVB4I1jZkzTRExBKZXpfAQRai0kgFIrXp3xaiTnTNd1tG37T6ZaK9vtEwAqiruTlhQCAbunHQjkJtNf9Hh1UkpcDpcAiECTM01qSCmRPILUJBBBVFl1Hd1qhZnR96tntuBRn6kCsnzVRJBS4HzGp4nWhEYqWk8ct4/Muy1xOpLTUmUYR9brNWZGOn/8xLzZUNRI9cy73SWfXr1BNPClAWYzSYW3rw1d1BIRyPe7L5GBEEHCmTVzanuQAAQVYXM4Mx2OvBhW9HrGzLi/vydNptQ2Q/xZF7S+/2vaqyPHmVwrvzZ7jlIxU25vP/Abm6P+NDjB9AIAAAAASUVORK5CYII=" style="; aspect-ratio: 540/516; height: auto;" width="540"/></p>
+<p>Now type 'pip' in cmd to make sure you have done this correctly. No errors should appear.</p>
+<blockquote>
+<p>If you are using an older version of Windows, you will be presented with a one-line input field. Add a semicolon ';' to the end of the text current in the field and then add the path as you would have in the area before. <code>&lt;current text&gt;;&lt;path&gt;</code></p>
+</blockquote>
+<h2 id="a-shortcut">
+<span style="position:relative"><a class="anchor" href="#a-shortcut"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>A Shortcut</span></h2>
+<p>A while ago I made a script that automatically sets up the <code>python</code> and <code>pip</code> commands on Windows by putting their directories on the users PATH variable automatically.</p>
+<p>You can find this script in my <a href="/blog/post/fix-python-is-not-recognized-as-an-internal-or-external-command/">"Fix: 'python' is not recognized as an internal or external command"</a> post. </p>
+<h2 id="usage">
+<span style="position:relative"><a class="anchor" href="#usage"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Usage</span></h2>
+<p>You can now use commands like <code>pip install pynput</code> to install a package or "pip list" to look at all packages installed.</p>
+<p>Some useful commands:
+- <code>pip install [package]</code>: install a package like pynput or pyinstaller
+- <code>pip uninstall [package]</code>: removes an installed package
+- <code>pip list</code>: shows install packages
+- <code>pip show [package]</code>: shows information about an install package
+- <code>pip install [package] --upgrade</code>:  Updates a package</p>
+<p>You can find packages from projects on <a href="https://github.com/">GitHub</a> or <a href="https://pypi.python.org/pypi">PyPI</a>.</p>
+<h2 id="common-issues-and-questions">
+<span style="position:relative"><a class="anchor" href="#common-issues-and-questions"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Common Issues and Questions</span></h2>
+<h3 id="when-editing-the-path-variable-i-can-only-edit-the-variable">
+<span style="position:relative"><a class="anchor" href="#when-editing-the-path-variable-i-can-only-edit-the-variable"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>When editing the PATH variable, I can only edit the variable</span></h3>
+<p>Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.</p>
+<h3 id="it-still-isnt-working">
+<span style="position:relative"><a class="anchor" href="#it-still-isnt-working"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>It Still Isn't Working</span></h3>
+<p>Regarding you followed the instructions properly, this will work. One other method to call pip is by calling <code>python -m pip</code>. Using this allows us to call pip when the scripts folder is not in the PATH variable. Note that the directory of python.exe must be in the PATH variable for this to work (which means calling <code>python</code> in cmd must work first).</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/get-wifi-passwords-with-python/" title="Get WiFi Passwords With Python">
+<span>←</span>
+<span class="btn-content">Get WiFi Passwords With Python</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-get-mouse-clicks-with-python/" title="How To Get Mouse Clicks With Python">
+<span class="btn-content">How To Get Mouse Clicks With Python</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-setup-pythons-pip/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-setup-pythons-pip/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

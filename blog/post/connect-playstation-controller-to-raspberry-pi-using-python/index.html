@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/connect-playstation-controller-to-raspberry-pi-using-python/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Connect PlayStation Controller to Raspberry Pi using Python - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="We'll look at how to connect a PlayStation Controller to Raspberry Pi using Bluetooth and then receive controller events in Python using pyPS4Controller" name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Connect PlayStation Controller to Raspberry Pi using Python" property="og:title"/>
+<meta content="We'll look at how to connect a PlayStation Controller to Raspberry Pi using Bluetooth and then receive controller events in Python using pyPS4Controller" property="og:description"/>
+<meta content="/posts/connect-playstation-controller-to-raspberry-pi-using-python/feature.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/connect-playstation-controller-to-raspberry-pi-using-python/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Connect PlayStation Controller to Raspberry Pi using Python</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2024">5 Oct 2024</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#raspberry-pi">raspberry-pi</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">5 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fconnect-playstation-controller-to-raspberry-pi-using-python%2F"/>
+</div>
+<p class="lead">We'll look at how to connect a PlayStation Controller to Raspberry Pi using Bluetooth and then receive controller events in Python using pyPS4Controller</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#hardware">Hardware</a></li>
+<li><a href="#connecting-the-playstation-controller-to-the-raspberry-pi-using-bluetooth">Connecting the PlayStation Controller to the Raspberry Pi Using Bluetooth</a></li>
+<li><a href="#identifying-the-device">Identifying the Device</a></li>
+<li><a href="#receiving-playstation-controller-events-in-python">Receiving PlayStation Controller Events in Python</a><ul>
+<li><a href="#installing-pyps4controller">Installing pyPS4Controller</a></li>
+<li><a href="#getting-events">Getting Events</a></li>
+<li><a href="#detecting-more-events">Detecting More Events</a></li>
+</ul>
+</li>
+<li><a href="#disconnecting-the-controller">Disconnecting the Controller</a></li>
+<li><a href="#connecting-controller-again-later">Connecting Controller Again Later</a></li>
+<li><a href="#further-pyps4controller-usage">Further pyPS4Controller Usage</a><ul>
+<li><a href="#all-events-available">All Events Available</a></li>
+<li><a href="#stop-printing-for-events-i-dont-want">Stop Printing For Events I Don't Want</a></li>
+</ul>
+</li>
+<li><a href="#credits">Credits</a></li>
+</ul>
+</div>
+<h2 id="hardware">
+<span style="position:relative"><a class="anchor" href="#hardware"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Hardware</span></h2>
+<p>For this tutorial, I will be using a PlayStation 4 (PS4) Controller and a Raspberry Pi 5. I have tested this on a Raspberry Pi 4 also and that had no issues. This should also work for PlayStation 5 Controllers as they can connect with Bluetooth.</p>
+<h2 id="connecting-the-playstation-controller-to-the-raspberry-pi-using-bluetooth">
+<span style="position:relative"><a class="anchor" href="#connecting-the-playstation-controller-to-the-raspberry-pi-using-bluetooth"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Connecting the PlayStation Controller to the Raspberry Pi Using Bluetooth</span></h2>
+<p>The first step is to connect the controller to the Raspberry Pi.</p>
+<p>On your Raspberry Pi, start Bluetooth scanning by doing the following:</p>
+<ol>
+<li>Execute <code>bluetoothctl</code> in a terminal to open an interactive tool for controlling Bluetooth</li>
+<li>Do not exit this yet</li>
+<li>Execute <code>scan on</code> to start scanning</li>
+</ol>
+<p>Now turn your PS4 controller on by holding down the PlayStation button and the share button at the same time until the light at the top of the controller starts flashing light blue.</p>
+<p>After the light starts flashing, you should see your device show up in the interactive Bluetooth session with a name like "Wireless Controller". Execute <code>devices</code> to see all devices that has been found by the Raspberry Pi. You should see your device as something like "10:18:49:88:10:DE Wireless Controller" - this gives you the MAC address.</p>
+<p>Now that you have the MAC address (10:18:49:88:10:DE in the example above), we can pair and connect:</p>
+<ol>
+<li>Execute <code>pair [MAC_ADDRESS]</code> (e.g. <code>pair 10:18:49:88:10:DE</code>)</li>
+<li>Execute <code>connect [MAC_ADDRESS]</code> (e.g. <code>connect 10:18:49:88:10:DE</code>)</li>
+<li>Execute <code>trust [MAC_ADDRESS]</code> (e.g. <code>trust 10:18:49:88:10:DE</code>)</li>
+</ol>
+<p>After executing step two above, you should have noticed that the light at the top of the controller has stopped flashing and is now solid blue - this means it's connected.</p>
+<p>If it is not solid blue, you may have connected to something else!</p>
+<p>You can type <code>exit</code> to leave <code>bluetoothctl</code> now.</p>
+<h2 id="identifying-the-device">
+<span style="position:relative"><a class="anchor" href="#identifying-the-device"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Identifying the Device</span></h2>
+<p>When the controller connects, a new file is created in <code>/dev/input</code> - typically it is <code>/dev/input/js0</code>.</p>
+<p>In a terminal, execute <code>ls /dev/input -al</code>; in this list you should see <code>js0</code>. If you do not, ensure the controller is not flashing light blue.</p>
+<h2 id="receiving-playstation-controller-events-in-python">
+<span style="position:relative"><a class="anchor" href="#receiving-playstation-controller-events-in-python"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Receiving PlayStation Controller Events in Python</span></h2>
+<h3 id="installing-pyps4controller">
+<span style="position:relative"><a class="anchor" href="#installing-pyps4controller"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing pyPS4Controller</span></h3>
+<p>Before running any Python, we need to install <code>pyPS4Controller</code>. To do this, execute <code>pip install pyPS4Controller</code>.</p>
+<p>In an interactive Python session, you should be able to execute <code>from pyPS4Controller.controller import Controller</code> with no error.</p>
+<h3 id="getting-events">
+<span style="position:relative"><a class="anchor" href="#getting-events"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Events</span></h3>
+<p>Here is a sample modified from the <a href="https://github.com/ArturSpirin/pyPS4Controller">pyPS4Controller docs</a>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyPS4Controller.controller</span> <span class="kn">import</span> <span class="n">Controller</span>
+
+<span class="k">class</span> <span class="nc">MyController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Controller</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_x_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s2">"x button pressed!"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_x_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s2">"x button released!"</span><span class="p">)</span>
+
+<span class="n">controller</span> <span class="o">=</span> <span class="n">MyController</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="s2">"/dev/input/js0"</span><span class="p">,</span> <span class="n">connecting_using_ds4drv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</code></pre></div>
+<p>Creating a new Python file, adding the above and executing it, should print out "x button pressed!" when you press x and "x button released!" when you release x.</p>
+<p>Use Ctrl+C to stop the script.</p>
+<h3 id="detecting-more-events">
+<span style="position:relative"><a class="anchor" href="#detecting-more-events"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Detecting More Events</span></h3>
+<p>Look at <a href="https://github.com/ArturSpirin/pyPS4Controller">https://github.com/ArturSpirin/pyPS4Controller</a> for more usage and events you can detect. Look at the <a href="https://github.com/ArturSpirin/pyPS4Controller/blob/724c87d5d2449b192e8ee697da5b5c61d11613e4/pyPS4Controller/controller.py#L6"><code>Action</code> class here</a> for how to use each function (as some provide values - like triggers and joysticks).</p>
+<p><a href="https://github.com/ArturSpirin/pyPS4Controller/blob/724c87d5d2449b192e8ee697da5b5c61d11613e4/pyPS4Controller/controller.py#L6">From this class</a>, we can see <code>MyController</code> can be expanded to handle more events:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Controller</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+     <span class="k">def</span> <span class="nf">on_x_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_x_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_x_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_x_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_triangle_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_triangle_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_triangle_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_triangle_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_circle_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_circle_press"</span><span class="p">)</span>
+
+    <span class="c1"># ...</span>
+</code></pre></div>
+<h2 id="disconnecting-the-controller">
+<span style="position:relative"><a class="anchor" href="#disconnecting-the-controller"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Disconnecting the Controller</span></h2>
+<ol>
+<li>Execute <code>bluetoothctl</code> in a terminal</li>
+<li>Execute <code>disconnect [MAC_ADDRESS]</code></li>
+<li>Execute <code>exit</code></li>
+</ol>
+<p>Disconnecting the controller will also turn it off.</p>
+<h2 id="connecting-controller-again-later">
+<span style="position:relative"><a class="anchor" href="#connecting-controller-again-later"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Connecting Controller Again Later</span></h2>
+<p>If your Raspberry Pi was the last thing your controller connected to, holding the PlayStation button until it starts flashing light blue will allow it to automatically connect back to the Raspberry Pi. This is because the Raspberry Pi has trusted the controller and the controller automatically connects to the last thing it connected to.</p>
+<p>If your Raspberry Pi was not the last thing the controller connected to, you will only need to use <code>connect MAC_ADDRESS</code> (within <code>bluetoothctl</code>).</p>
+<h2 id="further-pyps4controller-usage">
+<span style="position:relative"><a class="anchor" href="#further-pyps4controller-usage"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Further pyPS4Controller Usage</span></h2>
+<h3 id="all-events-available">
+<span style="position:relative"><a class="anchor" href="#all-events-available"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>All Events Available</span></h3>
+<p>These are all the events you can handle with functions:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MyController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Controller</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_x_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_x_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_x_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_x_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_triangle_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_triangle_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_triangle_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_triangle_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_circle_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_circle_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_circle_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_circle_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_square_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_square_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_square_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_square_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L1_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L1_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L1_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L1_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L2_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L2_press: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_L2_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L2_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R1_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R1_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R1_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R1_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R2_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R2_press: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_R2_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R2_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_up_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_up_arrow_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_up_down_arrow_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_up_down_arrow_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_down_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_down_arrow_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_left_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_left_arrow_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_left_right_arrow_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_left_right_arrow_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_right_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_right_arrow_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_up: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_down: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_left: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_right: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_y_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_y_at_rest"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_x_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_x_at_rest"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_L3_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_up: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_down: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_left: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_right: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_y_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_y_at_rest"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_x_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_x_at_rest"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_R3_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_options_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_options_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_options_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_options_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_share_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_share_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_share_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_share_release"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_playstation_button_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_playstation_button_press"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_playstation_button_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"on_playstation_button_release"</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>This is slightly modified from <a href="https://github.com/ArturSpirin/pyPS4Controller/blob/724c87d5d2449b192e8ee697da5b5c61d11613e4/pyPS4Controller/controller.py">controller.py in pyPS4Controller</a></p>
+</blockquote>
+<h3 id="stop-printing-for-events-i-dont-want">
+<span style="position:relative"><a class="anchor" href="#stop-printing-for-events-i-dont-want"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Stop Printing For Events I Don't Want</span></h3>
+<p>You may have noticed that even though you didn't add a <code>print</code> to an event, it still prints out. This is because the library does this by default. To stop this, you can create a class that overrides all of these calls with nothing. Then inherit this class that does nothing and set your events on that.</p>
+<p>Here is what I use:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyPS4Controller.controller</span> <span class="kn">import</span> <span class="n">Controller</span>
+
+
+<span class="k">class</span> <span class="nc">SilencedPyPS4Controller</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Controller</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_x_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_x_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_triangle_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_triangle_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_circle_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_circle_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_square_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_square_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L1_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L1_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L2_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L2_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R1_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R1_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R2_press</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R2_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_up_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_up_down_arrow_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_down_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_left_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_left_right_arrow_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_right_arrow_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_y_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_x_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_L3_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_y_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_x_at_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_R3_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_options_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_options_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_share_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_share_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_playstation_button_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">on_playstation_button_release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">MyController</span><span class="p">(</span><span class="n">SilencedPyPS4Controller</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">SilencedPyPS4Controller</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_R1_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s2">"R1 was pressed"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_L1_press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s2">"L1 was pressed"</span><span class="p">)</span>
+
+<span class="n">controller</span> <span class="o">=</span> <span class="n">MyController</span><span class="p">(</span><span class="n">interface</span><span class="o">=</span><span class="s2">"/dev/input/js0"</span><span class="p">,</span> <span class="n">connecting_using_ds4drv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</code></pre></div>
+<p>Now when I run this, it will only <code>print</code> when I press R1 or L1 - doing any other action on the controller will not <code>print</code> now.</p>
+<h2 id="credits">
+<span style="position:relative"><a class="anchor" href="#credits"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Credits</span></h2>
+<ul>
+<li><a href="https://unsplash.com/photos/black-sony-ps-4-game-controller-8qkQUtBQiTg">Feature image by Claudio Schwarz</a></li>
+</ul>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/getting-an-ssl-error-because-a-website-uses-hsts-even-though-it-never-sends-the-header/" title="Getting an SSL error because a website uses HSTS even though it never sends the header?">
+<span>←</span>
+<span class="btn-content">Getting an SSL error because a website uses HSTS even though it never sends the header?</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/connect-playstation-controller-to-raspberry-pi-using-python/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/connect-playstation-controller-to-raspberry-pi-using-python/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

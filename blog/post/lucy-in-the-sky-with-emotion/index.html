@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/lucy-in-the-sky-with-emotion/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Lucy In The Sky With Emotion - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This project aimed to visualise emotion in music with software developed by six people from the COMP241 (Software Engineering Development) paper as a group project. The project was successful in the end using Spotify to assist emotion detection." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Lucy In The Sky With Emotion" property="og:title"/>
+<meta content="This project aimed to visualise emotion in music with software developed by six people from the COMP241 (Software Engineering Development) paper as a group project. The project was successful in the end using Spotify to assist emotion detection." property="og:description"/>
+<meta content="/posts/lucy-in-the-sky-with-emotion/visualiser5.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/lucy-in-the-sky-with-emotion/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Lucy In The Sky With Emotion</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2017">21 Dec 2017</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Projects">Projects</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#machine-learning">machine-learning</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">4 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Flucy-in-the-sky-with-emotion%2F"/>
+</div>
+<p class="lead">This project aimed to visualise emotion in music with software developed by six people from the COMP241 (Software Engineering Development) paper as a group project. The project was successful in the end using Spotify to assist emotion detection.</p>
+<hr class="mt-3 mb-0"/>
+<div class="github-summary py-3 d-block text-center">
+<a class="repo-name stretched-link" href="https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion">
+<img alt="GitHub Icon" src="/static/img/github-icon.png">
+<span class="ml-2">brentvollebregt/Lucy-In-The-Sky-With-Emotion</span>
+</img></a>
+<div class="repo-stats">
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/brentvollebregt/Lucy-In-The-Sky-With-Emotion?style=social"/>
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/brentvollebregt/Lucy-In-The-Sky-With-Emotion?style=social"/>
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/brentvollebregt/Lucy-In-The-Sky-With-Emotion"/>
+</div>
+</div>
+<hr class="my-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-this">What is this?</a></li>
+<li><a href="#demonstration-and-screenshots">Demonstration and Screenshots</a><ul>
+<li><a href="#gui-emotion-detection">GUI - Emotion Detection</a></li>
+<li><a href="#gui-valence-energy-graph">GUI - Valence Energy Graph</a></li>
+<li><a href="#visualiser">Visualiser</a></li>
+<li><a href="#installation-and-setup">Installation and Setup</a><ul>
+<li><a href="#issues">Issues</a></li>
+</ul>
+</li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#credits">Credits</a><ul>
+<li><a href="#developers">Developers</a></li>
+<li><a href="#project-managers">Project Managers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="what-is-this">
+<span style="position:relative"><a class="anchor" href="#what-is-this"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is this?</span></h2>
+<p>This project takes a local library of music that is tagged and will predict the emotion of the song of either happy or sad. This data can then be passed to a visualiser which will play the selected song along with five other recommended songs based off its emotional position on a valence energy plane.</p>
+<p>When the project is first started it will create a sklearn.neighbors.KNeighborsClassifier instance and be provided <a href="/blog/post/finding-emotion-in-music-with-python/">previously researched data</a> for points to be compared to later. The Browse button then needs to be clicked and a directory selected. The music library is then scraped for tags and searches for them in Spotify. We then get audio data from Spotify for each song (if possible) and present the data on the GUI. When a user clicks on a song, recommendations of the five nearest songs based on emotion, song data and the point on the emotion gradient are all displayed to the user. When the user clicks the Visualise button, data will be sent to the visualiser and started.</p>
+<h2 id="demonstration-and-screenshots">
+<span style="position:relative"><a class="anchor" href="#demonstration-and-screenshots"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Demonstration and Screenshots</span></h2>
+<h3 id="gui-emotion-detection">
+<span style="position:relative"><a class="anchor" href="#gui-emotion-detection"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>GUI - Emotion Detection</span></h3>
+<p><img alt="Emotion detection - Lucy in the sky with diamonds" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/gui1.png" height="729" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAACJUlEQVR4nHWSwW4USwxFj101PZ1JSAIsyIYNekhvE17+iZ8jX8E/EFYICSmQBNALyqRnuqurq2wWPcwOS5a88L32ta+8u7x03Dk8PORv4e6EEBARAMyMWityfn7uq9UKABFBVTGzXS3ggqjw+PhIKWVPICLE5XI5syKwA4fgmBkwA1WEtj3Yk7obAPHPaqJC07SYGVYrtU64Fczh5OQZy/YAEcHMcDc2m464WCx48+Y/YgyYGaUUUko0TcOPu1tyqVxcXJBSQlXp+x6A6+vreXIISghhn2ZGjBEJke1jx83NLdOUcYdaCwDDkGawu+PulFKYpml/UXNwM7bb7f6Qf/rN6k6zO7ijAvisWbXhaFHJqwPOzl7Qti05T5hVQojkPBIdSEVYiFLNqdKQyoA6qPhM5jCOI6UUzOZPmBlxoc7r0y3tcslUClYrAKojn5IzmYJVUq67V4GbYu5ER0g1UEajVMAFM0cV+gzgO2M44LNCmWXGYsK37QrVgAgMKTHliaaJ3A+BoAKi4CA7T+hsHyJe0eEny0VgzJnGnFaFh7XR+MDdwwNXVx8wBENwCVQXPA9EM+fXumcYtqgGmqah6zqOTp4zmaKh4Z+Xrzhmw5F1HPqWp6x5/12J7s7DZmQqjllGh0JKE1U7xr7DD87Y/PuW4/qVY7vjzO54JTdc9d9mcNetUVVyztRaCUG5v0+oFUxHPn75zLWteeI9T1w5lVNu+//5DdEjaHQhqnI9AAAAAElFTkSuQmCC" style="; aspect-ratio: 676/729; height: auto;" width="676">
+<img alt="Emotion detection - All Star" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/gui2.png" height="729" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAACJUlEQVR4nEWS3W4cRRCFv1Pd4921YwckBJYQN4ELhEwEvBJvBzwGT5DccGMRAmQD5MfeXc/sznRVcTH2pqWWWqVT/ZXqHP308y9Za6HWioBM+PD4cMwMSQBkJhGBrq6u8uzsdO6QKFaIDASYzWKpsNlsaG0CCd3/X1fLJV0piKQIzJJI4fdkSVQ5jxaFPBGS8ABXoSbQMDoTq+J4BAEMbhAjkeLTixVni3PEPG5gvNkdqF3X8cN339LVytQcgAgHxPD2Jf9unW+efs80TWQmfd9jJuLFC2rBebL4h64IWxrLmrTWMIOX+57r18n61d9zTZrJmQzDQG0Urg+fU4oREfRDT0Ry0nW8fptEvOPubgfecA8kYWaQQRUgJZmBmehKYYzpWFuullx+dsmiK7g7U2vUUjiME/XBt1IKrTVq15GAZGQmGUmS7Pd7AFprZAQeTs3Mo+l5b09EHMMhiYyYG9wROursQZwZxwSZhLvPZBLdLyoTghmWCYaErCLrSAwPGFtgVuY0SUiGSYjEHq6gZjh+9x+lq3hrhDsWzs3WMN9ze3PDs+fPQIYnMwARh4GqTG5ut+z7O6wUThYLdpsNp48/ISIp5YSvvviSi9zxKLecsucxG35dBzWA97uRNkHEhHrncGiM2jEOW2J1ye7rH7nwP7mINZex5ole8Vv/FzVS3G53lGIcxnEe24z+3XssG2kjz3+/5o+85TwHzsP4WB+x7t/wP7sPZJ9BXw0NAAAAAElFTkSuQmCC" style="; aspect-ratio: 676/729; height: auto;" width="676"/></img></p>
+<h3 id="gui-valence-energy-graph">
+<span style="position:relative"><a class="anchor" href="#gui-valence-energy-graph"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>GUI - Valence Energy Graph</span></h3>
+<p><img alt="GUI - Valence Energy Graph" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/valence-plot.png" height="546" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAANCAYAAAB2HjRBAAABqUlEQVR4nH2SzW4UQQyEP7vd0zOzCwlJBDcukXj/p4BXQSFIQDabnf6xOWxChJDwpXwo/5Sq5P7b15iXPeuyEPyvAhDcnTEG7o6M4RHhBIGIIAgR5/4FBUFE8DivVwX3wCKcWisDBxWaD97YjBP06GzjhIpSx3f2+QP4AaIwlQsMICJY5wVVpYdTfXDslV2ecEnMqXB//EEdB65sJsYlACYiqCoRwVNrJFVOrXNolbvjIzfLSqhyXT7xNH7isj6rF9Td6b0DsOSMAKM7H/fvuCl7tjF4bI05FS7ze1o4KjNBYA8PD5glPOD0VAmBq93K41a5mAoRhTkbHkGNjsmKoBCgu90OEcXHYNsad3e/qFunmDGZcaiVOgZOkDWxsxUVPV82MyKClBLFnLdrISLOPpK4XheaOyb6j/P2QpwmJZuRVmVepj8EEWFK6a8hETlj7z1OpxPhQQxwgghY1gkzY4zxmrEIVJXWGqUULKVESgkrhialt4ZZ5ng8cjgcyDkzzzMiQu8dM0P1LEG+fPkcOU+MMTAz3J3b21tyzmzbRs759U3AnyPbe+c3P0Hx1l+3AUMAAAAASUVORK5CYII=" style="; aspect-ratio: 642/546; height: auto;" width="642"/></p>
+<h3 id="visualiser">
+<span style="position:relative"><a class="anchor" href="#visualiser"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Visualiser</span></h3>
+<p><img alt="Visualiser control" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/visualiser1.jpg" height="447" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAABOUlEQVR4nAXBXUvCUBgA4Pc9X/vUHefMSisljKDrIugm6Id045/pPwXdBNWNEELURVCGaWXNqXNzbuf0PHh1efEy1jd3M9+oMC0pAYq0yPNoNkzpHAyFBGRFetUy6w3Uth3HywyLkOHSNcqUFNwpmdSMZxNKmGVb0i9xk2Nd7J7tq/do4yckVK2F4F6t7gbNmi8ebq+jRYhAZFCVgccA+VssTccTKi2m6SIJo/G8Kfmg/5VkqevTvc1gZ8t3bAc7jVO0OAADlUCiKZqtg/bz62MrgHZFnBx1/+KP/mdvOs2YphwyhRQJmLkovFIgyw1LjMKcRhMc3T+Nfoffy4VtGthpnaMGRAKASiuiVuk6UZgI4nGjlBYxR4oAWiMBpQGJRtCoCKEFY4FxeJx2iyxaxWMDeJ7nlLlKJ/8I4ob3ibVqOgAAAABJRU5ErkJggg==" style="; aspect-ratio: 795/447; height: auto;" width="795">
+<img alt="Visualiser balls flying" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/visualiser2.jpg" height="448" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAABHUlEQVR4nAXB0U0CQRAA0JnZ2T3uDkQQ/DN++GFMTDQmflCAdViEnZhYhkVYgDYhJhAvBPBYbm93Z3wPZ+6inDjXT87U9iV7565vpm27+/luLFRk+vFsGJq48ht+vBzV43yMsaQo4Do3z4ftfrefV23v28BFOByfF0E90eDc5rrsOK+VNtnb6pfkr9IwPR3WJ65mAwLvXzkvjrxsEhVEqpxyUJJDP6xdKylmwkJ0J4ymkfLtQ1kSiGTLmlAVcLXdm5bLgfUh9kHAopjgUoefBWVVyRgjISqhGgbVmFIyhomQLTysX56Wr8adcOyVCAEBEC2rCopglzIbFAWBaAdN3d6b6PDu6jYFAUQAsAxsNAsQgjEgoExmVPjGc4r8Dyw7n3AV+CHPAAAAAElFTkSuQmCC" style="; aspect-ratio: 795/448; height: auto;" width="795"/>
+<img alt="Visualiser environment view" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/visualiser3.jpg" height="449" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAABH0lEQVR4nAXBu04CURAG4PnnXFiWFVhiKDCExEthZ62NjTY+jDZUVr6AiU9F4TvYmSgGI7AX4Jw54/dh2j/t9buzSdElHFbJwKqDYP8bqtX2kCzYu1gH2YkdliNj6u+vtfOkYLA2lWQdSgyGbf921oKDY+nYpDsVANZbY0jaVkblCDiEuOMjQnPscaROowksaW8MnFXHMYqO+h7SkqLjbEqaFTHFKoQmpi1rYuakqu2eNKnx7mR62VRN3agqNDtoJwhJTMzeUwxYb7RphQg/y/Xj08P93XW9rsrcTYepXyaBEGCd4RiRZdT1INAgp7OL3svrPEe1WLwLenA6GLi6YgYTMxERATHo+awoxxObF89v86ub24/P/WpZbzcx8+N/1U2VTjg9CIQAAAAASUVORK5CYII=" style="; aspect-ratio: 795/449; height: auto;" width="795"/>
+<img alt="Visualiser paused" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/visualiser4.jpg" height="447" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAABP0lEQVR4nAXByU7CQBgA4PlnoaWlguxCAkEPRePFhBgvJiYmHtWn8Oob+gLKScWYiEuIsoSlBbrN0vH7oNs5Y5ZBKdU6CjeejLhI0nrlJPW23vpD6ESCpNRgxMGM7pq2qSERAvOYhSE4lcqeWwuySto5hYEQmkrFZUhbreIm8v1F6G2ENoucmIVOT9rOOFxTyBYKJRPFWukUUXrRaxk5C2fYaDp/+14DYC1wNU9ubs+jIInGk2Q1DYVYTgI4dA4CYTTdbrXduLxqDga+XXRf+g/b7TJElHhjwr2FrxhG9O7+2vf84eff67D/9e73H2dQjmfzIIdirVCnbsYrw9tIwwI4brvNRnm/VWYUW7na0/PP73hULuVTxYEA8FgJTiiTQsFp90hwyUWaYWTHMeNEYARapxpphCDVmhAqpWKZzD8KoqmTPsIF3gAAAABJRU5ErkJggg==" style="; aspect-ratio: 795/447; height: auto;" width="795"/>
+<img alt="Visualiser balls flying colse" class="lazyload blur-up" data-src="/posts/lucy-in-the-sky-with-emotion/visualiser5.jpg" height="447" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAABM0lEQVR4nAXBWUrDQAAA0MksmUmzNUZwoS2CIFI/RApSL9A/r+hpPEMQCn60llqbNG2TSSaTWXzPuUpuxnRGLDskWRwOz3lNdcjkta5Otdq0tqFOCqDVUMMoGHE/58MtI3FTtbyujzwnKZNYCNMo0J/AitvCAAf70a0Xy3OZy7Ird/vX+Yz3/aHYdV5nJHCMRQZb2EtdQ6ZPPdcaOqpvsEt3f5VoEWIy3/+0QliggsgY5VIPY0+sjfSiceTAUEQaEXE3ec6Wn/O38QVi39umKApM1MDVMFspRJKR/0L5QjCqXZ8rA2phEW1c8nSPWeKFl8xAgP3Yf1+kkKw/so1s9FkF++orfRgX1S85GuXrttQOhX4InOnoMQoGiCKt5KCLxVRFVsA8aD0LyrKVpptYsAQuRv8uB63A9ubMygAAAABJRU5ErkJggg==" style="; aspect-ratio: 795/447; height: auto;" width="795"/></img></p>
+<h3 id="installation-and-setup">
+<span style="position:relative"><a class="anchor" href="#installation-and-setup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installation and Setup</span></h3>
+<ol>
+<li>First clone the repository at <a href="https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion">https://github.com/brentvollebregt/Lucy-In-The-Sky-With-Emotion</a></li>
+<li>Install Python (tested with 3.5.2)</li>
+<li>If using Windows, run install_dependencies.bat. If not using windows, run the pip commands in the bat file. This will install most of the modules.</li>
+<li>Install scipy by first downloading it at <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy">https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy</a> and then running <code>pip install [file]</code></li>
+<li>Install numpy+mkl by first downloading it at <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy</a> and then running <code>pip install [file]</code></li>
+<li>Build the visualiser using Unity</li>
+<li>Edit the paths in main.py to link to the visualiser<ul>
+<li>Lines 123 and 125 to the locations of the desired output (123 for song files and 125 for the CSV file)</li>
+<li>Line 156 to the executable to start the visualiser</li>
+</ul>
+</li>
+<li>Read about the issues below</li>
+<li>Run main.py</li>
+</ol>
+<h4 id="issues">
+<span style="position:relative"><a class="anchor" href="#issues"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Issues</span></h4>
+<p>Currently, the visualiser cannot take in dynamic input for audio. CSV files are still read in dynamically and will change based on what song is selected when the visualise button is clicked.</p>
+<p>This means music that was used in the building of the visualiser will be the only audio that the visualiser plays, however the data that the visualiser reads from the CSV to manipulate some functions will still be used.</p>
+<p>To temporarily fix this so incorrect data is not displayed can be easily fixed by commenting out lines 153 to 155 in main.py. This will disable the CSV wiring so the original CSV file will still be passing the correct data.</p>
+<h3 id="usage">
+<span style="position:relative"><a class="anchor" href="#usage"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Usage</span></h3>
+<p>To start this project, open up the emotion recognition part of the project by running main.py with Python. When the GUI appears, click Browse and select a folder that contains .mp3 tagged files (doesn't have to be in the top directory).</p>
+<p>The Graph button can be pressed to display the songs on the emotion plane (Energy vs Valence).</p>
+<p>After you have selected a song you want to visualise, click the Visualise button. After a short moment, the visualiser will open and you will be promoted how you want to run it (speed and resolution).</p>
+<p>When the visualiser has started, you can hold the left control key to display a list of the controls. These controls are:</p>
+<ul>
+<li>Esc - Pause</li>
+<li>Space - Freeroam the environment. Moves the ball off the pre-defined path.</li>
+<li>Left / Right Arrows - Previous / Next Song</li>
+<li>C - Change Camera</li>
+<li>Z - Reset Balls</li>
+<li>X - Blow balls away from the camera</li>
+<li>V - Change mood (for testing)</li>
+</ul>
+<h3 id="credits">
+<span style="position:relative"><a class="anchor" href="#credits"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Credits</span></h3>
+<h4 id="developers">
+<span style="position:relative"><a class="anchor" href="#developers"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Developers</span></h4>
+<ul>
+<li><a href="https://github.com/basedrhys">Rhys Compton</a></li>
+<li><a href="https://github.com/DylanExton">Dylan Exton</a></li>
+<li><a href="https://github.com/ryanlequesne">Ryan Le Quesne</a></li>
+<li><a href="https://github.com/minionsattle">Seattle Tupuhi</a></li>
+<li><a href="https://github.com/brentvollebregt">Brent Vollebregt</a></li>
+<li><a href="https://github.com/Woodsy1FD">Jack Woods</a></li>
+</ul>
+<h4 id="project-managers">
+<span style="position:relative"><a class="anchor" href="#project-managers"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Project Managers</span></h4>
+<ul>
+<li><a href="https://github.com/swikrit">Swikrit Khanal</a></li>
+<li><a href="https://github.com/sashsinha">Sash Sinha</a></li>
+</ul>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/mp3-itunes-downloader/" title="MP3-iTunes Downloader">
+<span>←</span>
+<span class="btn-content">MP3-iTunes Downloader</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/adding-snow-to-your-website/" title="Adding Snow to Your Website">
+<span class="btn-content">Adding Snow to Your Website</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/lucy-in-the-sky-with-emotion/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/lucy-in-the-sky-with-emotion/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
