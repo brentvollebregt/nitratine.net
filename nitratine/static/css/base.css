@@ -90,11 +90,22 @@ footer .link-group a.with-icon img, footer .link-group a.with-icon .icon {
 
 /* About - tech icons section */
 
-.tech-icon-container {
-    text-align: center;
+.tech-experience-container .experience-group:not(:first-child) {
+  margin-top: 0.5rem;
 }
 
-.tech-icon-container > img {
-    width: 70px;
-    margin: 0 5px 5px 5px;
+.tech-experience-container .experience-group .item-wrapper {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tech-experience-container .experience-group .item-wrapper > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tech-experience-container .experience-group .item-wrapper > div > img {
+  height: 25px;
 }
