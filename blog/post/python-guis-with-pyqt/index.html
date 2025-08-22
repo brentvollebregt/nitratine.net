@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/python-guis-with-pyqt/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Python GUI's with PyQt - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This tutorial covers the basics of how to create GUI's in Python using PyQt5. I will demonstrate how to find the designer and basic usage, converting .ui to .py, running the output file and connecting events to methods." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Python GUI's with PyQt" property="og:title"/>
+<meta content="This tutorial covers the basics of how to create GUI's in Python using PyQt5. I will demonstrate how to find the designer and basic usage, converting .ui to .py, running the output file and connecting events to methods." property="og:description"/>
+<meta content="/posts/python-guis-with-pyqt/youtube-thumbnail.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/python-guis-with-pyqt/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Python GUI's with PyQt</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">17 Jul 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#YouTube">YouTube</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#gui">gui</a>
+<a class="badge badge-warning" href="/blog/tags/#pyqt">pyqt</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">11 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fpython-guis-with-pyqt%2F"/>
+</div>
+<p class="lead">This tutorial covers the basics of how to create GUI's in Python using PyQt5. I will demonstrate how to find the designer and basic usage, converting .ui to .py, running the output file and connecting events to methods.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#important-first-note">Important First Note</a></li>
+<li><a href="#setting-up-the-environment">Setting up the Environment</a></li>
+<li><a href="#using-the-designer">Using the Designer</a><ul>
+<li><a href="#locating">Locating</a></li>
+<li><a href="#using-the-designer_1">Using the Designer</a><ul>
+<li><a href="#creating-a-simple-window">Creating a Simple Window</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#converting-ui-to-py">Converting .ui to .py</a></li>
+<li><a href="#running-the-output-and-hooking-up-the-button">Running the Output and Hooking up the Button</a></li>
+<li><a href="#more-advanced-example">More Advanced Example</a><ul>
+<li><a href="#creating-interface">Creating Interface</a></li>
+<li><a href="#connecting-events-to-methods">Connecting Events to Methods</a><ul>
+<li><a href="#linking-the-image-button">Linking the Image Button</a></li>
+<li><a href="#linking-the-add-to-list-button">Linking the Add to List Button</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/ksW59gYEl6Q"></iframe>
+</div>
+</div>
+</p>
+<h2 id="important-first-note">
+<span style="position:relative"><a class="anchor" href="#important-first-note"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Important First Note</span></h2>
+<p>Please understand this process is not the recommended method when using PyQt5 designed / pyuic; this is simply a demonstration of designing a UI using the PyQt5 designer tool, generating Python code and then partially understanding what comes out.</p>
+<p>This tutorial is not obsolete however as it can help you get a basic grasp of how to use PyQt5. </p>
+<p>The reason the method demonstrated below is not recommended is due to the fact if you use pyuic again to turn a .ui file into a .py file, it will overwrite all your changes to the file. I have a tutorial at <a href="/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/">How to Import a PyQt5 .ui File in a Python GUI</a> which better explains how you should import the generated script so your changes will not be overwritten.</p>
+<p>If you only intend on using the generated code as an initial layout and not re-generate the code (I do this a lot), you may find this method easier than importing as you can make changes to the layout a lot easier this way.</p>
+<h2 id="setting-up-the-environment">
+<span style="position:relative"><a class="anchor" href="#setting-up-the-environment"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting up the Environment</span></h2>
+<p>For this tutorial, you will need a version of Python equal to or above 3.5. I do however recommend to get a more recent version than 3.5 as I had issues with 3.5.2; a simple upgrade to 3.6.6 fixed this. If you don't know where to get Python, <a href="https://www.python.org/downloads/">look here</a>.</p>
+<p>Now you will want to install pyqt5 and pyqt5-tools. To do this, we can use pip. Call the two commands <code>python -m pip install pyqt5</code> and <code>python -m pip install pyqt5-tools</code>. After each command completes, make sure to verify that they installed properly by checking if it says they were installed successfully.</p>
+<p>You should now be able to execute the following in Python with no errors:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">PyQt5</span>
+</code></pre></div>
+<blockquote>
+<p>If you have issues installing PyQt5 for some reason, you could try the installers at <a href="https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.6/">its sourceforge page</a>.</p>
+</blockquote>
+<h2 id="using-the-designer">
+<span style="position:relative"><a class="anchor" href="#using-the-designer"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Using the Designer</span></h2>
+<p>When you ran the <code>pip install pyqt5-tools</code> command, this installed tools that we can use to help with building GUIs.</p>
+<h3 id="locating">
+<span style="position:relative"><a class="anchor" href="#locating"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Locating</span></h3>
+<p>First, we need to locate where they are now, to do this we can run the following code in Python:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">site</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">getsitepackages</span><span class="p">())</span>
+</code></pre></div>
+<p>This will print out a couple of paths, for me it prints: <code>['C:\\Python36', 'C:\\Python36\\lib\\site-packages']</code>. Here we can see my Python distribution location and the site-packages folder. Open up a file explorer and navigate to the site-packages folder. In this folder, you then want to locate the <code>pyqt5-tools</code> folder and open it. In this folder, you should find a few files, one named designer.exe.</p>
+<p>After recent updates to <code>pyqt5-tools</code>, designer.exe has been moved to the 'Scripts' folder in your Python distribution. To find this using the paths we found before, go to the first path returned ('C:\Python36' in my case) and then go into the 'Scripts' folder; you should find designer.exe in here.</p>
+<h3 id="using-the-designer_1">
+<span style="position:relative"><a class="anchor" href="#using-the-designer_1"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Using the Designer</span></h3>
+<p>designer.exe is the program that we will use to make designing GUIs a lot easier; remember the location of this or create a shortcut to it and then run it (double click if you wish). You will be welcomed with a selection window; select "Main Window" and then click "Create".</p>
+<p><img alt="Initial Display" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/pyqt5-designer-start.jpg" height="608" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAAA+ElEQVR4nD3PwUrDQBSF4XMnd5JOA9PUGiy4FPFV+tYuiiBZGd/AYrFaN6aCacjc4yLiWfzbjyOH9zdL3O/3JL33IkJAAAAk1+t1jJGkmSmQmQ1t2wIAIAIBjBCRcRw3m00xK2gkqQ5UVVUFxDm5ub27WNXLGI7Hz6ZphvMwnIeUkpkpSZJ/oLG+ul6u6lLH0+mb5LychxBIiogjkMwm3ci6Cpcx/+pOZgZARP6r4jjTYjoB4Kl9LkLJNPb9D4Cu62KMZkZSw6zMXOa9Bwlgt3uZOBGX5/myqsqynEzdPjw6ldfDR9+fnUwDCAotjffb7WJRuczl3v8CTBmJ+nMgO5YAAAAASUVORK5CYII=" style="; aspect-ratio: 1080/608; height: auto;" width="1080"/></p>
+<p>You will now be shown an empty window in the middle of the designer's window with widget options on the left and some other windows to the right.</p>
+<p>On the left, you can drag widgets from the drop-downs onto the MainWindow object in the centre. On the right, in the Object Inspector, you can see the current widgets in your window. Right below that is the Property Editor that allows you to modify the widget currently selected.</p>
+<p><img alt="Window Labeled" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/window-labeled.png" height="1040" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAICAYAAAAm06XyAAABOElEQVR4nEWQy2oUURRF1z7n1q2XUcggcayNX+D/j4VAj9pAMhAMEZTERwt2V1XfusdBC+7RmqzB2nq8vwt55unXT47LDDXITUNEgIAAc6dtEpcXL0ldR3KjLieMbuDy9RWfbm95eviClFlWcSridIIazteHR7Y3N2R3mnVl7DvGcSBB4ICvK+82b9ls3jCXgoaBiKBtW+4/tjx/+Mbhx56uzewPM6XMJEUl3FlzZhJMZmf5cCQIaq0sy0KNyrH7Thl73A0vlYScda0QgUUgM5Qz4l+vBAh3cX0F3YXwWvBwEqrk3GAmkMAdZGeOAHNkIgJ+Pxeohg4TUpBkjqYZT4nddsvn3Y5ag9D5akMcSsG6gVfX7+nbnnUMzERiWji9qHT9wH6e+SMRzv9FECkzjiNKieogDEn8BdNDj1FWGNBaAAAAAElFTkSuQmCC" style="; aspect-ratio: 1920/1040; height: auto;" width="1920"/></p>
+<h4 id="creating-a-simple-window">
+<span style="position:relative"><a class="anchor" href="#creating-a-simple-window"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Creating a Simple Window</span></h4>
+<p>For this example, we will be just putting a button that prints "Hello World!" when pressed in the Window; soon we will work with a larger example when the basics are out of the way.</p>
+<p>First, make your window a bit smaller by clicking and dragging the bottom right of the window (or any part on the edge) to change the size as you would do on any other window. Now find the "Push Button" widget under the Buttons section (on the left) and drag it into the window anywhere. You can double click on the button now to rename the text in it; set it to "Print Message".</p>
+<p>You may now want to change the size of the button, to do this click on the button until there are blue squares on each of its corners and edges. Use these blue squares to re-size the button to a size you want.</p>
+<p><img alt="GUI with blue buttons showing" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/print-message-ui-blue-buttons.png" height="303" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAABRUlEQVR4nF2Ry24TURBET9/puePYCTYGLyPx/Gs+gCUfwxJFbHgYkSCCHCue210sxoQktWupTnW3yt59eK82LiEc7502jqREHQaG4QRJYEySMIO6veBw2ONvz18y7+bMT56wfr4mI8hMvK/UYZjge8pMfP+Gj58+45vFhhfnG1oLSkmgYBRSDbVxIgzsuF4S/eqU/myBJ0GEGCOxmAxm0HUd1k1zRJA5nS8JO4xkCzxCx+QJKsW42TUuL38SFpiM1XLFajUQoWO40VIUzB78RCkUL8xO58yur5nVHh96VAr3vWaG80j5Z8fghflZhd0Cni5IHcjfe6gV/B8iHAlJSIASrq6QO3F7C97B9x9TRRGwXKJn6zu/uztDrRRrmBm8fgWI/+Xe3QmZKBq1r3Rdh198+cavmz0R8dD+mJfADDE18XW75S+95ZzukK0qTAAAAABJRU5ErkJggg==" style="; aspect-ratio: 454/303; height: auto;" width="454"/></p>
+<p>When you are happy with what you have done (this is just a simple practice) then click File -&gt; Save in the top left and save it somewhere where you will remember; I will save it as 'printMessage.ui' on my desktop.</p>
+<p><em><a href="/posts/python-guis-with-pyqt/printMessage.ui">Code download: printMessage.ui</a></em></p>
+<h2 id="converting-ui-to-py">
+<span style="position:relative"><a class="anchor" href="#converting-ui-to-py"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Converting .ui to .py</span></h2>
+<p>Now that we have our .ui file, we can convert it into Python code so we can modify and run it.</p>
+<p>To do this we need to locate pyuic5. pyuic5 converts .ui to .py in one simple command and is located in the 'Scripts' folder in your Python distribution. If you don't know where this is, execute the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">))</span>
+</code></pre></div>
+<p>You will be provided with a path of where your python distribution is located; mine is at <code>C:\Python36</code> (we saw this before when looking for the designer). Now go to this directory and open the 'Scripts' folder in there.</p>
+<p>In this folder you will see a few executables to make Python in the terminal easier, you should also be able to see a file named <code>pyuic5.exe</code>; this is what we are going to use. Open cmd and then use the cd command to get to the directory; for example, I will execute <code>cd C:\Python36\Scripts</code> in cmd. Now if you type <code>pyuic5</code> you should be provided with a small error message saying "Error: one input ui-file must be specified"; this is good, we are in the right place.</p>
+<p>To convert we now need to pass in the .ui file we created before and decide on an output filename and location. My .ui file is on my desktop currently so I will put the created .py file on the desktop also to make it easier. Now we can convert using <code>pyuic5 -x &lt;.ui file&gt; -o &lt;output.py file&gt;</code>, for example I will use <code>pyuic5 -x "C:\Users\Brent\Desktop\printMessage.ui" -o "C:\Users\Brent\Desktop\printMessage1.py"</code>. This should take not very long at all and show no errors; the python script you declared after -o will now exist - for me, a file called printMessage1.py is now on my desktop.</p>
+<h2 id="running-the-output-and-hooking-up-the-button">
+<span style="position:relative"><a class="anchor" href="#running-the-output-and-hooking-up-the-button"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Running the Output and Hooking up the Button</span></h2>
+<p>Now that you have the .py file containing the ui code, open it in IDLE or whatever IDE you use. Your code should look something like this:</p>
+<p><img alt="Start GUI Code" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/ui-code-1.png" height="787" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAABmElEQVR4nHWS23YTMQxFtyTbk0wmScv//x+LVW5DmyZjWxYPBRZtYb+fpXOR+OVrPNZC0cSIwQhHk2Bm9NaZlxlVJQDhNRLtGo9PzseHyjI7Eg0fznye2Z/3iAs72/EvZETE9fnC54dPiCYiIKfMVjfylJGkmCk+nPvlAyVnVBURQYlAEEQLvTklF2qrxAh66zSvtN4oWthuN9Z1JSIASCJCELRaySUTBO4DEVBThg9GH5SpsBwXVPWP7fTLPSJCBLg7EJglmnQO5cBpPhIEvXdyzoi8VKcRARGklDBTUkokS6gokxUalc03RPSV8OWyCJYS8+F3o0pOmYhg2k0gUMqEytuhQBmOjAAORMyIGGpK907vHRPDa6fVhrxZOokoHoN1/cJUJqDh7ogIrXa2eaPmypR2eHdu44aEcJAFGd6j+wACx1E1DMPMcB8MnKEDDUUQHIcAC0O256e4rN/wNJF2heFOsQIBosJ+P6P6Pi9ACs1cXanXC/79Bzlnznd3RARJ7P1Dv84MCOScSTlzOp84HY//V/zFT1eQ0tNNJ0o3AAAAAElFTkSuQmCC" style="; aspect-ratio: 846/787; height: auto;" width="846"/></p>
+<p><em><a href="/posts/python-guis-with-pyqt/printMessage1.py">Code download: printMessage1.py</a></em></p>
+<p>Run the code and then wait for the GUI to appear; it currently won't do anything when you press the button so we will set that up.</p>
+<p>Go back into the code for this GUI and look in the setupUi definition. You should see a class variable called <code>self.pushButton</code> which later has its text set to "Print Message" in the retranslateUi definition below. This is the object of our button that we need to make do something.</p>
+<p>First, we need to create our method, this method can be in the global scope or in the class scope, for simplicity I will put it in the class scope. After the retranslateUi definition, create a new class called <code>printMessage</code> that takes self as an argument since it is part of the class now. Inside this put what you want the script do to when you press the button, for this example, I will print "Hello World!".</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">printMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">)</span>
+</code></pre></div>
+<p>Now that you have created the method to run, we can attach it to the button. Using the button variable we found before, we can call .clicked.connect() on it passing in the name of our method we just created (make sure to remember <code>self.</code> for class variables). Put this line at the bottom of the setupUi definition so it will be executed when the GUI is built.</p>
+<div class="codehilite"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">printMessage</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>Remember to not include () when passing the method here or it will not work.</p>
+</blockquote>
+<p>Your script should now look something like this, don't worry if it is a bit different.</p>
+<p><img alt="Start GUI Code" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/ui-code-2.png" height="896" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAAB2klEQVR4nHWSW44bRwxFDx9V/UprksAb8P5XlQDOT5CMPLItqYtVzIfswcCY8P/gXF5SxrfnfLkXqjqDwRgddcHciCNY1gVzI0kE4e1Ixi2/XIK//j7Y1oFlI0aw7Avrbxt0WHTmJw4Axya0BnN9ZgwnRlJr5fL5wu16Q1y4FCd6cFpOLPOCqiIiKIAgqFaidWqdaK2RI4kWtN64tzuuTrTgfD4TEd/NQAKtNcwdAXp0ANSUkYNxH7g5+75jZm9i/1hegEyiB0ni5oQGk8/8+vQEJBGBiKL6KEDhAZk5aoa74+aIClUrXYJrXEEEd38FX81WK8u6IiIPaymMPpiXGVWl1IqbYao/tZ1JfvqEXa9EdLwURIQxBl2EDhwjidFZzNg/foR5ggSHgdSZ4+7Y6gy5Q3aO48BV2daNzMEkUNRI/f4qAk5P+jZz+/oPRcfD2gXdVo5SiSK0eWDqnOYT5/aZvA02NqT/+UdGV77cC2EHKjemeWINkA8fkHUByYcqkx+nFQQZz/9muzXUnfAOJEUKhsLp6d23fC0stoXL8Y2eglul92DSQpJweWFdV4r7+3CmcjuE1r7Szy94cebfK0KiZpjauyCAqwhmgupETrDvv7Dv+/9nfTP/ASnX3pH7pVnOAAAAAElFTkSuQmCC" style="; aspect-ratio: 831/896; height: auto;" width="831"/></p>
+<p><em><a href="/posts/python-guis-with-pyqt/printMessage2.py">Code download: printMessage2.py</a></em></p>
+<p>Run the code again and now when you press the button you should see that the script runs the code that you defined in the method you attached to the button.</p>
+<h2 id="more-advanced-example">
+<span style="position:relative"><a class="anchor" href="#more-advanced-example"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>More Advanced Example</span></h2>
+<p>In this next example, I will show you how to put images in the GUI, add a selection dialog box and add data to a table.</p>
+<h3 id="creating-interface">
+<span style="position:relative"><a class="anchor" href="#creating-interface"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Creating Interface</span></h3>
+<p>Open the designer back up and create a new MainWindow. Now create and position the 5 widgets described below:
+- Label (in Display Widgets): This label will be the widget we use to show the image
+- PushButton (in Buttons): This button will allow us to select the image to show in the Label
+- ListWidget (in Item Widgets): This will hold and display entries we add to it
+- LineEdit (in Input Widgets): This will allow us to enter what we want into the table
+- PushButton (in Buttons): This will add the item in the LineEdit to the table</p>
+<p><img alt="MainWindow advanced layout before editing properties" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/MainWindowAdvanced-layout-pt1.png" height="408" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAYAAAC9QufkAAABP0lEQVR4nH2R3U4bQQxGjz2zfxOSTQDx/jwBl32N3iH1DrW0QhCEhJQsu+txL6YhVDS1NNJY42N//kauv9z4tFvR1B0hKGaGqOAObdtRNQ3uznuIEJ/vedv+Qr7e3vpZ3dKvNzRNjWcHKXWqimrAOcLuTvDMt7t74rI94+pyxTTOTMOOEAM4IDDP/n4vJDiO1BWoEnfDwI/vr4zTxGZzTt/3ZLcCIUfwT4qXYzmjIkKXOlJKqArb7RPjOKLykfoc7k6sqpqLizVmjnsmpYSIfNjydMRDl5wzIsWkQ35q4sH9KFL2EhFEyqOIUFXVSTiEUGCzGZszZmUylOmLxeK/klWVaGYMw8B+vwegqmvatj0JHZS5OzF1ic26Z7Vc/iXb5vn4NZ9kK0GVePfwyMt+R7ZSVRqA+78NA4gh8PPpmd/FSp3hQ2xuTQAAAABJRU5ErkJggg==" style="; aspect-ratio: 508/408; height: auto;" width="508"/></p>
+<p>If you click on a widget, for example, the button that will be selecting the button, the Property Editor on the right will display all the options for that object. In there you can edit things like the exact size/position, borders (frames), tooltips and fonts.</p>
+<p>First, we will want to edit the Label that is holding the image; click on the label to open it up in the Property Editor. Find "text" under the QLabel section and delete the text, this is the same as double-clicking and removing the text. Now go to the QFrame heading and change "frameShape" to box, this will but a border around the image.</p>
+<p><img alt="Image Label Properties" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/image-label-properties.png" height="384" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAALCAYAAACgR9dcAAABgklEQVR4nFWR227TUBBF15wz5+K4dsJFRCr5/7+o+BWEqJBAbWgu9oljn+GhhdL9vrTXzJa7uy92e7sjxsh63eOco5oxXydEPN57ABAQwAAnjloXtOug7/aAw8mRts2oeg6HibZVQlDMDDPjb8yMeQ5ozpUYf3O9znT9B1QvgCOnC6VMXC6QUiCE/NILYDjXor9+Flgyl6ny/dsD/foG55TD0xOlTPTrDtWK6vICC2aVlD06NcqPxtifT2x3W+acwIwTkWa34ayKWX3VFqFapfceTX1A3i804uk/J6JGAHRTCTmgKMbrvc/SxoqI7u9PhJKZp8zXxwdiClQzBMF5x1IX5A0q1LrwrpnQzccd4dOWkDP9ZkOtFUEYh4H5OtNtejDedAtGPZ9Qrw7vYRyOrG4yKWUQSLPQtCvEVUDw3r3BkyW0ViM2K4bxkcWeHyIinI5nxrHQrTvEOdq+R5z7t7OGiFopxEshDAP+cMTGgmHEMlJLoVk1hBio+/1/6sJxOPMHI0qwRS2G1QYAAAAASUVORK5CYII=" style="; aspect-ratio: 526/384; height: auto;" width="526"/></p>
+<p>Now click on the select image button and in the QWidget header go to "font". This has many options inside of this so play around to get a font you like (you can leave it if you want). Your GUI should now look something like this:</p>
+<p><img alt="MainWindow advanced layout before editing properties" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/MainWindowAdvanced-layout-pt2.png" height="407" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAYAAAC9QufkAAABPklEQVR4nH2R3WoUQRBGT1VX9+yw2WSDExAh3nnjW/sAXvpEWTAiakSZbGa7q7yYuPkhk4K668P39Sn59OVzHKYzSuqxbLTWUBECKKWj63siguOIYDfXTN+vsI+XHzg/2bDZnLFadUzThIjM71RJmgge4AjQeMfu+j227ta8vRg4HCbuxr8EQbZMRBAe1EehAAFIUqZWsfH2lqvdjtoaOWcuhoFk9rTqM9hU8AATEfq+51Dr/NeI4y7BEfNaKR3D8IZaG7XWeyfyIvjgTBABe5wUEbg7qoq7LyajQoTPtf9PSgl3p9aKmb0Mx5xslrHWGq05rTVEhFIKANvt9tXq+ccfzN3Z7/eM44hHsOo6ci6LUEQg92Jt1XWcb085Wa9RlaNlb3URVlWSKvb15w1VlVrrE8uLp4rAUuLbr9/8A5jvqiKdOH/YAAAAAElFTkSuQmCC" style="; aspect-ratio: 509/407; height: auto;" width="509"/></p>
+<p>To help you later on, you can also change the "objectName" under QObject in the Property Editor for all widgets so you can identify them easier later. Here is what I named mine:
+- Select Image Button: selectImageBtn
+- Image Label: imageLbl
+- LineEdit: lineEdit
+- Add button: addBtn
+- ListWidget: listWidget</p>
+<p><em><a href="/posts/python-guis-with-pyqt/MainWindowAdvanced.ui">Code download: MainWindowAdvanced.ui</a></em></p>
+<p>Like we did before, convert this .ui file (after saving it) to a .py file.</p>
+<h3 id="connecting-events-to-methods">
+<span style="position:relative"><a class="anchor" href="#connecting-events-to-methods"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Connecting Events to Methods</span></h3>
+<p>Now we need to connect all the actions together. The select image button will need to be connected to a method that displays an image selection dialog which will then put an image in the label. Also, we will need to make the 'add' button add the text in the lineEdit object into the listWidget object.</p>
+<p>Your converted .py code should currently look something like this: <em><a href="/posts/python-guis-with-pyqt/MainWindowAdvanced1.py">Code download: MainWindowAdvanced1.py</a></em></p>
+<p>If you open your .py file in IDLE, you can see that the names we gave each widget have passed through to the names of the actual objects. I also recommend running the code now to make sure it works.</p>
+<p><img alt="Object names in code" class="lazyload blur-up" data-src="/posts/python-guis-with-pyqt/object-names-in-code.png" height="336" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAYAAADXhRcnAAAA8ElEQVR4nD2QQU4DQQwEy/bsZAlkpUj8/3nhwiHRkhBij81hA8eWWl2llo/TqbKKiEG4M/UJgKpCRFjeF1KKyEASji9HzAyAhgjhQYTzdnhjXVfMDFWlRrF+rpSAKKgod7ljZszzTJMNAwWZiZlhU+N1v2fYoGljpztUFGv2PwzQCpimhkfQWiNHQgXXupJtQAnLvCAi5HdSWRyWA713VAD3oPeOP5ysQs3IkahsJBEBNm01ZZr6lgEQISIoarN4OG3f8BHMNaPP2t+Rt9uVqkKzil2fePzcqeL5ZOFfzq51LuPC+eeMiKCmmBnujnvwCx4rfjMbWAyMAAAAAElFTkSuQmCC" style="; aspect-ratio: 700/336; height: auto;" width="700"/></p>
+<h4 id="linking-the-image-button">
+<span style="position:relative"><a class="anchor" href="#linking-the-image-button"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Linking the Image Button</span></h4>
+<p>First, you will want to create a class definition called <code>setImage</code>; make sure this takes self as it is a class definition. In this method, we want to ask the user for an image (not just any file). If they provide a file, we then need to create a pixmap object and then set the pixmap object to the image label. Before we set it, it is ideal to scale the image to fit inside the label without stretching and aligning it to the centre. Your method will look like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setImage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">fileName</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">"Select Image"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"Image Files (*.png *.jpg *jpeg *.bmp)"</span><span class="p">)</span> <span class="c1"># Ask for file</span>
+    <span class="k">if</span> <span class="n">fileName</span><span class="p">:</span> <span class="c1"># If the user gives a file</span>
+        <span class="n">pixmap</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span> <span class="c1"># Setup pixmap with the provided image</span>
+        <span class="n">pixmap</span> <span class="o">=</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imageLbl</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">imageLbl</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span> <span class="c1"># Scale pixmap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imageLbl</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span> <span class="c1"># Set the pixmap onto the label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imageLbl</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span> <span class="c1"># Align the label to center</span>
+</code></pre></div>
+<p>In the QtWidgets.QFileDialog.getOpenFileName method call, you can see I have passed the string <code>"Image Files (*.png *.jpg *jpeg *.bmp)"</code>. This declares the type of files I will accept. If you want to accept any file, remove this string completely. If you want to make it so the user could switch it to all files themselves, set it to <code>"Image Files (*.png *.jpg *jpeg *.bmp);;All Files (*)"</code>; play around with this to get the idea of what is going on, you can add more file extensions and selections if wanted.</p>
+<p>Now we need to attach the button to the definition. This can simply be done using the connect method we used previously; make sure to put it at the bottom of the setupUi definition as we did before:</p>
+<div class="codehilite"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">selectImageBtn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setImage</span><span class="p">)</span>
+</code></pre></div>
+<p>Run the script and make sure that your button works. Initially, the label will be clear but each time you select a file it should change to the selected file.</p>
+<h4 id="linking-the-add-to-list-button">
+<span style="position:relative"><a class="anchor" href="#linking-the-add-to-list-button"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Linking the Add to List Button</span></h4>
+<p>We will now need to create another class definition called <code>addItem</code> like before. In this method, we need to get the value of the lineEdit object and then clear it. We can then simply add the value we just got to the listWidget. After you have done that, the method should look like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">addItem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="c1"># Get the value of the lineEdit</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">lineEdit</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span> <span class="c1"># Clear the text</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">listWidget</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1"># Add the value we got to the list</span>
+</code></pre></div>
+<p>And then like before, we need to connect the button to the method just under the last one we did:</p>
+<div class="codehilite"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">addBtn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">addItem</span><span class="p">)</span>
+</code></pre></div>
+<p>Running the script now you should be able to type in the text edit item and then press add for the item to go into the list.</p>
+<p><em><a href="/posts/python-guis-with-pyqt/MainWindowAdvanced2.py">Code download: MainWindowAdvanced2.py</a></em></p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/media-picker/" title="Media Picker">
+<span>←</span>
+<span class="btn-content">Media Picker</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-clean-a-twitter-account-with-jquery/" title="How to Clean a Twitter Account with jQuery">
+<span class="btn-content">How to Clean a Twitter Account with jQuery</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/python-guis-with-pyqt/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/python-guis-with-pyqt/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

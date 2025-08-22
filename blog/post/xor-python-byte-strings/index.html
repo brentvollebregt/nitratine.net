@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/xor-python-byte-strings/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>XOR Python Byte Strings - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This snippet shows you how to can simply XOR two Python byte strings using a function to produce another byte string." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="XOR Python Byte Strings" property="og:title"/>
+<meta content="This snippet shows you how to can simply XOR two Python byte strings using a function to produce another byte string." property="og:description"/>
+<meta content="/posts/xor-python-byte-strings/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/xor-python-byte-strings/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">XOR Python Byte Strings</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2019">8 Jun 2019</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Snippets">Snippets</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">3 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fxor-python-byte-strings%2F"/>
+</div>
+<p class="lead">This snippet shows you how to can simply XOR two Python byte strings using a function to produce another byte string.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#a-quick-introduction-to-xor">A Quick Introduction to XOR?</a></li>
+<li><a href="#string-xor">String XOR</a></li>
+<li><a href="#byte-xor">Byte XOR</a></li>
+<li><a href="#my-original-problem">My Original Problem</a></li>
+</ul>
+</div>
+<p>Previously doing a CTF challenge I found myself needing to XOR two byte strings in Python to reveal a key from the original text and 'ciphered' data (in this case by XOR).</p>
+<h2 id="a-quick-introduction-to-xor">
+<span style="position:relative"><a class="anchor" href="#a-quick-introduction-to-xor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>A Quick Introduction to XOR?</span></h2>
+<p>XOR (or "exclusive or") is a binary operator like "AND" and "OR". In Python, bitwise XOR is represented as <code>^</code> like <code>&amp;</code> is to AND and <code>|</code> is to OR. Here is a "truth table" using 1's and 0's:</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a ^ b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>You can see that the result of the bitwise operation on two bits will be a 1 if they are different and 0 if they are the same. </p>
+<p>When applying this operator to values longer than one bit, each bit is compared with its corresponding in the other value; for example:</p>
+<p><img alt="How to XOR Bits Demonstration" class="lazyload blur-up" data-src="/posts/xor-python-byte-strings/example-xor-bits.png" height="164" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAYAAAC9QufkAAABeklEQVR4nG2QS2/TUBCFv7l+xLWtkMbUSCxgVVD+/59g0yVCLWxQhaiC85BN7NrX9w4L06SpeqRZjGY+nZkjqqqs1+Ac1DU6DMhqxaauWSwWfKsMeayERmh6+PwWjABACMDDAzQN7PeIc+j1NXEcYx382EGZC92jchiFT0sgmGBUVb33qt7r76rSX02jZxoPend7+7/xZyMDICIgwnw2I7m5gb7nT1VhR8+Xe0M2X7DZVNhHWH8FdDI2PFOa5yyjCLySZSleodGE8l1J0zT4Edr1kT2H8R61FvC0bUdo4MMccCMghDN48xHkLLBnkstLCCPSC0AE6wAxpGkKwHA47Z6cVcGYqYC+70EVnUJlt98xdlDfg/qX8NMtcYxiEDF4Ff724BSKZUGQwNUKxLzmDNC1SOSYZQGESq0QRQHb7YYgENqdP/mpPlEcf9p+B5leJb7w1MlPyqv3DEOPtZaiKF4EpoCAOui2ECbK2AtaQpBHWGsJgoAsy47IPzE62CzD9Pt4AAAAAElFTkSuQmCC" style="; aspect-ratio: 202/164; height: auto;" width="202"/></p>
+<p>It's also common to see this operator being used on numbers represented in binary, decimal and hex:</p>
+<ul>
+<li><code>0b1100 ^ 0b0110</code> = 1010</li>
+<li><code>5 ^ 10</code> = 15 <em>(0101 ^ 1010)</em></li>
+<li><code>0xF ^ 0x7</code> = 0x8  <em>(1111 ^ 0111)</em></li>
+</ul>
+<p>Even though my issue that I was trying to solve was using Python byte strings, I could still use the same principles...</p>
+<h2 id="string-xor">
+<span style="position:relative"><a class="anchor" href="#string-xor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>String XOR</span></h2>
+<p>I found <a href="https://stackoverflow.com/a/2612730/">an answer on StackOverflow</a> showing how to XOR two strings to form a resulting string:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sxor</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">):</span>    
+    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">))</span>
+</code></pre></div>
+<p>Using this we could now do:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">key</span> <span class="o">=</span> <span class="n">sxor</span><span class="p">(</span><span class="s1">'string 1'</span><span class="p">,</span> <span class="s1">'string 2'</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="byte-xor">
+<span style="position:relative"><a class="anchor" href="#byte-xor"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Byte XOR</span></h2>
+<p>But this only worked for strings and I had a byte string. To fix this I simply removed the <code>ord</code> and <code>chr</code> calls to only manipulate bytes.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">byte_xor</span><span class="p">(</span><span class="n">ba1</span><span class="p">,</span> <span class="n">ba2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">_a</span> <span class="o">^</span> <span class="n">_b</span> <span class="k">for</span> <span class="n">_a</span><span class="p">,</span> <span class="n">_b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ba1</span><span class="p">,</span> <span class="n">ba2</span><span class="p">)])</span>
+</code></pre></div>
+<p>So now I could do</p>
+<div class="codehilite"><pre><span></span><code><span class="n">key</span> <span class="o">=</span> <span class="n">byte_xor</span><span class="p">(</span><span class="sa">b</span><span class="s1">'string 1'</span><span class="p">,</span> <span class="sa">b</span><span class="s1">'string 2'</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="my-original-problem">
+<span style="position:relative"><a class="anchor" href="#my-original-problem"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>My Original Problem</span></h2>
+<p>In the CTF challenge we were given this table: </p>
+<table>
+<thead>
+<tr>
+<th>Ciphertext in base64</th>
+<th>Plaintext</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bVQwJ2M3K0pCIjQm</td>
+<td>Test message</td>
+</tr>
+<tr>
+<td>ekghNjF6HVxSNiEqLjcZcisyLzYrV1Ym</td>
+<td>Cyber Security Challenge</td>
+</tr>
+<tr>
+<td>bVkmcyU2L14RKiBjMiddVSY9YzgrVV40</td>
+<td>The flag is hidden below</td>
+</tr>
+<tr>
+<td>X10iNHk5fQ4HIGBxPnwPU3c=</td>
+<td>[REDACTED]</td>
+</tr>
+</tbody>
+</table>
+<p>It was pretty easy to guess that the last row contained the flag and we could assume all the other rows used the same key. Since <em>[plaintext XOR key = cipher-text]</em> then <em>[cipher-text XOR plaintext = key]</em>; this meant I only need one cipher-text and it's corresponding plain text to get the key. Using Python, I could get the key using this method:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="n">base64_ciphertext</span> <span class="o">=</span> <span class="s1">'bVkmcyU2L14RKiBjMiddVSY9YzgrVV40'</span>
+<span class="n">plaintext</span> <span class="o">=</span> <span class="s1">'The flag is hidden below'</span>
+
+<span class="k">def</span> <span class="nf">byte_xor</span><span class="p">(</span><span class="n">ba1</span><span class="p">,</span> <span class="n">ba2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" XOR two byte strings """</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">_a</span> <span class="o">^</span> <span class="n">_b</span> <span class="k">for</span> <span class="n">_a</span><span class="p">,</span> <span class="n">_b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ba1</span><span class="p">,</span> <span class="n">ba2</span><span class="p">)])</span>
+
+<span class="c1"># Decode the cipher-text to a byte string and make the plaintext a byte string</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">byte_xor</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">base64_ciphertext</span><span class="p">),</span> <span class="n">plaintext</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</code></pre></div>
+<p>The key produced from this was <code>91CSCZN91CSCZN91CSCZN91C</code>. We can see this repeats so we could say <code>91CSCZN</code> is the "base key" that repeats. Now to use this key on the final row, since <code>bxor</code> will zip to whatever byte string is the shortest, we do not have to make the key the correct size.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="n">base64_ciphertext</span> <span class="o">=</span> <span class="s1">'X10iNHk5fQ4HIGBxPnwPU3c='</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s1">'91CSCZN91CSCZN91CSCZN91C'</span>
+
+<span class="k">def</span> <span class="nf">bxor</span><span class="p">(</span><span class="n">ba1</span><span class="p">,</span> <span class="n">ba2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" XOR two byte strings """</span>
+    <span class="k">return</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">_a</span> <span class="o">^</span> <span class="n">_b</span> <span class="k">for</span> <span class="n">_a</span><span class="p">,</span> <span class="n">_b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ba1</span><span class="p">,</span> <span class="n">ba2</span><span class="p">)])</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="n">bxor</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">base64_ciphertext</span><span class="p">),</span> <span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</code></pre></div>
+<p>This gives <code>flag:c376c32d26b4</code>.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-create-dialogs-in-python/" title="How to Create Dialogs in Python">
+<span>←</span>
+<span class="btn-content">How to Create Dialogs in Python</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/remove-columns-in-a-csv-file-with-python/" title="Remove Columns in a CSV File With Python">
+<span class="btn-content">Remove Columns in a CSV File With Python</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/xor-python-byte-strings/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/xor-python-byte-strings/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

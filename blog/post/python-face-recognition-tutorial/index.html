@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/python-face-recognition-tutorial/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Python Face Recognition Tutorial - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="In this tutorial, I explain the setup and usage of the Python face_recognition library. This library can be used to detect faces using Python and identify facial features." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Python Face Recognition Tutorial" property="og:title"/>
+<meta content="In this tutorial, I explain the setup and usage of the Python face_recognition library. This library can be used to detect faces using Python and identify facial features." property="og:description"/>
+<meta content="/posts/python-face-recognition-tutorial/single-person-red-box.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/python-face-recognition-tutorial/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Python Face Recognition Tutorial</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2020">1 Sep 2020</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#facial-recognition">facial-recognition</a>
+<a class="badge badge-warning" href="/blog/tags/#pil">pil</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">16 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fpython-face-recognition-tutorial%2F"/>
+</div>
+<p class="lead">In this tutorial, I explain the setup and usage of the Python face_recognition library. This library can be used to detect faces using Python and identify facial features.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#the-goal">The Goal</a></li>
+<li><a href="#installing-the-face_recognition-library">Installing The "face_recognition" Library</a><ul>
+<li><a href="#prerequisites-windows">Prerequisites (Windows)</a><ul>
+<li><a href="#cmake">CMake</a></li>
+<li><a href="#visual-studio-c-build-tools">Visual Studio C++ Build Tools</a></li>
+</ul>
+</li>
+<li><a href="#installing-face_recognition-and-verifying-the-installation">Installing face_recognition and Verifying The Installation</a></li>
+<li><a href="#installing-pil">Installing PIL</a></li>
+</ul>
+</li>
+<li><a href="#detecting-a-face-in-an-image">Detecting A Face In An Image</a><ul>
+<li><a href="#identifying-the-detected-face">Identifying The Detected Face</a></li>
+<li><a href="#cropping-out-the-detected-face">Cropping Out The Detected Face</a></li>
+<li><a href="#final-code-for-this-section">Final Code For This Section</a></li>
+</ul>
+</li>
+<li><a href="#detecting-multiple-faces-in-an-image">Detecting Multiple Faces In An Image</a><ul>
+<li><a href="#identifying-the-detected-faces">Identifying The Detected Faces</a></li>
+<li><a href="#cropping-out-the-detected-faces">Cropping Out The Detected Faces</a></li>
+<li><a href="#final-code-for-this-section_1">Final Code For This Section</a></li>
+</ul>
+</li>
+<li><a href="#identifying-facial-features">Identifying Facial Features</a><ul>
+<li><a href="#final-code-for-this-section_2">Final Code For This Section</a></li>
+</ul>
+</li>
+<li><a href="#matching-detected-faces">Matching Detected Faces</a><ul>
+<li><a href="#getting-face-encodings">Getting Face Encodings</a></li>
+<li><a href="#checking-for-matches">Checking For Matches</a></li>
+<li><a href="#final-code-for-this-section_3">Final Code For This Section</a></li>
+</ul>
+</li>
+<li><a href="#additional-pil-help">Additional PIL Help</a></li>
+</ul>
+</div>
+<h2 id="the-goal">
+<span style="position:relative"><a class="anchor" href="#the-goal"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Goal</span></h2>
+<p>In this tutorial, I'll go over some example usages of the Python face_recognition library to:</p>
+<ul>
+<li>Detect faces in images</li>
+<li>Detect facial features on a detected face (like eyebrows and nose)</li>
+<li>Check for matches of detected faces</li>
+</ul>
+<p>All images and code snippets are provided on this post along with step-by-step instructions and explanations as to what is going on. This tutorial is aimed towards Windows 10 but Linux and macOS users will most likely find this easier as they can skip some of the prerequisites.</p>
+<p>Here are some relevant links for face_recognition if you need/want them:</p>
+<ul>
+<li>Documentation: <a href="https://face-recognition.readthedocs.io/en/latest/index.html">face-recognition.readthedocs.io</a></li>
+<li>Source code: <a href="https://github.com/ageitgey/face_recognition">github.com/ageitgey/face_recognition</a></li>
+<li>PyPI: <a href="https://pypi.org/project/face-recognition/">pypi.org/project/face-recognition</a></li>
+</ul>
+<h2 id="installing-the-face_recognition-library">
+<span style="position:relative"><a class="anchor" href="#installing-the-face_recognition-library"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing The "face_recognition" Library</span></h2>
+<h3 id="prerequisites-windows">
+<span style="position:relative"><a class="anchor" href="#prerequisites-windows"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Prerequisites (Windows)</span></h3>
+<p>To install the face_recognition library on Windows you will need the following installed:</p>
+<ul>
+<li><a href="https://pypi.org/project/cmake/">CMake</a></li>
+<li>Visual Studio C++ build tools</li>
+</ul>
+<p>If you do not have these, you will get errors like,</p>
+<div class="codehilite"><pre><span></span><code>CMake must be installed to build the following extensions: _dlib_pybind11
+</code></pre></div>
+<p>Which is telling you that CMake isn't installed, or,</p>
+<div class="codehilite"><pre><span></span><code>You must use Visual Studio to build a python extension on windows.  If you
+are getting this error it means you have not installed Visual C++.  Note
+that there are many flavours of Visual Studio, like Visual Studio for C#
+development.  You need to install Visual Studio for C++.
+</code></pre></div>
+<p>Which is telling you that you need Visual Studio C++ build tools.</p>
+<h4 id="cmake">
+<span style="position:relative"><a class="anchor" href="#cmake"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>CMake</span></h4>
+<p>To install CMake, go to <a href="https://cmake.org/download/">cmake.org/download/</a> and download the appropriate installer for your machine. I am using 64bit Windows 10 so I will get <code>cmake-&lt;version&gt;-win64-x64.msi</code>. After downloading the setup file, install it.</p>
+<p>While installing CMake, add CMake to the system PATH environment variable for all users or the current user so it can be found easily.</p>
+<p><img alt="CMake PATH Option" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/cmake-path-option.png" height="387" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAYAAAC9QufkAAABWklEQVR4nG2SwY7TMBRFz3u2Q9pM0lX//5tGLJAQGxCbqnRGKdBMavs9Fm0DLXMl73x9j44snz5/8WHdoiGw3W4JIQDg7pgZ/6bWiqoSQ+CtFGSaJt/vf9A0DcPQU2tFRFBV2rZFRHjMx+evyO4bsdbKMPSUUpmm6bomBFXcHVVdSuaGirJrvtN82CH7/d5Pp9OyGEK4wzUzzIyue2K1ajEz1u2KszlyOBxcNWBWcfcF092JMf6HfEspmejuvL6+kHPB3Qkh4GYgMAwDXddRa70riggiigL4FS2lCO4glwvH45FxPGLm765HgHXXkXK+IDukJi2iajXeEX4pu/uCdROVUiKltDgwswvQwyNRVdlsNrj/RTOz64cQHEFF0CC4OQaoKiJCNDNKKXflm5T5nKk5UzUxnwspRVYRcs6EEC7Yt/OYeZ75/esn1vS8jCf6/gltjXEcGYYNfwCyK9B8wDuj0AAAAABJRU5ErkJggg==" style="; aspect-ratio: 495/387; height: auto;" width="495"/></p>
+<p>After the installation is complete, open a terminal and execute <code>cmake</code>. This should show the usage for CMake. If it did not, make sure you selected the option to add it to the PATH environment variable.</p>
+<blockquote>
+<p>You will need to close and re-open your terminal/application for the PATH variable to update so the <code>cmake</code> binary can be identified.</p>
+</blockquote>
+<h4 id="visual-studio-c-build-tools">
+<span style="position:relative"><a class="anchor" href="#visual-studio-c-build-tools"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Visual Studio C++ Build Tools</span></h4>
+<p>Unlike Linux, C++ compilers for Windows are not included by default in the OS. If we visit the WindowsCompilers page on the Python wiki we can see there is <a href="https://wiki.python.org/moin/WindowsCompilers#Microsoft_Visual_C.2B-.2B-_14.2_standalone:_Build_Tools_for_Visual_Studio_2019_.28x86.2C_x64.2C_ARM.2C_ARM64.29">information on getting a standalone version of Visual C++ 14.2 compiler without the need for Visual Studio</a>. If we visit the <a href="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2019">link</a> from that wiki section, we will be brought to a Microsoft download page. On this download page, you will want to download "Build Tools for Visual Studio 2019".</p>
+<p>When <code>vs_buildtools__&lt;some other stuff&gt;.exe</code> has downloaded, run the exe and allow it to install a few things before we get to the screen below. When you get to this screen, make the selections I have:</p>
+<p><img alt="Visual Studio Build Tools Install" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/visual-studio-build-tools-install.png" height="720" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAAA50lEQVR4nCXBTVaCMQwF0PeStCk/TmDk/lekboCjR4cCCmg/2sSB9/Lp+cW9xpyqpqbMjARJACQARKQIr9eblVp3u30xLcV+jpdoLjnbqrl778v1enFv2+36cHi1dfVazMy8Vjzk1wg3zgiSqqpmpiKiICUBEZkREaGrVkRU1WsFMe+Dy5iZEQFQFhFQTJUiyKheSGYmQIz4PX6POe7LgkzZjG7Mf8iY/ZZAZhAoa9887u996Uufc9pCBjgjondQ3BtJkmOMRFZ3NWutlXK2t/ePz9N5hBChSAoBAFA1VVHViIjM0+n7D2gMhoYHYtuSAAAAAElFTkSuQmCC" style="; aspect-ratio: 1290/720; height: auto;" width="1290"/></p>
+<p>After clicking "Install", wait for the installation to complete and restart.</p>
+<p>Now that CMake and the required build tools are installed, we can then continue to installing the face_recognition library.</p>
+<h3 id="installing-face_recognition-and-verifying-the-installation">
+<span style="position:relative"><a class="anchor" href="#installing-face_recognition-and-verifying-the-installation"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing face_recognition and Verifying The Installation</span></h3>
+<p>To install the face_recognition library, execute the following in a terminal:</p>
+<div class="codehilite"><pre><span></span><code>python -m pip install face-recognition
+</code></pre></div>
+<p>This might take a bit longer to install than usual as dlib needs to be built using the tools installed from above. To validate that the library was installed successfully, try to import the library in Python using the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+</code></pre></div>
+<p>No errors should be raised.</p>
+<h3 id="installing-pil">
+<span style="position:relative"><a class="anchor" href="#installing-pil"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing PIL</span></h3>
+<p>For this tutorial, we will also be using <a href="https://pillow.readthedocs.io/en/stable/">Pillow</a> / PIL which will help us crop and draw on images. This is not required to use the face_recognition library but will be required in this tutorial to prove/show results. To install it, execute the following:</p>
+<div class="codehilite"><pre><span></span><code>python -m pip install Pillow
+</code></pre></div>
+<p>To validate the library was installed, try to import PIL in Python using the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">PIL</span>
+</code></pre></div>
+<p>No errors should be raised.</p>
+<h2 id="detecting-a-face-in-an-image">
+<span style="position:relative"><a class="anchor" href="#detecting-a-face-in-an-image"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Detecting A Face In An Image</span></h2>
+<p>Now that we have set the face_recognition library and PIL up, we can now start detecting faces. To start off, we will detect a face in an image with just one person.</p>
+<p><img alt="Single Person" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/single-person.jpg" height="533" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAIAAADkeZOuAAAB0klEQVR4nAXBS08TQQAA4N3Zmd2+llWybUEMqVUMMdjUi5j4OiiRmGA8+hNMbIIHL3rzJ/gjTORIPEhiatAgDx+0aloSkRaBtgvF7pbu7uzM7sz4ffJHi0BF0ZAiuCQ41+Kgtd1o/qxOFIrmhTz1uZAkIQMmOKUEbiy+Rgjkp4pj+UnjtNaoNd68KHndzm9zaHb+ee7OrOv4x1bb6fVkAORS6bGqKmo8YYycLdy4tbFU5n+q929fqaytCsbg9bnO0eHhbrPfGwgpgolULJFQNRQjdnd9ceHrh5VLuXOOGzCUbB3sRJ/ec91gGCdUJqIQovSkEkPxoWTWTLdr1Z5lDReKto3lUHSPHdUYL8zMtPctzkLII6iapoKQnNK1zLjSbBzs73kE66qJMoZlD3S7D0YnTiUzAQ5CGgFFSwEtKWAMe/jM5emHz17+Y+DE98rfa39bnfTIKA0ZxTiiUUhC6PshhEySoYLokXOSPT+Fibf2a8vp9a/dmzNvPsA+DggjmERhKD99taBqWkhppVze3apLEXny6G5GR8NGPJvLf6vvvd3sXJy+yhmjAQGu7WKXrL9bqq+uAMG4pHyu7IxlzWw6rQPGfffH8vL2l83AI549+A/TjPk47Lw+ugAAAABJRU5ErkJggg==" style="; aspect-ratio: 800/533; height: auto;" width="800"/></p>
+<p><a href="/posts/python-face-recognition-tutorial/single-person.jpg">single-person.jpg</a></p>
+<p>First, we want to import face_recognition and some helpers from PIL.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+</code></pre></div>
+<p>Now load your image using <a href="https://face-recognition.readthedocs.io/en/latest/face_recognition.html#face_recognition.api.load_image_file"><code>face_recognition.load_image_file</code></a>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s1">'single-person.jpg'</span><span class="p">)</span>
+</code></pre></div>
+<p><code>image</code> now contains our image in a format that face_recognition can detect faces with. To identify the location of the face in this image, call <a href="https://face-recognition.readthedocs.io/en/latest/face_recognition.html#face_recognition.api.face_locations"><code>face_recognition.face_locations</code></a> and pass the image.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</code></pre></div>
+<p><code>face_locations</code> will now contain a list of face locations. Each face location is a tuple of pixel positions for <code>(top, right, bottom, left)</code> - we need to remember this for when we use it later.</p>
+<p>Since there is only one face in this image, we would expect there to be only one item in this list. To check how many faces were detected, we can get the length of the list.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">amount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">face_locations</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'There are </span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s1"> face locations'</span><span class="p">)</span>
+</code></pre></div>
+<p>For the example image I have provided above and am using for this tutorial, this has told me there was one face detected.</p>
+<p>To get the location of this face to use later, we can then just get the first element out of the list.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">first_face_location</span> <span class="o">=</span> <span class="n">face_locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+<p>To see what's in this, you can call:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">first_face_location</span><span class="p">)</span>
+</code></pre></div>
+<p>Which will print out something like:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">1221</span><span class="p">,</span> <span class="mi">862</span><span class="p">,</span> <span class="mi">759</span><span class="p">)</span>
+</code></pre></div>
+<p>These are the pixel positions for <code>(top, right, bottom, left)</code> which we will use to create a box and crop with soon.</p>
+<h3 id="identifying-the-detected-face">
+<span style="position:relative"><a class="anchor" href="#identifying-the-detected-face"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Identifying The Detected Face</span></h3>
+<p>To identify where the face is that was detected in the image, we will draw a red box on the bounds that were returned by <code>face_recognition.face_locations</code>.</p>
+<p>First, we need to create a PIL image from the image that was loaded using <code>face_recognition.load_image_file</code>. Doing this will allow us to use features offered by PIL.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'RGB'</span><span class="p">)</span>
+</code></pre></div>
+<p>Now that we have the PIL image, we need to create an object to help us draw on the image. Before we do this, we will also copy the image into a new object so that when we crop the face out later there won't be a red box still around it.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_with_red_box</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">img_with_red_box_draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img_with_red_box</span><span class="p">)</span>
+</code></pre></div>
+<p>Now that we have an object to help us draw on the image, we will draw a rectangle using the dimensions returned earlier.</p>
+<p>To draw a box, we need two points, the top left and the bottom right as x and y coordinates. Since we got back <code>(top, right, bottom, left)</code>, we need to make these <code>(left, top), (right, bottom)</code>; the basic translation can be seen below.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_with_red_box_draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">first_face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">first_face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+        <span class="p">(</span><span class="n">first_face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">first_face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="p">],</span>
+    <span class="n">outline</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>We needed <code>(left, top), (right, bottom)</code> to get (x, y) (x, y) points.</p>
+</blockquote>
+<p>In that step we have also set <code>outline="red"</code> to make the box red and <code>width=3</code> to make the box 3 pixels wide.</p>
+<p>To see the final result, we call:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_with_red_box</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>This will open the image in the default image viewer. The image should look like this:</p>
+<p><img alt="Single Person With Red Box" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/single-person-red-box.png" height="533" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAIAAADkeZOuAAABzklEQVR4nAXB30/TQAAA4PZ6t1u3rHauYzOgkckSTNzEB8EHeTCiBmP01T9BUROfePPP0cRHTUiMaDIwLKhkDnEkw+Ew/Ogcoytd1+td71q/T17pUKgoGClSKIWhiKvK/s5ue6teLF3NFieYJyIJSEAWQlDG4Nd3rxEChStTo4VJPY1bjdbbVy9Jz/yd0e69WBy/Pe/aXs88si1LBor8/NkThCFW1TP5sdLNWz+XPoTN2txsabO6DqAsZh92ut1Ou31qD6SQw4QWT6oYIczs4/X3b5rLq4XCpX4QkYTm/v1jrS5HKV34noqExAOIjEmgokQqqWWyh9s/rG63XJ7q9QmIZPO4L9IXy3fvHO13Ih4oEYexTBbGoJzScG4M7LUPDw4Ip1o8FhtJr5w4yB6A3ISeGPGJz5kASjwJcDJSMBn6o+WZBwuLjsep41Q3tsx/XeNcPuAhIz5nQcAYJF7AkJAAUiB1Twepy9dwSNd+7ViWU5p/dPbGfc8jlHKfMM44HA48hOPOiblZqbS3G5JgTx/PFa+XM/qMcX681txb+rxWnJ4OhQgoBa7t+kP/+8dPjeoXEAkRgW/13Qv5bM4wdBjKnlOvVFobNZ9Q13b/A+t+9r1GUC4HAAAAAElFTkSuQmCC" style="; aspect-ratio: 800/533; height: auto;" width="800"/></p>
+<h3 id="cropping-out-the-detected-face">
+<span style="position:relative"><a class="anchor" href="#cropping-out-the-detected-face"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Cropping Out The Detected Face</span></h3>
+<p>Aside from drawing a box, we can also crop out the face into another image.</p>
+<p>Using the original image that we didn't draw on (because we drew on the copied image), we can call <code>img.crop</code> providing the dimensions from before.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_cropped</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>  <span class="c1"># Left x</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># Top y</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># Right x</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>   <span class="c1"># Bottom y</span>
+<span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p><code>img.crop</code> returns a copy of the original image being copped so you do not need to copy before-hand if you want to do something else with the original image.</p>
+</blockquote>
+<p><code>img_cropped</code> now contains a new cropped image, to display it, we can call <code>.show()</code> again.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_cropped</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="Single Person Cropped" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/single-person-cropped.png" height="223" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAACTUlEQVR4nAXByW7TQBgA4JnfM/E4TrM1pUkaiopAQKWC6AEJCYk7R56Pd+DCGQFSVTbRQys2QRIami5ZcOyxZzwr34efPnpMkdp7sH+9u9FguL3GWjUWMUIpBux/HI/eHXze3+sbWfqAEZEmdC0CAOcwJWHEqjQkAQ0wxkGANzZbYVjNeImM8SCJNVoJpJTJeb4QqRcJ6XcIqWOMtdN5IZXzvJBVgpVH4LzJhbDaMMCA7M+fo/cfT84uZsqq8a/xl09fuVSlVBh5az1wzj2GasROp+evDr8PEztdyIuliBmc/Z0fjpNPpzPrkDFOG0+0NvW4yqKoyMV2p3Fve7N0EDgaWne9u367kxdphrxDzkmhiXLOGkcwPH642yRWGzu8zCMWGQuDfvPRri1F7i1nIchlAc6jdr3prUbaVFlYqQQWWe+NNN4DubXTGTRinhoIAhpgUmpzufonheC5zGMipFpezZOLqc/q63XW7V/r95vDyWiRiJACAYyPR6M7d3cHm91CKRzSjRuDFsM3t+KtXpunGatRD/D1dN5trxEMAbKG88J6X2iLlUKrf8CDlcxNkuMIKoyiAA+naSFLwMgHEAwn46wopNUi4/kVd4lQy5JP02zBpTYrIYV1aZ4TABrTynx+NbmcYtprxJWd+4NmiEJKm+3IWv3rYPLtfAYUAIA8efY8jCqzyR+NIEmzUhJ6bb230ey0agHSo9/Tt0ffLlbpdqeFEcIv3hxRSsfHR4svH3yZAXJrFdJr1bqtuCzSl6/fH54MEfb9RszA/Ad8o2UoYCSw9gAAAABJRU5ErkJggg==" style="; aspect-ratio: 222/223; height: auto;" width="222"/></p>
+<h3 id="final-code-for-this-section">
+<span style="position:relative"><a class="anchor" href="#final-code-for-this-section"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Code For This Section</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+
+<span class="c1"># Detecting the faces</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s1">'single-person.jpg'</span><span class="p">)</span>  <span class="c1"># Load the image</span>
+<span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># Detect the face locations</span>
+<span class="n">first_face_location</span> <span class="o">=</span> <span class="n">face_locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Get the first face</span>
+
+<span class="c1"># Convert the face_recognition image to a PIL image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'RGB'</span><span class="p">)</span>
+
+<span class="c1"># Creating the image with red box</span>
+<span class="n">img_with_red_box</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Create a copy of the original image so there is not red box in the cropped image later</span>
+<span class="n">img_with_red_box_draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img_with_red_box</span><span class="p">)</span>  <span class="c1"># Create an image to draw with</span>
+<span class="n">img_with_red_box_draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span>  <span class="c1"># Draw the rectangle on the image</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="n">first_face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">first_face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>  <span class="c1"># (left, top)</span>
+        <span class="p">(</span><span class="n">first_face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">first_face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># (right, bottom)</span>
+    <span class="p">],</span>
+    <span class="n">outline</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>  <span class="c1"># Make the box red</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">3</span>  <span class="c1"># Make the box 3px in thickness</span>
+<span class="p">)</span>
+<span class="n">img_with_red_box</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Open the image in the default image viewer</span>
+
+<span class="c1"># Creating the cropped image</span>
+<span class="n">img_cropped</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span>  <span class="c1"># Crop the original image</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">first_face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">))</span>
+<span class="n">img_cropped</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Open the image in the default image viewer</span>
+</code></pre></div>
+<h2 id="detecting-multiple-faces-in-an-image">
+<span style="position:relative"><a class="anchor" href="#detecting-multiple-faces-in-an-image"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Detecting Multiple Faces In An Image</span></h2>
+<p>We saw before that <code>face_recognition.face_locations</code> returns an array of tuples corresponding with the locations of faces. This means we can use the same methods above, but loop over the result of <code>face_recognition.face_locations</code> when drawing and cropping.</p>
+<p>I will use the following as my image. It has 5 faces visible, 2 of which are slightly blurred.</p>
+<p><img alt="Group of People" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people.jpg" height="667" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAIAAADkeZOuAAAB10lEQVR4nAHMATP+AY2LegYGBgoMCwMCAgD//gMFBhAPGPz39QcMEAAJCgUAAPv79wwJBuDh0ykoOgQYGx4LCwz29fcUFRX///z9//4IBAf7/fP8+vDq7eMDBQzn5+gHAf8L9OrpDegCMTZCEBUfm4uO+Pb6HiEoERAUDw8TGB4lBvz8D+3x8PH77PL74+bp0NDZrK2xAhEUFs3Lz+ju8qiprwQCAAwKChETFvny7+vd5semvyjj6wD48vjq69je37bBzATS0Mzs3NZpYmexx8rj3d75AvYJ9PX2390fKCkNSwbn0tLsA/IfGyYSQEnpytsECgcPBhUo8AUJgIiQMyYamJ6EExIbB/L0CRH5MmZh/v//6pWI5+DgUFdXCCEuBMbGzOr9EvX4/fa3wv/qIPbyCg8D/goLEdbd6QUZ6iAhG/Py6/Hw6+DXzwkPKgFjWFYMEhvw+QLz6tv2BhMKBQASCQPZ3+FPS1T6BAUPB/fQxMD4Bibx4MBqeX8EFxsZ5OHhMDI2FTsstbq8FREK1t3n4ODlu8C5HSEl6ujn6eb39vnNHxEEDxIUBB0lLkRNWhQVFLe4uuro5+vl+dvk7wD//ePa1dnV0yYjLNzc2VZSRj43LQ0LDNcx5I+bBQ9qAAAAAElFTkSuQmCC" style="; aspect-ratio: 1000/667; height: auto;" width="1000"/></p>
+<p><a href="/posts/python-face-recognition-tutorial/group-of-people.jpg">group-of-people.jpg</a></p>
+<p>Once again, we want to import face_recognition and some helpers from PIL.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+</code></pre></div>
+<p>Then load the new image using <code>face_recognition.load_image_file</code> and detect the faces using the same methods as before.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s1">'group-of-people.jpg'</span><span class="p">)</span>
+<span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</code></pre></div>
+<p>If we print out face_locations (<code>print(face_locations)</code>), we can see that 5 faces have been detected.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span>
+    <span class="p">(</span><span class="mi">511</span><span class="p">,</span> <span class="mi">1096</span><span class="p">,</span> <span class="mi">666</span><span class="p">,</span> <span class="mi">941</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">526</span><span class="p">,</span> <span class="mi">368</span><span class="p">,</span> <span class="mi">655</span><span class="p">,</span> <span class="mi">239</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">283</span><span class="p">,</span> <span class="mi">1262</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">1154</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">168</span><span class="p">,</span> <span class="mi">1744</span><span class="p">,</span> <span class="mi">297</span><span class="p">,</span> <span class="mi">1615</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">271</span><span class="p">,</span> <span class="mi">390</span><span class="p">,</span> <span class="mi">378</span><span class="p">,</span> <span class="mi">282</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Since we now have more than one face, taking the first one does not make sense - we should loop over them all and perform our operations in the loop.</p>
+<p>Before we continue, we should also create the PIL image we will be working with.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'RGB'</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="identifying-the-detected-faces">
+<span style="position:relative"><a class="anchor" href="#identifying-the-detected-faces"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Identifying The Detected Faces</span></h3>
+<p>Like before, we need to copy the original image for later (optional) and create an object to help us draw.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_with_red_box</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">img_with_red_box_draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img_with_red_box</span><span class="p">)</span>
+</code></pre></div>
+<p>Now we can loop all the faces and create rectangles.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">face_location</span> <span class="ow">in</span> <span class="n">face_locations</span><span class="p">:</span>
+    <span class="n">img_with_red_box_draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">(</span><span class="n">face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="p">],</span>
+        <span class="n">outline</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">3</span>
+    <span class="p">)</span>
+</code></pre></div>
+<p>And once again, look at the image:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_with_red_box</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="Group of People With Red Boxes" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people-red-boxes.jpg" height="667" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAIAAADkeZOuAAAB10lEQVR4nAHMATP+AY2LegYGBgoMCwMCAgD//gMFBhAPGPz39QcMEAAJCwUA//v79wwIBuHi0ygoOwQYGx8LCwz49PUSFhb///z+//8HBAb8/fP7+vDq6+EDBg3m6OkP+/kJ7+XoDSECMDZAERUfp4qO/vX5HSIpERAUDw8SFx4mCfr7F+Xq8vD77PL74OvszdXerayxAhIUGMzJzeHs8aSqrwUB/wsKChITGPnv7Orc5MSvxifl7AH48fPr7tbm57bCzATS0czv2NFpXF6vz9Pi3t76APYJDPX81tUiISIKTgrmz9HsBPIfGycTPhfpytoECgYPBRot7QMHfIlkMicbmJ6EFBMbCfv7BQX/M2Vh//7+6paI59/fUVdXCCEuBMbGy+j/E/T3/vG5w//rH/byCvsD/QgPFdPi7QPg6CAiHPPx6/Hw69/XzwoPKQFjWVYMERzw+QHz6dr3BxQJBQESCgLa3uFOS1P6AwYPCPfRxMD3Bifx4L9qeX4EGBoa4+HhMDI1FTsrtbq9FREK1t3n3+Dlu7+6HCIl6+jn6eb39vrMHxEEDxMVBBwlLUNOWRQTFLe5uuro5+vl+Nvk8AD//eTb1dnW0yYjLNzc2lZSRT03LQ0KC9Pi5yd15XLiAAAAAElFTkSuQmCC" style="; aspect-ratio: 1000/667; height: auto;" width="1000"/></p>
+<p>Not bad eh!</p>
+<h3 id="cropping-out-the-detected-faces">
+<span style="position:relative"><a class="anchor" href="#cropping-out-the-detected-faces"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Cropping Out The Detected Faces</span></h3>
+<p>Just like drawing many boxes, we can also crop all the detected faces. Use a for-loop again, crop the image in each loop and then showing the image.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">face_location</span> <span class="ow">in</span> <span class="n">face_locations</span><span class="p">:</span>
+    <span class="n">img_cropped</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="n">face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="n">img_cropped</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>You will have many images open on your machine in separate windows; here they are all together:</p>
+<div style="text-align: center; margin-bottom: 1rem">
+<img alt="Group of People Cropped Face 1" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-1.jpg" height="74" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAACVUlEQVR4nAXBbU/TQBwA8Lvrv+2u7W7t2oEwhMwIMoMjQT+gXwLjx9C3xlc+QTSGaYIYCS4Mxx46Nrb1+Xp3/n747fHL/VbTsqtaxbCop7N1oDbWiAKCNVBIEp5efu/++Ham/7ohjJSYF5PJ3W0Yx5kyQEOGLsCUWE/icjXLpDTqa01pGhmjILK8d31b0Mak17+46B+96LSedRBR80k4GoytKhOBQ3RtsUyMrCCC55S644gPU1IIa9z/l8xudUKKXAwH4dfTn1lUGBWyWs5NViN+s+G4zNFI+3EraPhIFCKNAECvWI7nJlnW7w+cWo1jAQ98YMyrbmw1Wg7BFazheNrjcSSyOFj3wSSHzzvMsVW5dGz7/PoKtCTDRWHVLcuwomRBlCjTUkqMNez5HhKoLHMDa/F0ftbtwiIMzWrDsPJUYsX53c2YGtViK0aZqDC7kNJUIg7DeDZ1LRPSKJ1NJsp0qNdASiIE0TKKVytAqFKlSPCSZ6LINQwuc8G0acnzVThSCFHP2znsOE6tUvOxTXOeSV5gJRdJdn514zc3QdmUOlWkZLxapJlYLTk2F0n026vXdo/aecmtWvDl7H1vPNg7PCDTGJmmjkApHRbTObpP6prl2cy2bCElAGAdhsPBo93W5vYGefPuw/1yoYgUIrMY0ICWer7+MAh2/FSktmXPRqOPnz89ebrHPAYn3e7Bjtdpt2ndD9a2DJPZ7gatewqXIMt4uXp9/CrneeAy09RBYjWehn+vKUzCNOF+sFWWRALSKgaS8uryz+nJidsICDjb2/v/AZcMPZXDS2XrAAAAAElFTkSuQmCC" style="display: inline; aspect-ratio: 75/74; height: auto;" width="75"/>
+<img alt="Group of People Cropped Face 2" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-2.jpg" height="74" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAACa0lEQVR4nAXByW7TQAAA0JnxOF7S2FmbtQlLU6lIRUWlRwQSF7jyDxz4Ek5I3PkA+AQOHAGBqkqlalVUmiap0yZ2m8SJ7XjG45nhPXj25YO93uSKiQwLZ/JSgQBAKYCQLIPBbOp9/PTllqr5QiGhHCWMRVEkhOApZ4ylLOVpKoFECAEEq41GsVIiCV3FsZQSc845F4ZpKJqJsI60DCE05TyTwWE0d0bDMI6WYSC5yGYtzDmSNPnx8/Bi4qTI7rQ6jx916nbt+ODs6+9vRsb0xkRCPYhZKgKcAfhPb/T5++n27jN/KW+ORsEKsOxyeueX6vuUjff2K9HBJOYBSwg+HN6MubL99OVu96E/j5tF9Xo8ca+9B+1qaz2XVQwg0qMjJ+ZACoHzhtKs1BgudpombOfSlA4G7uudHU1FIVhudnd+HfcCCDDWqFihkmGVkGZItpgFNFhNJ35DNwuQbNQrpqJNb2cn5/8oYRDBKF5hJqRIaM0uYgxV07ZVXXGHV/3LVEUF27ILa0nCQpKIaOa6DlomMQdyFS0EpyngWMfEwMNVcHLRm898kOKxN3XvXMdz/GCGxxPX0nKaoSJC8pCOPG8exA2rbhnazahvlkrHf89c54qny5jGeE6p5y/yHEklNMgq9Gd6LLMQAsa6m/cHlwPQ7Ow9f6NgHOV0vCCk5zhb93QGpGaZrXJFWEVnOC7XiiJvrjHl/bu3erMTJ/HC0HG7WDg9dxIB262qtmZAu1yqVmwAVU076Q0DZL5q1CEC2YqlSoJr6+WAyigIz/v93mhcb7Wta9v3lwmJZwQ4IdjafRHSZcFWn3Q3/gPKsGpqEZ45CAAAAABJRU5ErkJggg==" style="display: inline; aspect-ratio: 75/74; height: auto;" width="75"/>
+<img alt="Group of People Cropped Face 3" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-3.jpg" height="62" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAACZElEQVR4nAXBW0/aUAAA4HNreygtFuWmgJmwKUrcHkx2eTHzbT9jf3Ix2TL3us0sJmbDKepUEKQtLW1poZdzzr4PfvxwePRmv9veVHJq3ljLFwxEVwBRCcYCLwCSCSQnX45/X/7d2nlBFtGcc04kGUGc+EEYsvyqVChSJMFsCfoXPYCx7UcBJz6TiEKRokhT280yEKZ8EiQs/fX2YL/V6TrW/OHRlBSYppmxvqEWq0jXNUopgigV0GjtNruvwkXgWQ9xGFG9UO/uMgxedra1gqZpGqGyrij52mYjjBnL5RuV9TIVfPqYzjxa0+vV1b3W+yfbhHaQckiWqc9gwjAoN2qysgZkhZYrfug6w8cSLayUVmUAsUz9YD5fDpCULRbeNAxcwZmCAWYsh2WQcsc2kzhCgiEA7Jk3fJoMRmNSX1vl8TJwXEmxCJBVvRqnyWzmIYwA5ALyVDDH9igkS8EIoCuhAIZIo2AaqFpO1SUJWJ47GVogrxIFaaVSZM/rQYILMmlud137Lk4jZYlBFk7G16Pbe8eeaoY+c6zz706l1Rpe3/in5+2iQfKA+2niOVnsxXlaNG0TLsF2o5MlAKlIK6q3N3fXvUs6eAjNIQmmlkiZa7vFWj3jvN1qE5aLp1wkAOuo3Kr3bNcZDFpYkJyErsZTd5HxOHuajE3HQoQUq1VjayMzUKFSCLP4548zMTJ1ATMkkT/3kxxeHO09P7+6GN3du6b1+t3hWvXZTmMvCoPjT5+vT89qTCCZzLOUxLI+GQ1Zp91sNvr926/fToajUWf3IGdU+v/6l737LAEy4gKCwI/+A7QoUwsCUho2AAAAAElFTkSuQmCC" style="display: inline; aspect-ratio: 62/62; height: auto;" width="62"/>
+<img alt="Group of People Cropped Face 4" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-4.jpg" height="52" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAACI0lEQVR4nAXB2W7TQBQA0Fmux56x4zhJky6CtlT8/wfwxCsS4gEBEhWqaNPQpm7tOB5vs9zhHHp1tl4qWKaCUrqa5ad5ns1mm/VylilIEz/o7d/7T19/7KbAQAAjhBAyGuu8H0eLnlzE8tgNXCRuPOjqGdFtVou350NnHRCCnINMVaxS64L2RvdtpsTDbr/797gu1Mm6iOMjw4OznsVCBBLKqn5rutX5RaDe9IdCianvegMtirL3nWOEihAYU3EMlMWMJZRKxmLOY6DvLtbX7zeMh4ensixrOw6ZyoL3kDBapLKQhZRpHgwVdJ7wy/NFkQtI2L71M45tXX35/RQRBixYwaIiTTZnp9bZ2lkk8b58BUYWKVzdfFgkcPvr5/e7LWcEQiCI6BAppY2eto3ZHc3r52+zhJ3MxWYwuCp48Ksid3/2MHkyOtIbbAfr0KmIBQaUoIr4zfXHSru7u0eGnlLhrAXv7WhpO2r+VhprVabO5ovL881mlXMOwVS7l3oy9rXRHToIlFhn+4kGV+luTFWisbnX3X4nuqGDOB486tEc+37yHgjlgdFAaCxT9JRZp6Rc5JlDAx48ITYwjJK6ffEW2aE5Oo9IqMMgpJJZ2pupPNbaTYvlMgIxWXxt+seXOhAK1bEjBNGnBEGKWM5kVuRZJiMJVvdVq8tmuN3um8EwADCBtr0NTg+Dm+cpZySK4kCB9aZq6vuyfnxrnurGE8pI+A8LDFjKlRpAMgAAAABJRU5ErkJggg==" style="display: inline; aspect-ratio: 52/52; height: auto;" width="52"/>
+<img alt="Group of People Cropped Face 5" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people-cropped-face-5.jpg" height="62" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAACW0lEQVR4nAXBWU8TURQA4HvOXWaj7QBt7VCLNSwF2QwU1xiMmuhv9EnDb1B4MRATNFI1hghRWxEIq2zdW8a59/h98Hn9vbC46bZWlpdW3719Mjc9OphLp5K2o0zEHNcjY8rb5dW10q+dAzGSH+QWdmoXg0E66Pfz2aDHtv14f8xPakThurYbszNDsfTw8tIbcXR63uzUL08Oj/6eFUbGhOWRdM8b4detEkh1u1hMZG5meoO+dJAeCMTLV4vNdtOEHcdQIZcCK/Z7/6yy/SWT9kdHxsN6u3a8zxOu58aHp6bExsZ6J4xs4c6NTfb2BwhCSntmYrpVP220wpPz8/3dH0Pjw3ZhhoQS1ctG918kfDl2q7Bd+U6dxvOnL4jg9eLK3t7y44VHCw/v+H1pBhJRoY6AiCFnA9l0s93a2d2t1Wv9maAwNjmaz85PFq4HWaE85DahElJZiEpZ6irsFu/fXWvVYr2JVCr5YG722exEPJHg3ELhAJfEUKBjESFwFVKEPV48mRwaLijBHalNRzPbY7bP0DMARIQcBOcCgTMDEsS94rxjOVI6QvRsbparF1XGCBG01kSEgAJAAONkmC2d6MqE7fDnVuVP5RhBHRwc16p1rbUxhogQQQqUBBgZI4RotJul0sfm5amyVTaXF1zuH+51r9om0jqKBCMGHAngnzaE1KJu4/DI514wkEWy67U6o7NGq9rnJgCMcHtkJ4wYQzKMIg0AIVE7DDe/bQWZXHAjl8pf09pEOpJMYsJ3YnFPax1F2miNgn8ofSpvlyVopUC5qGyeiMcROWPsP/h0Gfqe3B2dAAAAAElFTkSuQmCC" style="display: inline; aspect-ratio: 62/62; height: auto;" width="62"/>
+</div>
+<blockquote>
+<p>I have downscaled these images for the tutorial but yours will be cropped at whatever resolution you put in.</p>
+</blockquote>
+<h3 id="final-code-for-this-section_1">
+<span style="position:relative"><a class="anchor" href="#final-code-for-this-section_1"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Code For This Section</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+
+<span class="c1"># Load image and detect faces</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"group-of-people.jpg"</span><span class="p">)</span>
+<span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Create the PIL image to copy and crop</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'RGB'</span><span class="p">)</span>
+
+<span class="n">img_with_red_box</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Make a single copy for all the red boxes</span>
+<span class="n">img_with_red_box_draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img_with_red_box</span><span class="p">)</span>  <span class="c1"># Get our drawing object again</span>
+<span class="k">for</span> <span class="n">face_location</span> <span class="ow">in</span> <span class="n">face_locations</span><span class="p">:</span>  <span class="c1"># Loop over all the faces detected this time</span>
+    <span class="n">img_with_red_box_draw</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span>  <span class="c1"># Draw a rectangle for the current face</span>
+        <span class="p">[</span>
+            <span class="p">(</span><span class="n">face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">(</span><span class="n">face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="p">],</span>
+        <span class="n">outline</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">3</span>
+    <span class="p">)</span>
+<span class="n">img_with_red_box</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Open the image in the default image viewer</span>
+
+<span class="k">for</span> <span class="n">face_location</span> <span class="ow">in</span> <span class="n">face_locations</span><span class="p">:</span>  <span class="c1"># Loop over all the faces detected</span>
+    <span class="n">img_cropped</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span>  <span class="c1"># Crop the current image like we did last time</span>
+        <span class="n">face_location</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="n">face_location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">face_location</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">face_location</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="p">))</span>
+    <span class="n">img_cropped</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Show the image for the current iteration</span>
+</code></pre></div>
+<h2 id="identifying-facial-features">
+<span style="position:relative"><a class="anchor" href="#identifying-facial-features"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Identifying Facial Features</span></h2>
+<p>face_recognition also has a function <a href="https://face-recognition.readthedocs.io/en/latest/face_recognition.html#face_recognition.api.face_landmarks"><code>face_recognition.face_landmarks</code></a> which works like <code>face_recognition.face_locations</code> but will return a list of dictionaries containing face feature positions rather than the positions of the detected faces themselves.</p>
+<p>Going back to the image with one person in it, we can import everything again, load the image and call <code>face_recognition.face_landmarks</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s1">'single-person.jpg'</span><span class="p">)</span>
+<span class="n">face_landmarks_list</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_landmarks</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># The new call</span>
+</code></pre></div>
+<p>Now if we print <code>face_landmarks_list</code>, the object will look a bit different.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">'chin'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">315</span><span class="p">,</span> <span class="mi">223</span><span class="p">),</span> <span class="p">(</span><span class="mi">318</span><span class="p">,</span> <span class="mi">248</span><span class="p">),</span> <span class="p">(</span><span class="mi">321</span><span class="p">,</span> <span class="mi">273</span><span class="p">),</span> <span class="p">(</span><span class="mi">326</span><span class="p">,</span> <span class="mi">296</span><span class="p">),</span> <span class="p">(</span><span class="mi">335</span><span class="p">,</span> <span class="mi">319</span><span class="p">),</span> <span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">339</span><span class="p">),</span> <span class="p">(</span><span class="mi">370</span><span class="p">,</span> <span class="mi">354</span><span class="p">),</span> <span class="p">(</span><span class="mi">392</span><span class="p">,</span> <span class="mi">365</span><span class="p">),</span> <span class="p">(</span><span class="mi">415</span><span class="p">,</span> <span class="mi">367</span><span class="p">),</span> <span class="p">(</span><span class="mi">436</span><span class="p">,</span> <span class="mi">363</span><span class="p">),</span> <span class="p">(</span><span class="mi">455</span><span class="p">,</span> <span class="mi">351</span><span class="p">),</span> <span class="p">(</span><span class="mi">469</span><span class="p">,</span> <span class="mi">336</span><span class="p">),</span> <span class="p">(</span><span class="mi">479</span><span class="p">,</span> <span class="mi">318</span><span class="p">),</span> <span class="p">(</span><span class="mi">486</span><span class="p">,</span> <span class="mi">296</span><span class="p">),</span> <span class="p">(</span><span class="mi">488</span><span class="p">,</span> <span class="mi">273</span><span class="p">),</span> <span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="mi">251</span><span class="p">),</span> <span class="p">(</span><span class="mi">489</span><span class="p">,</span> <span class="mi">229</span><span class="p">)],</span>
+        <span class="s1">'left_eyebrow'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">329</span><span class="p">,</span> <span class="mi">194</span><span class="p">),</span> <span class="p">(</span><span class="mi">341</span><span class="p">,</span> <span class="mi">183</span><span class="p">),</span> <span class="p">(</span><span class="mi">358</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="p">(</span><span class="mi">375</span><span class="p">,</span> <span class="mi">182</span><span class="p">),</span> <span class="p">(</span><span class="mi">391</span><span class="p">,</span> <span class="mi">189</span><span class="p">)],</span>
+        <span class="s1">'right_eyebrow'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">434</span><span class="p">,</span> <span class="mi">189</span><span class="p">),</span> <span class="p">(</span><span class="mi">448</span><span class="p">,</span> <span class="mi">184</span><span class="p">),</span> <span class="p">(</span><span class="mi">461</span><span class="p">,</span> <span class="mi">182</span><span class="p">),</span> <span class="p">(</span><span class="mi">474</span><span class="p">,</span> <span class="mi">184</span><span class="p">),</span> <span class="p">(</span><span class="mi">483</span><span class="p">,</span> <span class="mi">194</span><span class="p">)],</span>
+        <span class="s1">'nose_bridge'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">411</span><span class="p">,</span> <span class="mi">209</span><span class="p">),</span> <span class="p">(</span><span class="mi">411</span><span class="p">,</span> <span class="mi">223</span><span class="p">),</span> <span class="p">(</span><span class="mi">412</span><span class="p">,</span> <span class="mi">238</span><span class="p">),</span> <span class="p">(</span><span class="mi">412</span><span class="p">,</span> <span class="mi">253</span><span class="p">)],</span>
+        <span class="s1">'nose_tip'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">394</span><span class="p">,</span> <span class="mi">269</span><span class="p">),</span> <span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="mi">272</span><span class="p">),</span> <span class="p">(</span><span class="mi">412</span><span class="p">,</span> <span class="mi">275</span><span class="p">),</span> <span class="p">(</span><span class="mi">421</span><span class="p">,</span> <span class="mi">272</span><span class="p">),</span> <span class="p">(</span><span class="mi">428</span><span class="p">,</span> <span class="mi">269</span><span class="p">)],</span>
+        <span class="s1">'left_eye'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">349</span><span class="p">,</span> <span class="mi">215</span><span class="p">),</span> <span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="mi">208</span><span class="p">),</span> <span class="p">(</span><span class="mi">373</span><span class="p">,</span> <span class="mi">207</span><span class="p">),</span> <span class="p">(</span><span class="mi">384</span><span class="p">,</span> <span class="mi">216</span><span class="p">),</span> <span class="p">(</span><span class="mi">372</span><span class="p">,</span> <span class="mi">218</span><span class="p">),</span> <span class="p">(</span><span class="mi">359</span><span class="p">,</span> <span class="mi">219</span><span class="p">)],</span>
+        <span class="s1">'right_eye'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">436</span><span class="p">,</span> <span class="mi">216</span><span class="p">),</span> <span class="p">(</span><span class="mi">446</span><span class="p">,</span> <span class="mi">208</span><span class="p">),</span> <span class="p">(</span><span class="mi">458</span><span class="p">,</span> <span class="mi">208</span><span class="p">),</span> <span class="p">(</span><span class="mi">467</span><span class="p">,</span> <span class="mi">216</span><span class="p">),</span> <span class="p">(</span><span class="mi">459</span><span class="p">,</span> <span class="mi">219</span><span class="p">),</span> <span class="p">(</span><span class="mi">447</span><span class="p">,</span> <span class="mi">219</span><span class="p">)],</span>
+        <span class="s1">'top_lip'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">374</span><span class="p">,</span> <span class="mi">309</span><span class="p">),</span> <span class="p">(</span><span class="mi">388</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">402</span><span class="p">,</span> <span class="mi">296</span><span class="p">),</span> <span class="p">(</span><span class="mi">411</span><span class="p">,</span> <span class="mi">298</span><span class="p">),</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">296</span><span class="p">),</span> <span class="p">(</span><span class="mi">434</span><span class="p">,</span> <span class="mi">301</span><span class="p">),</span> <span class="p">(</span><span class="mi">448</span><span class="p">,</span> <span class="mi">308</span><span class="p">),</span> <span class="p">(</span><span class="mi">442</span><span class="p">,</span> <span class="mi">308</span><span class="p">),</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">307</span><span class="p">),</span> <span class="p">(</span><span class="mi">411</span><span class="p">,</span> <span class="mi">308</span><span class="p">),</span> <span class="p">(</span><span class="mi">402</span><span class="p">,</span> <span class="mi">307</span><span class="p">),</span> <span class="p">(</span><span class="mi">380</span><span class="p">,</span> <span class="mi">309</span><span class="p">)],</span>
+        <span class="s1">'bottom_lip'</span><span class="p">:</span> <span class="p">[(</span><span class="mi">448</span><span class="p">,</span> <span class="mi">308</span><span class="p">),</span> <span class="p">(</span><span class="mi">434</span><span class="p">,</span> <span class="mi">317</span><span class="p">),</span> <span class="p">(</span><span class="mi">421</span><span class="p">,</span> <span class="mi">321</span><span class="p">),</span> <span class="p">(</span><span class="mi">411</span><span class="p">,</span> <span class="mi">322</span><span class="p">),</span> <span class="p">(</span><span class="mi">401</span><span class="p">,</span> <span class="mi">321</span><span class="p">),</span> <span class="p">(</span><span class="mi">388</span><span class="p">,</span> <span class="mi">317</span><span class="p">),</span> <span class="p">(</span><span class="mi">374</span><span class="p">,</span> <span class="mi">309</span><span class="p">),</span> <span class="p">(</span><span class="mi">380</span><span class="p">,</span> <span class="mi">309</span><span class="p">),</span> <span class="p">(</span><span class="mi">402</span><span class="p">,</span> <span class="mi">309</span><span class="p">),</span> <span class="p">(</span><span class="mi">411</span><span class="p">,</span> <span class="mi">310</span><span class="p">),</span> <span class="p">(</span><span class="mi">421</span><span class="p">,</span> <span class="mi">309</span><span class="p">),</span> <span class="p">(</span><span class="mi">442</span><span class="p">,</span> <span class="mi">308</span><span class="p">)]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>There is quite a bit of stuff here. For each facial feature (i.e. chin, left eyebrow, right eyebrow, etc), a corresponding list contains x and y tuples - these x and y points are x and y coordinates on the image.</p>
+<p>PIL offers a <code>.line()</code> method on the drawing object we have been uses which takes a list of x and y points which is perfect for this situation. To start we will need a drawing object.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'RGB'</span><span class="p">)</span>  <span class="c1"># Make a PIL image from the loaded image</span>
+<span class="n">img_draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>  <span class="c1"># Create the draw object</span>
+</code></pre></div>
+<blockquote>
+<p>In this example we will not copy the image as this is the only time we will be using it</p>
+</blockquote>
+<p>Now that we have the object to help us draw, plot all these lines using the first dictionary in the list returned above.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">face_landmarks</span> <span class="o">=</span> <span class="n">face_landmarks_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Get the first dictionary of features</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'chin'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'left_eyebrow'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'right_eyebrow'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'nose_bridge'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'nose_tip'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'left_eye'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'right_eye'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'top_lip'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'bottom_lip'</span><span class="p">])</span>
+</code></pre></div>
+<p>Now we can call <code>.show()</code> on our image to look at it:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">img_draw</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="Single Person With Facial Markings" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/single-person-facial-markings.png" height="533" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAIAAADkeZOuAAABzUlEQVR4nAXBW2vTUAAA4JNzWZqGZdXe7CxDtxambLMi1As+FFQmBX32J4gXxJe9zX8jgm97EEQrdsyKxTo75gaObi2ua9Otl7RNT5KTcxK/T9rUHYyQTBDwgOcJWUHNg8P6bjW9nImmFxgVPoAASkIIhzFc3nhLCJxfylycXwydkw//1N6vv6Jn7VpYW325dul+3jRot90y+n0JIunF86dExrKizFxIrtzNlT8W/Fr1YS6zvVVCCMBbef30VK/Xh8YYeBwHtYCqyITIzDj7sfGu8rW0kkqZlPuK1vpXp5uffS0kbKoQAbiLSWQRKiQ4rWrh6Mn+70Gno1273u2aWAC904fqbOb2g9ax7nMX+RxPhaN4CkvTmhxPosZRs3lsMSscSiogrA9G6mAE46lQMGZbNmcCooAKZdVHsjWxZ5ezj1+/6XJoDI0vld3GSSuWSLjcY5bNmesyhi3qMiIAJAg74+E4vrBEbfNb9aDX6d1cfXT+Tp5Sy3G4bTHOOJ6MKZEDo157p1is7+8Bzp49uXclczWSuxGZu/zrb+NDoZTOZj0hXMeBpmHaE/vnp8Le9y3oCwFgeedoLhGNRSMz2JPoqFos1irbtuWYhvkfTFvzuhJmlQUAAAAASUVORK5CYII=" style="; aspect-ratio: 800/533; height: auto;" width="800"/></p>
+<h3 id="final-code-for-this-section_2">
+<span style="position:relative"><a class="anchor" href="#final-code-for-this-section_2"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Code For This Section</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span>
+
+<span class="c1"># Load the image and detect face landmarks for each face within</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s1">'single-person.jpg'</span><span class="p">)</span>
+<span class="n">face_landmarks_list</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_landmarks</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Make a PIL image from the loaded image and then get a drawing object</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'RGB'</span><span class="p">)</span>
+<span class="n">img_draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="c1"># Draw all the features for the first face</span>
+<span class="n">face_landmarks</span> <span class="o">=</span> <span class="n">face_landmarks_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Get the first object corresponding to the first face</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'chin'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'left_eyebrow'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'right_eyebrow'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'nose_bridge'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'nose_tip'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'left_eye'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'right_eye'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'top_lip'</span><span class="p">])</span>
+<span class="n">img_draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">face_landmarks</span><span class="p">[</span><span class="s1">'bottom_lip'</span><span class="p">])</span>
+
+<span class="n">img_with_face_landmarks</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Show the image for the current iteration</span>
+</code></pre></div>
+<h2 id="matching-detected-faces">
+<span style="position:relative"><a class="anchor" href="#matching-detected-faces"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Matching Detected Faces</span></h2>
+<p>The face_recognition library also provides the function <a href="https://face-recognition.readthedocs.io/en/latest/face_recognition.html#face_recognition.api.compare_faces"><code>face_recognition.compare_faces</code></a> which can be used to compare detected faces to see if they match.</p>
+<p>There are two arguments for this function which we will use:</p>
+<ul>
+<li><code>known_face_encodings</code>: A list of known face encodings</li>
+<li><code>face_encoding_to_check</code>: A single face encoding to compare against the list</li>
+</ul>
+<p>For this section, we will be getting 2 face encodings for the same person and checking if they are in another image.</p>
+<p>Here are the two images with a known face in each:</p>
+<!-- Duncan.Hull CC BY-SA 4.0 src: https://en.wikipedia.org/wiki/Elon_Musk#/media/File:Elon_Musk_Royal_Society.jpg -->
+<!-- REUTERS/Mike Blake src: https://www.businessinsider.com.au/elon-musk-last-decade-tesla-spacex-relationships-controversies-tweets-2019-11 -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
+<p><img alt="Elon Musk 1" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/elon-musk-1.jpg" height="864" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAWCAIAAACQbVFOAAABKWlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGAycHRxcmUSYGDIzSspCnJ3UoiIjFJgv8DAwcDNIMxgzGCdmFxc4BgQ4MMABHn5eakMGODbNQZGEH1ZF2QWpjxewJVcUFQCpP8AsVFKanEyAwOjAZCdXV5SABRnnANkiyRlg9kbQOyikCBnIPsIkM2XDmFfAbGTIOwnIHYR0BNA9heQ+nQwm4kDbA6ELQNil6RWgOxlcM4vqCzKTM8oUTAyMDBQcEzJT0pVCK4sLknNLVbwzEvOLyrIL0osSU0BqoW4DwwEIQpBIaZhaGlpoUmivwkCUDxAWJ8DweHLKHYGIYYAyaVFZVAmI5MxYT7CjDkSDAz+SxkYWP4gxEx6GRgW6DAw8E9FiKkZMjAI6DMw7JsDAMOvUG/9wUzuAAADTElEQVR4nD3OS2tcZRgA4Pd73+9yzpmZTJJmGpImJbRidC0qliysUNwJbsT/Id0I/gEFa0FqN+KiXehGCl6CbSMSmxo0pIkuShpMM23mTMzMZHKZOZfv6kJw/ywedvfeIhEiImMMAIgoSRIibq0ZDAYhBO+Dc9YYW+Ql5yT+p3GivHerD1faaToze/6VV18z2mpdBg+EIETgRBwAGAMpBQN24/pnaysP5mZnfsnyx3/9+e5773OuQtAADAARERAZEcVJvLeXbm+uffXxRz98+/WtG58s/3z/WXO3WksQkXNORFwIRZxC8MHD1LmZNy+9zkm1dvcU8rcvLzTOTjHGlJLG+ADApVSMgfdecKHi+OKFF9OdZyO1MzLi7yxcqk5NW+eJuPfWe0TOOSIqpRAJkU/PzhaDE2tCLKnxwryME0IUQgkpkRCJkxAKkYhTo9E4e/Glnf200Po4O24+bwOjRqMRRREhcSmRcyGlGBsfU1LdXfzp08+/LOIzaWu7UhkfGLp69cPvvl86HQxHx+vivwYi3r79zZ07P25ubNRq8oPFpUpnq37+5UHz0fra2uOt9Nz05FuX37hyZYFHcbTf3r927WZelNXayNzc5Pz8BT2RqNGx582nSaUyUq91uv0vbt6amKjzSpLkWUbEqpUkzwdRFCWK4ukZZPB052/G0FqHjDEwzd0mKqkOe/1+rwMheGc4cWCMQciyIm2lUipnfVEM8jxr7bWROO/1j4oi895CCKUuy0IzxnZ2m2m7TVzk+WlZZEolh/1jVFJ2Oz3rtDE5EnY7vYODgxDCg5XVXqdjjMuHJ9ZoIjw46KA2dn39EWNQlhkhpml768kTxtjS/XvGmKLU1pkiHxBit9tDa32r1QJAo0vn3XA4/O3h6j/d/tofv3MR69I4XVqrA/iyLPnpyVG/f8QYc845a4n48vKvSW3kqH9Uq0+WZY4YKklsdImIvNfrdTqHUsXelc45FUUbG5vb29sqqllrvTWcU6Va6fcHKk7QWmOtFVwwQABgDJ0Lw0wTj7z3AMEYmw1zLpWzGhEJkQEwAPA+hOCBgYqqztkQPCBa549PTgAAALiUUghRFAUAhOCdC8x7rTUEDwDeGu8dITrnRuuVfwFLHtJMDENCnAAAAABJRU5ErkJggg==" style="; aspect-ratio: 576/864; height: auto;" width="576"/></p>
+<p><img alt="Elon Musk2" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/elon-musk-2.png" height="2000" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAALCAIAAAAvJUALAAAB7klEQVR4nAXBS2sTQQAA4JnZnd1J0s3GpLW1Cdhe4gNEiilBT14UBI/qRfDiWelZEPoDBPHgzYNXEb2oBxGRmsZXaEVbqNU2bGrcpNm4XfPYmZ3dmfH74JXlNWwiz20W5+eIYbKQxWy8+e7l9qcaQlBBTQkBIFRKKsVh6cIzi2iZTGQT4ayv+l6bjQc84rpBlJAaAAAgpSBQQAIOFx7ssYHob22PfRrv++ogsGKnaHwWLPB4kQubJzGASEmlVKJfzPrjvLmLiDFZHuF0n1pw5eGt6G315LF7q60nO6fFvwjGPSn7EHF9hkCIxLRtTKVClYr5LG61UM6xTWUuzpe+Xro98mHQdFmrJbyOHgGQwiBtJpZJEeY6xLmjJb7BBvv+mRPVm4uFLmPds8e79FSnF+nDRJpEEwBQkWCUNjFaa/7Ij2k5Pbnuj7jzrTJbigzQi6K/U1jf8pIjVGZHodIKgfvz/YtHH+uvl6+ez88UePv3naXLlYXqtRtL08VyZkDRXIplJLWMeND+cv/u9frKK5kkdXd4uHJujwI+Gn6ovXn+9PE41g6YQLkJbJkgEFZjc4fR0DAIhLDW+P4rUwLWIQAUxrrnOnYKFrIG0jBJNKKnrWHgQgilFJqmhSGtNTZs2wIAEGJ2/ux2O042O/EftAwA22eG1nwAAAAASUVORK5CYII=" style="; aspect-ratio: 2667/2000; height: auto;" width="2667"/></p>
+</div>
+<p><a href="/posts/python-face-recognition-tutorial/elon-musk-1.jpg">elon-musk-1.jpg</a>
+<a href="/posts/python-face-recognition-tutorial/elon-musk-2.png">elon-musk-2.png</a></p>
+<p>And here are the images we will check to see if Elon is in them:</p>
+<!-- Alex Gallardo/Associated Press src: https://www.nytimes.com/2019/10/10/science/nasa-spacex-elon-musk.html -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px; margin-bottom: 1rem">
+<p><img alt="Elon Musk Potential Match 1" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg" height="1365" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAIAAADkeZOuAAAKMWlDQ1BJQ0MgUHJvZmlsZQAAeJydlndUU9kWh8+9N71QkhCKlNBraFICSA29SJEuKjEJEErAkAAiNkRUcERRkaYIMijggKNDkbEiioUBUbHrBBlE1HFwFBuWSWStGd+8ee/Nm98f935rn73P3Wfvfda6AJD8gwXCTFgJgAyhWBTh58WIjYtnYAcBDPAAA2wA4HCzs0IW+EYCmQJ82IxsmRP4F726DiD5+yrTP4zBAP+flLlZIjEAUJiM5/L42VwZF8k4PVecJbdPyZi2NE3OMErOIlmCMlaTc/IsW3z2mWUPOfMyhDwZy3PO4mXw5Nwn4405Er6MkWAZF+cI+LkyviZjg3RJhkDGb+SxGXxONgAoktwu5nNTZGwtY5IoMoIt43kA4EjJX/DSL1jMzxPLD8XOzFouEiSniBkmXFOGjZMTi+HPz03ni8XMMA43jSPiMdiZGVkc4XIAZs/8WRR5bRmyIjvYODk4MG0tbb4o1H9d/JuS93aWXoR/7hlEH/jD9ld+mQ0AsKZltdn6h21pFQBd6wFQu/2HzWAvAIqyvnUOfXEeunxeUsTiLGcrq9zcXEsBn2spL+jv+p8Of0NffM9Svt3v5WF485M4knQxQ143bmZ6pkTEyM7icPkM5p+H+B8H/nUeFhH8JL6IL5RFRMumTCBMlrVbyBOIBZlChkD4n5r4D8P+pNm5lona+BHQllgCpSEaQH4eACgqESAJe2Qr0O99C8ZHA/nNi9GZmJ37z4L+fVe4TP7IFiR/jmNHRDK4ElHO7Jr8WgI0IABFQAPqQBvoAxPABLbAEbgAD+ADAkEoiARxYDHgghSQAUQgFxSAtaAYlIKtYCeoBnWgETSDNnAYdIFj4DQ4By6By2AE3AFSMA6egCnwCsxAEISFyBAVUod0IEPIHLKFWJAb5AMFQxFQHJQIJUNCSAIVQOugUqgcqobqoWboW+godBq6AA1Dt6BRaBL6FXoHIzAJpsFasBFsBbNgTzgIjoQXwcnwMjgfLoK3wJVwA3wQ7oRPw5fgEVgKP4GnEYAQETqiizARFsJGQpF4JAkRIauQEqQCaUDakB6kH7mKSJGnyFsUBkVFMVBMlAvKHxWF4qKWoVahNqOqUQdQnag+1FXUKGoK9RFNRmuizdHO6AB0LDoZnYsuRlegm9Ad6LPoEfQ4+hUGg6FjjDGOGH9MHCYVswKzGbMb0445hRnGjGGmsVisOtYc64oNxXKwYmwxtgp7EHsSewU7jn2DI+J0cLY4X1w8TogrxFXgWnAncFdwE7gZvBLeEO+MD8Xz8MvxZfhGfA9+CD+OnyEoE4wJroRIQiphLaGS0EY4S7hLeEEkEvWITsRwooC4hlhJPEQ8TxwlviVRSGYkNimBJCFtIe0nnSLdIr0gk8lGZA9yPFlM3kJuJp8h3ye/UaAqWCoEKPAUVivUKHQqXFF4pohXNFT0VFysmK9YoXhEcUjxqRJeyUiJrcRRWqVUo3RU6YbStDJV2UY5VDlDebNyi/IF5UcULMWI4kPhUYoo+yhnKGNUhKpPZVO51HXURupZ6jgNQzOmBdBSaaW0b2iDtCkVioqdSrRKnkqNynEVKR2hG9ED6On0Mvph+nX6O1UtVU9Vvuom1TbVK6qv1eaoeajx1UrU2tVG1N6pM9R91NPUt6l3qd/TQGmYaYRr5Grs0Tir8XQObY7LHO6ckjmH59zWhDXNNCM0V2ju0xzQnNbS1vLTytKq0jqj9VSbru2hnaq9Q/uE9qQOVcdNR6CzQ+ekzmOGCsOTkc6oZPQxpnQ1df11Jbr1uoO6M3rGelF6hXrtevf0Cfos/ST9Hfq9+lMGOgYhBgUGrQa3DfGGLMMUw12G/YavjYyNYow2GHUZPTJWMw4wzjduNb5rQjZxN1lm0mByzRRjyjJNM91tetkMNrM3SzGrMRsyh80dzAXmu82HLdAWThZCiwaLG0wS05OZw2xljlrSLYMtCy27LJ9ZGVjFW22z6rf6aG1vnW7daH3HhmITaFNo02Pzq62ZLde2xvbaXPJc37mr53bPfW5nbse322N3055qH2K/wb7X/oODo4PIoc1h0tHAMdGx1vEGi8YKY21mnXdCO3k5rXY65vTW2cFZ7HzY+RcXpkuaS4vLo3nG8/jzGueNueq5clzrXaVuDLdEt71uUnddd457g/sDD30PnkeTx4SnqWeq50HPZ17WXiKvDq/XbGf2SvYpb8Tbz7vEe9CH4hPlU+1z31fPN9m31XfKz95vhd8pf7R/kP82/xsBWgHcgOaAqUDHwJWBfUGkoAVB1UEPgs2CRcE9IXBIYMj2kLvzDecL53eFgtCA0O2h98KMw5aFfR+OCQ8Lrwl/GGETURDRv4C6YMmClgWvIr0iyyLvRJlESaJ6oxWjE6Kbo1/HeMeUx0hjrWJXxl6K04gTxHXHY+Oj45vipxf6LNy5cDzBPqE44foi40V5iy4s1licvvj4EsUlnCVHEtGJMYktie85oZwGzvTSgKW1S6e4bO4u7hOeB28Hb5Lvyi/nTyS5JpUnPUp2Td6ePJninlKR8lTAFlQLnqf6p9alvk4LTduf9ik9Jr09A5eRmHFUSBGmCfsytTPzMoezzLOKs6TLnJftXDYlChI1ZUPZi7K7xTTZz9SAxESyXjKa45ZTk/MmNzr3SJ5ynjBvYLnZ8k3LJ/J9879egVrBXdFboFuwtmB0pefK+lXQqqWrelfrry5aPb7Gb82BtYS1aWt/KLQuLC98uS5mXU+RVtGaorH1futbixWKRcU3NrhsqNuI2ijYOLhp7qaqTR9LeCUXS61LK0rfb+ZuvviVzVeVX33akrRlsMyhbM9WzFbh1uvb3LcdKFcuzy8f2x6yvXMHY0fJjpc7l+y8UGFXUbeLsEuyS1oZXNldZVC1tep9dUr1SI1XTXutZu2m2te7ebuv7PHY01anVVda926vYO/Ner/6zgajhop9mH05+x42Rjf2f836urlJo6m06cN+4X7pgYgDfc2Ozc0tmi1lrXCrpHXyYMLBy994f9Pdxmyrb6e3lx4ChySHHn+b+O31w0GHe4+wjrR9Z/hdbQe1o6QT6lzeOdWV0iXtjusePhp4tLfHpafje8vv9x/TPVZzXOV42QnCiaITn07mn5w+lXXq6enk02O9S3rvnIk9c60vvG/wbNDZ8+d8z53p9+w/ed71/LELzheOXmRd7LrkcKlzwH6g4wf7HzoGHQY7hxyHui87Xe4Znjd84or7ldNXva+euxZw7dLI/JHh61HXb95IuCG9ybv56Fb6ree3c27P3FlzF3235J7SvYr7mvcbfjT9sV3qID0+6j068GDBgztj3LEnP2X/9H686CH5YcWEzkTzI9tHxyZ9Jy8/Xvh4/EnWk5mnxT8r/1z7zOTZd794/DIwFTs1/lz0/NOvm1+ov9j/0u5l73TY9P1XGa9mXpe8UX9z4C3rbf+7mHcTM7nvse8rP5h+6PkY9PHup4xPn34D94Tz+6TMXDkAAAHJSURBVHicBcFNb9JgAADgvuXtN/2gjG5FJoOlq7jEjJv7CYsaD+rBxD/i2bNn7ybzZuKyGdSD06gxM+oyJNEQP7rKcNSVttLSvpS39XnAs6c7RJYyrFBrGu5wYPe/1jc2JZYcDE8IQMMCOXJGkiy5Z26KEsiyfG25iSKfxIWDD71C5FQuoN7rl8r5+jyeVPVq5A7mU8U6GfEMhAghz/OiBD1/tH3/wcO2qW9FaK/TYeTSanNj3Zx+7A3bl9hWy7CtY+gHwYv9t8osFSmwsiSOvWAchEmKGlX96Gf46v2+E5EHvbPLLVyWaRhGYRJPWu31YMbf3PolyWXL579bdlmvkQR9sVHkXFgtzjI8m2OaTNPU+nFKaWvf7FOGJoUiA/I8iWNNKyW52PdEBLh/5ILj4t3OG5IgCBGynhtVSoDlRZpXKYpQ1JJprKoyJXE5x5I4TYgcL6gqrK8s3723yYuSM+Q+vfvNcEIcjyiKWtR0kbNBRq/p5cj/c+fGrXAyhbZ17I89nOWhN5hjkERT0zSuXb1S0bTb1/XPh92liuA4RedvkGUY7D55LMnyoq73vxwyrJDn+FzD6B51aYbGGAAAKEgpiphlKUqS/3ZU3Kf2EvkqAAAAAElFTkSuQmCC" style="; aspect-ratio: 2048/1365; height: auto;" width="2048"/></p>
+<p><img alt="Elon Musk Potential Match 2 (Group Of People)" class="lazyload blur-up" data-src="/posts/python-face-recognition-tutorial/group-of-people.jpg" height="667" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAIAAADkeZOuAAAB10lEQVR4nAHMATP+AY2LegYGBgoMCwMCAgD//gMFBhAPGPz39QcMEAAJCgUAAPv79wwJBuDh0ykoOgQYGx4LCwz29fcUFRX///z9//4IBAf7/fP8+vDq7eMDBQzn5+gHAf8L9OrpDegCMTZCEBUfm4uO+Pb6HiEoERAUDw8TGB4lBvz8D+3x8PH77PL74+bp0NDZrK2xAhEUFs3Lz+ju8qiprwQCAAwKChETFvny7+vd5semvyjj6wD48vjq69je37bBzATS0Mzs3NZpYmexx8rj3d75AvYJ9PX2390fKCkNSwbn0tLsA/IfGyYSQEnpytsECgcPBhUo8AUJgIiQMyYamJ6EExIbB/L0CRH5MmZh/v//6pWI5+DgUFdXCCEuBMbGzOr9EvX4/fa3wv/qIPbyCg8D/goLEdbd6QUZ6iAhG/Py6/Hw6+DXzwkPKgFjWFYMEhvw+QLz6tv2BhMKBQASCQPZ3+FPS1T6BAUPB/fQxMD4Bibx4MBqeX8EFxsZ5OHhMDI2FTsstbq8FREK1t3n4ODlu8C5HSEl6ujn6eb39vnNHxEEDxIUBB0lLkRNWhQVFLe4uuro5+vl+dvk7wD//ePa1dnV0yYjLNzc2VZSRj43LQ0LDNcx5I+bBQ9qAAAAAElFTkSuQmCC" style="; aspect-ratio: 1000/667; height: auto;" width="1000"/></p>
+</div>
+<p><a href="/posts/python-face-recognition-tutorial/elon-musk-in-group.jpg">elon-musk-in-group.jpg</a>
+<a href="/posts/python-face-recognition-tutorial/group-of-people.jpg">group-of-people.jpg</a></p>
+<h3 id="getting-face-encodings">
+<span style="position:relative"><a class="anchor" href="#getting-face-encodings"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Face Encodings</span></h3>
+<p>To get known face encodings, we can use <a href="https://face-recognition.readthedocs.io/en/latest/face_recognition.html#face_recognition.api.face_encodings"><code>face_recognition.face_encodings</code></a>. This function takes an image that contains a face and the locations of faces in images to use. </p>
+<blockquote>
+<p>Typically you would only use one location of a face in a single image to create one encoding but if you have multiple of the same face in one image you can provide more than one location.</p>
+</blockquote>
+<p>The process of what we need to do to get our known face encodings is:</p>
+<ol>
+<li>Load in the first image</li>
+<li>Detect faces in the image to get the face locations</li>
+<li>Verify there is only one face and select the first face</li>
+<li>Call <code>face_recognition.face_encodings</code> with the image and the one face location</li>
+<li>Repeat 1 through 5 for the second image</li>
+</ol>
+<p>We have done steps 1-3 previously, so we can do it here again:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+
+<span class="c1"># Load image and detect faces</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"elon-musk-1.jpg"</span><span class="p">)</span>
+<span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</code></pre></div>
+<p>And to validate one face was detected:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">face_locations</span><span class="p">))</span>  <span class="c1"># Should be 1</span>
+</code></pre></div>
+<p>Now we can call <code>face_recognition.face_encodings</code> and provide the image and found location.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">face_location</span> <span class="o">=</span> <span class="n">face_locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># We only want an encoding for the first face. There may be more than one face in images you use so I am leaving this here as a note.</span>
+<span class="n">face_encodings</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">[</span><span class="n">face_location</span><span class="p">])</span>
+</code></pre></div>
+<blockquote>
+<p>The parameter <code>known_face_locations</code> is optional and face_recognition will detect all the faces in the image automatically when getting face encodings if <code>known_face_locations</code> is not supplied. For this part, I am demonstrating it this way to validate there is only one detected face in the image. </p>
+</blockquote>
+<p>Since we specified an array of <code>known_face_locations</code>, we know that there will be only one encoding returned so we can take the first.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">elon_musk_knwon_face_encoding_1</span> <span class="o">=</span> <span class="n">face_encodings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+<p>We can now repeat this process for the other image</p>
+<div class="codehilite"><pre><span></span><code><span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"elon-musk-2.png"</span><span class="p">)</span>  <span class="c1"># Load the image</span>
+<span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># Get face locations</span>
+<span class="n">face_location</span> <span class="o">=</span> <span class="n">face_locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Only use the first detected face</span>
+
+<span class="n">face_encodings</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">[</span><span class="n">face_location</span><span class="p">])</span>  <span class="c1"># Get all face encodings</span>
+<span class="n">elon_musk_knwon_face_encoding_2</span> <span class="o">=</span> <span class="n">face_encodings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Pull out the one returned face encoding</span>
+</code></pre></div>
+<p>Now that we have <code>elon_musk_knwon_face_encoding_1</code> and <code>elon_musk_knwon_face_encoding_2</code>, we can see if they exist in our other two images.</p>
+<h3 id="checking-for-matches">
+<span style="position:relative"><a class="anchor" href="#checking-for-matches"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Checking For Matches</span></h3>
+<p>To check for matches in an image with <code>face_recognition.compare_faces</code>, we need known face encodings (which we have just gotten above) and a <em>single</em> face encoding to check.</p>
+<p>Since we are working with groups of images, we will have to loop the detected faces - although this will also work the same with only one person in the image.</p>
+<p>First, we need to get all face decodings out of our first image to compare. I had noted above that the second parameter, <code>known_face_locations</code>, to <code>face_recognition.face_encodings</code> was optional, leaving it out will detect all faces in the image automatically and return face encodings for every face in the image; this is exactly what we want and will remove the intermediate step of detecting faces. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"elon-musk-in-group.jpg"</span><span class="p">)</span>  <span class="c1"># Load the image we are comparing</span>
+<span class="n">unknwon_face_encodings</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>  <span class="c1"># Get face encodings for everyone in the image</span>
+</code></pre></div>
+<p>Now that we have our unknown face encodings for all the faces in the group image, we can loop over them and check if either match:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">unknwon_face_encoding</span> <span class="ow">in</span> <span class="n">unknwon_face_encodings</span><span class="p">:</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">compare_faces</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">elon_musk_knwon_face_encoding_1</span><span class="p">,</span> <span class="n">elon_musk_knwon_face_encoding_2</span><span class="p">],</span>  <span class="c1"># The known face encodings (can be only 1 - less is faster)</span>
+        <span class="n">unknwon_face_encoding</span>  <span class="c1"># The single unknown face encoding</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+</code></pre></div>
+<p>If you run this, you will see something like:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+<span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+<span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+<span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+</code></pre></div>
+<p>Each line is one comparison (stored in <code>matches</code>) and each boolean corresponds to a known face encoding and whether it matched the unknown face encoding.</p>
+<p>From the values above, we can see that the first unknown face in the group image matched both known face encodings and the other three unknown faces didn't match either encoding. Using more than once face encoding can allow you to calculate a better probability but will cost you in speed. </p>
+<p>If you run this on the other image, everything returns false.</p>
+<h3 id="final-code-for-this-section_3">
+<span style="position:relative"><a class="anchor" href="#final-code-for-this-section_3"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Code For This Section</span></h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">face_recognition</span>
+
+
+<span class="c1"># Load elon-musk-1.jpg and detect faces</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"elon-musk-1.jpg"</span><span class="p">)</span>
+<span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Get the single face encoding out of elon-musk-1.jpg</span>
+<span class="n">face_location</span> <span class="o">=</span> <span class="n">face_locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Only use the first detected face</span>
+<span class="n">face_encodings</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">[</span><span class="n">face_location</span><span class="p">])</span>
+<span class="n">elon_musk_knwon_face_encoding_1</span> <span class="o">=</span> <span class="n">face_encodings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Pull out the one returned face encoding</span>
+
+
+<span class="c1"># Load elon-musk-2.jpg and detect faces</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"elon-musk-2.png"</span><span class="p">)</span>
+<span class="n">face_locations</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_locations</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Get the single face encoding out of elon-musk-2.jpg</span>
+<span class="n">face_location</span> <span class="o">=</span> <span class="n">face_locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">face_encodings</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">[</span><span class="n">face_location</span><span class="p">])</span>
+<span class="n">elon_musk_knwon_face_encoding_2</span> <span class="o">=</span> <span class="n">face_encodings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1"># Load the image with unknown to compare</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"elon-musk-in-group.jpg"</span><span class="p">)</span>  <span class="c1"># Load the image we are comparing</span>
+<span class="n">unknwon_face_encodings</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Loop over each unknwon face encoding to see if the face matches either known encodings</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Matches for elon-musk-in-group.jpg'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">unknwon_face_encoding</span> <span class="ow">in</span> <span class="n">unknwon_face_encodings</span><span class="p">:</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">compare_faces</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">elon_musk_knwon_face_encoding_1</span><span class="p">,</span> <span class="n">elon_musk_knwon_face_encoding_2</span><span class="p">],</span>  <span class="c1"># The known face encodings (can be only 1 - less is faster)</span>
+        <span class="n">unknwon_face_encoding</span>  <span class="c1"># The single unknown face encoding</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+
+
+<span class="c1"># Load the other image with unknown to compare</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">load_image_file</span><span class="p">(</span><span class="s2">"group-of-people.jpg"</span><span class="p">)</span>  <span class="c1"># Load the image we are comparing</span>
+<span class="n">unknwon_face_encodings</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">face_encodings</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Loop over each unknwon face encoding to see if the face matches either known encodings</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Matches for group-of-people.jpg'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">unknwon_face_encoding</span> <span class="ow">in</span> <span class="n">unknwon_face_encodings</span><span class="p">:</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">face_recognition</span><span class="o">.</span><span class="n">compare_faces</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">elon_musk_knwon_face_encoding_1</span><span class="p">,</span> <span class="n">elon_musk_knwon_face_encoding_2</span><span class="p">],</span>
+        <span class="n">unknwon_face_encoding</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="additional-pil-help">
+<span style="position:relative"><a class="anchor" href="#additional-pil-help"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Additional PIL Help</span></h2>
+<p>This tutorial doesn't focus on PIL but one function you may find useful is <a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.save"><code>img.save()</code></a>; this saves a file. An example of its usages is <code>img.save('my_image.png')</code> to save a PIL image to my_image.png.</p>
+<p>You can find more on PIL in its <a href="https://pillow.readthedocs.io/en/stable/reference/">docs</a> and there is plenty of other help online as it is a very old library.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-serve-a-react-app-from-a-python-server/" title="How To Serve A React App From A Python Server">
+<span>←</span>
+<span class="btn-content">How To Serve A React App From A Python Server</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-set-up-open-drone-map-on-windows/" title="How To Set Up Open Drone Map On Windows">
+<span class="btn-content">How To Set Up Open Drone Map On Windows</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/python-face-recognition-tutorial/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/python-face-recognition-tutorial/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
