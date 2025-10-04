@@ -29,7 +29,8 @@ EXTERNAL_URL_BLACKLIST = [
     r'^https://unsplash.com',  # 403
     r'^https://github.com',  # 429
     r'^https://www.cvedetails.com',  # 403
-    r'^https://fotoforensics.com'  # 403
+    r'^https://fotoforensics.com',  # 403
+    r'^https://www.digitalcitizen.life'  # SSL error
 ]
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36'
 
