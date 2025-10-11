@@ -42,9 +42,14 @@ description: "This is a tool where you can select a file on your PC and it will 
     const excludeFilterElementId = "exclude-filter";
     const ignoreEmptyFoldersElementId = "ignore-empty-folders";
 
-    const getFilesAndDirNodeForHandle = async (dirHandle, currentPath = '') => {
+    const getFilesAndDirNodeForHandle = async (dirHandle, currentPath = '', excludeFilterRegex = null, ignoreEmptyFolders = false) => {
         const nodesPath = currentPath + '/' + dirHandle.name;
-        console.log(`[Search] ${nodesPath}`);
+
+        // Skip if the current path matches the exclude regex
+        if (excludeFilterRegex && excludeFilterRegex.test(nodesPath)) {
+            console.log(`[Search] Skipping ${nodesPath} (excluded by regex)`);
+            return null;
+        }
 
         const node = {
             name: dirHandle.name,
@@ -54,49 +59,30 @@ description: "This is a tool where you can select a file on your PC and it will 
             path: nodesPath
         };
 
-        // If this node is a directory, search for subdirectories and files
         if (node.kind === "directory") {
             for await (const [_, handle] of dirHandle) {
-                node.children.push(await getFilesAndDirNodeForHandle(handle, nodesPath));
+                const childNode = await getFilesAndDirNodeForHandle(handle, nodesPath, excludeFilterRegex, ignoreEmptyFolders);
+                if (childNode !== null) {
+                    node.children.push(childNode);
+                }
             }
-        }
 
-        // Order the child nodes after discovery
-        node.children.sort((a, b) => {
-            if (a.kind === "directory" && b.kind === "file") {
-                return -1;
+            // Ignore empty directories if the user requested
+            if (ignoreEmptyFolders && node.children.length === 0) {
+                console.log(`[Search] Skipping ${nodesPath} (empty folder)`);
+                return null;
             }
-            if (a.kind === "file" && b.kind === "directory") {
-                return 1;
-            }
-            return a.name.localeCompare(b.name);
-        });
+
+            // Sort folders before files alphabetically
+            node.children.sort((a, b) => {
+                if (a.kind === "directory" && b.kind === "file") return -1;
+                if (a.kind === "file" && b.kind === "directory") return 1;
+                return a.name.localeCompare(b.name);
+            });
+        }
 
         return node;
     };
-
-    const filterNode = (node, excludeFilterRegex = null, ignoreEmptyFolders = false) => {
-        const filteredChildren = [];
-        for (const child of node.children) {
-            const filteredChild = filterNode(child, excludeFilterRegex, ignoreEmptyFolders);
-            if (filteredChild !== null) {
-                filteredChildren.push(filteredChild);
-            }
-        }
-        node.children = filteredChildren; // Warning, mutable
-
-        if (ignoreEmptyFolders && node.kind === "directory" && node.children.length === 0) {
-            console.log(`[Filter] Removed ${node.path} as it is empty`);
-            return null;
-        }
-
-        if (excludeFilterRegex !== null && excludeFilterRegex.test(node.path)) {
-            console.log(`[Filter] Removed ${node.path} as it matched the regex`);
-            return null;
-        }
-
-        return node;
-    }
 
     const getStructureDisplay = (node, indentationText = "") => {
         let structureDisplay = "";
@@ -110,12 +96,10 @@ description: "This is a tool where you can select a file on your PC and it will 
             const directoryPipe = isLastChild ? "┗ " : "┣ ";
 
             if (child.kind === "directory") {
-                const newIndentationText =
-                    indentationText + (isLastChild ? "  " : "┃ ");
+                const newIndentationText = indentationText + (isLastChild ? "  " : "┃ ");
                 const childDisplay = getStructureDisplay(child, newIndentationText);
                 structureDisplay += `${indentationText}${directoryPipe}${childDisplay}`;
-            }
-            if (child.kind === "file") {
+            } else if (child.kind === "file") {
                 structureDisplay += `${indentationText}${directoryPipe}📜 ${child.name}\n`;
             }
         }
@@ -125,21 +109,18 @@ description: "This is a tool where you can select a file on your PC and it will 
 
     const onSelectDirectory = async () => {
         const dirHandle = await window.showDirectoryPicker();
-        console.log(`[Search] Starting search`);
-        const node = await getFilesAndDirNodeForHandle(dirHandle, '');
-        console.log(`[Search] Search ended`);
-        console.log(`[Search] Search results`, node);
 
-        console.log(`[Filter] Starting filter`);
         const excludeFilterElement = document.getElementById(excludeFilterElementId);
         const excludeFilter = excludeFilterElement.value === '' ? null : new RegExp(excludeFilterElement.value, "m");
         const ignoreEmptyFolders = document.getElementById(ignoreEmptyFoldersElementId).checked;
-        const filteredNode = filterNode(node, excludeFilter, ignoreEmptyFolders);
-        console.log(`[Filter] Filter ended`);
-        console.log(`[Filter] Filter results`, filteredNode);
+
+        console.log(`[Search] Starting search`);
+        const rootNode = await getFilesAndDirNodeForHandle(dirHandle, '', excludeFilter, ignoreEmptyFolders);
+        console.log(`[Search] Search ended`);
+        console.log(`[Search] Search results`, rootNode);
 
         console.log(`[Display] Starting display`);
-        const display = getStructureDisplay(filteredNode);
+        const display = getStructureDisplay(rootNode);
         const outputElement = document.getElementById(outputElementId);
         outputElement.innerText = display;
         console.log(`[Display] Ended display`);
@@ -149,9 +130,7 @@ description: "This is a tool where you can select a file on your PC and it will 
     document.addEventListener("DOMContentLoaded", () => {
         const doesBrowserSupportSpecialFeatures = typeof window.showDirectoryPicker !== undefined;
         if (doesBrowserSupportSpecialFeatures) {
-            const selectDirectoryElement = document.getElementById(
-                selectDirectoryElementId
-            );
+            const selectDirectoryElement = document.getElementById(selectDirectoryElementId);
             selectDirectoryElement.addEventListener("click", onSelectDirectory);
         } else {
             document.getElementById("tool").style.display = "none";
@@ -167,8 +146,7 @@ description: "This is a tool where you can select a file on your PC and it will 
             + "\nLook in the console to see the folders/files found to see their paths."
             + "\n"
             + "\nDetails about your files are kept on your machine.";
-        const outputElement = document.getElementById(outputElementId);
-        outputElement.innerText = preMessage;
+        document.getElementById(outputElementId).innerText = preMessage;
     });
 </script>
 
@@ -181,21 +159,21 @@ These are some example filters for specific project types
 Ignore `.git`, `.venv`, `__pycache__`, `.idea`
 
 ```
-/\.git/|/\.venv/|/__pycache__/|/\.idea/
+(^|\/)(?:\.git|.venv|__pycache__|.idea)(?:\/|$)
 ```
 
 ### C\#
 
-Ignore `.git`, `.vs`, `/bin*`, `/obj*`
+Ignore `.git`, `.vs`, `bin`, `obj`
 
 ```
-/\.git/|/\.vs/|/bin/|/obj/
+(^|\/)(?:\.git|.vs|bin|obj)(?:\/|$)
 ```
 
 ### Node/JavaScript
 
-Ignore `.git`, `node_modules`, `build`
+Ignore `.git`, `node_modules`, `build`, `dist`
 
 ```
-/\.git/|/node_modules/|/build/
+(^|\/)(?:\.git|node_modules|build|dist)(?:\/|$)
 ```
