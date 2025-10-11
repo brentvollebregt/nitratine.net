@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-make-hotkeys-in-python/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How to Make Hotkeys in Python - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This demonstrates how to make a script to detect combinations of keypresses or even single keys pressed in Python. The script will use pynput to detect keypresses and will work on windows, mac and linux." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How to Make Hotkeys in Python" property="og:title"/>
+<meta content="This demonstrates how to make a script to detect combinations of keypresses or even single keys pressed in Python. The script will use pynput to detect keypresses and will work on windows, mac and linux." property="og:description"/>
+<meta content="/posts/how-to-make-hotkeys-in-python/feature.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-make-hotkeys-in-python/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How to Make Hotkeys in Python</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">13 Jan 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#YouTube">YouTube</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#keyboard">keyboard</a>
+<a class="badge badge-warning" href="/blog/tags/#pynput">pynput</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">10 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-make-hotkeys-in-python%2F"/>
+</div>
+<p class="lead">This demonstrates how to make a script to detect combinations of keypresses or even single keys pressed in Python. The script will use pynput to detect keypresses and will work on windows, mac and linux.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#pip">PIP</a></li>
+<li><a href="#installing-pynput">Installing Pynput</a></li>
+<li><a href="#creating-the-script">Creating the Script</a></li>
+<li><a href="#adding-hotkeys">Adding Hotkeys</a></li>
+<li><a href="#final-script">Final Script</a></li>
+<li><a href="#issues-with-character-casing-revision-1">Issues With Character Casing (Revision 1)</a></li>
+<li><a href="#an-improved-script">An Improved Script</a></li>
+<li><a href="#pynputs-hotkey-class">pynput's HotKey Class</a></li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError: No module named 'pynput'</a></li>
+<li><a href="#i-got-a-syntaxerror">I got a SyntaxError</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/n_dfv5DLCGI"></iframe>
+</div>
+</div>
+</p>
+<h2 id="pip">
+<span style="position:relative"><a class="anchor" href="#pip"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>PIP</span></h2>
+<p>If you haven't used or setup pip before, go to my tutorial at <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a> to setup pip.</p>
+<h2 id="installing-pynput">
+<span style="position:relative"><a class="anchor" href="#installing-pynput"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Pynput</span></h2>
+<p>We will be using the pynput module to listen to mouse events. To install this module execute <code>pip install pynput</code> in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.</p>
+<p><img alt="Installing pynput" class="lazyload blur-up" data-src="/posts/how-to-get-mouse-clicks-with-python/pynput1.png" height="163" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAACCAYAAABsfz2XAAAATUlEQVR4nAXBwQmAQAxFwZe4IqIHz4I1CNp/YWuS/c7YeV3K3vkiyAgqk6zCACEADGNUcT8vvvvMJuOYZpqMGEI4wxwxMXDUGiwrmckPwcAi4B3TeH4AAAAASUVORK5CYII=" style="; aspect-ratio: 989/163; height: auto;" width="989"/></p>
+<p>To double-check that it was installed successfully, open up IDLE and execute the command <code>import pynput</code>; no errors should occur.</p>
+<p><img alt="Testing pynput" class="lazyload blur-up" data-src="/posts/how-to-get-mouse-clicks-with-python/pynput2.png" height="150" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAADCAYAAABMFFUxAAAAdklEQVR4nD3LOw6DMBQF0Xn28w8L9r8vFkIaNzHmpohENdJIx87z1LEfRHdyTkgAotYKgJkh6e1aC0l8rgsvOdO3xr0WOSXmfeOeCBawYH/0/FHKiVIKwYwxBt5rYd8y4/uw9Y6ZEWNkzkkIAQBJSMLd39da4wc2kzFKSqutqAAAAABJRU5ErkJggg==" style="; aspect-ratio: 760/150; height: auto;" width="760"/></p>
+<h2 id="creating-the-script">
+<span style="position:relative"><a class="anchor" href="#creating-the-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Creating the Script</span></h2>
+<p>First import keyboard from pynput and create a variable called current and set it to a set object to track what keys are pressed currently.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="c1"># The currently active modifiers</span>
+<span class="n">current</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</code></pre></div>
+<p>Next we will setup a listener for the keyboard and set on press and release methods to it. Setup the listener in a with statement and join the listener thread to the main thread using .join().</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">on_release</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">with</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">,</span> <span class="n">on_release</span><span class="o">=</span><span class="n">on_release</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<p>Next we need to declare the combinations to look out for. I this example I will use <kbd>Shift</kbd> + <kbd>A</kbd>. I will need to use two variants, Shift + A and Shift + a so the combination will be detected no matter what order they are pressed. If <kbd>A</kbd> is pressed first, 'a' will be given to the listener but if <kbd>Shift</kbd> is pressed before <kbd>A</kbd> then 'A' will be given to the listener. Make a list called COMBINATIONS and add the keys in sets as shown below.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># The key combination to check</span>
+<span class="n">COMBINATIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'a'</span><span class="p">)},</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'A'</span><span class="p">)}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Now create a method called execute. This is what will be executed when a combination is detected. You can put anything in here but for the demonstration I will print a simple string.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">execute</span><span class="p">():</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">"Do Something"</span><span class="p">)</span>
+</code></pre></div>
+<p>Now we will edit the on_press method. We need to first check if the key that has just been pressed is in any of the combinations that we have. If it is we need to add it to the current key set and then loop though all the combinations checking if all the keys in a particular combination are in the 'current' set. If one of the combinations has all their keys down, we need to call execute().</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">key</span> <span class="ow">in</span> <span class="n">COMBO</span> <span class="k">for</span> <span class="n">COMBO</span> <span class="ow">in</span> <span class="n">COMBINATIONS</span><span class="p">]):</span>
+        <span class="n">current</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">COMBO</span><span class="p">)</span> <span class="k">for</span> <span class="n">COMBO</span> <span class="ow">in</span> <span class="n">COMBINATIONS</span><span class="p">):</span>
+            <span class="n">execute</span><span class="p">()</span>
+</code></pre></div>
+<blockquote>
+<p>In the current state, this script can provide multiple events for one combination detected. To prevent this, append <code>and not key in current</code> to the end of the initial if statement (before the colon).</p>
+</blockquote>
+<p>Finally we need to modify the on_release method and check that when a key is released, if it is in any of the combinations. If it is we need to removed it from the 'current' set.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">on_release</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">key</span> <span class="ow">in</span> <span class="n">COMBO</span> <span class="k">for</span> <span class="n">COMBO</span> <span class="ow">in</span> <span class="n">COMBINATIONS</span><span class="p">]):</span>
+        <span class="n">current</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+<p>You can now run the script and when <kbd>Shift</kbd> and <kbd>A</kbd> are pressed at the same time, the sting will be printed to the console.</p>
+<p>If you want to call another script, do it in execute() by doing something like an os.system call on your script or importing it and then calling it.</p>
+<p>This script has been modified from the example given by Moses Palmer on <a href="https://github.com/moses-palmer/pynput/issues/20">issue 20 of pynput</a></p>
+<h2 id="adding-hotkeys">
+<span style="position:relative"><a class="anchor" href="#adding-hotkeys"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Adding Hotkeys</span></h2>
+<p>To add more hotkeys or different hotkeys you will need to add another set of keys to the COMBINATIONS list. To do this use curly braces and make sure to separate the keys by commas. Also to make sure to split each set by a comma or you will be given an error when running the script.</p>
+<p>To use keys like shift and control, you need to provide the key. Keys can be found in the <a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key">documentation</a>. In this we can see that if we want to use shift, we need to use keyboard.Key.shift. Another example is the scroll lock: keyboard.Key.scroll_lock. To use characters on the keyboard like 'a', 'b', 'c' ect... you will need to use the method keyboard.KeyCode() passing the character as the char parameter. Examples follow below.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">COMBINATIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'a'</span><span class="p">)},</span> <span class="c1"># Shift + a</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'A'</span><span class="p">)},</span> <span class="c1"># Shift + A</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">scroll_lock</span><span class="p">},</span> <span class="c1"># Scroll lock</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'q'</span><span class="p">)},</span> <span class="c1"># q</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'Q'</span><span class="p">)},</span> <span class="c1"># Q</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">insert</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">}</span> <span class="c1"># Shift + Insert + Ctrl</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>You can have as many keys as you like in one combination and accidentally adding two of the same combination will not cause any errors.</p>
+<h2 id="final-script">
+<span style="position:relative"><a class="anchor" href="#final-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Script</span></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="c1"># The key combination to check</span>
+<span class="n">COMBINATIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'a'</span><span class="p">)},</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'A'</span><span class="p">)}</span>
+<span class="p">]</span>
+
+<span class="c1"># The currently active modifiers</span>
+<span class="n">current</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">execute</span><span class="p">():</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">"Do Something"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">key</span> <span class="ow">in</span> <span class="n">COMBO</span> <span class="k">for</span> <span class="n">COMBO</span> <span class="ow">in</span> <span class="n">COMBINATIONS</span><span class="p">]):</span>
+        <span class="n">current</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">current</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">COMBO</span><span class="p">)</span> <span class="k">for</span> <span class="n">COMBO</span> <span class="ow">in</span> <span class="n">COMBINATIONS</span><span class="p">):</span>
+            <span class="n">execute</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">on_release</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">key</span> <span class="ow">in</span> <span class="n">COMBO</span> <span class="k">for</span> <span class="n">COMBO</span> <span class="ow">in</span> <span class="n">COMBINATIONS</span><span class="p">]):</span>
+        <span class="n">current</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">,</span> <span class="n">on_release</span><span class="o">=</span><span class="n">on_release</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="issues-with-character-casing-revision-1">
+<span style="position:relative"><a class="anchor" href="#issues-with-character-casing-revision-1"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Issues With Character Casing (Revision 1)</span></h2>
+<p>In the example above I have defined two combinations, one for <kbd>Shift</kbd> + <kbd>A</kbd> and <kbd>Shift</kbd> + <kbd>A</kbd>; this handles the two cases when you press <kbd>A</kbd> before <kbd>Shift</kbd> and <kbd>Shift</kbd> before <kbd>A</kbd>. However this mixing of case can also cause issues when tracking the currently pressed keys.</p>
+<p>A better way would be to track what physical key is pressed, rather than what the actual value of it is. An example of this is that pressing the <kbd>A</kbd> key can give two different keys depending on if you are holding <kbd>Shift</kbd> or not (a or A); but pynput can actually see that the <kbd>A</kbd> key itself is pressed. To track what physical key is pressed, we can use the <code>vk</code>. </p>
+<blockquote>
+<p><code>vk</code> is short for "virtual key" and is a code associated with each key. For example: a = 65, b = 66, enter = 13, shift = 130</p>
+</blockquote>
+<p>To get the vk, we can read the <code>vk</code> attribute in the <code>KeyCode</code> object provided by pynput in the <code>on_press</code> and <code>on_release</code>. Using the <code>vk</code> codes to track what keys are pressed will take a bit more effort but can simplify some things.</p>
+<p>Below is a script I developed to watch for <kbd>Shift</kbd> + <kbd>A</kbd>. This will now be able to handle <kbd>Shift</kbd> + <kbd>A</kbd> pressed in many different ways.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="c1"># The key combinations to look for</span>
+<span class="n">COMBINATIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="n">keyboard</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">KeyCode</span><span class="p">(</span><span class="n">vk</span><span class="o">=</span><span class="mi">65</span><span class="p">)}</span>  <span class="c1"># shift + a (see below how to get vks)</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">execute</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" My function to execute when a combination is pressed """</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Do Something"</span><span class="p">)</span>
+
+
+<span class="c1"># The currently pressed keys (initially empty)</span>
+<span class="n">pressed_vks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the virtual key code from a key.</span>
+<span class="sd">    These are used so case/shift modifications are ignored.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">key</span><span class="o">.</span><span class="n">vk</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">'vk'</span><span class="p">)</span> <span class="k">else</span> <span class="n">key</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">vk</span>
+
+
+<span class="k">def</span> <span class="nf">is_combination_pressed</span><span class="p">(</span><span class="n">combination</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" Check if a combination is satisfied using the keys pressed in pressed_vks """</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pressed_vks</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">combination</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" When a key is pressed """</span>
+    <span class="n">vk</span> <span class="o">=</span> <span class="n">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># Get the key's vk</span>
+    <span class="n">pressed_vks</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">vk</span><span class="p">)</span>  <span class="c1"># Add it to the set of currently pressed keys</span>
+
+    <span class="k">for</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">COMBINATIONS</span><span class="p">:</span>  <span class="c1"># Loop though each combination</span>
+        <span class="k">if</span> <span class="n">is_combination_pressed</span><span class="p">(</span><span class="n">combination</span><span class="p">):</span>  <span class="c1"># And check if all keys are pressed</span>
+            <span class="n">execute</span><span class="p">()</span>  <span class="c1"># If they are all pressed, call your function</span>
+            <span class="k">break</span>  <span class="c1"># Don't allow execute to be called more than once per key press</span>
+
+
+<span class="k">def</span> <span class="nf">on_release</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" When a key is released """</span>
+    <span class="n">vk</span> <span class="o">=</span> <span class="n">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># Get the key's vk</span>
+    <span class="n">pressed_vks</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vk</span><span class="p">)</span>  <span class="c1"># Remove it from the set of currently pressed keys</span>
+
+
+<span class="k">with</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">,</span> <span class="n">on_release</span><span class="o">=</span><span class="n">on_release</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>  <span class="c1"># Join the listener thread to the current thread so we don't exit before it stops</span>
+</code></pre></div>
+<p>At the top of this script you will see that the <code>COMBINATIONS</code> value looks a bit different. This is because <code>keyboard.KeyCode(char='a')</code> does not populate the <code>vk</code> attribute, so we need to find the <code>vk</code> code ourselves. </p>
+<p>Doing this can easily be done using a simple script. If you run the following and press a key, it will print out the <code>vk</code> code for the pressed key which you can then use in the script above.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">vk</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">vk</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">'vk'</span><span class="p">)</span> <span class="k">else</span> <span class="n">key</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">vk</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'vk ='</span><span class="p">,</span> <span class="n">vk</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<p>If you pressed shift, you would have also noticed that the <code>vk</code> for <code>keyboard.Key.shift</code> is 160. Instead of using <code>keyboard.Key.shift</code> in the <code>COMBINATIONS</code>, this shows you could also use <code>keyboard.KeyCode(vk=160)</code>. The reason we could leave the shift key as <code>keyboard.Key.shift</code> in <code>COMBINATIONS</code> is because pynput is able to populate the <code>vk</code> value in the key object.</p>
+<p>Here are some other <code>vk</code> codes, you can find missing ones by running the script above and pressing keys:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>vk code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>65</td>
+</tr>
+<tr>
+<td>b</td>
+<td>66</td>
+</tr>
+<tr>
+<td>y</td>
+<td>89</td>
+</tr>
+<tr>
+<td>z</td>
+<td>90</td>
+</tr>
+<tr>
+<td>Top row 1</td>
+<td>49</td>
+</tr>
+<tr>
+<td>Num pad 1</td>
+<td>97</td>
+</tr>
+<tr>
+<td>Insert</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Enter</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Left ctrl</td>
+<td>162</td>
+</tr>
+<tr>
+<td>Right ctrl</td>
+<td>163</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>An interesting thing to note from this table is that you can tell the difference between 1 in the top row being pressed and 1 on the num pad being pressed.</p>
+</blockquote>
+<h2 id="an-improved-script">
+<span style="position:relative"><a class="anchor" href="#an-improved-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>An Improved Script</span></h2>
+<p>A lot of people had been asking for a solution that can handle different functions for different combinations. <a href="https://www.youtube.com/channel/UCzGG-Z4QAgkt2uYMH6VTpQQ">Christopher Walters</a> commented on the original video with a snippet that allowed users to declare a function per combination.</p>
+<p>I modified the original script and after revisions made to the original script, here is a script that can handle multiple combinations that execute their own function:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">,</span> <span class="n">Listener</span>
+
+
+<span class="k">def</span> <span class="nf">function_1</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" One of your functions to be executed by a combination """</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Executed function_1'</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">function_2</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" Another one of your functions to be executed by a combination """</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Executed function_2'</span><span class="p">)</span>
+
+
+<span class="c1"># Create a mapping of keys to function (use frozenset as sets/lists are not hashable - so they can't be used as keys)</span>
+<span class="c1"># Note the missing `()` after function_1 and function_2 as want to pass the function, not the return value of the function</span>
+<span class="n">combination_to_function</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">frozenset</span><span class="p">([</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">vk</span><span class="o">=</span><span class="mi">65</span><span class="p">)]):</span> <span class="n">function_1</span><span class="p">,</span>  <span class="c1"># shift + a</span>
+    <span class="nb">frozenset</span><span class="p">([</span><span class="n">Key</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">vk</span><span class="o">=</span><span class="mi">66</span><span class="p">)]):</span> <span class="n">function_2</span><span class="p">,</span>  <span class="c1"># shift + b</span>
+    <span class="nb">frozenset</span><span class="p">([</span><span class="n">Key</span><span class="o">.</span><span class="n">alt_l</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">vk</span><span class="o">=</span><span class="mi">71</span><span class="p">)]):</span> <span class="n">function_2</span><span class="p">,</span>  <span class="c1"># left alt + g</span>
+<span class="p">}</span>
+
+
+<span class="c1"># The currently pressed keys (initially empty)</span>
+<span class="n">pressed_vks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the virtual key code from a key.</span>
+<span class="sd">    These are used so case/shift modifications are ignored.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">key</span><span class="o">.</span><span class="n">vk</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">'vk'</span><span class="p">)</span> <span class="k">else</span> <span class="n">key</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">vk</span>
+
+
+<span class="k">def</span> <span class="nf">is_combination_pressed</span><span class="p">(</span><span class="n">combination</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" Check if a combination is satisfied using the keys pressed in pressed_vks """</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pressed_vks</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">combination</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" When a key is pressed """</span>
+    <span class="n">vk</span> <span class="o">=</span> <span class="n">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># Get the key's vk</span>
+    <span class="n">pressed_vks</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">vk</span><span class="p">)</span>  <span class="c1"># Add it to the set of currently pressed keys</span>
+
+    <span class="k">for</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">combination_to_function</span><span class="p">:</span>  <span class="c1"># Loop through each combination</span>
+        <span class="k">if</span> <span class="n">is_combination_pressed</span><span class="p">(</span><span class="n">combination</span><span class="p">):</span>  <span class="c1"># Check if all keys in the combination are pressed</span>
+            <span class="n">combination_to_function</span><span class="p">[</span><span class="n">combination</span><span class="p">]()</span>  <span class="c1"># If so, execute the function</span>
+
+
+<span class="k">def</span> <span class="nf">on_release</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" When a key is released """</span>
+    <span class="n">vk</span> <span class="o">=</span> <span class="n">get_vk</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># Get the key's vk</span>
+    <span class="n">pressed_vks</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">vk</span><span class="p">)</span>  <span class="c1"># Remove it from the set of currently pressed keys</span>
+
+
+<span class="k">with</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">,</span> <span class="n">on_release</span><span class="o">=</span><span class="n">on_release</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<p>When executing this script and pressing <kbd>Shift</kbd> + <kbd>A</kbd> (in any order), this will execute <code>function_1</code> and print "Executed function_1". When pressing <kbd>Shift</kbd> + <kbd>B</kbd> (in any order), <code>function_2</code> will be executed. Also when pressing Left <kbd>alt</kbd> + <kbd>G</kbd> (in any order), <code>function_2</code> will be executed.</p>
+<p>To create new combinations, duplicate a line in the <code>combination_to_function</code> dictionary and replace the keys inside of <code>frozenset</code> and the value (function - not the return value of the function).</p>
+<h2 id="pynputs-hotkey-class">
+<span style="position:relative"><a class="anchor" href="#pynputs-hotkey-class"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>pynput's HotKey Class</span></h2>
+<p>In December 2019 <a href="https://pynput.readthedocs.io/en/latest/keyboard.html#global-hotkeys">global hotkeys</a> were added to pynput. This allowed us to hide all the extra state of combination detection and just provide the keys we want to listen to.</p>
+<p>The docs recommend using <code>keyboard.HotKey.parse</code> to get a list of keys from a string (e.g. <code>"&lt;ctrl&gt;+&lt;alt&gt;+h"</code>) when using this function, but I recommend using keys like we defined above. This allows you to more easily identify keys are pynput keys although there aren't huge benefits using either way.</p>
+<p>Here is an example of <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>R</kbd>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">HotKey</span><span class="p">,</span> <span class="n">Key</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">,</span> <span class="n">Listener</span>
+
+
+<span class="c1"># The function called when a hotkey is pressed</span>
+<span class="k">def</span> <span class="nf">on_activate</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Hotkey pressed'</span><span class="p">)</span>
+
+
+<span class="c1"># A helper function when delegating on_press/on_release events</span>
+<span class="k">def</span> <span class="nf">for_canonical</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">canonical</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+
+
+<span class="c1"># The hotkey itself</span>
+<span class="n">hotkey</span> <span class="o">=</span> <span class="n">HotKey</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">Key</span><span class="o">.</span><span class="n">alt</span><span class="p">,</span> <span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'r'</span><span class="p">)],</span>  <span class="c1"># A list of the keys to look for</span>
+    <span class="n">on_activate</span>  <span class="c1"># The function to call when a hotkey is pressed</span>
+<span class="p">)</span>
+
+<span class="c1"># The typical pynput listener that is calling functions on hotkey using `for_canonical`</span>
+<span class="k">with</span> <span class="n">Listener</span><span class="p">(</span>
+    <span class="n">on_press</span><span class="o">=</span><span class="n">for_canonical</span><span class="p">(</span><span class="n">hotkey</span><span class="o">.</span><span class="n">press</span><span class="p">),</span>
+    <span class="n">on_release</span><span class="o">=</span><span class="n">for_canonical</span><span class="p">(</span><span class="n">hotkey</span><span class="o">.</span><span class="n">release</span><span class="p">)</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">l</span><span class="p">:</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<p>An example of more than one hotkey would be something like:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">HotKey</span><span class="p">,</span> <span class="n">Key</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">,</span> <span class="n">Listener</span>
+
+
+<span class="k">def</span> <span class="nf">function_1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Function 1 activated'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">function_2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Function 2 activated'</span><span class="p">)</span>
+
+
+<span class="n">hotkey1</span> <span class="o">=</span> <span class="n">HotKey</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">Key</span><span class="o">.</span><span class="n">alt</span><span class="p">,</span> <span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'r'</span><span class="p">)],</span>
+    <span class="n">function_1</span>
+<span class="p">)</span>
+
+<span class="n">hotkey2</span> <span class="o">=</span> <span class="n">HotKey</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">Key</span><span class="o">.</span><span class="n">alt</span><span class="p">,</span> <span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'t'</span><span class="p">)],</span>
+    <span class="n">function_1</span>
+<span class="p">)</span>
+
+<span class="n">hotkey3</span> <span class="o">=</span> <span class="n">HotKey</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">Key</span><span class="o">.</span><span class="n">alt</span><span class="p">,</span> <span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">,</span> <span class="n">KeyCode</span><span class="p">(</span><span class="n">char</span><span class="o">=</span><span class="s1">'y'</span><span class="p">)],</span>
+    <span class="n">function_2</span>
+<span class="p">)</span>
+
+<span class="n">hotkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">hotkey1</span><span class="p">,</span> <span class="n">hotkey2</span><span class="p">,</span> <span class="n">hotkey3</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">signal_press_to_hotkeys</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">hotkey</span> <span class="ow">in</span> <span class="n">hotkeys</span><span class="p">:</span>
+        <span class="n">hotkey</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">canonical</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">signal_release_to_hotkeys</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">hotkey</span> <span class="ow">in</span> <span class="n">hotkeys</span><span class="p">:</span>
+        <span class="n">hotkey</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">canonical</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">signal_press_to_hotkeys</span><span class="p">,</span> <span class="n">on_release</span><span class="o">=</span><span class="n">signal_release_to_hotkeys</span><span class="p">)</span> <span class="k">as</span> <span class="n">l</span><span class="p">:</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<p>However using <code>keyboard.HotKey.parse</code> would make things a lot easier for that example:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="k">def</span> <span class="nf">function_1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Function 1 activated'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">function_2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Function 2 activated'</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">GlobalHotKeys</span><span class="p">({</span>
+        <span class="s1">'&lt;alt&gt;+&lt;ctrl&gt;+r'</span><span class="p">:</span> <span class="n">function_1</span><span class="p">,</span>
+        <span class="s1">'&lt;alt&gt;+&lt;ctrl&gt;+t'</span><span class="p">:</span> <span class="n">function_1</span><span class="p">,</span>
+        <span class="s1">'&lt;alt&gt;+&lt;ctrl&gt;+y'</span><span class="p">:</span> <span class="n">function_2</span><span class="p">})</span> <span class="k">as</span> <span class="n">h</span><span class="p">:</span>
+    <span class="n">h</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<blockquote>
+<p>In this example, <code>keyboard.HotKey.parse</code> is being used in the background by keyboard.GlobalHotKeys.</p>
+</blockquote>
+<h2 id="common-issues-and-questions">
+<span style="position:relative"><a class="anchor" href="#common-issues-and-questions"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Common Issues and Questions</span></h2>
+<h3 id="modulenotfounderrorimporterror-no-module-named-pynput">
+<span style="position:relative"><a class="anchor" href="#modulenotfounderrorimporterror-no-module-named-pynput"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>ModuleNotFoundError/ImportError: No module named 'pynput'</span></h3>
+<p>Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.</p>
+<h3 id="i-got-a-syntaxerror">
+<span style="position:relative"><a class="anchor" href="#i-got-a-syntaxerror"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>I got a SyntaxError</span></h3>
+<p>Syntax errors are caused by you and these is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs <a href="https://docs.python.org/2/tutorial/errors.html#syntax-errors">here</a>.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/the-nitratine-project/" title="The Nitratine Project">
+<span>←</span>
+<span class="btn-content">The Nitratine Project</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/simulate-mouse-events-in-python/" title="Simulate Mouse Events In Python">
+<span class="btn-content">Simulate Mouse Events In Python</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-make-hotkeys-in-python/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-make-hotkeys-in-python/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

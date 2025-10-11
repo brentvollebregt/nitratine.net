@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/python-gcm-encryption-tutorial/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Python GCM Encryption Tutorial - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This tutorial covers what AES GCM mode encryption is, the benefits of it and how to use it in the PyCryptodome Python library to encrypt and decrypt files and other objects." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Python GCM Encryption Tutorial" property="og:title"/>
+<meta content="This tutorial covers what AES GCM mode encryption is, the benefits of it and how to use it in the PyCryptodome Python library to encrypt and decrypt files and other objects." property="og:description"/>
+<meta content="/posts/python-gcm-encryption-tutorial/decryption-flow-diagram.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/python-gcm-encryption-tutorial/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Python GCM Encryption Tutorial</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2020">13 Aug 2020</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#encryption">encryption</a>
+<a class="badge badge-warning" href="/blog/tags/#cyber-security">cyber-security</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">11 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fpython-gcm-encryption-tutorial%2F"/>
+</div>
+<p class="lead">This tutorial covers what AES GCM mode encryption is, the benefits of it and how to use it in the PyCryptodome Python library to encrypt and decrypt files and other objects.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-aes-and-gcm-mode">What is AES and GCM Mode?</a></li>
+<li><a href="#what-is-pycryptodome">What is PyCryptodome</a><ul>
+<li><a href="#why-you-should-use-pycryptodome-over-the-original-pycrypto">Why You Should Use PyCryptodome Over the Original PyCrypto</a></li>
+</ul>
+</li>
+<li><a href="#installing-pycryptodome">Installing PyCryptodome</a></li>
+<li><a href="#generating-a-key">Generating A Key</a><ul>
+<li><a href="#generating-a-salt">Generating a Salt</a></li>
+<li><a href="#generating-the-key-using-scrypt">Generating the Key Using scrypt</a></li>
+</ul>
+</li>
+<li><a href="#source-and-storage-planning">Source and Storage Planning</a><ul>
+<li><a href="#identifying-your-source-and-transformations">Identifying Your Source and Transformations</a></li>
+<li><a href="#encryption-planning">Encryption Planning</a></li>
+<li><a href="#decryption-planning">Decryption Planning</a></li>
+</ul>
+</li>
+<li><a href="#encryption">Encryption</a></li>
+<li><a href="#decrypting">Decrypting</a></li>
+</ul>
+</div>
+<blockquote>
+<p>This tutorial is a follow on from <a href="/blog/post/python-encryption-and-decryption-with-pycryptodome/">Python Encryption and Decryption with PyCryptodome</a> which covers a high-level view of the usage of the Python PyCryptodome library. If you have already read this, there will be a bit of duplicate reading but I recommend at least skimming just in case you miss something.</p>
+</blockquote>
+<h2 id="what-is-aes-and-gcm-mode">
+<span style="position:relative"><a class="anchor" href="#what-is-aes-and-gcm-mode"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is AES and GCM Mode?</span></h2>
+<p><a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">Advanced Encryption Standard</a> (AES) is a fast, secure and very popular block cipher that is commonly used to encrypt electronic data. AES has three different block ciphers: <em>AES-128</em> (128 bit), <em>AES-192</em> (192 bit) and <em>AES-256</em> (256 bit) - each cipher is named after the key length they use for encryption and decryption. Each of these ciphers encrypt and decrypt the data in 128-bit blocks but they use different sizes of cryptographic keys.</p>
+<p>AES supports many different "modes". Modes are the internal algorithm used to encrypt data; each mode can potentially have different inputs and outputs but they always have a single input for data to encrypt and a single output for encrypted data along with an input key.</p>
+<p><a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode"><em>GCM</em></a> is a mode of AES that uses the <a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)">CTR (counter) mode</a> to encrypt data and uses Galois mode for authentication. Aside from the CTR mode which is used to encrypt the data, Galois mode authentication allows us to check at the end of decryption that the message has not been tampered with. GCM is well known for its speed and that it's a mode that it's patent-free.</p>
+<p>In this tutorial, I'll be using an implementation of AES in <a href="https://pycryptodome.readthedocs.io/en/latest/">PyCryptodome</a> to encrypt strings and files. Many modes are supported <a href="https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html">by this implementation of AES</a>, including CBC, CFB and GCM which we will be using. I chose PyCryptodome as it is well documented and is similar to an older package <em>PyCrypto</em> that died a while ago.</p>
+<h2 id="what-is-pycryptodome">
+<span style="position:relative"><a class="anchor" href="#what-is-pycryptodome"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is <a href="https://pycryptodome.readthedocs.io/en/latest/">PyCryptodome</a></span></h2>
+<p>PyCryptodome is a self-contained Python package of low-level cryptographic primitives that supports Python 2.6 and 2.7, Python 3.4 and newer, and PyPy.</p>
+<p>PyCryptodome is a fork of PyCrypto that has been enhanced to add more implementations and fixes to the original PyCrypto library. Where possible, most of the algorithms in this library are implemented in pure Python; only pieces that are extremely critical to performance (e.g. block ciphers) are implemented as C extensions.</p>
+<p>The library offers implementations for things like:</p>
+<ul>
+<li>AES</li>
+<li>Stream ciphers like Salsa20</li>
+<li>Cryptographic hashes like SHA-2</li>
+<li>Message Authentication Codes like HMAC</li>
+<li>RSA asymmetric key generation</li>
+<li><a href="https://www.pycryptodome.org/en/latest/src/features.html">and much more!</a></li>
+</ul>
+<h3 id="why-you-should-use-pycryptodome-over-the-original-pycrypto">
+<span style="position:relative"><a class="anchor" href="#why-you-should-use-pycryptodome-over-the-original-pycrypto"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Why You Should Use PyCryptodome Over the Original PyCrypto</span></h3>
+<p>Even though unstated on any official site by the owner (which is unfortunate), PyCrypto is currently unmaintained. The last commit that was made to the official <a href="https://github.com/pycrypto/pycrypto">GitHub repository</a> was on <a href="https://github.com/pycrypto/pycrypto/commit/7acba5f3a6ff10f1424c309d0d34d2b713233019">Jun 21, 2014</a>.</p>
+<p>Since PyCrypto has been unmaintained for a few years, there have been a few security vulnerabilities found which are listed on <a href="https://www.cvedetails.com/vulnerability-list/vendor_id-11993/product_id-22441/Dlitz-Pycrypto.html">www.cvedetails.com</a>. This is quite a worry as PyCrypto examples are still prominent in Python security search results. Since there are no warnings in the project or on the repository, the best we can do is to tell people.</p>
+<p>As PyCryptodome is a modified fork of PyCrypto, it can be used in some situations as a drop-in-replacement for PyCrypto; you can read more about that <a href="https://www.pycryptodome.org/en/latest/src/vs_pycrypto.html">in the docs</a>.</p>
+<h2 id="installing-pycryptodome">
+<span style="position:relative"><a class="anchor" href="#installing-pycryptodome"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing PyCryptodome</span></h2>
+<p>The easiest way to install this library is to use pip. Open up the terminal/cmd and execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">python -m pip install pycryptodome</span>
+</code></pre></div>
+<p>To make sure it installed correctly, open IDLE and execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pycryptodome</span>
+</code></pre></div>
+<p>If no errors appeared it has been installed correctly.</p>
+<h2 id="generating-a-key">
+<span style="position:relative"><a class="anchor" href="#generating-a-key"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Generating A Key</span></h2>
+<p>Keys that are used in AES must be 128, 192, or 256 bits in size (for <em>AES-128</em>, <em>AES-192</em> or <em>AES-256</em> respectively). In my post <a href="/blog/post/python-encryption-and-decryption-with-pycryptodome/">Python Encryption and Decryption with PyCryptodome</a>, I describe how to</p>
+<ul>
+<li><a href="/blog/post/python-encryption-and-decryption-with-pycryptodome/#generating-a-key">How to generate a random key with PyCryptodome</a></li>
+<li><a href="/blog/post/python-encryption-and-decryption-with-pycryptodome/#storing-a-key">How to store and read the randomly generated key</a></li>
+<li><a href="/blog/post/python-encryption-and-decryption-with-pycryptodome/#generating-a-key-from-a-password">How to generate a key from a password</a></li>
+</ul>
+<p>For this tutorial, I'll just go over how to generate a key from a password as it is the most popular method. You are still free to use a randomly generated key as demonstrated in the links above - they will still work with these examples.</p>
+<p>When generating a key from a password, we need to take a string provided by the user and create an appropriately sized byte sequence; the method used must produce the same output for the same inputs. To do this we can use <code>Crypto.Protocol.KDF.scrypt</code> (<a href="https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#scrypt">API reference</a>). <em>scrypt</em> allows us to generate a key of any length by simply passing a password and <em>salt</em>. </p>
+<blockquote>
+<p>scrypt has been used instead of PBKDF2 because, in addition to being computationally expensive, it is also memory intensive and therefore more secure against the risk of custom ASICs.</p>
+</blockquote>
+<p>scrypt is different from the SHA family (ie. <em>SHA-256</em> and <em>SHA-512</em>) because it also takes a salt and a work factor. Providing a salt that will mean that the same hash does not map to the same password every time, thus preventing <a href="https://en.wikipedia.org/wiki/Rainbow_table">rainbow table</a> lookups. A work factor is also specified to make the transformation more computationally difficult which means the key is harder to brute force.</p>
+<blockquote>
+<p>You can read more about the differences between password hashes differ and secure hashes in <a href="https://crypto.stackexchange.com/a/35279">this reply on Stack Exchange</a> - in this example, PBKDF2 is compared to SHA-512 rather than scrypt.</p>
+</blockquote>
+<h3 id="generating-a-salt">
+<span style="position:relative"><a class="anchor" href="#generating-a-salt"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Generating a Salt</span></h3>
+<p>A <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)">salt</a> is <em>random data that is used as an additional input to a one-way function that "hashes" data</em>. To generate a salt, we can use the function <code>Crypto.Random.get_random_bytes</code> provided by PyCryptodome:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Random</span> <span class="kn">import</span> <span class="n">get_random_bytes</span>
+<span class="n">salt</span> <span class="o">=</span> <span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+</code></pre></div>
+<p>If you execute <code>print(salt)</code> you will see something like the following</p>
+<div class="codehilite"><pre><span></span><code><span class="sa">b</span><span class="s1">'</span><span class="se">\x8a\xfe\x1f\xa7</span><span class="s1">aY}</span><span class="se">\xa3</span><span class="s1">It=</span><span class="se">\xc3\xcc</span><span class="s1">T</span><span class="se">\xc8\x94\xc1</span><span class="s1">1%w]A</span><span class="se">\xb7\x87</span><span class="s1">G</span><span class="se">\xd8\xba\x9e\xf8\xec</span><span class="s1">&amp;</span><span class="se">\xf0</span><span class="s1">'</span>
+</code></pre></div>
+<p>This is a random sequence of bytes that has been generated. For every object (like files) you will encrypt, you should generate a new salt for it to be combined with the password by scrypt. This will mean the same password does not create the same key for multiple objects.</p>
+<p>It's safe to store this generated salt with the encrypted output and in this tutorial, I'll show you how to store them with the output and then read them back out. </p>
+<h3 id="generating-the-key-using-scrypt">
+<span style="position:relative"><a class="anchor" href="#generating-the-key-using-scrypt"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Generating the Key Using scrypt</span></h3>
+<p>Now that you have generated a salt, we can generate a key using the password being provided. Passing the password provided by the user, the salt that you just generated as well as declaring the output length, we can get the key.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Protocol.KDF</span> <span class="kn">import</span> <span class="n">scrypt</span>
+
+<span class="n">salt</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'...'</span>  <span class="c1"># Salt you generated</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s1">'password123'</span>  <span class="c1"># Password provided by the user, can use input() to get this</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">scrypt</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="p">,</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">17</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Your key that you can encrypt with</span>
+</code></pre></div>
+<p>Now in <code>key</code>, you will have the key that you can use in encryption - you can view it using <code>print(key)</code>. You do not have to store this key now as you can see that this can be generated every time regarding the user provides the same password as long as you use the same salt (which we will be storing with the encrypted file/object).</p>
+<p>In the example above, <code>key_len</code> has been set to 32; this is the length of the key that we want to be output. 32 has been used because 32 * 8 bits (8 bits = 1 byte) is 256, this means we will be using AES-256 when providing the key generated by this function.</p>
+<p>I also passed values for <code>N</code>, <code>r</code> and <code>p</code> which can be found in the <a href="https://pycryptodome.readthedocs.io/en/latest/src/protocol/kdf.html#scrypt">docs for scrypt</a>. <code>N</code> is the work factor (CPU/Memory cost) which will determine how long it takes to calculate the output - 2^14 will be &lt;100ms whereas 2^20 will be &lt;5s on today's machines. </p>
+<blockquote>
+<p>I have left <code>N</code> as <code>2**17</code> to keep people happy about the timing of encryption - in the case of blind copy and paste. If you're implementing this in a critical system or want to add have scrypt return a slightly more secure derivation, I recommend bumping <code>N</code> to <code>2**20</code>.</p>
+</blockquote>
+<h2 id="source-and-storage-planning">
+<span style="position:relative"><a class="anchor" href="#source-and-storage-planning"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Source and Storage Planning</span></h2>
+<p>Before we begin, we need to do a bit of planning of what is being encrypted (the source) and any transformations required, the inputs and outputs for both encryption and decryption and storing values we need to remember with the encrypted file.</p>
+<h3 id="identifying-your-source-and-transformations">
+<span style="position:relative"><a class="anchor" href="#identifying-your-source-and-transformations"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Identifying Your Source and Transformations</span></h3>
+<p>In this example below, I will show you how to encrypt a file. If you are not using a file though, it may still be able to be encrypted.</p>
+<p>If your object is in the form of bytes (<code>type(your_bytes_object) == bytes</code>) then you will have something like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">your_bytes_object</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'</span><span class="se">\xad</span><span class="s1">d</span><span class="se">\x8d</span><span class="s1">-</span><span class="se">\xef\xd5</span><span class="s1">I</span><span class="se">\xe2</span><span class="s1">u</span><span class="se">\x19\xb6\x00\xc0</span><span class="s1">+</span><span class="se">\xad</span><span class="s1">...'</span>
+</code></pre></div>
+<p>To make this readable, we can convert it to a <code>BytesIO</code> object using the following</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">io</span>
+<span class="n">file_object</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">your_bytes_object</span><span class="p">)</span>
+</code></pre></div>
+<p>Now <code>file_object</code> will look like a file because we can perform file-like operations on it like when we use <code>open</code> and call <code>.read()</code>.</p>
+<p>If you have a string (<code>type(your_bytes_object) == str</code>), call <code>.encode()</code> on it to convert it to bytes and then follow the step above. Note that when the data is decrypted, you will need to call <code>.decode()</code> on the output bytes to turn it back into a string.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">io</span>
+
+<span class="n">my_string_to_encrypt</span> <span class="o">=</span> <span class="s1">'Wow! This is a cool string.'</span>
+<span class="n">file</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">my_string_to_encrypt</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="encryption-planning">
+<span style="position:relative"><a class="anchor" href="#encryption-planning"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Encryption Planning</span></h3>
+<p>Here is a fully-involved diagram on the process we will need to follow to encrypt:</p>
+<p><img alt="Encryption Flow Diagram" class="lazyload blur-up" data-src="/posts/python-gcm-encryption-tutorial/encryption-flow-diagram.png" height="387" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAYAAADXhRcnAAABFUlEQVR4nCXQTXLTUBBF4XNb/SxZsvNXCaFgQDFiEex/C5kwZUCFAjuRjS35qZuBz+As4NPb23uaGQBSksB11zKTiEAITMzjX077ic1jjzcWmCWkiGyQQCYSMBPT8QgZWNchCaWosyGE8/oCOTPlht/jE+3g3H/sIJKaBuasuhZZA7lQl4WKkQjfl45aYdg8cNdvqfVMs/tBw8Tu/Mz+0PP0qbAuR2oFTSc29UwTj/ivC4ynC18G8XzjXCZH9pnMynB7i20Nt3fGny+U7Qd8KejwisUd3ncrzHvcRKrB2jWVAWTEaaS/6ZDuWX/9jkVy2P1hfvhG8RZfqSUNGjkRC5GBWK7UZUUswVWxoNYp63/M05lE/AdNA3cMVHpkRwAAAABJRU5ErkJggg==" style="; aspect-ratio: 860/387; height: auto;" width="860"/></p>
+<ol>
+<li>Generate a new salt.</li>
+<li>Use <code>scrypt</code> to convert the salt and password into a key we can use.</li>
+<li>Open a new file and write the salt out.<ul>
+<li>We write the salt to the output file first as we will need it when decrypting later.</li>
+<li>Putting it in this file allows us to keep the correct salt with the encrypted data.</li>
+<li>Putting it at the top of the file means we can easily read it out before decrypting (we know the length as it's always the same).</li>
+</ul>
+</li>
+<li>Create a new AES encryption instance using the key.</li>
+<li>Write the nonce out to the file.<ul>
+<li>The nonce is a random byte sequence generated by the instances of AES and is the start of the counter in CTR mode.</li>
+<li>This is different so if the same key and file and encrypted together again, the encryption will be different.</li>
+<li>Just like the salt, this is also stored at the top of the file so we can read it out again before decrypting to tell the CTR mode where to start counting from.</li>
+</ul>
+</li>
+<li>Read some data from the file into a buffer and then give it to the encryption instance.</li>
+<li>Write the encrypted data to the file.<ul>
+<li>6 and 7 are repeated over and over again until there is no more data coming from the source file.</li>
+<li>We read small parts out of the file at a time so we don't have to load the whole file into memory.</li>
+</ul>
+</li>
+<li>Write the tag to the output file.<ul>
+<li>This is the authentication "code" produced from the Galois mode authentication.</li>
+<li>This is used in the decryption phase to identify tampering/corruption.</li>
+</ul>
+</li>
+</ol>
+<h3 id="decryption-planning">
+<span style="position:relative"><a class="anchor" href="#decryption-planning"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Decryption Planning</span></h3>
+<p>Here is a fully-involved diagram on the process we will need to follow to decrypt:</p>
+<p><img alt="Decryption Flow Diagram" class="lazyload blur-up" data-src="/posts/python-gcm-encryption-tutorial/decryption-flow-diagram.png" height="233" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAFCAYAAACaTbYsAAAA00lEQVR4nAXBTU7DMBCA0W/Gzl/VlFKxKRvufxy4AEJiBVKEm7SJHXvMexJCqKoKQK0gUtimX1ICp0Yxx1D+kBTJhzPJWo6XA7QnvFOHqCAIiCBOSVFZbtC1xrornSXSNCGvF26rMj4LzjtkXubqvcOskmJE1jumGVGPc444L3jZsS1S2w5pB/qnM6U2yMfXew1L4HQ8c5WWcf9B+4FQroRJGU/QlE8e95nx5Y1vqcR9pW86tBbDq8f2jOSMNR0lG/vjDmrkuKFA3/eUFCEXtIJU4R+PXGwUoXEWxgAAAABJRU5ErkJggg==" style="; aspect-ratio: 739/233; height: auto;" width="739"/></p>
+<ol>
+<li>Read the salt from the source file.<ul>
+<li>The salt we generated was 32 bytes long, so calling <code>.read(32)</code> will get the salt out of the encrypted file.</li>
+</ul>
+</li>
+<li>Use <code>scrypt</code> to convert the salt and password into a key again.</li>
+<li>Read the nonce from the source file like we did for the salt.<ul>
+<li>AES GCM always generates a nonce that is 16 bytes long, so calling <code>.read(16)</code> will get the nonce out of the encrypted file.</li>
+</ul>
+</li>
+<li>Create a new AES decryption instance using the key and the nonce.</li>
+<li>Read the encrypted file bit-by-bit and decrypt, then output each part to the output file. Leave the tag still in the file (16 bytes also) <ul>
+<li>Just like when we read the file slowly to encrypt</li>
+</ul>
+</li>
+<li>Finally, read the tag and verify the decryption.</li>
+</ol>
+<h2 id="encryption">
+<span style="position:relative"><a class="anchor" href="#encryption"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Encryption</span></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">Crypto.Random</span> <span class="kn">import</span> <span class="n">get_random_bytes</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Protocol.KDF</span> <span class="kn">import</span> <span class="n">scrypt</span>
+
+<span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># The size in bytes that we read, encrypt and write to at once</span>
+
+
+<span class="n">password</span> <span class="o">=</span> <span class="s2">"password"</span>  <span class="c1"># Get this from somewhere else like input()</span>
+
+<span class="n">input_filename</span> <span class="o">=</span> <span class="s1">'input.txt'</span>  <span class="c1"># Any file extension will work</span>
+<span class="n">output_filename</span> <span class="o">=</span> <span class="n">input_filename</span> <span class="o">+</span> <span class="s1">'.encrypted'</span>  <span class="c1"># You can name this anything, I'm just putting .encrypted on the end</span>
+
+<span class="c1"># Open files</span>
+<span class="n">file_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>  <span class="c1"># rb = read bytes. Required to read non-text files</span>
+<span class="n">file_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span>  <span class="c1"># wb = write bytes. Required to write the encrypted data</span>
+
+<span class="n">salt</span> <span class="o">=</span> <span class="n">get_random_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># Generate salt</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">scrypt</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="p">,</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">17</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Generate a key using the password and salt</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">salt</span><span class="p">)</span>  <span class="c1"># Write the salt to the top of the output file</span>
+
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_GCM</span><span class="p">)</span>  <span class="c1"># Create a cipher object to encrypt data</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">nonce</span><span class="p">)</span>  <span class="c1"># Write out the nonce to the output file under the salt</span>
+
+<span class="c1"># Read, encrypt and write the data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span>  <span class="c1"># Read in some of the file</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Check if we need to encrypt anymore data</span>
+    <span class="n">encrypted_data</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Encrypt the data we read</span>
+    <span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">encrypted_data</span><span class="p">)</span>  <span class="c1"># Write the encrypted data to the output file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span>  <span class="c1"># Read some more of the file to see if there is any more left</span>
+
+<span class="c1"># Get and write the tag for decryption verification</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>  <span class="c1"># Signal to the cipher that we are done and get the tag</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+
+<span class="c1"># Close both files</span>
+<span class="n">file_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<p>The file <code>output_filename</code> will now have the encrypted data in it.</p>
+<h2 id="decrypting">
+<span style="position:relative"><a class="anchor" href="#decrypting"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Decrypting</span></h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Protocol.KDF</span> <span class="kn">import</span> <span class="n">scrypt</span>
+
+<span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>  <span class="c1"># The size in bytes that we read, encrypt and write to at once</span>
+
+
+<span class="n">password</span> <span class="o">=</span> <span class="s2">"password"</span>  <span class="c1"># Get this from somewhere else like input()</span>
+
+<span class="n">input_filename</span> <span class="o">=</span> <span class="s1">'input.txt.encrypted'</span>  <span class="c1"># The encrypted file</span>
+<span class="n">output_filename</span> <span class="o">=</span> <span class="s1">'decrypted.txt'</span>  <span class="c1"># The decrypted file</span>
+
+<span class="c1"># Open files</span>
+<span class="n">file_in</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
+<span class="n">file_out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span>
+
+<span class="c1"># Read salt and generate key</span>
+<span class="n">salt</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># The salt we generated was 32 bits long</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">scrypt</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="p">,</span> <span class="n">key_len</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">17</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Generate a key using the password and salt again</span>
+
+<span class="c1"># Read nonce and create cipher</span>
+<span class="n">nonce</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>  <span class="c1"># The nonce is 16 bytes long</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_GCM</span><span class="p">,</span> <span class="n">nonce</span><span class="o">=</span><span class="n">nonce</span><span class="p">)</span>
+
+<span class="c1"># Identify how many bytes of encrypted there is</span>
+<span class="c1"># We know that the salt (32) + the nonce (16) + the data (?) + the tag (16) is in the file</span>
+<span class="c1"># So some basic algebra can tell us how much data we need to read to decrypt</span>
+<span class="n">file_in_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">input_filename</span><span class="p">)</span>
+<span class="n">encrypted_data_size</span> <span class="o">=</span> <span class="n">file_in_size</span> <span class="o">-</span> <span class="mi">32</span> <span class="o">-</span> <span class="mi">16</span> <span class="o">-</span> <span class="mi">16</span>  <span class="c1"># Total - salt - nonce - tag = encrypted data</span>
+
+<span class="c1"># Read, decrypt and write the data</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">encrypted_data_size</span> <span class="o">/</span> <span class="n">BUFFER_SIZE</span><span class="p">)):</span>  <span class="c1"># Identify how many loops of full buffer reads we need to do</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span>  <span class="c1"># Read in some data from the encrypted file</span>
+    <span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Decrypt the data</span>
+    <span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">decrypted_data</span><span class="p">)</span>  <span class="c1"># Write the decrypted data to the output file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">encrypted_data_size</span> <span class="o">%</span> <span class="n">BUFFER_SIZE</span><span class="p">))</span>  <span class="c1"># Read whatever we have calculated to be left of encrypted data</span>
+<span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Decrypt the data</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">decrypted_data</span><span class="p">)</span>  <span class="c1"># Write the decrypted data to the output file</span>
+
+<span class="c1"># Verify encrypted file was not tampered with</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">file_in</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">cipher</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># If we get a ValueError, there was an error when decrypting so delete the file we created</span>
+    <span class="n">file_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">file_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_filename</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">e</span>
+
+<span class="c1"># If everything was ok, close the files</span>
+<span class="n">file_in</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">file_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<p>The file <code>output_filename</code> will now have the original data in it.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-manage-multiple-python-distributions/" title="How to Manage Multiple Python Distributions">
+<span>←</span>
+<span class="btn-content">How to Manage Multiple Python Distributions</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-file-backup-script/" title="Python File Backup Script">
+<span class="btn-content">Python File Backup Script</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/python-gcm-encryption-tutorial/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/python-gcm-encryption-tutorial/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

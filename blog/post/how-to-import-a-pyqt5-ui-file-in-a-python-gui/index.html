@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How to Import a PyQt5 .ui File in a Python GUI - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="In this tutorial, I explain how to import .ui files created using PyQt5's designer tool in Python and how to connect widgets from the GUI to methods in Python." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How to Import a PyQt5 .ui File in a Python GUI" property="og:title"/>
+<meta content="In this tutorial, I explain how to import .ui files created using PyQt5's designer tool in Python and how to connect widgets from the GUI to methods in Python." property="og:description"/>
+<meta content="/posts/how-to-import-a-pyqt5-ui-file-in-a-python-gui/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How to Import a PyQt5 .ui File in a Python GUI</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2019">26 May 2019</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#pyqt5">pyqt5</a>
+<a class="badge badge-warning" href="/blog/tags/#gui">gui</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">8 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-import-a-pyqt5-ui-file-in-a-python-gui%2F"/>
+</div>
+<p class="lead">In this tutorial, I explain how to import .ui files created using PyQt5's designer tool in Python and how to connect widgets from the GUI to methods in Python.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installing-pyqt5">Installing PyQt5</a></li>
+<li><a href="#generating-the-ui-file">Generating the UI File</a></li>
+<li><a href="#importing-the-ui-file-in-python">Importing the UI File In Python</a></li>
+<li><a href="#getting-widget-object-pointers">Getting Widget Object Pointers</a><ul>
+<li><a href="#giving-widgets-unique-names-to-find-them-with">Giving Widgets Unique Names to Find Them With</a></li>
+<li><a href="#using-these-names-to-find-the-widgets">Using These Names to Find the Widgets</a><ul>
+<li><a href="#searching-for-a-pointer">Searching For A Pointer</a></li>
+</ul>
+</li>
+<li><a href="#connecting-buttons-to-methods">Connecting Buttons to Methods</a></li>
+<li><a href="#reading-inputs">Reading Inputs</a></li>
+</ul>
+</li>
+<li><a href="#this-seems-like-a-lot-of-effort">This Seems Like A Lot Of Effort?</a></li>
+</ul>
+</div>
+<h2 id="introduction">
+<span style="position:relative"><a class="anchor" href="#introduction"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Introduction</span></h2>
+<p>In my tutorial on <a href="/blog/post/python-guis-with-pyqt/">Python GUI's with PyQt</a>, I had many people bring up the fact that when modifying the GUI, as soon as pyuic5 is executed again to rebuild the Python file, all original changes will be lost.</p>
+<p>In a sense, this is true. For demonstration proposes, I had put all code into the Python file generated, but a smarter way to add code would be have been to import the generated file so that when it changes (executed pyuic5 again to create an updated .py file), it would only have affected the imported file. This method also allows for separation of the GUI and logic.</p>
+<p>In this tutorial, I am going to cover a method that allows you to import the .ui file generated by PyQt Designer directly in Python. Please be aware that there is a lot more effort when importing it this way and it can be a lot harder to find where errors are occurring.</p>
+<h2 id="installing-pyqt5">
+<span style="position:relative"><a class="anchor" href="#installing-pyqt5"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing PyQt5</span></h2>
+<p>Go to my <a href="/blog/post/python-guis-with-pyqt/">previous tutorial</a> to learn how to install PyQt5. Generally, you can install it using <code>python -m pip install pyqt5</code> regarding your <a href="/blog/post/fix-python-is-not-recognized-as-an-internal-or-external-command/">environment is set up correctly</a>.</p>
+<p>If you haven't got the designer, you can use <code>python -m pip install pyqt5-tools</code> to install tools that contain the designer. Finding the executable can be a bit tough to find if you don't know where packages install so I would recommend reading <a href="/blog/post/python-guis-with-pyqt/#locating">the other post</a> to help you find it.</p>
+<h2 id="generating-the-ui-file">
+<span style="position:relative"><a class="anchor" href="#generating-the-ui-file"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Generating the UI File</span></h2>
+<p>As <a href="/blog/post/python-guis-with-pyqt/#using-the-designer">covered in my original PyQt5 tutorial</a>, install the designer, locate it and use it. When saving the GUI you have created, it will be saved as a <code>.ui</code>. This .ui file is XML that contains the layout of the GUI and other things you may have set in the designer application. Here is a snippet of an example .ui file:</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;ui</span><span class="w"> </span><span class="na">version=</span><span class="s">"4.0"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;class&gt;</span>MainWindow<span class="nt">&lt;/class&gt;</span>
+<span class="w">    </span><span class="nt">&lt;widget</span><span class="w"> </span><span class="na">class=</span><span class="s">"QMainWindow"</span><span class="w"> </span><span class="na">name=</span><span class="s">"MainWindow"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"geometry"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;rect&gt;</span>
+<span class="w">                </span><span class="nt">&lt;x&gt;</span>0<span class="nt">&lt;/x&gt;</span>
+<span class="w">                </span><span class="nt">&lt;y&gt;</span>0<span class="nt">&lt;/y&gt;</span>
+<span class="w">                </span><span class="nt">&lt;width&gt;</span>367<span class="nt">&lt;/width&gt;</span>
+<span class="w">                </span><span class="nt">&lt;height&gt;</span>339<span class="nt">&lt;/height&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/rect&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"windowTitle"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;string&gt;</span>MainWindow<span class="nt">&lt;/string&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;widget</span><span class="w"> </span><span class="na">class=</span><span class="s">"QWidget"</span><span class="w"> </span><span class="na">name=</span><span class="s">"centralwidget"</span><span class="nt">&gt;</span>
+<span class="w">            </span>contents...
+<span class="w">        </span><span class="nt">&lt;/widget&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/widget&gt;</span>
+<span class="w">    </span><span class="nt">&lt;resources/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;connections/&gt;</span>
+<span class="nt">&lt;/ui&gt;</span>
+</code></pre></div>
+<p>Regarding you know what XML is, this is pretty basic; knowing a little bit of XML is required for this.</p>
+<h2 id="importing-the-ui-file-in-python">
+<span style="position:relative"><a class="anchor" href="#importing-the-ui-file-in-python"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Importing the UI File In Python</span></h2>
+<p>First we need to import the modules required. We need <code>QtWidgets</code> from PyQt5 for the base widget and <code>uic</code> from PyQt5 also to load the file. We also need <code>sys</code> to access arguments.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">uic</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+</code></pre></div>
+<p>Next we need to create a base class that will load the .ui file in the constructor. It will need to call the <code>__init__</code> method of the inherited class, load the .ui file into the current object and then show the window.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># Call the inherited classes __init__ method</span>
+        <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s1">'basic.ui'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="c1"># Load the .ui file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Show the GUI</span>
+</code></pre></div>
+<p>It is <strong>very important</strong> here to inherit the correct class. In this example I inherit <code>QtWidgets.QMainWindow</code> because I created a new "Main Window" when selecting the form type when first creating the .ui file in PyQt Designer. If you look back to the source of the .ui file, we can actually identify the class we need to inherit.</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;ui</span><span class="w"> </span><span class="na">version=</span><span class="s">"4.0"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;class&gt;</span>MainWindow<span class="nt">&lt;/class&gt;</span>
+<span class="w">    </span><span class="nt">&lt;widget</span><span class="w"> </span><span class="na">class=</span><span class="s">"QMainWindow"</span><span class="w"> </span><span class="na">name=</span><span class="s">"MainWindow"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"geometry"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;rect&gt;</span>
+</code></pre></div>
+<p>This is a snippet of the XML from before. You can see "MainWindow" is the root widget as all the content is wrapped in the <code>&lt;widget class="QMainWindow" name="MainWindow"&gt; ... &lt;/widget&gt;</code> element. This tag has a <code>class</code> attribute; in this example, the value is <code>QMainWindow</code>, which explains why I used <code>QtWidgets.QMainWindow</code>.</p>
+<p>Your widget class may be different so be sure to double-check!</p>
+<p>After this, we then need to create an instance of this class we just made and execute it. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="c1"># Create an instance of QtWidgets.QApplication</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">Ui</span><span class="p">()</span> <span class="c1"># Create an instance of our class</span>
+<span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span> <span class="c1"># Start the application</span>
+</code></pre></div>
+<p>Putting this all together, we get:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">uic</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s1">'basic.ui'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">Ui</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+</code></pre></div>
+<blockquote>
+<p>This assumes that the .ui file is called <code>basic.ui</code></p>
+</blockquote>
+<p>Run the script to make sure everything runs, if the GUI that you created appears, congratulations! If not, look back over what you may have missed and <em>READ THE ERROR</em> (I cannot stress this enough).</p>
+<p>A small check-list for things that may go wrong:</p>
+<ul>
+<li>PyQt5 isn't installed</li>
+<li>The .ui file you are importing does not exist (incorrect reference)</li>
+<li>You did not inherit the correct class (found in the XML)</li>
+</ul>
+<h2 id="getting-widget-object-pointers">
+<span style="position:relative"><a class="anchor" href="#getting-widget-object-pointers"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Widget Object Pointers</span></h2>
+<p>Once you have the GUI being imported, you now need to identify some pointers for the objects you want to use. For this example I am going to use the .ui linked below:</p>
+<p><a href="/posts/how-to-import-a-pyqt5-ui-file-in-a-python-gui/basic.ui">Download: basic.ui</a></p>
+<p><img alt="basic.ui screenshot" class="lazyload blur-up" data-src="/posts/how-to-import-a-pyqt5-ui-file-in-a-python-gui/basic-ui.png" height="110" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAGCAYAAAAc2cSCAAABAElEQVR4nCXFuVLDMBRA0fskWXJsJywuSQPM8M38Az38AjN0tDShYgkMgSzIlqVHwWmOXN/e6BADxBMwGWsd1jqmKeFDTeU9qoqq4qQgcUf39MChPcKdL3tqGtJ2gbEFYx2V9xz2O2ZNx6ztEMBaS84Jxki9SDwPgluGK876BusNaUzkPAFw2i8BJU+ZGCOr1QrJhTEluotL+uxxRSb2w4H4kxARrDUYY3h5XVNUsdYgYmjnxwzDQBUKQaAMv5jGVwTn+PpYs91smAVPqBw6jXy+v6HThEVZzFvyOKAls5i31N4hd/eP2rYNKIBSVBEEUEQMRQuCoKqI+d8aw/p7yx8Xtnqet1CwMgAAAABJRU5ErkJggg==" style="; aspect-ratio: 299/110; height: auto;" width="299"/></p>
+<p>This GUI contains 5 widgets that we can see:</p>
+<ul>
+<li>Text input line</li>
+<li>A button to the right of this saying "Print Content"</li>
+<li>3 buttons below the input saying "Mode", "Set" and "Clear"</li>
+</ul>
+<p>When looking at the XML, we can see that there is a <code>centralwidget</code> inside a <code>QMainWindow</code> and inside the <code>centralwidget</code> are the 5 widgets I created.</p>
+<h3 id="giving-widgets-unique-names-to-find-them-with">
+<span style="position:relative"><a class="anchor" href="#giving-widgets-unique-names-to-find-them-with"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Giving Widgets Unique Names to Find Them With</span></h3>
+<p>The most important part of getting a pointer to one of these widgets is to give each widget a unique name, preferably something that is friendly to read. Open my .ui file in the Designer or in notepad to see the names I have given each widget. In the XML you can see the 5 widgets I created have friendly <code>name</code> attributes; these names can help us identify the widgets.</p>
+<p>To set these names, when clicking on an object in the designer, the property editor on the left provides a field called <code>objectName</code></p>
+<p><img alt="objectName in the designer" class="lazyload blur-up" data-src="/posts/how-to-import-a-pyqt5-ui-file-in-a-python-gui/objectName.png" height="169" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAECAYAAABREWWJAAAAtElEQVR4nC3KwUrDQBCA4X9md7NJsU1LKj5HHrh9Kg8KgnrSFJRCsbhNZseL3/mT4+HoFUcAdwdAVVissh8GxnEkhEDOGVVFROD/xvwwEHSHuBJSJMaGWg2f3vEKixm5yZRyY72+w2wBhJQS8vj07Pe7LSDk3FCKM31OVAm8vr2w7wK3mFm1LapKKYXrz5VNvyF+nL75Ol9IKTHPMzFFqhmGEqLTDwETo+sqqk75dfq+oW2dP9kAS1FlChuLAAAAAElFTkSuQmCC" style="; aspect-ratio: 634/169; height: auto;" width="634"/></p>
+<p>Set this to what you want the object to be called and you should see this in the XML when you save the file.</p>
+<blockquote>
+<p>You don't have to look at the XML, seeing/modifying it in the designer is enough.</p>
+</blockquote>
+<h3 id="using-these-names-to-find-the-widgets">
+<span style="position:relative"><a class="anchor" href="#using-these-names-to-find-the-widgets"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Using These Names to Find the Widgets</span></h3>
+<p>Now that each widget has a name attribute, we can get pointers of these objects. When I say pointers, I mean a variable that we can use to access this widget and modify it. </p>
+<p>When <code>uic.loadUi('basic.ui', self)</code> is called, the names of the widgets will be used to create pointers to the widgets themselves. This means to get our button named "printButton", we can access it using <code>self.printButton</code> within the same class that <code>uic.loadUi('basic.ui', self)</code> was called in after it has been called (technically we can call that on whatever <code>self</code> is).</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s1">'basic.ui'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Set the print button text to "Text Changed"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printButton</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">'Text Changed'</span><span class="p">)</span>
+        <span class="c1"># This should not throw an error as `uic.loadUi` would have created `self.printButton`</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<h4 id="searching-for-a-pointer">
+<span style="position:relative"><a class="anchor" href="#searching-for-a-pointer"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Searching For A Pointer</span></h4>
+<p>In the case that the method above doesn't work for some widgets, you can still search for them. To find an object, we can use <a href="https://www.riverbankcomputing.com/static/Docs/PyQt4/qobject.html#findChild"><code>findChild</code></a> on any one of its parent objects while supplying the type of widget we are getting and the name.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s1">'basic.ui'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Find the button with the name "printButton"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">,</span> <span class="s1">'printButton'</span><span class="p">)</span>
+        <span class="c1"># We have now created `self.printButton` ourselves (will overwrite whatever was there if something existed already)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<blockquote>
+<p>Alternatively, you can leave the name out to find the first object of the type you provided. You can also call <code>findChildren</code> to find more than one object.</p>
+</blockquote>
+<p>In the example above, I have searched for a <code>QPushButton</code> object with the name "printButton". To find the object type you need to search for, each widget in the XML will have a <code>class</code> attribute beside the <code>name</code> attribute. If you look at the .ui file I provided and search for "printButton", you will see an attribute <code>class</code> on the same line with a value <code>QPushButton</code>; this is how I knew to use <code>QtWidgets.QPushButton</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;widget</span><span class="w"> </span><span class="na">class=</span><span class="s">"QWidget"</span><span class="w"> </span><span class="na">name=</span><span class="s">"centralwidget"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;widget</span><span class="w"> </span><span class="na">class=</span><span class="s">"QPushButton"</span><span class="w"> </span><span class="na">name=</span><span class="s">"printButton"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"geometry"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<p>To find the name of this class in the designer, click on a widget and look at the "Object Inspector" window to the right. In the image below you can see that the type of the widget named "input" is <code>QLineEdit</code>; so I would then use <code>QtWidgets.QLineEdit</code>.</p>
+<p><img alt="widget class name in the designer" class="lazyload blur-up" data-src="/posts/how-to-import-a-pyqt5-ui-file-in-a-python-gui/widget-class-in-the-designer.png" height="153" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAECAYAAABREWWJAAAAuUlEQVR4nAXBzUrDQBSA0e/OZDpzIbaJbkQRhLgQH7v4OC7d+ArWtCGopc7P9RzZ71/NaICAGYYhCM0aqsrTNJGSMowDApgZIQRaa3TcbAk2Ag7vHZuomAjdz4ytXzxOE6kLnE5H/CayrisaG8M40L3cP/Nwe8XvubHbKqUK83wk+MR6uSPFRP27cPg80O8GlmXh2zliSsjb+4dZLSRVSs6IczgnlFw458q1dgTvKbWimsg5YwZ93/MPrD1NXnb73aEAAAAASUVORK5CYII=" style="; aspect-ratio: 579/153; height: auto;" width="579"/></p>
+<p>The method above simply helps you get a pointer to the object. Now that the hardest part is done, you are free to do what you would normally do after you have located all your widgets you want to use.</p>
+<blockquote>
+<p>Please note, this is not a full tutorial on PyQt5. I am simply demonstrating how to import .ui files</p>
+</blockquote>
+<h3 id="connecting-buttons-to-methods">
+<span style="position:relative"><a class="anchor" href="#connecting-buttons-to-methods"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Connecting Buttons to Methods</span></h3>
+<p>To connect a button to a method, we need to get a pointer (as shown before) and then connect it like we normally would. Here is a full example:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">uic</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s1">'basic.ui'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">,</span> <span class="s1">'printButton'</span><span class="p">)</span> <span class="c1"># Find the button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">printButtonPressed</span><span class="p">)</span> <span class="c1"># Remember to pass the definition/method, not the return value!</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">printButtonPressed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This is executed when the button is pressed</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'printButtonPressed'</span><span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">Ui</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="reading-inputs">
+<span style="position:relative"><a class="anchor" href="#reading-inputs"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Reading Inputs</span></h3>
+<p>To read inputs, I will use the button method from before to trigger an event and also get another pointer to the input widget.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">uic</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">class</span> <span class="nc">Ui</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ui</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s1">'basic.ui'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">,</span> <span class="s1">'printButton'</span><span class="p">)</span> <span class="c1"># Find the button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">printButtonPressed</span><span class="p">)</span> <span class="c1"># Remember to pass the definition/method, not the return value!</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLineEdit</span><span class="p">,</span> <span class="s1">'input'</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">printButtonPressed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This is executed when the button is pressed</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Input text:'</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">window</span> <span class="o">=</span> <span class="n">Ui</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+</code></pre></div>
+<p>These are only the basics but are great to build up from.</p>
+<h2 id="this-seems-like-a-lot-of-effort">
+<span style="position:relative"><a class="anchor" href="#this-seems-like-a-lot-of-effort"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>This Seems Like A Lot Of Effort?</span></h2>
+<p>Yes, at first it will be a lot of effort, but once you have set up all the pointers, you no longer need to worry about the GUI changing (regarding you keep the names of widgets the same). This is a small price to pay in 'overhead' for more smooth development later.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-hash-passwords-in-python/" title="How To Hash Passwords In Python">
+<span>←</span>
+<span class="btn-content">How To Hash Passwords In Python</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-create-dialogs-in-python/" title="How to Create Dialogs in Python">
+<span class="btn-content">How to Create Dialogs in Python</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
