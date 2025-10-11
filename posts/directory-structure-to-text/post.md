@@ -23,11 +23,15 @@ description: "This is a tool where you can select a file on your PC and it will 
         <div class="col-sm-auto mt-2 mt-sm-0 text-center">
             <button id="select-directory" type="button" class="btn btn-outline-primary">📁 Select Directory</button>
         </div>
-        
     </div>
 
-    <div class="codehilite mt-4">
-        <pre><code id="output">Output will appear here after selecting a directory.</code></pre>
+    <div class="mt-4">
+        <div id="copy-output-wrapper" class="mb-1 d-none justify-content-end">
+            <button id="copy-output" type="button" class="btn btn-primary">📋 Copy Output</button>
+        </div>
+        <div class="codehilite">
+            <pre><code id="output">Output will appear here after selecting a directory.</code></pre>
+        </div>
     </div>
 </div>
 
@@ -37,19 +41,26 @@ description: "This is a tool where you can select a file on your PC and it will 
 
 
 <script>
-    const selectDirectoryElementId = "select-directory";
-    const outputElementId = "output";
-    const excludeFilterElementId = "exclude-filter";
-    const ignoreEmptyFoldersElementId = "ignore-empty-folders";
+    // Get all required element references up front
+    const toolElement = document.getElementById("tool");
+    const unsupportedAlertElement = document.getElementById("unsupported-alert");
+    const selectDirectoryElement = document.getElementById("select-directory");
+    const outputElement = document.getElementById("output");
+    const excludeFilterElement = document.getElementById("exclude-filter");
+    const ignoreEmptyFoldersElement = document.getElementById("ignore-empty-folders");
+    const copyOutputWrapperElement = document.getElementById("copy-output-wrapper");
+    const copyOutputElement = document.getElementById("copy-output");
 
     const getFilesAndDirNodeForHandle = async (dirHandle, currentPath = '', excludeFilterRegex = null, ignoreEmptyFolders = false) => {
         const nodesPath = currentPath + '/' + dirHandle.name;
 
         // Skip if the current path matches the exclude regex
         if (excludeFilterRegex && excludeFilterRegex.test(nodesPath)) {
-            console.log(`[Search] Skipping ${nodesPath} (excluded by regex)`);
+            console.log(`[Search][Skipping] ${nodesPath} (excluded by regex)`);
             return null;
         }
+
+        console.log(`[Search] ${nodesPath}`);
 
         const node = {
             name: dirHandle.name,
@@ -69,7 +80,7 @@ description: "This is a tool where you can select a file on your PC and it will 
 
             // Ignore empty directories if the user requested
             if (ignoreEmptyFolders && node.children.length === 0) {
-                console.log(`[Search] Skipping ${nodesPath} (empty folder)`);
+                console.log(`[Search][Skipping] ${nodesPath} (empty folder)`);
                 return null;
             }
 
@@ -110,9 +121,8 @@ description: "This is a tool where you can select a file on your PC and it will 
     const onSelectDirectory = async () => {
         const dirHandle = await window.showDirectoryPicker();
 
-        const excludeFilterElement = document.getElementById(excludeFilterElementId);
         const excludeFilter = excludeFilterElement.value === '' ? null : new RegExp(excludeFilterElement.value, "m");
-        const ignoreEmptyFolders = document.getElementById(ignoreEmptyFoldersElementId).checked;
+        const ignoreEmptyFolders = ignoreEmptyFoldersElement.checked;
 
         console.log(`[Search] Starting search`);
         const rootNode = await getFilesAndDirNodeForHandle(dirHandle, '', excludeFilter, ignoreEmptyFolders);
@@ -121,20 +131,41 @@ description: "This is a tool where you can select a file on your PC and it will 
 
         console.log(`[Display] Starting display`);
         const display = getStructureDisplay(rootNode);
-        const outputElement = document.getElementById(outputElementId);
         outputElement.innerText = display;
         console.log(`[Display] Ended display`);
+
+        // Show the copy button
+        copyOutputWrapperElement.classList.remove("d-none");
+        copyOutputWrapperElement.classList.add("d-flex");
+    };
+
+    const onCopyOutput = async () => {
+        const outputText = outputElement.innerText;
+        try {
+            await navigator.clipboard.writeText(outputText);
+
+            const originalText = copyOutputElement.innerText;
+            copyOutputElement.innerText = "✅ Copied!";
+            copyOutputElement.disabled = true;
+
+            setTimeout(() => {
+                copyOutputElement.innerText = originalText;
+                copyOutputElement.disabled = false;
+            }, 1500);
+        } catch (err) {
+            alert("Failed to copy to clipboard: " + err);
+        }
     };
 
     // When the page first loads, hook everything up
     document.addEventListener("DOMContentLoaded", () => {
         const doesBrowserSupportSpecialFeatures = typeof window.showDirectoryPicker !== undefined;
         if (doesBrowserSupportSpecialFeatures) {
-            const selectDirectoryElement = document.getElementById(selectDirectoryElementId);
             selectDirectoryElement.addEventListener("click", onSelectDirectory);
+            copyOutputElement.addEventListener("click", onCopyOutput);
         } else {
-            document.getElementById("tool").style.display = "none";
-            document.getElementById("unsupported-alert").style.display = "block";
+            toolElement.style.display = "none";
+            unsupportedAlertElement.style.display = "block";
         }
 
         const preMessage = "Output will appear here after selecting a directory."
@@ -146,7 +177,7 @@ description: "This is a tool where you can select a file on your PC and it will 
             + "\nLook in the console to see the folders/files found to see their paths."
             + "\n"
             + "\nDetails about your files are kept on your machine.";
-        document.getElementById(outputElementId).innerText = preMessage;
+        outputElement.innerText = preMessage;
     });
 </script>
 
