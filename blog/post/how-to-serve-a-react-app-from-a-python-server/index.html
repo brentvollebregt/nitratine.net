@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-serve-a-react-app-from-a-python-server/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How To Serve A React App From A Python Server - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="In this tutorial, I explain how to serve a React application from a Python Flask server and how we can set up a postbuild script to automatically move the build React app to the server after a build." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How To Serve A React App From A Python Server" property="og:title"/>
+<meta content="In this tutorial, I explain how to serve a React application from a Python Flask server and how we can set up a postbuild script to automatically move the build React app to the server after a build." property="og:description"/>
+<meta content="/posts/how-to-serve-a-react-app-from-a-python-server/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-serve-a-react-app-from-a-python-server/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How To Serve A React App From A Python Server</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2020">29 Aug 2020</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#react">react</a>
+<a class="badge badge-warning" href="/blog/tags/#flask">flask</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">11 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-serve-a-react-app-from-a-python-server%2F"/>
+</div>
+<p class="lead">In this tutorial, I explain how to serve a React application from a Python Flask server and how we can set up a postbuild script to automatically move the build React app to the server after a build.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#goal">Goal</a></li>
+<li><a href="#setting-up-the-folder-structure">Setting Up The Folder Structure</a></li>
+<li><a href="#setting-up-your-react-application">Setting Up Your React Application</a><ul>
+<li><a href="#pre-existing-react-app">Pre-existing React App</a></li>
+<li><a href="#create-a-new-react-app">Create A New React App</a></li>
+</ul>
+</li>
+<li><a href="#setting-up-a-python-server">Setting Up A Python Server</a><ul>
+<li><a href="#creating-the-server">Creating The Server</a></li>
+<li><a href="#serving-an-html-page">Serving An HTML Page</a></li>
+</ul>
+</li>
+<li><a href="#moving-react-build-to-the-server">Moving React Build To The Server</a><ul>
+<li><a href="#postbuild-script">Postbuild Script</a></li>
+</ul>
+</li>
+<li><a href="#running-the-server-after-a-build">Running The Server After A Build</a><ul>
+<li><a href="#the-last-piece-of-the-puzzle">The Last Piece Of The Puzzle</a></li>
+</ul>
+</li>
+<li><a href="#usage-and-workflow">Usage And Workflow</a><ul>
+<li><a href="#development">Development</a></li>
+<li><a href="#development-using-an-api-in-the-python-server">Development Using An API In The Python Server</a></li>
+<li><a href="#deploying-release">Deploying / Release</a></li>
+</ul>
+</li>
+<li><a href="#final-code">Final Code</a></li>
+</ul>
+</div>
+<h2 id="goal">
+<span style="position:relative"><a class="anchor" href="#goal"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Goal</span></h2>
+<p>The goal of this tutorial is to set up a directory with a React client and Python server where the Python server has the capability of serving a built React application.</p>
+<blockquote>
+<p>The server from this tutorial will serve a <strong>built</strong> React application, any changes made to the React app source will require it to be rebuild to be served by the server. You can still use <code>npm start</code> to locally develop the app.</p>
+</blockquote>
+<p>This tutorial is for people that create frontends in React and would like to serve it from Python because their API is already in React or they just want to serve it from Python because they can. I will be going over the basics of getting the two set up in a way to work together.</p>
+<h2 id="setting-up-the-folder-structure">
+<span style="position:relative"><a class="anchor" href="#setting-up-the-folder-structure"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting Up The Folder Structure</span></h2>
+<p>When developing a client and server, you typically want to keep them in separate directories. To accomplish this, we will create two folders like below:</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┗ 📁 server
+</code></pre></div>
+<h2 id="setting-up-your-react-application">
+<span style="position:relative"><a class="anchor" href="#setting-up-your-react-application"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting Up Your React Application</span></h2>
+<p>After setting up these folders, we need to put a React app into the "client" folder. If you want to use a pre-existing app, you will need to move it but if you don't we can create one now.</p>
+<h3 id="pre-existing-react-app">
+<span style="position:relative"><a class="anchor" href="#pre-existing-react-app"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Pre-existing React App</span></h3>
+<p>If you have a pre-existing React app you want to serve from the Python server, copy package.json and everything beside it into the "client" folder. You should have something that now looks like this:</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┃ ┣ 📁 node_modules
+┃ ┣ 📁 public
+┃ ┣ 📁 src
+┃ ┣ 📜 .gitignore
+┃ ┣ 📜 package.json
+┃ ┣ 📜 package-lock.json
+┃ ┣ 📜 README.md
+┃ ┗ 📜 tsconfig.json
+┗ 📁 server
+</code></pre></div>
+<p>You may have different files in the "client" folder which is ok - the only requirement is that your package.json, public, src and any other files required to run the application have been moved here.</p>
+<p>You can also copy over the node_modules folder if you want. If you don't have a node_modules folder, execute <code>npm install</code> in the "client" directory to download all your required packages.</p>
+<h3 id="create-a-new-react-app">
+<span style="position:relative"><a class="anchor" href="#create-a-new-react-app"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Create A New React App</span></h3>
+<p>If you want to start with a new React app, cd into the "client" folder and then execute:</p>
+<div class="codehilite"><pre><span></span><code>npx create-react-app .
+</code></pre></div>
+<blockquote>
+<p>You can alternatively create a TypeScript React app using <code>npx create-react-app . --template typescript</code></p>
+</blockquote>
+<p>After this completes, you should have something that looks like this:</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┃ ┣ 📁 node_modules
+┃ ┣ 📁 public
+┃ ┣ 📁 src
+┃ ┣ 📜 .gitignore
+┃ ┣ 📜 package.json
+┃ ┣ 📜 package-lock.json
+┃ ┗ 📜 README.md
+┗ 📁 server
+</code></pre></div>
+<h2 id="setting-up-a-python-server">
+<span style="position:relative"><a class="anchor" href="#setting-up-a-python-server"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting Up A Python Server</span></h2>
+<p>Now that the React app is in the right place, we can set up the Python app and get it serving a basic page to being with.</p>
+<h3 id="creating-the-server">
+<span style="position:relative"><a class="anchor" href="#creating-the-server"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Creating The Server</span></h3>
+<p>In the "server" folder, create a new file run.py:</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┃ ┗ ... react files
+┗ 📁 server
+  ┗ 📜 run.py
+</code></pre></div>
+<p>This file will be what runs the server.</p>
+<blockquote>
+<p>If you have a pre-existing server/API, you can also perform similar steps to set up the serving of the React app, although the setup may be different for your server. If you do want to use your current server, I recommended moving your current server into the "server" folder and skip making run.py as you can modify the file where all your other endpoints are.</p>
+</blockquote>
+<p>To save on a lot of unnecessary code, we'll use <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> to help set up the web-server. To start, install Flask by executing the following in a terminal:</p>
+<div class="codehilite"><pre><span></span><code>python -m pip install flask
+</code></pre></div>
+<p>After flask has been installed, we will then set the server up in run.py. Open run.py in IDLE or another editor of your choice and add the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>  <span class="c1"># Import flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># Setup the flask app by creating an instance of Flask</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>  <span class="c1"># When someone goes to / on the server, execute the following function</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">'Hello, World!'</span>  <span class="c1"># Return this message back to the browser</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>  <span class="c1"># If the script that was run is this script (we have not been imported)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># Start the server</span>
+</code></pre></div>
+<blockquote>
+<p>This snippet has been modified from <a href="https://flask.palletsprojects.com/en/1.1.x/quickstart/">Flask's Quickstart</a> page.</p>
+</blockquote>
+<p>Now run the server using IDLE or a terminal:</p>
+<div class="codehilite"><pre><span></span><code>python run.py
+</code></pre></div>
+<p>You should see a message like the following appear:</p>
+<div class="codehilite"><pre><span></span><code>$ python run.py
+ * Serving Flask app "run" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+</code></pre></div>
+<p>This means the server is now running and if you go to <a href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a> you should see the text "Hello, World!" - this means the server is working and we can continue on to serving a page.</p>
+<blockquote>
+<p>Tip: Press <kbd>Ctrl</kbd> + <kbd>C</kbd> in the console running the server to stop it.</p>
+</blockquote>
+<h3 id="serving-an-html-page">
+<span style="position:relative"><a class="anchor" href="#serving-an-html-page"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Serving An HTML Page</span></h3>
+<p>Typically when serving an HTML page from a Flask server, you would put the HTML file in a "templates" folder beside the Flask app. In this tutorial however, we will soon be using the index.html file from the React build, so we can just serve it as a static file.</p>
+<p>To prepare for this, create a file in "server/static" called index.html with a basic message:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>An Example Page<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>An Example Page<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Here would be the new layout:</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┃ ┗ ... react files
+┗ 📁 server
+  ┣ 📁 static
+  ┃ ┗ 📜 index.html     &lt;-- new file
+  ┗ 📜 run.py
+</code></pre></div>
+<p>After creating this new index.html file, we need to go back into run.py and make the server respond with this HTML file when someone requests a file from "/". We will change the <code>home</code> definition to return the file like this:  </p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>  <span class="c1"># At the same home function as before</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">send_static_file</span><span class="p">(</span><span class="s1">'index.html'</span><span class="p">)</span>  <span class="c1"># Return index.html from the static folder</span>
+</code></pre></div>
+<p>If you run the server again (like you did before) and go back to <a href="http://127.0.0.1:5000/">http://127.0.0.1:5000/</a> after the messages appear, you should see that the HTML in index.html was returned.</p>
+<p>This is great! Now when someone requests for "/", index.html will be returned. You can press <kbd>Ctrl</kbd> + <kbd>C</kbd> again to stop the server for the moment.</p>
+<h2 id="moving-react-build-to-the-server">
+<span style="position:relative"><a class="anchor" href="#moving-react-build-to-the-server"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Moving React Build To The Server</span></h2>
+<p>We now want to set up a script that will copy the output of the React app build to the servers "static" folder so index.html can be served to the client.</p>
+<h3 id="postbuild-script">
+<span style="position:relative"><a class="anchor" href="#postbuild-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Postbuild Script</span></h3>
+<p>To do this, we will use an npm postbuild script (written in JavaScript) to copy all the output from <code>npm build</code> that had been put into the "build" folder to the server's "static" folder. The reason we will use a JavaScript script is because:</p>
+<ul>
+<li>It will be platform-independent (<code>rm</code>/<code>cp</code> terminal commands are not available in Windows cmd but are in Linux)</li>
+<li>We can run it with <code>node</code> which we can be sure will be available</li>
+<li><code>node</code> will happily run JavaScript without having to be transpiled (like TypeScript)</li>
+</ul>
+<p>Here is the script we will use to copy the build to the server:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">"fs"</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">targetSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'./build'</span><span class="p">;</span><span class="w"> </span><span class="c1">// Relative path to copy files from</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">targetDestination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'../server/static'</span><span class="p">;</span><span class="w"> </span><span class="c1">// Relative path to copy files to</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Remove directory recursively</span>
+<span class="cm"> * @param {string} dir_path</span>
+<span class="cm"> * @see https://stackoverflow.com/a/42505874</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">rimraf</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">entry_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">,</span><span class="w"> </span><span class="nx">entry</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">entry_path</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">rimraf</span><span class="p">(</span><span class="nx">entry_path</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">fs</span><span class="p">.</span><span class="nx">unlinkSync</span><span class="p">(</span><span class="nx">entry_path</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="nx">fs</span><span class="p">.</span><span class="nx">rmdirSync</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Copy a file</span>
+<span class="cm"> * @param {string} source</span>
+<span class="cm"> * @param {string} target</span>
+<span class="cm"> * @see https://stackoverflow.com/a/26038979</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">copyFileSync</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">targetFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">target</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// If target is a directory a new file with the same name will be created</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">target</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">target</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">targetFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">source</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">targetFile</span><span class="p">,</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">source</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Copy a folder recursively</span>
+<span class="cm"> * @param {string} source</span>
+<span class="cm"> * @param {string} target</span>
+<span class="cm"> * @see https://stackoverflow.com/a/26038979</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">copyFolderRecursiveSync</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">    </span><span class="c1">// Check if folder needs to be created or integrated</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">targetFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">source</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">targetFolder</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="nx">targetFolder</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Copy</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">source</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">source</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">files</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">curSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">curSource</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">copyFolderRecursiveSync</span><span class="p">(</span><span class="nx">curSource</span><span class="p">,</span><span class="w"> </span><span class="nx">targetFolder</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">copyFileSync</span><span class="p">(</span><span class="nx">curSource</span><span class="p">,</span><span class="w"> </span><span class="nx">targetFolder</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Calculate absolute paths using the relative paths we defined at the top</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">sourceFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">targetSource</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">destinationFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">targetDestination</span><span class="p">);</span>
+
+<span class="c1">// Remove destination folder if it exists to clear it</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">destinationFolder</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rimraf</span><span class="p">(</span><span class="nx">destinationFolder</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Copy the build over</span>
+<span class="nx">copyFolderRecursiveSync</span><span class="p">(</span><span class="nx">sourceFolder</span><span class="p">,</span><span class="w"> </span><span class="nx">destinationFolder</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+</code></pre></div>
+<p>This script needs to be placed beside package.json:</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┃ ┣ 📁 node_modules
+┃ ┣ 📁 public
+┃ ┣ 📁 src
+┃ ┣ 📜 .gitignore
+┃ ┣ 📜 package.json
+┃ ┣ 📜 package-lock.json
+┃ ┣ 📜 postbuild.js       &lt;-- right here
+┃ ┗ 📜 README.md
+┗ 📁 server
+  ┗ 📜 ... server files
+</code></pre></div>
+<p>We now want to setup package.json to run this script after an npm build. Create a new <code>"postbuild"</code> script key and set its value to <code>"node postbuild.js"</code>. Here is an example excerpt based off the default package.json generated before: </p>
+<div class="codehilite"><pre><span></span><code><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts start"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts build"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"postbuild"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node postbuild.js"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts test"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"eject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts eject"</span>
+<span class="p">},</span>
+</code></pre></div>
+<p>Now when you execute <code>npm build</code> in the "client" folder, all the files put in "build" will be copied to "server/static". To visualise the structure, we are going from:</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┃ ┣ 📁 build            &lt;-- build files
+┃ ┃ ┣ 📜 favicon.ico
+┃ ┃ ┣ 📜 index.html
+┃ ┃ ┣ 📜 manifest.json
+┃ ┃ ┗ 📜 .. and other build files
+┃ ┣ 📁 node_modules
+┃ ┣ 📁 public
+┃ ┣ 📁 src
+┃ ┣ 📜 .gitignore
+┃ ┣ 📜 package.json
+┃ ┣ 📜 package-lock.json
+┃ ┣ 📜 postbuild.js
+┃ ┗ 📜 README.md
+┗ 📁 server
+  ┣ 📁 static
+  ┗ 📜 run.py
+</code></pre></div>
+<p>to</p>
+<div class="codehilite"><pre><span></span><code>📁 project-root
+┣ 📁 client
+┃ ┣ 📁 build
+┃ ┃ ┣ 📜 favicon.ico
+┃ ┃ ┣ 📜 index.html
+┃ ┃ ┣ 📜 manifest.json
+┃ ┃ ┗ 📜 .. and other build files
+┃ ┣ 📁 node_modules
+┃ ┣ 📁 public
+┃ ┣ 📁 src
+┃ ┣ 📜 .gitignore
+┃ ┣ 📜 package.json
+┃ ┣ 📜 package-lock.json
+┃ ┣ 📜 postbuild.js
+┃ ┗ 📜 README.md
+┗ 📁 server
+  ┣ 📁 static            &lt;-- build files copied to here
+  ┃ ┣ 📜 favicon.ico
+  ┃ ┣ 📜 index.html
+  ┃ ┣ 📜 manifest.json
+  ┃ ┗ 📜 .. and other build files
+  ┗ 📜 run.py
+</code></pre></div>
+<blockquote>
+<p>Don't worry the original index.html file being deleted as we'll now be using the one from the npm build that is associated with the React app.</p>
+</blockquote>
+<h2 id="running-the-server-after-a-build">
+<span style="position:relative"><a class="anchor" href="#running-the-server-after-a-build"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Running The Server After A Build</span></h2>
+<p>After you have run an <code>npm build</code> in the client folder and the build files have been copied to the server's static folder, we can now run the server again. After running the server and going to "/", you will notice that the index.html file has been served, but the console (when looking at devtools) shows many 404 requests.</p>
+<p>These 404 requests have occurred because we are directly serving index.html but the other required React app files are at an unexpected path. Looking at devtools for example, a request has been made for <code>http://127.0.0.1:5000/manifest.json</code> which returned a 404, however if you go to <code>http://127.0.0.1:5000/static/manifest.json</code> you will see the file is under the "static/" path.</p>
+<h3 id="the-last-piece-of-the-puzzle">
+<span style="position:relative"><a class="anchor" href="#the-last-piece-of-the-puzzle"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Last Piece Of The Puzzle</span></h3>
+<p>To get around this and make it a lot simpler for the client to request files, we can remove this "static/" part from the URL that the server is serving the static files from by changing <a href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.Flask.static_url_path">static_url_path</a>. </p>
+<p>The <code>static_url_path</code> property is a value that can be supplied on the Flask instance initialisation which corresponds with the <em>URL prefix that the static route will be accessible from</em>. Since we can see that this is currently "static/" (from looking at the manifest.json file before), we can change it to be nothing by setting <code>static_url_path=''</code>.</p>
+<p>To do this, update the Flask instance initialisation to:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">static_url_path</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+</code></pre></div>
+<p>Now if you restart the server and go to "/", you will see the React app fully loads and there are no 404s.</p>
+<p>This has been possible because Flask is matching any unknown routes with files in the static folder. Since we don't define routes for files like "manifest.json", these static files are returned.</p>
+<h2 id="usage-and-workflow">
+<span style="position:relative"><a class="anchor" href="#usage-and-workflow"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Usage And Workflow</span></h2>
+<h3 id="development">
+<span style="position:relative"><a class="anchor" href="#development"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Development</span></h3>
+<p>Develop your React app using <code>npm start</code> in the "client" folder and execute <code>npm build</code> whenever you want to put your current changes in the server. You can run <code>npm build</code> as many times as you want to update the app that the server serves.</p>
+<p>To run the Python server, execute <code>python run.py</code> in the "server" folder. The server will run forever but will need to be restarted it a new React app build is done.</p>
+<h3 id="development-using-an-api-in-the-python-server">
+<span style="position:relative"><a class="anchor" href="#development-using-an-api-in-the-python-server"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Development Using An API In The Python Server</span></h3>
+<p>If your Python server is the  React app, you can develop your React app using <code>npm start</code> and have your application point at the Python server that is being run with <code>python run.py</code>. You do not have to use the application served from the Python server to use the API.</p>
+<p>To identify what URL to request, I quite often use something like:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">api_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_API_ROOT</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_API_ROOT</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
+</code></pre></div>
+<p>This allows me to set the environment variable <code>REACT_APP_API_ROOT</code> to state the location of the Python server for development. When building the application, do not set <code>REACT_APP_API_ROOT</code> so then the application being served from the Python server will use <code>window.location.origin</code>.</p>
+<blockquote>
+<p>An example of a value to set <code>REACT_APP_API_ROOT</code> to is <code>http://127.0.0.1:5000</code> as that is where the Python server is.</p>
+</blockquote>
+<h3 id="deploying-release">
+<span style="position:relative"><a class="anchor" href="#deploying-release"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Deploying / Release</span></h3>
+<p>When deploying this server, you will need to run <code>npm install</code> and <code>npm build</code> in the "client" directory before running the server. </p>
+<p>When committing to source control, you do not need to commit the React app build files that have been copied (or the original build folder for that matter). You can make sure you have the following in a .gitignore at the root of the project (beside the "client" and "server" folders).</p>
+<div class="codehilite"><pre><span></span><code>server/static
+client/build
+client/node_modules
+</code></pre></div>
+<h2 id="final-code">
+<span style="position:relative"><a class="anchor" href="#final-code"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Final Code</span></h2>
+<p>Aside from the default create-react-app or your current React app, here are the final files from this tutorial:</p>
+<p><strong>client/postbuild.js</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">"fs"</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">targetSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'./build'</span><span class="p">;</span><span class="w"> </span><span class="c1">// Relative path to move files from</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">targetDestination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'../server/static'</span><span class="p">;</span><span class="w"> </span><span class="c1">// Relative path to move files to</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Remove directory recursively</span>
+<span class="cm"> * @param {string} dir_path</span>
+<span class="cm"> * @see https://stackoverflow.com/a/42505874</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">rimraf</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">entry_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">,</span><span class="w"> </span><span class="nx">entry</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">entry_path</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">rimraf</span><span class="p">(</span><span class="nx">entry_path</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">fs</span><span class="p">.</span><span class="nx">unlinkSync</span><span class="p">(</span><span class="nx">entry_path</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="nx">fs</span><span class="p">.</span><span class="nx">rmdirSync</span><span class="p">(</span><span class="nx">dir_path</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Copy a file</span>
+<span class="cm"> * @param {string} source</span>
+<span class="cm"> * @param {string} target</span>
+<span class="cm"> * @see https://stackoverflow.com/a/26038979</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">copyFileSync</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">targetFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">target</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// If target is a directory a new file with the same name will be created</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">target</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">target</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">targetFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">source</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">targetFile</span><span class="p">,</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">source</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Copy a folder recursively</span>
+<span class="cm"> * @param {string} source</span>
+<span class="cm"> * @param {string} target</span>
+<span class="cm"> * @see https://stackoverflow.com/a/26038979</span>
+<span class="cm"> */</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">copyFolderRecursiveSync</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">    </span><span class="c1">// Check if folder needs to be created or integrated</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">targetFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">basename</span><span class="p">(</span><span class="nx">source</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">targetFolder</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="nx">targetFolder</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Copy</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">source</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">source</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">files</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">curSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span><span class="p">(</span><span class="nx">curSource</span><span class="p">).</span><span class="nx">isDirectory</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">copyFolderRecursiveSync</span><span class="p">(</span><span class="nx">curSource</span><span class="p">,</span><span class="w"> </span><span class="nx">targetFolder</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">copyFileSync</span><span class="p">(</span><span class="nx">curSource</span><span class="p">,</span><span class="w"> </span><span class="nx">targetFolder</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Calculate absolute paths using the relative paths we defined at the top</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">sourceFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">targetSource</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">destinationFolder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">targetDestination</span><span class="p">);</span>
+
+<span class="c1">// Remove destination folder if it exists to clear it</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">destinationFolder</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rimraf</span><span class="p">(</span><span class="nx">destinationFolder</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Copy the build over</span>
+<span class="nx">copyFolderRecursiveSync</span><span class="p">(</span><span class="nx">sourceFolder</span><span class="p">,</span><span class="w"> </span><span class="nx">destinationFolder</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>client/package.json</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"@testing-library/jest-dom"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.2.4"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"@testing-library/react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^9.5.0"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"@testing-library/user-event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^7.2.1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^16.13.1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"react-dom"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^16.13.1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"react-scripts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.4.3"</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts start"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts build"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"postbuild"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node postbuild.js"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts test"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"eject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-scripts eject"</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"eslintConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"extends"</span><span class="p">:</span><span class="w"> </span><span class="s2">"react-app"</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"browserslist"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"production"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"&gt;0.2%"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"not dead"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"not op_mini all"</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"development"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"last 1 chrome version"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"last 1 firefox version"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"last 1 safari version"</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>This is modified from the default create-react-app package.json. The only addition is <code>"postbuild": "node postbuild.js",</code></p>
+</blockquote>
+<p><strong>server/run.py</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>  <span class="c1"># Import flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">static_url_path</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>  <span class="c1"># Setup the Flask app by creating an instance of Flask</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>  <span class="c1"># When someone goes to / on the server, execute the following function</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">send_static_file</span><span class="p">(</span><span class="s1">'index.html'</span><span class="p">)</span>  <span class="c1"># Return index.html from the static folder</span>
+
+<span class="c1"># You can add your other routes here if you want</span>
+<span class="c1"># You could event have other API routes that the React app requests</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>  <span class="c1"># If the script that was run is this script (we have not been imported)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># Start the server</span>
+</code></pre></div>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-take-a-screenshot-in-python-using-mss/" title="How To Take A Screenshot In Python Using MSS">
+<span>←</span>
+<span class="btn-content">How To Take A Screenshot In Python Using MSS</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-face-recognition-tutorial/" title="Python Face Recognition Tutorial">
+<span class="btn-content">Python Face Recognition Tutorial</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-serve-a-react-app-from-a-python-server/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-serve-a-react-app-from-a-python-server/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

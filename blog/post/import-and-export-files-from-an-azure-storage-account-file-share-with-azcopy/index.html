@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/import-and-export-files-from-an-azure-storage-account-file-share-with-azcopy/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Import and Export files from an Azure Storage Account File Share with AzCopy - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="In this tutorial we go over how to import and export files to and from an Azure Storage Account File Share using AzCopy - a command line utility offered by Microsoft" name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Import and Export files from an Azure Storage Account File Share with AzCopy" property="og:title"/>
+<meta content="In this tutorial we go over how to import and export files to and from an Azure Storage Account File Share using AzCopy - a command line utility offered by Microsoft" property="og:description"/>
+<meta content="/posts/import-and-export-files-from-an-azure-storage-account-file-share-with-azcopy/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/import-and-export-files-from-an-azure-storage-account-file-share-with-azcopy/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Import and Export files from an Azure Storage Account File Share with AzCopy</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2022">27 Sep 2022</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#azure">azure</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">3 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fimport-and-export-files-from-an-azure-storage-account-file-share-with-azcopy%2F"/>
+</div>
+<p class="lead">In this tutorial we go over how to import and export files to and from an Azure Storage Account File Share using AzCopy - a command line utility offered by Microsoft</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-azcopy-and-why-use-it">What is AzCopy and why use it?</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#obtaining-a-sas-token">Obtaining a SAS Token</a></li>
+<li><a href="#uploading-importing">Uploading / Importing</a></li>
+<li><a href="#downloading-exporting">Downloading / Exporting</a></li>
+<li><a href="#clearing-a-file-share">Clearing a File Share</a></li>
+</ul>
+</div>
+<h2 id="what-is-azcopy-and-why-use-it">
+<span style="position:relative"><a class="anchor" href="#what-is-azcopy-and-why-use-it"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is AzCopy and why use it?</span></h2>
+<p><a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10">AzCopy</a> is a command-line utility offered by Microsoft that you can use to copy blobs or files to or from a storage account. Rather than using SMB, AzCopy is a much faster method to transfer files between your local machine and an Azure Storage Account File Share.</p>
+<blockquote>
+<p>In this tutorial, we will only look at moving files between your local machine and an Azure Storage Account File Share. AzCopy also supports blobs and functions in a similar way but is not covered in this tutorial.</p>
+</blockquote>
+<h2 id="setup">
+<span style="position:relative"><a class="anchor" href="#setup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setup</span></h2>
+<p>Download AzCopy from <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10#download-azcopy">this Microsoft page</a>, when complete, unzip the .zip file to find azcopy.exe.</p>
+<p>All commands from here on in will use this azcopy.exe file. To use the file, you can:</p>
+<ul>
+<li>You can then move this file to a location that is in your PATH environment variable so that you can run it from anywhere</li>
+<li>Use an absolute reference to the exe, for example in PowerShell: <code>&amp; "C:/Users/USER/Downloads/azcopy_windows_amd64_10.16.0/azcopy.exe"</code></li>
+<li>Execute your commands from the directory that the azcopy.exe file is in</li>
+</ul>
+<h2 id="obtaining-a-sas-token">
+<span style="position:relative"><a class="anchor" href="#obtaining-a-sas-token"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Obtaining a SAS Token</span></h2>
+<p>To interact with a file share, you will need a SAS token for authorization.</p>
+<p>Generate a SAS token for the storage account by following these steps:</p>
+<ol>
+<li>Go to the storage account in Azure portal</li>
+<li>Go to "Shared access signature" under "Security + networking"</li>
+<li>"Allowed services" = "File" only</li>
+<li>"Allowed resource types" = all</li>
+<li>"Allowed permissions" = all</li>
+<li>"Start and expiry date/time" = leave start time, set end time to something close (1hr)</li>
+<li>"Allowed IP addresses" = your current IP address</li>
+<li>Click "Generate SAS and connection string"</li>
+<li>Copy the value for "SAS token" - COPY IT BEFORE NAVIGATING AWAY</li>
+</ol>
+<h2 id="uploading-importing">
+<span style="position:relative"><a class="anchor" href="#uploading-importing"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Uploading / Importing</span></h2>
+<p>To upload a single file, execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">single_file</span><span class="p">.</span><span class="n">txt</span> <span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;?&lt;sas_token&gt;"</span>
+<span class="c"># For example,</span>
+<span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">single_file</span><span class="p">.</span><span class="n">txt</span> <span class="s2">"https://mystorageaccount.file.core.windows.net/myfileshare?sv=2021-06-..."</span>
+</code></pre></div>
+<p>If you want to put it somewhere other than the root, use something like:</p>
+<div class="codehilite"><pre><span></span><code><span class="c"># Into a specific folder (destination/file/)</span>
+<span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">single_file</span><span class="p">.</span><span class="n">txt</span> <span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;/destination/file/?&lt;sas_token&gt;"</span>
+<span class="c"># Rename at the same time (specify file name - destination/file/new_file.txt)</span>
+<span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">single_file</span><span class="p">.</span><span class="n">txt</span> <span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;/destination/file/new_file.txt?&lt;sas_token&gt;"</span>
+</code></pre></div>
+<p>To upload a directory, execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">directory</span> <span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;?&lt;sas_token&gt;"</span> <span class="p">-</span><span class="n">-recursive</span>
+</code></pre></div>
+<blockquote>
+<p>This will copy the folder "directory" and all of its contents to the root of the file share - it will create a new "directory" folder. You can specify a destination folder by adding it to the end of the URL, for example: <code>https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;/destination/folder/?&lt;sas_token&gt;</code></p>
+</blockquote>
+<p>To upload all files in a directory (and not create a new directory), execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">directory</span><span class="p">/*</span> <span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;?&lt;sas_token&gt;"</span>
+</code></pre></div>
+<blockquote>
+<p>Note the <code>*</code> at the end of the source path. This will copy all files in the directory, but not the directory itself.</p>
+</blockquote>
+<h2 id="downloading-exporting">
+<span style="position:relative"><a class="anchor" href="#downloading-exporting"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Downloading / Exporting</span></h2>
+<p>To copy a single file, execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;/&lt;file_name&gt;?&lt;sas_token&gt;"</span> <span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">single_file</span><span class="p">.</span><span class="n">txt</span>
+<span class="c"># For example,</span>
+<span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;/path/to/file/filename.text?&lt;sas_token&gt;"</span> <span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">single_file</span><span class="p">.</span><span class="n">txt</span>
+</code></pre></div>
+<p>To copy a directory, execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;/&lt;directory_name&gt;?&lt;sas_token&gt;"</span> <span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">directory</span>
+</code></pre></div>
+<p>To copy all files in a directory, execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">copy </span><span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;/&lt;directory_name&gt;/?&lt;sas_token&gt;"</span> <span class="p">./</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">directory</span> <span class="p">-</span><span class="n">-recursive</span>
+</code></pre></div>
+<blockquote>
+<p>This will copy the directory into the directory you named locally - you can get around this by using <code>*</code> like above top copy all files but not the directory itself.</p>
+</blockquote>
+<h2 id="clearing-a-file-share">
+<span style="position:relative"><a class="anchor" href="#clearing-a-file-share"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Clearing a File Share</span></h2>
+<div class="codehilite"><pre><span></span><code><span class="n">azcopy</span><span class="p">.</span><span class="n">exe</span> <span class="nb">rm </span><span class="s2">"https://&lt;storage_account_name&gt;.file.core.windows.net/&lt;file_share_name&gt;?&lt;sas_token&gt;"</span> <span class="p">-</span><span class="n">-recursive</span>
+</code></pre></div>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-clone-or-export-an-azure-sql-database-using-sqlpackage/" title="How to Clone or Export an Azure SQL Database Using SqlPackage">
+<span>←</span>
+<span class="btn-content">How to Clone or Export an Azure SQL Database Using SqlPackage</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/c-sharp-class-to-record-coverter/" title="C# Class to Record Converter">
+<span class="btn-content">C# Class to Record Converter</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/import-and-export-files-from-an-azure-storage-account-file-share-with-azcopy/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/import-and-export-files-from-an-azure-storage-account-file-share-with-azcopy/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

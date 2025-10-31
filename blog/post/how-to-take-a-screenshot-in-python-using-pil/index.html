@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-take-a-screenshot-in-python-using-pil/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How To Take A Screenshot In Python Using PIL - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="In this tutorial, I will demonstrate how to take a screenshot using PIL in Python. Window, macOS and Linux are all supported." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How To Take A Screenshot In Python Using PIL" property="og:title"/>
+<meta content="In this tutorial, I will demonstrate how to take a screenshot using PIL in Python. Window, macOS and Linux are all supported." property="og:description"/>
+<meta content="/posts/how-to-take-a-screenshot-in-python-using-pil/screenshot-main-monitor.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-take-a-screenshot-in-python-using-pil/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How To Take A Screenshot In Python Using PIL</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2020">24 Aug 2020</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#screenshot">screenshot</a>
+<a class="badge badge-warning" href="/blog/tags/#pil">pil</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">4 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-take-a-screenshot-in-python-using-pil%2F"/>
+</div>
+<p class="lead">In this tutorial, I will demonstrate how to take a screenshot using PIL in Python. Window, macOS and Linux are all supported.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-pil">What Is PIL?</a></li>
+<li><a href="#installing-pil">Installing PIL</a><ul>
+<li><a href="#i-cant-import-pil">I Can't Import PIL</a></li>
+</ul>
+</li>
+<li><a href="#taking-a-screenshot">Taking A Screenshot</a><ul>
+<li><a href="#viewing-the-screenshot">Viewing The Screenshot</a></li>
+<li><a href="#saving-the-screenshot">Saving The Screenshot</a><ul>
+<li><a href="#saving-to-a-file-object">Saving To A File Object</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#taking-a-screenshot-of-a-different-display">Taking A Screenshot Of A Different Display</a><ul>
+<li><a href="#using-mss-to-screenshot-each-displays">Using MSS to Screenshot Each Displays</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="what-is-pil">
+<span style="position:relative"><a class="anchor" href="#what-is-pil"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What Is PIL?</span></h2>
+<p>PIL (Python Imaging Library / Pillow) is a Python library that adds support for opening, manipulating, and saving many different image file formats. It has a very friendly API with lots of help online including <a href="https://pillow.readthedocs.io/en/stable/index.html">good documentation</a>. </p>
+<p>PIL supports Windows macOS and Linux and supports many versions of Python; see the installation notes to identify which version of PIL you will need for the version of Python you are using. At the time of wiring this, PIL 7 has been released and supports Python 3.8 - 3.5.</p>
+<h2 id="installing-pil">
+<span style="position:relative"><a class="anchor" href="#installing-pil"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing PIL</span></h2>
+<p>To install PIL, execute the following in a terminal:</p>
+<div class="codehilite"><pre><span></span><code>python -m pip install Pillow
+</code></pre></div>
+<blockquote>
+<p>To install an older version of PIL, execute <code>python -m pip install pip=&lt;version&gt;</code> eg. <code>python -m pip install pip=7.2.0</code>. You can find older versions released in the <a href="https://pillow.readthedocs.io/en/stable/releasenotes/index.html">release notes</a>.</p>
+</blockquote>
+<p>To validate it was installed correctly, go to IDLE or a python shell and execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">PIL</span>
+</code></pre></div>
+<p>If no import error is raised, it was installed successfully.</p>
+<h3 id="i-cant-import-pil">
+<span style="position:relative"><a class="anchor" href="#i-cant-import-pil"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>I Can't Import PIL</span></h3>
+<p>Make sure you have executed the install command above; if you're not sure you have executed it already, it is safe to execute it a second time.</p>
+<p>If there were no errors when installing it and it says PIL is installed successfully, make sure you're 100% sure that you installed PIL in the same distribution of Python that you're trying to import it in. Go to my tutorial on <a href="https://nitratine.net/blog/post/how-to-manage-multiple-python-distributions/">How to Manage Multiple Python Distributions</a> if you're having some issues or are unsure about this.</p>
+<h2 id="taking-a-screenshot">
+<span style="position:relative"><a class="anchor" href="#taking-a-screenshot"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Taking A Screenshot</span></h2>
+<p>To take a screenshot, we first need to import the <a href="https://pillow.readthedocs.io/en/stable/reference/ImageGrab.html"><code>ImageGrab</code></a> module from PIL.</p>
+<p>After we have the <code>ImageGrab</code> module, we can call <code>.grab()</code> to take a screenshot</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageGrab</span>
+
+<span class="n">screenshot</span> <span class="o">=</span> <span class="n">ImageGrab</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>  <span class="c1"># Take the screenshot</span>
+</code></pre></div>
+<blockquote>
+<p>On Linux, you must be using PIL 7.1.0 or higher for this to work; <a href="https://pillow.readthedocs.io/en/stable/releasenotes/7.1.0.html#x11-imagegrab-grab">see release notes</a>.</p>
+</blockquote>
+<h3 id="viewing-the-screenshot">
+<span style="position:relative"><a class="anchor" href="#viewing-the-screenshot"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Viewing The Screenshot</span></h3>
+<p>To view the screenshot, we can call <code>.show()</code> on the returned <a href="https://pillow.readthedocs.io/en/stable/reference/Image.html">Image object</a>. For example, using the code from above:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageGrab</span>
+
+<span class="n">screenshot</span> <span class="o">=</span> <span class="n">ImageGrab</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
+<span class="n">screenshot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Show the image using the default image viewer</span>
+</code></pre></div>
+<p>Executing this will open the screenshot in your default image viewer. If you have more than one display, you will notice that this screenshot is only of the first display; I will expand on this further <a href="#taking-a-screenshot-of-a-different-display">below</a>.</p>
+<p>Here is an example of a screenshot I took:</p>
+<p><img alt="Screenshot Main Monitor" class="lazyload blur-up" data-src="/posts/how-to-take-a-screenshot-in-python-using-pil/screenshot-main-monitor.png" height="1080" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAIAAABGc1mbAAABKElEQVR4nAXBvU4CQRQG0O/O7AwggdXdAAUSOnwjMfEJKSGhRgnBmoICg4S4JkKiYEH2h5m913PoPTm1GoFSxKS989nfj7YwlajZrDELACJSRFfP5JxnEa2U1goAAO99EAQsUAQAAgjLJS1IRJy7jscTa023ex9FUbvd3mw2D4PBx25XrVY7nU4YNi/ZVZUlG2P7/b5z/uXldbFYpGk6m82+D4f5fD6dTpfLN4AgIGbO89wYQ0Tn8zkMQ+ec1hoAM2+321ardXt3m+U+KEsejUb7/b7X663X66fh8DNJVqtVGDbzvLDWxnF8Ov0+Dp9JRMqSj8dDyVyr3cRxRECSfBlrqpVKvV5P00wpajQawWQy1oqUsRpyLTL2DMBay6CSISLaaIgUWfEPYzegrvxbS2UAAAAASUVORK5CYII=" style="; aspect-ratio: 1920/1080; height: auto;" width="1920"/></p>
+<h3 id="saving-the-screenshot">
+<span style="position:relative"><a class="anchor" href="#saving-the-screenshot"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Saving The Screenshot</span></h3>
+<p>Saving images in PIL is very easy, calling <code>.save()</code> on the returned Image object will allow us to save the image into a file. </p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageGrab</span>
+
+<span class="n">filepath</span> <span class="o">=</span> <span class="s1">'my_image.png'</span>
+
+<span class="n">screenshot</span> <span class="o">=</span> <span class="n">ImageGrab</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
+<span class="n">screenshot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">'PNG'</span><span class="p">)</span>  <span class="c1"># Equivalent to `screenshot.save(filepath, format='PNG')`</span>
+</code></pre></div>
+<p>Now if you go and open the file <code>filepath</code> ("my_image.png" in the current working directory for this example), you will see the screenshot has been saved.</p>
+<blockquote>
+<p>If you provide a file path with an extension of a supported image format, you can omit the format.</p>
+</blockquote>
+<h4 id="saving-to-a-file-object">
+<span style="position:relative"><a class="anchor" href="#saving-to-a-file-object"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Saving To A File Object</span></h4>
+<p>If you have a file already open in write mode or want to save the image to a file object, you can pass that instead of the filename. For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageGrab</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'my_file.png'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span>
+
+<span class="n">screenshot</span> <span class="o">=</span> <span class="n">ImageGrab</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
+<span class="n">screenshot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">'PNG'</span><span class="p">)</span>  <span class="c1"># Save the image to the file object as a PNG</span>
+
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># Make sure to close the file when you're done</span>
+</code></pre></div>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageGrab</span>
+
+<span class="n">bytes_io</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+
+<span class="n">screenshot</span> <span class="o">=</span> <span class="n">ImageGrab</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
+<span class="n">screenshot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">bytes_io</span><span class="p">,</span> <span class="s1">'PNG'</span><span class="p">)</span>  <span class="c1"># Save the image to bytes_io as a PNG</span>
+
+<span class="c1"># Do what you want with the bytes_io object</span>
+</code></pre></div>
+<h2 id="taking-a-screenshot-of-a-different-display">
+<span style="position:relative"><a class="anchor" href="#taking-a-screenshot-of-a-different-display"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Taking A Screenshot Of A Different Display</span></h2>
+<p>Back when we took a screenshot using <code>ImageGrab.grab()</code>, it only captured the main display. To take a screenshot of all displays, we can pass <code>all_screens=True</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageGrab</span>
+
+<span class="n">screenshot</span> <span class="o">=</span> <span class="n">ImageGrab</span><span class="o">.</span><span class="n">grab</span><span class="p">(</span><span class="n">all_screens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Take a screenshot that includes all screens</span>
+</code></pre></div>
+<blockquote>
+<p>Please note that <code>all_screens</code> is currently only supported in Windows</p>
+</blockquote>
+<p>Now when you call <code>screenshot.show()</code>, you will see that multiple monitors are now displayed. Here is an example of my monitors:</p>
+<p><img alt="Screenshot All Monitors" class="lazyload blur-up" data-src="/posts/how-to-take-a-screenshot-in-python-using-pil/screenshot-all-monitors.png" height="1080" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAFCAIAAAAVLyF7AAAA2UlEQVR4nAXBu07DMBQAUF/bSZqH0ySt1CBloD+BEN/CUiQY+E+60oXuqHgIAlehoSbXri/nwM3tXSwFYyxcvIxiRHx4en7c3F+IOZw8TllRcmCB2IQI7wedzhICPo0Dj5I0S8ui+BmG192uba+aReMQjTFd1y2WS2l/T+brUyllrT0eD6tVW1cVAGRZZsy3lMJ73/d9CEGVpXTOExEXgojyPD/bM6J/2++NMdfr9WkctdZNXWv9oVQJ2+0LMXITCi6IMRdCNZ8nSfxnz1JIDoDORfEMgAkh/wE/RW9GXZCwhwAAAABJRU5ErkJggg==" style="; aspect-ratio: 3360/1080; height: auto;" width="3360"/></p>
+<p>Now that you have this larger image, you can crop it using other methods in PIL: <a href="https://stackoverflow.com/a/58350508">How to crop an image using PIL</a>.</p>
+<h3 id="using-mss-to-screenshot-each-displays">
+<span style="position:relative"><a class="anchor" href="#using-mss-to-screenshot-each-displays"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Using MSS to Screenshot Each Displays</span></h3>
+<p>I also have a tutorial <a href="/blog/post/how-to-take-a-screenshot-in-python-using-mss/">How To Take A Screenshot In Python Using MSS</a> which goes over how to take screenshots using the <a href="https://python-mss.readthedocs.io/index.html">Python MSS library</a>. The tutorial is very similar, however MSS has better support for screenshots of different individual displays (including macOS and Windows).</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-beautiful-soup-basics-tutorial/" title="Python Beautiful Soup Basics Tutorial">
+<span>←</span>
+<span class="btn-content">Python Beautiful Soup Basics Tutorial</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-take-a-screenshot-in-python-using-mss/" title="How To Take A Screenshot In Python Using MSS">
+<span class="btn-content">How To Take A Screenshot In Python Using MSS</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-take-a-screenshot-in-python-using-pil/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-take-a-screenshot-in-python-using-pil/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

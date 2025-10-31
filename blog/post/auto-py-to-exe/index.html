@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/auto-py-to-exe/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Auto Py To Exe - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller. The whole idea seems automatic as it cleans up after itself." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Auto Py To Exe" property="og:title"/>
+<meta content="This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller. The whole idea seems automatic as it cleans up after itself." property="og:description"/>
+<meta content="/posts/auto-py-to-exe/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/auto-py-to-exe/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Auto Py To Exe</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">10 Mar 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Projects">Projects</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#pyinstaller">pyinstaller</a>
+<a class="badge badge-warning" href="/blog/tags/#eel">eel</a>
+<a class="badge badge-warning" href="/blog/tags/#gui">gui</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">4 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fauto-py-to-exe%2F"/>
+</div>
+<p class="lead">This project allows you to convert python scripts to executables with a simple interface. The interface uses chromes app mode and lists all possible flags for pyinstaller. The whole idea seems automatic as it cleans up after itself.</p>
+<hr class="mt-3 mb-0"/>
+<div class="github-summary py-3 d-block text-center">
+<a class="repo-name stretched-link" href="https://github.com/brentvollebregt/auto-py-to-exe">
+<img alt="GitHub Icon" src="/static/img/github-icon.png">
+<span class="ml-2">brentvollebregt/auto-py-to-exe</span>
+</img></a>
+<div class="repo-stats">
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/brentvollebregt/auto-py-to-exe?style=social"/>
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/brentvollebregt/auto-py-to-exe?style=social"/>
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/brentvollebregt/auto-py-to-exe"/>
+</div>
+</div>
+<hr class="my-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-this">What is this?</a></li>
+<li><a href="#demo">Demo</a></li>
+<li><a href="#getting-started">Getting Started</a><ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installing-via-pypi">Installing via PyPI</a></li>
+<li><a href="#installing-via-github">Installing via GitHub</a></li>
+</ul>
+</li>
+<li><a href="#using-the-application">Using the Application</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#video">Video</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#issues-using-the-tool">Issues Using the Tool</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+<li><a href="#response">Response</a></li>
+</ul>
+</div>
+<h2 id="what-is-this">
+<span style="position:relative"><a class="anchor" href="#what-is-this"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is this?</span></h2>
+<p>This application displays a simple interface that allows you to convert .py to .exe easily. By just selecting the file, if you want it to convert to onefile and if you want a console, you will only need to press convert and wait for the script to do the rest.</p>
+<div style="text-align: center">
+<p><img alt="Empty interface" class="lazyload blur-up" data-src="/posts/auto-py-to-exe/feature.png" height="364" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAABpklEQVR4nH2QzW4TQRCEv57pnd1Zb4yMRHLmKXj/K2+AFCSQuCAixRJs7N2Z6ebghODEUNfq6vqRT7dfPEigT4p2HScI4Lg7L2FmmDlmDR3GkalvhJiRx4O1FDabDcPQ4+Y8EU+8SKDWgvZ+5PCrILGxriu73Y430wQiWG2A/0liLhgg4rRmaNaeRmQcM74ZUVWiG25Aq2c1jtXZrw2APnXo/dqY5wcmUXabzFIrQ5fRGF91Tkl4N4KI0GpFpRsYtx0NoZiRVIkx4qdyrwaTv7qrtJXD/AAi+CL0XaTWCRFozUipJ+fh4vJaQ0+eFBDebkdyCtTanp1ELgoB1CXSeSGFRvBErZEYIyKCXIh9Jj7xxjzPLKUgCEMe6KIy5Iyq/sfZwRGiKjEo1zfXBBHMDOCfQgANj8mWtdAPI7U2RCCEcNrVHef8gQDuIPu7716WI6nvKaVgrTFtr8hXWygFOgX0hafgdUU/3zvf9jAkozUIoUPuDsSwsJRCSh0xRpo9u1ZzbqaA3v448PHrT1I85TeHMUViEKo5gtPMWYqBQACO1fnw/orfsJTKJbW3jBkAAAAASUVORK5CYII=" style="; aspect-ratio: 360/364; height: auto;" width="360"/></p>
+<p>The script is built using <a href="https://github.com/ChrisKnott/Eel">Eel</a> and uses <a href="https://pyinstaller.readthedocs.io/en/stable/index.html">PyInstaller</a> to convert the script</p>
+</div>
+<div style="text-align: center">
+<a href="https://pypi.org/project/auto-py-to-exe/"><img alt="PyPI Version" class="mt-1" src="https://img.shields.io/pypi/v/auto-py-to-exe.svg" style="display: inline;"/></a>
+<a href="https://pypi.org/project/auto-py-to-exe/"><img alt="PyPI Supported Versions" class="mt-1" src="https://img.shields.io/pypi/pyversions/auto-py-to-exe.svg" style="display: inline;"/></a>
+<a href="https://pypi.org/project/auto-py-to-exe/"><img alt="License" class="mt-1" src="https://img.shields.io/pypi/l/auto-py-to-exe.svg" style="display: inline;"/></a>
+<a href="https://pepy.tech/project/auto-py-to-exe"><img alt="Downloads" class="mt-1" src="https://pepy.tech/badge/auto-py-to-exe" style="display: inline;"/></a>
+<a href="https://pepy.tech/project/auto-py-to-exe"><img alt="Downloads Per Month" class="mt-1" src="https://img.shields.io/pypi/dm/auto-py-to-exe.svg" style="display: inline;"/></a>
+<a href="https://pyinstaller.readthedocs.io/en/stable/requirements.html"><img alt="Supported Platforms" class="mt-1" src="https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey"/></a>
+</div>
+<h2 id="demo">
+<span style="position:relative"><a class="anchor" href="#demo"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Demo</span></h2>
+<p><img alt="auto-py-to-exe Demo" class="lazyload blur-up" data-src="/posts/auto-py-to-exe/auto-py-to-exe-demo.gif" height="661" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAMAAAD+iNU2AAADAFBMVEUAAAAAAQ4AAyQCBjQMHoENDSgNVZwOdr0PabMSXKYZfsoaVZckNn4nDRcnGnwpgNkxV402gOU8gts+T34/hcxACwlCVIBCWYlCh8RDGm9DVYFEVoRFWYhFisVFisZGjMZGjchIIGFIlNBJJ0VLKixMmtdQod9Sq+dTpeRUYItVYI5VouRWBQNXn9xZXYdcmdNgcKllJBZllMxoDAJoZGZqXm1tkMZugsVvZmJvg8dwhMdwhMhxjcVyh8lzHQV0iMl0isV2dnV5amZ5dnV7eHV9dHN9qNR+bW5+rdiBwfWCueiCxPmDstyGptGMf3WMhX2MptCOi4aOpM2Ops+QkZCQw/uTnMSUnLCVmJmYmqSaUxycVBWc1/mdwfudwfyewfOe3Pufwuyf0vigVwuj3/ulWw2mxe2oTyaozfWo4vysyPKs5futyPOuZg+uyfSvyvSz6fu3cwy7eQa8xM297vnAfgPAwcfBx9DDgATD9frEwL/FggvGytDJ8/nLiR/MzdDP6vfQom/Q0NHRwLDR1trSnmPS0tPS0tTT2uDW6PXXqHHZ2tza5/jbnjLboVbc5/vdrHTd2trd6P7ewZ/f6vzf+vrhplDh2djh+Pri+/vj6/jj9fnksXPlwpfl2dPl6/Pm+/zn8PXo7fLp7fHttkftuXXt+vvu2MPvxYzyvkHzQzbzwXrzxYfz+vr2xnz2xoH22bT3+vr47t/52q357dn57dv579b58OD5+PH5+PP5+vr626X63aP63qP689L69eH698n6+OL6+O76+PT6+eX6+/v74KX75Kr76bD777j79c37+ev7+vf89MD8+MX8/Pn9/fv+/vz+/v3+/v4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACflS7aAAAATklEQVR4nGOwNg/Ii4uzBoE4TSkphqMoQAWJfxkIdqHJH2W4jATk5OQw5IFibW1IfKzybXAlDHJo8ujqgYgBla/DjK5+LQ73AQHIPmQAADnUnPXy5QjpAAAAAElFTkSuQmCC" style="; aspect-ratio: 630/661; height: auto;" width="630"/></p>
+<h2 id="getting-started">
+<span style="position:relative"><a class="anchor" href="#getting-started"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Started</span></h2>
+<h3 id="prerequisites">
+<span style="position:relative"><a class="anchor" href="#prerequisites"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Prerequisites</span></h3>
+<ul>
+<li>Python: 3.6-3.12</li>
+</ul>
+<p><em>To have the interface displayed in the images, you will need Chrome. If Chrome is not installed or <code>--no-chrome</code> is passed, the default browser will be used.</em></p>
+<h3 id="installing-via-pypi">
+<span style="position:relative"><a class="anchor" href="#installing-via-pypi"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing via <a href="https://pypi.org/project/auto-py-to-exe/">PyPI</a></span></h3>
+<p>You can install this project using PyPI:</p>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>auto-py-to-exe
+</code></pre></div>
+<p>Then to run it, execute the following in the terminal:</p>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>auto-py-to-exe
+</code></pre></div>
+<blockquote>
+<p>If you have more than one version of Python installed, you can use <code>python -m auto_py_to_exe</code> instead of <code>auto-py-to-exe</code>.</p>
+</blockquote>
+<h3 id="installing-via-github">
+<span style="position:relative"><a class="anchor" href="#installing-via-github"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing via <a href="https://github.com/brentvollebregt/auto-py-to-exe">GitHub</a></span></h3>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/brentvollebregt/auto-py-to-exe.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>auto-py-to-exe
+$<span class="w"> </span>python<span class="w"> </span>setup.py<span class="w"> </span>install
+</code></pre></div>
+<p>Then to run it, execute the following in the terminal:</p>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>auto-py-to-exe
+</code></pre></div>
+<h2 id="using-the-application">
+<span style="position:relative"><a class="anchor" href="#using-the-application"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Using the Application</span></h2>
+<ol>
+<li>Select your script location (paste in or use a file explorer)</li>
+<li>The outline will become blue if the file exists</li>
+<li>Select other options and add things like an icon or other files</li>
+<li>Click the big blue button at the bottom to convert</li>
+<li>Find your converted files in /output when completed</li>
+</ol>
+<p><em>Easy.</em></p>
+<h2 id="examples">
+<span style="position:relative"><a class="anchor" href="#examples"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Examples</span></h2>
+<p>The <a href="https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/">examples/</a> directory offers some examples of how to write your scripts and package them with auto-py-to-exe.</p>
+<ul>
+<li><a href="https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/1-basic/readme.md">Basic (console application)</a></li>
+<li><a href="https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/2-no-console/readme.md">No Console (as typically desired for GUI-based applications)</a></li>
+<li><a href="https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/3-images-and-other-non-py-files/readme.md">Images and other non-.py files (static files to be included)</a></li>
+<li><a href="https://github.com/brentvollebregt/auto-py-to-exe/tree/master/examples/4-persistent-data/readme.md">Persistent data (like databases)</a></li>
+</ul>
+<h2 id="video">
+<span style="position:relative"><a class="anchor" href="#video"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Video</span></h2>
+<p>If you need something visual to help you get started, <a href="https://youtu.be/OZSZHmWSOeM">I made a video for the original release of this project</a>; some things may be different but the same concepts still apply.</p>
+<h2 id="contributing">
+<span style="position:relative"><a class="anchor" href="#contributing"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Contributing</span></h2>
+<p>Check out <a href="https://github.com/brentvollebregt/auto-py-to-exe/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> to see guidelines on how to contribute. This outlines what to do if you have a new feature, a change, translation update or have found an issue with auto-py-to-exe.</p>
+<h2 id="issues-using-the-tool">
+<span style="position:relative"><a class="anchor" href="#issues-using-the-tool"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Issues Using the Tool</span></h2>
+<p>If you're having issues with the packaged executable or using this tool in general, I recommend you read <a href="https://nitratine.net/blog/post/issues-when-using-auto-py-to-exe/?utm_source=auto_py_to_exe&amp;utm_medium=readme_link&amp;utm_campaign=auto_py_to_exe_help">my blog post on common issues when using auto-py-to-exe</a>. This post covers things you should know about packaging Python scripts and fixes for things that commonly go wrong.</p>
+<p>If you believe you've found an issue with this tool, please follow the <a href="https://github.com/brentvollebregt/auto-py-to-exe/blob/master/CONTRIBUTING.md#reporting-an-issue">"Reporting an Issue" section in CONTRIBUTING.md</a>.</p>
+<h2 id="screenshots">
+<span style="position:relative"><a class="anchor" href="#screenshots"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Screenshots</span></h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 6px">
+<p><a href="/posts/auto-py-to-exe/empty-interface.png"><img alt="Empty interface" class="lazyload blur-up" data-src="/posts/auto-py-to-exe/empty-interface.png" height="643" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAABrElEQVR4nG2SyW5bMQxFDyVqsP1ekKBI0GU/o/+/6ycUSIEsuuqApkDt2k8S2YWHJE3uhhKkqwseSj7fP3iQQM5KSomjBHDcnRdyMDfMHLOB1s2aKQ9iXCPiuENrjc1mQ6kFt6cHRM410HtDKwf22wbBaG3h+uaGq2kCEayPF8HmYICIM4ahNRYMZbWqOGtUlQi4GdjZfGxj353HQweg5IQ+LoPtdsfkkeupcmiNqoqq4vilV4CchNtVQUQYvaOSCps5MYA2jJyUGOPpvvC8nJfnrcpY2G53IAEWIaVI33QEYYxBKYVa62vygPZQWU2KI7yb19Qc6M9ABQlvGgHUCGSMEgzxTu+RGCMigoi8abqYg4C4s93tOCwNEaHWimqk1hVR4wXYK7MD7hDjMfHu9g4Jgpm9IP128ul8WRq5rGljIAYhhCNX96eRnSSnQPn985v3ZU/Khd4bvQ/mq5k6zdAbaALif5kCY0G//HK+PkLJAxsgIRF+/CWEPUtr5JQJMTLMj/MV6MN5P0f0/vuOTw9/KCcu7rDKEQ1CM0fYYmbsux0/iMChOx8/zPwDr0vK+jsf1lwAAAAASUVORK5CYII=" style="; aspect-ratio: 636/643; height: auto;" width="636"/></a></p>
+<p><a href="/posts/auto-py-to-exe/filled-out.png"><img alt="Filled out" class="lazyload blur-up" data-src="/posts/auto-py-to-exe/filled-out.png" height="643" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAB8klEQVR4nG2SwW7dRgxFDzkcjfQkGXCLBv3/HyqCfkSCJPazY/eNnjRDZiGjq3BzVyQP76X88/nfaK0zjiMgLMvCOBbcnd9VRODuHMeBfH+6Rq0bouC9M88LyYxshpkR/3fBbW/ct0oeCiUF2tvOsVdKzqzrA707OSmWFAlHcZRAJbhk5WEeWcfMsd+xyzSxzBeODk9vlSEbf44FJQA5MePcn0ywOImuz3fsfr9zu90QUfrR2Zvx8qog0LszlsI8FSKCCD40EBGslJFpnAiB/vNOROdn3REReg9cMsvEySEA8qFgzxukdmMw+GOdGYYBd0dEQEBFaB4E0JsT4ThCALYMyhFKd2fbNmq9kZJhlpim6bwb6B7Uo7NvG5eLEhHY2+7QnO39lTKOIEopQmuN7kEpI92DpKDRmaeRYczUd8EeJ+U/KfjlgZTtNE4EScaPl1ceHzOOYAp1OzCDePlGxI5cX9/ivlVUz1hUFUHQlM7PAMyM1hoqyjhNDOF8uz6fhuXmxFFJNvDp018kVTwckN++J0MhRNGsICq07gzDQADNHdCPbE7DIsADPILwQABbpFKPGw/LhbZXvn95Z11XlnWlt07Sc4jmdJKEgAQqgn1963x5agxDpXcnpUR/vgJXIqCUwn4cLPNMzhmA49j5e1F+AQwnGNiUnhlGAAAAAElFTkSuQmCC" style="; aspect-ratio: 636/643; height: auto;" width="636"/></a></p>
+<p><a href="/posts/auto-py-to-exe/converting.png"><img alt="Converting" class="lazyload blur-up" data-src="/posts/auto-py-to-exe/converting.png" height="643" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAB3UlEQVR4nGWSy24bMQxFDyXOaGR7jKYflP//gGTRTbpOghgIkno8epBdTGLU6AUESZAA8h5eefj15EMQQhBSmhiGAXfD3QFhk/Mts+2t1oq8vL76ZVlQVcwMM2OeZ+Z5pveOiFzXv1rXFY0SiDESNeLNGXVkWRZKWTFzUkq01tgfDgyqiAjrulJKQVtvrOvKPM/knHH3a5XvfbPA9TxNEyKC9tbotfH2diKlEeuGjgMxhJuWa6kM48Bhf6C1hllHXl9evNYKX581RlrvHPZ7zJwYA601QggbP9+giQhq5rTeSEOit04YBn4cDsQYsd5BhJzzf8CWZUFrLVwuFxABhH4+czqd2O12hBCYponeOq03RIRBFXPfaOecMbcNhnVKraQ0cZyPuDtRIyAcj8ebyu/v72gphctlJe8ztXVcBAQ+/nxuFs3Z7Xes6+ZdVUkpfdHuhggEESAQxGitUUthHEbuft6RcwZAhwHc6b1/35XlAmZO2IaL46gqUSPn85llWeitX2c/5Ql3Rx1IKTGlxMVBQiAEIecdgyruW8pC2JJ4Q3tZFp6fnxERUkqMY0ICfH584l8tqioxxmvSzAxVRZ9+P/H48Mg4jtf4hRiZ0ggItVZKKTfxVFXu7+/5C9FnEPHqWUmLAAAAAElFTkSuQmCC" style="; aspect-ratio: 636/643; height: auto;" width="636"/></a></p>
+<p><a href="/posts/auto-py-to-exe/completed.png"><img alt="Completed" class="lazyload blur-up" data-src="/posts/auto-py-to-exe/completed.png" height="643" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAB1UlEQVR4nE2T204UQRCGvzpM98IKognBF/GBfFOvfAWjXnhpAoYsJMyy091VXswIVFJJH5Kuv77+S77/+JWTT0ylUEohIgEQgcxcExAEgIhBRND7wD9eXdJ6Y3JljAU3Q1UwNUYEpVRaa7g5S28oTmZSyjt8RPB8PDJK4fn0zK7uqGVHRMfcEV4futjvQYTMpPeOr2JAVVFVZDtIEhXhdDoRESytYaZkJGN0pjLhZCIiQAJJbJcIPBwfKFPhbLej7ipmhhWj1kuO84xnJq8hiMgGLpj2BTfbQCVmEBGrmkw8gcxAEBQlR/D09LRWMUNFyQhEBZ/OyAhyU+skxLYxMTICq75VCx4fD5DCzacbaikvGud5RkVARDdIGzwRIhNVAYQE3B0ReUkAf9PwZoz/ayETVAVRxbbe34ZnJjEGYwyWdsLMiVi/aYxBAsf5mcPhgJkxeieB1hpye3uXrS9MpbAsDRVBVYkRmDu991VRJOf7c2qtkMn9/T1eXJARnBfn+v3F5qAgc/W2mQJCjEBLBVZPmCn+d4bff2bcjtRSmKaJNgLzipusg7K5bix3RCZmzvVZ4N9+P/L158yH/YRygkyOLYiEfTVOPaiu24StUJcQvny+4h8R8g/WdH0twwAAAABJRU5ErkJggg==" style="; aspect-ratio: 636/643; height: auto;" width="636"/></a></p>
+</div>
+<h2 id="response">
+<span style="position:relative"><a class="anchor" href="#response"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Response</span></h2>
+<p>I really wanted to get this project out there so I released a YouTube video demonstrating how to set up and use the interface (video above). A day later I made a post in the /r/Python subreddit titled <a href="https://www.reddit.com/r/Python/comments/84kwb8/auto_py_to_exe_is_complete/">"Auto Py to Exe is Complete"</a>.
+To my surprise, the next morning (about 7 hours) I had more than 300 upvotes which to me was a big thing. I had many replies which I took time to read and reply to. About 44 hours later the post finally lost its top place on the subreddit and the post is sitting at 454 points with 12.1k views and 75 comments.
+I can't believe how big this got and it means a lot to me when I saw people thanking me for the project. When a couple of issues came to the Github repo I realised people do care about this and I was quick to fix these.
+Once again, thank you for the support; I loved making this project.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-auto-clicker/" title="Python Auto Clicker">
+<span>←</span>
+<span class="btn-content">Python Auto Clicker</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/my-desktop-backgrounds/" title="My Desktop Backgrounds">
+<span class="btn-content">My Desktop Backgrounds</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/auto-py-to-exe/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/auto-py-to-exe/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

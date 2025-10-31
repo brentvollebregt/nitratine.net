@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-clean-a-twitter-account-with-jquery/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How to Clean a Twitter Account with jQuery - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This article covers how I used jQuery on twitter.com to delete all my tweets and remove all my likes and accounts I follow." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How to Clean a Twitter Account with jQuery" property="og:title"/>
+<meta content="This article covers how I used jQuery on twitter.com to delete all my tweets and remove all my likes and accounts I follow." property="og:description"/>
+<meta content="/posts/how-to-clean-a-twitter-account-with-jquery/followers.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-clean-a-twitter-account-with-jquery/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How to Clean a Twitter Account with jQuery</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">12 Aug 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#twitter">twitter</a>
+<a class="badge badge-warning" href="/blog/tags/#javascript">javascript</a>
+<a class="badge badge-warning" href="/blog/tags/#jquery">jquery</a>
+<a class="badge badge-warning" href="/blog/tags/#tweepy">tweepy</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">7 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-clean-a-twitter-account-with-jquery%2F"/>
+</div>
+<p class="lead">This article covers how I used jQuery on twitter.com to delete all my tweets and remove all my likes and accounts I follow.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#unfollowing-accounts">Unfollowing Accounts</a></li>
+<li><a href="#this-didnt-unfollow-everyone">This Didn't Unfollow Everyone?</a></li>
+<li><a href="#unlike-all-of-my-liked-tweets">Unlike All of my Liked Tweets</a></li>
+<li><a href="#removing-retweets">Removing Retweets</a></li>
+<li><a href="#trying-to-access-tweets-over-twitters-api">Trying to Access Tweets Over Twitters API</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</div>
+<p>I have seen many people report about how bulk twitter deleters can 'break' an account; this has also occurred to me. At the end of this, I also provide a method to help with deleting broken tweets that you cannot delete/un-retweet.</p>
+<h2 id="unfollowing-accounts">
+<span style="position:relative"><a class="anchor" href="#unfollowing-accounts"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Unfollowing Accounts</span></h2>
+<p>I first wanted to remove all the users my <a href="/blog/post/python-retweet-bot/">bot</a> followed. Going into the <a href="https://twitter.com/following">"Following"</a> tab in twitter shows everyone you have followed with blue buttons that go red and change text to "Unfollow" when you hover on them.</p>
+<p><img alt="Unfollow Button" class="lazyload blur-up" data-src="/posts/how-to-clean-a-twitter-account-with-jquery/unfollow-btn.png" height="289" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAHCAMAAAAPmYwrAAACylBMVEX////IyMfMzMzFxcTGxsbLyskKCw3m6++kAClgitnQzs5bWlonRZ0vUarLx8UCAgLFw8Gwrazd2Na9uLRSUVG5tbPW09K5uLff2tmysK7T0NDFwb/Dv70jQZK1s7FeXF4qSqHPycfJxcOtqqm/u7jZ1tcsTaXBvrooSpq/vr7CwcG7urm9vLvQzMpMQkdGOkImQpshGxuqp6YkPpj//+ijoJ/a1dNMSknb0ctWVFXf1c+pXA7i2NEXExNBMDsmIiSJyf8iQIzi3N0JBgbWz8ro4N7z6OKnpKP//8w6KTNOQz7l3Nf/yYvOx8IjOpXt4+A4Nzjt4NX89Ojo//9IOjcwVqNSSE3Uy8Wp5P/oqlv57uPJ//9UmfEhOJD+//NXSkUKh8ny5NdEQkJsZmXZz9YKXaovLC/Sx9BcUFItU51ZqunLwr7Kwcjp2tBiT0nCx8pDMC/Ihw7/5Kr+//syV60dJop4cHP36tz9++yempvh0sdeTDqLh4bf0N4jNZW/CiKJC1ttV0RBdMUKC4uGen6wlFiVkZF5ZFHIv7dpWFJuWC/FyNWghVqTeU9ndH81XLPr7OvWwtcKC1vAysGuFzUgMY6JCw7GpFjn0+YrTJA6Y7o/a8Ca0/+0DCT69/g1SYK56v83KhuCakBZCw7Xt1rM0NlVZadmdp5ZC4uphTSIcVy7wtTVqC08VJT/1Ki9lz3dxuC6pm61i394gKgbLE4eOmpaTSjpy2LKzvGZcZXEcn7hwTK3MUmBZydwisKUdypOQiX/6sKzV2CIm7TXq63TvLrovZSDoOXSR1SAuuqeq8HNipFPXIiqt9DNo3xpo9esr+3x54Dc2vzb9P+PocVhyfjTvHXWmaKBT0iYBY/ncSliermYyL28itngvMHz32+jN02hotlZC1tgiuzl03Kz2fnx8ZXJoZikccjL+uBcqbyu3svNx43NAIooiHDgAAAAQElEQVR4nGMwtlxeHC6qZGzJVBwurMSgxt1VI6Ekp2a5P0pCSYeBiYUBBFiZGYgAPgwMhdPYGNgKGbLYJqFLAgC27wnPybc92QAAAABJRU5ErkJggg==" style="; aspect-ratio: 590/289; height: auto;" width="590"/></p>
+<p>My idea for this was to simulate clicking each of these buttons for every user I followed. Thankfully, Twitter uses jQuery so I could use some very simple methods for finding each tile and then clicking on them using <code>.click()</code>.</p>
+<p>Looking at the source, all these tiles were in a div with a class of 'GridTimeline-items' which was the only tag with this class. A simple call of <code>$.find('.GridTimeline-items')[0]</code> allowed me to get this. If I didn't get only the tiles in this class, I would be finding follow buttons on the left which when clicked would follow them.</p>
+<p>Next I needed to get all the buttons which all had a class of 'unfollow-text'. Once again I could call <code>.find('.unfollow-text')</code> to get all the instances of the class. So to find all the buttons, I can concatenate them to form <code>$($.find('.GridTimeline-items')[0]).find('.unfollow-text')</code> which will return all the buttons in a list that relate to all the users I follow.</p>
+<p><img alt="Unfollow Button" class="lazyload blur-up" data-src="/posts/how-to-clean-a-twitter-account-with-jquery/followers.png" height="566" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAMAAADgW+cVAAADAFBMVEViTRezkw28u7ro3NgQJUyx2OtWGA3+563wzwybalaxzNWPkJHy06gxLTDQrgoGBQb/zoycDBVMbdZubG6VcAMQFYzJxrz//+7t///HvLxLiiGSco8hYAcjQperqqmMx8jRA2SykYfR2fNtdITVt9n71eaCuuro7NwYS3hILEZvjbBjjN6SqrDvrVqzuc6thtcrT6dXVlfa6+zXzsvOhAjrV57PspTeFxhxuvNObJDTqlCsp5a46upsp9lYre/87+pOnO7x3HHt1k5viJVKjN+vkUyJlq6yjXRSZ3Xb1syKCVmRs8tCPj5Pc6lZCYTNp3wWFCr669zWRGDNztjmvZFpU0jX/f/N1tp0akrby9j16m/KsCopQ1LJk9nvWSVvrK5vV2zvtuuMathMWGvQmU/Wy3DZz5EwT2qUjMfO//+17//06Y+xy7FjjPCKhXqHWATv7/dsdaSThE8IhM6qt7nI7v7lvAvtnC/spzS4rHCHbiu2tbGovOwIWq2b1v8rDQj//84tJhRWRkOjfgTb7Pn//teskKu2razptNXnjUrn7sDd6NycjuVj1v+t5+fcwysiGyWzqU/XwlDNiJCVxe7oyjCHUTRXZVOorLz+7/n/78Ov6NrhxAybn5xJT4znrXXLmjEIe71WU0WHDZMVR1kKNwLTla5/oOGtWgj34lJcga9ziuBGSE/K6vHM18sXIzKotqs2X7jVr+FYWqxUSFRFVFiMzv9sS4u5qrvr+/GMx+5XgIkIg5+mfDYZTIXirbPBnGqg1utrnMRrjMJDVUCYo2vO++CdyvR9mMDa4bDqi7M8Ym+1neA4X5F5S7BslN41dTV4hMTe4HRcq6hAbsXi4Y31nR6NOL/Ozs739/fv7+/Fxsbe3t7n5+fW1tat5//Oxsbe1tbOzsbFzs/n7+////fe3tbExdDPxs/vjNbw5+P3///n7+fW1t7EzsXV3uHh1OLv7+bn5vD/9//y9//15+/V3tP/9/DvjHjr/9Narc6w3+IWGw7tHCTm6+////+JS8C7AAAARklEQVR4nGP4BwTVzby/f+/+fePe3ZsMIP6S/9r/Z2j/nwCkwPz/CMDwHxUwsP3///f/nz8GW/KqQUoZ2MThcmB+6X8UPgC20FxmlB/EoQAAAABJRU5ErkJggg==" style="; aspect-ratio: 1187/566; height: auto;" width="1187"/></p>
+<p>Simply looping through this list and clicking the buttons now made all the people I followed disappear.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">clickUnfollow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">buttons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.GridTimeline-items'</span><span class="p">)[</span><span class="mf">0</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.unfollow-text'</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">buttons</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">buttons</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">click</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Calling the method <code>clickUnfollow()</code> quickly clicks all the unfollow buttons of users I follow.</p>
+<h2 id="this-didnt-unfollow-everyone">
+<span style="position:relative"><a class="anchor" href="#this-didnt-unfollow-everyone"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>This Didn't Unfollow Everyone?</span></h2>
+<p>Originally I forgot that this will only unfollow the users that are rendered on the page currently, so I had to find a way to put everyone on one page (or at least a lot more of them) to make the process a lot easier and less repetitive.</p>
+<p>A way to fix this was to make something to automatically scroll down for me so users could be rendered when the requests were made to Twitter to show me more of my followers. (Basically: put my users on my following page)</p>
+<p>I first created a simple sleep method thanks to <a href="https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep">this answer</a>, this would allow me to sleep in between each scroll down to give Twitter some time to send my followers to me (the request to be fulfilled).</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">sleep</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">ms</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Then I needed to scroll down and use this sleep method. A simple for loop that sleeps, <a href="https://stackoverflow.com/questions/4249353/jquery-scroll-to-bottom-of-the-page">scrolls to the bottom</a> using <code>.animate()</code> and prints where it is currently was easy to create:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">scroll</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">100</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">sleep</span><span class="p">(</span><span class="mf">1000</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">(</span><span class="s2">"html, body"</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span><span class="w"> </span><span class="nx">scrollTop</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span><span class="o">-</span><span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now when you execute <code>scroll()</code>, the page will be scrolled down for 100 seconds trying to load people I follow, it will log where it currently is. When this is complete, run <code>clickUnfollow()</code> again to unfollow all the users shown. Reload the page and repeat until you have no more.</p>
+<p>This may not be the most efficient way but the time and effort still in this method was a great trade off for how easy it was. Added bonus: you don't have to authorise some third-party app.</p>
+<h2 id="unlike-all-of-my-liked-tweets">
+<span style="position:relative"><a class="anchor" href="#unlike-all-of-my-liked-tweets"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Unlike All of my Liked Tweets</span></h2>
+<p>Next was to unlike all of the tweets my bot had liked. Going to the "Likes" tab, it is clear to see in Chromes DevTools that I need to click on buttons with the class 'ProfileTweet-action--unfavorite'. A simple find once again will find all of these: <code>$.find('.ProfileTweet-action--unfavorite')</code>.</p>
+<p>Just like last time, you will need to implement the scroll functions to load some more liked posts so they can be deleted in larger bunches. Looping over the result from the find query before and clicking each button will unlike the post.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">unlike</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.ProfileTweet-action--unfavorite'</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">click</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Once again, scroll to the button, then call <code>unlike</code>. When everything has been unliked (you will see the bottom tile is unliked) then reload and redo until they are all gone.</p>
+<blockquote>
+<p>Make sure to re-create the methods on each page load as they will disappear. Simply using the up arrow in Chrome DevTools' console will revise previous statements.</p>
+</blockquote>
+<h2 id="removing-retweets">
+<span style="position:relative"><a class="anchor" href="#removing-retweets"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Removing Retweets</span></h2>
+<p>Removing retweets got a bit tricky but there was a pattern. Looking for all elements with the class 'ProfileTweet-actionButtonUndo' and 'js-actionRetweet' on your profile will return all the green 'retweet' buttons; using the querySelectorAll method can do this: <code>document.querySelectorAll('.ProfileTweet-actionButtonUndo.js-actionRetweet')</code>.</p>
+<p>Unfortunately for tweets that you haven't retweeted that are on your profile (like tweets by you) also have these buttons, they are just hidden. To filter out these hidden nodes, loop over each of the nodes returned and get the style display value using <code>.css('display')</code> provided in jQuery; make sure you wrap the node in $() for this to work.</p>
+<p>If the node we get is being displayed, then we need to click it. Else if we are returned 'none' then we need to ignore it.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">unretweet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'.ProfileTweet-actionButtonUndo.js-actionRetweet'</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">nodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="o">!</span><span class="nx">$</span><span class="p">(</span><span class="nx">nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'display'</span><span class="p">)</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'none'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">$</span><span class="p">(</span><span class="nx">nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">click</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Like previously, you can load the page using the scroll methods and then run this method by calling <code>unretweet()</code>.</p>
+<h2 id="trying-to-access-tweets-over-twitters-api">
+<span style="position:relative"><a class="anchor" href="#trying-to-access-tweets-over-twitters-api"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Trying to Access Tweets Over Twitters API</span></h2>
+<p>For those that haven't used bulk tweet-deleters before, the above methods probably worked; for me it didn't because I had used a bulk tweet-deleter. The final plan I had was to delete retweets them using the API.</p>
+<p>To start this method off, create a new twitter app (or even use an existing if you want) at <a href="https://apps.twitter.com/">apps.twitter.com</a>. Get all your keys/tokens/secrets and create a new Python file. You will need tweepy installed which can be simply achieved using <code>python -m pip install tweepy</code>. In that file created, import tweepy, set your keys/tokens/secrets to variables and then authorise the script.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tweepy</span>
+
+<span class="c1"># Fill in the strings for these variables</span>
+<span class="n">consumer_key</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s1">''</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+</code></pre></div>
+<p>Running this script should end gracefully, no errors. If there are errors, search them up; I'm sure StackOverflow will have an answer.</p>
+<p>We now need to find the id of the re-tweet we want to delete. Go back into ChromeDev Tools on your twitter timeline and select a tweet you want to un-retweet. You might be thinking "why can't I just click the (now green) retweet button to un-retweet?". That is because the function literally just doesn't work in browser anymore, I have no clue why; twitter is broken. When you look at the tweet in the Elements tab, go up the tree until you find the div related to this tweet with a class 'tweet'.</p>
+<p>An easier way to find this would be to execute <code>$.find('.tweet')</code> in the Console tab, expand the results and then hover over each item until it highlights your tweet; when it does highlight the tweet you are aiming for, click on it to be shown it in the Elements tab.</p>
+<p>Now that we are looking at the correct node, you will see it has a lot of attributes. The <em>data-tweet-id</em> is the id of who originally tweeted and the <em>data-retweet-id</em> attribute is the id of who retweeted (hopefully you). Copy the value related to <em>data-retweet-id</em> (will be a large number) and set it to a variable in your script as a string. We can now call <code>api.get_status(id)</code> to get info about this tweet, you can use this to verify it is the correct tweet if you want.</p>
+<p>Finally, you will wan to call <code>api.destroy_status(id)</code> to murder the re-tweet (or even tweet if you are using this method to delete a tweet you created). Technically, if you own the tweet, as in if you were the one that retweeted, it should delete.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">tweepy</span>
+
+<span class="n">consumer_key</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s1">''</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+
+<span class="nb">id</span> <span class="o">=</span> <span class="s1">'1019797124492349441'</span> <span class="c1"># data-retweet-id</span>
+
+<span class="c1"># api.get_status(id) Can use this if you want to look at the tweet</span>
+<span class="n">api</span><span class="o">.</span><span class="n">destroy_status</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>
+<p>For the tweets I could see when logged in, this method removed them.</p>
+<p>Interestingly, when removing the tweets I could only see when not logged in, I was getting an error stating <em>"You have been blocked from the author of this tweet"</em> when calling <code>api.get_status(id)</code>. When not bothering to check them and just calling <code>api.destroy_status(id)</code> they were being deleted. How is this even possible?</p>
+<p><code>api.destroy_status(id)</code> actually returns a <em>Status</em> object which I investigated in PyCharm's Debug console. Looking at <code>Status.author.name</code> it clearly stated that I (PyTutorials) was the author; what a joke.</p>
+<h2 id="conclusion">
+<span style="position:relative"><a class="anchor" href="#conclusion"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Conclusion</span></h2>
+<p>So in the end I was able to delete all of the visible tweets both when logged in and out. My tweet count is still sitting at about 2.5k but none of these are being received (do they even exist?). I was successful in what I set out to do and definitely recommend this method to others.</p>
+<p>This method may be a bit more time consuming but copying and pasting the code from here will be a lot better in the long run than having locked tweets that you have to forcefully delete using the API and then have incorrect tweet counts.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-guis-with-pyqt/" title="Python GUI's with PyQt">
+<span>←</span>
+<span class="btn-content">Python GUI's with PyQt</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/multi-clipboard/" title="Multi Clipboard">
+<span class="btn-content">Multi Clipboard</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-clean-a-twitter-account-with-jquery/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-clean-a-twitter-account-with-jquery/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

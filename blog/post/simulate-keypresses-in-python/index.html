@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/simulate-keypresses-in-python/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Simulate Keypresses In Python - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Simulate Keypresses In Python" property="og:title"/>
+<meta content="This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence." property="og:description"/>
+<meta content="/posts/simulate-keypresses-in-python/feature.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/simulate-keypresses-in-python/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Simulate Keypresses In Python</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2017">16 Dec 2017</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#YouTube">YouTube</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#keyboard">keyboard</a>
+<a class="badge badge-warning" href="/blog/tags/#pynput">pynput</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">6 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fsimulate-keypresses-in-python%2F"/>
+</div>
+<p class="lead">This demonstrates how to press keys with Python. Using pynput we are able to simulate key presses into any window. This will show you how to press and release a key, type special keys and type a sentence.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#pip">PIP</a></li>
+<li><a href="#installing-pynput">Installing Pynput</a></li>
+<li><a href="#simulating-keys">Simulating Keys</a><ul>
+<li><a href="#pressing-and-releasing-keys">Pressing and Releasing Keys</a></li>
+<li><a href="#pressing-and-releasing-special-keys">Pressing and Releasing Special Keys</a></li>
+<li><a href="#typing-multiple-keys">Typing Multiple Keys</a></li>
+<li><a href="#putting-a-random-delay-between-each-keypress">Putting A Random Delay Between Each Keypress</a></li>
+</ul>
+</li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#how-can-i-use-the-keyboard-and-mouse-controllers-at-the-same-time">How can I use the keyboard and mouse controllers at the same time?</a></li>
+<li><a href="#modulenotfounderrorimporterror-no-module-named-pynput">ModuleNotFoundError/ImportError : No module named 'pynput'</a></li>
+<li><a href="#i-got-a-syntaxerror">I got a SyntaxError</a></li>
+<li><a href="#the-key-presses-work-in-notepad-but-not-my-game">The Key Presses Work in Notepad But Not My Game</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/DTnz8wA6wpw"></iframe>
+</div>
+</div>
+</p>
+<h2 id="pip">
+<span style="position:relative"><a class="anchor" href="#pip"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>PIP</span></h2>
+<p>If you haven't used or setup pip before, go to my tutorial at <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a> to setup pip.</p>
+<h2 id="installing-pynput">
+<span style="position:relative"><a class="anchor" href="#installing-pynput"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Pynput</span></h2>
+<p>We will be using the pynput module to listen to mouse events. To install this module execute <code>pip install pynput</code> in cmd. Watch the output to make sure no errors have occurred; it will tell you when the module has been successfully installed.</p>
+<p><img alt="Installing pynput" class="lazyload blur-up" data-src="/posts/how-to-get-mouse-clicks-with-python/pynput1.png" height="163" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAACCAYAAABsfz2XAAAATUlEQVR4nAXBwQmAQAxFwZe4IqIHz4I1CNp/YWuS/c7YeV3K3vkiyAgqk6zCACEADGNUcT8vvvvMJuOYZpqMGEI4wxwxMXDUGiwrmckPwcAi4B3TeH4AAAAASUVORK5CYII=" style="; aspect-ratio: 989/163; height: auto;" width="989"/></p>
+<p>To double-check that it was installed successfully, open up IDLE and execute the command <code>import pynput</code>; no errors should occur.</p>
+<p><img alt="Testing pynput" class="lazyload blur-up" data-src="/posts/how-to-get-mouse-clicks-with-python/pynput2.png" height="150" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAADCAYAAABMFFUxAAAAdklEQVR4nD3LOw6DMBQF0Xn28w8L9r8vFkIaNzHmpohENdJIx87z1LEfRHdyTkgAotYKgJkh6e1aC0l8rgsvOdO3xr0WOSXmfeOeCBawYH/0/FHKiVIKwYwxBt5rYd8y4/uw9Y6ZEWNkzkkIAQBJSMLd39da4wc2kzFKSqutqAAAAABJRU5ErkJggg==" style="; aspect-ratio: 760/150; height: auto;" width="760"/></p>
+<h2 id="simulating-keys">
+<span style="position:relative"><a class="anchor" href="#simulating-keys"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Simulating Keys</span></h2>
+<p>Create a new script and save it somewhere so you can easily run the script. Import <code>Key</code> and <code>Controller</code> from <code>pynput.keyboard</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Controller</span>
+</code></pre></div>
+<p>Make a variable called keyboard and set it to an instance of <code>Controller</code>. Now using the keyboard variable we can press and release keys.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">keyboard</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="pressing-and-releasing-keys">
+<span style="position:relative"><a class="anchor" href="#pressing-and-releasing-keys"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Pressing and Releasing Keys</span></h3>
+<p>Using <code>keyboard.press</code> we can press keys and with <code>keyboard.release</code> we can release a key. This allows us to type a key by pressing and releasing. You can only supply this method with one key at a time. Here is an example of how to type the letter 'a'.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="pressing-and-releasing-special-keys">
+<span style="position:relative"><a class="anchor" href="#pressing-and-releasing-special-keys"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Pressing and Releasing Special Keys</span></h3>
+<p>For special keys that can't be put into a string like shift or control, you will need to refer to the page <a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key">here</a> to look at the Key class for supported keys. Using these in the press or release methods will press/release the key matching it. For example, if I wanted to press the Windows key, I would look at <a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key">that page</a> for the key. 'cmd' has the description <em>"A generic command button. On PC platforms, this corresponds to the Super key or Windows key, and on Mac it corresponds to the Command key"</em> which is what I am looking for. Now for the code.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">cmd</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">cmd</span><span class="p">)</span>
+</code></pre></div>
+<p>This method also allows us to press a key while holding another key, for example, ctrl+c to copy. To do this we will need to press ctrl, press and release c and then release ctrl.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s1">'c'</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="s1">'c'</span><span class="p">)</span>
+<span class="n">keyboard</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">Key</span><span class="o">.</span><span class="n">ctrl</span><span class="p">)</span>
+</code></pre></div>
+<p>Here are a few other common special keys:</p>
+<ul>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.alt_l">Key.alt_l</a>: Left ALT</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.backspace">Key.backspace</a>: Backspace</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.ctrl_l">Key.ctrl_l</a>: Left Ctrl</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.delete">Key.delete</a>: Delete</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.enter">Key.enter</a>: Enter</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.esc">Key.esc</a>: Escape</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.f1">Key.f1</a>: F1</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.f5">Key.f5</a>: F5</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.media_play_pause">Key.media_play_pause</a>: Play/Pause</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.page_down">Key.page_down</a>: Page Down</li>
+<li><a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key.up">Key.up</a>: Up Arrow Key</li>
+<li>The rest can be found in the <a href="https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key">pynput docs for the Key class</a>.</li>
+</ul>
+<h3 id="typing-multiple-keys">
+<span style="position:relative"><a class="anchor" href="#typing-multiple-keys"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Typing Multiple Keys</span></h3>
+<p>A cool feature supplied by the class is the type method. This method allows us to type more than one key at a time but it has to be a string of characters. So if we wanted to type "Nitratine" we would execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">keyboard</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="s1">'Nitratine'</span><span class="p">)</span>
+</code></pre></div>
+<p>This method does also support spaces but when it comes to enters, use a new line character (\n) and a tab character (\t) for tabs.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">keyboard</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="s1">'This is one line.</span><span class="se">\n</span><span class="s1">And this is the next line.</span><span class="se">\n\t</span><span class="s1">This line has been tabbed in.'</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="putting-a-random-delay-between-each-keypress">
+<span style="position:relative"><a class="anchor" href="#putting-a-random-delay-between-each-keypress"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Putting A Random Delay Between Each Keypress</span></h3>
+<p>To put a random delay between each keypress, you can use <code>time.sleep</code> with a random number passed to it. Here is a small example function I made:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Controller</span>
+
+<span class="n">keyboard</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">()</span>  <span class="c1"># Create the controller</span>
+
+<span class="k">def</span> <span class="nf">type_string_with_delay</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>  <span class="c1"># Loop over each character in the string</span>
+        <span class="n">keyboard</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">character</span><span class="p">)</span>  <span class="c1"># Type the character</span>
+        <span class="n">delay</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Generate a random number between 0 and 10</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>  <span class="c1"># Sleep for the amount of seconds generated</span>
+
+<span class="n">type_string_with_delay</span><span class="p">(</span><span class="s2">"This is my string typed with a delay"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="common-issues-and-questions">
+<span style="position:relative"><a class="anchor" href="#common-issues-and-questions"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Common Issues and Questions</span></h2>
+<h3 id="how-can-i-use-the-keyboard-and-mouse-controllers-at-the-same-time">
+<span style="position:relative"><a class="anchor" href="#how-can-i-use-the-keyboard-and-mouse-controllers-at-the-same-time"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>How can I use the keyboard and mouse controllers at the same time?</span></h3>
+<p>When you import the classes, Controller will be set to the last one imported. To show what the issue was, ask yourself, what controller did you use to set the mouse and what one to set the keyboard? You would have used the same, but they need to be from the different classes.  So then you should use:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Controller</span> <span class="k">as</span> <span class="n">KeyboardController</span>
+<span class="kn">from</span> <span class="nn">pynput.mouse</span> <span class="kn">import</span> <span class="n">Button</span><span class="p">,</span> <span class="n">Controller</span> <span class="k">as</span> <span class="n">MouseController</span>
+</code></pre></div>
+<p>Now when you want to use the controller for the mouse use MouseController and KeyboardController for the keyboard.</p>
+<div class="codehilite"><pre><span></span><code>keyboard = KeyboardController()
+mouse = MouseController()
+</code></pre></div>
+<h3 id="modulenotfounderrorimporterror-no-module-named-pynput">
+<span style="position:relative"><a class="anchor" href="#modulenotfounderrorimporterror-no-module-named-pynput"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>ModuleNotFoundError/ImportError : No module named 'pynput'</span></h3>
+<p>Did you install pynput? This error will not occur if you installed it properly. If you have multiple versions of Python, make sure you are installing pynput on the same version as what you are running the script with.</p>
+<h3 id="i-got-a-syntaxerror">
+<span style="position:relative"><a class="anchor" href="#i-got-a-syntaxerror"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>I got a SyntaxError</span></h3>
+<p>Syntax errors are caused by you and there is nothing I can offer to fix it apart from telling you to read the error. They always say where the error is in the output using a ^. Generally, people that get this issue have incorrect indentation, brackets in the wrong place or something spelt wrong. You can read about SyntaxError on Python's docs <a href="https://docs.python.org/2/tutorial/errors.html#syntax-errors">here</a>.</p>
+<h3 id="the-key-presses-work-in-notepad-but-not-my-game">
+<span style="position:relative"><a class="anchor" href="#the-key-presses-work-in-notepad-but-not-my-game"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Key Presses Work in Notepad But Not My Game</span></h3>
+<p>pynput uses a Win32API function called <code>SendInput</code>. The SendInput function will insert input events into the same queue as a hardware device but the events are marked with a <code>LLMHF_INJECTED</code> flag that can be detected by hooks and <a href="https://stackoverflow.com/a/19383403">then filtered</a>. To avoid this flag you probably have to write a custom driver <em>(ref: <a href="https://stackoverflow.com/a/44931001">stackoverflow/Anders</a>)</em>.</p>
+<p>It would be ideal for most games to look for these events if they want to reduce 'bot' activity as it stops packages like these being used.</p>
+<p>In <a href="https://github.com/Gautam-J/Self-Driving-Car">github.com/Gautam-J/Self-Driving-Car</a> I had seen that the file <a href="https://github.com/Gautam-J/Self-Driving-Car/blob/master/directkeys.py">directkeys.py</a> contained the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">SendInput</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">SendInput</span>
+
+<span class="n">W</span> <span class="o">=</span> <span class="mh">0x11</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mh">0x1E</span>
+<span class="n">S</span> <span class="o">=</span> <span class="mh">0x1F</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mh">0x20</span>
+<span class="n">UP</span> <span class="o">=</span> <span class="mh">0xC8</span>
+<span class="n">LEFT</span> <span class="o">=</span> <span class="mh">0xCB</span>
+<span class="n">RIGHT</span> <span class="o">=</span> <span class="mh">0xCD</span>
+<span class="n">DOWN</span> <span class="o">=</span> <span class="mh">0xD0</span>
+<span class="n">ENTER</span> <span class="o">=</span> <span class="mh">0x1C</span>
+<span class="n">ESC</span> <span class="o">=</span> <span class="mh">0x01</span>
+<span class="n">TWO</span> <span class="o">=</span> <span class="mh">0x03</span>
+
+<span class="c1"># C struct redefinitions</span>
+<span class="n">PUL</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">KeyBdInput</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"wVk"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ushort</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"wScan"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ushort</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"dwFlags"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"dwExtraInfo"</span><span class="p">,</span> <span class="n">PUL</span><span class="p">)]</span>
+
+
+<span class="k">class</span> <span class="nc">HardwareInput</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"uMsg"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"wParamL"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_short</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"wParamH"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ushort</span><span class="p">)]</span>
+
+
+<span class="k">class</span> <span class="nc">MouseInput</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"dx"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_long</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"dy"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_long</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"mouseData"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"dwFlags"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"dwExtraInfo"</span><span class="p">,</span> <span class="n">PUL</span><span class="p">)]</span>
+
+
+<span class="k">class</span> <span class="nc">Input_I</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Union</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"ki"</span><span class="p">,</span> <span class="n">KeyBdInput</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"mi"</span><span class="p">,</span> <span class="n">MouseInput</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"hi"</span><span class="p">,</span> <span class="n">HardwareInput</span><span class="p">)]</span>
+
+
+<span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"type"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">"ii"</span><span class="p">,</span> <span class="n">Input_I</span><span class="p">)]</span>
+
+
+<span class="c1"># Actuals Functions</span>
+<span class="k">def</span> <span class="nf">PressKey</span><span class="p">(</span><span class="n">hexKeyCode</span><span class="p">):</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ii_</span> <span class="o">=</span> <span class="n">Input_I</span><span class="p">()</span>
+    <span class="n">ii_</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">KeyBdInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hexKeyCode</span><span class="p">,</span> <span class="mh">0x0008</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">extra</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ii_</span><span class="p">)</span>
+    <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">SendInput</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">ReleaseKey</span><span class="p">(</span><span class="n">hexKeyCode</span><span class="p">):</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ii_</span> <span class="o">=</span> <span class="n">Input_I</span><span class="p">()</span>
+    <span class="n">ii_</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">KeyBdInput</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hexKeyCode</span><span class="p">,</span> <span class="mh">0x0008</span> <span class="o">|</span> <span class="mh">0x0002</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">extra</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_ulong</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ii_</span><span class="p">)</span>
+    <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">SendInput</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">pointer</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+
+<span class="c1"># directx scan codes</span>
+<span class="c1"># http://www.gamespp.com/directx/directInputKeyboardScanCodes.html</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">while</span> <span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">PressKey</span><span class="p">(</span><span class="mh">0x11</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ReleaseKey</span><span class="p">(</span><span class="mh">0x11</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>The license for this piece of code can be found <a href="https://github.com/Gautam-J/Self-Driving-Car/blob/master/LICENSE">here</a>.</p>
+</blockquote>
+<p>This file demonstrates how we can press keys using DirectX key codes. The link in the file no longer exists but it can <a href="http://web-old.archive.org/web/20190801085838/http://www.gamespp.com/directx/directInputKeyboardScanCodes.html">still be found on the wayback machine</a>. This page provides other codes for keys that can be simulated.</p>
+<p>Unfortunately it will only work on Windows (due to the usage of <code>ctypes.windll</code>) but some may find that it solves their issues with the <code>LLMHF_INJECTED</code> flag.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-keylogger/" title="Python Keylogger">
+<span>←</span>
+<span class="btn-content">Python Keylogger</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/quick-script/" title="Quick Script">
+<span class="btn-content">Quick Script</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/simulate-keypresses-in-python/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/simulate-keypresses-in-python/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

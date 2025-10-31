@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-add-a-custom-domain-to-a-github-pages-site/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How To Add a Custom Domain To a GitHub Pages Site - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="In this tutorial, I explain how to configure your domain for GitHub Pages using a domain from Namesilo. You will first want to create a CNAME file for your GitHub pages site." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How To Add a Custom Domain To a GitHub Pages Site" property="og:title"/>
+<meta content="In this tutorial, I explain how to configure your domain for GitHub Pages using a domain from Namesilo. You will first want to create a CNAME file for your GitHub pages site." property="og:description"/>
+<meta content="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/existing-resource-records.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-add-a-custom-domain-to-a-github-pages-site/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How To Add a Custom Domain To a GitHub Pages Site</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">29 Apr 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#website">website</a>
+<a class="badge badge-warning" href="/blog/tags/#domain">domain</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">5 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-add-a-custom-domain-to-a-github-pages-site%2F"/>
+</div>
+<p class="lead">In this tutorial, I explain how to configure your domain for GitHub Pages using a domain from Namesilo. You will first want to create a CNAME file for your GitHub pages site.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#setting-up-cname-in-github">Setting Up CNAME in GitHub</a></li>
+<li><a href="#managing-the-dns-records-on-namesilo">Managing the DNS Records on Namesilo</a><ul>
+<li><a href="#www">WWW</a></li>
+<li><a href="#no-www">No WWW</a></li>
+</ul>
+</li>
+<li><a href="#ssl-green-padlock">SSL (Green Padlock)</a></li>
+<li><a href="#sub-domains">Sub Domains</a></li>
+</ul>
+</div>
+<p>Yesterday night I purchased the domain <a href="https://nitratine.net/">nitratine.net</a> from <a href="https://www.namesilo.com/">Namesilo</a>. There is a lot of help out there to set this up but unfortunately, there are no direct instructions for Namesilo specifically.</p>
+<p>In this tutorial, I will explain how to configure your domain for GitHub Pages using a domain from Namesilo.</p>
+<h2 id="setting-up-cname-in-github">
+<span style="position:relative"><a class="anchor" href="#setting-up-cname-in-github"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting Up CNAME in GitHub</span></h2>
+<p>You will first want to create a CNAME file for your GitHub pages site. The easiest way to do this is to go to your project's repository and go to the settings tab on the right.</p>
+<p><img alt="GitHub Settings" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/github-settings.png" height="190" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAADCAYAAABMFFUxAAAAbklEQVR4nG3NMRKCQBQE0f7jLrVSpsQa6/1Pwl1QhP1jgka+vKvj+Xo7M7ENBLaJCCKMJLDZ55ltX2ntgh53vkrfVobWUAg7WZaF8zgiiQAwlNuVtndUK1HLkQaleyBT1EH0ftzTnIp+B00T/3wA1L0slMJNVDsAAAAASUVORK5CYII=" style="; aspect-ratio: 994/190; height: auto;" width="994"/></p>
+<p>Scroll down this page until you find the "GitHub Pages" block. In this block, there is a "Custom domain" header with an input field under it. In here put your domain you have registered.</p>
+<p><img alt="Custom Domain" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/custom-domain.png" height="290" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAGCAYAAAAc2cSCAAAAsElEQVR4nHWQQU7EMAxFn2MnaUD0AHD/88xRoEKjScm0fxZDEWLEW3jlJ39/W5ZF67rSWiMiOJCEpUxKTsnGXyQREcEYG2NsTHXCjj0zIGH2KB5EKpXYRc6ZyL8uH1NCehQlEf10ogOqE1sOxqVT5hf87fUuYqRkSCDtuAciCIcol07MMzUCLLF/XanjSm4NJPgntiSsn8/6fP/A3XH3+4+lfBdmP5ElgWXcE89PBYAbg8dLXb+LcU8AAAAASUVORK5CYII=" style="; aspect-ratio: 741/290; height: auto;" width="741"/></p>
+<p>In this image, I have put "nitratine.net". This is where I want my site hosted. If you want your site hosted at www.example.com instead of example.com, put in www.example.com.</p>
+<h2 id="managing-the-dns-records-on-namesilo">
+<span style="position:relative"><a class="anchor" href="#managing-the-dns-records-on-namesilo"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Managing the DNS Records on Namesilo</span></h2>
+<p>Now that you have set up your CNAME, login to Namesilo and click my account at the top of the page. In the account overview block, click on the number beside "Account Domains".</p>
+<p><img alt="Account Overview" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/account-overview.png" height="318" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAYAAADXhRcnAAABBElEQVR4nFWQu07DUBAFZx++vsR2CBINEh9B/v8bKKBFoowQEUoKJCd2vEsRKJhmqpGOjuw+DplABvQrxwxEBDOj1sofmcmyLAC4+9WSI4ownmYOJ6FWZ5onDscjZoYIzPOFYRgY+oHIwM0opeCqhplx33eIKCLC/nPPy/MrACpK1xe22ye6WkhRMEMB2e12v7ODUlpWqxumaWb8+kYyyCVQU07jSOaCt5X+rqN0K9zMiAiaWmncMVXk7Z1Iwx8fiPnCIkJpC+7GMLRkBGqOT9OZiGSazqgaTdNgmzWbzRpdD5AJyN9tLAFoQiZu5ogETdPQti3uTt5ukEzkXwggmF4tIvwA8YVmOVLw9h0AAAAASUVORK5CYII=" style="; aspect-ratio: 665/318; height: auto;" width="665"/></p>
+<p>Now click on the blue globe button that corresponds with the domain you put in GitHub Pages.</p>
+<p><img alt="Domain Manager" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/domain-manager.png" height="112" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAACCAYAAACHSIaUAAAAXElEQVR4nAXBQQ7DIAxFwfeNgaBK3P96zba7LKqkMrgzOs93RohaDTDGGEib+0mOXjCD+1lkgpmovvl+LvrrwOecuDd6b6y1kMSKwErSqgOBe0USklHsR+yNQvwBSaogCjodW4IAAAAASUVORK5CYII=" style="; aspect-ratio: 943/112; height: auto;" width="943"/></p>
+<p>You should now be brought to the "Manage DNS" page. If not, try again. Now you have two paths depending on if you want www or not.</p>
+<h3 id="www">
+<span style="position:relative"><a class="anchor" href="#www"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>WWW</span></h3>
+<p>GitHub's article on setting this up can be found <a href="https://help.github.com/articles/setting-up-a-www-subdomain/">here</a> if you want a reference.</p>
+<p>Setting up a www subdomain only requires one step. Click the "CNAME" link in the "Add/Edit a Resource Record" block.</p>
+<p><img alt="Add Resource Record" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/add-resource-record.png" height="89" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAsAAAABCAYAAAAIN1RAAAAAJ0lEQVR4nAXBAREAMAwCsYcd/i1WCSzR3W0bAG0BkERrNkhMYuzHB7HfDbZ1UNclAAAAAElFTkSuQmCC" style="; aspect-ratio: 939/89; height: auto;" width="939"/></p>
+<p>Now put "www" in the HOSTNAME input field and your current GitHub page URL into TARGET HOSTNAME. For example, I would put brentvollebregt.github.io in this as it is where by GitHub page is currently hosted. Leave TTL as it is and click submit.</p>
+<p><img alt="CNAME Record" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/cname-record.png" height="300" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAFCAYAAACaTbYsAAAAqUlEQVR4nG3MwVEDMRQE0R59ab1e558JMZADEALlgwG7LK/0hwMc/a5d1fp4e7eBUgJJZCYS/0SmyDQSRBSWJbChREGfl7O/7xdaiDEmdmIDGEm0tiIJ+2/QajBJtnqirsuB661QSqEAUhA1QEJRIQf740FtjRaNOSY2HLYVzTHdewcEGIDMJCS4X/mZMNOcto22NPZ9IInjcYXM9DP5dXZ/fbH77XnP9C81HH+xF+C1UQAAAABJRU5ErkJggg==" style="; aspect-ratio: 932/300; height: auto;" width="932"/></p>
+<p>This is all that needs to be done for a www subdomain. GitHub will decide what URL to use based on what you put in your Git repositories CNAME. You may have to wait a while until these entries are added by Namesilo but in my experience, it's very quick.</p>
+<h3 id="no-www">
+<span style="position:relative"><a class="anchor" href="#no-www"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>No WWW</span></h3>
+<p>GitHub's article on setting this up can be found <a href="https://help.github.com/articles/setting-up-an-apex-domain/">here</a> if you want a reference.</p>
+<p>First you will need to add an A Record to 185.199.111.153. To do this click "A" in the "Add/Edit a Resource Record" grey box.</p>
+<p><img alt="Add Resource Record" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/add-resource-record.png" height="89" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAsAAAABCAYAAAAIN1RAAAAAJ0lEQVR4nAXBAREAMAwCsYcd/i1WCSzR3W0bAG0BkERrNkhMYuzHB7HfDbZ1UNclAAAAAElFTkSuQmCC" style="; aspect-ratio: 939/89; height: auto;" width="939"/></p>
+<p>In this, you want to insert <code>185.199.111.153</code> into "IPV4 ADDRESS" but leave the hostname field blank. You can leave the TTL as it is and click submit.</p>
+<p><img alt="First IP" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/first-ip.png" height="290" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAFCAYAAACaTbYsAAAAp0lEQVR4nG3OS07DQBRE0fs+7dgM2P8u2AObIGtAyoAIsEx3v2JgKaPUsI5UKrt+XGVmuAcgqoQZCEBCFY/Ow1nXRCdin183/Rx3WkAfE52CJJbWcM/HkJmR6RTFGht5aQv77pgZXoBBZgIQ2VBNev8jsxHuVD/fXV5XbI6p3juSqCoAqop0R/3gt08ik6UteARjDAC2lw2qSk9zv+l4f5P276dcVfoH5q+KjoTYMvMAAAAASUVORK5CYII=" style="; aspect-ratio: 924/290; height: auto;" width="924"/></p>
+<p>Now repeat this another three times and use the IP addresses: <code>185.199.110.153</code>, <code>185.199.109.153</code> and <code>185.199.108.153</code></p>
+<p>After that, we will set up the www routing by clicking "CNAME" in the grey box. In here, add www to the HOSTNAME field and your current GitHub pages address to TARGET HOSTNAME. For example, I would put brentvollebregt.github.io in this as it is where by GitHub page is currently hosted. Leave the TTL the same again and click submit. If you are confused about this look under the WWW sub-heading for how to do this.</p>
+<blockquote>
+<p>You do not have to add a www in this situation but I feel it is good to have www.example.com and example.com point to the same place for consistency.</p>
+</blockquote>
+<p>You should now have five entries in the "Existing Resource Records" (4 A records and 1 CNAME).</p>
+<p><img alt="Existing Resource Records" class="lazyload blur-up" data-src="/posts/how-to-add-a-custom-domain-to-a-github-pages-site/existing-resource-records.png" height="184" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAADCAYAAABMFFUxAAAAdklEQVR4nD3NsY0DMQxFwSeKlpPtv8DtwMDBlCV+yoGBiyeYdt/3ATAzqoq1Fu7OGANJSKL3DkDujbmDRPu8aRFxJGFmRARVxXVdVBWZyRiDtRbnHCTxGE9qTfrfC59zAvzj3puIwN3JTFprZOZvzqSZUSlOFV8lmVTZ6ZeIVQAAAABJRU5ErkJggg==" style="; aspect-ratio: 932/184; height: auto;" width="932"/></p>
+<p>GitHub will decide what URL to use based on what you put in your git repositories CNAME. You may have to wait a while until these entries are added by Namesilo but in my experience, it's very quick.</p>
+<h2 id="ssl-green-padlock">
+<span style="position:relative"><a class="anchor" href="#ssl-green-padlock"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>SSL (Green Padlock)</span></h2>
+<p>Following these steps and using the new IP addresses, you will now be provided SSL for free from Github with no extra effort.</p>
+<p>If this did not occur (it didn't work the first time I tried), go to the git repo on Github and then go to settings. Scroll down this page until you find the "GitHub Pages" block. In this block, there is a "Custom domain" header with an input field under it (just like we did in Setting Up CNAME in GitHub). Clear this field and click save. Now put your URL in the input field (the one you just cleared) and save it. This reset of the URL can trigger the SSL certificate generation and you should get SSL on your website in under a day.</p>
+<h2 id="sub-domains">
+<span style="position:relative"><a class="anchor" href="#sub-domains"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Sub Domains</span></h2>
+<p>Sometimes when having your domain <code>example.com</code> point to your main site, you may also want <code>subdomain1.example.com</code> to point to a different site and <code>subdomain2.example.com</code> point to yet another. This is a lot easier to do as it seems; first add a CNAME file to the GitHub repository you are going to use, for example, <code>subdomain1.example.com</code>, to set up the domain on GitHub's side.</p>
+<p>Next, you'll want to go back to the "Manage DNS" page we have been using previously (may be different on other domain register sites) and add a new CNAME record like in the www tutorial above. Now in the hostname field, instead of www, add <code>subdomain1</code> and put your GitHub pages URL in the target hostname (mine is brentvollebregt.github.io).</p>
+<p>Now wait for changes to be applied to the DNS and you can now visit <code>subdomain1.example.com</code> to visit your new site.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/github-badges/" title="Github Badges">
+<span>←</span>
+<span class="btn-content">Github Badges</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-threading-basics/" title="Python Threading Basics">
+<span class="btn-content">Python Threading Basics</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-add-a-custom-domain-to-a-github-pages-site/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-add-a-custom-domain-to-a-github-pages-site/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

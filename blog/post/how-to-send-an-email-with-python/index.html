@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-send-an-email-with-python/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How to Send an Email With Python - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This script sends an email using python. By logging in to a Gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How to Send an Email With Python" property="og:title"/>
+<meta content="This script sends an email using python. By logging in to a Gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached." property="og:description"/>
+<meta content="/posts/how-to-send-an-email-with-python/youtube-thumbnail.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-send-an-email-with-python/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How to Send an Email With Python</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">23 Jan 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#YouTube">YouTube</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#email">email</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">7 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-send-an-email-with-python%2F"/>
+</div>
+<p class="lead">This script sends an email using python. By logging in to a Gmail account with python you can send emails using this tutorial. This tutorial shows you how to send basic emails and emails with files attached.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#why-bother">Why Bother?</a></li>
+<li><a href="#before-you-start">Before You Start</a></li>
+<li><a href="#simple-email">Simple Email</a></li>
+<li><a href="#better-layouts">Better Layouts</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#html-in-emails">HTML in Emails</a></li>
+<li><a href="#sending-to-multiple-emails">Sending to Multiple Emails</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/YPiHBtddefI"></iframe>
+</div>
+</div>
+</p>
+<h2 id="why-bother">
+<span style="position:relative"><a class="anchor" href="#why-bother"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Why Bother?</span></h2>
+<p>These scripts are used to send emails from a Gmail account (can be configured for other email servers). This will allow you to send emails when your script finishes executing, has come to an error or just needs to send some data to you.</p>
+<p>This data could be anything, statistics of a website, crash reports or even files! This is particularly helpful for scripts running in the cloud or other places that take longer than 5 seconds to get access to. Getting reports sent straight to your email is convenient and can be helpful for storage. Python 3 is used in this tutorial.</p>
+<h2 id="before-you-start">
+<span style="position:relative"><a class="anchor" href="#before-you-start"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Before You Start</span></h2>
+<p>Before you start this, make sure you have your Gmail username and password ready. The account you are going to use must not have 2-Step Verification enabled as we will no longer be able to log in.</p>
+<p>Next, go to <a href="https://myaccount.google.com/lesssecureapps">https://myaccount.google.com/lesssecureapps</a> and log in if you need to. On this page, you will want to flick the Allow less secure apps switch to on. This allows us to use less secure sign-in technology to login to the email server; note that this will make your account more vulnerable.</p>
+<p><img alt="Allow less secure apps switch" class="lazyload blur-up" data-src="/posts/how-to-send-an-email-with-python/alsa1.png" height="86" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAACCAYAAACHSIaUAAAAQElEQVR4nHXKOwqAQBDA0GSw2PufVOwW5mMhNoKvTdx7T2aiMgMKay1Uvt5+Xo0OR1WRWURI9xAhlflcP7oHHW4XCx7HYUIJjgAAAABJRU5ErkJggg==" style="; aspect-ratio: 678/86; height: auto;" width="678"/></p>
+<blockquote>
+<p>If you want/do have 2-Step Verification enabled, read up on how to <a href="https://support.google.com/accounts/answer/185833">sign in using an app password</a>. This allows you to generate a password specifically for this 'application' which allows this script to be compatible with a Google account using 2-Step Verification.</p>
+</blockquote>
+<h2 id="simple-email">
+<span style="position:relative"><a class="anchor" href="#simple-email"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Simple Email</span></h2>
+<p>To start, we will use the <a href="https://docs.python.org/3/library/smtplib.html">smtplib module</a> which comes with python, so no need to install it using <a href="/blog/post/how-to-setup-pythons-pip/">pip</a>.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">smtplib</span>
+
+<span class="n">email</span> <span class="o">=</span> <span class="s1">'myaddress@gmail.com'</span> <span class="c1"># Your email</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s1">'password'</span> <span class="c1"># Your email account password</span>
+<span class="n">send_to_email</span> <span class="o">=</span> <span class="s1">'sentoaddreess@gmail.com'</span> <span class="c1"># Who you are sending the message to</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'This is my message'</span> <span class="c1"># The message in the email</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s1">'smtp.gmail.com'</span><span class="p">,</span> <span class="mi">587</span><span class="p">)</span> <span class="c1"># Connect to the server</span>
+<span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span> <span class="c1"># Use TLS</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span> <span class="c1"># Login to the email server</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">send_to_email</span> <span class="p">,</span> <span class="n">message</span><span class="p">)</span> <span class="c1"># Send the email</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span> <span class="c1"># Logout of the email server</span>
+</code></pre></div>
+<p>By changing the initial variables at the top, the email will be sent. Make sure to change:
+- 'email' to your email address
+- 'password' to your email address password
+- 'send_to_email' to the email address you want to send the message to (can be the same as 'email')
+- 'message' to what the message is you want to send</p>
+<p><img alt="Simple Email Example" class="lazyload blur-up" data-src="/posts/how-to-send-an-email-with-python/email-example-1.png" height="139" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAGCAYAAAAc2cSCAAAAlElEQVR4nHWPyw6DMAwEZ0MQFoL//8r2BKIQJ+6h6kMqzMmSd62x3D2WZQFg33eGYUASpRTMjHEcuSJBUIpTvXIcx2dRSgFA0mVZ7h7uzrZt1Fohgsd+YGZIME0zfZ+JiL9DWYLWGuu6fnVSou8zLYKuS0g6NVBEBMD9dqfL3SsIoMQ8T5fKAPk9mBlB/PzbTlV/eQKdZkfDCVbgdQAAAABJRU5ErkJggg==" style="; aspect-ratio: 352/139; height: auto;" width="352"/></p>
+<p>The image above shows the email that I received. It is very basic and has no subject line, we will add that next.</p>
+<h2 id="better-layouts">
+<span style="position:relative"><a class="anchor" href="#better-layouts"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Better Layouts</span></h2>
+<p>We will now add a subject, sender and receiver using the <a href="https://docs.python.org/3/library/email.html">email module</a>. This module is also already in python so no need to use pip.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+
+<span class="n">email</span> <span class="o">=</span> <span class="s1">'myaddress@gmail.com'</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s1">'password'</span>
+<span class="n">send_to_email</span> <span class="o">=</span> <span class="s1">'sentoaddreess@gmail.com'</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s1">'This is the subject'</span> <span class="c1"># The subject line</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'This is my message'</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">email</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">send_to_email</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
+
+ <span class="c1"># Attach the message to the MIMEMultipart object</span>
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s1">'plain'</span><span class="p">))</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s1">'smtp.gmail.com'</span><span class="p">,</span> <span class="mi">587</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span> <span class="c1"># You now need to convert the MIMEMultipart object to a string to send</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">send_to_email</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</code></pre></div>
+<p>Replacing the previous variables again and setting the new variable 'subject' to the subject line, the email will now send with a subject line when run.</p>
+<p><img alt="Better Email Example" class="lazyload blur-up" data-src="/posts/how-to-send-an-email-with-python/email-example-2.png" height="132" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAGCAYAAAAc2cSCAAAA0ElEQVR4nG2OwU7CQBQA5+12oYtYjAnGg/z/bzXBkxEjoZZ9bfc9b5qIc5/MiJm5iPA1DByPr9x3He7GtSjbuw3D5YIjdN0Dz48Tn0Pi7f3Mbtch7u4A7s44joAQgrDUShBBVTEz2nbDNhs6B8arslqvf+VlWVBVaq3EGHF3cAgxklJDSom/NKUU5nkmiND3PbFJ5JzRUkirFTEG2jazf9ojOCC4OyKC1FrdzABn0ok2Z0IIN5X/+NlWLZxOH6TUUBdjmifMncPLgRAEEbmRvwGM+nGS4LuBpAAAAABJRU5ErkJggg==" style="; aspect-ratio: 328/132; height: auto;" width="328"/></p>
+<p>The image above shows the email that I received. It now has a subject and has a <code>to</code> header if you click the little down arrow by 'me'.</p>
+<h2 id="attachments">
+<span style="position:relative"><a class="anchor" href="#attachments"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Attachments</span></h2>
+<p>There are quite a few ways to attach files to an email, but this is one of the simpler ways. This time we will use an encoder and MIMEMultipart from the email module and os.path to simply get the filename from the provided path.</p>
+<p>This method supports text files, images, videos, audio and pdfs.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.base</span> <span class="kn">import</span> <span class="n">MIMEBase</span>
+<span class="kn">from</span> <span class="nn">email</span> <span class="kn">import</span> <span class="n">encoders</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="n">email</span> <span class="o">=</span> <span class="s1">'myaddress@gmail.com'</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s1">'password'</span>
+<span class="n">send_to_email</span> <span class="o">=</span> <span class="s1">'sentoaddreess@gmail.com'</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s1">'This is the subject'</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'This is my message'</span>
+<span class="n">file_location</span> <span class="o">=</span> <span class="s1">'C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">You</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">attach.txt'</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">email</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">send_to_email</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
+
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s1">'plain'</span><span class="p">))</span>
+
+<span class="c1"># Setup the attachment</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_location</span><span class="p">)</span>
+<span class="n">attachment</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_location</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">MIMEBase</span><span class="p">(</span><span class="s1">'application'</span><span class="p">,</span> <span class="s1">'octet-stream'</span><span class="p">)</span>
+<span class="n">part</span><span class="o">.</span><span class="n">set_payload</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">encoders</span><span class="o">.</span><span class="n">encode_base64</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<span class="n">part</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s1">'Content-Disposition'</span><span class="p">,</span> <span class="s2">"attachment; filename= </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># Attach the attachment to the MIMEMultipart object</span>
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s1">'smtp.gmail.com'</span><span class="p">,</span> <span class="mi">587</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">send_to_email</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</code></pre></div>
+<p>Once again, replacing the previous variables but setting the new variable 'file_location' to the location of the tile that you want to send, the email will now send with the file attached.</p>
+<p><img alt="Attachment Email Example" class="lazyload blur-up" data-src="/posts/how-to-send-an-email-with-python/email-example-3.png" height="293" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAANCAYAAAB2HjRBAAABQklEQVR4nIWQTVPbQBBE3+zOSrJc2KYE+MD//1EcCcmJJFUyJKy8H8NBtgMBJ32c3tnXPVJrNRFhN458//GT1eqCadqDQBMCz7+eCaFjWLd0TeHbY0aobLdbVEQA6JdLNqWgqqgGSq04gaZp8F5xGsApXacIBRFBzMwASinknCml4L3nMMZ7TwiBz6Qxxnlxn7h/+ELbdjRNYIp7ukULCNc3Nyz7BWAc/pzJOWerVrFq5JRY9D3HKv/TKfbLy292ux2qSsmVOEUWfc/VMJxIZ5fP6V+2vn9kwPnIf9Pde9MhIqSUGMeRlNJ8mDM3cJ8Na62klCilHFLNmT4kOXY2M2bATMk545x7Q/5Y6dQ5Tpn7x8hanzATNps1ZqDeuPsaGS4vuB0azODY4rQc1HG9CrR+hZmhOltWMyKV9TIc7vKH/ApzZp2OX3c0pAAAAABJRU5ErkJggg==" style="; aspect-ratio: 342/293; height: auto;" width="342"/></p>
+<p>The image above shows the email that I received. It now has a file named 'test.py' that I declared in the script attached to the email.</p>
+<h2 id="html-in-emails">
+<span style="position:relative"><a class="anchor" href="#html-in-emails"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>HTML in Emails</span></h2>
+<p>If you want to add things like links or CSS formatting to the email, you will need to prepare HTML text for the email.
+Make another string which is the plain-text version of the HTML and then attach them both to the MIMEMultipart object to be sent later on.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+
+<span class="n">email</span> <span class="o">=</span> <span class="s1">'myaddress@gmail.com'</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s1">'password'</span>
+<span class="n">send_to_email</span> <span class="o">=</span> <span class="s1">'sentoaddreess@gmail.com'</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s1">'This is the subject'</span>
+<span class="n">messageHTML</span> <span class="o">=</span> <span class="s1">'&lt;p&gt;Visit &lt;a href="https://nitratine.net/"&gt;nitratine.net&lt;a&gt; for some great &lt;span style="color: #496dd0"&gt;tutorials and projects!&lt;/span&gt;&lt;p&gt;'</span>
+<span class="n">messagePlain</span> <span class="o">=</span> <span class="s1">'Visit nitratine.net for some great tutorials and projects!'</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s1">'alternative'</span><span class="p">)</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">email</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">send_to_email</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
+
+<span class="c1"># Attach both plain and HTML versions</span>
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">messagePlain</span><span class="p">,</span> <span class="s1">'plain'</span><span class="p">))</span>
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">messageHTML</span><span class="p">,</span> <span class="s1">'html'</span><span class="p">))</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s1">'smtp.gmail.com'</span><span class="p">,</span> <span class="mi">587</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">send_to_email</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</code></pre></div>
+<p>As needed before, change the variables at the top but also messageHTML and messagePlain this time, the email will now be displayed using the HTML provided.</p>
+<p><img alt="Attachment Email Example" class="lazyload blur-up" data-src="/posts/how-to-send-an-email-with-python/email-example-4.png" height="167" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAYAAADXhRcnAAAA2ElEQVR4nHXQ0UrDQBRF0X3uzCRpSpv44P9/nhYhLUWbienM9UGDKHS/HxYc1VpdEqfXE+v9Tts25OWTrm253d6JacfzUwR3Xt5mxvHIMAy4O1ESAOM4kpeFGAOpaTAJrzsUIhZawOl7kVIEQBLa5JwzOWfMjK0QAn3fswH/i/M8I4nLNHG5XjkcjqzrSkoJM8Ms0HXt35WE4Ft2d0yCB8Kj5O4OcD5PfOTI4okUoLMZeaHWgsUOhT0mx4FSnH0ff8elFNYCtQoJUnDAqbViFkA/Xzg4TjDxBXwCZC5wGBHcAAAAAElFTkSuQmCC" style="; aspect-ratio: 383/167; height: auto;" width="383"/></p>
+<p>The image above shows that I received the email with the link and inline CSS colouring on the specified text.</p>
+<h2 id="sending-to-multiple-emails">
+<span style="position:relative"><a class="anchor" href="#sending-to-multiple-emails"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Sending to Multiple Emails</span></h2>
+<p>If you want to send the same email to many email addresses, the best method would be to first create all the objects you want in the email, login and then make each <code>MIMEMultipart</code> individually for each email.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.base</span> <span class="kn">import</span> <span class="n">MIMEBase</span>
+<span class="kn">from</span> <span class="nn">email</span> <span class="kn">import</span> <span class="n">encoders</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="n">email</span> <span class="o">=</span> <span class="s1">'myaddress@gmail.com'</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s1">'password'</span>
+<span class="n">send_to_emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'sentoaddreess@gmail.com'</span><span class="p">,</span> <span class="s1">'sentoaddreess2@gmail.com'</span><span class="p">]</span> <span class="c1"># List of email addresses</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s1">'This is the subject'</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s1">'This is my message'</span>
+<span class="n">file_location</span> <span class="o">=</span> <span class="s1">'C:</span><span class="se">\\</span><span class="s1">Users</span><span class="se">\\</span><span class="s1">You</span><span class="se">\\</span><span class="s1">Desktop</span><span class="se">\\</span><span class="s1">attach.txt'</span>
+
+<span class="c1"># Create the attachment file (only do it once)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_location</span><span class="p">)</span>
+<span class="n">attachment</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_location</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
+<span class="n">part</span> <span class="o">=</span> <span class="n">MIMEBase</span><span class="p">(</span><span class="s1">'application'</span><span class="p">,</span> <span class="s1">'octet-stream'</span><span class="p">)</span>
+<span class="n">part</span><span class="o">.</span><span class="n">set_payload</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">encoders</span><span class="o">.</span><span class="n">encode_base64</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<span class="n">part</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s1">'Content-Disposition'</span><span class="p">,</span> <span class="s2">"attachment; filename= </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># Connect and login to the email server</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s1">'smtp.gmail.com'</span><span class="p">,</span> <span class="mi">587</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+
+<span class="c1"># Loop over each email to send to</span>
+<span class="k">for</span> <span class="n">send_to_email</span> <span class="ow">in</span> <span class="n">send_to_emails</span><span class="p">:</span>
+    <span class="c1"># Setup MIMEMultipart for each email address (if we don't do this, the emails will concatenate on each email sent)</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">email</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">send_to_email</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
+
+    <span class="c1"># Attach the message to the MIMEMultipart object</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s1">'plain'</span><span class="p">))</span>
+    <span class="c1"># Attach the attachment file</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+
+    <span class="c1"># Send the email to this specific email address</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">send_to_email</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span> 
+
+<span class="c1"># Quit the email server when everything is done</span>
+<span class="n">server</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</code></pre></div>
+<p>This method also makes sure that everyone that receives the email will not see the email of everyone else that the email was sent to. If you want to send one email to many addresses and let each recipient see who the email was sent to, you can simply set <code>msg['To']</code> to the recipient emails split by commas and then call <code>server.send_message</code> to send the email, passing <code>msg</code> not as a string. </p>
+<div class="codehilite"><pre><span></span><code><span class="n">send_to_emails</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'recipient_1@gmail.com'</span><span class="p">,</span> <span class="s1">'recipient_2@gmail.com'</span><span class="p">]</span>
+
+<span class="c1"># Was: msg['To'] = send_to_email</span>
+<span class="n">msg</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">send_to_emails</span><span class="p">)</span>
+
+<span class="c1"># Was: server.sendmail(email, send_to_email, text) where text = msg.as_string()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> 
+</code></pre></div>
+<blockquote>
+<p>These lines are examples of lines switched in examples above excluding the snippet in "Sending to Multiple Emails"</p>
+</blockquote>
+<h2 id="sources">
+<span style="position:relative"><a class="anchor" href="#sources"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Sources</span></h2>
+<ul>
+<li><a href="https://en.wikibooks.org/wiki/Python_Programming/Email">WikiBooks</a></li>
+<li><a href="https://docs.python.org/3.4/library/email-examples.html">Python docs email examples</a></li>
+</ul>
+<p><em>Most recently modified on 15-7-18 ( added video )</em></p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/simulate-mouse-events-in-python/" title="Simulate Mouse Events In Python">
+<span>←</span>
+<span class="btn-content">Simulate Mouse Events In Python</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-retweet-bot/" title="Python Retweet Bot">
+<span class="btn-content">Python Retweet Bot</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-send-an-email-with-python/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-send-an-email-with-python/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

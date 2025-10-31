@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/monopoly-money/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Monopoly Money - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="A Node.js server and React web app that helps you manage your finances in a game of Monopoly from the browser." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Monopoly Money" property="og:title"/>
+<meta content="A Node.js server and React web app that helps you manage your finances in a game of Monopoly from the browser." property="og:description"/>
+<meta content="/posts/monopoly-money/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/monopoly-money/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Monopoly Money</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2020">18 Apr 2020</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Projects">Projects</a>
+<a class="badge badge-warning" href="/blog/tags/#react">react</a>
+<a class="badge badge-warning" href="/blog/tags/#typescript">typescript</a>
+<a class="badge badge-warning" href="/blog/tags/#javascript">javascript</a>
+<a class="badge badge-warning" href="/blog/tags/#express">express</a>
+<a class="badge badge-warning" href="/blog/tags/#lerna">lerna</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">3 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fmonopoly-money%2F"/>
+</div>
+<p class="lead">A Node.js server and React web app that helps you manage your finances in a game of Monopoly from the browser.</p>
+<hr class="mt-3 mb-0"/>
+<div class="github-summary py-3 d-block text-center">
+<a class="repo-name stretched-link" href="https://github.com/brentvollebregt/monopoly-money">
+<img alt="GitHub Icon" src="/static/img/github-icon.png">
+<span class="ml-2">brentvollebregt/monopoly-money</span>
+</img></a>
+<div class="repo-stats">
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/brentvollebregt/monopoly-money?style=social"/>
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/brentvollebregt/monopoly-money?style=social"/>
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/brentvollebregt/monopoly-money"/>
+</div>
+</div>
+<hr class="my-0"/>
+<div class="post-content mt-3">
+<div align="center" style="padding: 20px 20px 40px 20px">
+<img alt="Monopoly Money Banner" class="lazyload blur-up" data-src="/posts/monopoly-money/banner.png" height="503" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAECAYAAAC+0w63AAAAxUlEQVR4nAXBPUoDURgF0Hu/N4OQQcUm2YAIFjGQFWhvE8h+YrbhAoI4CGJWoFswKuLYWQg2U/gTx7x7PYenN5NxyhibfN3q0l39UPvgajSFvW35hWRBxlrKKaTssujTaAMbHws4lHTyU3bT2dkMYW8AIIg+mSrRAxJHKtI+pZ7sYRB4Ay0APSgGc8xtchfmjp3+LAdzLolou8+9y+fH+4W77/NYTq5rGRew3w3cgjCppwiuGFpHQmunLwCoqo8CAJum+f0HYxVjLINMjZkAAAAASUVORK5CYII=" style="margin-bottom: 10px;; aspect-ratio: 1753/503; height: auto;" width="1753"/>
+<p class="text-center">Manage your finances in a game of Monopoly from the browser.</p>
+<a href="https://monopoly-money.nitratine.net/"><button class="btn btn-outline-secondary" type="button">🌐 Visit monopoly-money.nitratine.net →</button></a>
+</div>
+<p>Monopoly Money is a web app designed for mobile that allows multiple players to track their balances collectively in a game of monopoly and transfer money from one another.</p>
+<h2 id="how-can-this-help-you">
+<span style="position:relative"><a class="anchor" href="#how-can-this-help-you"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>How Can This Help You?</span></h2>
+<p>If you have ever played the credit card edition of Monopoly, you will appreciate how much faster the game moves without having to count cash. This web app substitutes the need for cash in a game of monopoly for a mobile-banking-like solution where players can easily send each other virtual currency.</p>
+<p>Using this method for finance management also allows you to keep a full history of your game and have clarity over every movement.</p>
+<h2 id="usage">
+<span style="position:relative"><a class="anchor" href="#usage"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Usage</span></h2>
+<p>To start using the web app, follow the basic following steps:</p>
+<ul>
+<li>Get all participants to go to <a href="https://monopoly-money.nitratine.net/">monopoly-money.nitratine.net</a> in a browser of their choosing.</li>
+<li>Whoever is the banker should select "New Game" to create a new game after providing their name.</li>
+<li>All other participants should then select "Join Game" and using the game id provided by the banker and their name, join the game.</li>
+</ul>
+<p>When everyone is in the game, the banker can then close the game to stop others from joining and then start distributing out the initial balances.</p>
+<h2 id="screenshots">
+<span style="position:relative"><a class="anchor" href="#screenshots"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Screenshots</span></h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 6px;">
+<a href="/posts/monopoly-money/screenshot-1.png"><img alt="Funds page with game id" class="lazyload blur-up" data-src="/posts/monopoly-money/screenshot-1.png" height="1919" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAbCAYAAACjkdXHAAAB6UlEQVR4nO2TzY7TUAyFP/smZVqilGlpd7DhOUA8M/AobBAbWIAQIDrTJjRNcm0W+Wk6IDFrhHfR9Tk+59iRz/svfjgWNN8aULi+XlGURzaPr1ERyrJkNkupqhNZllFVFavVCndHVRTDcHfSNGWxmBNjREQAx91xB7MIgLszlPj0a1LRDBFBRXD3nowLgoSOH0HGh1ev3xBCIM9ziqLk6uoBL188R0PoJvZE4+QYDXDMnJvbm5FsaF4ulyAgQBhIvCuq6oS7Y+6kSQKAuUFP4+5Ei4CQPVx0YDPzwVOn5jzxotyhD9Gs748WXUQQZAzicDgwWIkWmaUpeZ5fBOfuJCp6TtDBBVQVB1JVgikhBMzsNzHytfzut3XBs+VTHGcgA6ibhrZtWcznF2saFErVnjx6ZJHM2e12JElClmW97O4wQgjsdjvMnPV6hfS7Tx7oDAQORcHP4xGz7tryPEdVUVWKsqRpWuq6Zr/fd2sDJMY4XtjdKzpvQcZpYz6ADg+qZ69TogHUxPbstcckAG1d8+njB67yR7RtS0gC281mbDrWJ96+f8eT9ZbNdksSQqfKzBzgVFX82N2gKqzWa2ZpipmNiupTjaiQpukofQRP/d71PJV/YW36S0493aeSP4V039K/t/wH/wPgXzrjLda7sbUKAAAAAElFTkSuQmCC" style="; aspect-ratio: 1079/1919; height: auto;" width="1079"/></a>
+<a href="/posts/monopoly-money/screenshot-2.png"><img alt="Transfering funds" class="lazyload blur-up" data-src="/posts/monopoly-money/screenshot-2.png" height="1919" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAbCAYAAACjkdXHAAACbElEQVR4nO2TwW4cRRCGv6qumdnZ2d2sCLBIJpGxiOQTJ25c/E7hwhvwDrwBR24hQUquvAFEQQIutmziJAbZszNdxcEzI68cKYrEkf/Q6q7+/7+rqrvl4Tdfx7bfkv9xkKBpGgDMjIig6zpUlZwzZVnSdx2zugZARYQggEA1URQFEYGIABARALg7EdfMEbYsF6yqJbISIgJ3pxwMAOq6xt1Jqrg7IjLtWRDXi8x00i+/PkdVqKqK7XaLmfHZ/j5yIxMAGydjMCK4f+9TdiCCuwMCAjqUNIn7nGGoqayq0XHSZ3fCAwTKohjSHgiFTT5Ts27iZrpjQ01EUNWdjbZtp8a4B6JCPZvdMrO2badrGE9s23YydA9UBc95R5xSwo6Ojtjb20NViBgczXDP9H2+NozAI3bEx8fH2MHBAXU956q9QlVp5g0Xf1/QNGs+2Wxu1T5isVhgOWfW6xXbbY2Zkcwoy5LZrCYCRCDfSNkjEFG6rsNUlaZZMDxpAOZ1zcvzE/q+IQKWywUBCJCGmapiEZmuPcVzjxQrJFUQ4ICk68fReY8AbS+8uQpSEjxAufyDy8dfcvb955RnTyjUKJLx4XxD2ZesdEGhhqnx0/PE4bfGV98lfn+l2Kuo+MG+4PX8nOWLn0nHZ4CTe6eQgi46NCVUhd9eCvf3nQ/u1BTpEOurhqfNIef6hnTxJ/H6BU5QpZKP67ucXv5Fm7cIQpWEewc96/maev4A+fHRo9hsPiLCEbWhLRAEOZwkigwxB7IHKsLpyQn29NkzwgMRdj66TGPcikeAqGBVVY3M90OMvyrezX0b9N2U/8X/mfhfI6QrsTWf8rMAAAAASUVORK5CYII=" style="; aspect-ratio: 1079/1919; height: auto;" width="1079"/></a>
+<a href="/posts/monopoly-money/screenshot-3.png"><img alt="Game history" class="lazyload blur-up" data-src="/posts/monopoly-money/screenshot-3.png" height="1919" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAbCAYAAACjkdXHAAADHklEQVR4nJWUS5PbVBCFv+77kmRJju0hTiiq4E/w/39ENixZQJKpwSSZ8UOy7oOFbA8ZQhWcKu2u+nSfPqfl9y8fyn7YMz1EihTebLd47wEYx5EYI845hmGgbVuGYWC1WgGgwQRQQUSwzlFXFSklSimklMg5X77EjIIxBhFBHk5/lqXpUBWMMfwX7Pd7nHPYd7tf+D59Rx86Pnx64Me7NyB6Y+37jrquARARcs6oKqqKvavWvJKe2ta81S1d31NKmRss4L1DRL5iLqVQSsE+xT2LGBAn1Cp83u1wdU2KEWMM+33mPJ3p2pau6wCw1s7MC9tQ2xpvPEpmuWgwzt+qq+ql1Wc9xvGM9x57igOnNOCc4ct0Ytz9wfbVGhFlihOlFLavX99aFxHqukLVYIPxVCaganjb3mE2ijGW65jXDhBBgJwzh8OREDz2nCLH85FF3/D5/iO2blBrSSmhosQYyTmz2aypqgpVpeva2RdGlaqqiDHSrTfzWkQopcwPrP1K6Zwzj4+PhKrCAsQp4lvHFCPj4yM5JVLKtO3ipvAVqkq/XKIi2FQSQ544HA8sl0u8f1a6lMLpdMJ7z/HTe4Yo1N2aOF3U9up53B/o+4ZSCvv9gZQiokpOmRgjfd+xWL2lKSBqKFWYRzqlgS40cGEKVUAI5FwoJWOMIYTA0+43xqTU7eqZeWEbUioYOyflPI43D6eU8N4TQqBZbqkBVUP2DlHF7qcnGqk5nydSzljrADCmYIwl50RKieOX+xtzTnPGbeu2FE5UVcA7zzgOF12FlBPMGaHb/MBV93EcMcZgd0PLT5Wj5MzhcGC9Xn07xKVQLo6bpjgLtg5CKA5vLe5yfq6RvOJlJI3R+eeHs9CWCZsiMSdU5Rb+FxUQ4O9l7M/Ne1LeIHhyzpzPc5IKsGia28PT044xFkLd3e6afcWvfDwq2a5RZkdZazgNA3ebDX3fX4gV5xRjFKNuPoLvHu7LBqVxjrqub5fxOvfLo1hK5ulpP5vkfjTYeER95Hg8sV6vCCF8S+7bCquqmklSzkVEbvYUkX+o+2+Q8nIv/wN/Acejl0RWU9QRAAAAAElFTkSuQmCC" style="; aspect-ratio: 1079/1919; height: auto;" width="1079"/></a>
+<a href="/posts/monopoly-money/screenshot-4.png"><img alt="Bankers actions page" class="lazyload blur-up" data-src="/posts/monopoly-money/screenshot-4.png" height="1919" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAbCAYAAACjkdXHAAAChElEQVR4nO2UPY4kRRCFv4jMrKrt6R6gR2rWwMHB4BprYnAOxBUQt1gbhxusjTCRENZKeAgLEKL529np+unKiMCo7t4BMdLi85wII35evhdK+fH257gb7pj3MyHB27sdTdOQUsLN+GW/p+s6VJXVasU4jmy3WyICzaqIGIrTNg3r9ZozPBwzw32JEUH1oDp4gNQa4QAJ1INpGlER2q5DeAgBQJ5ePGfYf0OQ0JsnSF4zzzM3paCqRAQgQHCYhS+/F9yF9x9DXvXP4LtP6NYd+u630Ly5UHYnIogAjyAn4adb+PDzgAE+/UCQ8bAPsT8ZxgnPjwkyOStt21KrUXIGgXGcsBB+P7aEwxuPHJlrhCYYRkfiiJlRSqZpGqwaIgvlcZpQEVarBgjcQIahj3k+opqIgJQSZkatBgSbzYaU0j0HlqgCuZpzOIyUpuDui7/uREBEcDzOlLK8HeLEBEIETaoM48D19TWr1RUgpLTQ3m7f4uyXuXH78u40BOZakWoWcVIWBFGBiEuRCJdt911WEfLQ9xz6npwy1Soigplh1Wiawm634+z0PyHjOIWI0A/Dxd+cM13XYmY0pSw052VwzukkXJBTElShLUpIIjzIJZPTkl+26LK7+iva0k8R0wyqoD4gOHOtJFU2m82DlAFyevEF8cMzIrfEOx9DuUFFADmJCH4a8FsPT78WbIYn70Fu5ufUXz+jvbomrT6C9gpY1Dbzy2HkJPwxwNOvgmmAdSfIME6RE7y8OxAhuDulFB51HXOtNCUDwqHvUVW6roOAwJHjXOOiJoHHcmXLT+JoUgSotQJCKenUDBIR5/QBWf6Os/4C5Ffp6+F+pb5217/g/+b/iL8ApmhlUztrQL4AAAAASUVORK5CYII=" style="; aspect-ratio: 1079/1919; height: auto;" width="1079"/></a>
+<a href="/posts/monopoly-money/screenshot-5.png"><img alt="Settings page" class="lazyload blur-up" data-src="/posts/monopoly-money/screenshot-5.png" height="1919" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAbCAYAAACjkdXHAAAB8UlEQVR4nO2STW4TQRCFv6ruaXs8NiIWZARSIpBYcgS2OQ8nYMkBkLgGN2DFCdgiSBagSCgGhcTjcWamu4vFmJ8FK0vs8latan2t1/WenF9/tWbbMKwGTIy6rglFgXOOlCKbTcskBC5WK+q6pu97lsslZoY6UYyMiBBCoJqVAIgIlg0zI5sR44CZ8bfEdpOYEt45shld1+FUCSHwL/16xFs2cs58PD1lXs04vH/I2dkZ0+mU46MjVJVsBiao2Oho50wu1t/ty+U5D90h1WJGjIlNuyHGSIqJ5fIAQ2h+XNC3EcvGg0fHuKLAT4rAQXWXYAWqSlkGYowURYF3nqqqSCkTZzMKIpgxmU4RETwioIJkh6jDeY+oIiY473G+wIioOrIaZEPUIYCPww3t9ooFjnXfMJ9VpK4lpchNkwiayQbD9pp+M2AGuWvBeeSq7eyyucHjxk2KI+UEu40677FsDEOHH+MhlCXzmce/fh948TYgUxCgnu8yBFIGryACUHK+Hs+xhZcn4E/4TJk/odljZkw2O1iVbKCAWUYFtmmMKBN5xhP80w/vePzmFbpYQB7/B+DvLZEQsH4grr6BCCqAKnm9pjp+jgxNa/G6YbwZ7f5ukY0DGX3zu5zZ8Hfmf+q5jzz7s7uS7Cndm7yFb+H/Dv8EIyLy2/XP5ooAAAAASUVORK5CYII=" style="; aspect-ratio: 1079/1919; height: auto;" width="1079"/></a>
+<a href="/posts/monopoly-money/screenshot-6.png"><img alt="Funds page without game id" class="lazyload blur-up" data-src="/posts/monopoly-money/screenshot-6.png" height="1919" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAbCAYAAACjkdXHAAABpElEQVR4nO2SzW4TUQyFP3vu/FANahORdMH7PxQsyKoSgiZBVZuZzFzbLMhMSVuQkOiuXvle+9jHx5abu69x390zfs+EONfra0SgaRrMMoeHA2VV0fc9bdvS9z3L5ZKIQAtRAocIyrLk4uIdOWeIwD0wd9wddwMgIphM4vfXKSgi/M3cHUQQdwtE4FRCRNjt9nNSzpmqrlhcXZ0VjQjE3eMpnWEYzpJUlbIsnzHQb92Wzz82qOqvD1WapqFpGkQU86Cua0QEEUFVZ1+yWSABDtvtjqIouLy6JBUFZoaq4u7c3m4xN9arFSmlEyMRCinoup4gGMaB7nB4VFSEvj+SUkJFORy6x5iZxUT3qaKT8i/FANKkYM4ZESEiiAhSSnPnbEZ37KhTRUppVj0BjMPAzWZDat9jlqmrmtXqwyzOmDOfNl/4uFyzWq9Iqo+rEhHMjN1+T6HKYrGYWcy7DfDweYSzPU8UIwIz45gHCnRWO5WJQouz2dPTq+m6DjNn/3BHXZQ0VcU4jrRtS2rSGfjZbf+L6Z8Ck+qT/5K9Tuc38Bv4v4B/Aqek/lzS6/rgAAAAAElFTkSuQmCC" style="; aspect-ratio: 1079/1919; height: auto;" width="1079"/></a>
+</div>
+<h2 id="features">
+<span style="position:relative"><a class="anchor" href="#features"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Features</span></h2>
+<ul>
+<li>Multiple games can be hosted on the server at once</li>
+<li>Each player uses their own device; everyone joins one game</li>
+<li>Send money between players with ease - no need to sort out change</li>
+<li>Realtime - players get notified when an event occurs immediately.</li>
+<li>The person that created the game is the banker. This person can:</li>
+<li>Give money to players from the bank (and take money)</li>
+<li>Give free parking to players</li>
+<li>Update player names</li>
+<li>Remove players</li>
+<li>Toggle whether free parking can be used or not</li>
+<li>Stop new people from joining the game</li>
+<li>End the game completely</li>
+<li>History is recorded of each game event that can be viewed by all players</li>
+</ul>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-detect-key-presses-in-python/" title="How to Detect Key Presses In Python">
+<span>←</span>
+<span class="btn-content">How to Detect Key Presses In Python</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-get-stored-wifi-passwords-in-windows/" title="How to get Stored WiFi Passwords in Windows">
+<span class="btn-content">How to get Stored WiFi Passwords in Windows</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/monopoly-money/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/monopoly-money/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

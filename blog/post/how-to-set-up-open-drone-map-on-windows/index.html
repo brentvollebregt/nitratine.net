@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/how-to-set-up-open-drone-map-on-windows/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>How To Set Up Open Drone Map On Windows - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This tutorial explains how to get WebODM running on Windows using WSL 2, Ubuntu and Docker Desktop." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="How To Set Up Open Drone Map On Windows" property="og:title"/>
+<meta content="This tutorial explains how to get WebODM running on Windows using WSL 2, Ubuntu and Docker Desktop." property="og:description"/>
+<meta content="/posts/how-to-set-up-open-drone-map-on-windows/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/how-to-set-up-open-drone-map-on-windows/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">How To Set Up Open Drone Map On Windows</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2020">20 Nov 2020</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#odm">odm</a>
+<a class="badge badge-warning" href="/blog/tags/#docker">docker</a>
+<a class="badge badge-warning" href="/blog/tags/#wsl">wsl</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">6 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fhow-to-set-up-open-drone-map-on-windows%2F"/>
+</div>
+<p class="lead">This tutorial explains how to get WebODM running on Windows using WSL 2, Ubuntu and Docker Desktop.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#recommendations">Recommendations</a></li>
+</ul>
+</li>
+<li><a href="#docker-setup">Docker Setup</a><ul>
+<li><a href="#setting-up-wsl-2">Setting Up WSL 2</a></li>
+<li><a href="#installing-ubuntu">Installing Ubuntu</a></li>
+<li><a href="#setting-up-docker-desktop">Setting Up Docker Desktop</a></li>
+<li><a href="#verifying-the-setup">Verifying the Setup</a></li>
+</ul>
+</li>
+<li><a href="#running-open-drone-map">Running Open Drone Map</a><ul>
+<li><a href="#stopping-and-starting-webodm">Stopping And Starting WebODM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="introduction">
+<span style="position:relative"><a class="anchor" href="#introduction"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Introduction</span></h2>
+<p>In this tutorial, I'll run you through the steps of setting up <a href="https://www.opendronemap.org/">Open Drone Map</a> (ODM) on a Windows machine - specifically <a href="https://github.com/OpenDroneMap/WebODM">WebODM</a>.</p>
+<p>To do this, we will first setup <a href="https://docs.microsoft.com/en-us/windows/wsl/compare-versions">WSL 2</a> and setup Ubuntu within windows. When complete, we will then set up <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a> and make it run on WSL 2. Using docker we will then be able to run the WebODM docker image.</p>
+<h3 id="requirements">
+<span style="position:relative"><a class="anchor" href="#requirements"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Requirements</span></h3>
+<p>For this tutorial, to get WSL 2 setup, you will need:</p>
+<ul>
+<li>For x64 systems: Version 1903 or higher, with Build 18362 or higher.</li>
+<li>For ARM64 systems: Version 2004 or higher, with Build 19041 or higher.</li>
+</ul>
+<p>To find your version number, execute the following in PowerShell:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">Get-ComputerInfo</span> <span class="p">|</span> <span class="nb">select </span><span class="n">WindowsVersion</span>
+</code></pre></div>
+<p>To find the build number of your Windows installation run the following in PowerShell:</p>
+<div class="codehilite"><pre><span></span><code><span class="no">[System.Environment]</span><span class="p">::</span><span class="n">OSVersion</span><span class="p">.</span><span class="n">Version</span>
+</code></pre></div>
+<p>This should output something like this:</p>
+<div class="codehilite"><pre><span></span><code>Major  Minor  Build  Revision
+-----  -----  -----  --------
+10     0      19041  0
+</code></pre></div>
+<p>Here you can see my build number is 19041 which is higher than the required 18362.</p>
+<p>If neither of these values are high enough, try checking for updates and updating Windows. You may have to update Windows multiple times to get to the desired version and build.</p>
+<blockquote>
+<p>Note: Windows Home and above is supported using this method.</p>
+</blockquote>
+<h3 id="recommendations">
+<span style="position:relative"><a class="anchor" href="#recommendations"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Recommendations</span></h3>
+<p>I recommend installing the new Windows Terminal as it allows you to access the different terminals on your system in one place. </p>
+<p>I recommend it as it will allow you to easily access your Ubuntu distribution with a nice terminal when it has been set up. You can find the Windows Terminal in the Microsoft Store.</p>
+<h2 id="docker-setup">
+<span style="position:relative"><a class="anchor" href="#docker-setup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Docker Setup</span></h2>
+<h3 id="setting-up-wsl-2">
+<span style="position:relative"><a class="anchor" href="#setting-up-wsl-2"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting Up WSL 2</span></h3>
+<p>These instructions are based on the steps in Microsoft's <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Windows Subsystem for Linux Installation Guide for Windows 10</a> documentation page at the time of writing this. If you have any issues with these steps, I recommend taking a look at the docs directly to see if a new step has been added.</p>
+<ol>
+<li>Enable the Windows Subsystem for Linux<ul>
+<li>Open PowerShell as Administrator</li>
+<li>Execute: <code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code></li>
+</ul>
+</li>
+<li>Enable Virtual Machine feature<ul>
+<li>Open PowerShell as Administrator (or use the same session as step 1)</li>
+<li>Execute: <code>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</code></li>
+</ul>
+</li>
+<li>Restart your machine</li>
+<li>Download the Linux kernel update package and run it<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package">Microsoft Docs with Download</a></li>
+</ul>
+</li>
+<li>Set WSL 2 as your default version<ul>
+<li>Open PowerShell as Administrator (session as step 2)</li>
+<li>Execute: <code>wsl --set-default-version 2</code></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Did you have any issues with these step? The <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10#troubleshooting-installation">original Microsoft documentation troubleshooting section</a> might offer some help.</p>
+</blockquote>
+<h3 id="installing-ubuntu">
+<span style="position:relative"><a class="anchor" href="#installing-ubuntu"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Ubuntu</span></h3>
+<p>For this tutorial I will be using Ubuntu, you do not have to use Ubuntu but you will need to install an OS that supports docker.</p>
+<ol>
+<li>Go to the Microsoft Store</li>
+<li>Search for "Ubuntu"</li>
+<li>Go to the Ubuntu app that has no version by it in the title. <em>(Any of them are fine, this is just specific for the tutorial)</em></li>
+<li>"Get" and install the app</li>
+<li>After it is installed, click "Launch"</li>
+<li>Create a new user and assign a password. <em>(If you ever forget your password, <a href="https://docs.microsoft.com/en-us/windows/wsl/user-support#forgot-your-password">this will help</a>)</em>.</li>
+</ol>
+<p>After creating the user, you should now be able to execute Linux-based commands. To make sure Ubuntu is running in WSL 2, execute <code>wsl --list --verbose</code> in PowerShell, you should see something like:</p>
+<div class="codehilite"><pre><span></span><code>  NAME                   STATE           VERSION
+* Ubuntu                 Running         2
+</code></pre></div>
+<p>VERSION=2 for Ubuntu means it is running in WSL 2. If it is not running in WSL 2, you may have not set the default version as shown in a previous step. To fix this, execute <code>wsl --set-version Ubuntu 2</code>.</p>
+<h3 id="setting-up-docker-desktop">
+<span style="position:relative"><a class="anchor" href="#setting-up-docker-desktop"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Setting Up Docker Desktop</span></h3>
+<p>Now that WSL 2 and Ubuntu are set up, <a href="https://www.docker.com/products/docker-desktop">download Docker Desktop</a> for Windows (I recommend using stable) and install it.</p>
+<p>After installing Docker Desktop and restarting, it will start automatically in the background. You will be able to see a new icon on the taskbar that looks like this:</p>
+<p><img alt="Docker Taskbar Icon" class="lazyload blur-up" data-src="/posts/how-to-set-up-open-drone-map-on-windows/docker-taskbar-icon.png" height="83" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAICAYAAAAm06XyAAAA80lEQVR4nJ2PzUoCYRiFn+9/mAayxhJs0aJNBRIEriLpQrqF7tOgjbuuoBQUE7IRmfd7W1hegGd1zuLhnGPG47FyoLzqwSzeOXc43DTNPhhj9l5VadsW7z3GGFQVay05ZzAWUMzT6HG324CIoGRUMzFE6rpmsZgjIjjraDYbiqJAtz8Y5/HTz4//WrpnXXLOpBRZrb4QEZbLBVVVMV+vuRnc8T55ww5fkOkEG2MkpkgIgbIsOe/16PcvKMuS2WxKSokQI1fHHZ4fRlymgnTSJ1WnmMHtterf31ba3ScyIXic8+QsbEW4F6Xzvaapjng1GWctvyA3X+NAw6rXAAAAAElFTkSuQmCC" style="; aspect-ratio: 164/83; height: auto;" width="164"/></p>
+<p>Right-clicking on this icon will give you a menu; go to the dashboard on this menu.</p>
+<p><img alt="Docker Taskbar Icon Menu" class="lazyload blur-up" data-src="/posts/how-to-set-up-open-drone-map-on-windows/docker-taskbar-icon-menu.png" height="350" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAARCAYAAAACCvahAAACK0lEQVR4nHWT224TMRCGv7HHSbY57JbSSD1ccFUQXCGeASFeAPGWIOC6PAVvUA5CVIQm2c0e7OFim1URMJJlja3/n39+j+X5i5f27NlTlsdLuq7DOcd4PGE0CogIZtbvGCKOsix59/4DXdehxeEhr1+94snjx6xWK0SEg+mULMv4V1xfX/PmzVvatkVF4OLigmpXsfr5i+l8xuFkQowRMyOZIYCZ4b2nqirUewxD23pHXTeMghKCklLk+9dvrDdr7h8vKYqclBIA3ntUlV21JaaIrm9ucE4ASGY0dYNzjrPzc8bj8QDaE6SU2Gw21HWNOud6SarMF3O895gZbdvinKNtW5qmYTQaM5/PABARRATdJ13XUpUVIShmEGPHj7phsViwyBf/NE8B7DYJQfFe6bqWLDtgNpuhIaCqxBiHNYBt72ayW4ktXdeRknF6doqIkFLCez+sfbi7MlJKiMhgVFlWmBn/C+2np+/bq6Je8d5zvDz+Q+YwaXfIXJ/0B0J/ud1uuLr6zN2ie2Bd14j0ZOq9H0BN3WAY48mEo6N7t+8vfxF4r6gqOssLYoyI9/jgb12eEkIgxjgMh5nhnENVmS0KRgex7znPc0Tg5mZNNpmQZRkpJoKGu4UByIuC6fSAyW6D/vj6hY+Xl4gT1r/Wg+spJWKMnJ6fkecLyrIkxUjTNgQVrlgiTx49tHq3AxGcc2AgAuz/sBOKw4LtZk1Zbjk9OeHk/AGfVhm/AQ/kHbAaXPBLAAAAAElFTkSuQmCC" style="; aspect-ratio: 302/350; height: auto;" width="302"/></p>
+<blockquote>
+<p>If you cannot see the taskbar icon, check the up chevron to see if it has been hidden away. If it is not their either, search for "Docker Desktop" in the start menu search, it should be there if Docker Desktop is installed.</p>
+</blockquote>
+<p>On the dashboard that just opened, go to the settings using the cog at the top.</p>
+<p>Under the "General" tab, make sure "Use the WSL 2 based engine" is checked (could be greyed out on Windows 10 Home). </p>
+<p><img alt="Docker Desktop Settings General" class="lazyload blur-up" data-src="/posts/how-to-set-up-open-drone-map-on-windows/docker-desktop-settings-general.png" height="720" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAJCAYAAADtj3ZXAAAA+klEQVR4nF2RS1LDQBBDX2t67JgNxZU5DldjQRUJn8QzIxZ2EkCrXkl66nh+eXVmQRLYGDBBCpYJjl9GgqeH4PS50lqna8KY+Di+21HoBkWggHBDKkQIMADDEAHBJgOJKufL4Pj5xWGZqSX5/uhMdSUkalZKKTcTfl1pm6mYJQc5LhzmpFfR+oXogceg1s3AO1YAktDVqdaJOh9wa+j0Ruy1DbTWOF9Weh8oYusPJLvLPM/YBhXG8gheyTpt3N6AQ8EYg9gN8sbhnSRgXpLeY09OQlDT+I59T/6vUso+0m/Fte2WDGR3J1WQrovGn2Xvz9nWWVdxPp+QzA8VNm+ayqxJkAAAAABJRU5ErkJggg==" style="; aspect-ratio: 1250/720; height: auto;" width="1250"/></p>
+<p>Under the "Resources"-&gt;"WSL Integration" tab, make sure "Enable integration with my default WSL distro" is checked and that the switch by the Linux distribution installed (Ubuntu) is turned on.</p>
+<p><img alt="Docker Desktop Settings WSL Integration" class="lazyload blur-up" data-src="/posts/how-to-set-up-open-drone-map-on-windows/docker-desktop-settings-wsl-integration.png" height="720" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAJCAYAAADtj3ZXAAAA5ElEQVR4nI3RS1bDMAyF4f9KctKU0wFbZjlsjVHTZ0hsMQiFDDic3pE8+CzJ1tv7R3o4JiNJ1ojiMHRivDbM4HUvzteZZalU60gSXU5juvtKBJKYlwqZgIhwkvUogb6vTyDwwuneGG93hmGgU/J5PJJdIMA9iBJ0paz6MRwQ2RpDbzAtcBvZHQ5Ml5nuZcDMMDNKKb9CGwyitUptFTNDBnHY0/c9j3UyN+020flyzVYb87JQSsEkZCLb32CbIMHM2PX9T4dnIIA9itbaUwDWH5FE1KyEOe7B+pT6hyXzbEzTGbPkCzlCX1hJsfb6AAAAAElFTkSuQmCC" style="; aspect-ratio: 1250/720; height: auto;" width="1250"/></p>
+<p>If you had to make any changes in the settings, you will need to click "Apply &amp; Restart" in the bottom right.</p>
+<h3 id="verifying-the-setup">
+<span style="position:relative"><a class="anchor" href="#verifying-the-setup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Verifying the Setup</span></h3>
+<p>In a new terminal (you may need to start a new session), execute <code>docker info</code>; if you get something like the following, it has worked and you can now use docker.</p>
+<div class="codehilite"><pre><span></span><code>Client:
+ Debug Mode: false
+ Plugins:
+  scan: Docker Scan (Docker Inc., v0.3.4)
+
+Server:
+...
+</code></pre></div>
+<h2 id="running-open-drone-map">
+<span style="position:relative"><a class="anchor" href="#running-open-drone-map"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Running Open Drone Map</span></h2>
+<p>Now that docker is setup, we can get WebODM running.</p>
+<ol>
+<li>Open a new terminal where you want to put the WebODM project.</li>
+<li>Clone the <a href="https://github.com/OpenDroneMap/WebODM">WebODM</a> repository: <code>git clone https://github.com/OpenDroneMap/WebODM --config core.autocrlf=input --depth 1</code> (or download it as a zip and unzip it)</li>
+<li>Go into the newly created directory: <code>cd WebODM</code></li>
+<li>Start the server using <code>./webodm.sh start</code></li>
+</ol>
+<p>Starting WebODM may take a while as it has to set up and build all the containers. If you open up the docker desktop dashboard again, you will be able to see it's running when everything is green:</p>
+<p><img alt="WebODM Running In Docker Desktop Dashboard" class="lazyload blur-up" data-src="/posts/how-to-set-up-open-drone-map-on-windows/webodm-running-in-docker.png" height="720" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAJCAYAAADtj3ZXAAAAtElEQVR4nI2QzU4DQQyDPyeZGSp4Zl6HFysSdw6FdjXmsNWqsPz55kS24+jx6cURorcGEgA2tIRDF69vBqA0KZnLeWGJhm10fD56tM44dJgw+gCMAbz5caUIYYxtqo17ULA4OL2fOF8KRVJpMtcrPuM6kChPQ0xEEBKhiYlNdJv8FbUutXlmikiYu8Q94pZIwXQxDZV/i2tNNBXBw7jbOu27/ihev8gv/b4VZwUti8zcbP6LD5vLQHgoGThjAAAAAElFTkSuQmCC" style="; aspect-ratio: 1250/720; height: auto;" width="1250"/></p>
+<p>If you look at the "webapp" container and click on "Open In Browser", a browser tab/window will open at the address WebODM is hosted at.</p>
+<p><img alt="WebODM Open In Browser" class="lazyload blur-up" data-src="/posts/how-to-set-up-open-drone-map-on-windows/webodm-open-in-browser.png" height="291" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAECAIAAADec/LeAAAAjElEQVR4nE3MSwrCQBAFwPe6J5+JERFciEfQ+59C8AzuFQNidGJmul0IYh2geB0Ge+fYtCDdnUKqwPFFMpDFPLsTCOGV0u2SJUJr5rleRt1tkTNIAC5yPp6g3eaw1zIH9r3V4mhclGAOtDT9YrO5rFeL2LWcXJ33xzimpxRpY+NQwIPgX1VVZlZKAfABup09HM4ImfcAAAAASUVORK5CYII=" style="; aspect-ratio: 1085/291; height: auto;" width="1085"/></p>
+<p>When first loading the application, it will ask you to create a username and password. If you forget your password later on, <a href="https://github.com/OpenDroneMap/WebODM#reset-password">this will help</a> - remember WebODM needs to be running and this will only change the password, you need to remember the username.</p>
+<p>After setting up the username and password, you will now be able to use WebODM:</p>
+<p><img alt="WebODM Home" class="lazyload blur-up" data-src="/posts/how-to-set-up-open-drone-map-on-windows/webodm-home.png" height="397" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAECAYAAAC+0w63AAAAkUlEQVR4nE2OSw4BURBFT9Ur+jVGBva/BduwBQYGIi3xa0R8upSBbpzJTW7uSa5MZ1WQ+twfT9ydMhcEEBEQEARJ9duJCKaCXC+nKIcDAOrDEbNEmTPaM0D50OUPuzfAzTFLWB6hAo+XkhohpU4Iqs2WY33G+on5Yom4e6gqjTvC/7hV2nurdcVuXzOZjClzwRsSUTuI++OLXgAAAABJRU5ErkJggg==" style="; aspect-ratio: 1439/397; height: auto;" width="1439"/></p>
+<h3 id="stopping-and-starting-webodm">
+<span style="position:relative"><a class="anchor" href="#stopping-and-starting-webodm"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Stopping And Starting WebODM</span></h3>
+<p>Since WebODM is running in docker containers, it can easily be stopped to save on system resources.</p>
+<p>To start WebODM, run:</p>
+<div class="codehilite"><pre><span></span><code>./webodm.sh<span class="w"> </span>start
+</code></pre></div>
+<blockquote>
+<p>Make sure you run this in the WebODM folder that was cloned from GitHub</p>
+</blockquote>
+<p>To stop WebODM press <kbd>Ctrl</kbd> + <kbd>C</kbd> in the terminal that opened with WebODM logs in it or run:</p>
+<div class="codehilite"><pre><span></span><code>./webodm.sh<span class="w"> </span>stop
+</code></pre></div>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-face-recognition-tutorial/" title="Python Face Recognition Tutorial">
+<span>←</span>
+<span class="btn-content">Python Face Recognition Tutorial</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/a-warning-for-ef-cores-datetimeoffsettobinaryconverter/" title="A Warning For EF Core's DateTimeOffsetToBinaryConverter">
+<span class="btn-content">A Warning For EF Core's DateTimeOffsetToBinaryConverter</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/how-to-set-up-open-drone-map-on-windows/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/how-to-set-up-open-drone-map-on-windows/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

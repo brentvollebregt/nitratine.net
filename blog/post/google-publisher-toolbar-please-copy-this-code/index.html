@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/google-publisher-toolbar-please-copy-this-code/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Google Publisher Toolbar: Please copy this code - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content='When first installing Google Publisher Toolbar, you may be asked, "Please copy this code, switch to your application and paste it there". In this post, I look into a method on how to fix this and allow you to use the extension.' name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Google Publisher Toolbar: Please copy this code" property="og:title"/>
+<meta content='When first installing Google Publisher Toolbar, you may be asked, "Please copy this code, switch to your application and paste it there". In this post, I look into a method on how to fix this and allow you to use the extension.' property="og:description"/>
+<meta content="/posts/google-publisher-toolbar-please-copy-this-code/message.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/google-publisher-toolbar-please-copy-this-code/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Google Publisher Toolbar: Please copy this code</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2019">24 Apr 2019</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#google">google</a>
+<a class="badge badge-warning" href="/blog/tags/#chrome-extension">chrome-extension</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">4 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fgoogle-publisher-toolbar-please-copy-this-code%2F"/>
+</div>
+<p class="lead">When first installing Google Publisher Toolbar, you may be asked, "Please copy this code, switch to your application and paste it there". In this post, I look into a method on how to fix this and allow you to use the extension.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#the-problem">The Problem</a></li>
+<li><a href="#a-potentially-quick-solution">A Potentially Quick Solution</a></li>
+<li><a href="#looking-at-the-source-of-the-extension">Looking at the Source of the Extension</a></li>
+<li><a href="#looking-for-what-should-be-executed">Looking for what Should be Executed</a></li>
+<li><a href="#executing-the-javascript">Executing the JavaScript</a></li>
+</ul>
+</div>
+<blockquote>
+<p>Note: This extension no longer exists</p>
+</blockquote>
+<h2 id="the-problem">
+<span style="position:relative"><a class="anchor" href="#the-problem"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Problem</span></h2>
+<p>When installing the latest version of the Chrome extension <em>Google Publisher Toolbar</em> and then trying to connect/enable Google AdSense or Google Analytics, you may be given a prompt to "<strong>Please copy this code, switch to your application and paste it there:</strong>" followed by a code that you can copy like in the image below.</p>
+<p><img alt="Google Publisher Toolbar Asking the User to Copy the Code" class="lazyload blur-up" data-src="/posts/google-publisher-toolbar-please-copy-this-code/message.png" height="199" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAYAAADXhRcnAAAAuklEQVR4nHWQwWrDQAxE32jXYJeu+//fWBKK3cNa8a56SO1A0uoiJN6MGCkigqfqAeu1Ynyh/Mb7x/yMAGB/LQUMA0QY+kVeLvwrFlyWTy7flcg6DV84d4+IQBJnB9q+393NkIR0lx8ph2EguzvufkIHcMy1ViKClBKtNWQGEZRSyBGB+w0z0XvQe6OUwjiOBDBNE5IweyRcloVt29C6ruF+o/eGZEjQWiOlxN4aOWVSMub58fHeO5L4AXcKXrQL9Sf7AAAAAElFTkSuQmCC" style="; aspect-ratio: 451/199; height: auto;" width="451"/></p>
+<p>After quite a bit of digging, I couldn't find any solutions to this problem which meant I had to investigate the issue from the start.</p>
+<blockquote>
+<p>Please note that these steps described in this post may not work for everyone. These are the steps I took and they seem reliable; however, file names and contents can change.</p>
+</blockquote>
+<p>My first thought was that something should be picking this code up automatically, in particular the Google Publisher Toolbar extension. Chrome extensions use JavaScript which can easily be viewed using some sort of extension viewer. </p>
+<h2 id="a-potentially-quick-solution">
+<span style="position:relative"><a class="anchor" href="#a-potentially-quick-solution"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>A Potentially Quick Solution</span></h2>
+<p>While testing the method below, it appeared to me that this script was being executed too fast on page load. In some cases, I found that simply refreshing the page that asks you to copy the code out will trigger the script to run again and thus take the token.</p>
+<p>I cannot guarantee this method will have better accuracy than the last method but it's still worth a shot.</p>
+<h2 id="looking-at-the-source-of-the-extension">
+<span style="position:relative"><a class="anchor" href="#looking-at-the-source-of-the-extension"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Looking at the Source of the Extension</span></h2>
+<p>There are a <a href="https://gist.github.com/paulirish/78d6c1406c901be02c2d">few options</a> when trying to view a Chrome extensions source but I decided to take an online tool approach as it would streamline the process of extracting everything. I ended up using <a href="https://robwu.nl/crxviewer/">robwu.nl/crxviewer/</a> which simply asks for the URL of a Chrome extension (plus some other options).</p>
+<p><img alt="Loading the Google Publisher Toolbar URL into the CRXViewer" class="lazyload blur-up" data-src="/posts/google-publisher-toolbar-please-copy-this-code/crxviewer.png" height="198" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAECAYAAABREWWJAAAAlElEQVR4nC3MQVLEMAxFwfdlJdSMQ+5/SCArPDWxJbGhD9C6rqskozVj3z+AYs6FAASSyEzcN9wdAAnmXPi+bSBhJta6ARGxiAjMRGbh7mQGr9dEKqqgstCcs8YYRCYUANz3m4hAElVFaw13x8w4jgNJRCRmJnrvxFp8/3wxxi+Px5PeO+d5IolmRmuN4/jE3f8j8QcU5EY43Fr48AAAAABJRU5ErkJggg==" style="; aspect-ratio: 833/198; height: auto;" width="833"/></p>
+<p>Providing it with the URL of Google Publisher Toolbar on the Chrome Web Store <em>(not available anymore)</em> and leaving all the other options as default, I then clicked "Open in this viewer" to view the source of the extension.</p>
+<h2 id="looking-for-what-should-be-executed">
+<span style="position:relative"><a class="anchor" href="#looking-for-what-should-be-executed"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Looking for what Should be Executed</span></h2>
+<p>When the source first loads, it may appear to have a lot of files, but many of them are translations for different languages. The best way to get a hint of what to look for is to look at the <code>manifest.json</code> file. Viewing this file gives details like the name, version, icons and what scripts are run where; this is definitely the place for insight into what I was looking for.</p>
+<p>If you look back at the URL we were told to "<strong>Please copy this code, switch to your application and paste it there:</strong>" on, you would have noticed that it followed something like <code>https://accounts.google.com/o/oauth2/approval/v2/approvalnativeapp?...</code> <em>(yours may be different)</em>; this is good to remember as this is where a JavaScript script should have picked up the token.</p>
+<p>In the <code>manifest.json</code> file, under the <a href="https://developer.chrome.com/extensions/content_scripts"><code>content_scripts</code></a> key is a list of objects that describe what files that run in the context of web pages at particular URLs.</p>
+<p><img alt="content_scripts in the manifest.json" class="lazyload blur-up" data-src="/posts/google-publisher-toolbar-please-copy-this-code/content-scripts.png" height="511" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAA40lEQVR4nH2RwU4DQQxDnzPJtAj+/0N7ge7uxBzYVkKi+G77OdHtdnPOYjvu0OJSVx4aQ0jilRLgUhMv87ntrG3Dbdrm/WMyZ/5nFt2NMXMma5moIEcgXreeZmMDMpaZlWQNxggAbL80B5gIIQfbZ6MQIbFWs1bT/dqcj3Rjrm/J/Wtni4OqAYYYwRjxJ0Ea4MRebjITBBHCBrfZ9+MMAInnB1IIndjHvXE2x76QRNtIMCuJ0dhQFVQN7BMboL2Iatzi+lbPpqogIh54PxP9wLbZjwOFuMyiV5D5k/68x3Pv793fKuqCm9djbHEAAAAASUVORK5CYII=" style="; aspect-ratio: 768/511; height: auto;" width="768"/></p>
+<p>Each object in this list contains a <code>matches</code> key; this contains a list of all the URL matches where particular scripts are allowed to run. In the same object under the <code>js</code> key is a list of all the scripts that can run on the matched URLs. In the screenshot above, the third object contains the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">"matches"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"https://accounts.google.com/o/oauth2/approval?*"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"https://accounts.google.com/o/oauth2/approval/v2/approvalnativeapp?*"</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"js"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"contentscript_oauth_response_handler.js"</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"all_frames"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"run_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"document_idle"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The URLs that can be matched in this content script object match the original URL we are looking for; <code>https://accounts.google.com/o/oauth2/approval/v2/approvalnativeapp?...</code> is matched by <code>https://accounts.google.com/o/oauth2/approval?*</code> <em>(* means anything)</em>. This means the JavaScript in the <code>contentscript_oauth_response_handler.js</code> is what should be running.</p>
+<p>Open this file by searching for it on the left. The file is averagely sized and has been compressed as all function names have been renamed. This isn't an issue though as all the code is this file is wrapped in <code>(function() { &lt;code&gt; })();</code> which will mean this immediately gets executed when the script loads.</p>
+<h2 id="executing-the-javascript">
+<span style="position:relative"><a class="anchor" href="#executing-the-javascript"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Executing the JavaScript</span></h2>
+<p>Copy all the code from <code>contentscript_oauth_response_handler.js</code> onto the clipboard <em>(Ctrl + C)</em> and try to enable AdSense or Analytics in the Google Publisher Toolbar extension again. You should be presented with the <em>Please copy this code, switch to your application and paste it there:</em> page again; this is good as we haven't changed anything yet.</p>
+<p>Press <code>F12</code> on this page to open Chrome dev tools. Go to the <code>Console</code> tab <em>(select it on the top bar)</em> and paste the code copied previously in this window.</p>
+<p><img alt="Pasted JavaScript in Chome DevTools" class="lazyload blur-up" data-src="/posts/google-publisher-toolbar-please-copy-this-code/pasted-js.png" height="387" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAICAYAAAAm06XyAAAAyUlEQVR4nI2OQXICMRADWxqvF6j8/4fhA1Qt2F57ciB36KtKLen+e8+IIKLQR5I52GshopAkJG8kLNFaw2Eso+M40jYktFdDgroVsBnniSWQEKLulTEGtrGNMjNnn6wxWV44zFYr31ByJf01GO1FjieuG7NWHAVJkDBZeC3KfmGl8BbYosji8rPDEm1MBLhWIgJkAHJNQkJRCPGWwvt2ZsKZzEzKZvgPP6HMzMfjwdkG131jSlxvN2x/Lvfes/dORFAjwMYRXy3/AbvSYuywbEFOAAAAAElFTkSuQmCC" style="; aspect-ratio: 708/387; height: auto;" width="708"/></p>
+<p>After pasting the code, press enter. An error may be displayed with <code>Uncaught TypeError: Cannot read property 'sendMessage' of undefined</code>; ignore this and close the tab. Now when clicking on the Google Publisher Toolbar, you should see that the extension read the token and you can use Google Publisher Toolbar; repeat for the other service (AdSense/Analytics) if required.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-requests-tutorial/" title="Python Requests Tutorial">
+<span>←</span>
+<span class="btn-content">Python Requests Tutorial</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-hash-files-in-python/" title="How to Hash Files in Python">
+<span class="btn-content">How to Hash Files in Python</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/google-publisher-toolbar-please-copy-this-code/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/google-publisher-toolbar-please-copy-this-code/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

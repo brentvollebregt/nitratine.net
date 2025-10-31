@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/multi-clipboard/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Multi Clipboard - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="A simple clipboard manager so you will never find yourself copying the same thing twice. Images, text and files are supported and unlimited amounts of saved clipboards can be created. Switch clipboard contents using a simple GUI." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Multi Clipboard" property="og:title"/>
+<meta content="A simple clipboard manager so you will never find yourself copying the same thing twice. Images, text and files are supported and unlimited amounts of saved clipboards can be created. Switch clipboard contents using a simple GUI." property="og:description"/>
+<meta content="/posts/multi-clipboard/main-gui-with-settings-shown.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/multi-clipboard/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Multi Clipboard</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2018">15 Aug 2018</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Projects">Projects</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#clipboard">clipboard</a>
+<a class="badge badge-warning" href="/blog/tags/#gui">gui</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">3 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fmulti-clipboard%2F"/>
+</div>
+<p class="lead">A simple clipboard manager so you will never find yourself copying the same thing twice. Images, text and files are supported and unlimited amounts of saved clipboards can be created. Switch clipboard contents using a simple GUI.</p>
+<hr class="mt-3 mb-0"/>
+<div class="github-summary py-3 d-block text-center">
+<a class="repo-name stretched-link" href="https://github.com/brentvollebregt/multi-clipboard">
+<img alt="GitHub Icon" src="/static/img/github-icon.png">
+<span class="ml-2">brentvollebregt/multi-clipboard</span>
+</img></a>
+<div class="repo-stats">
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/brentvollebregt/multi-clipboard?style=social"/>
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/brentvollebregt/multi-clipboard?style=social"/>
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/brentvollebregt/multi-clipboard"/>
+</div>
+</div>
+<hr class="my-0"/>
+<div class="post-content mt-3">
+<p>Switch clipboard contents using a simple GUI<br/>
+Images, text, files and other formats are supported with unlimited amounts of saved clipboards able to be created.<br/>
+The idea of this is to easily switch clipboards with a simple click in a GUI. It comes with a built-in listener for Ctrl + Windows + C</p>
+<p><img alt="Main GUI" class="lazyload blur-up" data-src="/posts/multi-clipboard/main-gui.png" height="142" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAADCAYAAACj1j4PAAAAfklEQVR4nAXBYQqCQBCA0W+WGcXAlv2ReBLvf54kg7KEnN3pPVmWJWqtmCainbgHXa8Ml0xEcBwH7o6IYGaUUpjnmQSBaiJIHO3Gfha6n2KdYmaICON4xVTJOSMi3NeVBODeECpDejD2L2rf8LPSWgNg3998vl+macLMeG4bf72yNUao5t11AAAAAElFTkSuQmCC" style="; aspect-ratio: 686/142; height: auto;" width="686"/></p>
+<h2 id="what-is-this">
+<span style="position:relative"><a class="anchor" href="#what-is-this"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What Is This?</span></h2>
+<p>This is my solution to constantly overwriting my clipboard. It is a GUI that acts like a hotbar, click on a virtual clipboard to place it on your actual clipboard. Some command-line support has also been added in the form of setting and clearing clipboards.</p>
+<h2 id="a-simple-demo">
+<span style="position:relative"><a class="anchor" href="#a-simple-demo"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>A Simple Demo</span></h2>
+<p><img alt="Demonstration" class="lazyload blur-up" data-src="/posts/multi-clipboard/multi-clipboard.gif" height="500" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA4AAAAJCAMAAAA1k+1bAAADAFBMVEUAAAAA/wAEBQUGCQcHDAsICQgICgsICwwJDA4LDhAMsOwPreAQayEZGRccvEYdHyAdOikdgMYeSY8eSZAgKjUgSYog/V8iJSkjOUUkR3wmQl8nTV8n9F8oTosoT5ApXZwqToUqVH0rTn0rToEsU40sVJAsV44sYH8tVI8tVpEtVpQtVpUtV5UuVJUuVZEvVpQwVpUxVYwxWZQ0U4A1Mi81XJk4OTo6XI89Pjg9UGlDaaBEQ0RE8nFFrM5HYHlITFJIyWVKSUtLbJ5Nte5PTU1PUFNQUFBRT1FSUFFUT0tUcJZVVFZWeaNXVFJZgLZcVFJdXFxfTilgXVVhYWFiZWhmZWdnfJhpZ2lqirhuYjhvb21vhZ1vrMhwhnRyc3Z0kKN02Pl1Skp4eHh5PCN7e3x7fnx7lrx+osaBfXiBfoCB/T6CgIKD61KEgoSEoMSGhYeGm7+Hh4CHmruIfnKJeFGJiYyJoL2Kh4iMjYeNjI2Nq8yRkpKSk5uUjI+Vmp+Wk5WXl5uXmJSXrcmYk4aaqbacm52du9ifimifnZ+ftseioKKjj3ukpaalzO+nfoWqn5GrvdOsqamtrayubnGxsLGyvca0kkC0s7i0y9+2sam2yNK22fO29ya3eU+5lZ65/Cm8u7y97E3Bv8DCQEvDDhLHdi/HrWnHxcfJ3/LKuTDNzM3N6/zN7nfQv4fQ0NPRxqXT1dfUw4/X1dfY1dfY1tja2Nrbwn3bzdrb5O3b6dDb7/nctGbcysPc29zg3+Dhszjj4uTk5uHm5Obm5ubo5ujpx4Tq/X7r6uvr/kDs/avtjynuzo7u3s3v7e/wdynweCvwjk/ws1Tw7/LxdCjxq43xu8Dx8fPyylDy7uHy8PLz8/Hz8/Pz9Pbz/v70xhz08vT09/j14Gr18fP2o8f2wtX2zxv26Yz29Pb2+Pr3zxD36Z/578v59/j5/tD6/f/7+fv7/f79/P79/fX9/fz+/br+/cz+/eT+/kz+/tv+/uz+/vn+/vn+/v7//f///v////8OvYUKAAAAAnRSTlP/AOW3MEoAAAAvSURBVHicYzCqk3TS10/L0wcBBYZNZ+9DwHEQwXDo0H84OHSImtzlRw7dh4F9EwF1G2hra+Ot+AAAAABJRU5ErkJggg==" style="; aspect-ratio: 800/500; height: auto;" width="800"/></p>
+<h2 id="getting-started">
+<span style="position:relative"><a class="anchor" href="#getting-started"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Started</span></h2>
+<h3 id="prerequisites">
+<span style="position:relative"><a class="anchor" href="#prerequisites"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Prerequisites</span></h3>
+<ul>
+<li>Python &gt;= 3.5</li>
+<li>Windows</li>
+</ul>
+<h3 id="installation-and-usage">
+<span style="position:relative"><a class="anchor" href="#installation-and-usage"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installation and Usage</span></h3>
+<h4 id="installing-via-pypi">
+<span style="position:relative"><a class="anchor" href="#installing-via-pypi"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Via <a href="https://pypi.org/project/multi-clipboard/">PyPi</a></span></h4>
+<p>To install the package from PyPI, execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">python -m pip install multi-clipboard</span>
+</code></pre></div>
+<p>Now you can run the project anywhere using:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">multi-clipboard</span>
+</code></pre></div>
+<h4 id="installing-via-the-repository">
+<span style="position:relative"><a class="anchor" href="#installing-via-the-repository"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Via the <a href="https://github.com/brentvollebregt/multi-clipboard">Repository</a></span></h4>
+<p>You can install this project using this repository by following these steps:
+1. Clone/download the <a href="https://github.com/brentvollebregt/multi-clipboard">repository</a>
+2. Open cmd/terminal and cd into multi-clipboard using <code>cd multi-clipboard</code>
+3. Execute <code>python setup.py install</code></p>
+<p>Now you can run the project anywhere using:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">multi-clipboard</span>
+</code></pre></div>
+<h4 id="running-the-package-from-source">
+<span style="position:relative"><a class="anchor" href="#running-the-package-from-source"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Running the Package From <a href="https://github.com/brentvollebregt/auto-py-to-exe/archive/master.zip">Source</a></span></h4>
+<p>Don't want to have to install the package? Follow these steps:
+1. Clone/download the <a href="https://github.com/brentvollebregt/multi-clipboard">repository</a>
+2. Open cmd/terminal and cd into multi-clipboard using <code>cd multi-clipboard</code>
+3. Install requirements using <code>python -m pip install -r requirements.txt</code> and <a href="https://github.com/mhammond/pywin32/releases">install this if pywin32 doesn't install</a>
+4. Run the project using <code>python -m multi_clipboard</code></p>
+<h3 id="gui-usage">
+<span style="position:relative"><a class="anchor" href="#gui-usage"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>GUI Usage</span></h3>
+<ul>
+<li>Click on clipboard to switch to it (will close automatically on selection by default)<ul>
+<li>You can also use TAB to highlight the clipboards and then press ENTER to set the currently selected keyboard</li>
+</ul>
+</li>
+<li>Right-click menu on each clipboard to individually delete/set</li>
+<li>Click on the trash to delete all clipboards</li>
+<li>Click on the plus button to create a new clipboard</li>
+<li>Settings for the GUI can be toggled easily in the settings window. In here you can:<ul>
+<li>Change window settings (opacity, frame, stay on top...)</li>
+<li>Toggle the listener</li>
+<li>Make the listener start on user login</li>
+</ul>
+</li>
+</ul>
+<h3 id="opening-the-gui-with-a-mouse-click">
+<span style="position:relative"><a class="anchor" href="#opening-the-gui-with-a-mouse-click"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Opening the GUI With A Mouse Click</span></h3>
+<p>If you rather a double click opposed to typing <code>mutli-clipboard</code> in the terminal, open the project and then click the settings button. On the right you will see a button labelled "Create Shortcut"; clicking this will ask you where you want to save a shortcut script (VB script).</p>
+<h3 id="command-line-usage">
+<span style="position:relative"><a class="anchor" href="#command-line-usage"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Command Line Usage</span></h3>
+<ul>
+<li><code>multi-clipboard</code> - Opens GUI</li>
+<li><code>multi-clipboard -s [clipboard]</code> - Will load data from that clipboard if it exists</li>
+<li><code>multi-clipboard -c *</code> - Delete all clipboards</li>
+<li><code>multi-clipboard -c 1</code> - Delete clipboard 1</li>
+<li><code>multi-clipboard --start-listener</code> - Starts the listener if it isn't running</li>
+<li><code>multi-clipboard --stop-listener</code> - Stops the listener if it's running</li>
+<li><code>multi-clipboard --current</code> - Check what clipboard you are currently on</li>
+</ul>
+<h2 id="the-listener">
+<span style="position:relative"><a class="anchor" href="#the-listener"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Listener</span></h2>
+<p>This package has a built-in listener which listens for Ctrl + Windows + C (Left control). This can be enabled in the GUI's settings under "Toggle Listener" or by arguments as described above. This also comes with a feature to make the listener start on startup. To enable this, go into the GUI's settings and click "Listener Autostart" to toggle it on/off.</p>
+<h2 id="gui-with-settings-open">
+<span style="position:relative"><a class="anchor" href="#gui-with-settings-open"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>GUI With Settings Open</span></h2>
+<p><img alt="Main GUI with Settings" class="lazyload blur-up" data-src="/posts/multi-clipboard/main-gui-with-settings-shown.png" height="215" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAFCAYAAACaTbYsAAAA9klEQVR4nAXBvUrDYBSA4fdLTvqjS2hJhEIEBUcHcbCgCCIKDu6CXpgIOngLroJDr8OlBUVBbYsaYr5zjs8TAI4PtjY70n+O6rg73Uxos4I2Gv1eD3DMjDRNyfOc6XS6PplMZnK4v3OuhKpVfVcXHEADZkvcIPKHkmHuhBBwd2KMZ+Px+DWcnhx5p7vC788yOilZp4/FhqvLC/LhGh9vM65v7mhaJRNBRKiqSoqiQMxQNUKSiDRNAwQIsLe7zbBY5eVzA7m9h5BiZoxGIxaLhc3ncxcsphYbTFtEMpIkBYynxwcGgyFf32DuqCruTlmW1HWd1HXNP/uRePycHjltAAAAAElFTkSuQmCC" style="; aspect-ratio: 687/215; height: auto;" width="687"/></p>
+<h2 id="thanks-to">
+<span style="position:relative"><a class="anchor" href="#thanks-to"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Thanks to</span></h2>
+<ul>
+<li><a href="https://github.com/MBRobertson">Michael Robertson</a> for adding file support in previous versions.</li>
+</ul>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-clean-a-twitter-account-with-jquery/" title="How to Clean a Twitter Account with jQuery">
+<span>←</span>
+<span class="btn-content">How to Clean a Twitter Account with jQuery</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/uow-moodle-rwa-ignorer/" title="University of Waikato Moodle Resource Work Around Ignorer">
+<span class="btn-content">University of Waikato Moodle Resource Work Around Ignorer</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/multi-clipboard/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/multi-clipboard/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

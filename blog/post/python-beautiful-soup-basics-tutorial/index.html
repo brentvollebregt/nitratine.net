@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/python-beautiful-soup-basics-tutorial/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Python Beautiful Soup Basics Tutorial - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="This tutorial covers the basics of the Python Beautiful Soup library including installation, parsing HTML/XML, finding elements and getting element data." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Python Beautiful Soup Basics Tutorial" property="og:title"/>
+<meta content="This tutorial covers the basics of the Python Beautiful Soup library including installation, parsing HTML/XML, finding elements and getting element data." property="og:description"/>
+<meta content="/posts/python-beautiful-soup-basics-tutorial/feature.png" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/python-beautiful-soup-basics-tutorial/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Python Beautiful Soup Basics Tutorial</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2020">22 Aug 2020</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#Tutorials">Tutorials</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#html">html</a>
+<a class="badge badge-warning" href="/blog/tags/#scraping">scraping</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">11 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fpython-beautiful-soup-basics-tutorial%2F"/>
+</div>
+<p class="lead">This tutorial covers the basics of the Python Beautiful Soup library including installation, parsing HTML/XML, finding elements and getting element data.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#what-is-beautiful-soup">What is Beautiful Soup?</a></li>
+<li><a href="#getting-your-data-to-parse">Getting Your Data To Parse</a><ul>
+<li><a href="#string-literal">String literal</a></li>
+<li><a href="#html-or-xml-file">HTML or XML File</a></li>
+<li><a href="#http-request">HTTP Request</a></li>
+</ul>
+</li>
+<li><a href="#installing-beautiful-soup">Installing Beautiful Soup</a></li>
+<li><a href="#using-beautiful-soup">Using Beautiful Soup</a><ul>
+<li><a href="#parsing-your-htmlxml">Parsing Your HTML/XML</a></li>
+<li><a href="#the-four-main-kinds-of-objects">The Four Main Kinds Of Objects</a><ul>
+<li><a href="#beautifulsoup">BeautifulSoup</a></li>
+<li><a href="#tag">Tag</a></li>
+<li><a href="#navigablestring">NavigableString</a></li>
+</ul>
+</li>
+<li><a href="#ways-to-search-for-elements-tags">Ways to Search For Elements / Tags</a><ul>
+<li><a href="#searching-using-find-vs-find_all">Searching Using .find vs .find_all</a></li>
+<li><a href="#search-for-elements-by-tag-name">Search For Elements By Tag Name</a></li>
+<li><a href="#search-for-elements-by-id">Search For Elements By Id</a></li>
+<li><a href="#search-for-elements-by-class-name">Search For Elements By Class Name</a></li>
+<li><a href="#search-for-elements-by-a-combination-of-attributes">Search For Elements By A Combination Of Attributes</a></li>
+<li><a href="#search-for-elements-by-text-content">Search For Elements By Text Content</a></li>
+<li><a href="#search-for-elements-using-a-query-selector">Search For Elements Using a Query Selector</a></li>
+<li><a href="#searching-using-lambdas">Searching Using Lambdas</a></li>
+<li><a href="#chaining-searches">Chaining Searches</a></li>
+</ul>
+</li>
+<li><a href="#getting-data-from-an-element-tag-and-other-elements">Getting Data From An Element / Tag And Other Elements</a><ul>
+<li><a href="#getting-the-tag-name-of-the-current-tag">Getting The Tag Name Of The Current Tag</a></li>
+<li><a href="#getting-the-text-inside-the-current-tag">Getting The Text Inside The Current Tag</a></li>
+<li><a href="#getting-the-attributes-of-the-current-tag">Getting The Attributes Of The Current Tag</a></li>
+<li><a href="#getting-the-parent-of-the-current-tag">Getting The Parent Of The Current Tag</a></li>
+<li><a href="#getting-the-children-of-the-current-tag">Getting The Children Of The Current Tag</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#example-1-scraping-data-from-a-table">Example 1 - Scraping Data From A Table</a></li>
+<li><a href="#example-2-read-a-single-value-on-the-page">Example 2 - Read A Single Value On The Page</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="what-is-beautiful-soup">
+<span style="position:relative"><a class="anchor" href="#what-is-beautiful-soup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>What is Beautiful Soup?</span></h2>
+<p>Beautiful Soup is a Python library for pulling data out of HTML and XML files. It is commonly used for scraping websites and simply getting data out of a known HTML/XML structure.</p>
+<p>There is awesome documentation for Beautiful Soup at <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">www.crummy.com/software/BeautifulSoup/bs4/doc/</a> which covers all of the functions that are to offer and many examples. In this tutorial, I will cover a subset of the functions provided with examples that I feel will give a good starting point to someone new. I will cover some common expectations of a library like Beautiful Soup including:</p>
+<ul>
+<li>Searching for elements</li>
+<li>Getting element contents and attributes</li>
+<li>Getting the children and parent of an element </li>
+</ul>
+<h2 id="getting-your-data-to-parse">
+<span style="position:relative"><a class="anchor" href="#getting-your-data-to-parse"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Your Data To Parse</span></h2>
+<p>Before you start using Beautiful Soup, you'll first need to get your data source ready. For most of my examples, I'll be using some hard-coded example HTML. Here are a few ways you could source your data.</p>
+<h3 id="string-literal">
+<span style="position:relative"><a class="anchor" href="#string-literal"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>String literal</span></h3>
+<p>A string literal is simply a string with your HTML or XML in it; for example:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;html&gt;</span>
+<span class="s2">    &lt;head&gt;</span>
+<span class="s2">        &lt;title&gt;Page title&lt;/title&gt;</span>
+<span class="s2">    &lt;/head&gt;</span>
+<span class="s2">    &lt;body&gt;</span>
+<span class="s2">        ... body ...</span>
+<span class="s2">    &lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;</span>
+<span class="s2">"""</span>
+</code></pre></div>
+<h3 id="html-or-xml-file">
+<span style="position:relative"><a class="anchor" href="#html-or-xml-file"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>HTML or XML File</span></h3>
+<p>If your HTML or XML is in a file, you will need to read it into a variable so Beautiful Soup can use it; for example:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">file_path</span> <span class="o">=</span> <span class="s2">"my_file.html"</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># The html variable now has the HTML document in it </span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<p>The variable <code>html</code> will have your data now like the <a href="#string-literal">String literal</a> example.</p>
+<h3 id="http-request">
+<span style="position:relative"><a class="anchor" href="#http-request"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>HTTP Request</span></h3>
+<p>If you want to get a webpage, you can use something like the <a href="https://requests.readthedocs.io/en/master/"><code>requests</code> library</a> to get the page. Say you want to get <a href="https://example.com/">https://example.com/</a>, you would do:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://example.com/'</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>  <span class="c1"># The html variable now has the HTML document in it </span>
+</code></pre></div>
+<p>The variable <code>html</code> will have your data now like the <a href="#string-literal">String literal</a> example.</p>
+<h2 id="installing-beautiful-soup">
+<span style="position:relative"><a class="anchor" href="#installing-beautiful-soup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Installing Beautiful Soup</span></h2>
+<p>To install Beautiful Soup, simply go to the command line and execute:</p>
+<p><code>python -m pip install beautifulsoup4</code></p>
+<blockquote>
+<p>If you can't import <code>BeautifulSoup</code> later on, make sure you're 100% sure that you installed Beautiful Soup in the same distribution of Python that you're trying to import it in. Go to my tutorial on <a href="https://nitratine.net/blog/post/how-to-manage-multiple-python-distributions/">How to Manage Multiple Python Distributions</a> if you're having some issues or are unsure.</p>
+</blockquote>
+<h2 id="using-beautiful-soup">
+<span style="position:relative"><a class="anchor" href="#using-beautiful-soup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Using Beautiful Soup</span></h2>
+<h3 id="parsing-your-htmlxml">
+<span style="position:relative"><a class="anchor" href="#parsing-your-htmlxml"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Parsing Your HTML/XML</span></h3>
+<p>When you have your HTML or XML data, you now want Beautiful Soup to parse it into a <code>BeautifulSoup</code> object using the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="s2">"..."</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+</code></pre></div>
+<p>The variable <code>soup</code> now contains a <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#beautifulsoup">BeautifulSoup object</a> that you can use to traverse the root element.</p>
+<blockquote>
+<p>Note: In all of the following examples, the variable <code>html</code> contains the HTML defined above the usage of it.</p>
+</blockquote>
+<h3 id="the-four-main-kinds-of-objects">
+<span style="position:relative"><a class="anchor" href="#the-four-main-kinds-of-objects"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The Four Main Kinds Of Objects</span></h3>
+<p>When using Beautiful Soup, you will encounter four types of objects, these are:</p>
+<blockquote>
+<p>Please note different types of objects that could be returned, these are just common ones.</p>
+</blockquote>
+<h4 id="beautifulsoup">
+<span style="position:relative"><a class="anchor" href="#beautifulsoup"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>BeautifulSoup</span></h4>
+<p>The BeautifulSoup object represents the parsed document as a whole. It inherits the <a href="#tag">Tag</a> object so most calls you can make on a Tag object, you can also make on a BeautifulSoup object.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"en"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">soup</span><span class="p">)</span>
+<span class="go">&lt;class 'bs4.BeautifulSoup'&gt;</span>
+</code></pre></div>
+<h4 id="tag">
+<span style="position:relative"><a class="anchor" href="#tag"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Tag</span></h4>
+<p>A <code>Tag</code> object corresponds to an XML or HTML tag in the original document.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="s1">'&lt;b class="boldest"&gt;Extremely bold&lt;/b&gt;'</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'b'</span><span class="p">)</span>  <span class="c1"># Get the b tag</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+<span class="go">&lt;class 'bs4.element.Tag'&gt;</span>
+</code></pre></div>
+<p>The <code>Tag</code> object allows us to access attributes on a tag using dictionary-like methods and also search for other tags under this tag.</p>
+<p>To get the name of the current tag, access <code>tag.name</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="s1">'&lt;span&gt;Example tag&lt;/span&gt;'</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">span</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">name</span>
+<span class="go">'span'</span>
+</code></pre></div>
+<p>This tutorial covers more of what we can get out of a Tag under <a href="#getting-data-from-an-element-tag-and-other-elements">Getting Data From An Element / Tag And Other Elements</a>.</p>
+<h4 id="navigablestring">
+<span style="position:relative"><a class="anchor" href="#navigablestring"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>NavigableString</span></h4>
+<p>A NavigableString corresponds to a bit of text within a tag. When accessing the content of a <code>Tag</code> object, a <code>NavigableString</code> object will be returned.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="s1">'&lt;span&gt;Example tag&lt;/span&gt;'</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">span</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">string</span>
+<span class="go">&lt;class 'bs4.element.NavigableString'&gt;</span>
+</code></pre></div>
+<p>To make this a string and drop the object altogether, cast the object to a string: <code>str(tag.string)</code>.</p>
+<h3 id="ways-to-search-for-elements-tags">
+<span style="position:relative"><a class="anchor" href="#ways-to-search-for-elements-tags"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Ways to Search For Elements / Tags</span></h3>
+<h4 id="searching-using-find-vs-find_all">
+<span style="position:relative"><a class="anchor" href="#searching-using-find-vs-find_all"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Searching Using <code>.find</code> vs <code>.find_all</code></span></h4>
+<p>On any <code>BeautifulSoup</code> or <code>Tag</code> object, we can search for elements under the current tag (<code>BeautifulSoup</code> will have the root tag majority of the time). To search for other elements/tags, we can use <code>.find</code> and <code>.find_all</code>.</p>
+<p>These two calls are very similar, they both take the same inputs, but <code>.find</code> returns the first tag found whereas <code>.find_all</code> returns all tags found if there are any. </p>
+<p>For example, if we had the following <code>BeautifulSoup</code> object:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Span1<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span><span class="p">&gt;</span>A1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Span2<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>P1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>P2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Span3<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+</code></pre></div>
+<p>Using <code>.find</code> to get the first span, we would do:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">span</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'span'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">span</span>
+<span class="go">&lt;span&gt;Span1&lt;/span&gt;</span>
+</code></pre></div>
+<p>This returned object is of type <code>bs4.element.Tag</code> so we could further search under this tag. If there was no matching element, we would get <code>None</code>, for example:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">form</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'form'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span>  <span class="c1"># Validate that form is None for this example</span>
+<span class="go">True</span>
+</code></pre></div>
+<p>Using <code>.find_all</code> to get all the spans, we would do:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">spans</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">'span'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spans</span>
+<span class="go">[&lt;span&gt;Span1&lt;/span&gt;, &lt;span&gt;Span2&lt;/span&gt;, &lt;span&gt;Span3&lt;/span&gt;]</span>
+</code></pre></div>
+<p>This has returned a list of <code>bs4.element.Tag</code> objects, so pulling out an individual object would allow us to perform more tag operations. If there was no matching element, we would get an empty list, for example:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">forms</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">'form'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">forms</span>
+<span class="go">[]</span>
+</code></pre></div>
+<p>All of the following examples will use one of <code>.find</code> or <code>.find_all</code> but they can both be used interchangeably to get the first or all of the target elements.</p>
+<h4 id="search-for-elements-by-tag-name">
+<span style="position:relative"><a class="anchor" href="#search-for-elements-by-tag-name"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Search For Elements By Tag Name</span></h4>
+<p>As displayed in the examples above, using <code>.find</code> or <code>.find_all</code> and passing a tag name, we can search for elements with a specific tag. For example, if we had:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Span1<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span><span class="p">&gt;</span>A1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>P1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+</code></pre></div>
+<p>If we wanted to get the <code>a</code> tag, we would execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+<span class="go">&lt;a&gt;A1&lt;/a&gt;</span>
+</code></pre></div>
+<p>If we wanted to get the <code>p</code> tag, we would execute:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'p'</span><span class="p">)</span>
+<span class="go">&lt;p&gt;P1&lt;/p&gt;</span>
+</code></pre></div>
+<h4 id="search-for-elements-by-id">
+<span style="position:relative"><a class="anchor" href="#search-for-elements-by-id"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Search For Elements By Id</span></h4>
+<p>Passing the <code>id</code> argument to <code>.find</code> allows us to search for an element by id, for example:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Element 1<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">"not_target"</span><span class="p">&gt;</span>Element 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">"target"</span><span class="p">&gt;</span>Element 3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Element 4<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'target'</span><span class="p">)</span>  <span class="c1"># The id we're searching for is "target"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>  <span class="c1"># Output the contents of `element`</span>
+<span class="go">&lt;a id="target"&gt;Element 3&lt;/a&gt;</span>
+</code></pre></div>
+<p>Notice how this has found the element with the id "target" regardless of its tag name. </p>
+<h4 id="search-for-elements-by-class-name">
+<span style="position:relative"><a class="anchor" href="#search-for-elements-by-class-name"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Search For Elements By Class Name</span></h4>
+<p>Similar to searching by an id, we can also search for elements with a specific class by passing the class we want to search for, for example:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"class_a class_b"</span><span class="p">&gt;</span>Element 1<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"class_b class_c class_d"</span><span class="p">&gt;</span>Element 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"class_c"</span><span class="p">&gt;</span>Element 3<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Element 4<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s1">'class_c'</span><span class="p">)</span>  <span class="c1"># The class we're searching for is "class_c"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span>
+<span class="go">[&lt;p class="class_b class_c class_d"&gt;Element 2&lt;/p&gt;, &lt;a class="class_c"&gt;Element 3&lt;/a&gt;]</span>
+</code></pre></div>
+<p>In this example, we found both the element with just the class "class_c" and the element with "class_c" being within other classes. This shows that this search will find the class name anywhere in the class attribute.</p>
+<p>Note that we had to use <code>class_</code> as an argument to <code>.find_all</code>; this is because <code>class</code> is a reserved keyword in Python.</p>
+<h4 id="search-for-elements-by-a-combination-of-attributes">
+<span style="position:relative"><a class="anchor" href="#search-for-elements-by-a-combination-of-attributes"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Search For Elements By A Combination Of Attributes</span></h4>
+<p>Using the elements above, we can search for elements with multiple attributes. To do this, the first positional argument is always the tag name and the other keyword arguments are attribute names. For example, if we had something like:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Heading 1<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Data 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">"bold"</span><span class="p">&gt;</span>Heading 2<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"bold"</span><span class="p">&gt;</span>Data 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Heading 3<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Data 3<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>And wanted to identify the p element with the class "bold", we would do:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'p'</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>  <span class="c1"># Searching for p tag with class "bold"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p class="bold"&gt;Data 2&lt;/p&gt;</span>
+</code></pre></div>
+<p>We are not only bound to search for tags, id and classes though; as stated above, providing other keyword arguments allows us to search for other attributes. </p>
+<p>For example, if we have:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://example.com/"</span> <span class="na">title</span><span class="o">=</span><span class="s">"Example"</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">"http://nitratine.net/"</span> <span class="na">title</span><span class="o">=</span><span class="s">"Nitratine"</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>We can get the iframe with the title "Nitratine" by doing:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Nitratine'</span><span class="p">)</span>  <span class="c1"># Searching for anything with a title equal to "Nitratine"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;iframe src="http://nitratine.net/" title="Nitratine"&gt;&lt;/iframe&gt;</span>
+</code></pre></div>
+<h4 id="search-for-elements-by-text-content">
+<span style="position:relative"><a class="anchor" href="#search-for-elements-by-text-content"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Search For Elements By Text Content</span></h4>
+<p>Aside from searching for things on the element itself, we can search for an element using expected text content. For example, if we have:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"class_a"</span><span class="p">&gt;</span>This is a paragraph<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"class_b"</span><span class="p">&gt;</span>This is also a paragraph<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>And we want to get the element with the text "This is also a paragraph" to check what class it has, we can do:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'p'</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="s1">'This is also a paragraph'</span><span class="p">)</span>  <span class="c1"># `string` is the internal string</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p class="class_b"&gt;This is also a paragraph&lt;/p&gt;</span>
+</code></pre></div>
+<p>In the example above, we said to search for a p tag with the text "This is also a paragraph". We needed to specify the tag name otherwise we would get back a NavigableString object as shown below.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="s1">'This is also a paragraph'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+<span class="go">&lt;class 'bs4.element.NavigableString'&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string</span>
+<span class="go">'This is also a paragraph'</span>
+</code></pre></div>
+<p>However, to get around providing the tag it's in, we can get the parent of the NavigableString object to get the p tag that it's located in.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">string</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="s1">'This is also a paragraph'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">parent</span>  <span class="c1"># Go up the tree to get the parent element / tag</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p class="class_b"&gt;This is also a paragraph&lt;/p&gt;</span>
+</code></pre></div>
+<h4 id="search-for-elements-using-a-query-selector">
+<span style="position:relative"><a class="anchor" href="#search-for-elements-using-a-query-selector"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Search For Elements Using a Query Selector</span></h4>
+<p>For anyone that has used CSS or JavaScripts <code>document.querySelector</code> / <code>document.querySelectorAll</code>, Beautiful Soup offers methods to search by CSS selectors. Using <code>.select()</code> and <code>.select_one()</code>, we can pass a CSS selectors to get elements/tags. </p>
+<p>The difference between <code>.select()</code> and <code>.select_one()</code> is like <code>.find()</code> and <code>.find_all()</code>; <code>.select()</code> finds many like <code>.find_all()</code> and <code>.select_one()</code> finds only one like <code>.find()</code>.</p>
+<p>Lets say we had:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"red"</span><span class="p">&gt;</span>Content 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 3<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+</code></pre></div>
+<p>And wanted to find the p tag with the class "red", we would do:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s1">'p.red'</span><span class="p">)</span>  <span class="c1"># Pass in CSS selector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p class="red"&gt;Content 2&lt;/p&gt;</span>
+</code></pre></div>
+<p>If we had used <code>soup.select()</code>, we would get a list with the single item:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'p.red'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span>
+<span class="go">[&lt;p class="red"&gt;Content 2&lt;/p&gt;]</span>
+</code></pre></div>
+<p>Using this same idea, we can also get all the p tags:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'p'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span>
+<span class="go">[&lt;p&gt;Content 1&lt;/p&gt;, &lt;p class="red"&gt;Content 2&lt;/p&gt;, &lt;p&gt;Content 3&lt;/p&gt;]</span>
+</code></pre></div>
+<h4 id="searching-using-lambdas">
+<span style="position:relative"><a class="anchor" href="#searching-using-lambdas"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Searching Using Lambdas</span></h4>
+<p>For searching that needs some more advanced logic, you can pass a lambda to the <code>.find()</code> / <code>.find_all()</code> functions to do a more powerful search. For example, if we had:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"header"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>My Title<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Some text...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"main_content"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 3<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">blockquote</span><span class="p">&gt;</span>Not Content<span class="p">&lt;/</span><span class="nt">blockquote</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"footer"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>A footer element<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Another footer element<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+</code></pre></div>
+<p>And we wanted to get the all the p tags under the div with the id "main_content", we could do:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="k">lambda</span> <span class="n">tag</span><span class="p">:</span> <span class="n">tag</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">'p'</span> <span class="ow">and</span> <span class="n">tag</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">'main_content'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span>
+<span class="go">[&lt;p&gt;Content 1&lt;/p&gt;, &lt;p&gt;Content 2&lt;/p&gt;, &lt;p&gt;Content 3&lt;/p&gt;]</span>
+</code></pre></div>
+<p>We can see that <strong>every</strong> tag in the parsed tree has been passed to the lambda function which then checks if the tag is a p tag and that the id attribute on its parent is "main_content".</p>
+<blockquote>
+<p>We will look at what <code>Tag.name</code>, <code>Tag.parent</code> and <code>Tag.attrs</code> are soon.</p>
+</blockquote>
+<p>Sometimes these lambda searches can be less preformat than doing intermediate searches, thus you could chain searches as demonstrated below to speed this operation up.</p>
+<h4 id="chaining-searches">
+<span style="position:relative"><a class="anchor" href="#chaining-searches"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Chaining Searches</span></h4>
+<p>When using one of the find or select queries to get a Tag object, you can also then use this Tag object to search further. Chaining searches can lead to performance increases as you reduce the search space for each step. For example, if we had what we used above:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"header"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>My Title<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Some text...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"main_content"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 1<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 2<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Content 3<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">blockquote</span><span class="p">&gt;</span>Not Content<span class="p">&lt;/</span><span class="nt">blockquote</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"footer"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>A footer element<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Another footer element<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>  <span class="c1"># html contains above data</span>
+</code></pre></div>
+<p>And we wanted to get all the p tags under the div with the id "main_content", we would do:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">main_content_element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">'main_content'</span><span class="p">)</span>  <span class="c1"># First find the div tag using the id</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">main_content_element</span>  <span class="c1"># Prove we have the div tag and all contents</span>
+<span class="go">&lt;div id="main_content"&gt;</span>
+<span class="go">&lt;p&gt;Content 1&lt;/p&gt;</span>
+<span class="go">&lt;p&gt;Content 2&lt;/p&gt;</span>
+<span class="go">&lt;p&gt;Content 3&lt;/p&gt;</span>
+<span class="go">&lt;blockquote&gt;Not Content&lt;/blockquote&gt;</span>
+<span class="go">&lt;/div&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span> <span class="o">=</span> <span class="n">main_content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">'p'</span><span class="p">)</span>  <span class="c1"># Find all p tags in the div tag we found</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elements</span>
+<span class="go">[&lt;p&gt;Content 1&lt;/p&gt;, &lt;p&gt;Content 2&lt;/p&gt;, &lt;p&gt;Content 3&lt;/p&gt;]</span>
+</code></pre></div>
+<h3 id="getting-data-from-an-element-tag-and-other-elements">
+<span style="position:relative"><a class="anchor" href="#getting-data-from-an-element-tag-and-other-elements"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting Data From An Element / Tag And Other Elements</span></h3>
+<p>Once you have a Tag object, getting data off it is pretty easy.</p>
+<h4 id="getting-the-tag-name-of-the-current-tag">
+<span style="position:relative"><a class="anchor" href="#getting-the-tag-name-of-the-current-tag"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting The Tag Name Of The Current Tag</span></h4>
+<p>To get the name of the current tag, we can call <code>tag.name</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p&gt;Some text...&lt;/p&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span><span class="o">.</span><span class="n">name</span>
+<span class="go">'p'</span>
+</code></pre></div>
+<h4 id="getting-the-text-inside-the-current-tag">
+<span style="position:relative"><a class="anchor" href="#getting-the-text-inside-the-current-tag"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting The Text Inside The Current Tag</span></h4>
+<p>To get the text inside the current tag, we can call <code>tag.text</code> or <code>tag.string</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p&gt;Some text...&lt;/p&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span><span class="o">.</span><span class="n">text</span>
+<span class="go">'Some text...'</span>
+</code></pre></div>
+<h4 id="getting-the-attributes-of-the-current-tag">
+<span style="position:relative"><a class="anchor" href="#getting-the-attributes-of-the-current-tag"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting The Attributes Of The Current Tag</span></h4>
+<p>To get the attributes inside the current tag, we can access them using <code>tag.attrs</code>. This will return something that looks and functions like a dictionary.</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p class="class_a, class_b, class_c" id="some_id" title="My Title"&gt;&lt;/p&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span><span class="o">.</span><span class="n">attrs</span>
+<span class="go">{'id': 'some_id', 'class': ['class_a,', 'class_b,', 'class_c'], 'title': 'My Title'}</span>
+</code></pre></div>
+<p>Notice how <code>id</code> and <code>title</code> have a string value whereas <code>class</code> has a list of string as its value; this is demonstrating Beautiful Soup handling attributes with multiple values. </p>
+<p>If you want to get a particular attribute from an element, we can use <code>.get()</code> as it may not always be there:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p class="class_a, class_b, class_c" id="some_id" title="My Title"&gt;&lt;/p&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="go">'some_id'</span>
+</code></pre></div>
+<p>In the case the attribute does not exist, the second parameter passed to <code>.get()</code> is returned:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p class="class_a, class_b, class_c" id="some_id" title="My Title"&gt;&lt;/p&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'doesntexist'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="go">None</span>
+</code></pre></div>
+<h4 id="getting-the-parent-of-the-current-tag">
+<span style="position:relative"><a class="anchor" href="#getting-the-parent-of-the-current-tag"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting The Parent Of The Current Tag</span></h4>
+<p>To get a tags parent (the tag it's located in), we can call <code>tag.parent</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;p&gt;Some text...&lt;/p&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span><span class="o">.</span><span class="n">parent</span>
+<span class="go">&lt;div id="header"&gt;</span>
+<span class="go">&lt;h1&gt;My Title&lt;/h1&gt;</span>
+<span class="go">&lt;p&gt;Some text...&lt;/p&gt;</span>
+<span class="go">&lt;/div&gt;</span>
+</code></pre></div>
+<blockquote>
+<p>None will be returned if the element has no parent</p>
+</blockquote>
+<h4 id="getting-the-children-of-the-current-tag">
+<span style="position:relative"><a class="anchor" href="#getting-the-children-of-the-current-tag"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Getting The Children Of The Current Tag</span></h4>
+<p>To get all the elements under a given element, we can call <code>tag.children</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">element</span>
+<span class="go">&lt;div id="header"&gt;</span>
+<span class="go">&lt;h1&gt;My Title&lt;/h1&gt;</span>
+<span class="go">&lt;p&gt;Some text...&lt;/p&gt;</span>
+<span class="go">&lt;/div&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element</span><span class="o">.</span><span class="n">children</span>
+<span class="go">&lt;list_iterator object at 0x000001E2E5BE25C8&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+<span class="go">['\n', &lt;h1&gt;My Title&lt;/h1&gt;, '\n', &lt;p&gt;Some text...&lt;/p&gt;, '\n']</span>
+</code></pre></div>
+<p>This has returned an iterator which finds the children on-demand to potentially reduce memory and CPU consumption. We can see that this has also returned elements that look like <code>'\n'</code>; looking at these more closely, we can see they are NavigableString objects:</p>
+<div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">children</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">'\n'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">children</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;class 'bs4.element.NavigableString'&gt;</span>
+</code></pre></div>
+<h2 id="examples">
+<span style="position:relative"><a class="anchor" href="#examples"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Examples</span></h2>
+<h3 id="example-1-scraping-data-from-a-table">
+<span style="position:relative"><a class="anchor" href="#example-1-scraping-data-from-a-table"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Example 1 - Scraping Data From A Table</span></h3>
+<ul>
+<li>Data source: Custom</li>
+<li>Target: Read the HTML table into a Python array</li>
+</ul>
+<p>HTML preview:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Page Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Some contents...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Firstname<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Lastname<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Age<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Jill<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Smith<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>50<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Eve<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Jackson<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>94<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Getting the table data:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="s1">'&lt;html from above&gt;'</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+<span class="n">table_element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'table'</span><span class="p">)</span>  <span class="c1"># Get the table element</span>
+<span class="n">row_elements</span> <span class="o">=</span> <span class="n">table_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">'tr'</span><span class="p">)</span>  <span class="c1"># Get all rows in the table</span>
+
+<span class="n">data_rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row_elements</span><span class="p">:</span>  <span class="c1"># Loop over each row</span>
+    <span class="n">cell_elements</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="k">lambda</span> <span class="n">tag</span><span class="p">:</span> <span class="n">tag</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'th'</span><span class="p">,</span> <span class="s1">'td'</span><span class="p">])</span>  <span class="c1"># Get all the cells in the row that are either th or td</span>
+    <span class="n">cell_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">string</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">cell_elements</span><span class="p">]</span>  <span class="c1"># Get the content out of each cell and cast the values to a string</span>
+    <span class="n">data_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell_values</span><span class="p">)</span>  <span class="c1"># Add this row to our data</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data_rows</span><span class="p">)</span>  <span class="c1"># Output the data that is now in data_rows</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span>
+    <span class="p">[</span><span class="s1">'Firstname'</span><span class="p">,</span> <span class="s1">'Lastname'</span><span class="p">,</span> <span class="s1">'Age'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Jill'</span><span class="p">,</span> <span class="s1">'Smith'</span><span class="p">,</span> <span class="s1">'50'</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Eve'</span><span class="p">,</span> <span class="s1">'Jackson'</span><span class="p">,</span> <span class="s1">'94'</span><span class="p">]</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="example-2-read-a-single-value-on-the-page">
+<span style="position:relative"><a class="anchor" href="#example-2-read-a-single-value-on-the-page"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Example 2 - Read A Single Value On The Page</span></h3>
+<ul>
+<li>Data source: testing-ground.scraping.pro/whoami <em>(No longer exists)</em></li>
+<li>Target: Read IP address</li>
+</ul>
+<p>HTML preview (cut down version):</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Web Scraper Testing Ground<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span> <span class="na">style</span><span class="o">=</span><span class="s">"text-decoration: none;"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"title"</span><span class="p">&gt;</span>WEB SCRAPER TESTING GROUND<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"logo"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"content"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>WHO AM I?<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"caseinfo"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          This page displays web client information and can be used for web
+          scraper tuning.
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          It also sets <span class="p">&lt;</span><span class="nt">em</span><span class="p">&gt;</span>TestingGround=WebScraperTest<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;</span> cookie that you can
+          check whether your web scrapes keeps cookies or not.
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"case_whoami"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"name"</span><span class="p">&gt;</span>IP<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"value"</span> <span class="na">id</span><span class="o">=</span><span class="s">"IP"</span><span class="p">&gt;</span>23.126.45.124<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"name"</span><span class="p">&gt;</span>HOST<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"value"</span> <span class="na">id</span><span class="o">=</span><span class="s">"HOST"</span><span class="p">&gt;</span>testing-ground.scraping.pro<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"name"</span><span class="p">&gt;</span>REFERER<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"value"</span> <span class="na">id</span><span class="o">=</span><span class="s">"REFERER"</span><span class="p">&gt;</span>
+          http://testing-ground.scraping.pro/
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"name"</span><span class="p">&gt;</span>USER AGENT<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"value"</span> <span class="na">id</span><span class="o">=</span><span class="s">"USER_AGENT"</span><span class="p">&gt;</span>
+          Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+          like Gecko) Chrome/84.0.4147.135 Safari/537.36
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"name"</span><span class="p">&gt;</span>COOKIES<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"value"</span> <span class="na">id</span><span class="o">=</span><span class="s">"COOKIE"</span><span class="p">&gt;&lt;</span><span class="nt">ul</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Getting the IP address:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="s1">'&lt;html from above&gt;'</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">'html.parser'</span><span class="p">)</span>
+<span class="n">ip_element</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">"IP"</span><span class="p">)</span>  <span class="c1"># Get the element with the id "IP"</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="n">ip_element</span><span class="o">.</span><span class="n">text</span>  <span class="c1"># Get the text from the element</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>  <span class="c1"># Output the ip</span>
+</code></pre></div>
+<p>Output:</p>
+<div class="codehilite"><pre><span></span><code><span class="s1">'23.126.45.124'</span>
+</code></pre></div>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/python-file-backup-script/" title="Python File Backup Script">
+<span>←</span>
+<span class="btn-content">Python File Backup Script</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/how-to-take-a-screenshot-in-python-using-pil/" title="How To Take A Screenshot In Python Using PIL">
+<span class="btn-content">How To Take A Screenshot In Python Using PIL</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/python-beautiful-soup-basics-tutorial/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/python-beautiful-soup-basics-tutorial/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px">
+</img></a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

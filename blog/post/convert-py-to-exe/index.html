@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/img/favicon.ico" rel="shortcut icon"/>
+<link href="/static/img/favicon-384x384.png" rel="icon" sizes="384x384" type="image/png"/>
+<link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><meta content="#343a40" name="theme-color"/><link href="https://nitratine.net/blog/post/convert-py-to-exe/" rel="canonical"/>
+<link href="/rss.xml" rel="alternate" title="RSS Feed for nitratine.net" type="application/rss+xml"/>
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"/>
+<link href="/static/css/base.css" rel="stylesheet"/><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EB27CZP773"></script>
+<script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EB27CZP773');
+          gtag('config', 'UA-117153268-2');
+        </script><!-- instant.page -->
+<script defer="" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU" src="https://instant.page/1.2.2" type="module"></script>
+<!-- lazysizes -->
+<script async="" src="/static/js/lazysizes.min.js"></script>
+<title>Convert .py to .exe - Nitratine</title>
+<link href="/static/css/pygments.css" rel="stylesheet"/>
+<meta content="A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package." name="description"/>
+<meta content="Brent Vollebregt" name="author"/>
+<meta content="Convert .py to .exe" property="og:title"/>
+<meta content="A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package." property="og:description"/>
+<meta content="/posts/convert-py-to-exe/youtube-thumbnail.jpg" property="og:image"/>
+<meta content="https://nitratine.net/blog/post/convert-py-to-exe/" property="og:url"/>
+<meta content="summary" name="twitter:card"/><script async="" data-ad-client="ca-pub-6407227183932047" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<link href="/static/css/blog.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<div class="container">
+<a class="navbar-brand" href="/">
+<img alt="Brand Icon" class="d-inline-block align-top" height="30" src="/static/img/logo.png" width="145"/>
+</a>
+<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-between" id="navbar">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog/">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://www.youtube.com/PyTutorials">YouTube</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/brentvollebregt">GitHub</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<div class="container my-4">
+<div class="row">
+<main class="col-blog-content blog-main">
+<h1 class="blog-post-title">Convert .py to .exe</h1>
+<div class="mb-2">
+<a class="text-muted" href="/blog/archive/#2017">11 Dec 2017</a>
+<a class="badge badge-primary ml-2" href="/blog/categories/#YouTube">YouTube</a>
+<a class="badge badge-warning" href="/blog/tags/#python">python</a>
+<a class="badge badge-warning" href="/blog/tags/#pyinstaller">pyinstaller</a>
+<span class="ml-2"></span>
+<span class="text-muted text-nowrap">6 min read</span>
+<span class="ml-2"></span>
+<img alt="Hits" class="post-hits" src="https://hitcounternitratine.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fnitratine.net%2Fblog%2Fpost%2Fconvert-py-to-exe%2F"/>
+</div>
+<p class="lead">A demonstration of how to package a python script into an executable file. This tutorial includes compiling to one file, no console, how to add an icon and adding other files to the final package.</p>
+<hr class="mt-3 mb-0"/>
+<div class="post-content mt-3">
+<div class="toc">
+<ul>
+<li><a href="#pip">PIP</a></li>
+<li><a href="#pyinstaller">PyInstaller</a></li>
+<li><a href="#basic-compiling">Basic Compiling</a></li>
+<li><a href="#no-console">No Console</a></li>
+<li><a href="#onefile">Onefile</a></li>
+<li><a href="#adding-an-icon">Adding an Icon</a></li>
+<li><a href="#adding-other-files">Adding Other Files</a></li>
+<li><a href="#end-notes">End Notes</a></li>
+<li><a href="#auto-py-to-exe">Auto PY to EXE</a></li>
+<li><a href="#common-issues-and-questions">Common Issues and Questions</a><ul>
+<li><a href="#my-script-runs-fine-in-idle-but-wont-run-when-packaged-to-exe-failed-to-execute-script">My script runs fine in IDLE but won't run when packaged to exe (failed to execute script)</a></li>
+<li><a href="#zipimportzipimporterror-cant-find-module-encodings">zipimport.ZipImportError: can't find module 'encodings'</a></li>
+<li><a href="#open-command-window-here-isnt-shown-when-i-shift-right-click">"Open command window here" isn't shown when I shift right click?</a></li>
+<li><a href="#pip-is-not-recognized-as-an-internal-or-external-command">'pip' is not recognized as an internal or external command</a></li>
+<li><a href="#pyinstaller-is-not-recognized-as-an-internal-or-external-command">'pyinstaller' is not recognized as an internal or external command</a></li>
+<li><a href="#fatal-error-in-launcher-unable-to-create-process-using">Fatal error in launcher: Unable to create process using...</a></li>
+<li><a href="#when-editing-the-path-variable-i-can-only-edit-the-variable">When editing the PATH variable, I can only edit the variable</a></li>
+<li><a href="#the-exe-does-not-work-on-another-computer">The exe does not work on another computer</a></li>
+<li><a href="#my-antivirus-detected-my-exe-as-a-virus">My antivirus detected my exe as a virus</a></li>
+<li><a href="#i-get-lots-of-warnings-when-running-pyinstaller">I get lots of WARNINGs when running pyinstaller</a></li>
+<li><a href="#will-this-add-my-other-scripts-will-this-work-with-external-python-modules">Will this add my other scripts? / Will this work with external Python modules?</a></li>
+<li><a href="#is-it-available-in-walmart">is it available in Walmart?????</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/lOIJIk_maO4"></iframe>
+</div>
+</div>
+</p>
+<h2 id="pip">
+<span style="position:relative"><a class="anchor" href="#pip"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>PIP</span></h2>
+<p>If you haven't used or setup pip before, go to my tutorial at <a href="/blog/post/how-to-setup-pythons-pip/">how-to-setup-pythons-pip</a> to setup pip.</p>
+<h2 id="pyinstaller">
+<span style="position:relative"><a class="anchor" href="#pyinstaller"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>PyInstaller</span></h2>
+<p>Now that pip has been set up, execute the command <code>pip install pyinstaller</code> in cmd. Make sure to check the output for errors as if there are errors it would not have installed successfully. PyInstaller now supports Python 2.7 - 3.7 including Python 3.7.</p>
+<p>To make sure it installed properly, type <code>pyinstaller</code> in cmd and make sure no errors appeared.</p>
+<p><img alt="pyinstaller command output" class="lazyload blur-up" data-src="/posts/convert-py-to-exe/demo6.png" height="520" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAICAYAAAAm06XyAAAAzklEQVR4nH2QyW6EQAwFqw1EYbnOfAh/Nv8+gGhvOUSNUBKljnY9eSmv1yvHz5HhYyAzAai1oqpEBCJCKYVGKQV35/l8UsZxTHcHQFURkUvKTFrvJ+u60pvZJUzTxOPxICIAOM+TbduotV6OiBARzPNMHxGXbOaoKuZGeHCeJyKCql4nZSYt07fi96rQdR0iQvZBKYX3+83dudMvy4Ka4uaICMdxXPerKu7OMAyo6u9wrRUzw8yotbLv+59TGvct+swkM+m67t9Qoz0sM/gCY7mYTsXQwe8AAAAASUVORK5CYII=" style="; aspect-ratio: 987/520; height: auto;" width="987"/></p>
+<h2 id="basic-compiling">
+<span style="position:relative"><a class="anchor" href="#basic-compiling"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Basic Compiling</span></h2>
+<p>Created a new folder and put your python file in it and any other modules or files it may need. Then hold shift and right-click in the folder, in the menu that popped up, click "Open PowerShell Window Here" or "Open command window here" for older versions of windows. If this option doesn't appear, try again or open cmd and type <code>cd {folder location}</code> to move to that folder.</p>
+<p><img alt="Open PowerShell window here" class="lazyload blur-up" data-src="/posts/convert-py-to-exe/demo7.png" height="346" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAIAAAAL/BNYAAAB5ElEQVR4nG2ST2/UMBDFZ+yxN9l0m2rbEA4rBCf4+PQTVAJxQGIvCATiT6HlhlSR3c06dmzPcIhalS3v5MNPz8/vGYdhSCnFGAHAWisiiAgPxMwAQDlnZu66DgCapsk5P0QRMYQQQiBEVEoR0W63CyEURTHZHNCkKaqoAEBEmFlr3XXdf71vGVEiAgApJe99VVVaa0ScosutmJmIiDQhYkrJWltVFTP3fT8lsdYqpQ7saYo1vWMYhomIMbZtW5bldPOdiJmVQiJaLpd1XU8eAJBzvt/mdMAU4+C9cy7nbIxhZmut1vqgExEOY1QXr15LHkPw/X7fbTbee1QK/h2ImWez8tPHD+rN23cx+ejdOAzj4LxzGgBzRmZkBmbILClZ0l+/faHTy8vi/WfoNrAfZsUspby/+jWzllkQYdqOmfno6Oz7NZWuL1dPVHlDzilrMcbfIVjhmCIRGTJt23KMUNcnmujmcZtj1N6bnMU5AnjUNMYYEUEAARDnUIR3/c+ZJVit0ovnuT7WCokMiKSiEK1E4K48Zs5Vxc+eUtz34r3fbquqOlkcj+MoY2QQAJB7nWRUY78jY0w5n5+eNeM4brbbpmkOBp+Wmr4G/bi6fnl+vtv88d5nhsVi8ZBm5vl8vl6v/wJP20jAvafI8AAAAABJRU5ErkJggg==" style="; aspect-ratio: 292/346; height: auto;" width="292"/></p>
+<p>Now that cmd is in the right location, execute <code>pyinstaller {the name of your python file}</code> make sure to add .py or whatever extension it has. Wait for it to finish and check if any errors have appeared. If none have you can close cmd and look at the three folders generated.</p>
+<p>Look in the 'dist' folder and you should see {the name of your script}.exe. If you run that your script should execute as an exe.</p>
+<h2 id="no-console">
+<span style="position:relative"><a class="anchor" href="#no-console"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>No Console</span></h2>
+<p>When running the compiled script, you will notice a console window will appear. If you do not want this, add the 'w' flag to the statement when creating the script.</p>
+<p>Thus the new statement will be <code>pyinstaller -w {the name of your python file}</code>. Now when you run the .exe, the console will not appear.</p>
+<h2 id="onefile">
+<span style="position:relative"><a class="anchor" href="#onefile"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Onefile</span></h2>
+<p>If you want all the files to be packed into one .exe you will need to add the 'F' flag. Thus the new statement will be <code>pyinstaller -F {the name of your python file}</code>. Note that this will not work for all python scripts due to third party libraries or how the script works. You will find out if it works or not by running the .exe in the 'dist' folder.</p>
+<blockquote>
+<p>If you want to use onefile mode with external files, it will pay to read <a href="https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile/13790741">this</a></p>
+</blockquote>
+<h2 id="adding-an-icon">
+<span style="position:relative"><a class="anchor" href="#adding-an-icon"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Adding an Icon</span></h2>
+<p>To add an icon to the final .exe (normal or onefile) add the 'i' flag and then the location of the .ico file (do not rename a .png/.jpg/.bmp to a .ico - this is not how image formats work). You can find some nice icons <a href="https://goo.gl/EfpGD0">here</a>.</p>
+<p>Thus the new statement will be <code>pyinstaller -i {icon location} {python file}</code>, remember to not forget about extensions.</p>
+<h2 id="adding-other-files">
+<span style="position:relative"><a class="anchor" href="#adding-other-files"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Adding Other Files</span></h2>
+<p>Since pyinstaller only searches for Python files, you need to add data files like images, databases and JSON files yourself. To do this, simply provide the <a href="https://pyinstaller.readthedocs.io/en/v3.3.1/spec-files.html#adding-data-files"><code>--add-data</code></a> flag with the source and destination of your file as many times as required.</p>
+<p>As described in the documentation, to use this flag, it must be formatted as <code>--add-data SRC;DST</code>. SRC is the source file path of the file you want to add, for example <code>C:\Users\me\Desktop\my-image.jpg</code>, this can be either an absolute or relative path to the current working directory. DST is the destination in the packaged folder/executable. I recommend using a <code>.</code> to put a file in the root path. You can also specify a folder, for example, <code>images</code> which will then create a folder named <code>images</code> and copy the file to there.</p>
+<p>An example of this is when I want to put the file <code>C:\my-file.png</code> into the <code>img\</code> folder in the packaged folder/executable. To do this I would use <code>--add-data "my-file.png";"img/"</code> <em>(I used <code>"</code> so spaces in the paths don't cause errors)</em>. Now in Python, I will need to look in the img folder in the root of the packaged folder/executable to get the image.</p>
+<p>If you can't get this to work, I recommend trying out my project called auto-py-to-exe mentioned below. The application takes care of moving extra files and many other things so you don't have to.</p>
+<blockquote>
+<p>The separator between the SRC and DST can be different on different platforms. Windows uses <code>;</code> whereas most other operating systems like OSX and Linux use <code>:</code>.</p>
+</blockquote>
+<h2 id="end-notes">
+<span style="position:relative"><a class="anchor" href="#end-notes"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>End Notes</span></h2>
+<p>You can combine these flags to make things like onefile executables with no console and an icon by using a statement like: <code>pyinstaller -w -F -i {icon location} {python file}</code></p>
+<h2 id="auto-py-to-exe">
+<span style="position:relative"><a class="anchor" href="#auto-py-to-exe"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Auto PY to EXE</span></h2>
+<p>In March 2018 I created an application that allows you to create executables easily from Python scripts. It is a simple graphical interface built with Eel in Python and uses pyinstaller in the background.</p>
+<p>
+<div class="embedded_yt my-3">
+<div>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/OZSZHmWSOeM"></iframe>
+</div>
+</div>
+</p>
+<p><img alt="Empty interface" src="https://i.imgur.com/dd0LC2n.png"/></p>
+<h2 id="common-issues-and-questions">
+<span style="position:relative"><a class="anchor" href="#common-issues-and-questions"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Common Issues and Questions</span></h2>
+<h3 id="my-script-runs-fine-in-idle-but-wont-run-when-packaged-to-exe-failed-to-execute-script">
+<span style="position:relative"><a class="anchor" href="#my-script-runs-fine-in-idle-but-wont-run-when-packaged-to-exe-failed-to-execute-script"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>My script runs fine in IDLE but won't run when packaged to exe (failed to execute script)</span></h3>
+<p>Assuming the python script runs properly by itself then this would have been caused by an incorrect configuration or third-party modules. The best way to find what the issue is, is to add <code>--debug all</code> to your command and then re-package it. This will mean the exe is now in a debugging mode. Open up cmd and then run the exe using cmd e.g. "C:/folder/path/myexe.exe". Any errors will be preserved in the console which you were previously missing.</p>
+<h3 id="zipimportzipimporterror-cant-find-module-encodings">
+<span style="position:relative"><a class="anchor" href="#zipimportzipimporterror-cant-find-module-encodings"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>zipimport.ZipImportError: can't find module 'encodings'</span></h3>
+<p>Please upgrade PyInstaller to 3.4 or above using: <code>python -m pip install --upgrade PyInstaller</code></p>
+<h3 id="open-command-window-here-isnt-shown-when-i-shift-right-click">
+<span style="position:relative"><a class="anchor" href="#open-command-window-here-isnt-shown-when-i-shift-right-click"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>"Open command window here" isn't shown when I shift right click?</span></h3>
+<p>Make sure you are holding down shift. If you are using new versions of Windows, this has been replaced by "Open PowerShell Window Here". Using this method will work the same for this tutorial, so go ahead and use PowerShell.</p>
+<h3 id="pip-is-not-recognized-as-an-internal-or-external-command">
+<span style="position:relative"><a class="anchor" href="#pip-is-not-recognized-as-an-internal-or-external-command"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>'pip' is not recognized as an internal or external command</span></h3>
+<p>Please follow the pip setup again, you have done something wrong. Alternatively, you can try to use <code>python -m pip {command}</code>.</p>
+<h3 id="pyinstaller-is-not-recognized-as-an-internal-or-external-command">
+<span style="position:relative"><a class="anchor" href="#pyinstaller-is-not-recognized-as-an-internal-or-external-command"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>'pyinstaller' is not recognized as an internal or external command</span></h3>
+<p>Go back to the PyInstaller heading, you have not installed pyinstaller, remember to test it.</p>
+<h3 id="fatal-error-in-launcher-unable-to-create-process-using">
+<span style="position:relative"><a class="anchor" href="#fatal-error-in-launcher-unable-to-create-process-using"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Fatal error in launcher: Unable to create process using...</span></h3>
+<p>Try executing <code>python -m pip install pyinstaller</code> in cmd.</p>
+<h3 id="when-editing-the-path-variable-i-can-only-edit-the-variable">
+<span style="position:relative"><a class="anchor" href="#when-editing-the-path-variable-i-can-only-edit-the-variable"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>When editing the PATH variable, I can only edit the variable</span></h3>
+<p>Add a ';' to the end and then put in the folder location, then apply/save it. This input is like this because you are using an older version of Windows.</p>
+<h3 id="the-exe-does-not-work-on-another-computer">
+<span style="position:relative"><a class="anchor" href="#the-exe-does-not-work-on-another-computer"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>The exe does not work on another computer</span></h3>
+<p>This may be an architecture issue. PyInstaller will create an executable with the architecture of the machine it was built with. You are most likely using a 64bit machine if you are asking this question to compile the .py; thus it will create a 64bit executable. As with any other programs, you cannot run 64bit on 32bit but you can run 32bit on 64bit. Thus I recommend using 32bit python or compiling on a 32bit machine so it will work on both architectures.</p>
+<h3 id="my-antivirus-detected-my-exe-as-a-virus">
+<span style="position:relative"><a class="anchor" href="#my-antivirus-detected-my-exe-as-a-virus"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>My antivirus detected my exe as a virus</span></h3>
+<p>This is your anti-virus vendors fault. Check out <a href="https://github.com/pyinstaller/pyinstaller/issues/2501#issuecomment-286230354">this</a>.</p>
+<h3 id="i-get-lots-of-warnings-when-running-pyinstaller">
+<span style="position:relative"><a class="anchor" href="#i-get-lots-of-warnings-when-running-pyinstaller"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>I get lots of WARNINGs when running pyinstaller</span></h3>
+<p>These warnings can be ignored in most cases. I have not currently found a situation where these are an issue, after all, they are only warnings.</p>
+<h3 id="will-this-add-my-other-scripts-will-this-work-with-external-python-modules">
+<span style="position:relative"><a class="anchor" href="#will-this-add-my-other-scripts-will-this-work-with-external-python-modules"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a>Will this add my other scripts? / Will this work with external Python modules?</span></h3>
+<p>If your main script imports your others scripts, then yes. PyInstaller looks at imports to figure out what to bundle, so it will add your other scripts just like if you were to import os or time.</p>
+<h3 id="is-it-available-in-walmart">
+<span style="position:relative"><a class="anchor" href="#is-it-available-in-walmart"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z" fill-rule="evenodd"></path></svg></a><a href="https://www.youtube.com/watch?v=lOIJIk_maO4&amp;lc=UgxFJKkC5nzr7MiscOd4AaABAg">is it available in Walmart?????</a></span></h3>
+<p>I don't believe so, sorry.</p>
+</div>
+<nav class="blog-navigation-in-post text-center mb-5 mt-4">
+<a class="btn btn-outline-primary mt-1" href="/blog/post/randomly-generating-numbers-to-fulfil-an-integer-range/" title="Randomly Generating Numbers to Fulfil an Integer Range">
+<span>←</span>
+<span class="btn-content">Randomly Generating Numbers to Fulfil an Integer Range</span>
+</a>
+<a class="btn btn-outline-primary mt-1" href="/blog/post/get-wifi-passwords-with-python/" title="Get WiFi Passwords With Python">
+<span class="btn-content">Get WiFi Passwords With Python</span>
+<span>→</span>
+</a>
+</nav>
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function() {
+        this.page.url = 'https://nitratine.net/blog/post/convert-py-to-exe/'; // Your page's canonical URL variable
+        this.page.identifier = 'https://nitratine.net/blog/post/convert-py-to-exe/'; // Your page's unique identifier variable
+    };
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//nitratine.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</main>
+<aside class="col-blog-sidebar blog-sidebar">
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">About</span>
+<p class="mb-0">Owner of <a href="https://www.youtube.com/PyTutorials">PyTutorials</a> and creator of <a href="https://github.com/brentvollebregt/auto-py-to-exe">auto-py-to-exe</a>. I enjoy making quick tutorials for people new to particular topics in Python and tools that help fix small things.</p>
+</div>
+<div class="input-group mb-3">
+<input aria-label="Search" class="form-control" id="sidebar-search" placeholder="Search" type="text"/>
+<div class="input-group-append">
+<button class="btn btn-outline-primary" id="sidebar-search-submit" type="button">Search</button>
+</div>
+</div>
+<script>let searchUrl = "/search/";</script>
+<script defer="" src="/static/js/search.js" type="text/javascript"></script>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Categories</span>
+<ol class="list-unstyled mb-0 text-center text-lg-left">
+<li>
+<a href="/blog/categories/#Apps">📱 Apps
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#General">📰 General
+                        <span class="badge badge-primary ml-3">9</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Investigations">🔍 Investigations
+                        <span class="badge badge-primary ml-3">2</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Projects">💾 Projects
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Snippets">✂ Snippets
+                        <span class="badge badge-primary ml-3">1</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tools">🛠 Tools
+                        <span class="badge badge-primary ml-3">6</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#Tutorials">📖 Tutorials
+                        <span class="badge badge-primary ml-3">32</span>
+</a>
+</li>
+<li>
+<a href="/blog/categories/#YouTube">🎥 YouTube
+                        <span class="badge badge-primary ml-3">15</span>
+</a>
+</li>
+</ol>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">PyTutorials on YouTube</span>
+<script src="https://apis.google.com/js/platform.js"></script>
+<div style="text-align: center">
+<div class="g-ytsubscribe" data-channel="PrivateSplat" data-count="default" data-layout="full"></div>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<div class="featured-sites">
+<a href="https://www.buymeacoffee.com/brentvollebregt">
+<img alt="Buy Me A Coffee" src="/static/img/buy-me-a-coffee-black.png" style="max-height: 80px"/>
+</a>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Latest Videos</span>
+<div class="yt_video_container" id="recent-yt-videos">
+<img alt="How to Encrypt Strings and Files in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=H8t4DJ3Tdrg', '_blank')" src="https://img.youtube.com/vi/H8t4DJ3Tdrg/mqdefault.jpg" title="How to Encrypt Strings and Files in Python"/>
+<img alt="Python GUI's with PyQt5 thumbnail" onclick="window.open('https://www.youtube.com/watch?v=ksW59gYEl6Q', '_blank')" src="https://img.youtube.com/vi/ksW59gYEl6Q/mqdefault.jpg" title="Python GUI's with PyQt5"/>
+<img alt="How to Send Emails in Python thumbnail" onclick="window.open('https://www.youtube.com/watch?v=YPiHBtddefI', '_blank')" src="https://img.youtube.com/vi/YPiHBtddefI/mqdefault.jpg" title="How to Send Emails in Python"/>
+<img alt="Python SQLite Basics thumbnail" onclick="window.open('https://www.youtube.com/watch?v=SQj17D1Q_6s', '_blank')" src="https://img.youtube.com/vi/SQj17D1Q_6s/mqdefault.jpg" title="Python SQLite Basics"/>
+<img alt="Python GUI Using Chrome thumbnail" onclick="window.open('https://www.youtube.com/watch?v=2kbeBzEQfXE', '_blank')" src="https://img.youtube.com/vi/2kbeBzEQfXE/mqdefault.jpg" title="Python GUI Using Chrome"/>
+<img alt="Python Threading Tutorial thumbnail" onclick="window.open('https://www.youtube.com/watch?v=5JSloPGocSY', '_blank')" src="https://img.youtube.com/vi/5JSloPGocSY/mqdefault.jpg" title="Python Threading Tutorial"/>
+</div>
+</div>
+<div class="card p-3 mb-3 bg-light">
+<span class="h4 text-center text-lg-left">Featured Sites</span>
+<div class="featured-sites">
+<a href="https://emotionify.nitratine.net/" title="Emotionify">
+<img alt="Emotionify" src="/static/img/featured-sites/emotionify.png">
+</img></a>
+<a href="https://spotify-lyrics-viewer.nitratine.net/" title="Spotify Lyrics Viewer">
+<img alt="Spotify Lyrics Viewer" src="/static/img/featured-sites/spotify-lyrics-viewer.png">
+</img></a>
+<a href="https://monopoly-money.nitratine.net/" title="Monopoly Money">
+<img alt="Monopoly Money" src="/posts/monopoly-money/banner.png">
+</img></a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<footer class="bg-dark py-4 px-1">
+<div class="container">
+<div class="d-flex justify-content-center">
+<div class="top-group">
+<div class="link-group">
+<p class="header">Navigate</p>
+<a aria-current="page" class="" href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a class="ml-2" href="/blog/categories/">Categories</a>
+<a class="ml-2" href="/blog/tags/">Tags</a>
+<a class="ml-2" href="/blog/archive/">Archive</a>
+<a href="/portfolio/">Portfolio</a>
+<a href="/about/">About</a>
+</div>
+<div class="link-group">
+<p class="header">Popular Projects</p>
+<a href="/blog/post/auto-py-to-exe/">auto-py-to-exe</a>
+<a href="/blog/post/hit-counter/">hit-counter</a>
+<a href="/blog/post/whos-on-my-network/">whos-on-my-network</a>
+<a href="/blog/post/monopoly-money/">monopoly-money</a>
+</div>
+<div class="link-group expandable">
+<p class="header">Follow</p>
+<a class="with-icon" href="https://github.com/brentvollebregt">
+<img alt="GitHub Logo" src="/static/img/icons/github.svg" style="filter: invert(1);">
+                                GitHub
+                            </img></a>
+<a class="with-icon" href="https://www.youtube.com/c/PyTutorials">
+<img alt="YouTube Logo" src="/static/img/icons/youtube.svg">
+                                YouTube
+                            </img></a>
+<a class="with-icon" href="/rss.xml" rel="alternate" type="application/rss+xml">
+<img alt="RSS Logo" src="/static/img/icons/rss.svg">
+                                Nitratine RSS Feed
+                            </img></a>
+<div class="expand"></div>
+<a class="with-icon" href="https://www.buymeacoffee.com/brentvollebregt" rel="alternate">
+<span class="icon" style="align-self: baseline;">🍺</span>
+                                Buy me a beer
+                            </a>
+</div>
+</div>
+</div>
+<div class="mx-4">
+<hr>
+</hr></div>
+<p class="text-center m-0">
+<small>© 2025 Brent Vollebregt</small>
+</p>
+</div>
+</footer>
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
