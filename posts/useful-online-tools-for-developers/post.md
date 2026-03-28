@@ -81,7 +81,6 @@ When moving code from an IDE to paper for something like an assessment, black te
 - [Epoch & Unix Timestamp Conversion Tool](https://www.epochconverter.com/)
     - Timestamp to readable date and date to timestamp
     - Supports seconds, milliseconds, microseconds and nanoseconds (if can figure it out)
-- [Python strftime reference](https://strftime.org/)
 
 ## Miscellaneous
 

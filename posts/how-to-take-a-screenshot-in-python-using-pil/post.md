@@ -126,4 +126,4 @@ Now when you call `screenshot.show()`, you will see that multiple monitors are n
 Now that you have this larger image, you can crop it using other methods in PIL: [How to crop an image using PIL](https://stackoverflow.com/a/58350508).
 
 ### Using MSS to Screenshot Each Displays
-I also have a tutorial [How To Take A Screenshot In Python Using MSS](/blog/post/how-to-take-a-screenshot-in-python-using-mss/) which goes over how to take screenshots using the [Python MSS library](https://python-mss.readthedocs.io/index.html). The tutorial is very similar, however MSS has better support for screenshots of different individual displays (including macOS and Windows).
+I also have a tutorial [How To Take A Screenshot In Python Using MSS](/blog/post/how-to-take-a-screenshot-in-python-using-mss/) which goes over how to take screenshots using the [Python MSS library](https://python-mss.readthedocs.io/). The tutorial is very similar, however MSS has better support for screenshots of different individual displays (including macOS and Windows).
