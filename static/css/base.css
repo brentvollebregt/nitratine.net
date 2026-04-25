@@ -1,0 +1,111 @@
+.card-columns > a, .blog-main > a {
+    /* Allow links to inherit colour on home cards and blog page's content */
+    color: inherit;
+}
+
+*::selection {
+    /* Text highlighting colour */
+    background: #ded28f;
+    color: black;
+}
+
+a {
+    /* Break links to reduce width overflow */
+    word-break: break-word;
+}
+
+/* Footer */
+
+footer {
+  color: white;
+}
+
+footer .top-group {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 8rem;
+}
+
+@media (max-width: 768px) and (min-width: 577px) {
+  footer .top-group {
+    grid-gap: 5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  footer .top-group {
+    grid-gap: 1rem;
+  }
+}
+
+footer .link-group .header {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+footer .link-group a {
+  margin: 0;
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+
+footer .link-group a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+footer .link-group a.with-icon {
+  display: flex;
+  align-items: center;
+}
+
+footer .link-group a.with-icon img, footer .link-group a.with-icon .icon {
+  max-height: 18px;
+  max-width: 18px;
+  margin-right: 0.5rem;
+}
+
+.link-group.expandable {
+  display: flex;
+  flex-direction: column;
+}
+
+.link-group .expand {
+  flex-grow: 1;
+}
+
+/* Smaller screens => smaller font sizes (bootstrap override) */
+
+@media (max-width: 767.98px) {
+    body {font-size: 0.9rem}
+    .lead {font-size: 1.15rem}
+    pre {font-size: 0.75rem}
+    h1 {font-size: 2rem}
+    h2 {font-size: 1.8rem}
+    h3 {font-size: 1.6rem}
+    h4 {font-size: 1.4rem}
+    h5 {font-size: 1.2rem}
+    h6 {font-size: 1rem}
+}
+
+/* About - tech icons section */
+
+.tech-experience-container .experience-group:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
+.tech-experience-container .experience-group .item-wrapper {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tech-experience-container .experience-group .item-wrapper > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tech-experience-container .experience-group .item-wrapper > div > img {
+  height: 25px;
+}
