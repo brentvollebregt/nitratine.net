@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - tests/**
 
 jobs:
   build-deploy:
