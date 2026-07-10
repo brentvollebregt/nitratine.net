@@ -14,7 +14,6 @@ EXTERNAL_URL_BLACKLIST = [
     r'^$',
     r'^http://127.0.0.1',
     r'^http://localhost',
-    r'^https://hitcounternitratine.pythonanywhere.com',  # Loves dying quite often at the moment
     r'^https://www.pexels.com',  # 403
     r'^https://nzcsc.org.nz',  # Doesn't seem to be up anymore
     r'^https://www.namesilo.com',  # 403

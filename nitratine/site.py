@@ -89,14 +89,10 @@ def portfolio():
 
 @app.route('/data/')
 def data():
-    """ The data page """
-    public_posts = posts.get_posts()
-    available_posts = [[p.path, p['title']] for p in public_posts]
-
+    """ The data page - no longer exists and is redirected to /about/ """
     return render_template(
-        'page/data.html',
-        repos=get_github_user_repos(),
-        posts=available_posts
+        'redirect.html',
+        redirect_to='/about/'
     )
 
 
